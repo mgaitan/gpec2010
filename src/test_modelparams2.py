@@ -9,24 +9,19 @@ import os
 import apimanager
 from settings import PATH_ICONS
 
-
-
-
-class TestFrame(wx.Frame):
+class VarsAndParamPanel(wx.Panel):
     def __init__(self, parent, id):
-        wx.Frame.__init__(self, parent, id, "Model Params")
-        pane = self.pane = wx.Panel(self, -1, style = wx.TAB_TRAVERSAL
+        wx.Panel.__init__(self, parent, id, style = wx.TAB_TRAVERSAL
                      | wx.CLIP_CHILDREN
                      | wx.FULL_REPAINT_ON_RESIZE
                      )
-        
-        
+
         gbs = self.gbs = wx.GridBagSizer(6, 5)
     
 
         self.model_choices =  {'Soave-Redlich-Kwong':1, 'Peng-Robinson':2,
                             'RK-PR':3, 'PC-SAFT':4, 'SPHCT':6}
-        self.ch = wx.Choice(pane, -1, choices = self.model_choices.keys())
+        self.ch = wx.Choice(self, -1, choices = self.model_choices.keys())
         
 
         gbs.Add( self.ch, (0,3), (1,2), flag=wx.ALIGN_RIGHT )
@@ -40,8 +35,8 @@ class TestFrame(wx.Frame):
         #add first col
         self.vars = []
         for row, var in enumerate(vars_label):
-            gbs.Add( wx.StaticText(pane, -1, var[0]), (row+2, 0), flag=wx.ALIGN_RIGHT)
-            self.vars.append(widgets.FloatCtrl(pane, -1))
+            gbs.Add( wx.StaticText(self, -1, var[0]), (row+2, 0), flag=wx.ALIGN_RIGHT)
+            self.vars.append(widgets.FloatCtrl(self, -1))
             gbs.Add ( self.vars[-1], (row+2, 1))
 
         self.param = []
@@ -50,8 +45,8 @@ class TestFrame(wx.Frame):
         
 
         #add radio buttons
-        self.radio1 = wx.RadioButton( pane, -1, "", style = wx.RB_GROUP)
-        self.radio2 = wx.RadioButton( pane, -1, "")
+        self.radio1 = wx.RadioButton( self, -1, "", style = wx.RB_GROUP)
+        self.radio2 = wx.RadioButton( self, -1, "")
         self.gbs.Add(self.radio1, (1,1))
         self.gbs.Add(self.radio2, (1,4))
 
@@ -73,8 +68,8 @@ class TestFrame(wx.Frame):
         #add button in the center
         self.arrow = (wx.Bitmap(os.path.join(PATH_ICONS,"go-next.png")), 
                         wx.Bitmap(os.path.join(PATH_ICONS,"go-previous.png")))
-        self.button = wx.BitmapButton(pane, -1, self.arrow[0], style = wx.CENTRE)
-        #self.button2left = wx.BitmapButton(pane, -1, wx.Bitmap("/home/tin/facu/pi/src/images/go-previous.png", wx.BITMAP_TYPE_ANY))
+        self.button = wx.BitmapButton(self, -1, self.arrow[0], style = wx.CENTRE)
+        #self.button2left = wx.BitmapButton(self, -1, wx.Bitmap("/home/tin/facu/pi/src/images/go-previous.png", wx.BITMAP_TYPE_ANY))
         gbs.Add(self.button, (3,2), flag=wx.FIXED_MINSIZE | wx.ALIGN_CENTER)
 
 
@@ -207,8 +202,8 @@ class TestFrame(wx.Frame):
 
         for row, var in enumerate(self.params_labels[model_id]):
             #add row an box to the form and the list
-            self.gbs.Add(wx.StaticText(self.pane, -1, var[0]), (row+2, 3), flag=wx.ALIGN_RIGHT)
-            self.param.append(widgets.FloatCtrl(self.pane, -1))
+            self.gbs.Add(wx.StaticText(self, -1, var[0]), (row+2, 3), flag=wx.ALIGN_RIGHT)
+            self.param.append(widgets.FloatCtrl(self, -1))
             self.gbs.Add ( self.param[-1], (row+2, 4))
     
         if self.direction == 0:
@@ -218,10 +213,30 @@ class TestFrame(wx.Frame):
         self.gbs.Layout()
         
     
-        self.pane.SetSizerAndFit(self.box)
-        self.SetClientSize(self.pane.GetSize())
+        self.SetSizerAndFit(self.box)
+        self.SetClientSize(self.GetSize())
 
 
+
+    
+
+
+
+class TestFrame(wx.Frame):
+    def __init__(self, parent, id):
+        wx.Frame.__init__(self, parent, id, "Model Params")
+        pane = self.pane = wx.Panel(self, -1, style = wx.TAB_TRAVERSAL
+                     | wx.CLIP_CHILDREN
+                     | wx.FULL_REPAINT_ON_RESIZE
+                     )
+        
+        self.box = wx.BoxSizer(wx.VERTICAL)
+
+        self.box.Add(VarsAndParamPanel(self,-1), 1, wx.ALL, 10)
+        self.box.Add(VarsAndParamPanel(self,-1), 1, wx.ALL, 10)
+
+        self.SetSizerAndFit(self.box)
+        self.SetClientSize(self.GetSize())
 
 if __name__ == "__main__":
     app = wx.PySimpleApp(0)
