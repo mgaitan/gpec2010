@@ -19,13 +19,6 @@ class VarsAndParamPanel(wx.Panel):
         gbs = self.gbs = wx.GridBagSizer(6, 5)
     
 
-        self.model_choices =  {'Soave-Redlich-Kwong':1, 'Peng-Robinson':2,
-                            'RK-PR':3, 'PC-SAFT':4, 'SPHCT':6}
-        self.ch = wx.Choice(self, -1, choices = self.model_choices.keys())
-        
-
-        gbs.Add( self.ch, (0,3), (1,2), flag=wx.ALIGN_RIGHT )
-
  
         vars_label = (('Tc [K]', 'Critical temperature'), 
                 ('Pc [bar]', 'Critical Pressure'), 
@@ -89,7 +82,6 @@ class VarsAndParamPanel(wx.Panel):
         
 
         #binding
-        self.Bind(wx.EVT_CHOICE, self.OnSetModel, self.ch)
         self.Bind(wx.EVT_BUTTON, self.OnButton,  self.button)
         self.Bind(wx.EVT_RADIOBUTTON, self.OnDirectionSelect, self.radio1 )
         self.Bind(wx.EVT_RADIOBUTTON, self.OnDirectionSelect, self.radio2 )
@@ -162,9 +154,7 @@ class VarsAndParamPanel(wx.Panel):
 
      
 
-    def OnSetModel(self, event):
-        self.model_id = self.model_choices[event.GetString()]
-        self.SetParamsForm(self.model_id)
+
 
     def OnButton(self, event):
     
@@ -191,8 +181,8 @@ class VarsAndParamPanel(wx.Panel):
 
     def SetParamsForm(self, model_id):
         """set a column of widgets for params depending on selected model"""
-        
         #clean up
+        self.model_id = model_id
         for row in range(len(self.param)):
             self.remove_gbitem(row + 2, 3)
             self.remove_gbitem(row + 2, 4)
@@ -232,11 +222,31 @@ class TestFrame(wx.Frame):
         
         self.box = wx.BoxSizer(wx.VERTICAL)
 
-        self.box.Add(VarsAndParamPanel(self,-1), 1, wx.ALL, 10)
-        self.box.Add(VarsAndParamPanel(self,-1), 1, wx.ALL, 10)
+
+        self.model_choices =  {'Soave-Redlich-Kwong':1, 'Peng-Robinson':2,
+                            'RK-PR':3, 'PC-SAFT':4, 'SPHCT':6}
+        self.ch = wx.Choice(self, -1, choices = self.model_choices.keys())
+        
+        #model ID by default
+        self.model_id = 1
+
+        self.box.Add( self.ch, 0, wx.ALIGN_RIGHT)
+
+        self.Bind(wx.EVT_CHOICE, self.OnSetModel, self.ch)
+
+        self.panels = (VarsAndParamPanel(self,-1), VarsAndParamPanel(self,-1))
+
+        self.box.Add(self.panels[0], 1, wx.ALL, 10)
+        self.box.Add(self.panels[1], 1, wx.ALL, 10)
 
         self.SetSizerAndFit(self.box)
         self.SetClientSize(self.GetSize())
+
+    def OnSetModel(self, event):
+        for panel in self.panels:
+            self.model_id = self.model_choices[event.GetString()]
+            panel.SetParamsForm(self.model_id)
+
 
 if __name__ == "__main__":
     app = wx.PySimpleApp(0)

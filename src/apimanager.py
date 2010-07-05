@@ -74,7 +74,7 @@ def read_conparout():
         model parameters. """
 
     ret = exec_fortran('ModelsParam')
-    print ret
+    
     if ret == 0:
         filename = 'CONPAROUT.DAT'
         fh = open(os.path.join(PATH_TEMP, filename), 'r')
