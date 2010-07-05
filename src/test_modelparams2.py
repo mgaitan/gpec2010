@@ -35,7 +35,8 @@ class VarsAndParamPanel(wx.Panel):
                 (u'\u03c9', 'Acentric Factor') )
 
         #add title
-        self.title = wx.StaticText(self, -1, 'Titulo', (20, 120))
+        self.title = wx.StaticText(self, -1, '', (5, 120), style = wx.ALIGN_CENTER)
+        self.title.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL))
         gbs.Add(self.title, (0,0), (1,4),  flag=wx.ALIGN_CENTER)
 
 
@@ -246,8 +247,6 @@ class VarsAndParamPanel(wx.Panel):
 
         #FIT all
         self.gbs.Layout()
-        
-    
         self.SetSizerAndFit(self.box)
         self.SetClientSize(self.GetSize())
 
@@ -284,8 +283,18 @@ class TestFrame(wx.Frame):
         self.box.Add(self.panels[1], 0, wx.EXPAND )
 
 
+        #colapasible for extra variables
+
+        self.cp = cp = wx.CollapsiblePane(self, label='Other case variables',
+                                          style=wx.CP_DEFAULT_STYLE|wx.CP_NO_TLW_RESIZE)
+        self.MakeCollipsable(cp.GetPane())
+        self.box.Add(self.cp, 0, wx.RIGHT|wx.LEFT|wx.EXPAND, 25)
+
+
+
         self.load_button = wx.Button(self, -1, "Load System")
         self.accept_button = wx.Button(self, -1, "Write GPECIN")
+
 
         but_sizer =  wx.BoxSizer(wx.HORIZONTAL)
         but_sizer.Add(self.load_button, 0, flag=wx.ALL , border=5)
@@ -293,13 +302,51 @@ class TestFrame(wx.Frame):
 
         self.box.Add(but_sizer, 0, flag= wx.ALL | wx.FIXED_MINSIZE | wx.ALIGN_RIGHT, border = 5)
 
+        
+        #self.Bind(wx.EVT_COLLAPSIBLEPANE_CHANGED, self.OnPaneChanged, cp)
+
+
         self.SetSizerAndFit(self.box)
         self.SetClientSize(self.GetSize())
 
         #Binding
+        self.Bind(wx.EVT_COLLAPSIBLEPANE_CHANGED, self.OnPaneChanged, cp)
         self.Bind(wx.EVT_CHOICE, self.OnSetModel, self.ch)
         self.Bind(wx.EVT_BUTTON, self.OnLoadSystem, self.load_button)
         self.Bind(wx.EVT_BUTTON, self.OnWriteGPECIN, self.accept_button)
+
+    def MakeCollipsable(self, pane):
+        addrSizer = wx.FlexGridSizer(cols=2, hgap=5, vgap=5)
+    
+        self.temperature = widgets.FloatCtrl(pane, -1, "2000.0");
+        temperatureLbl = wx.StaticText(pane, -1, "Temperature [k]")
+
+        self.k12 = widgets.FloatCtrl(pane, -1);
+        k12Lbl = wx.StaticText(pane, -1, "K12")
+
+        self.l12 = widgets.FloatCtrl(pane, -1);
+        l12Lbl = wx.StaticText(pane, -1, "L12")
+
+        addrSizer.Add(temperatureLbl, 0, 
+                wx.ALIGN_RIGHT|wx.ALIGN_CENTER_VERTICAL)
+        addrSizer.Add(self.temperature, 0)
+        addrSizer.Add(l12Lbl, 0, 
+                wx.ALIGN_RIGHT|wx.ALIGN_CENTER_VERTICAL)
+        addrSizer.Add(self.l12, 0)
+        addrSizer.Add(k12Lbl, 0, 
+                wx.ALIGN_RIGHT|wx.ALIGN_CENTER_VERTICAL)
+        addrSizer.Add(self.k12, 0)
+
+        border = wx.BoxSizer()
+        border.Add(addrSizer, 1, wx.EXPAND|wx.ALL, 5)
+        pane.SetSizer(border)
+    
+    def OnPaneChanged(self, evt=None):
+        # redo the layout
+        self.Layout()
+        self.SetClientSize(self.GetSize())
+        self.Fit()
+    
 
     def OnLoadSystem(self, event):
         self.panels[0].SetData(('METHANE', '190.56', '45.99', '0.1152', '0.0115'))
