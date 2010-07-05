@@ -76,7 +76,7 @@ class VarsAndParamPanel(wx.Panel):
         #add button in the center
         self.arrow = (wx.Bitmap(os.path.join(PATH_ICONS,"go-next.png")), 
                         wx.Bitmap(os.path.join(PATH_ICONS,"go-previous.png")))
-        self.button = wx.BitmapButton(self, -1, self.arrow[0], style = wx.CENTRE)
+        self.button = wx.BitmapButton(self, -1, self.arrow[0], style = wx.CENTRE | wx.BU_AUTODRAW)
         #self.button2left = wx.BitmapButton(self, -1, wx.Bitmap("/home/tin/facu/pi/src/images/go-previous.png", wx.BITMAP_TYPE_ANY))
         gbs.Add(self.button, (3,2), flag=wx.FIXED_MINSIZE | wx.ALIGN_CENTER)
 
