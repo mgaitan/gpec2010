@@ -5,9 +5,11 @@ import wx
 import widgets
 import os
 
-
+import wx.lib.buttons
 import apimanager
 from settings import PATH_ICONS
+
+#list-add
 
 class VarsAndParamPanel(wx.Panel):
     """a panel with 2 columns of inputs. First colums input EOS variables. 
@@ -292,7 +294,7 @@ class TestFrame(wx.Frame):
 
 
 
-        self.load_button = wx.Button(self, -1, "Load System")
+        self.load_button = wx.lib.buttons.GenBitmapTextButton(self, -1, wx.Bitmap(os.path.join(PATH_ICONS,"list-add.png")), "Load System")
         self.accept_button = wx.Button(self, -1, "Write GPECIN")
 
 
