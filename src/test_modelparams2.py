@@ -10,7 +10,16 @@ import apimanager
 from settings import PATH_ICONS
 
 class VarsAndParamPanel(wx.Panel):
-    def __init__(self, parent, id):
+    """a panel with 2 columns of inputs. First colums input EOS variables. 
+        The second one are the inputs to model parameters (change depending
+        the model selected). 
+        This parameter are related and is possible to calcule a group of values
+        defining the other one. 
+        """
+
+    def __init__(self, parent, id, model_id=1, setup_data=None):
+        
+
         wx.Panel.__init__(self, parent, id, style = wx.TAB_TRAVERSAL
                      | wx.CLIP_CHILDREN
                      | wx.FULL_REPAINT_ON_RESIZE
@@ -25,6 +34,11 @@ class VarsAndParamPanel(wx.Panel):
                 ('Vol [l/mol]', 'Critical Volume'), 
                 (u'\u03c9', 'Acentric Factor') )
 
+        #add title
+        self.title = wx.StaticText(self, -1, 'Titulo', (20, 120))
+        gbs.Add(self.title, (0,0), (1,4),  flag=wx.ALIGN_CENTER)
+
+
         #add first col
         self.vars = []
         for row, var in enumerate(vars_label):
@@ -32,9 +46,9 @@ class VarsAndParamPanel(wx.Panel):
             self.vars.append(widgets.FloatCtrl(self, -1))
             gbs.Add ( self.vars[-1], (row+2, 1))
 
-        self.param = []
-        self.direction = 0
-        self.model_id = 1
+        self.params = []
+
+
         
 
         #add radio buttons
@@ -75,17 +89,45 @@ class VarsAndParamPanel(wx.Panel):
         self.box = wx.BoxSizer()
         self.box.Add(gbs, 0, wx.ALL, 10)
 
+
         #set default on form
-        self.SetParamsForm(self.model_id)
-        self.SetDirectionOnForm()
-        self.SetVarsValues(('190.56', '45.99', '0.1152', '0.0115'))
+        self.direction = 0
+        self.model_id = model_id
+      
+
+        if setup_data is not None:
+            self.enabled = True
+            self.SetData(setup_data)
+            self.SetDirectionOnForm()
+        else:
+            
+            self.EnableAll(False)
+
         
+        self.SetParamsForm(self.model_id)
+        
+
 
         #binding
         self.Bind(wx.EVT_BUTTON, self.OnButton,  self.button)
         self.Bind(wx.EVT_RADIOBUTTON, self.OnDirectionSelect, self.radio1 )
         self.Bind(wx.EVT_RADIOBUTTON, self.OnDirectionSelect, self.radio2 )
 
+    def SetData(self, data):
+        self.title.SetLabel(data[0])
+        self.SetVarsValues(data[1:])
+        self.EnableAll()
+        
+
+    def EnableAll(self, flag=True):
+        self.enabled = flag
+        for box in self.vars :
+            box.Enable(flag)
+
+        self.button.Enable(flag)
+        self.radio1.Enable(flag)
+        self.radio2.Enable(flag)
+        
 
     def SetVarsValues(self, data):
         if len(data) == len(self.vars):
@@ -96,8 +138,8 @@ class VarsAndParamPanel(wx.Panel):
             print "not enough data or boxes for EOS vars"
 
     def SetParamsValues(self, data):
-        if len(data) == len(self.param):
-            for box, data in zip(self.param, data):
+        if len(data) == len(self.params):
+            for box, data in zip(self.params, data):
                 box.SetValue(data)
         else:
             wx.Bell()
@@ -120,15 +162,14 @@ class VarsAndParamPanel(wx.Panel):
         if self.direction == 0:
             for box in self.vars:
                 box.Enable(True)
-            for box in self.param:
+            for box in self.params:
                 box.Enable(False)
             
             self.button.SetBitmapLabel(self.arrow[0])
-
         else:
             for box in self.vars:
                 box.Enable(False)
-            for box in self.param:
+            for box in self.params:
                 box.Enable(True)
             self.button.SetBitmapLabel(self.arrow[1])
 
@@ -161,7 +202,7 @@ class VarsAndParamPanel(wx.Panel):
         if self.direction == 0:
             data = [box.GetValue() for box in self.vars]
         else:
-            data = [box.GetValue() for box in self.param]
+            data = [box.GetValue() for box in self.params]
 
         apimanager.write_conparin(self.direction, self.model_id, data)
 
@@ -170,7 +211,7 @@ class VarsAndParamPanel(wx.Panel):
         if data is not None:
             if self.direction == 0:
                 self.SetParamsValues(data[1])
-            else: 
+            else:
                 self.SetVarsValues(data[0])
         else:
             wx.Bell()
@@ -183,21 +224,25 @@ class VarsAndParamPanel(wx.Panel):
         """set a column of widgets for params depending on selected model"""
         #clean up
         self.model_id = model_id
-        for row in range(len(self.param)):
+        for row in range(len(self.params)):
             self.remove_gbitem(row + 2, 3)
             self.remove_gbitem(row + 2, 4)
 
  
-        self.param = []
+        self.params = []
 
         for row, var in enumerate(self.params_labels[model_id]):
             #add row an box to the form and the list
             self.gbs.Add(wx.StaticText(self, -1, var[0]), (row+2, 3), flag=wx.ALIGN_RIGHT)
-            self.param.append(widgets.FloatCtrl(self, -1))
-            self.gbs.Add ( self.param[-1], (row+2, 4))
+            self.params.append(widgets.FloatCtrl(self, -1))
+            self.gbs.Add ( self.params[-1], (row+2, 4))
     
+        
+
         if self.direction == 0:
             self.SetDirectionOnForm()
+
+        self.EnableAll(self.enabled)
 
         #FIT all
         self.gbs.Layout()
@@ -230,23 +275,46 @@ class TestFrame(wx.Frame):
         #model ID by default
         self.model_id = 1
 
-        self.box.Add( self.ch, 0, wx.ALIGN_RIGHT)
+        self.box.Add( self.ch, 0, flag= wx.TOP | wx.RIGHT | wx.FIXED_MINSIZE | wx.ALIGN_RIGHT, border = 5)
 
-        self.Bind(wx.EVT_CHOICE, self.OnSetModel, self.ch)
-
+        
         self.panels = (VarsAndParamPanel(self,-1), VarsAndParamPanel(self,-1))
 
-        self.box.Add(self.panels[0], 1, wx.ALL, 10)
-        self.box.Add(self.panels[1], 1, wx.ALL, 10)
+        self.box.Add(self.panels[0], 0, wx.EXPAND )
+        self.box.Add(self.panels[1], 0, wx.EXPAND )
+
+
+        self.load_button = wx.Button(self, -1, "Load System")
+        self.accept_button = wx.Button(self, -1, "Write GPECIN")
+
+        but_sizer =  wx.BoxSizer(wx.HORIZONTAL)
+        but_sizer.Add(self.load_button, 0, flag=wx.ALL , border=5)
+        but_sizer.Add(self.accept_button, 0, flag=wx.ALL , border=5)
+
+        self.box.Add(but_sizer, 0, flag= wx.ALL | wx.FIXED_MINSIZE | wx.ALIGN_RIGHT, border = 5)
 
         self.SetSizerAndFit(self.box)
         self.SetClientSize(self.GetSize())
+
+        #Binding
+        self.Bind(wx.EVT_CHOICE, self.OnSetModel, self.ch)
+        self.Bind(wx.EVT_BUTTON, self.OnLoadSystem, self.load_button)
+        self.Bind(wx.EVT_BUTTON, self.OnWriteGPECIN, self.accept_button)
+
+    def OnLoadSystem(self, event):
+        self.panels[0].SetData(('METHANE', '190.56', '45.99', '0.1152', '0.0115'))
+        self.panels[1].SetData(('BUTHANE', '194.56', '12.99', '1.1452', '0.0115'))
 
     def OnSetModel(self, event):
         for panel in self.panels:
             self.model_id = self.model_choices[event.GetString()]
             panel.SetParamsForm(self.model_id)
 
+        self.SetSizerAndFit(self.box)
+        self.SetClientSize(self.GetSize())
+
+    def OnWriteGPECIN(self, event):
+        pass
 
 if __name__ == "__main__":
     app = wx.PySimpleApp(0)
