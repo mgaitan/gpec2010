@@ -285,7 +285,7 @@ class TestFrame(wx.Frame):
         self.box.Add(self.panels[1], 0, wx.EXPAND )
 
 
-        #colapasible for extra variables
+        #collapsible for extra variables
 
         self.cp = cp = wx.CollapsiblePane(self, label='Other case variables',
                                           style=wx.CP_DEFAULT_STYLE|wx.CP_NO_TLW_RESIZE)
@@ -352,7 +352,7 @@ class TestFrame(wx.Frame):
 
     def OnLoadSystem(self, event):
         self.panels[0].SetData(('METHANE', '190.56', '45.99', '0.1152', '0.0115'))
-        self.panels[1].SetData(('BUTHANE', '194.56', '12.99', '1.1452', '0.0115'))
+        self.panels[1].SetData(('BUTANE', '194.56', '12.99', '1.1452', '0.0115'))
 
     def OnSetModel(self, event):
         for panel in self.panels:
