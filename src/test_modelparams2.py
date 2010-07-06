@@ -277,7 +277,16 @@ class TestFrame(wx.Frame):
         self.model_id = 1
         self.ch.SetSelection(0)
 
-        self.box.Add( self.ch, 0, flag= wx.TOP | wx.RIGHT | wx.FIXED_MINSIZE | wx.ALIGN_RIGHT, border = 5)
+        first_row_sizer = wx.BoxSizer(wx.HORIZONTAL)
+
+        self.load_button = wx.lib.buttons.GenBitmapTextButton(self, -1, wx.Bitmap(os.path.join(PATH_ICONS,"compose.png")), "Load System")
+        
+        first_row_sizer.Add(self.load_button, 0, flag=wx.ALL | wx.ALIGN_LEFT | wx.EXPAND , border=5)
+        first_row_sizer.Add((60, 20), 0, wx.EXPAND)
+
+        first_row_sizer.Add(wx.StaticText(self, -1, "Model:"), 0, flag= wx.ALIGN_RIGHT | wx.ALIGN_CENTER_VERTICAL, border=5)
+        first_row_sizer.Add(self.ch, 0, flag=wx.ALL | wx.ALIGN_CENTER_VERTICAL , border=5)
+        self.box.Add( first_row_sizer, 0, flag= wx.TOP | wx.RIGHT | wx.FIXED_MINSIZE | wx.ALIGN_RIGHT, border = 5)
 
         
         self.panels = (VarsAndParamPanel(self,-1), VarsAndParamPanel(self,-1))
@@ -295,12 +304,12 @@ class TestFrame(wx.Frame):
 
 
 
-        self.load_button = wx.lib.buttons.GenBitmapTextButton(self, -1, wx.Bitmap(os.path.join(PATH_ICONS,"compose.png")), "Load System")
+            
         self.accept_button = wx.lib.buttons.GenBitmapTextButton(self, -1, wx.Bitmap(os.path.join(PATH_ICONS,"document-save.png")), "Write GPECIN.DAT")
 
 
         but_sizer =  wx.BoxSizer(wx.HORIZONTAL)
-        but_sizer.Add(self.load_button, 0, flag=wx.ALL , border=5)
+        
         but_sizer.Add(self.accept_button, 0, flag=wx.ALL , border=5)
 
         self.box.Add(but_sizer, 0, flag= wx.ALL | wx.FIXED_MINSIZE | wx.ALIGN_RIGHT, border = 5)
