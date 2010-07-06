@@ -266,6 +266,8 @@ class TestFrame(wx.Frame):
                      | wx.FULL_REPAINT_ON_RESIZE
                      )
         
+        self.SetBackgroundColour(wx.NullColour) #hack for win32
+        
         self.box = wx.BoxSizer(wx.VERTICAL)
 
 

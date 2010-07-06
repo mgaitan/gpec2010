@@ -15,7 +15,7 @@ import os
 from settings import PATH_ICONS
 
 
-class DefineSystemFrame(wx.Frame):
+class DefineSystemDialog(wx.Dialog):
     def __init__(self, *args, **kwds):
         
         #database handler
@@ -32,9 +32,9 @@ class DefineSystemFrame(wx.Frame):
 
 
         # begin wxGlade: MyFrame.__init__
-        kwds["style"] = wx.DEFAULT_FRAME_STYLE ^ ( wx.RESIZE_BORDER | 
-                                            wx.MINIMIZE_BOX | wx.MAXIMIZE_BOX )   
-        wx.Frame.__init__(self, *args, **kwds)
+        #kwds["style"] = wx.DEFAULT_FRAME_STYLE ^ ( wx.RESIZE_BORDER | 
+        #                                    wx.MINIMIZE_BOX | wx.MAXIMIZE_BOX )   
+        wx.Dialog.__init__(self, *args, **kwds)
 
         self.notebook_1 = wx.Notebook(self, -1, style=0)
         self.notebook_1_pane_1 = wx.Panel(self.notebook_1, -1)
@@ -51,9 +51,11 @@ class DefineSystemFrame(wx.Frame):
         
         self.button_add2system = wx.BitmapButton(self, -1, wx.Bitmap(os.path.join(PATH_ICONS,"go-next.png")))
         self.button_remove4system = wx.BitmapButton(self, -1, wx.Bitmap(os.path.join(PATH_ICONS,"go-previous.png")))
-        self.list_system = wx.ListCtrl(self, -1, style=wx.LC_REPORT|wx.SUNKEN_BORDER)
-        self.button_cancel = wx.Button(self, -1, "Cancel")
-        self.button_accept = wx.Button(self, -1, "Accept")
+        self.list_system = wx.ListCtrl(self, -1, validator= SystemValidator(), style=wx.LC_REPORT|wx.SUNKEN_BORDER)
+
+        self.button_cancel = wx.Button(self, wx.ID_CANCEL)
+        self.button_accept = wx.Button(self, wx.ID_OK)
+        self.button_accept.SetDefault()
 
         self.__set_properties()
         self.__do_layout()
@@ -256,6 +258,7 @@ class DefineSystemFrame(wx.Frame):
         else:
             wx.Bell()
 
+    
 
 
     def OnRemoveFromSystem(self, evt):
@@ -297,7 +300,28 @@ class DefineSystemFrame(wx.Frame):
             self.Destroy()
 
         
+class SystemValidator(wx.PyValidator):
+    def __init__(self):
+        wx.PyValidator.__init__(self)
 
+    def Clone(self):
+        return SystemValidator()
+    
+    def Validate(self):
+        win = self.GetWindow()
+        if win.GetItemCount() != 2:
+            wx.MessageBox(self, "Do you know what binary means?", "Your system needs 2 compounds", wx.OK|wx.ICON_ERROR|wx.CENTRE)
+            return False
+        else:
+            return True
+        
+    def TransferToWindow(self):
+        return True
+    
+    def TransferFromWindow(self):
+        return True
+
+        
 
 class DataFormDialog(sc.SizedDialog):
     def __init__(self, parent, id, title="New Compound", data=None ):
@@ -364,7 +388,9 @@ class DataFormDialog(sc.SizedDialog):
 if __name__ == "__main__":
     app = wx.PySimpleApp(0)
     wx.InitAllImageHandlers()
-    frame_2 = DefineSystemFrame(None, -1)
-    app.SetTopWindow(frame_2)
-    frame_2.Show()
+
+    
+    dlg = DefineSystemDialog(None, -1)
+    dlg.ShowModal()
+    dlg.Destroy()
     app.MainLoop()
