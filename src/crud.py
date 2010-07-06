@@ -7,7 +7,7 @@ import wx.lib.sized_controls as sc
 
 import sqlite3
 
-import widgets
+import ui.widgets
         
 # begin wxGlade: extracode
 # end wxGlade
@@ -16,25 +16,26 @@ from settings import PATH_ICONS
 
 
 class DefineSystemDialog(wx.Dialog):
-    def __init__(self, *args, **kwds):
+    def __init__(self, parent, id, compounds_data):
         
+      
+
+        # begin wxGlade: MyFrame.__init__
+        #kwds["style"] = wx.DEFAULT_FRAME_STYLE ^ ( wx.RESIZE_BORDER | 
+        #                                    wx.MINIMIZE_BOX | wx.MAXIMIZE_BOX )   
+        wx.Dialog.__init__(self, parent, id)
+
         #database handler
         conn = sqlite3.connect('gpec.sqlite')
         self.c = conn.cursor()
         
         #cache database
-        self.c.execute("select * from compounds")
+        self.c.execute("select id, name, tc, pc, vc, acentric_factor from compounds")
         self.list_base_data = {}
         for row in self.c:
             id = row[0]
             self.list_base_data[id] = row[1:]
-        
 
-
-        # begin wxGlade: MyFrame.__init__
-        #kwds["style"] = wx.DEFAULT_FRAME_STYLE ^ ( wx.RESIZE_BORDER | 
-        #                                    wx.MINIMIZE_BOX | wx.MAXIMIZE_BOX )   
-        wx.Dialog.__init__(self, *args, **kwds)
 
         self.notebook_1 = wx.Notebook(self, -1, style=0)
         self.notebook_1_pane_1 = wx.Panel(self.notebook_1, -1)
@@ -51,7 +52,15 @@ class DefineSystemDialog(wx.Dialog):
         
         self.button_add2system = wx.BitmapButton(self, -1, wx.Bitmap(os.path.join(PATH_ICONS,"go-next.png")))
         self.button_remove4system = wx.BitmapButton(self, -1, wx.Bitmap(os.path.join(PATH_ICONS,"go-previous.png")))
-        self.list_system = wx.ListCtrl(self, -1, validator= SystemValidator(), style=wx.LC_REPORT|wx.SUNKEN_BORDER)
+
+
+        self.compounds_data = compounds_data
+        self.list_system = wx.ListCtrl(self, -1, validator= SystemValidator(self.compounds_data), style=wx.LC_REPORT|wx.SUNKEN_BORDER)
+        
+
+
+        
+        
 
         self.button_cancel = wx.Button(self, wx.ID_CANCEL)
         self.button_accept = wx.Button(self, wx.ID_OK)
@@ -81,7 +90,7 @@ class DefineSystemDialog(wx.Dialog):
         self.Bind(wx.EVT_BUTTON, self.OnRemoveFromSystem, self.button_remove4system)
 
         #accept / cancel
-        self.Bind(wx.EVT_BUTTON, self.OnAccept, self.button_accept)
+        #self.Bind(wx.EVT_BUTTON, self.OnAccept, self.button_accept)
         self.Bind(wx.EVT_BUTTON, self.OnCancel, self.button_cancel)
 
         self.Bind(wx.EVT_CLOSE, self.OnCancel)
@@ -194,7 +203,7 @@ class DefineSystemDialog(wx.Dialog):
         for id, data in self.list_base_data.iteritems():
             if filterer(data[1]):
                 #print filter, data[1]
-                self.list_base.Append([data[1]]) #name
+                self.list_base.Append([data[0]]) #name
                 key = self.list_base.GetItemCount() - 1
                 self.list_base.SetItemData(key, id)
                         
@@ -249,11 +258,14 @@ class DefineSystemDialog(wx.Dialog):
         """Add the first selected item from left (base)  to right (system)"""
 
         if self.list_system.GetItemCount() < 2:
-            key = self.list_base.GetFirstSelected()
-            id = self.list_base.GetItemData(key)
-            name = self.list_base.GetItemText(key)
-            self.list_system.Append([name])
-            self.list_system.SetItemData(self.list_system.GetItemCount() - 1, id)
+            key = self.list_base.GetFirstSelected() #row selected on database
+            id = self.list_base.GetItemData(key)    #compound's id
+            
+            self.list_system.Append([self.list_base_data[id][0]]) 
+
+            
+            self.compounds_data.append( [id] + list(self.list_base_data[id]))
+
         
         else:
             wx.Bell()
@@ -265,6 +277,7 @@ class DefineSystemDialog(wx.Dialog):
         key = self.list_system.GetFirstSelected()
         if key != -1:
             self.list_system.DeleteItem(key)
+            self.compounds_data.pop(key)
         else:
             wx.Bell()
 
@@ -301,13 +314,15 @@ class DefineSystemDialog(wx.Dialog):
 
         
 class SystemValidator(wx.PyValidator):
-    def __init__(self):
+    def __init__(self, compounds_data):
         wx.PyValidator.__init__(self)
+        self.compounds_data = compounds_data
+
 
     def Clone(self):
-        return SystemValidator()
+        return SystemValidator(self.compounds_data)
     
-    def Validate(self):
+    def Validate(self, parent):
         win = self.GetWindow()
         if win.GetItemCount() != 2:
             wx.MessageBox(self, "Do you know what binary means?", "Your system needs 2 compounds", wx.OK|wx.ICON_ERROR|wx.CENTRE)
@@ -316,10 +331,21 @@ class SystemValidator(wx.PyValidator):
             return True
         
     def TransferToWindow(self):
-        return True
+        listCtrl = self.GetWindow()
+        
+
+        for compound in self.compounds_data:
+            listCtrl.Append([compound[1]]) #add name
+            
+            
+
+        return True          
+        
     
     def TransferFromWindow(self):
-        return True
+        return True    
+        
+            
 
         
 
@@ -351,17 +377,17 @@ class DataFormDialog(sc.SizedDialog):
 
         # row 4
         wx.StaticText(pane, -1, u'Critical Temperature [K]')
-        self.controls.append(widgets.FloatControl(pane, -1))
+        self.controls.append(ui.widgets.FloatControl(pane, -1))
         
         #row 5
         wx.StaticText(pane, -1, u'Critical Pressure [bar]')
-        self.controls.append(widgets.FloatControl(pane, -1))
+        self.controls.append(ui.widgets.FloatControl(pane, -1))
         
         wx.StaticText(pane, -1, u'Critical Volume [m³/Kmol]')
-        self.controls.append( widgets.FloatControl(pane, -1))
+        self.controls.append( ui.widgets.FloatControl(pane, -1))
         
         wx.StaticText(pane, -1, "Acentric Factor")
-        self.controls.append(  widgets.FloatControl(pane, -1))
+        self.controls.append(  ui.widgets.FloatControl(pane, -1))
         
         # add dialog buttons
         self.SetButtonSizer(self.CreateStdDialogButtonSizer(wx.OK | wx.CANCEL))

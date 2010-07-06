@@ -1,15 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import wx
-import widgets
 import os
 
+#WX
+import wx
 import wx.lib.buttons
-import apimanager
-
-
+import ui.widgets
 import ui.PyCollapsiblePane as pycp
+
+import apimanager
+import crud
+
 
 from settings import PATH_ICONS
 
@@ -24,7 +26,7 @@ class VarsAndParamPanel(wx.Panel):
         """
 
     def __init__(self, parent, id, model_id=1, setup_data=None):
-        
+        """setup_data: (id, name, tc, pc, vc, om)"""
 
         wx.Panel.__init__(self, parent, id, style = wx.TAB_TRAVERSAL
                      | wx.CLIP_CHILDREN
@@ -50,7 +52,7 @@ class VarsAndParamPanel(wx.Panel):
         self.vars = []
         for row, var in enumerate(vars_label):
             gbs.Add( wx.StaticText(self, -1, var[0]), (row+2, 0), flag=wx.ALIGN_RIGHT)
-            self.vars.append(widgets.FloatCtrl(self, -1))
+            self.vars.append(ui.widgets.FloatCtrl(self, -1))
             gbs.Add ( self.vars[-1], (row+2, 1))
 
         self.params = []
@@ -121,10 +123,15 @@ class VarsAndParamPanel(wx.Panel):
         self.Bind(wx.EVT_RADIOBUTTON, self.OnDirectionSelect, self.radio2 )
 
     def SetData(self, data):
-        self.title.SetLabel(data[0])
-        self.SetVarsValues(data[1:])
+        self.compound_id = data[0]
+        self.compound_name = data[1]    #in case the title != compound_name
+        self.title.SetLabel(data[1]) 
+        self.SetVarsValues(data[2:])
         self.EnableAll()
-        
+
+    def GetData(self):
+        if self.enabled:
+            return [self.compound_id, self.compound_name] + [box.GetValue() for box in self.vars]
 
     def EnableAll(self, flag=True):
         self.enabled = flag
@@ -139,7 +146,7 @@ class VarsAndParamPanel(wx.Panel):
     def SetVarsValues(self, data):
         if len(data) == len(self.vars):
             for box, data in zip(self.vars, data):
-                box.SetValue(data)
+                box.SetValue(str(data))
         else:
             wx.Bell()
             print "not enough data or boxes for EOS vars"
@@ -147,7 +154,7 @@ class VarsAndParamPanel(wx.Panel):
     def SetParamsValues(self, data):
         if len(data) == len(self.params):
             for box, data in zip(self.params, data):
-                box.SetValue(data)
+                box.SetValue(str(data))
         else:
             wx.Bell()
             print "not enough data or boxes for EOS vars"
@@ -241,7 +248,7 @@ class VarsAndParamPanel(wx.Panel):
         for row, var in enumerate(self.params_labels[model_id]):
             #add row an box to the form and the list
             self.gbs.Add(wx.StaticText(self, -1, var[0]), (row+2, 3), flag=wx.ALIGN_RIGHT)
-            self.params.append(widgets.FloatCtrl(self, -1))
+            self.params.append(ui.widgets.FloatCtrl(self, -1))
             self.gbs.Add ( self.params[-1], (row+2, 4))
     
         
@@ -285,7 +292,7 @@ class TestFrame(wx.Frame):
 
         first_row_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.load_button = wx.lib.buttons.GenBitmapTextButton(self, -1, wx.Bitmap(os.path.join(PATH_ICONS,"compose.png")), "Load System")
+        self.load_button = wx.lib.buttons.GenBitmapTextButton(self, -1, wx.Bitmap(os.path.join(PATH_ICONS,"compose.png")), "Define system")
         
         first_row_sizer.Add(self.load_button, 0, flag=wx.ALL | wx.ALIGN_LEFT | wx.EXPAND , border=5)
         first_row_sizer.Add((60, 20), 0, wx.EXPAND)
@@ -336,13 +343,13 @@ class TestFrame(wx.Frame):
     def MakeCollipsable(self, pane):
         addrSizer = wx.FlexGridSizer(cols=2, hgap=5, vgap=5)
     
-        self.temperature = widgets.FloatCtrl(pane, -1, "2000.0");
+        self.temperature = ui.widgets.FloatCtrl(pane, -1, "2000.0");
         temperatureLbl = wx.StaticText(pane, -1, "Temperature [k]")
 
-        self.k12 = widgets.FloatCtrl(pane, -1);
+        self.k12 = ui.widgets.FloatCtrl(pane, -1);
         k12Lbl = wx.StaticText(pane, -1, "K12")
 
-        self.l12 = widgets.FloatCtrl(pane, -1);
+        self.l12 = ui.widgets.FloatCtrl(pane, -1);
         l12Lbl = wx.StaticText(pane, -1, "L12")
 
         addrSizer.Add(temperatureLbl, 0, 
@@ -366,9 +373,23 @@ class TestFrame(wx.Frame):
         self.Fit()
     
 
-    def OnLoadSystem(self, event):
-        self.panels[0].SetData(('METHANE', '190.56', '45.99', '0.1152', '0.0115'))
-        self.panels[1].SetData(('BUTANE', '194.56', '12.99', '1.1452', '0.0115'))
+    def OnLoadSystem(self, event):        
+
+
+        compounds_data =  [panel.GetData() for panel in self.panels if  panel.enabled ]  #GET DATA IF vars-paramPanels are enabled
+        
+        
+
+
+        dlg = crud.DefineSystemDialog(None, -1, compounds_data)        
+    
+        
+        if dlg.ShowModal()  == wx.ID_OK:
+            for panel, data in zip (self.panels, compounds_data):
+                panel.SetData(data)
+
+        dlg.Destroy()
+
 
     def OnSetModel(self, event):
         for panel in self.panels:
