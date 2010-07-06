@@ -5,20 +5,9 @@ import os
 import sys
 
 from settings import PATH_BIN, PATH_TEMP
-
+import numpy as np
 
 def exec_fortran(bin):
-    #if bin == 'ModelsParam':
-    #elif bin == 'PCSAFTparam':
-    #elif bin == 'GPEC':
-    #elif bin =='PxyGPEC':
-    #elif bin == 'TxyGPEC':
-    #elif bin == 'IsoplethGPEC':
-    #elif bin == 'FUGi':
-    #elif bin == 'IsoXT':
-    #elif bin == 'PhPxy':
-    #elif bin == 'PhTxy':
-
     args = []
     if sys.platform != 'win32':
         #On any non-Windows system, we run binaries over wine
@@ -46,12 +35,12 @@ def write_conparin(sense, model, data):
         model paramater""" 
 
     filename = 'CONPARIN.DAT'
-    fh = open( os.path.join(PATH_TEMP, filename), 'w')
     template = "{0}  {1}\n {2}"
     output = template.format (sense, model, "  ".join( data )) 
-    fh.write(output)
-    fh.close()
-
+    with open( os.path.join(PATH_TEMP, filename), 'w') as fh:
+        fh.write(output)
+        fh.close()
+    
 
 def write_gpecin(model, comp1, comp2, ncomb=0, ntdep=0, k12=0.0, l12=0.0, max_p=2000):
     """
@@ -59,15 +48,14 @@ def write_gpecin(model, comp1, comp2, ncomb=0, ntdep=0, k12=0.0, l12=0.0, max_p=
     """
 
     filename = 'GPECIN.DAT'
-    fh = open(os.path.join(PATH_TEMP, filename), 'w')
     template = "{0}\n{1} {2}\n%s" % "".join(['{%d}\n' % i for i in range(3, 12)])
-
     output = template.format(model, ncomb, ntdep, comp1[0], "  ".join(map(str, comp1[1])), 
                             "  ".join(map(str, comp1[2])), comp2[0], "  ".join(map(str, comp2[1])), 
                             "  ".join(map(str, comp2[2])), k12, l12, max_p)
-    print output
-    fh.write(output)
-    fh.close()
+    
+    with open(os.path.join(PATH_TEMP, filename), 'w') as fh:
+        fh.write(output)
+        fh.close()
 
 def read_conparout():
     """COMPAROUT.DAT has two lines of data. First one is EOS vars and second 
@@ -77,14 +65,61 @@ def read_conparout():
     
     if ret == 0:
         filename = 'CONPAROUT.DAT'
-        fh = open(os.path.join(PATH_TEMP, filename), 'r')
-        output = [get_numbers(line) for line in fh.readlines()]
-        fh.close()
+        with open(os.path.join(PATH_TEMP, filename), 'r') as fh:
+            output = [get_numbers(line) for line in fh.readlines()]
+            fh.close()
+
         return output
                 
         
+def read_gpecout():
+    """Parses an gpecout.dat, detects numeric blocks and create arrays with them"""
 
-
-
+    ret = exec_fortran('GPEC')
     
+    if ret==0:
+        filename = 'GPECOUT.DAT'
+        curve_types = {'VAP':4, 'CRI':5, 'CEP':6, 'LLV':10 } #type:significatives columns
+
+        tokens = {}         #{(begin,end):'type', ...}
+        begin = end = 0
+        
+        with open(os.path.join(PATH_TEMP, filename), 'w', 'r') as fh:
+            number_of_lines = len(fh.readlines())
+            fh.seek(0)
+            
+            #give skip from header and skip from footer
+            for line_number, line in enumerate(fh):
+                if begin <= end:
+                    #print 'begin <= end'
+                    if line.strip() in curve_types:
+                        begin = line_number + 1
+                        curve_type = line.strip()
+                else:
+                    if not line.strip():
+                        end = line_number
+                        tokens[(begin, end)] = curve_type
+            
+            curves = []
+            token_keys = tokens.keys()
+            token_keys.sort()
+
+            for (begin, end) in token_keys:
+                #print (begin,end)
+                fh.seek(0)
+                temp_file_path = os.path.join(PATH_TEMP, 'temp_gpecout.dat')
+                with open(file_path, 'w') as fho:
+                    #write lines just of the block between (begin,end)
+                    [fho.write(line) for l,line in enumerate(fh) if  begin<=l<end]  
+                    fho.close()
+                
+                #retrieve significative columns from a dictionary. (begin,end)=>type=>num_cols 
+                significatives_cols= range(curve_types[tokens[(begin, end)]])     
+
+                curve = np.loadtxt(temp_file_path, usecols=significatives_cols)
+                curves.append(curve)
+
+            fh.close()
+        return curves
+        
 

@@ -127,11 +127,23 @@ class VarsAndParamPanel(wx.Panel):
         self.compound_name = data[1]    #in case the title != compound_name
         self.title.SetLabel(data[1]) 
         self.SetVarsValues(data[2:])
+
+        #TODO reset param columns. 
         self.EnableAll()
 
     def GetData(self):
+        """Return a compound list [id, name, vars...]   useful to redefine the system"""
         if self.enabled:
-            return [self.compound_id, self.compound_name] + [box.GetValue() for box in self.vars]
+            return [self.compound_id, self.compound_name] + self.GetVarsValues()
+
+    def GetTotalData(self):
+        """Return a compound list tuple (name, (vars...), (param...))"""
+        self.OnButton(None) #Ensure last numbers
+        tmp_var = self.GetVarsValues()
+        tmp_var = tmp_var[:-2] + [tmp_var[-1], tmp_var[-2]]  #gpecout has order changed: vc <-> omega
+
+        return (self.compound_name, tmp_var, self.GetParamsValues())
+
 
     def EnableAll(self, flag=True):
         self.enabled = flag
@@ -143,6 +155,11 @@ class VarsAndParamPanel(wx.Panel):
         self.radio2.Enable(flag)
         
 
+    def GetVarsValues(self):
+        """Return vars values of defined compound"""
+        if self.enabled:
+            return [box.GetValue() for box in self.vars]
+
     def SetVarsValues(self, data):
         if len(data) == len(self.vars):
             for box, data in zip(self.vars, data):
@@ -150,6 +167,13 @@ class VarsAndParamPanel(wx.Panel):
         else:
             wx.Bell()
             print "not enough data or boxes for EOS vars"
+
+    
+    def GetParamsValues(self):
+        """Return params values of defined compound"""
+        if self.enabled:
+            return [box.GetValue() for box in self.params]
+
 
     def SetParamsValues(self, data):
         if len(data) == len(self.params):
@@ -348,8 +372,8 @@ class TestFrame(wx.Frame):
         combining_rulesLbl = wx.StaticText(pane, -1, "Combining Rule")
 
         
-        self.temperature = ui.widgets.FloatCtrl(pane, -1, "2000.0");
-        temperatureLbl = wx.StaticText(pane, -1, "Temperature [k]")
+        self.max_p = ui.widgets.FloatCtrl(pane, -1, "2000.0");
+        max_pLbl = wx.StaticText(pane, -1, "Maximum Pressure for LL critical line  [bar]")
 
         self.k12 = ui.widgets.FloatCtrl(pane, -1);
         k12Lbl = wx.StaticText(pane, -1, "K12")
@@ -361,9 +385,9 @@ class TestFrame(wx.Frame):
                 wx.ALIGN_RIGHT|wx.ALIGN_CENTER_VERTICAL)
         addrSizer.Add(self.combining_rules, 0)
 
-        addrSizer.Add(temperatureLbl, 0, 
+        addrSizer.Add(max_pLbl, 0, 
                 wx.ALIGN_RIGHT|wx.ALIGN_CENTER_VERTICAL)
-        addrSizer.Add(self.temperature, 0)
+        addrSizer.Add(self.max_p, 0)
         addrSizer.Add(l12Lbl, 0, 
                 wx.ALIGN_RIGHT|wx.ALIGN_CENTER_VERTICAL)
         addrSizer.Add(self.l12, 0)
@@ -402,9 +426,10 @@ class TestFrame(wx.Frame):
 
     def OnSetModel(self, event):
 
-        model_id = self.model_choices[event.GetString()]
+        self.model_id = self.model_choices[event.GetString()]
 
-        if model_id in (4,6):
+
+        if self.model_id in (4,6):
             #constraint  ``PC-SAFT`` y ``SPHCT`` exigen que la regla sea ``Lorentz-Berthelot``.
             self.combining_rules.SetSelection(0)   
             self.combining_rules.Disable()
@@ -413,14 +438,24 @@ class TestFrame(wx.Frame):
         
 
         for panel in self.panels:
-            self.model_id = model_id
+            panel.model_id = self.model_id
             panel.SetParamsForm(self.model_id)
 
         self.SetSizerAndFit(self.box)
         self.SetClientSize(self.GetSize())
 
     def OnWriteGPECIN(self, event):
-        pass
+        comp1 = self.panels[0].GetTotalData()
+        comp2 = self.panels[1].GetTotalData()
+        ncomb = self.combining_rules.GetSelection() 
+        k12 = self.k12.GetValue()
+        l12 = self.l12.GetValue()
+        max_p = self.max_p.GetValue()
+
+        apimanager.write_gpecin(self.model_id, comp1, comp2, ncomb, 0, k12, l12, max_p)
+
+        print apimanager.read_gpecout()
+
 
 if __name__ == "__main__":
     app = wx.PySimpleApp(0)
