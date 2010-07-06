@@ -7,6 +7,10 @@ import os
 
 import wx.lib.buttons
 import apimanager
+
+
+import ui.PyCollapsiblePane as pycp
+
 from settings import PATH_ICONS
 
 #list-add
@@ -299,8 +303,8 @@ class TestFrame(wx.Frame):
 
         #collapsible for extra variables
 
-        self.cp = cp = wx.CollapsiblePane(self, label='Other case variables',
-                                          style=wx.CP_DEFAULT_STYLE|wx.CP_NO_TLW_RESIZE)
+        self.cp = cp = pycp.PyCollapsiblePane(self, label='Other case variables',
+                                          style=wx.CP_DEFAULT_STYLE|wx.CP_NO_TLW_RESIZE|pycp.CP_GTK_EXPANDER)
         self.MakeCollipsable(cp.GetPane())
         self.box.Add(self.cp, 0, wx.RIGHT|wx.LEFT|wx.EXPAND, 25)
 
