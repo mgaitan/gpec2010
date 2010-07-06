@@ -284,6 +284,7 @@ class TestFrame(wx.Frame):
 
         self.model_choices =  {'Soave-Redlich-Kwong':1, 'Peng-Robinson':2,
                             'RK-PR':3, 'PC-SAFT':4, 'SPHCT':6}
+
         self.ch = wx.Choice(self, -1, choices = self.model_choices.keys())
         
         #model ID by default
@@ -315,8 +316,6 @@ class TestFrame(wx.Frame):
         self.MakeCollipsable(cp.GetPane())
         self.box.Add(self.cp, 0, wx.RIGHT|wx.LEFT|wx.EXPAND, 25)
 
-
-
             
         self.accept_button = wx.lib.buttons.GenBitmapTextButton(self, -1, wx.Bitmap(os.path.join(PATH_ICONS,"document-save.png")), "Write GPECIN.DAT")
 
@@ -343,6 +342,12 @@ class TestFrame(wx.Frame):
     def MakeCollipsable(self, pane):
         addrSizer = wx.FlexGridSizer(cols=2, hgap=5, vgap=5)
     
+   
+        self.combining_rules_options = {'van Der Waals': 0, 'Lorentz-Berthelot': 1}
+        self.combining_rules = wx.Choice(pane, -1, choices=self.combining_rules_options.keys())
+        combining_rulesLbl = wx.StaticText(pane, -1, "Combining Rule")
+
+        
         self.temperature = ui.widgets.FloatCtrl(pane, -1, "2000.0");
         temperatureLbl = wx.StaticText(pane, -1, "Temperature [k]")
 
@@ -351,6 +356,10 @@ class TestFrame(wx.Frame):
 
         self.l12 = ui.widgets.FloatCtrl(pane, -1);
         l12Lbl = wx.StaticText(pane, -1, "L12")
+
+        addrSizer.Add(combining_rulesLbl, 0, 
+                wx.ALIGN_RIGHT|wx.ALIGN_CENTER_VERTICAL)
+        addrSizer.Add(self.combining_rules, 0)
 
         addrSizer.Add(temperatureLbl, 0, 
                 wx.ALIGN_RIGHT|wx.ALIGN_CENTER_VERTICAL)
@@ -392,8 +401,19 @@ class TestFrame(wx.Frame):
 
 
     def OnSetModel(self, event):
+
+        model_id = self.model_choices[event.GetString()]
+
+        if model_id in (4,6):
+            #constraint  ``PC-SAFT`` y ``SPHCT`` exigen que la regla sea ``Lorentz-Berthelot``.
+            self.combining_rules.SetSelection(0)   
+            self.combining_rules.Disable()
+        else:
+            self.combining_rules.Enable()
+        
+
         for panel in self.panels:
-            self.model_id = self.model_choices[event.GetString()]
+            self.model_id = model_id
             panel.SetParamsForm(self.model_id)
 
         self.SetSizerAndFit(self.box)

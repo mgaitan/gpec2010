@@ -18,12 +18,12 @@ from settings import PATH_ICONS
 class DefineSystemDialog(wx.Dialog):
     def __init__(self, parent, id, compounds_data):
         
-      
-
         # begin wxGlade: MyFrame.__init__
         #kwds["style"] = wx.DEFAULT_FRAME_STYLE ^ ( wx.RESIZE_BORDER | 
         #                                    wx.MINIMIZE_BOX | wx.MAXIMIZE_BOX )   
+
         wx.Dialog.__init__(self, parent, id)
+        self.SetBackgroundColour(wx.NullColour) #hack for win32
 
         #database handler
         conn = sqlite3.connect('gpec.sqlite')
