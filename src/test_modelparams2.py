@@ -454,7 +454,7 @@ class TestFrame(wx.Frame):
 
         apimanager.write_gpecin(self.model_id, comp1, comp2, ncomb, 0, k12, l12, max_p)
 
-        print apimanager.read_gpecout()
+        #self.gpecout = apimanager.read_gpecout()
 
 
 if __name__ == "__main__":
