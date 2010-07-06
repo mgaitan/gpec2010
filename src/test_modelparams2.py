@@ -275,6 +275,7 @@ class TestFrame(wx.Frame):
         
         #model ID by default
         self.model_id = 1
+        self.ch.SetSelection(0)
 
         self.box.Add( self.ch, 0, flag= wx.TOP | wx.RIGHT | wx.FIXED_MINSIZE | wx.ALIGN_RIGHT, border = 5)
 
