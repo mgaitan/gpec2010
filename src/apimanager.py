@@ -53,7 +53,7 @@ def write_gpecin(model, comp1, comp2, ncomb=0, ntdep=0, k12=0.0, l12=0.0, max_p=
                             "  ".join(map(str, comp1[2])), comp2[0], "  ".join(map(str, comp2[1])), 
                             "  ".join(map(str, comp2[2])), k12, l12, max_p)
     
-    with open(os.path.join(PATH_TEMP, filename), 'w') as fh:
+    with open(os.path.join(PATH_BIN, filename), 'w') as fh:     #writing in path_bin instead path_temp
         fh.write(output)
         fh.close()
 
@@ -75,51 +75,51 @@ def read_conparout():
 def read_gpecout():
     """Parses an gpecout.dat, detects numeric blocks and create arrays with them"""
 
-    ret = exec_fortran('GPEC')
+    ret = exec_fortran('GPEC')  #generate gpecout.dat
     
-    if ret==0:
-        filename = 'GPECOUT.DAT'
-        curve_types = {'VAP':4, 'CRI':5, 'CEP':6, 'LLV':10 } #type:significatives columns
 
-        tokens = {}         #{(begin,end):'type', ...}
-        begin = end = 0
+    filename = 'GPECOUT.DAT'
+    curve_types = {'VAP':4, 'CRI':5, 'CEP':6, 'LLV':10 } #type:significatives columns
+
+    tokens = {}         #{(begin,end):'type', ...}
+    begin = end = 0
+    
+    with open(os.path.join(PATH_BIN, filename), 'r') as fh:
+        number_of_lines = len(fh.readlines())
+        fh.seek(0)
         
-        with open(os.path.join(PATH_TEMP, filename), 'w', 'r') as fh:
-            number_of_lines = len(fh.readlines())
+        #give skip from header and skip from footer
+        for line_number, line in enumerate(fh):
+            if begin <= end:
+                #print 'begin <= end'
+                if line.strip() in curve_types:
+                    begin = line_number + 1
+                    curve_type = line.strip()
+            else:
+                if not line.strip():
+                    end = line_number
+                    tokens[(begin, end)] = curve_type
+        
+        curves = []
+        token_keys = tokens.keys()
+        token_keys.sort()
+
+        for (begin, end) in token_keys:
+            #print (begin,end)
             fh.seek(0)
+            temp_file_path = os.path.join(PATH_TEMP, 'temp_gpecout.dat')
+            with open(temp_file_path, 'w') as fho:
+                #write lines just of the block between (begin,end)
+                [fho.write(line) for l,line in enumerate(fh) if  begin<=l<end]  
+                fho.close()
             
-            #give skip from header and skip from footer
-            for line_number, line in enumerate(fh):
-                if begin <= end:
-                    #print 'begin <= end'
-                    if line.strip() in curve_types:
-                        begin = line_number + 1
-                        curve_type = line.strip()
-                else:
-                    if not line.strip():
-                        end = line_number
-                        tokens[(begin, end)] = curve_type
-            
-            curves = []
-            token_keys = tokens.keys()
-            token_keys.sort()
+            #retrieve significative columns from a dictionary. (begin,end)=>type=>num_cols 
+            significatives_cols= range(curve_types[tokens[(begin, end)]])     
 
-            for (begin, end) in token_keys:
-                #print (begin,end)
-                fh.seek(0)
-                temp_file_path = os.path.join(PATH_TEMP, 'temp_gpecout.dat')
-                with open(file_path, 'w') as fho:
-                    #write lines just of the block between (begin,end)
-                    [fho.write(line) for l,line in enumerate(fh) if  begin<=l<end]  
-                    fho.close()
-                
-                #retrieve significative columns from a dictionary. (begin,end)=>type=>num_cols 
-                significatives_cols= range(curve_types[tokens[(begin, end)]])     
+            curve = np.loadtxt(temp_file_path, usecols=significatives_cols)
+            curves.append(curve)
 
-                curve = np.loadtxt(temp_file_path, usecols=significatives_cols)
-                curves.append(curve)
+        fh.close()
+    return curves
 
-            fh.close()
-        return curves
-        
 

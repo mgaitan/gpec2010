@@ -12,10 +12,65 @@ import ui.PyCollapsiblePane as pycp
 import apimanager
 import crud
 
-
 from settings import PATH_ICONS
 
-#list-add
+#MATPLOTLIB
+import matplotlib
+from matplotlib.figure import Figure
+matplotlib.use('WXAgg')
+import numpy as np
+from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigCanvas
+from matplotlib.backends.backend_wxagg import NavigationToolbar2Wx as NavigationToolbar
+
+#pubsub
+from wx.lib.pubsub import Publisher as pub
+
+
+class PlotPanel(wx.Panel):
+    """ Creates the main panel with all the controls on it:
+             * mpl canvas 
+             * mpl navigation toolbar
+             * Control panel for interaction"""
+        
+    def __init__ (self, parent, id, figure=None):
+        
+        wx.Panel.__init__(self, parent, id)
+        # Create the mpl Figure and FigCanvas objects. 
+        # 5x4 inches, 100 dots-per-inch
+        #
+        self.dpi = 100
+        self.fig = Figure(dpi=self.dpi)
+        self.canvas = FigCanvas(self, -1, self.fig)
+        
+        # Since we have only one plot, we can use add_axes 
+        # instead of add_subplot, but then the subplot
+        # configuration tool in the navigation toolbar wouldn't
+        # work.
+        self.axes = self.fig.add_subplot(111)
+        self.toolbar = NavigationToolbar(self.canvas)
+        self.vbox = wx.BoxSizer(wx.VERTICAL)
+        self.vbox.Add(self.canvas, 1, wx.LEFT | wx.TOP | wx.GROW)
+        self.vbox.Add(self.toolbar, 0, wx.EXPAND)
+        self.vbox.AddSpacer(10)
+
+        self.SetSizer(self.vbox)
+        self.vbox.Fit(self)
+
+        pub.subscribe(self.OnPlotPT, 'plot.PT')
+
+    def OnPlotPT(self, message):
+        curves = message.data
+
+        print [len(curve) for curve in curves]
+        
+
+        self.axes.plot(curves[0][:,0],curves[0][:,1])
+        self.axes.plot(curves[1][:,0],curves[1][:,1])
+        self.axes.plot(curves[2][:,0],curves[2][:,1])
+        #self.axes.plot(curves[3][:,0],curves[3][:,1])
+    
+        self.canvas.draw()
+
 
 class VarsAndParamPanel(wx.Panel):
     """a panel with 2 columns of inputs. First colums input EOS variables. 
@@ -289,19 +344,37 @@ class VarsAndParamPanel(wx.Panel):
 
 
 
-    
-
-
-
 class TestFrame(wx.Frame):
     def __init__(self, parent, id):
         wx.Frame.__init__(self, parent, id, "Model Params")
-        pane = self.pane = wx.Panel(self, -1, style = wx.TAB_TRAVERSAL
-                     | wx.CLIP_CHILDREN
-                     | wx.FULL_REPAINT_ON_RESIZE
-                     )
-        
         self.SetBackgroundColour(wx.NullColour) #hack for win32
+
+        hsizer =  wx.BoxSizer(wx.HORIZONTAL)
+        
+        case_panel = CasePanel(self, -1)
+
+        plot_panel = PlotPanel(self, -1)
+
+        hsizer.Add(case_panel, 0, wx.EXPAND )
+        
+        hsizer.Add(plot_panel, 0, wx.EXPAND )
+
+        self.SetSizerAndFit(hsizer)
+        self.SetClientSize(self.GetSize())
+
+
+
+
+class CasePanel(wx.Panel):
+    def __init__(self, parent, id):
+        wx.Panel.__init__(self, parent, id, style = wx.TAB_TRAVERSAL
+                                                | wx.CLIP_CHILDREN
+                                                | wx.FULL_REPAINT_ON_RESIZE)
+        
+        
+        
+        
+
         
         self.box = wx.BoxSizer(wx.VERTICAL)
 
@@ -405,6 +478,11 @@ class TestFrame(wx.Frame):
         self.SetClientSize(self.GetSize())
         self.Fit()
     
+        p = self.GetParent()
+        p.SetClientSize(self.GetSize())
+        
+
+    
 
     def OnLoadSystem(self, event):        
 
@@ -454,7 +532,10 @@ class TestFrame(wx.Frame):
 
         apimanager.write_gpecin(self.model_id, comp1, comp2, ncomb, 0, k12, l12, max_p)
 
-        #self.gpecout = apimanager.read_gpecout()
+        curves = apimanager.read_gpecout()
+        
+        pub.sendMessage('plot.PT', curves)
+
 
 
 if __name__ == "__main__":
