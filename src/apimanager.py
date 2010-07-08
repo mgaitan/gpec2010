@@ -119,7 +119,7 @@ def read_gpecout():
                 #write lines just of the block between (begin,end)
                 
                 #sometimes there are "*" chars which must be removed
-                [fho.write(line.strip([*])) for l,line in enumerate(fh) if  begin<=l<end]  
+                [fho.write(line.strip([*]) for l,line in enumerate(fh) if  begin<=l<end]  
                 fho.close()
             
             #retrieve significative columns from a dictionary. (begin,end)=>type=>num_cols 
