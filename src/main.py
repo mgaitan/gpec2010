@@ -452,6 +452,9 @@ class CasePanel(wx.Panel):
    
         self.combining_rules_options = {'van Der Waals': 0, 'Lorentz-Berthelot': 1}
         self.combining_rules = wx.Choice(pane, -1, choices=self.combining_rules_options.keys())
+
+        self.combining_rules.SetSelection(0)
+
         combining_rulesLbl = wx.StaticText(pane, -1, "Combining Rule")
 
         
