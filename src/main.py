@@ -22,6 +22,9 @@ import numpy as np
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigCanvas
 from matplotlib.backends.backend_wxagg import NavigationToolbar2Wx as NavigationToolbar
 
+
+
+
 #pubsub
 from wx.lib.pubsub import Publisher as pub
 
@@ -34,12 +37,12 @@ class PlotPanel(wx.Panel):
         
     def __init__ (self, parent, id, figure=None):
         
-        wx.Panel.__init__(self, parent, id)
+        wx.Panel.__init__(self, parent, id, style = wx.NO_FULL_REPAINT_ON_RESIZE)
         # Create the mpl Figure and FigCanvas objects. 
         # 5x4 inches, 100 dots-per-inch
         #
         self.dpi = 100
-        self.fig = Figure(dpi=self.dpi)
+        self.fig = Figure()     #dpi=self.dpi
         self.canvas = FigCanvas(self, -1, self.fig)
         
         # Since we have only one plot, we can use add_axes 
@@ -55,9 +58,8 @@ class PlotPanel(wx.Panel):
 
         self.SetSizer(self.vbox)
         self.vbox.Fit(self)
-
-        pub.subscribe(self.OnPlotPT, 'plot.PT')
-
+    
+        
     def OnPlotPT(self, message):
         curves = message.data
 
@@ -362,13 +364,20 @@ class TestFrame(wx.Frame):
 
         hsizer =  wx.BoxSizer(wx.HORIZONTAL)
         
-        case_panel = CasePanel(self, -1)
+        self.vsplitter  = wx.SplitterWindow(self, -1, style= wx.SP_LIVE_UPDATE | wx.SP_3D )
 
-        plot_panel = PlotPanel(self, -1)
+        self.vsplitter.SetMinimumPaneSize(4)
 
-        hsizer.Add(case_panel, 0, wx.EXPAND )
-        
-        hsizer.Add(plot_panel, 0, wx.EXPAND )
+        self.case_panel = CasePanel(self.vsplitter, -1)
+
+        self.plot_panel = PlotPanel(self.vsplitter, -1)
+
+        self.vsplitter.SplitVertically(self.case_panel, self.plot_panel, 
+                                        self.case_panel.GetSize().GetWidth() )
+
+        hsizer.Add(self.vsplitter, 0, wx.EXPAND )
+        #hsizer.Add(case_panel, 0, wx.EXPAND )
+        #hsizer.Add(plot_panel, 0, wx.EXPAND )
 
         self.SetSizerAndFit(hsizer)
         self.SetClientSize(self.GetSize())
@@ -490,9 +499,14 @@ class CasePanel(wx.Panel):
         self.Layout()
         self.SetClientSize(self.GetSize())
         self.Fit()
-    
+
         p = self.GetParent()
-        p.SetClientSize(self.GetSize())
+        
+        if isinstance(p, wx.SplitterWindow):
+            
+            p.UpdateSize()
+        else:
+            p.SetClientSize(self.GetSize())
         
 
     
@@ -558,7 +572,9 @@ class LogPanel(wx.Panel):
 
 
 if __name__ == "__main__":
-    apimanager.clean_tmp()
+    apimanager.clean_tmp() #sometimes are problems with file handling between 
+                           #python and GPEC at the same time. Trying a magic clean-up
+
     app = wx.PySimpleApp(0)
     wx.InitAllImageHandlers()
     frame_2 = TestFrame(None, -1)
