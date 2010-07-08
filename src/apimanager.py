@@ -117,7 +117,9 @@ def read_gpecout():
             temp_file_path = os.path.join(PATH_TEMP, 'temp_gpecout.dat')            #TODO rethink this!
             with open(temp_file_path, 'w') as fho:
                 #write lines just of the block between (begin,end)
-                [fho.write(line) for l,line in enumerate(fh) if  begin<=l<end]  
+                
+                #sometimes there are "*" chars which must be removed
+                [fho.write(line.strip([*])) for l,line in enumerate(fh) if  begin<=l<end]  
                 fho.close()
             
             #retrieve significative columns from a dictionary. (begin,end)=>type=>num_cols 
