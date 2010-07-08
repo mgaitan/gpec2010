@@ -121,7 +121,8 @@ def read_gpecout():
                 
                 for l,line in enumerate(fh):
                     if begin <= l < end:
-                        fho.write( line.strip('*') )		#sometimes there are "*" chars which must be removed
+                        #sometimes there are "*" chars which must be removed
+                        fho.write( line.replace('*', '') )        
                 fho.close()
             
             #retrieve significative columns from a dictionary. (begin,end)=>type=>num_cols 
