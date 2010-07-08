@@ -558,6 +558,7 @@ class LogPanel(wx.Panel):
 
 
 if __name__ == "__main__":
+    apimanager.clean_tmp()
     app = wx.PySimpleApp(0)
     wx.InitAllImageHandlers()
     frame_2 = TestFrame(None, -1)

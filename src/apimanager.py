@@ -10,6 +10,12 @@ from settings import PATH_BIN, PATH_TEMP, TIMEOUT
 import numpy as np
 
 
+def clean_tmp():
+    try:
+        os.remove( os.path.join(PATH_BIN, '*.*') )
+    except:
+        pass
+
 
 def exec_fortran(bin):
     args = []
@@ -34,13 +40,19 @@ def get_numbers(data_raw, prefix=None):
 
 
 
-def write_conparin(sense, model, data):
+def write_conparin(direction, model_id, data):
     """Write the input file CONPARIN.DAT ". data could be EOS variables or 
         model paramater""" 
 
     filename = 'CONPARIN.DAT'
     template = "{0}  {1}\n {2}"
-    output = template.format (sense, model, "  ".join( data )) 
+
+    if model_id in (1,2,3):
+        data = data[:-2] + [data[-1], data[-2]]
+    elif model_id in (4,6):
+        data = data[:-2].append([data[-1]])
+
+    output = template.format (direction, model_id, "  ".join( data )) 
     with open( os.path.join(PATH_TEMP, filename), 'w') as fh:
         fh.write(output)
         fh.close()
@@ -53,6 +65,11 @@ def write_gpecin(model, comp1, comp2, ncomb=0, ntdep=0, k12=0.0, l12=0.0, max_p=
 
     filename = 'GPECIN.DAT'
     template = "{0}\n{1} {2}\n%s" % "".join(['{%d}\n' % i for i in range(3, 12)])
+
+    if model == 4:
+        comp1[1].append('1.168')
+        comp2[1].append('1.168')
+
     output = template.format(model, ncomb, ntdep, comp1[0], "  ".join(map(str, comp1[1])), 
                             "  ".join(map(str, comp1[2])), comp2[0], "  ".join(map(str, comp2[1])), 
                             "  ".join(map(str, comp2[2])), k12, l12, max_p)

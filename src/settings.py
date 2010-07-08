@@ -19,4 +19,4 @@ _models = {'Soave-Redlich-Kwong':1,
           'SPHCT':6}
 
 VC_RATIO = 1.168    #relation MODEL/EXPERIMENTAL for critical volumen
-TIMEOUT = 5 #seconds to timeout the calculation 
+TIMEOUT = 10 #seconds to timeout the calculation 
