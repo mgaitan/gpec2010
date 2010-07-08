@@ -12,7 +12,7 @@ import ui.PyCollapsiblePane as pycp
 import apimanager
 import crud
 
-from settings import PATH_ICONS
+from settings import PATH_ICONS, _models
 
 #MATPLOTLIB
 import matplotlib
@@ -379,8 +379,7 @@ class CasePanel(wx.Panel):
         self.box = wx.BoxSizer(wx.VERTICAL)
 
 
-        self.model_choices =  {'Soave-Redlich-Kwong':1, 'Peng-Robinson':2,
-                            'RK-PR':3, 'PC-SAFT':4, 'SPHCT':6}
+        self.model_choices =  _models
 
         self.ch = wx.Choice(self, -1, choices = self.model_choices.keys())
         
@@ -535,6 +534,12 @@ class CasePanel(wx.Panel):
         curves = apimanager.read_gpecout()
         
         pub.sendMessage('plot.PT', curves)
+
+
+class LogPanel(wx.Panel):
+    def __init__(self, parent, id):
+        wx.Panel.__init__(parent, id)
+        
 
 
 

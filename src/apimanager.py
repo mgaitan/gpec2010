@@ -7,11 +7,15 @@ import sys
 from settings import PATH_BIN, PATH_TEMP
 import numpy as np
 
+
+
+
 def exec_fortran(bin):
     args = []
     if sys.platform != 'win32':
         #On any non-Windows system, we run binaries over wine
         args.append('wine')
+
     args.append( os.path.join(PATH_BIN, bin + '.exe'))
 
     #fortran binaries need to be called from temporary input files are
@@ -53,7 +57,7 @@ def write_gpecin(model, comp1, comp2, ncomb=0, ntdep=0, k12=0.0, l12=0.0, max_p=
                             "  ".join(map(str, comp1[2])), comp2[0], "  ".join(map(str, comp2[1])), 
                             "  ".join(map(str, comp2[2])), k12, l12, max_p)
     
-    with open(os.path.join(PATH_BIN, filename), 'w') as fh:     #writing in path_bin instead path_temp
+    with open(os.path.join(PATH_TEMP, filename), 'w') as fh:     #writing in path_bin instead path_temp
         fh.write(output)
         fh.close()
 
@@ -84,7 +88,7 @@ def read_gpecout():
     tokens = {}         #{(begin,end):'type', ...}
     begin = end = 0
     
-    with open(os.path.join(PATH_BIN, filename), 'r') as fh:
+    with open(os.path.join(PATH_TEMP, filename), 'r') as fh:
         number_of_lines = len(fh.readlines())
         fh.seek(0)
         
@@ -107,7 +111,7 @@ def read_gpecout():
         for (begin, end) in token_keys:
             #print (begin,end)
             fh.seek(0)
-            temp_file_path = os.path.join(PATH_TEMP, 'temp_gpecout.dat')
+            temp_file_path = os.path.join(PATH_TEMP, 'temp_gpecout.dat')            #TODO rethink this!
             with open(temp_file_path, 'w') as fho:
                 #write lines just of the block between (begin,end)
                 [fho.write(line) for l,line in enumerate(fh) if  begin<=l<end]  
