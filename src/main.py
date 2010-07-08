@@ -12,7 +12,7 @@ import ui.PyCollapsiblePane as pycp
 import apimanager
 import crud
 
-from settings import PATH_ICONS, _models
+from settings import PATH_ICONS, _models, VC_RATIO
 
 #MATPLOTLIB
 import matplotlib
@@ -91,7 +91,6 @@ class VarsAndParamPanel(wx.Panel):
         gbs = self.gbs = wx.GridBagSizer(6, 5)
     
 
- 
         vars_label = (('Tc [K]', 'Critical temperature'), 
                 ('Pc [bar]', 'Critical Pressure'), 
                 ('Vol [l/mol]', 'Critical Volume'), 
@@ -107,8 +106,11 @@ class VarsAndParamPanel(wx.Panel):
         self.vars = []
         for row, var in enumerate(vars_label):
             gbs.Add( wx.StaticText(self, -1, var[0]), (row+2, 0), flag=wx.ALIGN_RIGHT)
-            self.vars.append(ui.widgets.FloatCtrl(self, -1))
-            gbs.Add ( self.vars[-1], (row+2, 1))
+            box = ui.widgets.FloatCtrl(self, -1)
+            box.SetToolTipString(var[1])
+            self.vars.append(box)
+            gbs.Add ( box, (row+2, 1))
+
 
         self.params = []
 
@@ -204,6 +206,9 @@ class VarsAndParamPanel(wx.Panel):
         self.enabled = flag
         for box in self.vars :
             box.Enable(flag)
+        
+        if self.model_id != 3:
+            self.vars[2].Enable(False)
 
         self.button.Enable(flag)
         self.radio1.Enable(flag)
@@ -216,10 +221,10 @@ class VarsAndParamPanel(wx.Panel):
             return [box.GetValue() for box in self.vars]
 
     def SetVarsValues(self, data):
-        if len(data) == len(self.vars):
+        try:
             for box, data in zip(self.vars, data):
                 box.SetValue(str(data))
-        else:
+        except:
             wx.Bell()
             print "not enough data or boxes for EOS vars"
 
@@ -255,6 +260,11 @@ class VarsAndParamPanel(wx.Panel):
         if self.direction == 0:
             for box in self.vars:
                 box.Enable(True)
+        
+            if self.model_id != 3:
+                self.vars[2].Enable(False)
+
+
             for box in self.params:
                 box.Enable(False)
             
@@ -299,7 +309,7 @@ class VarsAndParamPanel(wx.Panel):
 
         apimanager.write_conparin(self.direction, self.model_id, data)
 
-        data = apimanager.read_conparout()
+        data = apimanager.read_conparout(self.model_id) 
         
         if data is not None:
             if self.direction == 0:
@@ -327,10 +337,11 @@ class VarsAndParamPanel(wx.Panel):
         for row, var in enumerate(self.params_labels[model_id]):
             #add row an box to the form and the list
             self.gbs.Add(wx.StaticText(self, -1, var[0]), (row+2, 3), flag=wx.ALIGN_RIGHT)
-            self.params.append(ui.widgets.FloatCtrl(self, -1))
-            self.gbs.Add ( self.params[-1], (row+2, 4))
+            box = ui.widgets.FloatCtrl(self, -1)
+            box.SetToolTipString(var[1])
+            self.params.append(box)
+            self.gbs.Add ( box, (row+2, 4))
     
-        
 
         if self.direction == 0:
             self.SetDirectionOnForm()
@@ -493,8 +504,8 @@ class CasePanel(wx.Panel):
 
         dlg = crud.DefineSystemDialog(None, -1, compounds_data)        
     
-        
         if dlg.ShowModal()  == wx.ID_OK:
+        
             for panel, data in zip (self.panels, compounds_data):
                 panel.SetData(data)
 

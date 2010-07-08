@@ -4,9 +4,10 @@ import subprocess
 import os
 import sys
 
-from settings import PATH_BIN, PATH_TEMP
-import numpy as np
+from tools import killableprocess
 
+from settings import PATH_BIN, PATH_TEMP, TIMEOUT
+import numpy as np
 
 
 
@@ -18,8 +19,7 @@ def exec_fortran(bin):
 
     args.append( os.path.join(PATH_BIN, bin + '.exe'))
 
-    #fortran binaries need to be called from temporary input files are
-    return subprocess.call(args, cwd=PATH_TEMP)
+    return killableprocess.call(args, cwd=PATH_TEMP, timeout=TIMEOUT)    #kill if not return in TIMEOUT seconds
 
 
 
@@ -61,12 +61,15 @@ def write_gpecin(model, comp1, comp2, ncomb=0, ntdep=0, k12=0.0, l12=0.0, max_p=
         fh.write(output)
         fh.close()
 
-def read_conparout():
+def read_conparout(model_id):
     """COMPAROUT.DAT has two lines of data. First one is EOS vars and second 
         model parameters. """
 
-    ret = exec_fortran('ModelsParam')
-    
+    if model_id in (4,6):
+        ret = exec_fortran('PCSAFT')
+    else:
+        ret = exec_fortran('ModelsParam')
+
     if ret == 0:
         filename = 'CONPAROUT.DAT'
         with open(os.path.join(PATH_TEMP, filename), 'r') as fh:

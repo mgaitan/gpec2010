@@ -30,11 +30,13 @@ class DefineSystemDialog(wx.Dialog):
         self.c = conn.cursor()
         
         #cache database
-        self.c.execute("select id, name, tc, pc, vc, acentric_factor from compounds")
+        self.c.execute("select id, name, tc, pc, vc, acentric_factor, vc_rat from compounds")
         self.list_base_data = {}
         for row in self.c:
             id = row[0]
-            self.list_base_data[id] = row[1:]
+            data = list(row[1:6])
+            data[-2] = data[-2] * row[6]   #VCeos = VCMODEL*VCrat  - TODO MAKE this configurable
+            self.list_base_data[id] = tuple(data)
 
 
         self.notebook_1 = wx.Notebook(self, -1, style=0)
@@ -377,17 +379,17 @@ class DataFormDialog(sc.SizedDialog):
 
         # row 4
         wx.StaticText(pane, -1, u'Critical Temperature [K]')
-        self.controls.append(ui.widgets.FloatControl(pane, -1))
+        self.controls.append(ui.widgets.FloatCtrl(pane, -1))
         
         #row 5
         wx.StaticText(pane, -1, u'Critical Pressure [bar]')
-        self.controls.append(ui.widgets.FloatControl(pane, -1))
+        self.controls.append(ui.widgets.FloatCtrl(pane, -1))
         
         wx.StaticText(pane, -1, u'Critical Volume [m³/Kmol]')
-        self.controls.append( ui.widgets.FloatControl(pane, -1))
+        self.controls.append( ui.widgets.FloatCtrl(pane, -1))
         
         wx.StaticText(pane, -1, "Acentric Factor")
-        self.controls.append(  ui.widgets.FloatControl(pane, -1))
+        self.controls.append(  ui.widgets.FloatCtrl(pane, -1))
         
         # add dialog buttons
         self.SetButtonSizer(self.CreateStdDialogButtonSizer(wx.OK | wx.CANCEL))
