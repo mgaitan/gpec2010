@@ -2,13 +2,16 @@
 # -*- coding: utf-8 -*-
 #
 
-import os, sys
+import os, sys, fs.memoryfs
 
 #path where fortran executables are
 PATH_BIN = os.path.join( os.getcwd(), "bin" )
 
 #path where fortran executables are
-PATH_TEMP = os.path.join( os.getcwd(), "tmp" )   
+
+#PATH_TEMP = os.path.join( os.getcwd(), "tmp" )   
+memfs = fs.memoryfs.MemoryFS()
+_path_temp = memfs.makedir('tmp')
 
 PATH_ICONS = os.path.join( os.getcwd(), "icons" )
 
