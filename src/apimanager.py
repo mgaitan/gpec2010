@@ -1,6 +1,5 @@
 import re
 import string
-import subprocess
 import os
 import sys
 
@@ -8,30 +7,20 @@ import sys
 
 from tools import killableprocess
 
-from settings import PATH_BIN, TIMEOUT, _path_temp, work_in_memory #PATH_TEMP
+from settings import PATH_BIN, TIMEOUT, _path_temp
 import numpy as np
 
-if work_in_memory:
-    try:
-        import fs.memoryfs
-        pathjoin4tmp = fs.memoryfs.pathjoin
-    except ImportError:
-        work_in_memory = False
-        pathjoin4tmp = os.path.join
-else: 
-    pathjoin4tmp = os.path.join
 
 
 
-def clean_tmp():    
-    if not work_in_memory:
-        for the_file in os.listdir(_path_temp):
-            file_path = os.path.join(_path_temp, the_file)
-            try:
-                if os.path.isfile(file_path):
-                    os.remove(file_path)
-            except Exception, e:
-                print e
+def clean_tmp():
+    for the_file in os.listdir(_path_temp):
+        file_path = os.path.join(_path_temp, the_file)
+        try:
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+        except Exception, e:
+            print e
 
 
 
@@ -71,7 +60,7 @@ def write_conparin(direction, model_id, data):
         data = data[:-2].append([data[-1]])
 
     output = template.format (direction, model_id, "  ".join( data )) 
-    with open( pathjoin4tmp(_path_temp, filename), 'w') as fh:
+    with open( os.path.join(_path_temp, filename), 'w') as fh:
         fh.write(output)
         fh.close()
     
@@ -92,7 +81,7 @@ def write_gpecin(model, comp1, comp2, ncomb=0, ntdep=0, k12=0.0, l12=0.0, max_p=
                             "  ".join(map(str, comp1[2])), comp2[0], "  ".join(map(str, comp2[1])), 
                             "  ".join(map(str, comp2[2])), k12, l12, max_p)
     
-    with open(pathjoin4tmp(_path_temp, filename), 'w') as fh:     #writing in path_bin instead _path_temp
+    with open(os.path.join(_path_temp, filename), 'w') as fh:     #writing in path_bin instead _path_temp
         fh.write(output)
         fh.close()
 
@@ -107,7 +96,7 @@ def read_conparout(model_id):
 
     if ret == 0:
         filename = 'CONPAROUT.DAT'
-        with open(pathjoin4tmp(_path_temp, filename), 'r') as fh:
+        with open(os.path.join(_path_temp, filename), 'r') as fh:
             output = [get_numbers(line) for line in fh.readlines()]
             fh.close()
 
@@ -126,7 +115,7 @@ def read_gpecout():
     tokens = {}         #{(begin,end):'type', ...}
     begin = end = 0
     
-    with open(pathjoin4tmp(_path_temp, filename), 'r') as fh:
+    with open(os.path.join(_path_temp, filename), 'r') as fh:
         number_of_lines = len(fh.readlines())
         fh.seek(0)
         
@@ -149,7 +138,7 @@ def read_gpecout():
         for (begin, end) in token_keys:
             #print (begin,end)
             fh.seek(0)
-            temp_file_path = pathjoin4tmp(_path_temp, 'temp_gpecout.dat')            #TODO rethink this!
+            temp_file_path = os.path.join(_path_temp, 'temp_gpecout.dat')            #TODO rethink this!
             with open(temp_file_path, 'w') as fho:
                 #write lines just of the block between (begin,end)
                 
