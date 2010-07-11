@@ -12,6 +12,8 @@ import ui.PyCollapsiblePane as pycp
 import apimanager
 import crud
 
+import  wx.lib.scrolledpanel as scrolled
+
 from settings import PATH_ICONS, _models, VC_RATIO
 
 #MATPLOTLIB
@@ -119,8 +121,7 @@ class VarsAndParamPanel(wx.Panel):
         self.params = []
 
 
-        
-
+    
         #add radio buttons
         self.radio1 = wx.RadioButton( self, -1, "", style = wx.RB_GROUP)
         self.radio2 = wx.RadioButton( self, -1, "")
@@ -402,16 +403,26 @@ class TestFrame(wx.Frame):
 
    
         self.case_panel = CasePanel(self.vsplitter, -1)
-        self.plot_panel = PlotPanel(self.vsplitter, -1)
-        #self.log_panel = LogPanel(self.hsplitter, -1)
-     
         
+        vsizer =  wx.BoxSizer(wx.VERTICAL)    
+
+        panel_right = wx.Panel(self, -1)
+
+        self.plot_panel = PlotPanel(panel_right, -1)
+        self.log_panel = LogPanel(panel_right, -1)
+
+        vsizer.Add(self.plot_panel, 2)
+        vsizer.Add(self.log_panel, 1)
+
+        panel_right.SetSizerAndFit(vsizer)
+        
+
         #self.hsplitter.SplitHorizontally( self.plot_panel, self.log_panel, self.plot_panel.GetSize().GetHeight())
 
         self.vsplitter.SetMinimumPaneSize(4)
        
 
-        self.vsplitter.SplitVertically(self.case_panel, self.plot_panel,
+        self.vsplitter.SplitVertically(self.case_panel, panel_right,
                                         self.case_panel.GetSize().GetWidth() )
 
         hsizer.Add(self.vsplitter, 0, wx.EXPAND )
@@ -488,31 +499,18 @@ class TestFrame(wx.Frame):
     
     
 
-class curry:
-    """Taken from the Python Cookbook, this class provides an easy way to
-    tie up a function with some default parameters and call it later.
-    See http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52549 for more.
-    """
-    def __init__(self, func, *args, **kwargs):
-        self.func = func
-        self.pending = args[:]
-        self.kwargs = kwargs
-    def __call__(self, *args, **kwargs):
-        if kwargs and self.kwargs:
-            kw = self.kwargs.copy()
-            kw.update(kwargs)
-        else:
-            kw = kwargs or self.kwargs
-        return self.func(*(self.pending + args), **kw)
 
 
 
-class CasePanel(wx.Panel):
+
+class CasePanel(scrolled.ScrolledPanel):
     def __init__(self, parent, id):
-        wx.Panel.__init__(self, parent, id, style = wx.TAB_TRAVERSAL
+        #wx.Panel.__init__(self, parent, id, style = wx.TAB_TRAVERSAL
+        #                                        | wx.CLIP_CHILDREN
+        #                                        | wx.FULL_REPAINT_ON_RESIZE)
+        scrolled.ScrolledPanel.__init__(self, parent, id, style = wx.TAB_TRAVERSAL
                                                 | wx.CLIP_CHILDREN
                                                 | wx.FULL_REPAINT_ON_RESIZE)
-        
         
         
         
@@ -520,6 +518,7 @@ class CasePanel(wx.Panel):
         
         self.box = wx.BoxSizer(wx.VERTICAL)
 
+        
 
         self.model_choices =  _models
 
@@ -534,11 +533,11 @@ class CasePanel(wx.Panel):
         self.load_button = wx.lib.buttons.GenBitmapTextButton(self, -1, wx.Bitmap(os.path.join(PATH_ICONS,"compose.png")), "Define system")
         
         first_row_sizer.Add(self.load_button, 0, flag=wx.ALL | wx.ALIGN_LEFT | wx.EXPAND , border=5)
-        first_row_sizer.Add((60, 20), 0, wx.EXPAND)
+        first_row_sizer.Add((10, 20), 0, wx.EXPAND)
 
         first_row_sizer.Add(wx.StaticText(self, -1, "Model:"), 0, flag= wx.ALIGN_RIGHT | wx.ALIGN_CENTER_VERTICAL, border=5)
         first_row_sizer.Add(self.ch, 0, flag=wx.ALL | wx.ALIGN_CENTER_VERTICAL , border=5)
-        self.box.Add( first_row_sizer, 0, flag= wx.TOP | wx.RIGHT | wx.FIXED_MINSIZE | wx.ALIGN_RIGHT, border = 5)
+        self.box.Add( first_row_sizer, 0, flag= wx.TOP | wx.LEFT | wx.FIXED_MINSIZE | wx.ALIGN_LEFT, border = 5)
 
         
         self.panels = (VarsAndParamPanel(self,-1), VarsAndParamPanel(self,-1))
@@ -571,6 +570,8 @@ class CasePanel(wx.Panel):
         self.SetSizerAndFit(self.box)
         self.SetClientSize(self.GetSize())
 
+        self.SetupScrolling(scroll_x = False)
+
         #Binding
         self.Bind(wx.EVT_COLLAPSIBLEPANE_CHANGED, self.OnPaneChanged, cp)
         self.Bind(wx.EVT_CHOICE, self.OnSetModel, self.ch)
@@ -590,7 +591,7 @@ class CasePanel(wx.Panel):
 
         
         self.max_p = ui.widgets.FloatCtrl(pane, -1, "2000.0");
-        max_pLbl = wx.StaticText(pane, -1, "Maximum Pressure for LL critical line  [bar]")
+        max_pLbl = wx.StaticText(pane, -1, "Maximum Pressure for\n LL critical line  [bar]")
 
         self.k12 = ui.widgets.FloatCtrl(pane, -1);
         k12Lbl = wx.StaticText(pane, -1, "K12")
@@ -599,8 +600,8 @@ class CasePanel(wx.Panel):
         l12Lbl = wx.StaticText(pane, -1, "L12")
 
         addrSizer.Add(combining_rulesLbl, 0, 
-                wx.ALIGN_RIGHT|wx.ALIGN_CENTER_VERTICAL)
-        addrSizer.Add(self.combining_rules, 0)
+                wx.ALIGN_RIGHT|wx.ALIGN_BOTTOM)
+        addrSizer.Add(self.combining_rules, 0, wx.ALIGN_BOTTOM)
 
         addrSizer.Add(max_pLbl, 0, 
                 wx.ALIGN_RIGHT|wx.ALIGN_CENTER_VERTICAL)
@@ -693,6 +694,9 @@ class LogPanel(wx.Panel):
         wx.Panel.__init__(self, parent, id)
         self.nb = wx.Notebook(self, -1,  style=  wx.BK_DEFAULT)
         self.logCtrl = wx.ListCtrl(self, -1)
+
+        self.logCtrl
+
         #sizer = wx.BoxSizer(wx.HORIZONTAL)
         #sizer.Add ( self.logCtrl, 1, wx.EXPAND)
         self.nb.AddPage(self.logCtrl, "Log")

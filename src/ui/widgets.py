@@ -28,8 +28,8 @@ class FloatCtrl(wx.TextCtrl):
     def __init__(self, parent, id, value=0.0):
         wx.TextCtrl.__init__(self, parent, id, str(value), \
         validator = FloatValidator())
-        self.SetMinSize((100,-1))
-        self.SetMaxSize((150,-1))
+        self.SetMinSize((50,-1))
+        self.SetMaxSize((100,-1))
         #self.SetFont(PlainFont(12))
 
 class FloatControlUnit(wx.Panel):
