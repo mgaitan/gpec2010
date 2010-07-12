@@ -2,9 +2,12 @@
 # -*- coding: utf-8 -*-
 
 import os
+import time
 
 #WX
 import wx
+import wx.aui
+
 import wx.lib.buttons
 import ui.widgets
 import ui.PyCollapsiblePane as pycp
@@ -53,7 +56,6 @@ class PlotPanel(wx.Panel):
         self.vbox = wx.BoxSizer(wx.VERTICAL)
         self.vbox.Add(self.canvas, 1, wx.LEFT | wx.TOP | wx.GROW)
         self.vbox.Add(self.toolbar, 0, wx.EXPAND)
-        self.vbox.AddSpacer(10)
 
         self.SetSizer(self.vbox)
         self.vbox.Fit(self)
@@ -689,19 +691,62 @@ class CasePanel(scrolled.ScrolledPanel):
         pub.sendMessage('plot.PT', curves)
 
 
-class LogPanel(wx.Panel):
+class InfoPanel(wx.Panel):
+    """a general tabbed panel including a log list and othe useful information"""
+
     def __init__(self, parent, id):
         wx.Panel.__init__(self, parent, id)
-        self.nb = wx.Notebook(self, -1,  style=  wx.BK_DEFAULT)
-        self.logCtrl = wx.ListCtrl(self, -1)
+        self.nb = wx.aui.AuiNotebook(self)
 
-        self.logCtrl
+        self.log_panel = LogMessagesPanel(self, -1)
 
-        #sizer = wx.BoxSizer(wx.HORIZONTAL)
-        #sizer.Add ( self.logCtrl, 1, wx.EXPAND)
-        self.nb.AddPage(self.logCtrl, "Log")
+        self.nb.AddPage(self.log_panel, "Log Messages")
+        
+        sizer = wx.BoxSizer()
+        sizer.Add(self.nb, 1, wx.EXPAND)
+        self.SetSizerAndFit(sizer)
+
+
+
+class LogMessagesPanel(wx.Panel):
+    def __init__(self, parent, id):
+        wx.Panel.__init__(self, parent, id)
+        self.list = wx.ListCtrl(self, -1,  style=  wx.LC_REPORT|wx.SUNKEN_BORDER)
+
+        self.populateIcons()
+        self.list.InsertColumn(0, "")    #first column show an icon
+        self.list.SetColumnWidth(0, 24)
+
+        
+        ## Loop over all the column names        
+        for indx, column in enumerate(['Message                                 ', 'Time']):
+            self.list.InsertColumn(indx+1, column, width=wx.LIST_AUTOSIZE_USEHEADER)
+            self.list.SetColumnWidth(indx+1, wx.LIST_AUTOSIZE_USEHEADER)
+        
+        sizer = wx.BoxSizer()
+        sizer.Add(self.list, 1, wx.EXPAND)
+        self.SetSizerAndFit(sizer)
+    
+        pub.subscribe(self.OnAppendLog, 'append.log')
+    
+
+
+        self.OnAppendLog({'ico':1, 'data':"un mensaje de log"})  #test
+        self.OnAppendLog({'ico':2, 'data':"otro mensaje de log"})  #test
+        self.OnAppendLog({'ico':0, 'data':u"uno más mensaje de log"})  #test
+
+    def populateIcons(self):
+        imgList = wx.ImageList(16, 16)
+        ico_dir = os.path.join(PATH_ICONS, 'log')
+        for ico in os.listdir(ico_dir):
+            ico = os.path.join(ico_dir, ico)
+            imgList.Add( wx.Bitmap(ico, wx.BITMAP_TYPE_PNG))
+        self.list.AssignImageList(imgList, wx.IMAGE_LIST_SMALL)
         
 
+    def OnAppendLog(self, msg):
+        self.list.Append([msg['ico'], msg['data'], time.strftime('%H:%M:%s')])
+        #self.list.SetStringItem(index, 2, data[2])
 
 
 if __name__ == "__main__":

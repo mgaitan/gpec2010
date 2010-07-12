@@ -1,4 +1,5 @@
 import wx
+import  wx.lib.mixins.listctrl  as  listmix
 
 class FloatValidator( wx.PyValidator):
     def __init__(self, pyVar = None):
@@ -43,3 +44,10 @@ class FloatControlUnit(wx.Panel):
         box = wx.BoxSizer()
         box.Add(fgs, 1, wx.EXPAND|wx.LEFT|wx.ALL)
         self.SetSizer(box)
+
+class AListCtrl(wx.ListCtrl, listmix.ListCtrlAutoWidthMixin):
+    def __init__(self, parent, ID, pos=wx.DefaultPosition,
+                 size=wx.DefaultSize, style=0):
+        wx.ListCtrl.__init__(self, parent, ID, pos, size, style)
+        listmix.ListCtrlAutoWidthMixin.__init__(self)
+
