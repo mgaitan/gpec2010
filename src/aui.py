@@ -2,7 +2,7 @@ import wx
 import wx.aui
 
 import apimanager
-from panels import PlotPanel, CasePanel, InfoPanel
+from panels import SuitePlotsPanel, CasePanel, InfoPanel
 from tools.misc import curry
 
 from wx.lib.pubsub import Publisher as pub
@@ -50,7 +50,7 @@ class MainFrame(wx.Frame):
 
         # create several text controls
         self.case_panel = CasePanel(self, -1)
-        self.plot_panel = PlotPanel(self, -1)
+        self.plots_panel = SuitePlotsPanel(self, -1)
         self.log_panel = InfoPanel(self, -1)
 
         # add the panes to the manager
@@ -59,8 +59,8 @@ class MainFrame(wx.Frame):
                           MaxSize(self.case_panel.GetSize()).
                           Layer(1).Position(2).CloseButton(True).MinimizeButton(True))
 
-        self._mgr.AddPane(self.plot_panel, wx.aui.AuiPaneInfo().Name('plot').CenterPane())
-        self._mgr.AddPane(self.log_panel, wx.aui.AuiPaneInfo().Name("log").
+        self._mgr.AddPane(self.plots_panel, wx.aui.AuiPaneInfo().Name('plot').CenterPane())
+        self._mgr.AddPane(self.log_panel, wx.aui.AuiPaneInfo().Name("log").Caption(u"Info").
                           MinSize(wx.Size(-1, 100)).
                           Bottom().Layer(0).Position(1).CloseButton(True).MaximizeButton(False))
 

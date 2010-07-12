@@ -39,11 +39,11 @@ class PlotPanel(wx.Panel):
         
     def __init__ (self, parent, id, figure=None):
         
-        wx.Panel.__init__(self, parent, id, style = wx.NO_FULL_REPAINT_ON_RESIZE)
+        wx.Panel.__init__(self, parent, id, style = wx.FULL_REPAINT_ON_RESIZE)
         # Create the mpl Figure and FigCanvas objects. 
         # 5x4 inches, 100 dots-per-inch
         #
-        self.dpi = 120
+        self.dpi = 100
         self.fig = Figure()     #dpi=self.dpi
         self.canvas = FigCanvas(self, -1, self.fig)
         
@@ -78,6 +78,34 @@ class PlotPanel(wx.Panel):
         #self.axes.plot(curves[3][:,0],curves[3][:,1])
     
         self.canvas.draw()
+
+
+class SuitePlotsPanel(wx.Panel):
+    """a general tabbed panel to show plots"""
+
+    def __init__(self, parent, id):
+        wx.Panel.__init__(self, parent, id)
+        self.nb = wx.aui.AuiNotebook(self)
+
+        self.plots = []
+        
+        pub.subscribe(self.OnAddPlot, 'plot.PT')
+
+        sizer = wx.BoxSizer()
+        sizer.Add(self.nb, 1, wx.EXPAND)
+        self.SetSizerAndFit(sizer)
+
+        
+
+
+    def OnAddPlot(self, event):
+
+        #by default it include a log_messages panel
+        self.plots.append(PlotPanel(self, -1)) 
+
+        self.nb.AddPage(self.plots[-1], "Plot %i" % len(self.plots) )
+        
+
 
 
 class VarsAndParamPanel(wx.Panel):
@@ -698,9 +726,10 @@ class InfoPanel(wx.Panel):
         wx.Panel.__init__(self, parent, id)
         self.nb = wx.aui.AuiNotebook(self)
 
+        #by default it include a log_messages panel
         self.log_panel = LogMessagesPanel(self, -1)
 
-        self.nb.AddPage(self.log_panel, "Log Messages")
+        self.nb.AddPage(self.log_panel, "Log")
         
         sizer = wx.BoxSizer()
         sizer.Add(self.nb, 1, wx.EXPAND)
