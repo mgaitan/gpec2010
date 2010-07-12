@@ -3,7 +3,7 @@
 
 import os
 import time
-
+import sys
 #WX
 import wx
 import wx.aui
@@ -713,40 +713,59 @@ class LogMessagesPanel(wx.Panel):
         wx.Panel.__init__(self, parent, id)
         self.list = wx.ListCtrl(self, -1,  style=  wx.LC_REPORT|wx.SUNKEN_BORDER)
 
-        self.populateIcons()
-        self.list.InsertColumn(0, "")    #first column show an icon
-        self.list.SetColumnWidth(0, 24)
 
-        
-        ## Loop over all the column names        
-        for indx, column in enumerate(['Message                                 ', 'Time']):
-            self.list.InsertColumn(indx+1, column, width=wx.LIST_AUTOSIZE_USEHEADER)
-            self.list.SetColumnWidth(indx+1, wx.LIST_AUTOSIZE_USEHEADER)
-        
+        self.setupList()
+
+    
         sizer = wx.BoxSizer()
         sizer.Add(self.list, 1, wx.EXPAND)
         self.SetSizerAndFit(sizer)
     
-        pub.subscribe(self.OnAppendLog, 'append.log')
+        pub.subscribe(self.OnAppendLog, 'log')
+        
+        self.Bind(wx.EVT_SCROLLWIN, self.OnScroll, self.list)
     
 
+    def setupList(self):
+        """sets columns and append a imagelist """
+        
+         #setup first column (which accept icons)
+        info = wx.ListItem()
+        info.m_mask = wx.LIST_MASK_TEXT | wx.LIST_MASK_IMAGE | wx.LIST_MASK_FORMAT
+        info.m_image = -1
+        info.m_format = 0
+        info.m_text = "Message"
+        self.list.InsertColumnInfo(0, info)
+        self.list.SetColumnWidth(0, 550)
 
-        self.OnAppendLog({'ico':1, 'data':"un mensaje de log"})  #test
-        self.OnAppendLog({'ico':2, 'data':"otro mensaje de log"})  #test
-        self.OnAppendLog({'ico':0, 'data':u"uno más mensaje de log"})  #test
+        #insert second column
+        self.list.InsertColumn(1, 'Time')   
+        self.list.SetColumnWidth(1, 70)
 
-    def populateIcons(self):
+        #setup imagelist and an associated dict to map status->image_index
         imgList = wx.ImageList(16, 16)
         ico_dir = os.path.join(PATH_ICONS, 'log')
-        for ico in os.listdir(ico_dir):
-            ico = os.path.join(ico_dir, ico)
-            imgList.Add( wx.Bitmap(ico, wx.BITMAP_TYPE_PNG))
+        ico_filenames = [ico for ico in os.listdir(ico_dir) if ico[-3:] != 'svn' ]
+        ico_list = [os.path.join(ico_dir, ico) for ico in ico_filenames]
+
+        self.icon_map = {}
+        for ico, filename in zip(ico_list, ico_filenames):
+            indx = imgList.Add( wx.Bitmap(ico, wx.BITMAP_TYPE_PNG))
+            self.icon_map[filename[:-4]] = indx
         self.list.AssignImageList(imgList, wx.IMAGE_LIST_SMALL)
         
-
     def OnAppendLog(self, msg):
-        self.list.Append([msg['ico'], msg['data'], time.strftime('%H:%M:%s')])
-        #self.list.SetStringItem(index, 2, data[2])
+        ico = self.icon_map[msg.data[0]]
+        message = msg.data[1]
+        index = self.list.InsertImageStringItem(sys.maxint, message, ico)
+        self.list.SetStringItem(index, 1, time.strftime('%H:%M:%S'))
+
+        self.list.EnsureVisible(index) #keep scroll at bottom
+    
+
+    def OnScroll(self, evt):
+        print 'scroll position', self.list.GetScrollPos(0), self.list.GetScrollPos(1)
+
 
 
 if __name__ == "__main__":

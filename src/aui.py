@@ -5,6 +5,7 @@ import apimanager
 from panels import PlotPanel, CasePanel, InfoPanel
 from tools.misc import curry
 
+from wx.lib.pubsub import Publisher as pub
 
 class MainFrame(wx.Frame):
 
@@ -147,4 +148,6 @@ if __name__ == "__main__":
     main_frame = MainFrame(None, -1)
     app.SetTopWindow(main_frame)
     main_frame.Show()
+
+    pub.sendMessage('log', ('ok', 'GPEC is ready. Define your system to begin') )
     app.MainLoop()
