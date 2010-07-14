@@ -19,16 +19,16 @@ import  wx.lib.scrolledpanel as scrolled
 
 from settings import PATH_ICONS, _models, VC_RATIO
 
-#MATPLOTLIB
+
 import matplotlib
-from matplotlib.figure import Figure
 matplotlib.use('WXAgg')
-import numpy as np
-from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigCanvas
 from matplotlib.backends.backend_wxagg import NavigationToolbar2Wx as NavigationToolbar
 
 #pubsub
 from wx.lib.pubsub import Publisher as pub
+
+#plots
+import plots
 
 
 class PlotPanel(wx.Panel):
@@ -40,21 +40,14 @@ class PlotPanel(wx.Panel):
     def __init__ (self, parent, id, figure=None):
         
         wx.Panel.__init__(self, parent, id, style = wx.FULL_REPAINT_ON_RESIZE)
-        # Create the mpl Figure and FigCanvas objects. 
-        # 5x4 inches, 100 dots-per-inch
-        #
-        self.dpi = 100
-        self.fig = Figure()     #dpi=self.dpi
-        self.canvas = FigCanvas(self, -1, self.fig)
         
-        # Since we have only one plot, we can use add_axes 
-        # instead of add_subplot, but then the subplot
-        # configuration tool in the navigation toolbar wouldn't
-        # work.
-        self.axes = self.fig.add_subplot(111)
-        self.toolbar = NavigationToolbar(self.canvas)
+ 
+
+        self.plot = plots.PT(self) #any type of diagram
+
+        self.toolbar = NavigationToolbar(self.plot.canvas)      #the canvas from plot
         self.vbox = wx.BoxSizer(wx.VERTICAL)
-        self.vbox.Add(self.canvas, 1, wx.LEFT | wx.TOP | wx.GROW)
+        self.vbox.Add(self.plot.canvas, 1, wx.LEFT | wx.TOP | wx.GROW)
         self.vbox.Add(self.toolbar, 0, wx.EXPAND)
 
         self.SetSizer(self.vbox)
@@ -67,17 +60,10 @@ class PlotPanel(wx.Panel):
 
         
     def OnPlotPT(self, message):
-        curves = message.data
+        self.plot.set_arrays(message.data)
+        self.plot.plot()
 
-        print [len(curve) for curve in curves]
-        
-
-        self.axes.plot(curves[0][:,0],curves[0][:,1])
-        self.axes.plot(curves[1][:,0],curves[1][:,1])
-        self.axes.plot(curves[2][:,0],curves[2][:,1])
-        #self.axes.plot(curves[3][:,0],curves[3][:,1])
-    
-        self.canvas.draw()
+ 
 
 
 class SuitePlotsPanel(wx.Panel):
@@ -89,21 +75,22 @@ class SuitePlotsPanel(wx.Panel):
 
         self.plots = []
         
-        pub.subscribe(self.OnAddPlot, 'plot.PT')
+        #pub.subscribe(self.OnAddPlot, 'plot.PT')
 
         sizer = wx.BoxSizer()
         sizer.Add(self.nb, 1, wx.EXPAND)
         self.SetSizerAndFit(sizer)
 
-        
-
-
-    def OnAddPlot(self, event):
-
-        #by default it include a log_messages panel
         self.plots.append(PlotPanel(self, -1)) 
 
         self.nb.AddPage(self.plots[-1], "Plot %i" % len(self.plots) )
+                
+
+
+
+    def OnAddPlot(self, event):
+        pass
+        #by default it include a log_messages panel
         
 
 
