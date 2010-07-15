@@ -3,14 +3,12 @@ import string
 import os
 import sys
 
-
-
 from tools import killableprocess
 
 from settings import PATH_BIN, TIMEOUT, _path_temp
 import numpy as np
 
-
+from wx.lib.pubsub import Publisher as pub
 
 
 def clean_tmp():
@@ -64,6 +62,7 @@ def write_conparin(direction, model_id, data):
         fh.write(output)
         fh.close()
     
+    pub.sendMessage('add_txt', filename)
 
 def write_gpecin(model, comp1, comp2, ncomb=0, ntdep=0, k12=0.0, l12=0.0, max_p=2000):
     """
@@ -85,6 +84,9 @@ def write_gpecin(model, comp1, comp2, ncomb=0, ntdep=0, k12=0.0, l12=0.0, max_p=
         fh.write(output)
         fh.close()
 
+    pub.sendMessage('add_txt', filename)
+
+
 def read_conparout(model_id):
     """COMPAROUT.DAT has two lines of data. First one is EOS vars and second 
         model parameters. """
@@ -99,6 +101,8 @@ def read_conparout(model_id):
         with open(os.path.join(_path_temp, filename), 'r') as fh:
             output = [get_numbers(line) for line in fh.readlines()]
             fh.close()
+
+        pub.sendMessage('add_txt', filename)
 
         return output
                 
@@ -116,6 +120,10 @@ def read_gpecout():
     begin = end = 0
     
     with open(os.path.join(_path_temp, filename), 'r') as fh:
+
+        
+
+
         number_of_lines = len(fh.readlines())
         fh.seek(0)
         
@@ -156,4 +164,6 @@ def read_gpecout():
             curves.append(curve)
 
         fh.close()
+
+    pub.sendMessage('add_txt', filename)
     return curves

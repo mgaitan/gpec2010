@@ -17,7 +17,7 @@ import crud
 
 import  wx.lib.scrolledpanel as scrolled
 
-from settings import PATH_ICONS, _models, VC_RATIO
+from settings import PATH_ICONS, _models, VC_RATIO, _path_temp
 
 
 import matplotlib
@@ -723,12 +723,25 @@ class InfoPanel(wx.Panel):
         self.SetSizerAndFit(sizer)
 
 
+        pub.subscribe(self.OnAddTextPage, 'add_txt')
+
+
+    def OnAddTextPage(self, msg):
+
+        filename = msg.data
+        with open( os.path.join(_path_temp, filename), 'r') as fh:
+    
+            text_ctrl = wx.TextCtrl(self, -1,  style=wx.TE_MULTILINE|wx.TE_READONLY)
+            text_ctrl.AppendText(fh.read())
+            self.nb.AddPage(text_ctrl, filename)
+
+            
 
 class LogMessagesPanel(wx.Panel):
     def __init__(self, parent, id):
         wx.Panel.__init__(self, parent, id)
-        self.list = wx.ListCtrl(self, -1,  style=  wx.LC_REPORT|wx.SUNKEN_BORDER)
 
+        self.list = wx.ListCtrl(self, -1,  style=  wx.LC_REPORT|wx.SUNKEN_BORDER)
 
         self.setupList()
 
@@ -739,7 +752,7 @@ class LogMessagesPanel(wx.Panel):
     
         pub.subscribe(self.OnAppendLog, 'log')
         
-        self.Bind(wx.EVT_SCROLLWIN, self.OnScroll, self.list)
+        
     
 
     def setupList(self):
@@ -779,11 +792,7 @@ class LogMessagesPanel(wx.Panel):
         self.list.EnsureVisible(index) #keep scroll at bottom
     
 
-    def OnScroll(self, evt):
-        print 'scroll position', self.list.GetScrollPos(0), self.list.GetScrollPos(1)
-
-
-
+   
 if __name__ == "__main__":
     apimanager.clean_tmp() #sometimes are problems with file handling between 
                            #python and GPEC at the same time. Trying a magic clean-up
