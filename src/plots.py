@@ -50,11 +50,10 @@ class BasePlot(object):
 
 
     def plot(self):
-        """plot all visible curve"""
+        """plot all visible curves"""
         for curve in self.curves:
             if curve['visible']:
-                self.axes.plot(*curve['lines'], color=curve['color'], label=curve['name'])
-
+                curve['line2d'] = self.axes.plot(*curve['lines'], color=curve['color'], label=curve['name'])
         
         self.canvas.draw()
 

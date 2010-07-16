@@ -120,9 +120,7 @@ def read_gpecout():
     begin = end = 0
     
     with open(os.path.join(_path_temp, filename), 'r') as fh:
-
-        
-
+       
 
         number_of_lines = len(fh.readlines())
         fh.seek(0)
@@ -130,11 +128,12 @@ def read_gpecout():
         #give skip from header and skip from footer
         for line_number, line in enumerate(fh):
             if begin <= end:
-                #print 'begin <= end'
+                #looking for a curve TOKEN : 'VAP', 'CRI' etc...
                 if line.strip() in curve_types:
                     begin = line_number + 1
                     curve_type = line.strip()
             else:
+                #looking for a blank line which determines the end of arrays block.
                 if not line.strip():
                     end = line_number
                     tokens[(begin, end)] = curve_type
@@ -146,6 +145,7 @@ def read_gpecout():
         for (begin, end) in token_keys:
             #print (begin,end)
             fh.seek(0)
+
             temp_file_path = os.path.join(_path_temp, 'temp_gpecout.dat')            #TODO rethink this!
             with open(temp_file_path, 'w') as fho:
                 #write lines just of the block between (begin,end)

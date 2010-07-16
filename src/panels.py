@@ -56,15 +56,44 @@ class PlotPanel(wx.Panel):
         #binding via pubsub
         pub.subscribe(self.OnPlotPT, 'plot.PT')
 
-
-
+        self.plot.canvas.Bind(wx.EVT_CONTEXT_MENU, self.OnContextMenu)
+        self.Bind(wx.EVT_CONTEXT_MENU, self.OnContextMenu)
         
     def OnPlotPT(self, message):
         self.plot.set_arrays(message.data)
         self.plot.plot()
 
- 
+    def OnContextMenu(self, event):
+        
+        # only do this part the first time so the events are only bound once
+        #
+        # Yet another anternate way to do IDs. Some prefer them up top to
+        # avoid clutter, some prefer them close to the object of interest
+        # for clarity. 
+        
 
+        self.popupIDs = []
+        menu = wx.Menu()
+        
+
+        for curve in self.plot.curves:
+            self.popupIDs.append ( wx.NewId() )
+            curve['popupId'] = self.popupIDs[-1]
+            menu.Append = (self.popupIDs[-1], curve['name'], "Show/hide %s" % curve['name'], wx.ITEM_CHECK)
+
+
+        self.Bind(wx.EVT_MENU_RANGE, self.OnPopupItem, id=self.popupIDs[0], id2=self.popupIDs[-1]) #are range from NewId consecutives? 
+        
+        self.PopupMenu(menu)
+        menu.Destroy()
+    
+
+
+    def OnPopupItem(self, event):
+        print event.GetId()
+        pass
+
+   
 
 class SuitePlotsPanel(wx.Panel):
     """a general tabbed panel to show plots"""
@@ -594,6 +623,8 @@ class CasePanel(scrolled.ScrolledPanel):
         self.Bind(wx.EVT_CHOICE, self.OnSetModel, self.ch)
         self.Bind(wx.EVT_BUTTON, self.OnLoadSystem, self.load_button)
         self.Bind(wx.EVT_BUTTON, self.OnWriteGPECIN, self.accept_button)
+
+
 
     def MakeCollipsable(self, pane):
         addrSizer = wx.FlexGridSizer(cols=2, hgap=5, vgap=5)
