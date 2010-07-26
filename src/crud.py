@@ -5,6 +5,9 @@
 import wx
 import wx.lib.sized_controls as sc
 
+#pubsub
+from wx.lib.pubsub import Publisher as pub
+
 import sqlite3
 
 import ui.widgets
@@ -12,7 +15,7 @@ import ui.widgets
 # begin wxGlade: extracode
 # end wxGlade
 import os
-from settings import PATH_ICONS
+from settings import PATH_ICONS, WEIGHT_POWER
 
 
 class DefineSystemDialog(wx.Dialog):
@@ -35,14 +38,14 @@ class DefineSystemDialog(wx.Dialog):
         for row in self.c:
             id = row[0]
             data = list(row[1:6])
-            data[-2] = data[-2] * row[6]   #VCeos = VCMODEL*VCrat  - TODO MAKE this configurable
+            data[-2] = data[-2] * row[6]   #VCeos = VCMODEL*VCrat  - TODO: MAKE this configurable
             self.list_base_data[id] = tuple(data)
-
+            
 
         self.notebook_1 = wx.Notebook(self, -1, style=0)
         self.notebook_1_pane_1 = wx.Panel(self.notebook_1, -1)
 
-        self.search = wx.SearchCtrl(self, size=(200,-1), style=wx.TE_PROCESS_ENTER)
+        self.search = wx.SearchCtrl(self, size=(200,-1))
 
         self.list_base = wx.ListCtrl(self.notebook_1_pane_1, -1, style=wx.LC_REPORT|wx.SUNKEN_BORDER)
         
@@ -78,7 +81,7 @@ class DefineSystemDialog(wx.Dialog):
 
         #---- BINDING EVENTS ----------
         #search
-        self.Bind(wx.EVT_TEXT_ENTER, self.OnDoSearch, self.search)
+        self.Bind(wx.EVT_TEXT, self.OnDoSearch, self.search)
         self.Bind(wx.EVT_SEARCHCTRL_CANCEL_BTN, self.OnCancelSearch, self.search)
 
         #toolbar CRUD
@@ -121,9 +124,8 @@ class DefineSystemDialog(wx.Dialog):
         self.search.ShowSearchButton(True)
         self.search.ShowCancelButton(True)
 
-
-        self.list_base.InsertColumn(0, "Compounds", width=-1)
-        self.list_system.InsertColumn(0, "System", width=-1)
+        self.list_base.InsertColumn(0, "Compounds", width=185)
+        self.list_system.InsertColumn(0, "System", width=185)
 
         self.PopulateLists()
 
@@ -197,13 +199,15 @@ class DefineSystemDialog(wx.Dialog):
     
         def filterer(s1, s2=filter):
             if s2 == '' or s1.lower().find(s2.lower())!=-1:
+                #we have a winner
                 return True
             else:
                 return False
 
         self.list_base.DeleteAllItems()
         for id, data in self.list_base_data.iteritems():
-            if filterer(data[1]):
+
+            if filterer(data[0]):
                 #print filter, data[1]
                 self.list_base.Append([data[0]]) #name
                 key = self.list_base.GetItemCount() - 1
@@ -257,17 +261,20 @@ class DefineSystemDialog(wx.Dialog):
         pass
 
     def OnAddToSystem(self, evt):
-        """Add the first selected item from left (base)  to right (system)"""
+        """Add the at the most two compounds selected to the system"""
 
-        if self.list_system.GetItemCount() < 2:
-            key = self.list_base.GetFirstSelected() #row selected on database
-            id = self.list_base.GetItemData(key)    #compound's id
-            
-            self.list_system.Append([self.list_base_data[id][0]]) 
+        comp_left = 2 - self.list_system.GetItemCount()
+        comp_selected = self.list_base.GetSelectedItemCount()
 
-            
-            self.compounds_data.append( [id] + list(self.list_base_data[id]))
+        if  comp_selected <= comp_left:
 
+            current = -1
+            for iter in range(comp_selected):
+                key = self.list_base.GetNextSelected(current) 
+                id = self.list_base.GetItemData(key)    #compound's id
+                self.list_system.Append([self.list_base_data[id][0]]) 
+                self.compounds_data.append( [id] + list(self.list_base_data[id]))
+                current = key
         
         else:
             wx.Bell()
@@ -302,17 +309,7 @@ class DefineSystemDialog(wx.Dialog):
             self.Destroy()
 
 
-    def OnAccept(self, evt):
-        if self.list_system.GetItemCount() != 2:         
-            dlg = wx.MessageDialog(self, "Do you know what binary means?",
-            "Your system needs 2 compounds", wx.OK|wx.ICON_ERROR)
-            dlg.ShowModal()
-            dlg.Destroy()
-        else:
-            
-            
-            print (self.list_system.GetItemData(0), self.list_system.GetItemData(1))
-            self.Destroy()
+    
 
         
 class SystemValidator(wx.PyValidator):
@@ -339,17 +336,40 @@ class SystemValidator(wx.PyValidator):
         for compound in self.compounds_data:
             listCtrl.Append([compound[1]]) #add name
             
-            
-
         return True          
         
     
     def TransferFromWindow(self):
-        return True    
+        """the compound 2 must be more heavy than 1""" 
         
-            
 
+        def get_weight(tc, pc):
+            print tc, WEIGHT_POWER, pc, 
+            return tc**WEIGHT_POWER / pc
+
+        tc1 = self.compounds_data[0][2]
+        tc2 = self.compounds_data[1][2]
+        pc1 = self.compounds_data[0][3]
+        pc2 = self.compounds_data[1][3]
+
+        if get_weight(tc1, pc1) >  get_weight(tc2, pc2):
+            
         
+            tmp = self.compounds_data[0]
+            self.compounds_data[0] = self.compounds_data[1]
+            self.compounds_data[1] = tmp
+            
+            pub.sendMessage('log', ('info', '%s is heavier than %s. The system was inverted' % 
+                                    (self.compounds_data[1][1], self.compounds_data[0][1])
+                                   )
+                            )
+   
+        pub.sendMessage('log', ('ok', 'The system %s-%s was defined succesfully' %  
+                                (self.compounds_data[0][1], self.compounds_data[1][1]) 
+                                )
+                        )
+        return True    
+
 
 class DataFormDialog(sc.SizedDialog):
     def __init__(self, parent, id, title="New Compound", data=None ):

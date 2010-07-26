@@ -17,8 +17,7 @@ import crud
 
 import  wx.lib.scrolledpanel as scrolled
 
-from settings import PATH_ICONS, _models, VC_RATIO, _path_temp
-
+from settings import PATH_ICONS, _models, VC_RATIO
 
 import matplotlib
 matplotlib.use('WXAgg')
@@ -56,43 +55,71 @@ class PlotPanel(wx.Panel):
         #binding via pubsub
         pub.subscribe(self.OnPlotPT, 'plot.PT')
 
-        self.plot.canvas.Bind(wx.EVT_CONTEXT_MENU, self.OnContextMenu)
-        self.Bind(wx.EVT_CONTEXT_MENU, self.OnContextMenu)
+        #self.plot.canvas.Bind(wx.EVT_CONTEXT_MENU, self.OnContextMenu)
         
+        self.Bind(wx.EVT_CONTEXT_MENU, self.OnContextMenu)
+
+
     def OnPlotPT(self, message):
         self.plot.set_arrays(message.data)
         self.plot.plot()
 
+    
+    #--------begin test
+
     def OnContextMenu(self, event):
-        
-        # only do this part the first time so the events are only bound once
-        #
-        # Yet another anternate way to do IDs. Some prefer them up top to
-        # avoid clutter, some prefer them close to the object of interest
-        # for clarity. 
-        
+       
 
-        self.popupIDs = []
+        self.popupID1 = wx.NewId()
+        self.popupID2 = wx.NewId()
+        self.popupID3 = wx.NewId()
+        self.popupID4 = wx.NewId()
+        self.popupID5 = wx.NewId()
+        self.popupID6 = wx.NewId()
+        self.popupID7 = wx.NewId()
+        self.popupID8 = wx.NewId()
+        self.popupID9 = wx.NewId()
+
+        self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID1)
+        self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID2)
+        self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID3)
+        self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID4)
+        self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID5)
+        self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID6)
+        self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID7)
+        self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID8)
+        self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID9)
+
+        # make a menu
         menu = wx.Menu()
-        
+        # Show how to put an icon in the menu
 
-        for curve in self.plot.curves:
-            self.popupIDs.append ( wx.NewId() )
-            curve['popupId'] = self.popupIDs[-1]
-            menu.Append = (self.popupIDs[-1], curve['name'], "Show/hide %s" % curve['name'], wx.ITEM_CHECK)
+        # add some other items
+        menu.Append(self.popupID2, "Two", kind=wx.ITEM_CHECK)
+        menu.Append(self.popupID3, "Three", kind=wx.ITEM_CHECK)
+        menu.Append(self.popupID4, "Four", kind=wx.ITEM_CHECK)
+        menu.Append(self.popupID5, "Five", kind=wx.ITEM_CHECK)
+        menu.Append(self.popupID6, "Six", kind=wx.ITEM_CHECK)
+        # make a submenu
+        sm = wx.Menu()
+        sm.Append(self.popupID8, "sub item 1")
+        sm.Append(self.popupID9, "sub item 1")
+        menu.AppendMenu(self.popupID7, "Test Submenu", sm)
 
 
-        self.Bind(wx.EVT_MENU_RANGE, self.OnPopupItem, id=self.popupIDs[0], id2=self.popupIDs[-1]) #are range from NewId consecutives? 
-        
+        # Popup the menu.  If an item is selected then its handler
+        # will be called before PopupMenu returns.
         self.PopupMenu(menu)
         menu.Destroy()
-    
+
 
 
     def OnPopupItem(self, event):
         print event.GetId()
-        pass
+        
 
+    #--------end test
+  
    
 
 class SuitePlotsPanel(wx.Panel):
@@ -141,7 +168,8 @@ class VarsAndParamPanel(wx.Panel):
                      )
 
         gbs = self.gbs = wx.GridBagSizer(6, 5)
-    
+        
+        self.api_manager = parent.api_manager
 
         vars_label = (('Tc [K]', 'Critical temperature'), 
                 ('Pc [bar]', 'Critical Pressure'), 
@@ -149,7 +177,7 @@ class VarsAndParamPanel(wx.Panel):
                 (u'\u03c9', 'Acentric Factor') )
 
         #add title
-        self.title = wx.StaticText(self, -1, '', (5, 120), style = wx.ALIGN_CENTER)
+        self.title = wx.StaticText(self, -1, '', (5, 120), style = wx.ALIGN_LEFT)
         self.title.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL))
         gbs.Add(self.title, (0,0), (1,4),  flag=wx.ALIGN_CENTER)
 
@@ -358,15 +386,20 @@ class VarsAndParamPanel(wx.Panel):
         else:
             data = [box.GetValue() for box in self.params]
 
-        apimanager.write_conparin(self.direction, self.model_id, data)
+        self.api_manager.write_conparin(self.direction, self.model_id, data)
 
-        data = apimanager.read_conparout(self.model_id) 
+        data = self.api_manager.read_conparout(self.model_id) 
         
         if data is not None:
-            if self.direction == 0:
-                self.SetParamsValues(data[1])
-            else:
-                self.SetVarsValues(data[0])
+
+            #~ if self.direction == 0:
+                #~ self.SetParamsValues(data[1])
+            #~ else:
+                #~ self.SetVarsValues(data[0])
+            
+            self.SetVarsValues(data[0])
+            self.SetParamsValues(data[1])
+
         else:
             wx.Bell()
             print "error handling ModelsParam output"
@@ -558,10 +591,13 @@ class CasePanel(scrolled.ScrolledPanel):
                                                 | wx.CLIP_CHILDREN
                                                 | wx.FULL_REPAINT_ON_RESIZE)
         
-        
+        self.case_id = wx.NewId()
+        self.name = u'Undefined'
+
+        self.api_manager = apimanager.ApiManager(self.case_id)
         
 
-        
+
         self.box = wx.BoxSizer(wx.VERTICAL)
 
         
@@ -623,6 +659,8 @@ class CasePanel(scrolled.ScrolledPanel):
         self.Bind(wx.EVT_CHOICE, self.OnSetModel, self.ch)
         self.Bind(wx.EVT_BUTTON, self.OnLoadSystem, self.load_button)
         self.Bind(wx.EVT_BUTTON, self.OnWriteGPECIN, self.accept_button)
+        
+        #self.Bind(wx.EVT_CONTEXT_MENU, self.OnContextMenu)
 
 
 
@@ -630,14 +668,17 @@ class CasePanel(scrolled.ScrolledPanel):
         addrSizer = wx.FlexGridSizer(cols=2, hgap=5, vgap=5)
     
    
-        self.combining_rules_options = {'van Der Waals': 0, 'Lorentz-Berthelot': 1}
-        self.combining_rules = wx.Choice(pane, -1, choices=self.combining_rules_options.keys())
+        self.cr_options = {0: 'van Der Waals', 1:'Lorentz-Berthelot'}       # candidate to a sorted dictionary
+
+        self.combining_rules = wx.Choice(pane, -1, choices = [self.cr_options[key] 
+                                         for key in sorted(self.cr_options.keys())] )
 
         self.combining_rules.SetSelection(0)
 
         combining_rulesLbl = wx.StaticText(pane, -1, "Combining Rule")
 
         
+ 
         self.max_p = ui.widgets.FloatCtrl(pane, -1, "2000.0");
         max_pLbl = wx.StaticText(pane, -1, "Maximum Pressure for\n LL critical line  [bar]")
 
@@ -728,45 +769,113 @@ class CasePanel(scrolled.ScrolledPanel):
         l12 = self.l12.GetValue()
         max_p = self.max_p.GetValue()
 
-        apimanager.write_gpecin(self.model_id, comp1, comp2, ncomb, 0, k12, l12, max_p)
+        self.api_manager.write_gpecin(self.model_id, comp1, comp2, ncomb, 0, k12, l12, max_p)
 
-        curves = apimanager.read_gpecout()
+        curves = self.api_manager.read_gpecout()
         
-        print 'curves', len(curves)
-
         pub.sendMessage('plot.PT', curves)
 
+
+
+   
 
 class InfoPanel(wx.Panel):
     """a general tabbed panel including a log list and othe useful information"""
 
     def __init__(self, parent, id):
         wx.Panel.__init__(self, parent, id)
-        self.nb = wx.aui.AuiNotebook(self)
+        self.nb = wx.aui.AuiNotebook(self, style=wx.aui.AUI_NB_TOP | wx.aui.AUI_NB_TAB_SPLIT )
 
         #by default it include a log_messages panel
         self.log_panel = LogMessagesPanel(self, -1)
 
+        self.io_panel = IOPanel(self, -1)
+
+
         self.nb.AddPage(self.log_panel, "Log")
+        self.nb.AddPage(self.io_panel, "Input/Output ")
         
+
         sizer = wx.BoxSizer()
         sizer.Add(self.nb, 1, wx.EXPAND)
         self.SetSizerAndFit(sizer)
 
 
-        pub.subscribe(self.OnAddTextPage, 'add_txt')
+class IOPanel(wx.Panel):
+    """an info panel to show input an output text files"""
+
+    #TODO!   #pub.subscribe(self.OnAddTextPage, 'add_txt')
+
+    def __init__(self, parent, id):
+        wx.Panel.__init__(self, parent, id)
+
+        #TREE
+        self.tree = wx.TreeCtrl(self, -1, wx.DefaultPosition, wx.DefaultSize,
+                               wx.TR_DEFAULT_STYLE | wx.TR_HIDE_ROOT)
+
+        
+        self.root = self.tree.AddRoot("")
+        
+        
+        self.Bind(wx.EVT_TREE_SEL_CHANGED, self.OnTreeSelChanged, self.tree)
+       
+
+        #TEXT
+        self.text_ctrl = wx.TextCtrl(self, -1,  style=wx.TE_MULTILINE|wx.TE_READONLY)
+
+        #TODO make this through a sash
+
+        #sizer
+        sizer = wx.BoxSizer(wx.HORIZONTAL)
+        
+        sizer.Add(self.tree, 1, wx.EXPAND)        
+        sizer.Add(self.text_ctrl, 4, wx.EXPAND)
+        self.SetSizerAndFit(sizer)
+
+        
+
+        self.cases = {} #id:item_ID
+        pub.subscribe(self.OnAddItem, 'add_txt')
 
 
-    def OnAddTextPage(self, msg):
 
-        filename = msg.data
-        with open( os.path.join(_path_temp, filename), 'r') as fh:
-    
-            text_ctrl = wx.TextCtrl(self, -1,  style=wx.TE_MULTILINE|wx.TE_READONLY)
-            text_ctrl.AppendText(fh.read())
-            self.nb.AddPage(text_ctrl, filename)
+    def OnTreeSelChanged(self, event):
+        item = event.GetItem()
+        try:
+            content = self.tree.GetItemPyData(item)
+            self.text_ctrl.Clear()
+            self.text_ctrl.AppendText(content)
+        except:
+            pass 
 
+
+    def OnAddItem(self, msg):
+
+        filepath, case_id = msg.data
+
+        head,filename = os.path.split(filepath)
+
+        if case_id not in self.cases.keys():
+            #if case is unknown, create it
+            node = self.tree.AppendItem(self.root, "Case %d" % case_id)
+            self.cases[case_id] = node
             
+        
+        else:
+            node = self.cases[case_id]
+
+
+        with open( filepath, 'r') as fh:
+            content = fh.read()
+
+            item = self.tree.AppendItem(node, filename)
+            self.tree.SetPyData(item, content)
+                    
+
+        #self.tree.Expand(node)
+        self.tree.SelectItem(item)  #TODO refresh text_ctrl?
+        
+
 
 class LogMessagesPanel(wx.Panel):
     def __init__(self, parent, id):
@@ -822,15 +931,3 @@ class LogMessagesPanel(wx.Panel):
 
         self.list.EnsureVisible(index) #keep scroll at bottom
     
-
-   
-if __name__ == "__main__":
-    apimanager.clean_tmp() #sometimes are problems with file handling between 
-                           #python and GPEC at the same time. Trying a magic clean-up
-
-    app = wx.PySimpleApp(0)
-    wx.InitAllImageHandlers()
-    frame_2 = TestFrame(None, -1)
-    app.SetTopWindow(frame_2)
-    frame_2.Show()
-    app.MainLoop()
