@@ -1,4 +1,18 @@
-class curry:
+
+class Counter():
+    count = 0
+    def __init__(self, init=0):
+        self.__class__.count +=  1
+        
+    def get_id(self):
+        return self.__class__.count
+
+    
+        
+
+
+
+class curry():
     """Taken from the Python Cookbook, this class provides an easy way to
     tie up a function with some default parameters and call it later.
     See http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52549 for more.

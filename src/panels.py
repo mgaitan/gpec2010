@@ -21,6 +21,8 @@ import  wx.lib.scrolledpanel as scrolled
 
 from settings import PATH_ICONS, _models, VC_RATIO
 
+from tools.misc import Counter
+
 import matplotlib
 matplotlib.use('WXAgg')
 from matplotlib.backends.backend_wxagg import NavigationToolbar2Wx as NavigationToolbar
@@ -33,15 +35,6 @@ import plots
 
 
 from wx.lib.embeddedimage import PyEmbeddedImage
-
-test = PyEmbeddedImage(
-    "iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAABHNCSVQICAgIfAhkiAAAANRJ"
-    "REFUKJGdkj1OgkEQhp/ZJSCF0VBYmUBPixfwAtzRS2DvCShMvAGRUJCQkMjOjwV8CwT1C77V"
-    "zGaevO9MViRlrlWnKd7el7HaKGpgpQDg7ng4rkY3Bw/3PZ4nI6lQzpnp0+BPh5fXDwBS8+DR"
-    "HquonUNEOxWHmaOTWSvk6sDJIRqZO0kEO8nrAUmEiN8gC8iCHyBvYqdU01RIizKbr1msy4/R"
-    "xo/9uvbRKYIIJewSSgIderWv0PZrRzcrw9tAVeulwvd7fC62DO5uAJD/fKPUPnKpbzVEY0DN"
-    "U2N1AAAAAElFTkSuQmCC")
-
 
 
 
@@ -595,8 +588,41 @@ class TestFrame(wx.Frame):
     
 
 
+class TabbedCases(wx.Panel):
 
+    def __init__(self, parent, id):
+        wx.Panel.__init__(self, parent, id)
+        self.nb = wx.aui.AuiNotebook(self )
+        
+        ico = os.path.join(PATH_ICONS, 'add.png')
 
+        self.addNewCase(0) #a first one case
+
+        self.nb.AddPage(wx.Panel(self,-1), "", bitmap=wx.Bitmap(ico, wx.BITMAP_TYPE_PNG)) #dummy Panel
+        self.Bind(wx.aui.EVT_AUINOTEBOOK_PAGE_CHANGED, self.onPageChange, self.nb)
+
+        
+        
+
+        sizer = wx.BoxSizer()
+        sizer.Add(self.nb, 1, wx.EXPAND)
+        self.SetSizerAndFit(sizer)
+
+        size = self.nb.GetPage(0).GetSize()
+        self.SetSize(size)
+        
+    def addNewCase(self, location):
+        case = CasePanel(self, -1)
+
+        self.nb.InsertPage(location, case, "Case %i" % case.case_id)
+        wx.CallAfter(self.nb.SetSelection, location)
+
+ 
+    def onPageChange(self, evt):
+        if evt.GetSelection() + 1 == self.nb.GetPageCount(): #last tab selected
+            self.addNewCase(evt.GetSelection())
+
+            
 
 class CasePanel(scrolled.ScrolledPanel):
     def __init__(self, parent, id):
@@ -607,7 +633,7 @@ class CasePanel(scrolled.ScrolledPanel):
                                                 | wx.CLIP_CHILDREN
                                                 | wx.FULL_REPAINT_ON_RESIZE)
         
-        self.case_id = wx.NewId()
+        self.case_id = Counter().get_id()
         self.name = u'Undefined'
 
         self.api_manager = apimanager.ApiManager(self.case_id)
@@ -814,8 +840,7 @@ class InfoPanel(wx.Panel):
         self.nb.AddPage(self.io_panel, "Input/Output ")
 
 
-        ico = os.path.join(PATH_ICONS, 'add.png')
-        self.nb.AddPage(wx.Panel(self,-1), "", bitmap=wx.Bitmap(ico, wx.BITMAP_TYPE_PNG)) #dummy Panel
+
 
         sizer = wx.BoxSizer()
         sizer.Add(self.nb, 1, wx.EXPAND)
@@ -824,23 +849,12 @@ class InfoPanel(wx.Panel):
         
         #self.Bind(wx.aui.EVT_AUINOTEBOOK_BUTTON, self.onPageChange)
 
-        self.Bind(wx.aui.EVT_AUINOTEBOOK_PAGE_CHANGED, self.onPageChange, self.nb)
-
+        
         
 
-    def addPage(self, location):
-        """ """
-        self.nb.InsertPage(location, wx.Panel(self,-1), "New Page")
-        wx.CallAfter(self.nb.SetSelection, location)
 
 
-
-    def onPageChange(self, evt):
-        print evt.GetSelection(), self.nb.GetPageCount()
-        if evt.GetSelection() + 1 == self.nb.GetPageCount(): #last tab selected
-            self.addPage(evt.GetSelection())
-
-            
+  
         
 
 
