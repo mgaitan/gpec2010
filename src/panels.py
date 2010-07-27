@@ -800,7 +800,7 @@ class InfoPanel(wx.Panel):
 
     def __init__(self, parent, id):
         wx.Panel.__init__(self, parent, id)
-        self.nb = wx.aui.AuiNotebook(self, style=aui.AUI_NB_TOP | aui.AUI_NB_TAB_SPLIT )
+        self.nb = aui.AuiNotebook(self, style=aui.AUI_NB_TOP | aui.AUI_NB_TAB_SPLIT )
 
         ico = os.path.join(PATH_ICONS, 'add.png')
         but = self.nb.AddTabAreaButton(aui.AUI_BUTTON_CUSTOM1, wx.LEFT, wx.Bitmap(ico, wx.BITMAP_TYPE_PNG))
