@@ -14,7 +14,6 @@ from wx.lib.pubsub import Publisher as pub
 
 def clean_tmp():
     """auxiliary function to clean all temporary files/dirs"""
-
     def rm_content(path):
         for the_file in os.listdir(path):
             file_path = os.path.join(path, the_file)

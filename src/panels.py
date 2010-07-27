@@ -796,16 +796,13 @@ class CasePanel(scrolled.ScrolledPanel):
    
 
 class InfoPanel(wx.Panel):
-    """a general tabbed panel including a log list and othe useful information"""
+    """a general tabbed panel including a log list and other useful information"""
 
     def __init__(self, parent, id):
         wx.Panel.__init__(self, parent, id)
-        self.nb = aui.AuiNotebook(self, style=aui.AUI_NB_TOP | aui.AUI_NB_TAB_SPLIT )
+        self.nb = wx.aui.AuiNotebook(self, style=aui.AUI_NB_TOP | aui.AUI_NB_TAB_SPLIT )
 
-        ico = os.path.join(PATH_ICONS, 'add.png')
-        but = self.nb.AddTabAreaButton(aui.AUI_BUTTON_CUSTOM1, wx.LEFT, wx.Bitmap(ico, wx.BITMAP_TYPE_PNG))
 
-        print but 
 
         #by default it include a log_messages panel
         self.log_panel = LogMessagesPanel(self, -1)
@@ -815,11 +812,37 @@ class InfoPanel(wx.Panel):
 
         self.nb.AddPage(self.log_panel, "Log")
         self.nb.AddPage(self.io_panel, "Input/Output ")
-        
+
+
+        ico = os.path.join(PATH_ICONS, 'add.png')
+        self.nb.AddPage(wx.Panel(self,-1), "", bitmap=wx.Bitmap(ico, wx.BITMAP_TYPE_PNG)) #dummy Panel
 
         sizer = wx.BoxSizer()
         sizer.Add(self.nb, 1, wx.EXPAND)
         self.SetSizerAndFit(sizer)
+
+        
+        #self.Bind(wx.aui.EVT_AUINOTEBOOK_BUTTON, self.onPageChange)
+
+        self.Bind(wx.aui.EVT_AUINOTEBOOK_PAGE_CHANGED, self.onPageChange, self.nb)
+
+        
+
+    def addPage(self, location):
+        """ """
+        self.nb.InsertPage(location, wx.Panel(self,-1), "New Page")
+        wx.CallAfter(self.nb.SetSelection, location)
+
+
+
+    def onPageChange(self, evt):
+        print evt.GetSelection(), self.nb.GetPageCount()
+        if evt.GetSelection() + 1 == self.nb.GetPageCount(): #last tab selected
+            self.addPage(evt.GetSelection())
+
+            
+        
+
 
 
 class IOPanel(wx.Panel):
