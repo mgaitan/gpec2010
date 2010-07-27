@@ -601,7 +601,7 @@ class TabbedCases(wx.Panel):
         self.nb.AddPage(wx.Panel(self,-1), "", bitmap=wx.Bitmap(ico, wx.BITMAP_TYPE_PNG)) #dummy Panel
         
         self.Bind(wx.aui.EVT_AUINOTEBOOK_PAGE_CHANGED, self.onPageChange, self.nb)
-        self.Bind(wx.aui.EVT_AUINOTEBOOK_PAGE_CLOSE, self.onPageClose, self.nb
+        #self.Bind(wx.aui.EVT_AUINOTEBOOK_PAGE_CLOSE, self.onPageClose, self.nb) #TODO
         
         
 
@@ -622,9 +622,7 @@ class TabbedCases(wx.Panel):
         self.nb.InsertPage(location, case, "Case %i" % case.case_id)
         wx.CallAfter(self.nb.SetSelection, location)
 
-    def onPageClose(self, evt):
-        if evt.GetSelection() + 2 = self.nb.GetPageCount():
-            wx.CallAfter(self.nb.SetSelection, evt.GetSelection() - 1 )
+        
  
     
             
