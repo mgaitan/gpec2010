@@ -592,7 +592,7 @@ class TabbedCases(wx.Panel):
 
     def __init__(self, parent, id):
         wx.Panel.__init__(self, parent, id)
-        self.nb = wx.aui.AuiNotebook(self )
+        self.nb = wx.aui.AuiNotebook(self, style = wx.aui.AUI_NB_TOP )
         
         ico = os.path.join(PATH_ICONS, 'add.png')
 
@@ -601,9 +601,7 @@ class TabbedCases(wx.Panel):
         self.nb.AddPage(wx.Panel(self,-1), "", bitmap=wx.Bitmap(ico, wx.BITMAP_TYPE_PNG)) #dummy Panel
         
         self.Bind(wx.aui.EVT_AUINOTEBOOK_PAGE_CHANGED, self.onPageChange, self.nb)
-        #self.Bind(wx.aui.EVT_AUINOTEBOOK_PAGE_CLOSE, self.onPageClose, self.nb) #TODO
-        
-        
+        self.Bind(wx.aui.EVT_AUINOTEBOOK_PAGE_CLOSED, self.onPageClose, self.nb) #TODO
 
         sizer = wx.BoxSizer()
         sizer.Add(self.nb, 1, wx.EXPAND)
@@ -612,6 +610,17 @@ class TabbedCases(wx.Panel):
         size = self.nb.GetPage(0).GetSize()
         self.SetSize(size)
     
+
+    def onPageClose(self, evt):
+        evt.Veto()
+        if evt.GetSelection() + 2 == self.nb.GetPageCount(): #last tab selected
+            wx.CallAfter(self.nb.SetSelection,  0)
+            
+            
+            
+            
+
+
     def onPageChange(self, evt):
         if evt.GetSelection() + 1 == self.nb.GetPageCount(): #last tab selected
             self.addNewCase(evt.GetSelection())
