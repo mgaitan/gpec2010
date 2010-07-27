@@ -53,6 +53,11 @@ class PlotPanel(wx.Panel):
 
         self.plot = plots.PT(self) #any type of diagram
 
+        self.plot.canvas.mpl_connect('button_release_event',
+                                self.onMouseButtonClick)
+
+
+
         self.toolbar = NavigationToolbar(self.plot.canvas)      #the canvas from plot
         self.vbox = wx.BoxSizer(wx.VERTICAL)
         self.vbox.Add(self.plot.canvas, 1, wx.LEFT | wx.TOP | wx.GROW)
@@ -66,61 +71,63 @@ class PlotPanel(wx.Panel):
 
         #self.plot.canvas.Bind(wx.EVT_CONTEXT_MENU, self.OnContextMenu)
         
-        self.Bind(wx.EVT_CONTEXT_MENU, self.OnContextMenu)
+        #self.Bind(wx.EVT_CONTEXT_MENU, self.OnContextMenu)
+
+    def onMouseButtonClick(self, event):
+        if event.button == 3: 
+
+            if not hasattr(self, 'popupID1'):
+                self.popupID1 = wx.NewId()
+                self.popupID2 = wx.NewId()
+                self.popupID3 = wx.NewId()
+                self.popupID4 = wx.NewId()
+                self.popupID5 = wx.NewId()
+                self.popupID6 = wx.NewId()
+                self.popupID7 = wx.NewId()
+                self.popupID8 = wx.NewId()
+                self.popupID9 = wx.NewId()
+
+                self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID1)
+                self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID2)
+                self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID3)
+                self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID4)
+                self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID5)
+                self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID6)
+                self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID7)
+                self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID8)
+                self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID9)
+
+            # make a menu
+            menu = wx.Menu()
+            # Show how to put an icon in the menu
+
+            # add some other items
+            menu.Append(self.popupID2, "Two", kind=wx.ITEM_CHECK)
+            menu.Append(self.popupID3, "Three", kind=wx.ITEM_CHECK)
+            menu.Append(self.popupID4, "Four", kind=wx.ITEM_CHECK)
+            menu.Append(self.popupID5, "Five", kind=wx.ITEM_CHECK)
+            menu.Append(self.popupID6, "Six", kind=wx.ITEM_CHECK)
+            # make a submenu
+            sm = wx.Menu()
+            sm.Append(self.popupID8, "sub item 1")
+            sm.Append(self.popupID9, "sub item 1")
+            menu.AppendMenu(self.popupID7, "Test Submenu", sm)
+
+
+            # Popup the menu.  If an item is selected then its handler
+            # will be called before PopupMenu returns.
+            wx.CallAfter(self.PopupMenu, menu)
+
+        #self.PopupMenu(menu)
+        #menu.Destroy()
 
 
     def OnPlotPT(self, message):
         self.plot.set_arrays(message.data)
         self.plot.plot()
 
-    
-    #--------begin test
 
-    def OnContextMenu(self, event):
-       
-
-        self.popupID1 = wx.NewId()
-        self.popupID2 = wx.NewId()
-        self.popupID3 = wx.NewId()
-        self.popupID4 = wx.NewId()
-        self.popupID5 = wx.NewId()
-        self.popupID6 = wx.NewId()
-        self.popupID7 = wx.NewId()
-        self.popupID8 = wx.NewId()
-        self.popupID9 = wx.NewId()
-
-        self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID1)
-        self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID2)
-        self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID3)
-        self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID4)
-        self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID5)
-        self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID6)
-        self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID7)
-        self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID8)
-        self.Bind(wx.EVT_MENU, self.OnPopupItem, id=self.popupID9)
-
-        # make a menu
-        menu = wx.Menu()
-        # Show how to put an icon in the menu
-
-        # add some other items
-        menu.Append(self.popupID2, "Two", kind=wx.ITEM_CHECK)
-        menu.Append(self.popupID3, "Three", kind=wx.ITEM_CHECK)
-        menu.Append(self.popupID4, "Four", kind=wx.ITEM_CHECK)
-        menu.Append(self.popupID5, "Five", kind=wx.ITEM_CHECK)
-        menu.Append(self.popupID6, "Six", kind=wx.ITEM_CHECK)
-        # make a submenu
-        sm = wx.Menu()
-        sm.Append(self.popupID8, "sub item 1")
-        sm.Append(self.popupID9, "sub item 1")
-        menu.AppendMenu(self.popupID7, "Test Submenu", sm)
-
-
-        # Popup the menu.  If an item is selected then its handler
-        # will be called before PopupMenu returns.
-        self.PopupMenu(menu)
-        menu.Destroy()
-
+        
 
 
     def OnPopupItem(self, event):
