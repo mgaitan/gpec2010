@@ -21,9 +21,8 @@ def clean_tmp():
             try:
                 if os.path.isfile(file_path):
                     os.remove(file_path)
-                elif os.path.isdir(file_path):
+                elif os.path.isdir(file_path) and file_path != '.svn' :
                     rm_content(file_path)   #recursiveness
-
             except Exception, e:
                 print e
         if path != PATH_TEMP:

@@ -8,6 +8,8 @@ import sys
 import wx
 import wx.aui
 
+import wx.lib.agw.aui as aui
+
 import wx.lib.buttons
 import ui.widgets
 import ui.PyCollapsiblePane as pycp
@@ -28,6 +30,20 @@ from wx.lib.pubsub import Publisher as pub
 
 #plots
 import plots
+
+
+from wx.lib.embeddedimage import PyEmbeddedImage
+
+test = PyEmbeddedImage(
+    "iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAABHNCSVQICAgIfAhkiAAAANRJ"
+    "REFUKJGdkj1OgkEQhp/ZJSCF0VBYmUBPixfwAtzRS2DvCShMvAGRUJCQkMjOjwV8CwT1C77V"
+    "zGaevO9MViRlrlWnKd7el7HaKGpgpQDg7ng4rkY3Bw/3PZ4nI6lQzpnp0+BPh5fXDwBS8+DR"
+    "HquonUNEOxWHmaOTWSvk6sDJIRqZO0kEO8nrAUmEiN8gC8iCHyBvYqdU01RIizKbr1msy4/R"
+    "xo/9uvbRKYIIJewSSgIderWv0PZrRzcrw9tAVeulwvd7fC62DO5uAJD/fKPUPnKpbzVEY0DN"
+    "U2N1AAAAAElFTkSuQmCC")
+
+
+
 
 
 class PlotPanel(wx.Panel):
@@ -784,7 +800,12 @@ class InfoPanel(wx.Panel):
 
     def __init__(self, parent, id):
         wx.Panel.__init__(self, parent, id)
-        self.nb = wx.aui.AuiNotebook(self, style=wx.aui.AUI_NB_TOP | wx.aui.AUI_NB_TAB_SPLIT )
+        self.nb = wx.aui.AuiNotebook(self, style=aui.AUI_NB_TOP | aui.AUI_NB_TAB_SPLIT )
+
+        ico = os.path.join(PATH_ICONS, 'add.png')
+        but = self.nb.AddTabAreaButton(aui.AUI_BUTTON_CUSTOM1, wx.LEFT, wx.Bitmap(ico, wx.BITMAP_TYPE_PNG))
+
+        print but 
 
         #by default it include a log_messages panel
         self.log_panel = LogMessagesPanel(self, -1)
