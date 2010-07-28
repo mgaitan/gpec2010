@@ -19,6 +19,9 @@ import crud
 
 import  wx.lib.scrolledpanel as scrolled
 
+import  wx.py  as  py #for pyshell
+
+
 from settings import PATH_ICONS, _models, VC_RATIO
 
 from tools.misc import Counter
@@ -822,7 +825,17 @@ class CasePanel(scrolled.ScrolledPanel):
 
 
 
+class ShellPanel(wx.Panel):
+    """A python shell """
+
+    def __init__(self, parent, id):
+        wx.Panel.__init__(self, parent, id)
+        self.shell = py.shell.Shell(self, -1, introText='Welcome To GPEC' )
    
+        sizer = wx.BoxSizer()
+        sizer.Add(self.shell, 1, wx.EXPAND)
+        self.SetSizerAndFit(sizer)
+
 
 class InfoPanel(wx.Panel):
     """a general tabbed panel including a log list and other useful information"""
@@ -838,10 +851,12 @@ class InfoPanel(wx.Panel):
 
         self.io_panel = IOPanel(self, -1)
 
+        self.shell_panel = ShellPanel(self, -1)
 
         self.nb.AddPage(self.log_panel, "Log")
         self.nb.AddPage(self.io_panel, "Input/Output ")
-
+        
+        self.nb.AddPage(self.shell_panel, "Shell")
 
 
 
