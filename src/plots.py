@@ -7,6 +7,8 @@ from matplotlib.figure import Figure
 import numpy as np
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigCanvas
 
+import wx
+
 class BasePlot(object):
     """a base plot class for GPEC"""
 
@@ -29,6 +31,8 @@ class BasePlot(object):
         self.axes.set_title(title)
         self.axes.set_ylabel(ylabel)
         self.axes.set_xlabel(xlabel)
+
+        self.properties = {'Grid':wx.NewId(), 'Legends':wx.NewId() }
    
 
         self.curves = []    #curves to plot
@@ -37,7 +41,7 @@ class BasePlot(object):
             self.setup_curves()
 
     def set_arrays(self, arrays):
-        self.arrays = arrays
+        self.arrays = arrays        #TODO it's needed to have a whole copy? 
         self.setup_curves()
      
 
@@ -55,6 +59,32 @@ class BasePlot(object):
             if curve['visible']:
                 curve['line2d'] = self.axes.plot(*curve['lines'], color=curve['color'], label=curve['name'])
         
+        self.canvas.draw()
+
+
+    def OnToggleCurve(self, event):
+        wx_id = event.GetId()
+        curve = [curve for curve in self.curves  if curve['wx_id'] == wx_id][0]     #TODO better way?        
+
+        curve['visible'] = not curve['visible']
+        for line in curve['line2d']:
+            line.set_visible(curve['visible']) 
+
+        self.canvas.draw()
+
+    def OnToggleProperty(self, event):
+        wx_id = event.GetId()
+        prop = dict([[v,k] for k,v in self.properties.items()])[wx_id] #inverted dict
+
+        if prop == 'Grid':
+            self.axes.grid()
+
+        elif prop == 'Legends':
+            if self.axes.get_legend():
+                self.axes.legend_ = None        #a tricky way to remove lengeds
+            else:
+                self.axes.legend(loc='best')  
+
         self.canvas.draw()
 
 
@@ -76,16 +106,22 @@ class PT(BasePlot):
         self.curves.append( {'name': u'Vapor lines', 
                              'visible':True, 
                              'lines':( self.arrays[0][:,0],self.arrays[0][:,1], self.arrays[1][:,0],self.arrays[1][:,1]),
-                              'color' : 'g'} )
+                              'color' : 'g',
+                              'wx_id' : wx.NewId()  
+                                } )
 
         self.curves.append( {'name': u'Critical line', 'visible':True, 
                              'lines':(self.arrays[2][:,0],self.arrays[2][:,1]),
-                              'color' : 'b'} )
+                             'color' : 'b',
+                             'wx_id' : wx.NewId()
+                            } )
 
         #TODO add others curves AZE / LLV
         self.curves.append( {'name': 'LLV', 'visible':False,
                             'lines': (),            #TODO
-                            'color': 'r'} )
+                            'color': 'r', 
+                            'wx_id' : wx.NewId()
+                            } )
 
 
 
@@ -105,10 +141,14 @@ class Tx(BasePlot):
         self.curves.append( {'name': u'Critical lines', 
                              'visible':True, 
                              'lines':( self.arrays[0][:,0],self.arrays[0][:,1], self.arrays[1][:,0],self.arrays[1][:,1]),
-                              'color' : 'b'} )
+                             'color' : 'b', 
+                             'wx_id' : wx.NewId()
+                            } )
 
         self.curves.append( {'name': u'LLV lines', 
                              'visible':True, 
                              'lines':( self.arrays[0][:,0],self.arrays[0][:,1], self.arrays[1][:,0],self.arrays[1][:,1]),
-                              'color' : 'b'} )
+                             'color' : 'b', 
+                             'wx_id' : wx.NewId()
+                            } )
         

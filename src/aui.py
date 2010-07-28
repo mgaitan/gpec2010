@@ -11,7 +11,7 @@ class MainFrame(wx.Frame):
 
     def __init__(self, parent, id=-1, title='GPEC',
                  pos=wx.DefaultPosition, size=(800,600),
-                 style=wx.DEFAULT_FRAME_STYLE):
+                 style=wx.DEFAULT_FRAME_STYLE | wx.MAXIMIZE ):
         wx.Frame.__init__(self, parent, id, title, pos, size, style=style)
 
         self._mgr = wx.aui.AuiManager(self)
@@ -68,6 +68,8 @@ class MainFrame(wx.Frame):
         self._mgr.Update()
 
         self.Bind(wx.EVT_CLOSE, self.OnClose)
+
+        self.Maximize()
 
 
     def OnClose(self, event):
