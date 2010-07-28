@@ -82,7 +82,8 @@ class PlotPanel(wx.Panel):
                 for curve in self.plot.curves:
                     self.menu.Append(curve['wx_id'], curve['name'], kind=wx.ITEM_CHECK)
                     self.Bind(wx.EVT_MENU, self.plot.OnToggleCurve, id=curve['wx_id'])
-                
+                    self.menu.Check(curve['wx_id'], True)
+    
                 self.menu.AppendSeparator()
                 
                 for prop, wx_id in self.plot.properties.iteritems():
