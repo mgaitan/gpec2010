@@ -48,13 +48,13 @@ class PlotPanel(wx.Panel):
              * mpl navigation toolbar
              * Control panel for interaction"""
         
-    def __init__ (self, parent, id, figure=None):
+    def __init__ (self, parent, id, diagram_type='PT', curves=None):
         
         wx.Panel.__init__(self, parent, id, style = wx.FULL_REPAINT_ON_RESIZE)
         
  
-
-        self.plot = plots.PT(self) #any type of diagram
+        
+        self.plot = getattr(plots, diagram_type)(self) #any type of diagram
 
         self.plot.canvas.mpl_connect('button_release_event',        #binding matplotlib event
                                 self.onMouseButtonClick)
@@ -69,13 +69,13 @@ class PlotPanel(wx.Panel):
         self.SetSizer(self.vbox)
         self.vbox.Fit(self)
 
+        if curves:
+            self.plot.set_arrays(curves)
+
         #binding via pubsub
-        pub.subscribe(self.OnPlotPT, 'plot.PT')
+        #pub.subscribe(self.OnPlotPT, 'plot.PT')
 
-        #self.plot.canvas.Bind(wx.EVT_CONTEXT_MENU, self.OnContextMenu)
         
-        #self.Bind(wx.EVT_CONTEXT_MENU, self.OnContextMenu)
-
     def onMouseButtonClick(self, event):
         if event.button == 3: 
 
@@ -109,20 +109,12 @@ class PlotPanel(wx.Panel):
     
 
 
-    def OnPlotPT(self, message):
-        self.plot.set_arrays(message.data)
+    def Plot(self, event=None):
+        
         self.plot.plot()
 
 
-        
-
-
-    def OnPopupItem(self, event):
-        print event.GetId()
-        
-
-    #--------end test
-  
+          
    
 
 class SuitePlotsPanel(wx.Panel):
@@ -132,23 +124,28 @@ class SuitePlotsPanel(wx.Panel):
         wx.Panel.__init__(self, parent, id)
         self.nb = wx.aui.AuiNotebook(self)
 
-        self.plots = []
-        
+       
+
         #pub.subscribe(self.OnAddPlot, 'plot.PT')
 
         sizer = wx.BoxSizer()
         sizer.Add(self.nb, 1, wx.EXPAND)
         self.SetSizerAndFit(sizer)
 
-        self.plots.append(PlotPanel(self, -1)) 
+        
 
-        self.nb.AddPage(self.plots[-1], "Plot %i" % len(self.plots) )
+        
                 
+        pub.subscribe(self.OnMakeSuite, 'make.suite')
 
+    def OnMakeSuite(self, message):
+        case_id, name, curves = message.data
 
-
-    def OnAddPlot(self, event):
-        pass
+        for type in ['PT', 'Tx']:
+            pp = PlotPanel(self,  -1, type, curves)
+            self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, name))
+            pp.Plot()
+        
         #by default it include a log_messages panel
         
 
@@ -640,7 +637,7 @@ class CasePanel(scrolled.ScrolledPanel):
                                                 | wx.FULL_REPAINT_ON_RESIZE)
         
         self.case_id = Counter().get_id()
-        self.name = u'Undefined'
+        self.name = 'Case %i' % self.case_id
 
         self.api_manager = apimanager.ApiManager(self.case_id)
         
@@ -684,12 +681,12 @@ class CasePanel(scrolled.ScrolledPanel):
         self.box.Add(self.cp, 0, wx.RIGHT|wx.LEFT|wx.EXPAND, 25)
 
             
-        self.accept_button = wx.lib.buttons.GenBitmapTextButton(self, -1, wx.Bitmap(os.path.join(PATH_ICONS,"document-save.png")), "Plot P-T diagram")
+        self.plot_button = wx.lib.buttons.GenBitmapTextButton(self, -1, wx.Bitmap(os.path.join(PATH_ICONS,"plot.png")), "Plot!")
 
 
         but_sizer =  wx.BoxSizer(wx.HORIZONTAL)
         
-        but_sizer.Add(self.accept_button, 0, flag=wx.ALL , border=5)
+        but_sizer.Add(self.plot_button, 0, flag=wx.ALL , border=5)
 
         self.box.Add(but_sizer, 0, flag= wx.ALL | wx.FIXED_MINSIZE | wx.ALIGN_RIGHT, border = 5)
 
@@ -706,7 +703,7 @@ class CasePanel(scrolled.ScrolledPanel):
         self.Bind(wx.EVT_COLLAPSIBLEPANE_CHANGED, self.OnPaneChanged, cp)
         self.Bind(wx.EVT_CHOICE, self.OnSetModel, self.ch)
         self.Bind(wx.EVT_BUTTON, self.OnLoadSystem, self.load_button)
-        self.Bind(wx.EVT_BUTTON, self.OnWriteGPECIN, self.accept_button)
+        self.Bind(wx.EVT_BUTTON, self.OnMakePlots, self.plot_button)
         
         #self.Bind(wx.EVT_CONTEXT_MENU, self.OnContextMenu)
 
@@ -809,7 +806,7 @@ class CasePanel(scrolled.ScrolledPanel):
         self.SetSizerAndFit(self.box)
         self.SetClientSize(self.GetSize())
 
-    def OnWriteGPECIN(self, event):
+    def OnMakePlots(self, event):
         comp1 = self.panels[0].GetTotalData()
         comp2 = self.panels[1].GetTotalData()
         ncomb = self.combining_rules.GetSelection() 
@@ -821,7 +818,7 @@ class CasePanel(scrolled.ScrolledPanel):
 
         curves = self.api_manager.read_gpecout()
         
-        pub.sendMessage('plot.PT', curves)
+        pub.sendMessage('make.suite', (self.case_id, self.name, curves))
 
 
 
