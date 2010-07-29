@@ -304,8 +304,9 @@ class VarsAndParamPanel(wx.Panel):
             for box, data in zip(self.vars, data):
                 box.SetValue(str(data))
         except:
-            wx.Bell()
-            print "not enough data or boxes for EOS vars"
+            pub.sendMessage('log', ('error',  "not enough data or boxes for EOS vars"))
+            
+            
 
     
     def GetParamsValues(self):
@@ -319,8 +320,9 @@ class VarsAndParamPanel(wx.Panel):
             for box, data in zip(self.params, data):
                 box.SetValue(str(data))
         else:
-            wx.Bell()
-            print "not enough data or boxes for EOS vars"
+            pub.sendMessage('log', ('error',  "not enough data or boxes for EOS vars"))
+            
+            
                 
 
 
@@ -770,8 +772,8 @@ class CasePanel(scrolled.ScrolledPanel):
 
     def OnLoadSystem(self, event):        
 
-
-        compounds_data =  [panel.GetData() for panel in self.panels if  panel.enabled ]  #GET DATA IF vars-paramPanels are enabled
+        #GET DATA IF vars-paramPanels are enabled
+        compounds_data =  [panel.GetData() for panel in self.panels if  panel.enabled ]  
         
         
 
@@ -807,19 +809,22 @@ class CasePanel(scrolled.ScrolledPanel):
         self.SetClientSize(self.GetSize())
 
     def OnMakePlots(self, event):
-        comp1 = self.panels[0].GetTotalData()
-        comp2 = self.panels[1].GetTotalData()
-        ncomb = self.combining_rules.GetSelection() 
-        k12 = self.k12.GetValue()
-        l12 = self.l12.GetValue()
-        max_p = self.max_p.GetValue()
 
-        self.api_manager.write_gpecin(self.model_id, comp1, comp2, ncomb, 0, k12, l12, max_p)
+        if self.panels[0].enabled and self.panels[1].enabled:
 
-        curves = self.api_manager.read_gpecout()
-        
-        pub.sendMessage('make.suite', (self.case_id, self.name, curves))
+            comp1 = self.panels[0].GetTotalData()
+            comp2 = self.panels[1].GetTotalData()
+            ncomb = self.combining_rules.GetSelection() 
+            k12 = self.k12.GetValue()
+            l12 = self.l12.GetValue()
+            max_p = self.max_p.GetValue()
 
+            self.api_manager.write_gpecin(self.model_id, comp1, comp2, ncomb, 0, k12, l12, max_p)
+
+            curves = self.api_manager.read_gpecout()            
+            pub.sendMessage('make.suite', (self.case_id, self.name, curves))
+        else:
+            pub.sendMessage('log', ('error', "Nothing to calculate. Define the system first."))
 
 
 class ShellPanel(wx.Panel):
@@ -998,9 +1003,12 @@ class LogMessagesPanel(wx.Panel):
         
     def OnAppendLog(self, msg):
         ico = self.icon_map[msg.data[0]]
+
         message = msg.data[1]
         index = self.list.InsertImageStringItem(sys.maxint, message, ico)
         self.list.SetStringItem(index, 1, time.strftime('%H:%M:%S'))
-
         self.list.EnsureVisible(index) #keep scroll at bottom
-    
+
+        if msg.data[0] == 'error':
+            wx.Bell()
+

@@ -3,6 +3,8 @@ import string
 import os
 import sys
 
+import cStringIO #for memory files
+
 
 from tools import killableprocess
 
@@ -181,21 +183,25 @@ class ApiManager():
                 #print (begin,end)
                 fh.seek(0)
 
-                temp_file_path = os.path.join(self.path_temp, 'temp_gpecout.dat')            #TODO rethink this!
-                with open(temp_file_path, 'w') as fho:
+                #temp_file_path = os.path.join(self.path_temp, 'temp_gpecout.dat')            #TODO rethink this!
+                
+                fho_w = cStringIO.StringIO()
                     #write lines just of the block between (begin,end)
                     
                     
-                    for l,line in enumerate(fh):
-                        if begin <= l < end:
-                            #sometimes there are "*" chars which must be removed
-                            fho.write( line.replace('*', '') )        
-                    fho.close()
-                
-                #retrieve significative columns from a dictionary. (begin,end)=>type=>num_cols 
-                significatives_cols= range(curve_types[tokens[(begin, end)]])     
+                for l,line in enumerate(fh):
+                    if begin <= l < end:
+                        #sometimes there are "*" chars which must be removed
+                        fho_w.write( line )        #line.replace('*', '')
+            
 
-                curve = np.loadtxt(temp_file_path, usecols=significatives_cols)
+                fho_r = cStringIO.StringIO(fho_w.getvalue())
+                
+
+                #retrieve significative columns from a dictionary. (begin,end)=>type=>num_cols 
+                significatives_cols= range(curve_types[tokens[(begin, end)]])
+
+                curve = np.loadtxt(fho_r, usecols=significatives_cols)
                 curves.append(curve)
 
             fh.close()
