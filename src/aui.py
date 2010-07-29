@@ -22,8 +22,8 @@ class MainFrame(wx.Frame):
         self.CenterOnScreen()
 
         self.CreateStatusBar()
-        self.SetStatusText("This is the statusbar")
-
+        self.SetStatusText("")
+        pub.subscribe(self.OnSetStatusText, 'status')
 
         menu = [
             ('&File', [
@@ -70,6 +70,10 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_CLOSE, self.OnClose)
 
         self.Maximize()
+
+
+    def OnSetStatusText(self, message):
+        self.SetStatusText(message.data)
 
 
     def OnClose(self, event):

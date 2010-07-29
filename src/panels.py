@@ -59,6 +59,8 @@ class PlotPanel(wx.Panel):
         self.plot.canvas.mpl_connect('button_release_event',        #binding matplotlib event
                                 self.onMouseButtonClick)
 
+        self.plot.canvas.mpl_connect('motion_notify_event', 
+                                        self.onMouseMotion)
 
 
         self.toolbar = NavigationToolbar(self.plot.canvas)      #the canvas from plot
@@ -74,6 +76,11 @@ class PlotPanel(wx.Panel):
 
         #binding via pubsub
         #pub.subscribe(self.OnPlotPT, 'plot.PT')
+
+    def onMouseMotion(self, event):
+        if event.inaxes:
+            pub.sendMessage('status', 'X=%g Y=%g' % (event.xdata, event.ydata) )
+        
 
         
     def onMouseButtonClick(self, event):
@@ -141,7 +148,7 @@ class SuitePlotsPanel(wx.Panel):
     def OnMakeSuite(self, message):
         case_id, case_name, arrays = message.data
 
-        for type in ['PT', 'Tx']:
+        for type in ['PT', 'Tx', 'Px', 'Trho']:
             pp = PlotPanel(self,  -1, type, arrays)
             self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
             pp.Plot()
