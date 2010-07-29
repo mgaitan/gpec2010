@@ -148,7 +148,7 @@ class SuitePlotsPanel(wx.Panel):
     def OnMakeSuite(self, message):
         case_id, case_name, arrays = message.data
 
-        for type in ['PT', 'Tx', 'Px', 'Trho']:
+        for type in ['PT', 'Tx', 'Px', 'Trho', 'Prho']:
             pp = PlotPanel(self,  -1, type, arrays)
             self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
             pp.Plot()

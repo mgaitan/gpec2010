@@ -304,3 +304,63 @@ class Trho(BasePlot):
                                        'type': 'LLV',
                                     } )
 
+
+class Prho(BasePlot):
+    """pressure-density diagram"""
+    
+    def __init__(self, parent, arrays=None, system=()):
+
+        self.short_title = u'P-\u03c1'
+        self.title = u'Pressure-Density projection of a global phase equilibrium diagram'
+        self.xlabel = u'Density [mol/l]'
+        self.ylabel = u'Pressure [bar]'
+
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system)        
+
+    def setup_curves(self, arrays):
+
+        if 'VAP' in arrays.keys():
+            for num, vap_curve in enumerate(arrays['VAP']):
+                
+                counter = u'' if len(arrays['VAP']) == 1 else u' %i' % (num + 1)
+
+                self.curves.append( {'name': u'Vapor line (L)' + counter , 
+                                     'visible':True, 
+                                     'lines':( vap_curve[:,2], vap_curve[:,1]),
+                                      'color' : 'green',
+                                      'wx_id' : wx.NewId(),
+                                      'type': 'VAP',
+                                        } )      
+            
+                self.curves.append( {'name': u'Vapor line (V)' + counter , 
+                                     'visible':True, 
+                                     'lines':( vap_curve[:,3], vap_curve[:,1]),
+                                      'color' : 'green',
+                                      'wx_id' : wx.NewId(),
+                                      'type': 'VAP',
+                                        } )  
+
+       
+
+        if 'CRI' in arrays.keys():
+            for num, cri_curve in enumerate(arrays['CRI']):
+
+                counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
+                self.curves.append( {'name': u'Critical line' + counter , 
+                                     'visible':True, 
+                                     'lines':(cri_curve[:,2],cri_curve[:,1]),
+                                     'color' : 'black',
+                                     'wx_id' : wx.NewId(),
+                                     'type': 'CRI'
+                                    } )
+
+
+        if 'LLV' in arrays.keys():
+            for num, llv_curve in enumerate(arrays['LLV']):
+                self.curves.append( { 'name': 'LLV', 
+                                      'visible':True,
+                                      'lines': (llv_curve[:,7], llv_curve[:,1]),           #TODO
+                                      'color': 'red', 
+                                      'wx_id' : wx.NewId(),
+                                       'type': 'LLV',
+                                    } )
