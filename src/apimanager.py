@@ -175,36 +175,42 @@ class ApiManager():
                         end = line_number
                         tokens[(begin, end)] = curve_type
             
-            curves = []
-            token_keys = tokens.keys()
-            token_keys.sort()
-
-            for (begin, end) in token_keys:
-                #print (begin,end)
-                fh.seek(0)
-
-                #temp_file_path = os.path.join(self.path_temp, 'temp_gpecout.dat')            #TODO rethink this!
+            arrays_out = {}     #Format: {type: [array1, array2, ... ], ...  }
+            
+            
+            for (begin, end), curve_type in sorted(tokens.items()):
                 
-                fho_w = cStringIO.StringIO()
-                    #write lines just of the block between (begin,end)
-                    
-                    
+
+                fh.seek(0)
+                
+                temp_w = cStringIO.StringIO()       #a memory file to write 
+                
+                #write lines just of the block between (begin,end)
                 for l,line in enumerate(fh):
                     if begin <= l < end:
-                        #sometimes there are "*" chars which must be removed
-                        fho_w.write( line )        #line.replace('*', '')
+                        temp_w.write( line )    
             
 
-                fho_r = cStringIO.StringIO(fho_w.getvalue())
+                temp_r = cStringIO.StringIO(temp_w.getvalue())      #and copy to read
                 
 
                 #retrieve significative columns from a dictionary. (begin,end)=>type=>num_cols 
                 significatives_cols= range(curve_types[tokens[(begin, end)]])
 
-                curve = np.loadtxt(fho_r, usecols=significatives_cols)
-                curves.append(curve)
+                curve_array = np.loadtxt(temp_r, usecols=significatives_cols)
+
+                temp_w.close()
+                temp_r.close()
+
+
+                #if it's a new type on the dict, create it.
+                if curve_type not in arrays_out.keys():
+                    arrays_out[curve_type] = []         #TODO should it be a ndarray ?
+                
+                arrays_out[curve_type].append(curve_array)
+
 
             fh.close()
 
         pub.sendMessage('add_txt', (filepath, self.case_id))
-        return curves
+        return arrays_out

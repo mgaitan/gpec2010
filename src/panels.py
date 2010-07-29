@@ -48,7 +48,7 @@ class PlotPanel(wx.Panel):
              * mpl navigation toolbar
              * Control panel for interaction"""
         
-    def __init__ (self, parent, id, diagram_type='PT', curves=None):
+    def __init__ (self, parent, id, diagram_type='PT', arrays=None):
         
         wx.Panel.__init__(self, parent, id, style = wx.FULL_REPAINT_ON_RESIZE)
         
@@ -69,8 +69,8 @@ class PlotPanel(wx.Panel):
         self.SetSizer(self.vbox)
         self.vbox.Fit(self)
 
-        if curves:
-            self.plot.set_arrays(curves)
+        if arrays:
+            self.plot.setup_curves(arrays)
 
         #binding via pubsub
         #pub.subscribe(self.OnPlotPT, 'plot.PT')
@@ -139,11 +139,11 @@ class SuitePlotsPanel(wx.Panel):
         pub.subscribe(self.OnMakeSuite, 'make.suite')
 
     def OnMakeSuite(self, message):
-        case_id, name, curves = message.data
+        case_id, case_name, arrays = message.data
 
         for type in ['PT', 'Tx']:
-            pp = PlotPanel(self,  -1, type, curves)
-            self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, name))
+            pp = PlotPanel(self,  -1, type, arrays)
+            self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
             pp.Plot()
         
         #by default it include a log_messages panel
