@@ -22,7 +22,7 @@ import  wx.lib.scrolledpanel as scrolled
 import  wx.py  as  py #for pyshell
 
 
-from settings import PATH_ICONS, _models, VC_RATIO
+from settings import PATH_ICONS, MODELS_OPTIONS, VC_RATIO
 
 from tools.misc import Counter
 
@@ -174,7 +174,7 @@ class VarsAndParamPanel(wx.Panel):
                      | wx.FULL_REPAINT_ON_RESIZE
                      )
 
-        gbs = self.gbs = wx.GridBagSizer(6, 5)
+        gbs = self.gbs = ui.widgets.GridBagSizerEnh(6, 5)
         
         self.api_manager = parent.api_manager
 
@@ -366,25 +366,7 @@ class VarsAndParamPanel(wx.Panel):
 
 
 
-    def remove_gbcontitem(self, row, col):
-        '''Removes a panel item as from the class gridbagsizer position (row, col)
-        as well as destroying its children.'''
 
-        item = self.gbs.FindItemAtPosition((row, col))
-        if (item != None) and (item.IsWindow()):
-            item.GetWindow().DestroyChildren()  # destroy panel components
-            self.gbs.Remove(item.GetWindow()) # Remove Panel from Sizer
-
-    def remove_gbitem(self, row, col):
-        '''Removes a control item as from the class gridbagsizer
-        position (row, col) and makes it invisible.'''
-
-        item = self.gbs.FindItemAtPosition((row, col))
-        if (item != None) and (item.IsWindow()):
-            self.gbs.Remove(item.GetWindow()) # Remove Panel from Sizer
-            item.Show(0)                        # make old control invisible
-
-     
 
 
 
@@ -421,8 +403,8 @@ class VarsAndParamPanel(wx.Panel):
         #clean up
         self.model_id = model_id
         for row in range(len(self.params)):
-            self.remove_gbitem(row + 2, 3)
-            self.remove_gbitem(row + 2, 4)
+            self.gbs.remove_gbitem(row + 2, 3)
+            self.gbs.remove_gbitem(row + 2, 4)
 
  
         self.params = []
@@ -656,9 +638,9 @@ class CasePanel(scrolled.ScrolledPanel):
 
         
 
-        self.model_choices =  _models
+        self.model_options =  MODELS_OPTIONS
 
-        self.ch = wx.Choice(self, -1, choices = self.model_choices.keys())
+        self.ch = wx.Choice(self, -1, choices = self.model_options.keys())
         
         #model ID by default
         self.model_id = 1
@@ -797,7 +779,7 @@ class CasePanel(scrolled.ScrolledPanel):
 
     def OnSetModel(self, event):
 
-        self.model_id = self.model_choices[event.GetString()]
+        self.model_id = self.model_options[event.GetString()]
 
 
         if self.model_id in (4,6):

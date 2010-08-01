@@ -52,3 +52,28 @@ class FloatControlUnit(wx.Panel):
         #listmix.ListCtrlAutoWidthMixin.__init__(self)
 
 
+class GridBagSizerEnh(wx.GridBagSizer):
+    """a grid Bag sizer enhaced. Adds a method to remove/hide windows giving its 
+     coordinates instead the window instance"""
+
+    def __init__(self, *arg, **kwarg):
+        wx.GridBagSizer.__init__(self, *arg, **kwarg)
+
+    def remove_gbcontitem(self, row, col):
+        '''Removes a panel item as from the class gridbagsizer position (row, col)
+        as well as destroying its children.'''
+
+        item = gbs.FindItemAtPosition((row, col))
+        if (item != None) and (item.IsWindow()):
+            item.GetWindow().DestroyChildren()  # destroy panel components
+            self.Remove(item.GetWindow()) # Remove Panel from Sizer
+
+    def remove_gbitem(self, row, col):
+        '''Removes a control item as from the class gridbagsizer
+        position (row, col) and makes it invisible.'''
+
+        item = self.FindItemAtPosition((row, col))
+        if (item != None) and (item.IsWindow()):
+            self.Remove(item.GetWindow()) # Remove Panel from Sizer
+            item.Show(0)                        # make old control invisible
+

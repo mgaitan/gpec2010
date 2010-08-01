@@ -14,11 +14,11 @@ PATH_TEMP = os.path.join( os.getcwd(), "tmp" )
 
 PATH_ICONS = os.path.join( os.getcwd(), "icons" )
 
-_models = {'Soave-Redlich-Kwong':1, 
-          'Peng-Robinson':2,
-          'RK-PR':3, 
-          'PC-SAFT':4, 
-          'SPHCT':6}            #TODO; should it be inverted?
+MODELS_OPTIONS = {'Soave-Redlich-Kwong':1, 
+                  'Peng-Robinson':2,
+                  'RK-PR':3, 
+                  'PC-SAFT':4, 
+                  'SPHCT':6}            #TODO; should it be inverted?
 
 
 VC_RATIO = 1.168    #relation MODEL/EXPERIMENTAL for critical volumen
