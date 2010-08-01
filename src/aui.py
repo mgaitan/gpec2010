@@ -37,12 +37,12 @@ class MainFrame(wx.Frame):
                 ('&Paste', self.EditPaste),
             ]),
             ('&View', [
-                ('&One item', curry(self.DataBox, 1)),
-                ('&Second item', curry(self.DataBox, 2)),
-                ('Sub&menu', [
-                    ('&Three', curry(self.DataBox, 3)),
-                    ('&Four', curry(self.DataBox, 4)),
-                ]),
+                ('&Restore default view', self.SetDefaultPerspective),
+                
+                #('Sub&menu', [
+                #    ('&Three', curry(self.DataBox, 3)),
+                #    ('&Four', curry(self.DataBox, 4)),
+                #]),
             ]),
         ]
 
@@ -50,19 +50,24 @@ class MainFrame(wx.Frame):
 
         # create several text controls
         self.cases_panel = TabbedCases(self, -1)
+        self.cases_auipane = wx.aui.AuiPaneInfo().Name("cases").\
+                          Caption(u"Cases").Left().MinSize(self.cases_panel.GetSize()).\
+                          MaxSize(self.cases_panel.GetSize()).\
+                          Layer(1).Position(2).CloseButton(True).MinimizeButton(True)
+
         self.plots_panel = SuitePlotsPanel(self, -1)
         self.log_panel = InfoPanel(self, -1)
 
         # add the panes to the manager
-        self._mgr.AddPane(self.cases_panel, wx.aui.AuiPaneInfo().Name("cases").
-                          Caption(u"Cases").Left().MinSize(self.cases_panel.GetSize()).
-                          MaxSize(self.cases_panel.GetSize()).
-                          Layer(1).Position(2).CloseButton(True).MinimizeButton(True))
+        self._mgr.AddPane(self.cases_panel, self.cases_auipane )
 
-        self._mgr.AddPane(self.plots_panel, wx.aui.AuiPaneInfo().Name('plot').CenterPane())
+        self._mgr.AddPane(self.plots_panel, wx.aui.AuiPaneInfo().Name('plot').Center().Layer(2).Caption(u"Plots").MaximizeButton(True))
         self._mgr.AddPane(self.log_panel, wx.aui.AuiPaneInfo().Name("log").Caption(u"Info").
                           MinSize(wx.Size(-1, 100)).
                           Bottom().Layer(0).Position(1).CloseButton(True).MaximizeButton(False))
+
+
+        self.perspective_default = self._mgr.SavePerspective()
 
         # tell the manager to 'commit' all the changes just made
         self._mgr.Update()
@@ -70,6 +75,9 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_CLOSE, self.OnClose)
 
         self.Maximize()
+
+    def SetDefaultPerspective(self, event=None):
+        self._mgr.LoadPerspective(self.perspective_default)
 
 
     def OnSetStatusText(self, message):
