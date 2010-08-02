@@ -78,7 +78,11 @@ class ApiManager():
             proc = killableprocess.Popen(args, cwd=self.path_temp, stdout=subprocess.PIPE)    #kill if not return in TIMEOUT seconds
             ret = proc.wait(timeout=TIMEOUT)
 
+
             pub.sendMessage('log', ('ok', '%s executed' % bin))
+
+            for out in BIN_AVAILABLE[bin]['out']:
+                self.written.add((out))
 
             for line  in proc.communicate()[0].splitlines():        #read stdout and send to log panel
                 if line.strip():
