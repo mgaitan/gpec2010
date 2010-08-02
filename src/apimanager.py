@@ -55,12 +55,11 @@ class ApiManager():
 
     def exec_fortran(self, bin):
 
-        #stout_tmp = cStringIO.StringIO() 
 
         if bin in BIN_AVAILABLE.keys():
             args = []
             if sys.platform != 'win32':
-                #On any non-Windows system, we run binaries over wine
+                #On any non-Windows system, we run binaries through wine
                 args.append('wine')
 
             args.append( os.path.join(PATH_BIN, bin + '.exe'))
@@ -70,11 +69,10 @@ class ApiManager():
 
             pub.sendMessage('log', ('ok', '%s executed' % bin))
 
-            for line  in proc.communicate()[0].splitlines():
+            for line  in proc.communicate()[0].splitlines():        #read stdout and send to log panel
                 if line.strip():
                     pub.sendMessage('log', ('info', "%s output: %s" % (bin, line) ))
                 
-                # print '---%s---' % line
             return ret
         else:
             pub.sendMessage('log', ('error', 'Unknown fortran executable %s' % bin))
