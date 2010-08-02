@@ -671,8 +671,38 @@ class CasePanel(scrolled.ScrolledPanel):
         self.MakeCollipsable(cp.GetPane())
         self.box.Add(self.cp, 0, wx.RIGHT|wx.LEFT|wx.EXPAND, 25)
 
-            
+
+        self.box.Add(wx.StaticLine(self), 0, wx.EXPAND)
+
+        #BOTTOM. Diagram selector
+
+        self.diag_hbox = wx.BoxSizer(wx.HORIZONTAL)
+
+        self.diagram_types = {0: 'Global Phase', 
+                              1: 'Isopheths',
+                              2: 'Pxy', 
+                              3: 'Txy',  }       
+
+        self.diagram_ch = wx.Choice(self, -1, choices = [self.diagram_types[key] 
+                                         for key in sorted(self.diagram_types.keys())] )
+
+        self.diagram_ch.SetSelection(0)
+
+        st = wx.StaticText(self, -1, "Diagram:", style=wx.ALIGN_RIGHT)
+        self.diag_hbox.Add(st, 1, flag= wx.ALIGN_RIGHT | wx.ALIGN_CENTER_VERTICAL, border=5)
+
+        self.diag_hbox.Add(self.diagram_ch, 2, wx.EXPAND)
+
+        
+        self.box.Add(self.diag_hbox, 0, wx.ALL | wx.EXPAND , 5)
+
+        #end diagram selector.
+
+   
         self.plot_button = wx.lib.buttons.GenBitmapTextButton(self, -1, wx.Bitmap(os.path.join(PATH_ICONS,"plot.png")), "Plot!")
+
+
+        
 
 
         but_sizer =  wx.BoxSizer(wx.HORIZONTAL)
@@ -693,12 +723,50 @@ class CasePanel(scrolled.ScrolledPanel):
         #Binding
         self.Bind(wx.EVT_COLLAPSIBLEPANE_CHANGED, self.OnPaneChanged, cp)
         self.Bind(wx.EVT_CHOICE, self.OnSetModel, self.ch)
+        self.Bind(wx.EVT_CHOICE, self.OnSetDiagram, self.diagram_ch)
         self.Bind(wx.EVT_BUTTON, self.OnLoadSystem, self.load_button)
         self.Bind(wx.EVT_BUTTON, self.OnMakePlots, self.plot_button)
         
         #self.Bind(wx.EVT_CONTEXT_MENU, self.OnContextMenu)
 
 
+    def OnSetDiagram(self, event):
+        diagram_type_key = self.diagram_ch.GetSelection()
+
+
+        
+        for pos in (2, 2):      #after remove first 2, pos 3 turns into pos 2. 
+            item = self.diag_hbox.GetItem(pos)
+            if (item != None) and (item.IsWindow()):
+                self.diag_hbox.Remove(pos)
+                item.Show(False)
+                self.diag_hbox.Layout()
+        
+        if diagram_type_key == 1:   #isopleth
+            
+            label = wx.StaticText(self, -1, "Z")  #for isopleths
+            self.z_input = ui.widgets.FloatCtrl(self, -1, "0.97")
+
+            self.diag_hbox.Add(label, 0, flag= wx.ALIGN_CENTER_VERTICAL | wx.ALL , border=5)
+            self.diag_hbox.Add(self.z_input, 1, wx.EXPAND | wx.ALL ^ wx.LEFT , border=5)
+
+        elif diagram_type_key == 2:   #pxy
+
+            label = wx.StaticText(self, -1, "T [K]")      #for pxy
+            self.t_input = ui.widgets.FloatCtrl(self, -1, "300.0")
+
+            self.diag_hbox.Add(label, 0, flag= wx.ALIGN_CENTER_VERTICAL | wx.ALL , border=5)
+            self.diag_hbox.Add(self.t_input, 1, wx.EXPAND | wx.ALL ^ wx.LEFT , border=5)
+
+        elif diagram_type_key == 3: 
+
+            label = wx.StaticText(self, -1, "P [bar]")      #for txy
+            self.p_input = ui.widgets.FloatCtrl(self, -1, "100.0")
+
+            self.diag_hbox.Add(label, 0, flag= wx.ALIGN_CENTER_VERTICAL | wx.ALL , border=5)
+            self.diag_hbox.Add(self.p_input, 1, wx.EXPAND | wx.ALL ^ wx.LEFT , border=5)
+
+        self.diag_hbox.Layout()
 
     def MakeCollipsable(self, pane):
         addrSizer = wx.FlexGridSizer(cols=2, hgap=5, vgap=5)
