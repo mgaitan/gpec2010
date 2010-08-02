@@ -6,13 +6,14 @@ import matplotlib
 from matplotlib.figure import Figure
 import numpy as np
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigCanvas
+from mpl_toolkits.mplot3d.axes3d import Axes3D
 
 import wx
 
 class BasePlot(object):
     """a base plot class for GPEC"""
 
-    def __init__(self, parent, arrays=None, title=None, xlabel=None, ylabel=None, system=()):
+    def __init__(self, parent, arrays=None, title=None, xlabel="", ylabel="", system=(), projection="2d", zlabel="", ):
 
         self.title = title
         if len(system)==2:
@@ -25,8 +26,12 @@ class BasePlot(object):
         self.fig = Figure()     #dpi=self.dpi
         self.canvas = FigCanvas(parent, -1, self.fig)
         
-        self.axes = self.fig.add_subplot(111)
 
+        if projection == '3d':
+            self.axes = Axes3D(self.fig)
+            self.axes.set_zlabel(zlabel)
+        else: 
+            self.axes = self.fig.add_subplot(111)
 
         self.axes.set_title(title)
         self.axes.set_ylabel(ylabel)
@@ -102,6 +107,36 @@ class BasePlot(object):
 
 
         self.canvas.draw()
+
+
+class PTrho(BasePlot):
+    def __init__(self, parent, arrays=None, system=()):
+
+        self.short_title = u"P-T-\u03c1"
+        self.title = u'Pressure-Temperature-Density projection of a global phase equilibrium diagram'
+        self.xlabel = u'Temperature [K]'
+        self.ylabel = u'Pressure [bar]'
+        self.zlabel = u'Density [mol/l]'
+
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, projection='3d', zlabel=self.zlabel)        
+
+    def setup_curves(self, arrays):
+
+        if 'VAP' in arrays.keys():
+            for num, vap_curve in enumerate(arrays['VAP']):
+                
+                counter = u'' if len(arrays['VAP']) == 1 else u' %i' % (num + 1)
+
+                self.curves.append( {'name': u'Vapor line' + counter , 
+                                     'visible':True, 
+                                     'lines':( vap_curve[:,0], vap_curve[:,1], vap_curve[:,2]),
+                                      'color' : 'green',
+                                      'wx_id' : wx.NewId(),
+                                      'type': 'VAP',
+                                        } )             
+
+    
+
 
 
 class PT(BasePlot):
