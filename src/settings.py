@@ -27,7 +27,22 @@ TIMEOUT = 10 #seconds to timeout the calculation
 
 WEIGHT_POWER = 14 # weight = (Tc ^ WEIGHT_POWER) / Pc
 
-BIN_AVAILABLE = ['2PhPxy', '2PhTxy', 'FUGi', 'GPEC', 'IsoplethGPEC', 'IsoXT', 
-                  'Models', 'ModelsParam', 'PCSAFT', 'PxyGPEC', 'TxyGPEC']
+BIN_AVAILABLE = {'2PhPxy': {'in':('twophin.DAT2'), 'out': ('PXYOUT.DAT')} , 
+                 '2PhTxy': {'in':('twophin.DAT2'), 'out': ('TXYOUT.DAT')} , 
+                 'FUGi': {'in': ('GPECIN.DAT', 'FUGIN.DAT'), 'out': ('FUGOUT.DAT')}, 
+                 'GPEC': {'in': ('GPECIN.DAT'), 'out': ('GPECOUT.DAT') },
+                 'IsoplethGPEC': {'in':('GPECIN.DAT', 'GPECOUT.DAT', 'ZforIsop.dat'), 
+                                  'out':('ISOPOUT.DAT') },
+                 'IsoXT': {'in': ('GPECIN.DAT', 'IsoXTin.DAT'), 
+                           'out': ('IsoXTout.DAT') },
+                 'Models': {'in':(), 'out':() }, 
+                 'ModelsParam': {'in':('CONPARIN.DAT'), 'out':('CONPAROUT.DAT') }, 
+                 'PCSAFT': {'in':('CONPARIN.DAT'), 'out':('CONPAROUT.DAT') }, 
+                 'PxyGPEC': {'in':('GPECIN.DAT', 'GPECOUT.DAT', 'TFORPXY.dat'), 
+                            'out':('PXYOUT.DAT') }, 
+                 'TxyGPEC': {'in':('GPECIN.DAT', 'GPECOUT.DAT', 'PFORTXY.dat'), 
+                            'out':('TXYOUT.DAT') } 
+                }
+
 
 COMBINING_RULES = {0: 'van Der Waals', 1:'Lorentz-Berthelot'}

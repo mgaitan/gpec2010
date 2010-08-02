@@ -7,6 +7,7 @@ import cStringIO #for memory files
 
 
 from tools import killableprocess
+import subprocess
 
 from settings import PATH_BIN, TIMEOUT, PATH_TEMP, BIN_AVAILABLE
 import numpy as np
@@ -49,12 +50,14 @@ class ApiManager():
         self.case_id = case_id
         os.mkdir(os.path.join(PATH_TEMP, str(self.case_id)))    #make a temporary directory exclusive
         self.path_temp = os.path.join(PATH_TEMP, str(self.case_id))
+        
+        self.written = {}   #flags
 
     def exec_fortran(self, bin):
 
-        stout_tmp = open(os.path.join(self.path_temp, 'stout'), 'w')
+        #stout_tmp = cStringIO.StringIO() 
 
-        if bin in BIN_AVAILABLE:
+        if bin in BIN_AVAILABLE.keys():
             args = []
             if sys.platform != 'win32':
                 #On any non-Windows system, we run binaries over wine
@@ -62,17 +65,16 @@ class ApiManager():
 
             args.append( os.path.join(PATH_BIN, bin + '.exe'))
 
-            ret = killableprocess.call(args, cwd=self.path_temp, stdout=stout_tmp, timeout=TIMEOUT)    #kill if not return in TIMEOUT seconds
+            proc = killableprocess.Popen(args, cwd=self.path_temp, stdout=subprocess.PIPE)    #kill if not return in TIMEOUT seconds
+            ret = proc.wait(timeout=TIMEOUT)
 
-            pub.sendMessage('log', ('info', '%s executed' % bin))
+            pub.sendMessage('log', ('ok', '%s executed' % bin))
 
-            stout_tmp.close()
-            
-            with open(os.path.join(self.path_temp, 'stout'), 'r') as stout_tmp:
-                outputs = stout_tmp.readlines()
-                for line in [line.strip() for line in outputs]:
+            for line  in proc.communicate()[0].splitlines():
+                if line.strip():
                     pub.sendMessage('log', ('info', "%s output: %s" % (bin, line) ))
-                    # print '---%s---' % line
+                
+                # print '---%s---' % line
             return ret
         else:
             pub.sendMessage('log', ('error', 'Unknown fortran executable %s' % bin))
@@ -96,7 +98,9 @@ class ApiManager():
         with open(filepath , 'w') as fh:
             fh.write(output)
             fh.close()
-        
+    
+    
+        self.written[filename] = True
         pub.sendMessage('add_txt', (filepath, self.case_id))
 
     def write_gpecin(self, model, comp1, comp2, ncomb=0, ntdep=0, k12=0.0, l12=0.0, max_p=2000):
@@ -120,6 +124,7 @@ class ApiManager():
             fh.write(output)
             fh.close()
 
+        self.written[filename] = True
         pub.sendMessage('add_txt', (filepath, self.case_id))
 
 
@@ -148,8 +153,10 @@ class ApiManager():
 
         ret = self.exec_fortran('GPEC')  #generate gpecout.dat
         
-
+        
+        
         filename = 'GPECOUT.DAT'
+
         filepath = os.path.join(self.path_temp, filename)
         curve_types = {'VAP':4, 'CRI':5, 'CEP':6, 'LLV':10 } #type:significatives columns
 

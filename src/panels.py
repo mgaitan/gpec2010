@@ -880,6 +880,7 @@ class CasePanel(scrolled.ScrolledPanel):
 
             curves = self.api_manager.read_gpecout()            
             pub.sendMessage('make.suite', (self.case_id, self.name, curves))
+
         else:
             pub.sendMessage('log', ('error', "Nothing to calculate. Define the system first."))
 
