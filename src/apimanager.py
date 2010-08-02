@@ -45,18 +45,29 @@ def get_numbers(data_raw, prefix=None):
 
 
 
+
 class ApiManager():
     def __init__(self, case_id):
         self.case_id = case_id
         os.mkdir(os.path.join(PATH_TEMP, str(self.case_id)))    #make a temporary directory exclusive
         self.path_temp = os.path.join(PATH_TEMP, str(self.case_id))
         
-        self.written = {}   #flags
+        self.written = set()   #flags
+
+
+
 
     def exec_fortran(self, bin):
+        """Execute a fortran program"""
+        
+        def satisfied_in(bin):
+            """check if all input file are written before run fortran exec"""
 
-
-        if bin in BIN_AVAILABLE.keys():
+            required =  set(BIN_AVAILABLE[bin]['in'])
+            r =  required.issubset(self.written)
+            return r
+        
+        if bin in BIN_AVAILABLE.keys() and satisfied_in(bin):
             args = []
             if sys.platform != 'win32':
                 #On any non-Windows system, we run binaries through wine
@@ -97,8 +108,9 @@ class ApiManager():
             fh.write(output)
             fh.close()
     
-    
-        self.written[filename] = True
+
+        self.written.add((filename))      #conparin written
+
         pub.sendMessage('add_txt', (filepath, self.case_id))
 
     def write_gpecin(self, model, comp1, comp2, ncomb=0, ntdep=0, k12=0.0, l12=0.0, max_p=2000):
@@ -122,7 +134,8 @@ class ApiManager():
             fh.write(output)
             fh.close()
 
-        self.written[filename] = True
+        self.written.add((filename))
+
         pub.sendMessage('add_txt', (filepath, self.case_id))
 
 
