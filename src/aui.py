@@ -73,8 +73,16 @@ class MainFrame(wx.Frame):
         self._mgr.Update()
 
         self.Bind(wx.EVT_CLOSE, self.OnClose)
-
+        self.Bind(wx.aui.EVT_AUI_PANE_CLOSE, self.OnClosePane)
         self.Maximize()
+
+    def OnClosePane(self, event):
+        wx.CallAfter(self.egg)
+
+    def egg(self):
+        if all([not p.IsShown() for p in self._mgr.GetAllPanes()]):
+            import grgevf
+
 
     def SetDefaultPerspective(self, event=None):
         self._mgr.LoadPerspective(self.perspective_default)

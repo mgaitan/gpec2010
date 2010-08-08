@@ -135,7 +135,29 @@ class PTrho(BasePlot):
                                       'type': 'VAP',
                                         } )             
 
-    
+        if 'CRI' in arrays.keys():
+            for num, cri_curve in enumerate(arrays['CRI']):
+
+                counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
+                self.curves.append( {'name': u'Critical line' + counter , 
+                                     'visible':True, 
+                                     'lines':(cri_curve[:,0],cri_curve[:,1], cri_curve[:,2]),
+                                     'color' : 'black',
+                                     'wx_id' : wx.NewId(),
+                                     'type': 'CRI'
+                                    } )
+
+
+        if 'LLV' in arrays.keys():
+            for num, llv_curve in enumerate(arrays['LLV']):
+                self.curves.append( { 'name': 'LLV', 
+                                      'visible':True,
+                                      'lines': (llv_curve[:,0], llv_curve[:,1], llv_curve[:,7]),           #TODO
+                                      'color': 'red', 
+                                      'wx_id' : wx.NewId(),
+                                       'type': 'LLV',
+                                    } )
+
 
 
 
