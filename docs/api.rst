@@ -27,7 +27,7 @@ Tabla de incidencia
  Entrada                                     Ejecutable    Salida
  ==========================================  ============  ================  
  CONPARIN.DAT                                ModelsParam   CONPAROUT.DAT
- CONPARIN.DAT                                PCSAFTparam   CONPAROUT.DAT
+ CONPARIN.DAT                                PCSAFT        CONPAROUT.DAT
  GPECIN.DAT                                  GPEC          GPECOUT.DAT
  GPECIN.DAT + GPECOUT.DAT + TFORPXY.dat      PxyGPEC       PXYOUT.DAT
  GPECIN.DAT + GPECOUT.DAT + PFORTXY.dat      TxyGPEC       TXYOUT.DAT
@@ -38,8 +38,6 @@ Tabla de incidencia
  twophin.DAT2                                PhTxy         TXYOUT.DAT
  ==========================================  ============  ================
 
-
-
 CONPARIN.DAT
 ------------
 
@@ -48,10 +46,8 @@ modelos en función de las constantes de cada compuesto, o bien, en sentido cont
 ajustar las constantes en función de parámetros del modelo definido por el usuario. 
 Esta bidireccionalidad del cálculo se especifica mediante el parametro ``SENTIDO``.
 
-
  .. note:: el archivo se encuentra en realidad en `./INOUTS/CONPARIN.DAT`
         
-
 
 Formato General::
 
@@ -87,27 +83,54 @@ Formato General::
  ==  ====================
 
 
+Modo para calcular parámetros del modelo
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Para ``SENTIDO`` 0: 
+Este modo se define con ``SENTIDO`` 0. Se definen las variables del compuesto. 
+
     
-::
+  Modelos 1, 2, 3::
 
     0 MODELO
-     TC    PC    VC    OM
+     TC    PC    OM     VC
+
+  Para los modelos 4 y 6 el formato es el siguiente::
+
+    0  MODELO
+     TC    PC    OM
+
+
+.. attention::
+   El ejecutable a invocar para el cálculo en los modelos 4 o 6 es ``PCSAFT``
+
 
 Detalle:
 
- ==========  ===================  ========
- Parámetro   Descripción          Unidad
- ==========  ===================  ========
- TC          Temperatura          K
- PC          Presión              Bar
- VC          Volumen              l/mol
- OM          --                   --
+ ==========  ===================  ======== 
+ Parámetro   Descripción          Unidad   
+ ==========  ===================  ======== 
+ TCeos       Temperatura          K        
+ PCeos       Presión              Bar      
+ VCeos       Volumen              l/mol    
+ OM          Factor acentrico     --
  ==========  ===================  ========
 
 
-* Para ``SENTIDO`` 1: depende del modelo
+Todos los parámetros son editables en el formulario excepto ``VCeos``.
+
+Para RK-PR el valor sí es editable y está asociado a un factor denominado 
+``Critical Volume Ratio Model/Experimental`` o ``VCrat`` que se fija a 1.168. 
+
+    VCeos = VCmodel*VCrat
+
+Para el modelo ``RK-PR`` se permite editar esta proporción. 
+Si el usuario define ``VCeos``, se actualiza el ``VCrat`` y viceversa.
+
+
+Modo para calcular variables del compuesto
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Cuando ``SENTIDO`` es 1 el formato depende del modelo
     
     
     - 1  _`Soave-Redlich-Kwong`
@@ -192,26 +215,30 @@ parámetros propios del modelo.
 
 Formato General::
 
-    TC    PC    VC    OM
+    VAR1  VAR2   VAR3    VAR4
     PARM1 PARAM2 PARAM3  [...]
 
 Detalle:
 
-     - Para `Soave-Redlich-Kwong`_ (id 1) y  Peng-Robinson (id 2)::
+     - Para `Soave-Redlich-Kwong`_ (id 1) y  ``Peng-Robinson`` (id 2)::
         
            TC    PC    VC    OM
            ac     b     m
 
  
-     - Para  RK-PR (id 3)::
+     - Para  ``RK-PR`` (id 3)::
         
            TC    PC     VC    OM
            ac     b   del1     k
 
-     - Para  PC-SAFT (id 4)::
+     - Para  ``PC-SAFT`` (id 4)::
 
            TC    PC     VC    OM
            eps/k   ro    m
+
+     - Para  ``SPHCT`` (id 6)::
+        
+        
         
 
 
@@ -468,7 +495,7 @@ estructura::
  VAP    ``T(K)    Pv(bar)    rhoL     rhoV``
  CRI    ``T(K)     P(bar)   d(mol/L)   x(1)     1-x(1)``
  CEP    ``T(K)     P(bar)    X(1)     XL1(1)   dc(mol/L)  dL(mol/L)``
- LLV    ``T    P    XL1    XL2    Y(1)    Y(2)    X2L2    d1(mol/L)    d2(mol/L)    dV(mol/L)``
+ LLV    ``T(K)    P(bar)    XL1    XL2    Y(1)    Y(2)    X2L2    d1(mol/L)    d2(mol/L)    dV(mol/L)``
  =====  ===================================================================================
  
  .. todo:: 
@@ -588,6 +615,12 @@ ZforIsop.dat
 Es un archivo de entrada para ``IsoplethGPEC`` que realiza los cómputos 
 para obtener un set de datos para una proporción del *compuesto 1* constante, 
 que define el usuario.  
+
+.. note::
+
+    ``IsoplethGPEC`` requiere, además de este archivo, que ``GPECIN.DAT`` y 
+    ``GPECOUT.DAT`` hayan sido generados. 
+
 
 Es similar a `PFORTXY.DAT`_ y `TFORPXY.dat`_ pero define un parámetro ``z``
 adimensional que representa la fracción de compuesto:: 
