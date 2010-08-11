@@ -1,0 +1,33 @@
+.. diseno::
+
+******
+Diseño
+****** 
+
+
+Flujo de trabajo general
+========================
+
+Diagrama de actividades
+-----------------------
+
+Casos de uso   
+============
+
+
+Diseño de Base de datos
+=======================
+
+Modelo Entidad-Relación
+-----------------------
+    
+Interacción Frontend / Backend
+==============================
+        
+Justificación de diseño
+------------------------
+
+Metodología de relevamiento
+----------------------------
+
+

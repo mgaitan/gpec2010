@@ -22,7 +22,8 @@ import sys, os
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.intersphinx', 'sphinx.ext.todo', 'sphinx.ext.pngmath', 'sphinx.ext.graphviz']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.todo', 'sphinx.ext.pngmath', 
+                'sphinx.ext.ifconfig', 'sphinx.ext.viewcode']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -37,7 +38,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Gpec2'
+project = u'Desarrollo de un software para el cálculo y graficación\
+ de diagramas de fase global de sistemas termodinámicos'
+
 copyright = u'2010, Martín Gaitán'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -64,7 +67,7 @@ language = 'es'
 
 # List of directories, relative to source directory, that shouldn't be searched
 # for source files.
-exclude_trees = ['_build']
+exclude_trees = ['_build', 'sandbox']
 
 # The reST default role (used for this markup: `text`) to use for all documents.
 #default_role = None
@@ -103,7 +106,7 @@ html_theme = 'default'
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-#html_title = None
+html_title = "<project>"
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None
@@ -138,7 +141,7 @@ html_static_path = ['_static']
 #html_additional_pages = {}
 
 # If false, no module index is generated.
-#html_use_modindex = True
+html_use_modindex = False
 
 # If false, no index is generated.
 #html_use_index = True
@@ -167,14 +170,26 @@ htmlhelp_basename = 'Gpec2doc'
 latex_paper_size = 'a4'
 
 # The font size ('10pt', '11pt' or '12pt').
-#latex_font_size = '10pt'
+latex_font_size = '10pt'
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'Gpec2.tex', u'GPEC - Global Phase Equilibrium Calculator',
+  ('index', 'report.tex', project,
    u'Martín Gaitán', 'manual'),
 ]
+
+pre_tableofcontent = '' #r'''\includegraphics{cc.png}'''
+
+latex_elements = {'papersize': 'a4paper', 
+                  'tableofcontents': pre_tableofcontent + r'''
+                                          \tableofcontents ''',
+
+                   'preamble': '\\usepackage{graphicx}',
+
+    }
+
+
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
@@ -182,7 +197,13 @@ latex_documents = [
 
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.
-#latex_use_parts = False
+latex_use_parts = False
+
+# If true, show page references after internal links.
+latex_show_pagerefs = False
+
+# If true, show URL addresses after external links.
+latex_show_urls = True #False
 
 # Additional stuff for the LaTeX preamble.
 #latex_preamble = ''
@@ -191,7 +212,7 @@ latex_documents = [
 #latex_appendices = []
 
 # If false, no module index is generated.
-#latex_use_modindex = True
+#latex_domain_indices = True
 
 
 # Example configuration for intersphinx: refer to the Python standard library.

@@ -1,5 +1,18 @@
-Especificación de la interfaz de comunicación
-==============================================
+Interfaz abstracta de programación (API)
+========================================
+
+
+.. contents::
+
+.. section-numbering::
+
+.. raw:: pdf
+
+   PageBreak oneColumn
+
+
+Introducción
+------------
 
 Esta documentación especifica la interfaz de archivos de entrada y salida
 para el conjunto de programas de cálculo que componen *GPEC*. 
@@ -39,7 +52,7 @@ Esta bidireccionalidad del cálculo se especifica mediante el parametro ``SENTID
 Formato General::
 
     SENTIDO MODELO
-    PARAM1    PARAM2    PARAM3    [PARAM4]   
+    PARAM1    PARAM2    PARAM3    [PARAM4]    ...
 
 
 

@@ -39,7 +39,7 @@ Esta bidireccionalidad del cálculo se especifica mediante el parametro ``SENTID
 Formato General::
 
     SENTIDO MODELO
-    PARAM1    PARAM2    PARAM3    [PARAM4]   
+    PARAM1    PARAM2    PARAM3    [PARAM4]    ...
 
 
 
