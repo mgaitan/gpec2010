@@ -1,8 +1,11 @@
-.. _marco_teorico:
-
 **************
 Marco Teórico
 **************
+
+.. _computacion_cientifica:
+
+Computación Científica
+======================
 
 Conceptos de diagramas de fases en termodinámica
 =================================================

@@ -1,5 +1,3 @@
-.. implementacion:
-
 ***************
 Implementación
 ***************

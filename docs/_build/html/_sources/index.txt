@@ -1,4 +1,4 @@
-
+.. _index:
 
 Contenidos:
 ===========
@@ -19,11 +19,11 @@ Contenidos:
     glosario
     bibliografia
 
-..
-    Indices y tablas
-    ==================
 
-    * :ref:`genindex`
-    * :ref:`modindex`
-    * :ref:`search`
+Indices y tablas
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
 

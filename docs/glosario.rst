@@ -1,20 +1,60 @@
-.. _glossary:
-
 Glosario
 ========
 
-.. glossary::
-   :sorted:
+Química y termodinámica
+-----------------------
+
+..  glossary::
+    :sorted:
+
+    curvas de equilibro
+        una curva de equilibro    
+
+    ecuación de estado
+        :abbr:`EOS (Equation of State)` es la relación entre variables de estado
+        que describen el estado de la materia bajo ciertas condiciones físicas.
+
+    fase global
+        fase global
+
+    sistema binario
+        Un sistema binario 
+
+    
 
 
-   término
-      A class (inheriting from :class:`~sphinx.builders.Builder`) that takes
-      parsed documents and performs an action on them.  Normally, builders
-      translate the documents to an output format, but it is also possible to
-      use the builder builders that e.g. check for broken links in the
-      documentation, or build coverage information.
-    
-    
-   otra cosa
-     definición de otra cosa
-      
+Computación
+------------
+
+..  glossary::
+
+    computación científica
+        Es el campo de estudio relacionado con la construcción de modelos 
+        matemáticos y métodos numéricos para resolver problemas científicos, 
+        de ciencias sociales y problemas de ingeniería. 
+        Típicamente es la aplicación de modelado numérico y otras formas de 
+        cálculo de problemas en varias disciplinas científicas.
+        
+        .. seealso:: 
+
+            :ref:`computacion_cientifica` 
+
+    Front end
+        pass
+
+    Back end
+        pass
+
+    usabilidad
+        pass
+
+    software cerrado
+        pass
+
+    software extensible
+        pass
+
+TODO's
+======
+
+.. todolist::

@@ -182,6 +182,7 @@ Cuando ``SENTIDO`` es 1 el formato depende del modelo
     -  5   GC
 
        .. todo::
+
             No aplica ?
 
 

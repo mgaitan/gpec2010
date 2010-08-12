@@ -1,5 +1,3 @@
-.. contexto_de_trabajo::
-
 *******************
 Contexto de trabajo
 *******************

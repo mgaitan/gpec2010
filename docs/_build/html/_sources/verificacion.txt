@@ -1,5 +1,3 @@
-.. verificacion:
-
 *************************
 Verificación y Validación    
 *************************

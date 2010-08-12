@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="top" title="&lt;project&gt;" href="index.html" />
-    <link rel="next" title="2. Glosario" href="glosario.html" />
+    <link rel="next" title="2. Marco Teórico" href="marco_teorico.html" />
     <link rel="prev" title="Contenidos:" href="index.html" /> 
   </head>
   <body>
@@ -35,7 +35,7 @@
           <a href="genindex.html" title="Índice General"
              accesskey="I">índice</a></li>
         <li class="right" >
-          <a href="glosario.html" title="2. Glosario"
+          <a href="marco_teorico.html" title="2. Marco Teórico"
              accesskey="N">siguiente</a> |</li>
         <li class="right" >
           <a href="index.html" title="Contenidos:"
@@ -51,19 +51,185 @@
             
   <div class="section" id="introducci-n">
 <h1>1. Introducción<a class="headerlink" href="#introducci-n" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>Lorem ipsum <a class="reference internal" href="bibliografia.html#ref">[Ref]</a> dolor sit amet. Un <a class="reference internal" href="glosario.html#term-t-rmino"><em class="xref std std-term">término</em></a> es algo destacable</p>
-<p>y esto <a class="reference external" href="http://google.com">es un link</a></p>
+<p>En sus orígenes y durante muchas décadas, la computación estuvo vinculada
+estricta e intrínsecamente al mundo de la ciencia. Este vínculo fue
+retroalimentándose a lo largo de la historia, permitiendo tecnologías que
+abarataron y multiplicaron la potencia de las computadoras y, en el otro sentido,
+ayudando a resolver complejos interrogantes que sin la capacidad computacional los
+científicos no hubieran podido responder.</p>
+<p>Es evidente que en la actualidad las computadoras ya no son exclusivad de
+selectos laboratorios y universidades, y su uso generalizado ha modificado
+drásticamente la cultura y la calidad de vida de las personas, teniendo un rol
+<em>sine qua non</em> en el trabajo, la comunicación, el ocio, etc.</p>
+<p>Esta popularización abrió amplísimos campos de desarrollo de la computación,
+pero, aunque ya no el único, el campo de la <a class="reference internal" href="glosario.html#term-computaci-n-cient-fica"><em class="xref std std-term">computación científica</em></a> sigue
+siendo de gran importancia.</p>
+<p>Diversas áreas de la ciencia y la ingeniería han
+sido revolucionadas por el software para cálculo, visualización
+y simulación disponible. Por nombrar sólo dos ejemplos,
+herramientas como <em>MATLAB®</em> o <em>Mathematica®</em>
+forman parte del día a día en la labor de ingenieros e investigadores.</p>
+<p>Someramente puede hacerse aquí una distinción entre software científico/técnico
+de propósito general como los mencionados (independientemente de que
+tengan mayor aceptación en un campo que en otro) de los que son
+de propósito específico, como es es el caso del software sobre el cual
+trata este proyecto.</p>
+<div class="section" id="descripci-n">
+<h2>1.1. Descripción<a class="headerlink" href="#descripci-n" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><abbr title="Global Phase Equilibrium Calculations">GPEC</abbr> <a class="footnote-reference" href="#id8" id="id1">[1]</a>, es un software para la
+obtención de <a class="reference internal" href="glosario.html#term-curvas-de-equilibro"><em class="xref std std-term">curvas de equilibro</em></a> de <a class="reference internal" href="glosario.html#term-fase-global"><em class="xref std std-term">fase global</em></a>
+para <a class="reference internal" href="glosario.html#term-sistema-binario"><em class="xref std std-term">sistemas binarios</em></a>, que se calculan mediante
+<a class="reference internal" href="glosario.html#term-ecuaci-n-de-estado"><em class="xref std std-term">ecuaciones de estado</em></a>.
+Es útil para fines académicos, científicos y de desarrollo industrial.</p>
+<p><em>GPEC</em> fue desarrollado originalmente por el Dr. Martín Cismondi Duarte en el marco
+de su tesis doctoral <a class="footnote-reference" href="#id9" id="id2">[2]</a> en Ingeniería Química por la Universidad Técnica de Dinamarca,
+en 2005, y luego ampliado y mantenido junto a Diego Nuñez.</p>
+<p>Está basado en métodos numéricos y algoritmos desarrollados principalmente por Cismondi
+en colaboración con el Prof. Michael Michelsen, del Department of Chemical Engineering,
+DTU (Dinamarca),  y el Prof. Marcelo Zabaloy de la Universidad Nacional del Sur,
+(Argentina).</p>
+<p>Actualmente es un proyecto dirigido por el Prof. Esteban Brignole de
+<abbr title="Planta Piloto de Ingeniería Química">PLAPIQUI</abbr> <a class="footnote-reference" href="#id10" id="id3">[3]</a>
+en colaboración con el <abbr title="Investigación y Desarrollo en Tecnologías Química">IDTQ</abbr> <a class="footnote-reference" href="#id11" id="id4">[4]</a></p>
+<p>El software tiene una arquitectura de capas. El <a class="reference internal" href="glosario.html#term-back-end"><em class="xref std std-term">Back end</em></a> corresponde
+al conjunto de programas (codificados en lenguaje Fortran) que implementa los algoritmos
+de cálculo . El <a class="reference internal" href="glosario.html#term-front-end"><em class="xref std std-term">Front end</em></a>, denominado <em>Visual Gpec</em> es la interfaz
+de usuario que genera datos de entrada con formato comprensible por los algoritmos
+y procesa las salidas generando distintos gráficos. Para detalle sobre esta arquitectura
+puede ver <a class="reference internal" href="diseno.html#frontend-backend"><em>Interacción Frontend / Backend</em></a>.</p>
+</div>
 <div class="section" id="motivaci-n">
-<h2>1.1. Motivación<a class="headerlink" href="#motivaci-n" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>1.2. Motivación<a class="headerlink" href="#motivaci-n" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>GPEC <a class="footnote-reference" href="#id12" id="id5">[5]</a> es un software que goza de cierta popularidad en el ambiente científico-
+académico e industrial. La última versión previa a este trabajo fue descargada
+XXXX veces <a class="footnote-reference" href="#id13" id="id6">[6]</a> de numerosos puntos geográficos.</p>
+<blockquote>
+<div class="admonition-todo admonition " id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">buscar la estádistica de descargas de GPEC</p>
+</div>
+</blockquote>
+<p>Hasta el momento no se conoce ningún otro software con capacidades equivalentes,
+lo que implica una creciente comunidad de usuarios, pertenecientes no sólo a instituciones académicas
+y de investigación, si no también a industrias.</p>
+<p>algunos factores han sido determinantes para el virtual congelamiento de su desarrollo
+desde el año 2008:</p>
+<ul>
+<li><p class="first">La falta de recursos técnicos especializados en el desarrollo de software
+vinculados a los grupos que impulsan GPEC</p>
+</li>
+<li><p class="first">La ausencia de documentación</p>
+</li>
+<li><p class="first">El diseño <a class="reference internal" href="glosario.html#term-software-cerrado"><em class="xref std std-term">cerrado</em></a>, <em class="dfn">autosuficiente</em> <a class="footnote-reference" href="#id14" id="id7">[7]</a> y
+poco <a class="reference internal" href="glosario.html#term-software-extensible"><em class="xref std std-term">extensible</em></a> de <em>Visual Gpec</em></p>
+<blockquote>
+<div class="admonition-ver-tambi-n admonition seealso">
+<p class="first admonition-title">Ver también</p>
+<p class="last"><a class="reference internal" href="requerimientos.html#relevamiento"><em>Relevamiento de la versión preexistente</em></a></p>
+</div>
+</blockquote>
+</li>
+</ul>
 </div>
 <div class="section" id="importancia">
-<h2>1.2. Importancia<a class="headerlink" href="#importancia" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>1.3. Importancia<a class="headerlink" href="#importancia" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Las potencialidades técnicas, científicas e incluso comerciales de este software
+son amplias, ya que su <em>nicho</em> tiene aplicación en la industria alimenticia,
+petroquímica, etc.</p>
+<blockquote>
+<div class="admonition-todo admonition " id="index-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">ver aplicación / nicho</p>
 </div>
-<div class="section" id="alcance">
-<h2>1.3. Alcance<a class="headerlink" href="#alcance" title="Enlazar permanentemente con este título">¶</a></h2>
+</blockquote>
+<p>También es útil como herramienta educativa, donde los estudiantes consolidan
+conceptos teóricos y manipulan curvas que, por razones obvias, son estáticas
+en los libros.</p>
+<blockquote>
+El alcance de este trabajo es el rediseño y e implementación de un nuevo
+<em>Visual Gpec</em>. Para más detalles puede ver <a class="reference internal" href="diseno.html#justificacion-diseno"><em>Justificación de diseño</em></a>.</blockquote>
 </div>
 <div class="section" id="objetivos">
 <h2>1.4. Objetivos<a class="headerlink" href="#objetivos" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="objetivo-general">
+<h3>1.4.1. Objetivo general<a class="headerlink" href="#objetivo-general" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El objetivo principal que persigue este trabajo es:</p>
+<ul class="simple">
+<li>Desarrollar un software <em>front-end</em> totalmente compatible con el back-end
+existente que reemplace al actual (<em>Visual Gpec</em>), orientado a un desarrollo
+prolongado y extensible, que satisfaciendo las funcionalidades con las que
+este cuenta y las amplie y mejore en algunos aspectos como la ergonomía, la calidad de los diagramas producidos,
+la <a class="reference internal" href="glosario.html#term-usabilidad"><em class="xref std std-term">usabilidad</em></a> general, y aspecto visual del programa.</li>
+</ul>
+</div>
+<div class="section" id="objetivos-espec-ficos">
+<h3>1.4.2. Objetivos específicos<a class="headerlink" href="#objetivos-espec-ficos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Los objetivos específicos del proyecto son:</p>
+<ul class="simple">
+<li>Estudiar y documentar la versión preexistente del software</li>
+<li>Dilucidar fallas de diseño desde el punto de vista del usuarios
+e idear sus soluciones para incluirlas como nuevos requerimientos</li>
+<li>Relevar nuevos requerimientos del grupo cliente</li>
+<li>Investigar metodologías, procedimientos y paradigmas del desarrollo de software
+y justificar las adoptadas para este proyecto</li>
+<li>Investigar tecnologías (lenguajes de programación, bibliotecas de funciones,
+etc) y justificar las adoptadas.</li>
+<li>Codificar y documentar el software de manera que satisfaga el conjunto
+de requerimientos planteados</li>
+<li>Verificar y validar la implementación</li>
+</ul>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Web: <a class="reference external" href="http://gpec.efn.uncor.edu">http://gpec.efn.uncor.edu</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td><em>Global phase equilibrium calculations: Critical lines, critical end points
+and liquid-liquid-vapour equilibrium in binary mixtures</em>, M Cismondi, ML Michelsen
+- The Journal of Supercritical Fluids, 2007 - Elsevier</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id10" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>Es un instituto de investigación, educación y desarrollo de tecnología
+con sede en la ciudad de Bahía Blanca, dependiente de la Universidad
+Nacional del Sur (UNS) y del Consejo Nacional de Investigaciones Científicas
+y Técnicas (CONICET). Web: <a class="reference external" href="http://www.plapiqui.edu.ar">http://www.plapiqui.edu.ar</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id11" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>Grupo de investigación de la Facultad de Ciencias Exáctas Físicas
+y Naturales. Web: <a class="reference external" href="http://www.idtq.efn.uncor.edu">http://www.idtq.efn.uncor.edu</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id12" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[5]</a></td><td>Según estadísticas del sitio web de GPEC</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id13" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[6]</a></td><td>Si bien el equipo de desarrollo denomina <em>GPEC</em> al backend específicamente
+(el desarrollo original), a lo largo de este trabajo el termino se refiere
+al conjunto de software.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id14" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[7]</a></td><td><em>Visual Gpec</em> está desarrollado en <em>Visual Basic 6.0</em>, y por lo tanto
+requiere algunas bibliotecas dinámicas para su funcionamiento</td></tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 
@@ -76,10 +242,14 @@
   <h3><a href="index.html">Contenidos</a></h3>
   <ul>
 <li><a class="reference internal" href="#">1. Introducción</a><ul>
-<li><a class="reference internal" href="#motivaci-n">1.1. Motivación</a></li>
-<li><a class="reference internal" href="#importancia">1.2. Importancia</a></li>
-<li><a class="reference internal" href="#alcance">1.3. Alcance</a></li>
-<li><a class="reference internal" href="#objetivos">1.4. Objetivos</a></li>
+<li><a class="reference internal" href="#descripci-n">1.1. Descripción</a></li>
+<li><a class="reference internal" href="#motivaci-n">1.2. Motivación</a></li>
+<li><a class="reference internal" href="#importancia">1.3. Importancia</a></li>
+<li><a class="reference internal" href="#objetivos">1.4. Objetivos</a><ul>
+<li><a class="reference internal" href="#objetivo-general">1.4.1. Objetivo general</a></li>
+<li><a class="reference internal" href="#objetivos-espec-ficos">1.4.2. Objetivos específicos</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -88,8 +258,8 @@
   <p class="topless"><a href="index.html"
                         title="Capítulo anterior">Contenidos:</a></p>
   <h4>Próximo tema</h4>
-  <p class="topless"><a href="glosario.html"
-                        title="Próximo capítulo">2. Glosario</a></p>
+  <p class="topless"><a href="marco_teorico.html"
+                        title="Próximo capítulo">2. Marco Teórico</a></p>
   <h3>Esta página</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/introduccion.txt"
@@ -119,7 +289,7 @@
           <a href="genindex.html" title="Índice General"
              >índice</a></li>
         <li class="right" >
-          <a href="glosario.html" title="2. Glosario"
+          <a href="marco_teorico.html" title="2. Marco Teórico"
              >siguiente</a> |</li>
         <li class="right" >
           <a href="index.html" title="Contenidos:"
