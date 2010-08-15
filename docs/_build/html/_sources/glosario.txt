@@ -1,3 +1,5 @@
+.. _glosario:
+
 Glosario
 ========
 
@@ -35,9 +37,6 @@ Computación
         Típicamente es la aplicación de modelado numérico y otras formas de 
         cálculo de problemas en varias disciplinas científicas.
         
-        .. seealso:: 
-
-            :ref:`computacion_cientifica` 
 
     Front end
         pass
@@ -53,6 +52,12 @@ Computación
 
     software extensible
         pass
+
+    software reutilizable
+        Un fragmento de software es reutilizable cuando es suficientemente 
+        genérico para brindar solución a un conjunto de problemas similar
+
+, y reutilizar otros componentes lo mayor posible.
 
 TODO's
 ======

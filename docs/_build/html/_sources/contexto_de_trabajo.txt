@@ -1,12 +1,50 @@
 *******************
 Contexto de trabajo
 *******************
-       
+
+.. _trabajo_interdisciplinario:
+
 Trabajo interdisciplinario
 ===========================
     
+Según la especificación de *Alcances e Incumbencias* de la carrera 
+el ingeniero en computación *"estudia la factibilidad, proyecta, planifica, dirige, 
+construye, instala, pone en marcha, opera ensaya, mide, mantiene, repara, modifica, 
+transforma e inspecciona (...) sistemas o partes de sistemas de computación 
+y su interconexión tanto en su aspecto de hardware como de software y 
+las aplicaciones de los mismos. "*
+
+
+Como opina [Rey Roque, 2003]_:
+
+    Hablar de interdisciplinaridad en el contexto académico significa lograr un 
+    nivel adecuado de comunicación, la integración de paradigmas, la
+    ruptura de concepciones reduccionistas, el desarrollo de una cultura de aprendizaje colectivo.
+    Presupone implicación profesional, multiplicación (no suma) de ideas conceptuales,
+    metodológicas, procedimentales; economización de esfuerzos, de carga profesional y evaluativa.
+    Implica una proceso docente educativo ágil, económico y enriquecedor para los docente;
+    procesos de aprendizaje más significativos para los alumnos; relación profesional más rica y
+    afectiva entre docentes. El escenario correspondiente a un trabajo interdisciplinario no implica,
+    como algunos pueden pensar, un mayor trabajo, sino, mayor riqueza, variedad y aceptación de
+    actividades; mayor equidad en la distribución de tareas y recibe los beneficios afectivos y
+    profesionales del trabajo en equipo. El resultado del aprendizaje en tal escenario es un saber más
+    coherente, se logra mayor capacidad para enfrentar problemas.
+
+
+
 Licenciamiento como Software libre
 ===================================
 
 Justificación
 --------------
+
+
+
+.. [#]  Web: http://computacion.efn.uncor.edu/Alcances-e-Incumbencias
+
+
+
+.. [Rey Roque, 2003]  Rey Roque, A (2003), *Experiencias en el trabajo 
+                      Interdisciplinario desde una Disciplina Básica*,
+                      Departamento de Matemáticas, Facultad de Informática, Universidad de
+                      Cienfuegos “Carlos Rafael Rodríguez”, Cuba

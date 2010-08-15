@@ -1,3 +1,5 @@
+.. _intro:
+
 *************
 Introducción
 *************
@@ -27,8 +29,8 @@ forman parte del día a día en la labor de ingenieros e investigadores.
 Someramente puede hacerse aquí una distinción entre software científico/técnico 
 de propósito general como los mencionados (independientemente de que 
 tengan mayor aceptación en un campo que en otro) de los que son 
-de propósito específico, como es es el caso del software sobre el cual 
-trata este proyecto. 
+de propósito específico (sofware aplicativo), como es es el caso del software 
+sobre el cual trata este proyecto. 
 
 Descripción
 ===========
@@ -59,10 +61,19 @@ de usuario que genera datos de entrada con formato comprensible por los algoritm
 y procesa las salidas generando distintos gráficos. Para detalle sobre esta arquitectura
 puede ver :ref:`frontend_backend`.
 
+.. note::
+    
+        Estrictamente, *GPEC* es el software backend; el desarrollo original de Cismondi, 
+        un conjunto de programas de línea de comando. 
+        Con el advenimiento de la interfaz gráfica *Visual Gpec*, se comenzó a 
+        llamar *GPEC* al conjunto de software, y es, salvo
+        aclaración explícita, a la asepción que tiene en este libro. 
+
+
 Motivación
 ==========
 
-GPEC [#]_ es un software que goza de cierta popularidad en el ambiente científico- 
+GPEC  es un software que goza de cierta popularidad en el ambiente científico- 
 académico e industrial. La última versión previa a este trabajo fue descargada
 XXXX veces [#]_ de numerosos puntos geográficos. 
 
@@ -83,7 +94,7 @@ desde el año 2008:
 
 * La ausencia de documentación 
 
-* El diseño :term:`cerrado <software cerrado>`, :dfn:`autosuficiente` [#]_ y 
+* El diseño :term:`cerrado <software cerrado>`, no :term:`reutilizable <software reutilizable>` y 
   poco :term:`extensible <software extensible>` de *Visual Gpec*
 
     .. seealso:: 
@@ -135,12 +146,12 @@ Objetivos específicos
 
 Los objetivos específicos del proyecto son:
 
-* Estudiar y documentar la versión preexistente del software
+* Estudiar y documentar la versión preexistente del software. Vea :ref:`relevamiento`.
 
 * Dilucidar fallas de diseño desde el punto de vista del usuarios
-  e idear sus soluciones para incluirlas como nuevos requerimientos
+  e idear sus soluciones para incluirlas como nuevos requerimientos.
 
-* Relevar nuevos requerimientos del grupo cliente
+* Relevar nuevos requerimientos.
 
 * Investigar metodologías, procedimientos y paradigmas del desarrollo de software
   y justificar las adoptadas para este proyecto
@@ -149,12 +160,14 @@ Los objetivos específicos del proyecto son:
   etc) y justificar las adoptadas. 
 
 * Codificar y documentar el software de manera que satisfaga el conjunto
-  de requerimientos planteados
+  de requerimientos planteados.
 
-* Verificar y validar la implementación
+* Verificar y validar la implementación. 
 
 
-
+    .. seealso::
+            
+        :ref:`requerimientos`
 
 
 .. [#] Web: http://gpec.efn.uncor.edu
@@ -173,9 +186,4 @@ Los objetivos específicos del proyecto son:
 
 .. [#] Según estadísticas del sitio web de GPEC
 
-.. [#] Si bien el equipo de desarrollo denomina *GPEC* al backend específicamente 
-       (el desarrollo original), a lo largo de este trabajo el termino se refiere
-       al conjunto de software. 
 
-.. [#] *Visual Gpec* está desarrollado en *Visual Basic 6.0*, y por lo tanto 
-       requiere algunas bibliotecas dinámicas para su funcionamiento

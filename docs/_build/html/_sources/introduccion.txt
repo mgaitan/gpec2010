@@ -27,8 +27,8 @@ forman parte del día a día en la labor de ingenieros e investigadores.
 Someramente puede hacerse aquí una distinción entre software científico/técnico 
 de propósito general como los mencionados (independientemente de que 
 tengan mayor aceptación en un campo que en otro) de los que son 
-de propósito específico, como es es el caso del software sobre el cual 
-trata este proyecto. 
+de propósito específico (sofware aplicativo), como es es el caso del software 
+sobre el cual trata este proyecto. 
 
 Descripción
 ===========
@@ -83,7 +83,7 @@ desde el año 2008:
 
 * La ausencia de documentación 
 
-* El diseño :term:`cerrado <software cerrado>`, :dfn:`autosuficiente` [#]_ y 
+* El diseño :term:`cerrado <software cerrado>`, no :term:`reutilizable <software reutilizable>` y 
   poco :term:`extensible <software extensible>` de *Visual Gpec*
 
     .. seealso:: 
@@ -177,5 +177,3 @@ Los objetivos específicos del proyecto son:
        (el desarrollo original), a lo largo de este trabajo el termino se refiere
        al conjunto de software. 
 
-.. [#] *Visual Gpec* está desarrollado en *Visual Basic 6.0*, y por lo tanto 
-       requiere algunas bibliotecas dinámicas para su funcionamiento

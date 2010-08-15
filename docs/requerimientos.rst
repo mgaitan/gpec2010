@@ -16,8 +16,13 @@ Aspectos de ingeniería de software
 Problemas detectados
 ---------------------
 
+.. _metodologia:
+
 Metodología
 ===========
+
+
+.. _requerimientos:
 
 Requerimientos Funcionales
 ===========================

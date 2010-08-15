@@ -2,16 +2,28 @@
 Marco Teórico
 **************
 
-.. _computacion_cientifica:
+Debido a la naturaleza multidisplinaria de este trabajo, posiblemente sea leído
+y evaluado por profesionales o interesados de/en las distintas áreas de incumbecia 
+(química y computación). 
 
-Computación Científica
-======================
+    .. seealso::
+
+        :ref:`trabajo_interdisciplinario`.
+
+Dado que no necesariamente se tiene un conocimiento
+sólido fuera de la especifidad de la profesión, en este capitulo se presentarán 
+conceptos generales (que no pretenten exhautividad pero sí precisión) de las dos áreas, 
+útiles para la comprensión de este trabajo. Para definiciónes de términos puntuales, consulte el :ref:`glosario <glosario>`.
+
 
 Conceptos de diagramas de fases en termodinámica
 =================================================
 
+
 Conceptos de orientación a objetos
 ==================================
+
+
 
 Orientación a eventos
 ---------------------
@@ -28,8 +40,11 @@ Refactoring
 Principios de diseño
 ====================
 
+
 DRY
 ---
+:abbr:`DRY (Don't Reapeat Yourself)` , "No te repitas" es un principi
+
 
 Pareto
 ------
@@ -74,3 +89,5 @@ Sphinx
 ^^^^^^
 
 sdf sdf adsfk asdkf añsldkfj askldf
+
+
