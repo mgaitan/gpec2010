@@ -60,6 +60,9 @@ Tecnologías principales
 Python 
 ------
 
+
+
+
 Python en el software científico
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         
