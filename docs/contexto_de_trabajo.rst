@@ -11,26 +11,26 @@ Como se describe en la :ref:`introducción <intro>`, la computación ha revoluci
 todas las áreas de la cultura y la investigación moderna, incluyendo, por supuesto
 a la ingeniería en todas sus formas. 
 
-Puede decirse que la ingeniería en computación (como la ingeniería en sistemas) 
-se ha constituído en una *meta ingeniería* requerida por todas las demás áreas. 
-Es aceptable pensar que, en general, un ingeniero en computación puede desenvolverse 
-profesionalmente sin conocimientos de termodinámica, pero un ingeniero químico o mecánico
+Puede decirse que la ingeniería en computación (completada con la ingeniería en sistemas) 
+se ha constituido en una *meta ingeniería* requerida por todas las demás áreas. 
+Por poner un ejemplo, es aceptable pensar que, en general, un ingeniero en computación puede 
+desenvolverse  profesionalmente sin conocimientos de termodinámica, pero un ingeniero químico o mecánico
 avocado a esa área tendrá dificultades para progresar si no tiene cierta destreza
 en programación y sistemas de información. 
 
 No obstante, cuando se quieren alcanzar objetivos
-más altos a nivel de software, la capacidad y formación media en un profresional
-de otra área se vuelve escasa: el desarrollo de software es una ingeniería *per se*
-que va mucho más allá de la programación. 
+más altos a nivel de software, la capacidad y formación media en un profesional
+de otra área se vuelve escasa: el desarrollo de software es una ingeniería por sí misma
+que va mucho más allá de la destreza en programación. 
 
 Es saludable entonces que profesionales idóneos sean los encargados de ese 
-aspecto específico del proyecto interactuando y consultando cuestiones específicas
-del ámbito de aplicación. 
+aspecto específico del proyecto, interactuando y consultando cuestiones específicas
+del ámbito de aplicación, aportando ideas, desarrollando una acabada *ingeniería de requerimientos*, 
+y explicando de manera didáctica cuando estos exceden o complejizan innecesariamente
+la implementación. 
 
-Ese ha sido, desde su concepción, el espíritu de este trabajo. 
-
-Por otro lado, desde el punto de vista académico/investigativo de la :abbr:`FCEFyN` 
-no existe una notoria sinergia entre las  distintas disciplinas [#]_ cuyas ventajas
+Por otro lado, desde contexto académico y de investigación, en la :abbr:`FCEFyN` 
+no existe una notoria sinergia entre las  distintas disciplinas [#]_, cuyas ventajas
 expone el magíster Antonio Rey Roque en [ARR2003]_:
 
     Hablar de interdisciplinaridad en el contexto académico significa lograr un 
@@ -46,45 +46,56 @@ expone el magíster Antonio Rey Roque en [ARR2003]_:
     profesionales del trabajo en equipo. El resultado del aprendizaje en tal escenario es un saber más
     coherente, se logra mayor capacidad para enfrentar problemas.
 
+Desde ambas puntos de vista, estas han sido las ideas que, desde el principio,
+guiaron este proyecto. Como se verá en :ref:`experiencia` el resultado fue altamente 
+satisfactorio. 
+
 
 Software libre
 ===============
 
 
-El :term:`Software libre` es aquel que respeta la libertad  de los usuarios sobre su 
-producto adquirido (independientemente si se debe pagar por ello o no) y, por tanto, u
-na vez obtenido puede ser usado, copiado, estudiado, cambiado y redistribuido libremente [#]_.  
+El :term:`Software Libre` (SL) es aquel que respeta la libertad  de los usuarios sobre su 
+producto adquirido (independientemente si se debe pagar por ello o no) y, por tanto, una 
+vez obtenido puede ser usado, copiado, estudiado, cambiado y redistribuido libremente [#]_.  
 Esto no implica que  el/la autor/a o autores del software
-pierdan los derechos de autoría que son inalienables e imprescriptibles.  
+pierdan los derechos de autoría intelectual que son inalienables e imprescriptibles.  
 
-La definición de software libre [FSFa] fue concebida originalmente por Richard Stallman
-a principio de los años 80, oponiendose a las restricciones que imponía el modelo 
-de software privativo que muchas universidades empezaban a adoptar y a las 
+La definición de SL [FSFa]_ fue concebida originalmente por Richard Stallman
+a principio de los años 80, oponiéndose a las restricciones que imponía el modelo 
+de :term:`software privativo` (SP) que muchas universidades empezaban a adoptar y a las 
 que los :term:`hackers <hacker>` [#]_ no podían aceptar. 
 
 Desde entonces, y en especial con la aparición del sistema operativo :term:`GNU/Linux`, 
-el avance del software libre ha sido arrollador, siendo eslabón escencial 
+el avance del SL ha sido arrollador, siendo eslabón escencial 
 para el funcionamiento de Internet desde sus orígenes hasta nuestros días [#]_, 
-, de los :term:`clusters <cluster>` más poderosos [#]_ y núcleo propulsor
+de los :term:`clusters <cluster>` más poderosos [#]_ y núcleo propulsor
 de los dos sitios más visitados y exitosos a nivel mundial: Google [#]_ [#]_ y Facebook [#]_ .
 
-El software libre excede el aspecto de licenciamiento de software erigiendose en un marco
-de referencia moral, político y legal para la creación de conocimiento en sus diversas formas
-. Inciativas como `Creative Commons <http://creativecommons.org/>` o 
-`Wikipedia <http://wikipedia.org/>` nacieron como extensión conceptual aplicada
+    .. figure:: images/top500so.png
+       :figwidth: 511px
+       :align: left
+        
+       Familia de S.O. de los 500 supercomputadores 
+       más rápidos del múndo. http://www.top500.org
+
+De cierta manera, el SL ha excedido su condición de forma de licenciamiento de software 
+erigiéndose en un marco de referencia moral, político y legal para la creación 
+de conocimiento en sus diversas formas. Iniciativas como `Creative Commons <http://creativecommons.org/>`_ y 
+`Wikipedia <http://wikipedia.org/>`_ nacieron como extensión conceptual aplicada
 a otros tipos de creaciones intelectuales. 
 
-Entre las muchas ventajas asociadas al modelo del software libre como modelo 
-técnicamente viable, económicamente sostenible y socialmente justo ([JMiH2005]), 
-sintéticamente se mencionarán las que justifican que el software desarrollado 
-para este trabajo sea liberado bajo la licencia libre :term:`GPL (General Public License)` [#]_
+Entre las muchas motivos asociadas a que SL sea un modelo 
+técnicamente viable, económicamente sostenible y socialmente justo [JMiH2005]_, 
+sintéticamente se mencionarán los que justifican que el software desarrollado 
+para este trabajo sea liberado bajo la licencia libre :abbr:`GPL (General Public License)` [#]_
 
- ..attention::
+ .. important::
         
-        La liberación se limita al software desarrollado por el autor de este trabajo
-        siendo dependiente del *backend GPEC* que no es libre. 
+        La liberación se limita al software desarrollado por el autor de este trabajo,
+        siendo este dependiente del *backend GPEC* que no es libre. 
         Si bien la utilidad de un sofware libre que depende de otro no libre es parcial,
-        (ver [RMS04]), queda fuera de potestad del autor la determinación
+        (ver [RMS2004]_), queda fuera de la potestad del autor la determinación
         de una liberación total, aunque enfáticamente la promueva.
 
 
@@ -96,19 +107,21 @@ Creación desde la Universidad Pública
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 La formación del autor de este trabajo, así como la de su director y codirector, 
-es fruto de la Universidad Pública Argentina, privilegio al que una ínfima 
-porción de la sociedad accede cuando es ella toda, a través del Estado, quien 
+no obstante el esfuerzo personal, son fruto de la Universidad Pública Argentina, 
+privilegio al que una ínfima  porción de la sociedad accede cuando es ella toda, a través del Estado, quien 
 la sostiene. Más aún, el tiempo dedicado por los docentes para guiar y evaluar
 este trabajo fue sostenido con recursos públicos.
 
 Retribuir los conocimientos adquiridos en la formación universitaria 
 para beneficio del conjunto del pueblo (y por extensión, de la humanidad), 
 es una obligación ética basada en la concepción misma de la universidad pública y gratuita, 
-y declarada en el artículo 2 del Estatuto de la Universidad Nacional de Córdoba ([UNC1]) que 
-enumera dentro de sus fines *"la promoción de la investigación científica, (...) [el]
-libre desarrollo de la cultura, (...) la efectiva integración del hombre en su comunidad, 
-[el] promover la actuación del universitario en el seno del pueblo al que pertenece,
-(...) [y] la difusión del saber superior entre todas las capas de la población"
+y declarada en el artículo 2 del Estatuto de la Universidad Nacional de Córdoba [UNC1]_ que 
+enumera dentro de sus fines:
+
+    la promoción de la investigación científica(...), [el] libre desarrollo de 
+    la cultura, (...) la efectiva integración del hombre en su comunidad, 
+    (...) [el] promover la actuación del universitario en el seno del pueblo al que pertenece,
+    (...) [y] la difusión del saber superior entre todas las capas de la población.
 
 Desarrollo basado en software libre
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -117,7 +130,7 @@ Desarrollo basado en software libre
 
     Los buenos programadores saben qué escribir. Los mejores, que reescribir (y reutilizar)
 
-    -- Eric Raymon, [ER1997]
+    -- Eric Raymon, [ER1997]_
 
 En ninguna disciplina creativa se es absolutamente original. Basarse 
 en las creaciones o ideas previas, que han sido probadas con éxito, 
@@ -127,15 +140,14 @@ Es un precepto que el software libre comparte con la ciencia, expresada en la
 frase atribuía a Isaac Newton: *"Si he visto más lejos es porque 
 me paré sobre hombros de gigantes"* [#]_
 
-Eric Raymon, en su ensayo famoso ensayo *The Cathedral and the Bazaar* ([ER1997])
-, expresa la ventaja desde su experincia como programador: 
+Eric Raymond, en su famoso ensayo *The Cathedral and the Bazaar* [ER1997]_, 
+expresa la ventaja desde su experiencia como programador: 
 
-    Aunque no presumo ser un extraordinario programador, 
-    he tratado siempre de imitar a uno de ellos. Una importante característica de 
-    los grandes programadores es la meticulosidad con la que construyen. 
-    Saben que les pondrán diez no por el esfuerzo, sino por los resultados; 
-    y que casi siempre será más fácil partir de una buena solución parcial 
-    que de cero.
+    Aunque no pretendo ser un gran programador, trato de imitarlos. 
+    Una característica importante de los grandes de verdad es la vagancia constructiva. 
+    Saben que te darán un diez no por tu esfuerzo, sino por los resultados, 
+    y es casi siempre más fácil empezar a partir de una buena solución parcial 
+    que desde la nada más absoluta. 
 
 El lenguaje y las bibliotecas que se usaron para el desarrollo
 de este trabajo son libres [#]_ (ver :ref:`tecnologias`) y ampliamente probadas por 
@@ -143,8 +155,8 @@ numerosas aplicaciones que las utilizan. Además, gran cantidad de ejemplos
 y buenas ideas aplicadas en este trabajo fueron extraídas de código libre 
 disponible en internet.
 
-Sin la existencia de software libre este trabajo hubiera sido muchísimo más 
-costoso, tanto en término de horas de desarrollo como en costo de licencia 
+Sin la existencia de SL este trabajo hubiera sido muchísimo más 
+costoso, tanto en términos de horas de desarrollo como en el costo de licencias 
 de software privativo equivalente al utilizado, y hubiese resultado 
 inalcanzable en el contexto de un proyecto integrador de grado. 
 
@@ -154,12 +166,12 @@ resulta un evidente acto de justicia.
 Necesidad de transparencia en el software científico
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Dan Gezelter, mentor de la iniciativa `Open Science >http://www.openscience.org>`
-resume en [DG09] los objetivos del proyecto:
+Dan Gezelter, mentor de la iniciativa `Open Science <http://www.openscience.org>`_
+resume en [DG09]_ los objetivos del proyecto:
 
-    * Transperencia en metodología experimental, observación y recolección de datos
+    * Transparencia en metodología experimental, observación y recolección de datos
     * Disponibilidad pública y reusabilidad de los datos científicos
-    * Accesibiblidad pública y transparencia de la comunicación científica
+    * Accesibilidad pública y transparencia de la comunicación científica
     * Uso de herramientas basadas en web para facilidad la colaboración científica. 
 
 Sobre el primer punto agrega:
@@ -171,28 +183,27 @@ Sobre el primer punto agrega:
     para llevar a cabo nuestra experimentación. En algunos casos extremos, 
     (por ejemplo, cuando el código de simulación o archivos de parámetros son privativos
     u ocultados por sus dueños), la experimentación numérica ni siquiera es ciencia. 
-    Un diseño experimental "secreto" no permite a los escepticos repetir (y con 
+    Un diseño experimental "secreto" no permite a los escépticos repetir (y con 
     suerte verificar) su experimento y lo mismo ocurre con experimentos numéricos. 
     La ciencia debe ser "verificable en práctica" tanto como "verificable en principio". [#]_
 
-Si bien el software realizado por el autor no implementa los algorimos de cálculos numéricos, 
+Si bien el software realizado por el autor no implementa los algoritmos de cálculos numéricos, 
 es una buena práctica permitir la verificabilidad de que los resultados no se 
 adulteran. 
 
 Calidad del software
 ^^^^^^^^^^^^^^^^^^^^
 
-La libertad de un sofware no garantiza su calidad *per se*, ni mucho menos 
+La libertad de un software no garantiza su calidad *per se*, ni mucho menos 
 la ausencia de errores,  pero aumenta enormemente las posibilidades de alcanzar 
 cotas altas en este aspecto. 
 
-Según Challet y Le Du en [CLD03] para hacer un software de código privativo 
-de igual calidad que su equivalente libre hacen falta muchos más desarrolladores 
-de mucha mayor calidad que para el mismo programa siendo de soft libre. 
-El artículo plantea que en un modelo de software libre la interacción 
-entre los usuarios y los programadores hace que los fallos sean eliminados a 
-una velocidad mucho mayor que la que un grupo de programadores de élite 
-pueden lograr. 
+Según Challet y Le Du en [CLD03]_ para hacer un software de código privativo 
+de igual calidad que su equivalente libre hacen falta más y mejor calificados
+desarrolladores. El artículo plantea, desde un modelo matemático, que en el SL la interacción 
+entre los usuarios y desarrolladores logra que los fallos sean eliminados a 
+una velocidad mucho mayor que la que un grupo de programadores de software privativo de elite 
+puede lograr. 
 
 Esto radica en dos aspectos: la libertad de estudiar el código permite a cualquiera
 encontrar errores en el programa y reportarlos, y la dinámica de "comunidad"
@@ -207,12 +218,12 @@ es que no se puede lucrar con Software Libre, lo cual es falso. Por el contrario
 en muchos escenarios, la adopción de software libre resulta beneficiosa para 
 su maximización. 
 
-Jordi Mas enumera en [JMiH2005] los principales modelos negocio
-que se han puesto en práctica en el software libre con éxito durante los últimos años.
+Jordi Mas enumera en [JMiH2005]_ los principales modelos negocio
+que se han puesto en práctica en el SL con éxito durante los últimos años.
 En particular, es importante destacar el modelo de desarrollo software como 
 servicio. Sobre este modelo mas comenta:
 
-     Empresas que se dedican a la consultoría, desarrollo a medida de
+    (...) [son] empresas que se dedican a la consultoría, desarrollo a medida de
     soluciones, formación y soporte técnico (...)
     Su valor diferencial respecto a las empresas
     tradicionales de servicios son los beneficios que
@@ -224,41 +235,46 @@ servicio. Sobre este modelo mas comenta:
     reconocido como experto en la misma es una buena estrategia. 
 
 Si bien el derecho a realizar modificaciones es concedido a todo el mundo, 
-dentro del universo de personas o empresas capaces de llevarlas a cabo adaptaciones
+dentro del universo de personas o empresas capaces de llevar a cabo adaptaciones
 a medida (situación plausible en un nicho tan específico como
 el de *GPEC*), los autores originales del software se encuentran en una 
-ventaja competitiva obvia. 
+ventaja competitiva obvia.
 
-Por otro lado, en nichos de software específicos, la posibilidad de difusión, y 
-por consiguiente de tener usuarios, que tiene un software son mucho mayores 
-aprovechando la *infraestructura comunicacional* de la que el Software libre goza:
+Por otro lado, en nichos de software específicos y pequeños, la posibilidad de difusión (y 
+en consecuencia de tracción de usuarios) que tiene un software son mucho mayores 
+aprovechando la *infraestructura comunicacional* de la que el SL goza:
 por el mero hecho de ser libre (y resultar mínimamente interesante) se dará 
-publicidad gratuita en numerosos sitios de noticias y foros de internet, puede incluirse en 
-repositorios de software accesible fácilmente desde sistemas operativos libres, 
-y ser encontrables desde sitios de referencia para código libre como `SourceForge <http://sourceforge.net>`
-o `Google Code <http://code.google.com`. 
+publicidad gratuita y, mejor aún, espontánea, en numerosos sitios de noticias y 
+foros de internet, puede incluirse en repositorios de software accesibles 
+fácilmente desde sistemas operativos libres que facilitan la instalación y la prueba, 
+y ser albergado en sitios de referencia para código libre como `SourceForge <http://sourceforge.net>`_
+`GitHub <http://github.com>`_ o `Google Code <http://code.google.com>`_ 
+con cientos de miles de visitas diarias. 
 
- 
+Más y mejores usuarios repercute, como se ha visto, en más calidad y prestigio, 
+que se realimentan en un bucle virtuoso ampliando posibilidades de lucro, 
+fin que está fuera de los alcances de este trabajo por no por ello descartado 
+a futuro. 
+
+    .. seealso::
+        
+            :ref:`lineas_abiertas`
 
 
 
-.. [#]  Web: http://computacion.efn.uncor.edu/Alcances-e-Incumbencias
-
-.. [#]  Salvo las más cercanas, como electrónica y computación, pero en una medida
+.. [#]  Salvo quizás las más cercanas, como electrónica y computación, pero en una medida
         muy inferior a la que podría lograrse. 
 
-.. [#]  Se refiere a las *"4 libertades del software libre"* descriptas en [FSFa]
+.. [#]  Refiere a las cuatro libertades esenciales del software libre descriptas en [FSFa]_
 
 .. [#]  La definición de *hacker* que el común de la gente tiene es incorrecta. 
         Vea el :ref:`glosario <glosario>` para una definición correcta.
 
-.. [#]  Según [JMiH2005], en 2005 el 67% de los servidores web de internet funcionaban
-        con el software `Apache <http://apache.org>`_. En 2010, el 73% 
-        de la web funciona con software libre. 
+.. [#]  En 2010, el 73% de los servidores web funciona con software libre. 
         http://news.netcraft.com/archives/2010/02/22/february_2010_web_server_survey.html
 
 .. [#]  Hasta junio de 2010, el 91% de los 500 supercomputadores más poderosos del mundo
-        funcionan con Linux o derivados. http://www.top500.org/charts/list/35/osfam
+        funcionaban con Linux o derivados. http://www.top500.org/charts/list/35/osfam
 
 .. [#]  Sergey Brin en una entrevista de 2000 cuenta que dentro de Google 
         *"Linux se utiliza en todas partes... en los más de 6.000 servidores así 
@@ -272,20 +288,22 @@ o `Google Code <http://code.google.com`.
 .. [#]  *"Facebook has been developed from the ground up using open source software"*, 
         http://developers.facebook.com/opensource/    
 
-.. [#]  *Licencia pública general versión 3", http://www.spanish-translator-services.com/espanol/t/gnu/gpl-ar.html
+.. [#]  *Licencia pública general versión 3*, http://www.gnu.org/licenses/licenses.html#GPL
 
 .. [#]  Particularmente, sus licencias no exigen que el software producido o derivado 
         deba ser liberado, como sí ocurre con *GPEC* al adoptar una licencia GPL.
 
-.. [#]  Según la bibliografía, la cita parece corresponder a Bernard of Chartres
-        http://en.wikipedia.org/wiki/Standing_on_the_shoulders_of_giants#Attribution_and_meaning
-
+.. [#]  Según `la entrada en Wikipedia <http://en.wikipedia.org/wiki/Standing_on_the_shoulders_of_giants#Attribution_and_meaning>`_
+        la cita corresponde a Bernard of Chartres.
+        
 .. [#]  Traducción del inglés propia del autor del trabajo.
 
 .. [#]  Vea :term:`FUD` en el glosario
 
 
-.. [UNC1]  *Estatuto de la UNC -  Misión de la Universidad*: http://www.unc.edu.ar/institucional/organizacion/estatutos/mision
+
+.. [UNC1]  Universidad Nacional de Córdoba, *Estatuto de la UNC -  Misión de la Universidad*: 
+           http://www.unc.edu.ar/institucional/organizacion/estatutos/mision
 
 
 .. [FSFa] Free Software Foundation, *La definición de Software libre*,  
@@ -293,21 +311,22 @@ o `Google Code <http://code.google.com`.
 
 
 .. [ARR2003]  Rey Roque, Antonio (2003), *Experiencias en el trabajo 
-             Interdisciplinario desde una Disciplina Básica*,
-             Departamento de Matemáticas, Facultad de Informática, Universidad de
-             Cienfuegos “Carlos Rafael Rodríguez”, Cuba
+              Interdisciplinario desde una Disciplina Básica*,
+              Departamento de Matemáticas, Facultad de Informática, Universidad de
+              Cienfuegos “Carlos Rafael Rodríguez”, Cuba
 
 .. [JMiH2005]  Mas i Hernàndez, Jordi  (2005), *Software Libre. Técnicamente viable, 
-               económicamente sostenible y socialmente justo*, infonomia.com (Ed.), Barcelona
+              económicamente sostenible y socialmente justo*, infonomia.com (Ed.), Barcelona
 
 
-.. [ER1997]  Raymon, Eric S (1997),  *The Cathedral and the Bazaar*, Open Source Software Foundation
+.. [ER1997]  Raymon, Eric S (1997),  *The Cathedral and the Bazaar*, Open Source Software Foundation,
+             Traducción al español del Proyecto Lucas, http://es.tldp.org/Otros/catedral-bazar/cathedral-es-paper-00.html
 
-.. [RMS04]  Stallman, Richard M, *Libre pero encadenado. La trampa del Java.*, 
-              :term:`FSF (Free Software Foundation)`, http://www.gnu.org/philosophy/java-trap.es.html
+.. [RMS2004]  Stallman, Richard M (2004), *Libre pero encadenado. La trampa del Java.*, 
+              :abbr:`FSF (Free Software Foundation)`, http://www.gnu.org/philosophy/java-trap.es.html
 
-.. [DG09]   Gezelter, Dan (2009), *What, exactly, is Open Science?*, 
-            http://www.openscience.org/blog/?p=269
+.. [DG09]  Gezelter, Dan (2009), *What, exactly, is Open Science?*, 
+           http://www.openscience.org/blog/?p=269
 
 .. [CLD03]  Challet, D - Le Du, Y (2003) *Microscopic model of software bug dynamics: closed source versus open source*, 
             International Journal of Reliability, Quality and Safety Engineering

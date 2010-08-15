@@ -15,8 +15,12 @@ Estado de desarrollo
 Impacto
 =======
 
+.. _lineas_abiertas:
+
 Lineas de trabajo abiertas
 ==========================
+
+.. _experiencia:
 
 Experiencia de trabajo
 ======================

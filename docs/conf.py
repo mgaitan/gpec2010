@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 #
 # Gpec2 documentation build configuration file, created by
 # sphinx-quickstart on Mon Apr 19 10:59:55 2010.
@@ -41,8 +42,8 @@ master_doc = 'index'
 todo_include_todos = True
 
 # General information about the project.
-project = u'Desarrollo de un software para el cálculo y graficación\
- de diagramas de fase global de sistemas termodinámicos'
+project = u'Software frontend para la graficación\
+ de diagramas globales de fases para sistemas binarios'
 
 copyright = u'2010, Martín Gaitán'
 

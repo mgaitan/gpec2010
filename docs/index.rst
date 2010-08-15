@@ -17,7 +17,7 @@ Contenidos:
     verificacion
     conclusiones
     glosario
-    bibliografia
+
 
 
 Indices y tablas

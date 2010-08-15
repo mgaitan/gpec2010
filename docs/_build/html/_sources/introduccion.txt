@@ -1,3 +1,5 @@
+.. _intro:
+
 *************
 Introducción
 *************
@@ -59,10 +61,19 @@ de usuario que genera datos de entrada con formato comprensible por los algoritm
 y procesa las salidas generando distintos gráficos. Para detalle sobre esta arquitectura
 puede ver :ref:`frontend_backend`.
 
+.. note::
+    
+        Estrictamente, *GPEC* es el software backend; el desarrollo original de Cismondi, 
+        un conjunto de programas de línea de comando. 
+        Con el advenimiento de la interfaz gráfica *Visual Gpec*, se comenzó a 
+        llamar *GPEC* al conjunto de software, y es, salvo
+        aclaración explícita, a la asepción que tiene en este libro. 
+
+
 Motivación
 ==========
 
-GPEC [#]_ es un software que goza de cierta popularidad en el ambiente científico- 
+GPEC  es un software que goza de cierta popularidad en el ambiente científico- 
 académico e industrial. La última versión previa a este trabajo fue descargada
 XXXX veces [#]_ de numerosos puntos geográficos. 
 
@@ -107,13 +118,11 @@ También es útil como herramienta educativa, donde los estudiantes consolidan
 conceptos teóricos y manipulan curvas que, por razones obvias, son estáticas 
 en los libros. 
 
-..
+Alcance
+=======
 
-    Alcance
-    =======
-
-    El alcance de este trabajo es el rediseño y e implementación de un nuevo 
-    *Visual Gpec*. Para más detalles puede ver :ref:`justificacion_diseno`.
+El alcance de este trabajo es el rediseño y la implementación de un nuevo 
+*Visual Gpec*. Para más detalles puede ver :ref:`justificacion_diseno`.
 
 
 Objetivos
@@ -135,12 +144,12 @@ Objetivos específicos
 
 Los objetivos específicos del proyecto son:
 
-* Estudiar y documentar la versión preexistente del software
+* Estudiar y documentar la versión preexistente del software. Vea :ref:`relevamiento`.
 
 * Dilucidar fallas de diseño desde el punto de vista del usuarios
-  e idear sus soluciones para incluirlas como nuevos requerimientos
+  e idear sus soluciones para incluirlas como nuevos requerimientos.
 
-* Relevar nuevos requerimientos del grupo cliente
+* Relevar nuevos requerimientos.
 
 * Investigar metodologías, procedimientos y paradigmas del desarrollo de software
   y justificar las adoptadas para este proyecto
@@ -149,12 +158,14 @@ Los objetivos específicos del proyecto son:
   etc) y justificar las adoptadas. 
 
 * Codificar y documentar el software de manera que satisfaga el conjunto
-  de requerimientos planteados
+  de requerimientos planteados.
 
-* Verificar y validar la implementación
+* Verificar y validar la implementación. 
 
 
-
+    .. seealso::
+            
+        :ref:`requerimientos`
 
 
 .. [#] Web: http://gpec.efn.uncor.edu
@@ -173,7 +184,4 @@ Los objetivos específicos del proyecto son:
 
 .. [#] Según estadísticas del sitio web de GPEC
 
-.. [#] Si bien el equipo de desarrollo denomina *GPEC* al backend específicamente 
-       (el desarrollo original), a lo largo de este trabajo el termino se refiere
-       al conjunto de software. 
 

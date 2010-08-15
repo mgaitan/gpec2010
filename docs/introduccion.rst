@@ -118,13 +118,11 @@ También es útil como herramienta educativa, donde los estudiantes consolidan
 conceptos teóricos y manipulan curvas que, por razones obvias, son estáticas 
 en los libros. 
 
-..
+Alcance
+=======
 
-    Alcance
-    =======
-
-    El alcance de este trabajo es el rediseño y e implementación de un nuevo 
-    *Visual Gpec*. Para más detalles puede ver :ref:`justificacion_diseno`.
+El alcance de este trabajo es el rediseño y la implementación de un nuevo 
+*Visual Gpec*. Para más detalles puede ver :ref:`justificacion_diseno`.
 
 
 Objetivos
