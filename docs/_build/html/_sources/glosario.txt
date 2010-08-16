@@ -48,6 +48,18 @@ Computación
                      http://www.cs.berkeley.edu/~bh/hacker.html
 
 
+    GUI
+        pass
+
+    
+
+    pseudocódigo
+        Descripción de alto nivel de un algoritmo que emplea una mezcla de lenguaje natural
+        con algunas convenciones sintácticas propias de lenguajes de programación, 
+        como asignaciones, ciclos y condicionales. 
+        Es utilizado para describir algoritmos en libros y publicaciones científicas, 
+        y como producto intermedio durante el desarrollo de un algoritmo.
+
     GNU/Linux
         Combinación del núcleo o kernel libre Linux, que es usado con herramientas de sistema GNU
         para configurar un sistema operativo completo y multipropósito. 

@@ -8,28 +8,28 @@ Trabajo interdisciplinario
 ===========================
 
 Como se describe en la :ref:`introducción <intro>`, la computación ha revolucionado
-todas las áreas de la cultura y la investigación moderna, incluyendo, por supuesto
+todas las áreas de la cultura y la investigación moderna, incluyendo, por supuesto,
 a la ingeniería en todas sus formas. 
 
-Puede decirse que la ingeniería en computación (completada con la ingeniería en sistemas) 
+Puede decirse que la ingeniería en computación (complementada con la ingeniería en sistemas) 
 se ha constituido en una *meta ingeniería* requerida por todas las demás áreas. 
-Por poner un ejemplo, es aceptable pensar que, en general, un ingeniero en computación puede 
+Es aceptable pensar que, en general, un ingeniero en computación puede 
 desenvolverse  profesionalmente sin conocimientos de termodinámica, pero un ingeniero químico o mecánico
 avocado a esa área tendrá dificultades para progresar si no tiene cierta destreza
 en programación y sistemas de información. 
 
 No obstante, cuando se quieren alcanzar objetivos
 más altos a nivel de software, la capacidad y formación media en un profesional
-de otra área se vuelve escasa: el desarrollo de software es una ingeniería por sí misma
+de otra área se vuelve escasa: el desarrollo de software es una ingeniería por sí misma,
 que va mucho más allá de la destreza en programación. 
 
 Es saludable entonces que profesionales idóneos sean los encargados de ese 
-aspecto específico del proyecto, interactuando y consultando cuestiones específicas
-del ámbito de aplicación, aportando ideas, desarrollando una acabada *ingeniería de requerimientos*, 
+aspecto específico del proyecto, interactuando y consultando cuestiones que conciernen
+al ámbito de aplicación, aportando ideas, desarrollando una acabada *ingeniería de requerimientos* 
 y explicando de manera didáctica cuando estos exceden o complejizan innecesariamente
 la implementación. 
 
-Por otro lado, desde contexto académico y de investigación, en la :abbr:`FCEFyN` 
+Por otro lado, desde el contexto académico y de investigación, en la :abbr:`FCEFyN` 
 no existe una notoria sinergia entre las  distintas disciplinas [#]_, cuyas ventajas
 expone el magíster Antonio Rey Roque en [ARR2003]_:
 
@@ -46,8 +46,8 @@ expone el magíster Antonio Rey Roque en [ARR2003]_:
     profesionales del trabajo en equipo. El resultado del aprendizaje en tal escenario es un saber más
     coherente, se logra mayor capacidad para enfrentar problemas.
 
-Desde ambas puntos de vista, estas han sido las ideas que, desde el principio,
-guiaron este proyecto. Como se verá en :ref:`experiencia` el resultado fue altamente 
+Desde ambos puntos de vista, estas han sido las ideas que, desde el principio,
+guiaron este proyecto. Como se verá en :ref:`experiencia`, el resultado fue altamente 
 satisfactorio. 
 
 
@@ -56,15 +56,15 @@ Software libre
 
 
 El :term:`Software Libre` (SL) es aquel que respeta la libertad  de los usuarios sobre su 
-producto adquirido (independientemente si se debe pagar por ello o no) y, por tanto, una 
+producto adquirido (independientemente de si se debe pagar por ello o no) y, por lo tanto, una 
 vez obtenido puede ser usado, copiado, estudiado, cambiado y redistribuido libremente [#]_.  
-Esto no implica que  el/la autor/a o autores del software
+Esto no implica que el/la autor/a o autores del software
 pierdan los derechos de autoría intelectual que son inalienables e imprescriptibles.  
 
 La definición de SL [FSFa]_ fue concebida originalmente por Richard Stallman
 a principio de los años 80, oponiéndose a las restricciones que imponía el modelo 
-de :term:`software privativo` (SP) que muchas universidades empezaban a adoptar y a las 
-que los :term:`hackers <hacker>` [#]_ no podían aceptar. 
+de :term:`software privativo` (SP) que muchas universidades empezaban a adoptar y que 
+los :term:`hackers <hacker>` [#]_ no podían aceptar. 
 
 Desde entonces, y en especial con la aparición del sistema operativo :term:`GNU/Linux`, 
 el avance del SL ha sido arrollador, siendo eslabón escencial 
@@ -73,9 +73,8 @@ de los :term:`clusters <cluster>` más poderosos [#]_ y núcleo propulsor
 de los dos sitios más visitados y exitosos a nivel mundial: Google [#]_ [#]_ y Facebook [#]_ .
 
     .. figure:: images/top500so.png
-       :figwidth: 511px
-       :align: left
-        
+       :figwidth: 50 %
+
        Familia de S.O. de los 500 supercomputadores 
        más rápidos del múndo. http://www.top500.org
 
@@ -85,7 +84,7 @@ de conocimiento en sus diversas formas. Iniciativas como `Creative Commons <http
 `Wikipedia <http://wikipedia.org/>`_ nacieron como extensión conceptual aplicada
 a otros tipos de creaciones intelectuales. 
 
-Entre las muchas motivos asociadas a que SL sea un modelo 
+Entre las muchos motivos que hacen al SL un modelo 
 técnicamente viable, económicamente sostenible y socialmente justo [JMiH2005]_, 
 sintéticamente se mencionarán los que justifican que el software desarrollado 
 para este trabajo sea liberado bajo la licencia libre :abbr:`GPL (General Public License)` [#]_
@@ -110,7 +109,7 @@ La formación del autor de este trabajo, así como la de su director y codirecto
 no obstante el esfuerzo personal, son fruto de la Universidad Pública Argentina, 
 privilegio al que una ínfima  porción de la sociedad accede cuando es ella toda, a través del Estado, quien 
 la sostiene. Más aún, el tiempo dedicado por los docentes para guiar y evaluar
-este trabajo fue sostenido con recursos públicos.
+este trabajo fue sostenido con recursos públicos [#]_.
 
 Retribuir los conocimientos adquiridos en la formación universitaria 
 para beneficio del conjunto del pueblo (y por extensión, de la humanidad), 
@@ -167,7 +166,7 @@ Necesidad de transparencia en el software científico
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Dan Gezelter, mentor de la iniciativa `Open Science <http://www.openscience.org>`_
-resume en [DG09]_ los objetivos del proyecto:
+resume en [DG2009]_ los objetivos del proyecto:
 
     * Transparencia en metodología experimental, observación y recolección de datos
     * Disponibilidad pública y reusabilidad de los datos científicos
@@ -290,6 +289,11 @@ a futuro.
 
 .. [#]  *Licencia pública general versión 3*, http://www.gnu.org/licenses/licenses.html#GPL
 
+.. [#]  Por supuesto, habiendo podido dedicar su tiempo a otras labores, 
+        los docentes aceptaron dirigir este trabajo voluntariamente, 
+        actitud por la que vale reiterar el agradecimiento del autor.
+        
+
 .. [#]  Particularmente, sus licencias no exigen que el software producido o derivado 
         deba ser liberado, como sí ocurre con *GPEC* al adoptar una licencia GPL.
 
@@ -306,8 +310,8 @@ a futuro.
            http://www.unc.edu.ar/institucional/organizacion/estatutos/mision
 
 
-.. [FSFa] Free Software Foundation, *La definición de Software libre*,  
-          http://www.gnu.org/philosophy/free-sw.es.html
+.. [FSFa]  Free Software Foundation, *La definición de Software libre*,  
+           http://www.gnu.org/philosophy/free-sw.es.html
 
 
 .. [ARR2003]  Rey Roque, Antonio (2003), *Experiencias en el trabajo 
@@ -316,7 +320,7 @@ a futuro.
               Cienfuegos “Carlos Rafael Rodríguez”, Cuba
 
 .. [JMiH2005]  Mas i Hernàndez, Jordi  (2005), *Software Libre. Técnicamente viable, 
-              económicamente sostenible y socialmente justo*, infonomia.com (Ed.), Barcelona
+               económicamente sostenible y socialmente justo*, infonomia.com (Ed.), Barcelona
 
 
 .. [ER1997]  Raymon, Eric S (1997),  *The Cathedral and the Bazaar*, Open Source Software Foundation,
@@ -325,8 +329,8 @@ a futuro.
 .. [RMS2004]  Stallman, Richard M (2004), *Libre pero encadenado. La trampa del Java.*, 
               :abbr:`FSF (Free Software Foundation)`, http://www.gnu.org/philosophy/java-trap.es.html
 
-.. [DG09]  Gezelter, Dan (2009), *What, exactly, is Open Science?*, 
+.. [DG2009]  Gezelter, Dan (2009), *What, exactly, is Open Science?*, 
            http://www.openscience.org/blog/?p=269
 
-.. [CLD03]  Challet, D - Le Du, Y (2003) *Microscopic model of software bug dynamics: closed source versus open source*, 
+.. [CLD03]  Challet, D - Le Du, Y (2003), *Microscopic model of software bug dynamics: closed source versus open source*, 
             International Journal of Reliability, Quality and Safety Engineering
