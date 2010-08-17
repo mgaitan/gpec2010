@@ -87,18 +87,14 @@ Python
             del software, de manera que un mismo programa puede ser ejecutado en 
             diferentes plataformas. 
 
-        interactivo
-            Python incluye un modo interactivo, al estilo Matlab 
-
-
+     
 Un sencillo programa *"Hola Mundo"* [#]_ en Python se ve así::
 
     print "¡Hola Mundo!"
 
-
 Además, la mayoría de sus implementaciones [#]_, permiten ejecutar código en  
-modo interactivo al estilo de softwares como Matlab® u *Octave*, 
-de manera que las expresiones pueden ser introducidas una a una, pudiendo verse el resultado 
+modo interactivo al estilo Matlab® u *Octave*, 
+de manera que las expresiones pueden ser introducidas una a una y ver el resultado 
 de su evaluación inmediatamente::
 
     >>> 1+1
@@ -470,7 +466,7 @@ Sphinx
              una traducción al español disponible en http://www.gulic.org/almacen/diveintopython-5.4-es/
             
 .. [WIKIPEDIA1]  Contribuidores varios, *Polymorphism in object-oriented programming*, 
-                 Wikipedia, The Free Encyclopedia, visto el 16 de agosto de 20010, 
+                 Wikipedia, The Free Encyclopedia, visto el 16 de agosto de 2010, 
                  http://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming
 
 .. [HPL2004]  Langtangen, Hans P (2004), *Python Scripting for Computational Science*, 
