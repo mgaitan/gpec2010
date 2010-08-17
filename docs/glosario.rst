@@ -52,7 +52,17 @@ Computación
     GUI
         pass
 
+    herencia
+        pass
     
+    polimorfismo
+        pass
+
+    vector
+        pass
+
+    wrapper
+        pass
 
     pseudocódigo
         Descripción de alto nivel de un algoritmo que emplea una mezcla de lenguaje natural
@@ -72,7 +82,6 @@ Computación
         de ciencias sociales y problemas de ingeniería. 
         Típicamente es la aplicación de modelado numérico y otras formas de 
         cálculo de problemas en varias disciplinas científicas.
-
 
 
     `FUD`

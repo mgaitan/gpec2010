@@ -63,7 +63,8 @@ y evaluado por profesionales o interesados de/en las distintas áreas de incumbe
 <p>Dado que no necesariamente se tiene un conocimiento
 sólido fuera de la especifidad de la profesión, en este capitulo se presentarán
 conceptos generales (que no pretenten exhautividad pero sí precisión) de las dos áreas,
-útiles para la comprensión de este trabajo. Para definiciónes de términos puntuales, consulte el <a class="reference internal" href="glosario.html#glosario"><em>glosario</em></a>.</p>
+útiles para la comprensión de este trabajo. Para definiciónes de términos puntuales,
+consulte el <a class="reference internal" href="glosario.html#glosario"><em>glosario</em></a>.</p>
 <div class="section" id="conceptos-de-diagramas-de-fases-en-termodin-mica">
 <h2>2.1. Conceptos de diagramas de fases en termodinámica<a class="headerlink" href="#conceptos-de-diagramas-de-fases-en-termodin-mica" title="Enlazar permanentemente con este título">¶</a></h2>
 </div>
@@ -100,8 +101,7 @@ conceptos generales (que no pretenten exhautividad pero sí precisión) de las d
 <div class="section" id="python">
 <h3>2.5.1. Python<a class="headerlink" href="#python" title="Enlazar permanentemente con este título">¶</a></h3>
 <p><a class="reference external" href="http://python.org">Python</a> es un avanzado lenguaje de programación de alto nivel,
-<a class="reference internal" href="#term-interpretado"><em class="xref std std-term">interpretado</em></a>, <a class="reference internal" href="#term-multiparadigma"><em class="xref std std-term">multiparadigma</em></a> y <a class="reference internal" href="#term-multiplataforma"><em class="xref std std-term">multiplataforma</em></a>. Además,
-la mayoría de sus implementaciones <a class="footnote-reference" href="#id15" id="id2">[1]</a>, permiten ejecutar código de manera <a class="reference internal" href="#term-interactivo"><em class="xref std std-term">interactiva</em></a>.</p>
+<a class="reference internal" href="#term-interpretado"><em class="xref std std-term">interpretado</em></a>, <a class="reference internal" href="#term-multiparadigma"><em class="xref std std-term">multiparadigma</em></a> y <a class="reference internal" href="#term-multiplataforma"><em class="xref std std-term">multiplataforma</em></a>.</p>
 <blockquote>
 <dl class="glossary docutils">
 <dt id="term-interpretado">interpretado</dt>
@@ -124,23 +124,31 @@ código y funcionalidades de alto nivel. Esto permite una altísima portabilidad
 del software, de manera que un mismo programa puede ser ejecutado en
 diferentes plataformas.</dd>
 <dt id="term-interactivo">interactivo</dt>
-<dd>Python incluye un modo interactivo, al estilo Matlab de manera que las
-expresiones pueden ser introducidas una a una, pudiendo verse el resultado
-de su evaluación inmediatamente. Esto resulta útil tanto para los principiantes
-que se están familiarizando con el lenguaje como para los programadores avanzados:
-se pueden probar porciones de código en el modo interactivo antes
-de integrarlo como parte de un programa.</dd>
+<dd>Python incluye un modo interactivo, al estilo Matlab</dd>
 </dl>
 </blockquote>
-<p>Un sencillo programa <em>&#8220;Hola Mundo&#8221;</em> <a class="footnote-reference" href="#id16" id="id3">[2]</a> en Python se ve así:</p>
+<p>Un sencillo programa <em>&#8220;Hola Mundo&#8221;</em> <a class="footnote-reference" href="#id23" id="id2">[1]</a> en Python se ve así:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="s">&quot;¡Hola Mundo!&quot;</span>
 </pre></div>
 </div>
-<p>Por diseño <a class="footnote-reference" href="#id17" id="id4">[3]</a>, Python tiene sintaxis muy clara que facilita la legibilidad del código.
+<p>Además, la mayoría de sus implementaciones <a class="footnote-reference" href="#id24" id="id3">[2]</a>, permiten ejecutar código en
+modo interactivo al estilo de softwares como Matlab® u <em>Octave</em>,
+de manera que las expresiones pueden ser introducidas una a una, pudiendo verse el resultado
+de su evaluación inmediatamente:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mf">1</span><span class="o">+</span><span class="mf">1</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mf">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">a</span>
+<span class="go">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+</pre></div>
+</div>
+<p>Esto resulta útil tanto para los principiantes que se están familiarizando con el lenguaje
+como para los programadores avanzados: se pueden probar porciones de código en el modo interactivo antes
+de integrarlo como parte de un programa.</p>
+<p>Por diseño <a class="footnote-reference" href="#id25" id="id4">[3]</a>, Python tiene sintaxis muy clara que facilita la legibilidad del código.
 Esta característica es la razón por la que Guido van Rossum, su creador,
-lo compara con &#8220;<a class="reference internal" href="glosario.html#term-pseudoc-digo"><em class="xref std std-term">pseudocódigo</em></a> ejecutable&#8221; <a class="footnote-reference" href="#id18" id="id5">[4]</a>.</p>
-<p>El siguiente programa aplica conceptos de programación orientada  a objetos
-como herencia y polimorfismo:</p>
+lo compara con &#8220;<a class="reference internal" href="glosario.html#term-pseudoc-digo"><em class="xref std std-term">pseudocódigo</em></a> ejecutable&#8221; <a class="footnote-reference" href="#id26" id="id5">[4]</a>. El siguiente programa
+aplica conceptos de programación orientada  a objetos como <a class="reference internal" href="glosario.html#term-herencia"><em class="xref std std-term">herencia</em></a> y <a class="reference internal" href="glosario.html#term-polimorfismo"><em class="xref std std-term">polimorfismo</em></a>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Superclase que define un constructor común y</span>
 <span class="sd">        un método abstracto&quot;&quot;&quot;</span>
@@ -176,10 +184,11 @@ como herencia y polimorfismo:</p>
 <p>Puede ver el artículo <a class="reference internal" href="#wikipedia1">[WIKIPEDIA1]</a> para una comparación (en particular la extensión y legibilidad)
 de código equivalente en otros lenguajes de programación.</p>
 <blockquote>
-<p>... seealso:</p>
-<div class="highlight-python"><pre>Dar una introducción completa a las capacidades de Python como lenguaje
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">Dar una introducción completa a las capacidades de Python como lenguaje
 de programación quedan fuera de los alcances de este trabajo. Para
-ampliar los conceptos aquí vertidos puede ver [TUT-PSF] y [MP2001].</pre>
+ampliar los conceptos aquí vertidos puede ver <a class="reference internal" href="#tut-psf">[TUT-PSF]</a> y <a class="reference internal" href="#mp2001">[MP2001]</a>.</p>
 </div>
 </blockquote>
 <p>En Python el <strong>tipado de datos es dinámico</strong> (al igual que la asignación de memoria),
@@ -198,12 +207,12 @@ como protocolos de internet, funciones matemáticas, manejo de hilos y multiproc
 pruebas unitarias y abstracción de llamadas al sistemas operativo subyacente, entre
 muchas otras.</p>
 <p>Además de la incorporada, puede interfacear con diversas bibliotecas, por ejemplo
-para para desarrollar interfaces gráficas de usuario (<a class="reference internal" href="glosario.html#term-gui"><em class="xref std std-term">GUI</em></a>), y
+para desarrollar interfaces gráficas de usuario (<a class="reference internal" href="glosario.html#term-gui"><em class="xref std std-term">GUI</em></a>) (ver <em class="xref std std-ref">wxpython</em>), y
 a la vez es extensible en C o C++.</p>
 <p>Esta facilidad de integración permite que frecuentemente sea utilizado
 como <em>&#8220;lenguaje pegamento&#8221;</em> (ver <a class="reference internal" href="#gvr1998">[GvR1998]</a> ) para interconectar código que
-por razones históricas, de performance o arquitectura están desarrolladas
-en otro lenguaje de más bajo nivel.</p>
+por razones de diseño, de performance o históricas están desarrolladas
+en otro lenguaje de más bajo nivel, permitiendo aprovechar las ventajas de Python.</p>
 <p>Python ha ganado popularidad no sólo entre programadores aficionados
 sino en el mercado altamente competitivo de la industria del software. Como
 plantea Shannon Behrens en el prólogo de <a class="reference internal" href="#tz2008">[TZ2008]</a>:</p>
@@ -211,7 +220,7 @@ plantea Shannon Behrens en el prólogo de <a class="reference internal" href="#t
 Hubo un tiempo en el que las compañías me llamaban loco cuando insistía en usar Python.
 En estos días, simplemente no hay suficientes programadores Python para todos.
 Grandes empresas como Google, YouTube, VMware y DreamWorks están en una lucha
-constante para contratar todo buen talento Python que puedan encontrar. <a class="footnote-reference" href="#id20" id="id9">[5]</a></blockquote>
+constante para contratar todo buen talento Python que puedan encontrar. <a class="footnote-reference" href="#id28" id="id11">[5]</a></blockquote>
 <div class="section" id="python-en-el-software-cient-fico">
 <h4>2.5.1.1. Python en el software científico<a class="headerlink" href="#python-en-el-software-cient-fico" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Como se afirma en <a class="reference internal" href="#jh-fp">[JH-FP]</a> en la sección <em>Who is using Python?</em>, el uso de
@@ -237,8 +246,8 @@ para la exploración de petroleo.</p>
 <blockquote>
 <div class="admonition-ver-tambi-n admonition seealso">
 <p class="first admonition-title">Ver también</p>
-<p class="last">Muchos otros casos de éxito son detallados en los dos volúmenes
-<em>Python Success Stories</em> de la editorial O&#8217;Reilly&#8217;s <a class="footnote-reference" href="#id21" id="id11">[6]</a> y en
+<p class="last">Muchos otros casos de éxito son detallados en el texto mencionado, en
+los dos volúmenes de <em>Python Success Stories</em> de la editorial O&#8217;Reilly&#8217;s <a class="footnote-reference" href="#id29" id="id13">[6]</a> y en
 <a class="reference external" href="http://python.org/about/success/">http://python.org/about/success/</a></p>
 </div>
 </blockquote>
@@ -247,25 +256,27 @@ para la exploración de petroleo.</p>
 </div>
 </div>
 <div class="section" id="numpy">
-<h3>2.5.2. Numpy<a class="headerlink" href="#numpy" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>2.5.2. NumPy<a class="headerlink" href="#numpy" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Los tipos de datos incorporados con Python nativamente para contener otros tipos
-de objetos (en particular listas y tuplas), son muy eficientes pero
-están diseñados para ser multipropósito. Estos &#8220;contenedores&#8221; pueden tener cualquier
+de datos u objetos (en particular listas y tuplas), son muy eficientes pero
+están diseñados para ser multipropósito. Estos &#8220;contenedores&#8221; pueden albergar cualquier
 tipo de objeto (incluso una mezcla de ellos) y las listas, en particular, pueden mutar
 (agregar, modificar o borrar elementos) dinámicamente.</p>
-<p>Es decir, que si bien pueden usarse listas o tuplas como un <em class="xref std std-term">vector</em> de datos, no están
+<p>Es decir, que si bien pueden usarse listas o tuplas como un <a class="reference internal" href="glosario.html#term-vector"><em class="xref std std-term">vector</em></a> de datos, no están
 especialmente concebidas para tal fin.</p>
 <blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
 <p class="last">Los siguientes párrafos descriptivos han sido tomados, en modo
-de paráfrasis y traducido por el autor, de <a class="reference internal" href="#numpy-ug">[NUMPY-UG]</a>.</p>
+de paráfrasis y traducido por el autor, del capitulo <em>What is NumPy?</em> de
+<a class="reference internal" href="#numpy-ug">[NumPy-UG]</a>.</p>
 </div>
 </blockquote>
-<p><a class="reference external" href="http://numpy.org">Numpy</a> es una biblioteca que extiende Python para suplir
-este aspecto, proveyendo un tipo de objeto vector multidimensional y varios objetos derivados (como vectores enmascarados o matrices),
+<p><a class="reference external" href="http://numpy.org">NumPy</a> es una biblioteca que extiende Python para complementar
+este aspecto, proveyendo un tipo de objeto vector multidimensional (<tt class="docutils literal"><span class="pre">narray</span></tt>) y
+varios objetos derivados (como vectores enmascarados o matrices),
 además de rutinas optimizadas para la operación sobre estos vectores, incluyendo
-operaciones matemáticas y lógicas, manipulación de las dimensiones, álgebra lineal,
+operaciones matemáticas y lógicas, manipulación de dimensiones, álgebra lineal,
 operaciones estadísticas básicas, simulación aleatoria, etc.</p>
 <p>Considere el código siguiente que dado dos secuencias unidimensionales <tt class="docutils literal"><span class="pre">a</span></tt> y <tt class="docutils literal"><span class="pre">b</span></tt> de igual
 longitud y con todos sus elementos numéricos, multiplica elemento por elemento
@@ -276,16 +287,16 @@ y dispone el resultado en una nueva lista <tt class="docutils literal"><span cla
 </pre></div>
 </div>
 <p>El resultado será correcto, pero considerando que las secuencias <tt class="docutils literal"><span class="pre">a</span></tt> y <tt class="docutils literal"><span class="pre">b</span></tt>
-pueden contener millones de números, se pagará el precio de la iteración ineficiente.</p>
-<p>Esta operación, siendo <tt class="docutils literal"><span class="pre">a</span></tt> y <tt class="docutils literal"><span class="pre">b</span></tt> objetos <em>ndarray</em> de numpy, resultaría en:</p>
+pueden tener millones de elementos, se pagará el precio de una iteración ineficiente.</p>
+<p>Esta operación, siendo <tt class="docutils literal"><span class="pre">a</span></tt> y <tt class="docutils literal"><span class="pre">b</span></tt> objetos <em>ndarray</em> de NumPy, resultaría en:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
 </pre></div>
 </div>
 <p>Dicho código funcionaría siempre que <tt class="docutils literal"><span class="pre">a</span></tt> y <tt class="docutils literal"><span class="pre">b</span></tt> tengan las mismas dimensiones,
 independientemente que sean uni o multidimensionales.</p>
-<p>El ejemplo ilustra dos características de Numpy que son gran parte de las bases
+<p>El ejemplo ilustra dos características de NumPy que son gran parte de las bases
 de su poder: <em>vectorización</em> y <em>broadcasting</em></p>
-<p>La vectorización describe la ausencia de iteraciones explícitas e indización
+<p>La <em>vectorización</em> describe la ausencia de iteraciones explícitas e indización
 (que toman lugar, por supuesto, &#8220;detrás de escena&#8221;, en un optimizado y precompilado
 código C). La vectorización tiene muchas ventajas:</p>
 <blockquote>
@@ -293,16 +304,125 @@ código C). La vectorización tiene muchas ventajas:</p>
 <li>El código vectorizado es más conciso y fácil de leer.</li>
 <li>Menos líneas de código habitualmente implican menos errores.</li>
 <li>El código se parece más a la notación matemática estándar (por lo que es más fácil,
-por lo general, el código correctamente construcciones matemáticas</li>
-<li>La vectorización redunda en un código más &#8220;pythónico&#8221; <a class="footnote-reference" href="#id22" id="id14">[7]</a></li>
+por lo general, corregir código asociado a construcciones matemáticas</li>
+<li>La vectorización redunda en un código más &#8220;pythónico&#8221; <a class="footnote-reference" href="#id30" id="id16">[7]</a></li>
 </ul>
 </blockquote>
+<p>El <em>broadcasting</em> o <em>difusión</em> es el término que describe el comportamiento
+elemento &#8220;elemento por elemento&#8221; de las operaciones. En general, en NumPy todas
+las operaciones adoptan por defecto un comportamiento de este tipo (no sólo las operaciones
+aritméticas sino las lógicas, las funcionales y las de nivel de bits).</p>
 </div>
 <div class="section" id="matplotlib">
 <h3>2.5.3. Matplotlib<a class="headerlink" href="#matplotlib" title="Enlazar permanentemente con este título">¶</a></h3>
+<p><a class="reference external" href="http://matplotlib.sourceforge.net/">Matplotlib</a> es una biblioteca para Python,
+liberada como software libre, que permite la generación de diferentes tipos de gráficos en 2D y 3D con calidad
+de publicación. Se pueden generar gráficos cartesianos, polares, de barras,
+histogramas, de superficie, etc.</p>
+<blockquote>
+<div class="figure">
+<img alt="_images/matplotlib_examples.png" src="_images/matplotlib_examples.png" />
+<p class="caption">Ejemplos de gráficos logrados con Matplotlib</p>
+</div>
+</blockquote>
+<p>Aunque tiene su origen en la emulación de los comandos gráficos de Matlab® ,
+es totalamente independiente y puede usarse de una manera pythónica y orientada
+a objetos. Está principalmente escrito en Python, aunque se basa fuertemente
+en NumPy y otras extensiones para proveer buena performance incluso con
+arreglos grandes.</p>
+<p>Sin bien existen otras bibliotecas libres con prestaciones similares <a class="footnote-reference" href="#id33" id="id18">[8]</a>, Matplotlib
+se destaca por las siguientes características:</p>
+<blockquote>
+<ul class="simple">
+<li>Cuenta con una extensa y clara documentación (ver <a class="reference internal" href="#mpldoc">[MPLDOC]</a>)</li>
+<li>Es orientado a objetos: se puede heredar, extender y sobrecargar cada tipo de objeto
+que define</li>
+<li>La calidad de los gráficos es excepcional, permitiendo la exportación
+a muchos formatos gráficos, incluyendo <abbr title="PostScript">PS</abbr> y
+<abbr title="Scalable Vector Graphic">SVG</abbr></li>
+<li>Es empotrable dentro de las bibliotecas para <a class="reference internal" href="glosario.html#term-gui"><em class="xref std std-term">GUI</em></a> más utilizadas
+permitiendo realizar aplicaciones de escritorio sin la funcionalidades.</li>
+<li>Incorpora muchos paquetes que extienden las posibilidades: el
+muy logrado paquete para graficación 3D, graficación sobre mapas geográficos,
+utilidades para la interacción con Microsoft Excel®, etc.</li>
+</ul>
+</blockquote>
 </div>
 <div class="section" id="wxpython">
-<h3>2.5.4. WxPython<a class="headerlink" href="#wxpython" title="Enlazar permanentemente con este título">¶</a></h3>
+<span id="id20"></span><h3>2.5.4. WxPython<a class="headerlink" href="#wxpython" title="Enlazar permanentemente con este título">¶</a></h3>
+<p><a class="reference external" href="http://www.wxwindows.org/">wxWidgets</a> es una biblioteca en C++ que permite
+desarrollar interfaces gráficas para aplicaciones multiplataforma que corren
+en Microsoft Windows, OS X, GNU/Linux o UNIX de 32 o 64 bits.</p>
+<p><a class="reference external" href="http://www.wxpython.org/">wxPython</a> es un <a class="reference internal" href="glosario.html#term-wrapper"><em class="xref std std-term">wrapper</em></a> de la biblioteca wxWidgets
+para el lenguaje de programación Python. Junto a Python permite el desarrollo
+rápido de aplicaciones gráficas de escritorio multiplataforma.</p>
+<p>Una de las características sobresalientes de wxWidgets es su uso nativo de
+las API gráficas de cada entorno de ventanas, brindando una apariencia y experiencia
+de uso nativa para cada ambiente. Esto significa la misma aplicación, sin modificaciones
+(al menos significativas), adopta las características gráficas definidas por el
+usuario en el entorno de escritorio. En concreto: se ve como <em>una aplicación Windows</em>
+si se corre en Windows®, como una <em>aplicación GNOME</em> si se corre sobre el gestor
+de escritorio GNOME en Linux, y como una aplicación OS/X en platafomas Mac:</p>
+<blockquote>
+<div class="figure">
+<img alt="_images/wxpython_example.png" src="_images/wxpython_example.png" />
+<p class="caption">El mismo programa wxPython ejecutado en Windows, Linux y Mac</p>
+</div>
+</blockquote>
+<p>La guia <a class="reference internal" href="#nr-rd2006">[NR-RD2006]</a> escrita por dos de los desarrolladores de la biblioteca
+es un material de refencia obligado para el desarrollo con wxPython.
+Allí se exponen como características relevantes es la orientación
+a objetos y la orientación a eventos.</p>
+<blockquote>
+<div class="admonition attention">
+<p class="first admonition-title">Atención</p>
+<p class="last">En la bibliografía de wxPython se denomina <em>window</em> a cualquier elemento
+gráfico que ocupa espacio visual y puede ser contenido por otro. Lo que
+comunmente se denomina <em>window</em> (ventana) en otros escenarios, en wxPython
+es un <em>frame</em>, es decir, una ventana de programa.</p>
+</div>
+</blockquote>
+<p>Se expondrán estos conceptos con un ejemplo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">wx</span>
+
+<span class="k">class</span> <span class="nc">MyFrame</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">Frame</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">wx</span><span class="o">.</span><span class="n">Frame</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="o">-</span><span class="mf">1</span><span class="p">,</span> <span class="s">&quot;Ventana&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mf">300</span><span class="p">,</span> <span class="mf">300</span><span class="p">))</span>
+
+        <span class="n">panel</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">Panel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mf">1</span><span class="p">)</span>
+        <span class="n">wx</span><span class="o">.</span><span class="n">StaticText</span><span class="p">(</span><span class="n">panel</span><span class="p">,</span> <span class="o">-</span><span class="mf">1</span><span class="p">,</span> <span class="s">&quot;Pos:&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="p">(</span><span class="mf">10</span><span class="p">,</span> <span class="mf">12</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">posCtrl</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">TextCtrl</span><span class="p">(</span><span class="n">panel</span><span class="p">,</span> <span class="o">-</span><span class="mf">1</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="p">(</span><span class="mf">40</span><span class="p">,</span> <span class="mf">10</span><span class="p">))</span>
+
+        <span class="n">panel</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_MOTION</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">OnMove</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">OnMove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">GetPosition</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">posCtrl</span><span class="o">.</span><span class="n">SetValue</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">pos</span><span class="o">.</span><span class="n">y</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">PySimpleApp</span><span class="p">()</span>
+    <span class="n">frame</span> <span class="o">=</span> <span class="n">MyFrame</span><span class="p">()</span>
+    <span class="n">frame</span><span class="o">.</span><span class="n">Show</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">MainLoop</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>La subclase <tt class="docutils literal"><span class="pre">MyFrame</span></tt> hereda de la clase <tt class="docutils literal"><span class="pre">wx.Frame</span></tt> y extiende su
+constructor incluyendo un objeto <tt class="docutils literal"><span class="pre">Panel</span></tt> (elemento contenedor de otros
+objetos gráficos), una línea de texto estática y una caja de texto
+denominada <tt class="docutils literal"><span class="pre">self.posCtrl</span></tt>.</p>
+<p>Además se realiza un <em>binding</em>, es decir,
+la asociación de un evento identificable a una acción, un método o función
+que indica como responde el programa ante el acaecimiento del evento.
+En este caso se asocia el evento <tt class="docutils literal"><span class="pre">wx.EVT_MOTION</span></tt> en el objeto <tt class="docutils literal"><span class="pre">panel</span></tt>
+(que ocurre cuando se mueve el puntero sobre el objeto) al método <tt class="docutils literal"><span class="pre">OnMove</span></tt>.</p>
+<p>Como resultado, cada vez que se mueve el puntero sobre el panel, la caja
+de texto será actualizada con las coordenadas donde este se encuentra.</p>
+<blockquote>
+<div class="figure">
+<img alt="_images/wxpython_ventana.png" src="_images/wxpython_ventana.png" />
+<p class="caption">Captura del ejemplo de marras</p>
+</div>
+</blockquote>
 </div>
 </div>
 <div class="section" id="gesti-n-de-proyecto">
@@ -320,7 +440,7 @@ por lo general, el código correctamente construcciones matemáticas</li>
 </div>
 <div class="section" id="sphinx">
 <h4>2.6.2.3. Sphinx<a class="headerlink" href="#sphinx" title="Enlazar permanentemente con este título">¶</a></h4>
-<table class="docutils footnote" frame="void" id="id15" rules="none">
+<table class="docutils footnote" frame="void" id="id23" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>Python es un lenguaje estandarizado que tiene distintas implementaciones.
@@ -329,7 +449,7 @@ implementaciones en Java (<a class="reference external" href="http://jython.org"
 y Python mismo (<a class="reference external" href="http://codespeak.net/pypy">http://codespeak.net/pypy</a>)</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id16" rules="none">
+<table class="docutils footnote" frame="void" id="id24" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>Un programa {&#8220;Hola Mundo!&#8221;} es el que imprime el texto «Hola Mundo!» en un
@@ -338,7 +458,7 @@ Se suele usar como introducción al estudio de un lenguaje de programación,
 siendo un primer ejercicio típico.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id17" rules="none">
+<table class="docutils footnote" frame="void" id="id25" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id4">[3]</a></td><td>La hipótesis en la que se basó su creador es que el código fuente suele leerse
@@ -346,37 +466,44 @@ muchas más veces de las que se escribe, ya sea por el mismo autor tiempo
 despues de haberlo escrito, o por otros programadores.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id18" rules="none">
+<table class="docutils footnote" frame="void" id="id26" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id5">[4]</a></td><td><em>&#8220;Syntactically, Python code looks like executable pseudo code.&#8221;</em>, <a class="reference internal" href="#gvr1998">[GvR1998]</a></td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id20" rules="none">
+<table class="docutils footnote" frame="void" id="id28" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id9">[5]</a></td><td>Traducción del inglés propia.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id11">[5]</a></td><td>Traducción del inglés propia.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id21" rules="none">
+<table class="docutils footnote" frame="void" id="id29" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id11">[6]</a></td><td><em>Python Success Stories: 8 True Tales of Flexibility, Speed, and Improved Productivity</em> (2002) y
+<tr><td class="label"><a class="fn-backref" href="#id13">[6]</a></td><td><em>Python Success Stories: 8 True Tales of Flexibility, Speed, and Improved Productivity</em> (2002) y
 <em>Python Success Stories Volume II: 12 More True Tales</em> (2005), O&#8217;Reilly Associates</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id22" rules="none">
+<table class="docutils footnote" frame="void" id="id30" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id14">[7]</a></td><td>El código que sigue los principios de legibilidad y transparencia propuestos
+<tr><td class="label"><a class="fn-backref" href="#id16">[7]</a></td><td>El código que sigue los principios de legibilidad y transparencia propuestos
 por Python se dice que es &#8220;pythonico&#8221;. Contrariamente, el código opaco u ofuscado es
 bautizado como &#8220;no pythonico&#8221;. Ver <a class="reference internal" href="#pep8">[PEP8]</a> y <a class="reference internal" href="#pep20">[PEP20]</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id33" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id18">[8]</a></td><td><a class="reference external" href="http://code.enthought.com/chaco/">Chaco</a> y <a class="reference external" href="http://gnuplot-py.sourceforge.net/">GNUplot-Py</a>
+son las más notables alternativas.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="gvr1998" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[GvR1998]</td><td><em>(<a class="fn-backref" href="#id7">1</a>, <a class="fn-backref" href="#id19">2</a>)</em> van Rossum, Guido (1998), <em>Glue it all together with Python</em>,
+<tr><td class="label">[GvR1998]</td><td><em>(<a class="fn-backref" href="#id9">1</a>, <a class="fn-backref" href="#id27">2</a>)</em> van Rossum, Guido (1998), <em>Glue it all together with Python</em>,
 Workshop on Compositional Software Architecture in Monterey,
 <a class="reference external" href="http://www.python.org/doc/essays/omg-darpa-mcc-position.html">http://www.python.org/doc/essays/omg-darpa-mcc-position.html</a></td></tr>
 </tbody>
@@ -392,19 +519,19 @@ Castelló de la Plana</td></tr>
 <table class="docutils citation" frame="void" id="tz2008" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id8">[TZ2008]</a></td><td>Ziadé, Tarek (2010),  <em>Expert Python programming</em>, Pack Publishing, Birmingham</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id10">[TZ2008]</a></td><td>Ziadé, Tarek (2008),  <em>Expert Python programming</em>, Pack Publishing, Birmingham</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="jh-fp" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id10">[JH-FP]</a></td><td>Hunter, John D. - Pérez, Fernando, (n/d) <em>Practical Scientific Computing in Python</em>,</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id12">[JH-FP]</a></td><td>Hunter, John D. - Pérez, Fernando, (n/d) <em>Practical Scientific Computing in Python</em>,</td></tr>
 </tbody>
 </table>
-<table class="docutils citation" frame="void" id="tp-psf" rules="none">
+<table class="docutils citation" frame="void" id="tut-psf" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[TP-PSF]</td><td>van Rossum, Guido (2010), <em>The Python Tutorial v2.7</em>, Python Software Foundation,
+<tr><td class="label"><a class="fn-backref" href="#id7">[TUT-PSF]</a></td><td>van Rossum, Guido (2010), <em>The Python Tutorial v2.7</em>, Python Software Foundation,
 <a class="reference external" href="http://docs.python.org/tutorial/">http://docs.python.org/tutorial/</a> . Existe una traducción al español en  realizada
 por la comunidad Python Argentina en <a class="reference external" href="http://python.org.ar/pyar/Tutorial">http://python.org.ar/pyar/Tutorial</a></td></tr>
 </tbody>
@@ -412,7 +539,7 @@ por la comunidad Python Argentina en <a class="reference external" href="http://
 <table class="docutils citation" frame="void" id="mp2001" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[MP2001]</td><td>Pilgrim, Mark (2001), <em>Dive into Python</em>, liberado bajo los términos
+<tr><td class="label"><a class="fn-backref" href="#id8">[MP2001]</a></td><td>Pilgrim, Mark (2001), <em>Dive into Python</em>, liberado bajo los términos
 de GNU Free Documentation License, <a class="reference external" href="http://diveintopython.org/">http://diveintopython.org/</a>. Existe
 una traducción al español disponible en <a class="reference external" href="http://www.gulic.org/almacen/diveintopython-5.4-es/">http://www.gulic.org/almacen/diveintopython-5.4-es/</a></td></tr>
 </tbody>
@@ -435,21 +562,41 @@ Simula Research Laboratory and Department of Informatics University of Oslo, Osl
 <table class="docutils citation" frame="void" id="pep8" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id23">[PEP8]</a></td><td>van Rossum, Guido - Warsaw, Barry (2001), <em>Python Enhancement Proposals (PEP) #8:
+<tr><td class="label"><a class="fn-backref" href="#id31">[PEP8]</a></td><td>van Rossum, Guido - Warsaw, Barry (2001), <em>Python Enhancement Proposals (PEP) #8:
 Style Guide for Python Code</em>, Python Software Foundation, <a class="reference external" href="http://www.python.org/dev/peps/pep-0008/">http://www.python.org/dev/peps/pep-0008/</a></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="pep20" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id24">[PEP20]</a></td><td>Peters, Tim (2004) <em>Python Enhancement Proposals (PEP) #20: The Zen of Python</em>,
+<tr><td class="label"><a class="fn-backref" href="#id32">[PEP20]</a></td><td>Peters, Tim (2004) <em>Python Enhancement Proposals (PEP) #20: The Zen of Python</em>,
 Python Software Foundation, <a class="reference external" href="http://www.python.org/dev/peps/pep-0020/">http://www.python.org/dev/peps/pep-0020/</a></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="numpy-ug" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id12">[NUMPY-UG]</a></td><td>Scipy community, <em>Numpy User Guide</em>,</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id14">[NumPy-UG]</a></td><td>Scipy community, <em>NumPy User Guide</em>,  <a class="reference external" href="http://docs.scipy.org/doc/numpy">http://docs.scipy.org/doc/numpy</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="to2006" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[TO2006]</td><td>Oliphant, Travis (2006) <em>Guide to NumPy</em>, Trelgol Publishing, <a class="reference external" href="http://www.trelgol.com">http://www.trelgol.com</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="mpldoc" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id19">[MPLDOC]</a></td><td>Hunter, J - Dale, D - Droettboom, M (2010), <em>Matplotlib documentation v1.0.0</em>,
+<a class="reference external" href="http://matplotlib.sourceforge.net/contents.html">http://matplotlib.sourceforge.net/contents.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="nr-rd2006" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id22">[NR-RD2006]</a></td><td>Rappin, Noel - Dunn, Robin (2006) <em>wxPython in Action</em>, Manning Publications,
+Greenwich</td></tr>
 </tbody>
 </table>
 </div>
@@ -487,7 +634,7 @@ Python Software Foundation, <a class="reference external" href="http://www.pytho
 <li><a class="reference internal" href="#python-en-el-software-cient-fico">2.5.1.1. Python en el software científico</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#numpy">2.5.2. Numpy</a></li>
+<li><a class="reference internal" href="#numpy">2.5.2. NumPy</a></li>
 <li><a class="reference internal" href="#matplotlib">2.5.3. Matplotlib</a></li>
 <li><a class="reference internal" href="#wxpython">2.5.4. WxPython</a></li>
 </ul>
