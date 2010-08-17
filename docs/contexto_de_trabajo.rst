@@ -62,7 +62,7 @@ Esto no implica que el/la autor/a o autores del software
 pierdan los derechos de autoría intelectual que son inalienables e imprescriptibles.  
 
 La definición de SL [FSFa]_ fue concebida originalmente por Richard Stallman
-a principio de los años 80, oponiéndose a las restricciones que imponía el modelo 
+a mediados de los años 80, oponiéndose a las restricciones que imponía el modelo 
 de :term:`software privativo` (SP) que muchas universidades empezaban a adoptar y que 
 los :term:`hackers <hacker>` [#]_ no podían aceptar. 
 
@@ -323,7 +323,7 @@ a futuro.
                económicamente sostenible y socialmente justo*, infonomia.com (Ed.), Barcelona
 
 
-.. [ER1997]  Raymon, Eric S (1997),  *The Cathedral and the Bazaar*, Open Source Software Foundation,
+.. [ER1997]  Raymond, Eric S (1997),  *The Cathedral and the Bazaar*, Open Source Software Foundation,
              Traducción al español del Proyecto Lucas, http://es.tldp.org/Otros/catedral-bazar/cathedral-es-paper-00.html
 
 .. [RMS2004]  Stallman, Richard M (2004), *Libre pero encadenado. La trampa del Java.*, 

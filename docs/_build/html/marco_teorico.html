@@ -101,7 +101,7 @@ conceptos generales (que no pretenten exhautividad pero sí precisión) de las d
 <h3>2.5.1. Python<a class="headerlink" href="#python" title="Enlazar permanentemente con este título">¶</a></h3>
 <p><a class="reference external" href="http://python.org">Python</a> es un avanzado lenguaje de programación de alto nivel,
 <a class="reference internal" href="#term-interpretado"><em class="xref std std-term">interpretado</em></a>, <a class="reference internal" href="#term-multiparadigma"><em class="xref std std-term">multiparadigma</em></a> y <a class="reference internal" href="#term-multiplataforma"><em class="xref std std-term">multiplataforma</em></a>. Además,
-la mayoría de sus implementaciones <a class="footnote-reference" href="#id12" id="id2">[1]</a>, permiten ejecutar código de manera <a class="reference internal" href="#term-interactivo"><em class="xref std std-term">interactiva</em></a>.</p>
+la mayoría de sus implementaciones <a class="footnote-reference" href="#id15" id="id2">[1]</a>, permiten ejecutar código de manera <a class="reference internal" href="#term-interactivo"><em class="xref std std-term">interactiva</em></a>.</p>
 <blockquote>
 <dl class="glossary docutils">
 <dt id="term-interpretado">interpretado</dt>
@@ -132,21 +132,23 @@ se pueden probar porciones de código en el modo interactivo antes
 de integrarlo como parte de un programa.</dd>
 </dl>
 </blockquote>
-<p>Un sencillo programa <em>&#8220;Hola Mundo&#8221;</em> <a class="footnote-reference" href="#id13" id="id3">[2]</a> en Python se ve así:</p>
+<p>Un sencillo programa <em>&#8220;Hola Mundo&#8221;</em> <a class="footnote-reference" href="#id16" id="id3">[2]</a> en Python se ve así:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="s">&quot;¡Hola Mundo!&quot;</span>
 </pre></div>
 </div>
-<p>Por diseño <a class="footnote-reference" href="#id14" id="id4">[3]</a>, Python tiene sintaxis muy clara que facilita la legibilidad del código.
+<p>Por diseño <a class="footnote-reference" href="#id17" id="id4">[3]</a>, Python tiene sintaxis muy clara que facilita la legibilidad del código.
 Esta característica es la razón por la que Guido van Rossum, su creador,
-lo compara con &#8220;<a class="reference internal" href="glosario.html#term-pseudoc-digo"><em class="xref std std-term">pseudocódigo</em></a> ejecutable&#8221; <a class="footnote-reference" href="#id15" id="id5">[4]</a>.</p>
-<p>Intente comprender el siguiente programa, que aplica conceptos de programación orientada
-a objetos como herencia y polimorfismo:</p>
+lo compara con &#8220;<a class="reference internal" href="glosario.html#term-pseudoc-digo"><em class="xref std std-term">pseudocódigo</em></a> ejecutable&#8221; <a class="footnote-reference" href="#id18" id="id5">[4]</a>.</p>
+<p>El siguiente programa aplica conceptos de programación orientada  a objetos
+como herencia y polimorfismo:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Superclase que define un constructor común y un método abstracto&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Superclase que define un constructor común y</span>
+<span class="sd">        un método abstracto&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nombre</span> <span class="o">=</span> <span class="n">nombre</span>
     <span class="k">def</span> <span class="nf">hablar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">u&quot;La subclase no implementa el método&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">u&quot;La subclase debe </span><span class="se">\</span>
+<span class="s">                                    implementar el método&quot;</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">Gato</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">hablar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -173,6 +175,13 @@ a objetos como herencia y polimorfismo:</p>
 </div>
 <p>Puede ver el artículo <a class="reference internal" href="#wikipedia1">[WIKIPEDIA1]</a> para una comparación (en particular la extensión y legibilidad)
 de código equivalente en otros lenguajes de programación.</p>
+<blockquote>
+<p>... seealso:</p>
+<div class="highlight-python"><pre>Dar una introducción completa a las capacidades de Python como lenguaje
+de programación quedan fuera de los alcances de este trabajo. Para
+ampliar los conceptos aquí vertidos puede ver [TUT-PSF] y [MP2001].</pre>
+</div>
+</blockquote>
 <p>En Python el <strong>tipado de datos es dinámico</strong> (al igual que la asignación de memoria),
 es decir que el tipo de dato (entero, cadena, punto flotante u otros tipos de más alto nivel como listas o diccionarios)
 se determina automáticamente al momento de la asignación de la variable, a diferencia
@@ -191,7 +200,7 @@ muchas otras.</p>
 <p>Además de la incorporada, puede interfacear con diversas bibliotecas, por ejemplo
 para para desarrollar interfaces gráficas de usuario (<a class="reference internal" href="glosario.html#term-gui"><em class="xref std std-term">GUI</em></a>), y
 a la vez es extensible en C o C++.</p>
-<p>Esto facilidad de integración permite que frecuentemente sea utilizado
+<p>Esta facilidad de integración permite que frecuentemente sea utilizado
 como <em>&#8220;lenguaje pegamento&#8221;</em> (ver <a class="reference internal" href="#gvr1998">[GvR1998]</a> ) para interconectar código que
 por razones históricas, de performance o arquitectura están desarrolladas
 en otro lenguaje de más bajo nivel.</p>
@@ -202,7 +211,7 @@ plantea Shannon Behrens en el prólogo de <a class="reference internal" href="#t
 Hubo un tiempo en el que las compañías me llamaban loco cuando insistía en usar Python.
 En estos días, simplemente no hay suficientes programadores Python para todos.
 Grandes empresas como Google, YouTube, VMware y DreamWorks están en una lucha
-constante para contratar todo buen talento Python que puedan encontrar. <a class="footnote-reference" href="#id17" id="id9">[5]</a></blockquote>
+constante para contratar todo buen talento Python que puedan encontrar. <a class="footnote-reference" href="#id20" id="id9">[5]</a></blockquote>
 <div class="section" id="python-en-el-software-cient-fico">
 <h4>2.5.1.1. Python en el software científico<a class="headerlink" href="#python-en-el-software-cient-fico" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Como se afirma en <a class="reference internal" href="#jh-fp">[JH-FP]</a> en la sección <em>Who is using Python?</em>, el uso de
@@ -229,7 +238,7 @@ para la exploración de petroleo.</p>
 <div class="admonition-ver-tambi-n admonition seealso">
 <p class="first admonition-title">Ver también</p>
 <p class="last">Muchos otros casos de éxito son detallados en los dos volúmenes
-<em>Python Success Stories</em> de la editorial O&#8217;Reilly&#8217;s <a class="footnote-reference" href="#id18" id="id11">[6]</a> y en
+<em>Python Success Stories</em> de la editorial O&#8217;Reilly&#8217;s <a class="footnote-reference" href="#id21" id="id11">[6]</a> y en
 <a class="reference external" href="http://python.org/about/success/">http://python.org/about/success/</a></p>
 </div>
 </blockquote>
@@ -239,6 +248,55 @@ para la exploración de petroleo.</p>
 </div>
 <div class="section" id="numpy">
 <h3>2.5.2. Numpy<a class="headerlink" href="#numpy" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Los tipos de datos incorporados con Python nativamente para contener otros tipos
+de objetos (en particular listas y tuplas), son muy eficientes pero
+están diseñados para ser multipropósito. Estos &#8220;contenedores&#8221; pueden tener cualquier
+tipo de objeto (incluso una mezcla de ellos) y las listas, en particular, pueden mutar
+(agregar, modificar o borrar elementos) dinámicamente.</p>
+<p>Es decir, que si bien pueden usarse listas o tuplas como un <em class="xref std std-term">vector</em> de datos, no están
+especialmente concebidas para tal fin.</p>
+<blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">Los siguientes párrafos descriptivos han sido tomados, en modo
+de paráfrasis y traducido por el autor, de <a class="reference internal" href="#numpy-ug">[NUMPY-UG]</a>.</p>
+</div>
+</blockquote>
+<p><a class="reference external" href="http://numpy.org">Numpy</a> es una biblioteca que extiende Python para suplir
+este aspecto, proveyendo un tipo de objeto vector multidimensional y varios objetos derivados (como vectores enmascarados o matrices),
+además de rutinas optimizadas para la operación sobre estos vectores, incluyendo
+operaciones matemáticas y lógicas, manipulación de las dimensiones, álgebra lineal,
+operaciones estadísticas básicas, simulación aleatoria, etc.</p>
+<p>Considere el código siguiente que dado dos secuencias unidimensionales <tt class="docutils literal"><span class="pre">a</span></tt> y <tt class="docutils literal"><span class="pre">b</span></tt> de igual
+longitud y con todos sus elementos numéricos, multiplica elemento por elemento
+y dispone el resultado en una nueva lista <tt class="docutils literal"><span class="pre">c</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">c</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>El resultado será correcto, pero considerando que las secuencias <tt class="docutils literal"><span class="pre">a</span></tt> y <tt class="docutils literal"><span class="pre">b</span></tt>
+pueden contener millones de números, se pagará el precio de la iteración ineficiente.</p>
+<p>Esta operación, siendo <tt class="docutils literal"><span class="pre">a</span></tt> y <tt class="docutils literal"><span class="pre">b</span></tt> objetos <em>ndarray</em> de numpy, resultaría en:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+</pre></div>
+</div>
+<p>Dicho código funcionaría siempre que <tt class="docutils literal"><span class="pre">a</span></tt> y <tt class="docutils literal"><span class="pre">b</span></tt> tengan las mismas dimensiones,
+independientemente que sean uni o multidimensionales.</p>
+<p>El ejemplo ilustra dos características de Numpy que son gran parte de las bases
+de su poder: <em>vectorización</em> y <em>broadcasting</em></p>
+<p>La vectorización describe la ausencia de iteraciones explícitas e indización
+(que toman lugar, por supuesto, &#8220;detrás de escena&#8221;, en un optimizado y precompilado
+código C). La vectorización tiene muchas ventajas:</p>
+<blockquote>
+<ul class="simple">
+<li>El código vectorizado es más conciso y fácil de leer.</li>
+<li>Menos líneas de código habitualmente implican menos errores.</li>
+<li>El código se parece más a la notación matemática estándar (por lo que es más fácil,
+por lo general, el código correctamente construcciones matemáticas</li>
+<li>La vectorización redunda en un código más &#8220;pythónico&#8221; <a class="footnote-reference" href="#id22" id="id14">[7]</a></li>
+</ul>
+</blockquote>
 </div>
 <div class="section" id="matplotlib">
 <h3>2.5.3. Matplotlib<a class="headerlink" href="#matplotlib" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -262,7 +320,7 @@ para la exploración de petroleo.</p>
 </div>
 <div class="section" id="sphinx">
 <h4>2.6.2.3. Sphinx<a class="headerlink" href="#sphinx" title="Enlazar permanentemente con este título">¶</a></h4>
-<table class="docutils footnote" frame="void" id="id12" rules="none">
+<table class="docutils footnote" frame="void" id="id15" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>Python es un lenguaje estandarizado que tiene distintas implementaciones.
@@ -271,7 +329,7 @@ implementaciones en Java (<a class="reference external" href="http://jython.org"
 y Python mismo (<a class="reference external" href="http://codespeak.net/pypy">http://codespeak.net/pypy</a>)</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id13" rules="none">
+<table class="docutils footnote" frame="void" id="id16" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>Un programa {&#8220;Hola Mundo!&#8221;} es el que imprime el texto «Hola Mundo!» en un
@@ -280,7 +338,7 @@ Se suele usar como introducción al estudio de un lenguaje de programación,
 siendo un primer ejercicio típico.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id14" rules="none">
+<table class="docutils footnote" frame="void" id="id17" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id4">[3]</a></td><td>La hipótesis en la que se basó su creador es que el código fuente suele leerse
@@ -288,29 +346,37 @@ muchas más veces de las que se escribe, ya sea por el mismo autor tiempo
 despues de haberlo escrito, o por otros programadores.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id15" rules="none">
+<table class="docutils footnote" frame="void" id="id18" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id5">[4]</a></td><td><em>&#8220;Syntactically, Python code looks like executable pseudo code.&#8221;</em>, <a class="reference internal" href="#gvr1998">[GvR1998]</a></td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id17" rules="none">
+<table class="docutils footnote" frame="void" id="id20" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id9">[5]</a></td><td>Traducción del inglés propia.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id18" rules="none">
+<table class="docutils footnote" frame="void" id="id21" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id11">[6]</a></td><td><em>Python Success Stories: 8 True Tales of Flexibility, Speed, and Improved Productivity</em> (2002) y
 <em>Python Success Stories Volume II: 12 More True Tales</em> (2005), O&#8217;Reilly Associates</td></tr>
 </tbody>
 </table>
+<table class="docutils footnote" frame="void" id="id22" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id14">[7]</a></td><td>El código que sigue los principios de legibilidad y transparencia propuestos
+por Python se dice que es &#8220;pythonico&#8221;. Contrariamente, el código opaco u ofuscado es
+bautizado como &#8220;no pythonico&#8221;. Ver <a class="reference internal" href="#pep8">[PEP8]</a> y <a class="reference internal" href="#pep20">[PEP20]</a>.</td></tr>
+</tbody>
+</table>
 <table class="docutils citation" frame="void" id="gvr1998" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[GvR1998]</td><td><em>(<a class="fn-backref" href="#id7">1</a>, <a class="fn-backref" href="#id16">2</a>)</em> Rossum, Guido v (1998), <em>Glue it all together with Python</em>,
+<tr><td class="label">[GvR1998]</td><td><em>(<a class="fn-backref" href="#id7">1</a>, <a class="fn-backref" href="#id19">2</a>)</em> van Rossum, Guido (1998), <em>Glue it all together with Python</em>,
 Workshop on Compositional Software Architecture in Monterey,
 <a class="reference external" href="http://www.python.org/doc/essays/omg-darpa-mcc-position.html">http://www.python.org/doc/essays/omg-darpa-mcc-position.html</a></td></tr>
 </tbody>
@@ -335,6 +401,22 @@ Castelló de la Plana</td></tr>
 <tr><td class="label"><a class="fn-backref" href="#id10">[JH-FP]</a></td><td>Hunter, John D. - Pérez, Fernando, (n/d) <em>Practical Scientific Computing in Python</em>,</td></tr>
 </tbody>
 </table>
+<table class="docutils citation" frame="void" id="tp-psf" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[TP-PSF]</td><td>van Rossum, Guido (2010), <em>The Python Tutorial v2.7</em>, Python Software Foundation,
+<a class="reference external" href="http://docs.python.org/tutorial/">http://docs.python.org/tutorial/</a> . Existe una traducción al español en  realizada
+por la comunidad Python Argentina en <a class="reference external" href="http://python.org.ar/pyar/Tutorial">http://python.org.ar/pyar/Tutorial</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="mp2001" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[MP2001]</td><td>Pilgrim, Mark (2001), <em>Dive into Python</em>, liberado bajo los términos
+de GNU Free Documentation License, <a class="reference external" href="http://diveintopython.org/">http://diveintopython.org/</a>. Existe
+una traducción al español disponible en <a class="reference external" href="http://www.gulic.org/almacen/diveintopython-5.4-es/">http://www.gulic.org/almacen/diveintopython-5.4-es/</a></td></tr>
+</tbody>
+</table>
 <table class="docutils citation" frame="void" id="wikipedia1" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
@@ -348,6 +430,26 @@ Wikipedia, The Free Encyclopedia, visto el 16 de agosto de 20010,
 <tbody valign="top">
 <tr><td class="label">[HPL2004]</td><td>Langtangen, Hans P (2004), <em>Python Scripting for Computational Science</em>,
 Simula Research Laboratory and Department of Informatics University of Oslo, Oslo</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="pep8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id23">[PEP8]</a></td><td>van Rossum, Guido - Warsaw, Barry (2001), <em>Python Enhancement Proposals (PEP) #8:
+Style Guide for Python Code</em>, Python Software Foundation, <a class="reference external" href="http://www.python.org/dev/peps/pep-0008/">http://www.python.org/dev/peps/pep-0008/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="pep20" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id24">[PEP20]</a></td><td>Peters, Tim (2004) <em>Python Enhancement Proposals (PEP) #20: The Zen of Python</em>,
+Python Software Foundation, <a class="reference external" href="http://www.python.org/dev/peps/pep-0020/">http://www.python.org/dev/peps/pep-0020/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="numpy-ug" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id12">[NUMPY-UG]</a></td><td>Scipy community, <em>Numpy User Guide</em>,</td></tr>
 </tbody>
 </table>
 </div>

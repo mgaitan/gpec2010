@@ -44,9 +44,10 @@ Computación
         con espíritu lúdico, curioso y solidario, asumiéndolo como el reto 
         intelectual de superar o rodear las limitaciones de forma creativa. 
 
-        .. seealso:: *What is a Hacker?*, Brian Harvey, University of California, Berkeley
-                     http://www.cs.berkeley.edu/~bh/hacker.html
+        .. seealso:: 
 
+            *What is a Hacker?*, Brian Harvey, University of California, Berkeley,
+            http://www.cs.berkeley.edu/~bh/hacker.html
 
     GUI
         pass
