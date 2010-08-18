@@ -139,13 +139,14 @@ class SuitePlotsPanel(wx.Panel):
         sizer.Add(self.nb, 1, wx.EXPAND)
         self.SetSizerAndFit(sizer)
 
-        
-
-        
                 
-        pub.subscribe(self.OnMakeSuite, 'make.suite')
+        pub.subscribe(self.OnMakeGlobalSuite, 'make.globalsuite')
 
-    def OnMakeSuite(self, message):
+        pub.subscribe(self.OnMakeIsop, 'make.isop')
+        pub.subscribe(self.OnMakePxy, 'make.pxy')
+        pub.subscribe(self.OnMakeTxy, 'make.txy')
+
+    def OnMakeGlobalSuite(self, message):
         case_id, case_name, arrays = message.data
 
         for type in ['PT', 'Tx', 'Px', 'Trho', 'Prho', 'PTrho']:
@@ -155,7 +156,18 @@ class SuitePlotsPanel(wx.Panel):
         
         #by default it include a log_messages panel
         
+    def OnMakeIsop(self, message):
+        case_id, case_name, arrays = message.data
+        pub.sendMessage('log', ('error', 'ISOP plots Not implemented yet'))
 
+    def OnMakePxy(self, message):
+        case_id, case_name, arrays = message.data
+        pub.sendMessage('log', ('error', 'Pxy plot not implemented yet'))
+
+    def OnMakeTxy(self, message):
+        case_id, case_name, arrays = message.data
+        pub.sendMessage('log', ('error', 'Txy plot not implemented yet'))
+    
 
 
 class VarsAndParamPanel(wx.Panel):
@@ -876,11 +888,33 @@ class CasePanel(scrolled.ScrolledPanel):
             l12 = self.l12.GetValue()
             max_p = self.max_p.GetValue()
 
+
+            #needed to ALL type of diagrams. TODO: check a way to cache result if parameter didn't change
+
             self.api_manager.write_gpecin(self.model_id, comp1, comp2, ncomb, 0, k12, l12, max_p)
+            curves = self.api_manager.read_gpecout()
 
-            curves = self.api_manager.read_gpecout()            
-            pub.sendMessage('make.suite', (self.case_id, self.name, curves))
+            diagram_selection =  self.diagram_ch.GetSelection()
+            
+            if diagram_selection == 0:   #global
+                pub.sendMessage('make.globalsuite', (self.case_id, self.name, curves))
 
+            elif diagram_selection == 1:   #isopleth
+                self.api_manager.write_generic_inparam('z', self.z_input.GetValue())
+                curves_isop = self.api_manager.read_generic_output('isop')
+                
+                pub.sendMessage('make.isop', (self.case_id, self.name, curves_isop))
+            
+            elif diagram_selection == 2:   #pxy
+                self.api_manager.write_generic_inparam('t', self.t_input.GetValue())
+                curves_pxy = self.api_manager.read_generic_output('pxy')
+                pub.sendMessage('make.pxy', (self.case_id, self.name, curves_pxy))
+
+            elif diagram_selection == 3:   #txy
+                self.api_manager.write_generic_inparam('p', self.p_input.GetValue())
+                curves_txy = self.api_manager.read_generic_output('txy')
+                pub.sendMessage('make.txy', (self.case_id, self.name, curves_txy))
+            
         else:
             pub.sendMessage('log', ('error', "Nothing to calculate. Define the system first."))
 

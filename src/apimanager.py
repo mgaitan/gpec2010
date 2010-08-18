@@ -142,6 +142,33 @@ class ApiManager():
 
         pub.sendMessage('add_txt', (filepath, self.case_id))
 
+    
+    def write_generic_inparam(self, type, param):
+        """
+        writes ZforIsop.dat or PFORTXY.DAT or TFORPXY.dat  needed to run IsoplethGPEC, 
+        TxyGPEC or PxyGPEC respectively.
+        """
+
+        type2file = {'z':'ZforIsop.dat', 'p':'PFORTXY.dat', 't':'TFORTXY.dat'}
+        
+        if type not in type2file.keys():
+            pub.sendMessage('log', ('error', 'Unknown input file to write' ))
+            return
+        else:
+            filename = type2file[type]
+
+        filepath = os.path.join(self.path_temp, filename)
+        template = "{0!s}"
+
+        output = template.format(param)
+        with open(filepath, 'w') as fh:
+            fh.write(output)
+            fh.close()
+        self.written.add((filename))
+        pub.sendMessage('add_txt', (filepath, self.case_id))
+
+
+    
 
     def read_conparout(self, model_id):
         """COMPAROUT.DAT has two lines of data. First one is EOS vars and second 
@@ -162,9 +189,26 @@ class ApiManager():
 
             return output
                     
-            
+    
+    def read_generic_output(self, type):
+        type2exe = {'isop':'IsoplethGPEC', 'pxy': 'PxyGPEC', 'txy': 'TxyGPEC'}
+        
+        if type not in type2exe.keys():
+            pub.sendMessage('log', ('error', 'Unknown executable' ))
+            return
+        else:
+            ret = self.exec_fortran(type2exe[type]) 
+        
+        filename = BIN_AVAILABLE[type2exe[type]]['out'][0]
+
+        filepath = os.path.join(self.path_temp, filename)
+        pub.sendMessage('add_txt', (filepath, self.case_id))
+    
+
     def read_gpecout(self):
         """Parses an gpecout.dat, detects numeric blocks and create arrays with them"""
+
+        #TODO Generalize this to use with PXYOUT.DAT TXYOUT.DAT and ISOPOUT.DAT
 
         ret = self.exec_fortran('GPEC')  #generate gpecout.dat
         
