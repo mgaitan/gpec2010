@@ -115,8 +115,8 @@ class PTrho(BasePlot):
         self.short_title = u"P-T-\u03c1"
         self.title = u'Pressure-Temperature-Density projection of a global phase equilibrium diagram'
         self.xlabel = u'Temperature [K]'
-        self.xlabel = u'Density [mol/l]'
-        self.ylabel = u'Pressure [bar]'
+        self.ylabel = u'Density [mol/l]'
+        self.zlabel = u'Pressure [bar]'
 
         BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, projection='3d', zlabel=self.zlabel)        
 
@@ -127,13 +127,22 @@ class PTrho(BasePlot):
                 
                 counter = u'' if len(arrays['VAP']) == 1 else u' %i' % (num + 1)
 
-                self.curves.append( {'name': u'Vapor line' + counter , 
+                self.curves.append( {'name': u'Vapor line (L)' + counter , 
                                      'visible':True, 
                                      'lines':( vap_curve[:,0], vap_curve[:,2], vap_curve[:,1]),
                                       'color' : 'green',
                                       'wx_id' : wx.NewId(),
                                       'type': 'VAP',
                                         } )             
+
+                self.curves.append( {'name': u'Vapor line (V)' + counter , 
+                                     'visible':True, 
+                                     'lines':( vap_curve[:,0], vap_curve[:,3], vap_curve[:,1]),
+                                      'color' : 'green',
+                                      'wx_id' : wx.NewId(),
+                                      'type': 'VAP',
+                                        } )
+
 
         if 'CRI' in arrays.keys():
             for num, cri_curve in enumerate(arrays['CRI']):
