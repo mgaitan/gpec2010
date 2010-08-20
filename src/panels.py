@@ -141,15 +141,24 @@ class SuitePlotsPanel(wx.Panel):
 
                 
         pub.subscribe(self.OnMakeGlobalSuite, 'make.globalsuite')
-
+        pub.subscribe(self.OnMakeGlobalSuite3d, 'make.globalsuite3d')
         pub.subscribe(self.OnMakeIsop, 'make.isop')
         pub.subscribe(self.OnMakePxy, 'make.pxy')
         pub.subscribe(self.OnMakeTxy, 'make.txy')
 
+
+    def OnMakeGlobalSuite3d(self, message):
+        case_id, case_name, arrays = message.data
+
+        for type in ['PTrho', 'PTx']:
+            pp = PlotPanel(self,  -1, type, arrays)
+            self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
+            pp.Plot()
+
     def OnMakeGlobalSuite(self, message):
         case_id, case_name, arrays = message.data
 
-        for type in ['PT', 'Tx', 'Px', 'Trho', 'Prho', 'PTrho']:
+        for type in ['PT', 'Tx', 'Px', 'Trho', 'Prho']:
             pp = PlotPanel(self,  -1, type, arrays)
             self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
             pp.Plot()
@@ -713,9 +722,10 @@ class CasePanel(scrolled.ScrolledPanel):
         self.diag_hbox = wx.BoxSizer(wx.HORIZONTAL)
 
         self.diagram_types = {0: 'Global Phase', 
-                              1: 'Isopheths',
-                              2: 'Pxy', 
-                              3: 'Txy',  }       
+                              1: 'Global Phase 3D',
+                              2: 'Isopheths',
+                              3: 'Pxy', 
+                              4: 'Txy',  }       
 
         self.diagram_ch = wx.Choice(self, -1, choices = [self.diagram_types[key] 
                                          for key in sorted(self.diagram_types.keys())] )
@@ -776,7 +786,7 @@ class CasePanel(scrolled.ScrolledPanel):
                 item.Show(False)
                 self.diag_hbox.Layout()
         
-        if diagram_type_key == 1:   #isopleth
+        if diagram_type_key == 2:   #isopleth
             
             label = wx.StaticText(self, -1, "Z")  #for isopleths
             self.z_input = ui.widgets.FloatCtrl(self, -1, "0.97")
@@ -784,7 +794,7 @@ class CasePanel(scrolled.ScrolledPanel):
             self.diag_hbox.Add(label, 0, flag= wx.ALIGN_CENTER_VERTICAL | wx.ALL , border=5)
             self.diag_hbox.Add(self.z_input, 1, wx.EXPAND | wx.ALL ^ wx.LEFT , border=5)
 
-        elif diagram_type_key == 2:   #pxy
+        elif diagram_type_key == 3:   #pxy
 
             label = wx.StaticText(self, -1, "T [K]")      #for pxy
             self.t_input = ui.widgets.FloatCtrl(self, -1, "300.0")
@@ -792,7 +802,7 @@ class CasePanel(scrolled.ScrolledPanel):
             self.diag_hbox.Add(label, 0, flag= wx.ALIGN_CENTER_VERTICAL | wx.ALL , border=5)
             self.diag_hbox.Add(self.t_input, 1, wx.EXPAND | wx.ALL ^ wx.LEFT , border=5)
 
-        elif diagram_type_key == 3: 
+        elif diagram_type_key == 4: 
 
             label = wx.StaticText(self, -1, "P [bar]")      #for txy
             self.p_input = ui.widgets.FloatCtrl(self, -1, "100.0")
@@ -923,20 +933,23 @@ class CasePanel(scrolled.ScrolledPanel):
             if diagram_selection == 0:   #global
                 pub.sendMessage('make.globalsuite', (self.case_id, self.name, curves))
 
-            elif diagram_selection == 1:   #isopleth
+            if diagram_selection == 1:  #global 3D
+                pub.sendMessage('make.globalsuite3d', (self.case_id, self.name, curves))
+
+            elif diagram_selection == 2:   #isopleth
                 z = self.z_input.GetValue()
                 self.api_manager.write_generic_inparam('z', z)
                 curves_isop = self.api_manager.read_generic_output('isop')
                 
                 pub.sendMessage('make.isop', (self.case_id, self.name, curves_isop, z))
             
-            elif diagram_selection == 2:   #pxy
+            elif diagram_selection == 3:   #pxy
                 t = self.t_input.GetValue()
                 self.api_manager.write_generic_inparam('t', t)
                 curves_pxy = self.api_manager.read_generic_output('pxy')
                 pub.sendMessage('make.pxy', (self.case_id, self.name, curves_pxy, t))
 
-            elif diagram_selection == 3:   #txy
+            elif diagram_selection == 4:   #txy
                 p = self.p_input.GetValue()
                 self.api_manager.write_generic_inparam('p', p)
                 curves_txy = self.api_manager.read_generic_output('txy')
