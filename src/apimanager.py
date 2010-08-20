@@ -102,6 +102,11 @@ class ApiManager():
         self._write_conparin(direction, model_id, data)
         return self._read_conparout(model_id)
 
+    @misc.memoize()
+    def gpecin2gpecout(self, model, comp1, comp2, ncomb=0, ntdep=0, k12=0.0, l12=0.0, max_p=2000):
+        self._write_gpecin(model, comp1, comp2, ncomb, ntdep, k12, l12, max_p)
+        return self.read_generic_output('gpec')
+
 
    
     def _write_conparin(self, direction, model_id, data):
@@ -129,7 +134,7 @@ class ApiManager():
 
         pub.sendMessage('add_txt', (filepath, self.case_id))
 
-    def write_gpecin(self, model, comp1, comp2, ncomb=0, ntdep=0, k12=0.0, l12=0.0, max_p=2000):
+    def _write_gpecin(self, model, comp1, comp2, ncomb=0, ntdep=0, k12=0.0, l12=0.0, max_p=2000):
         """
         compX -> ('NAME', (const1, ..., constN), (param1, ... , paramM))
         """
@@ -229,7 +234,7 @@ class ApiManager():
         
         arrays = self.output2array(filepath, curve_types[type])
 
-        print "------------- %s -------------" % type2exe[type], arrays 
+        #print "------------- %s -------------" % type2exe[type], arrays 
         return arrays
 
     def output2array(self, filepath, curve_types):

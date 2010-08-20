@@ -892,8 +892,10 @@ class CasePanel(scrolled.ScrolledPanel):
 
             #needed to ALL type of diagrams. TODO: check a way to cache result if parameter didn't change
 
-            self.api_manager.write_gpecin(self.model_id, comp1, comp2, ncomb, 0, k12, l12, max_p)
-            curves = self.api_manager.read_generic_output('gpec')
+            #self.api_manager.write_gpecin(self.model_id, comp1, comp2, ncomb, 0, k12, l12, max_p)
+            #curves = self.api_manager.read_generic_output('gpec')
+        
+            curves = self.api_manager.gpecin2gpecout(self.model_id, comp1, comp2, ncomb, 0, k12, l12, max_p)
 
             diagram_selection =  self.diagram_ch.GetSelection()
             
