@@ -238,7 +238,7 @@ class ApiManager():
         return arrays
 
     def output2array(self, filepath, curve_types):
-        """Parses an gpecout.dat, detects numeric blocks and create arrays with them"""
+        """Parses an gpecout.dat isopou ... , detects numeric blocks and create arrays with them"""
 
         #TODO Generalize this to use with PXYOUT.DAT TXYOUT.DAT and ISOPOUT.DAT
 
@@ -253,6 +253,7 @@ class ApiManager():
            
 
             number_of_lines = len(fh.readlines())
+            #print 'number_of_lines: ' + `number_of_lines`
             fh.seek(0)
             
             #give skip from header and skip from footer
@@ -264,10 +265,12 @@ class ApiManager():
                         curve_type = line.strip()
                 else:
                     #looking for a blank line which determines the end of arrays block.
-                    if not line.strip():
+                    
+
+                    if not line.strip() or line_number==number_of_lines-1:
                         end = line_number
                         tokens[(begin, end)] = curve_type
-            
+
             arrays_out = {}     #Format: {type: [array1, array2, ... ], ...  }
             
             
@@ -281,7 +284,7 @@ class ApiManager():
                 #write lines just of the block between (begin,end)
                 for l,line in enumerate(fh):
                     if begin <= l < end:
-                        temp_w.write( line )    
+                        temp_w.write( line.replace('*', '') )    
             
 
                 temp_r = cStringIO.StringIO(temp_w.getvalue())      #and copy to read

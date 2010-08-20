@@ -18,7 +18,8 @@ def memoize():
                 result = function(*args, **kw)   
                 cache[key] = result         #store a new one 
             else:
-                print 'found in cache'
+                print 'found in cache'          #TODO may be it's a better idea get a file and parse it again instead 
+                                                #cache the whole arrays. 
 
             return cache[key]   
         return __memoize

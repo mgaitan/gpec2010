@@ -301,8 +301,157 @@ class Tx(BasePlot):
                                        'type': 'LLV',
                                     } )
 
+class Pxy(BasePlot):
+    """Pxy Px (isothermal)"""
+    
+    def __init__(self, parent, arrays=None, **kwarg):
+        self.short_title = u"Pxy (isothermal)"
+        self.title = u'Isothermal fluid phase equilibrium for T=%s [k]' % kwarg['t']
+
+        self.ylabel = u'Pressure [bar]'
+        self.xlabel = u'Molar fraction '    #TODO DEFINE system inside the plot
+        
+
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
+
+    def setup_curves(self, arrays):
+
+               
+        
+        if 'Pxy' in arrays.keys():
+            for num, isot_curve in enumerate(arrays['Pxy']):
+
+                counter = u'' if len(arrays['Pxy']) == 1 else u' %i' % (num + 1)
+
+                self.curves.append( {'name': u'Isothermal line X' + counter, 
+                                     'visible':True, 
+                                     'lines':(isot_curve[:,1],isot_curve[:,0]),
+                                     'color' : 'black',
+                                     'wx_id' : wx.NewId(),
+                                     'type': 'Pxy'
+                                    } )
+
+                self.curves.append( {'name': u'Isothermal line Y' + counter, 
+                                     'visible':True, 
+                                     'lines':(isot_curve[:,2],isot_curve[:,0]),
+                                     'color' : 'black',
+                                     'wx_id' : wx.NewId(),
+                                     'type': 'Pxy'
+                                    } )
+
+class PxyPrho(BasePlot):
+    """Pxy P-Rho projection (isothermal)"""
+    
+    def __init__(self, parent, arrays=None, **kwarg):
+        self.short_title = u"P-\u03c1 (isothermal)"
+        self.title = u'Pressure-Density of the Isothermal fluid phase equilibrium for T=%s [k]' % kwarg['t']
+
+        self.ylabel = u'Pressure [bar]'
+        self.xlabel = u'Density [mol/l]'    #TODO DEFINE system inside the plot
+        
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
+
+    def setup_curves(self, arrays):
+
+               
+        
+        if 'Pxy' in arrays.keys():
+            for num, isot_curve in enumerate(arrays['Pxy']):
+
+                counter = u'' if len(arrays['Pxy']) == 1 else u' %i' % (num + 1)
+
+                self.curves.append( {'name': u'Isothermal line X' + counter, 
+                                     'visible':True, 
+                                     'lines':(isot_curve[:,5],isot_curve[:,0]),
+                                     'color' : 'black',
+                                     'wx_id' : wx.NewId(),
+                                     'type': 'Pxy'
+                                    } )
+
+                self.curves.append( {'name': u'Isothermal line Y' + counter, 
+                                     'visible':True, 
+                                     'lines':(isot_curve[:,6],isot_curve[:,0]),
+                                     'color' : 'black',
+                                     'wx_id' : wx.NewId(),
+                                     'type': 'Pxy'
+                                    } )
 
 
+class Txy(BasePlot):
+    """Txy Tx (isobaric)"""
+    
+    def __init__(self, parent, arrays=None, **kwarg):
+        self.short_title = u"Txy (isobaric)"
+        self.title = u'Isobaric fluid phase equilibrium for P=%s [bar]' % kwarg['p']
+
+        self.ylabel = u'Temperature [k]'
+        self.xlabel = u'Molar fraction'    #TODO DEFINE system inside the plot
+        
+
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
+
+    def setup_curves(self, arrays):
+
+               
+        
+        if 'Txy' in arrays.keys():
+            for num, isob_curve in enumerate(arrays['Txy']):
+
+                counter = u'' if len(arrays['Txy']) == 1 else u' %i' % (num + 1)
+
+                self.curves.append( {'name': u'Isobaric line X' + counter, 
+                                     'visible':True, 
+                                     'lines':(isob_curve[:,1],isob_curve[:,0]),
+                                     'color' : 'black',
+                                     'wx_id' : wx.NewId(),
+                                     'type': 'Pxy'
+                                    } )
+
+                self.curves.append( {'name': u'Isobaric line Y' + counter, 
+                                     'visible':True, 
+                                     'lines':(isob_curve[:,2],isob_curve[:,0]),
+                                     'color' : 'black',
+                                     'wx_id' : wx.NewId(),
+                                     'type': 'Pxy'
+                                    } )
+
+class TxyTrho(BasePlot):
+    """Txy T-Rho projection (isobaric)"""
+    
+    def __init__(self, parent, arrays=None, **kwarg):
+        self.short_title = u"T-\u03c1 (isobaric)"
+        self.title = u'Temperature-Density of the Isobaric fluid phase equilibrium for P=%s [bar]' % kwarg['p']
+
+        self.ylabel = u'Temperature [bar]'
+        self.xlabel = u'Density [mol/l]'    #TODO DEFINE system inside the plot
+        
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
+
+    
+    def setup_curves(self, arrays):
+
+               
+        
+        if 'Txy' in arrays.keys():
+            for num, isob_curve in enumerate(arrays['Txy']):
+
+                counter = u'' if len(arrays['Txy']) == 1 else u' %i' % (num + 1)
+
+                self.curves.append( {'name': u'Isobaric line X' + counter, 
+                                     'visible':True, 
+                                     'lines':(isob_curve[:,5],isob_curve[:,0]),
+                                     'color' : 'black',
+                                     'wx_id' : wx.NewId(),
+                                     'type': 'Pxy'
+                                    } )
+
+                self.curves.append( {'name': u'Isobaric line Y' + counter, 
+                                     'visible':True, 
+                                     'lines':(isob_curve[:,6],isob_curve[:,0]),
+                                     'color' : 'black',
+                                     'wx_id' : wx.NewId(),
+                                     'type': 'Pxy'
+                                    } )
 class Px(BasePlot):
     """P-x diagram"""
     

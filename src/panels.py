@@ -159,27 +159,37 @@ class SuitePlotsPanel(wx.Panel):
     def OnMakeIsop(self, message):
         case_id, case_name, arrays, z_val = message.data
 
-        for type in ['IsoPT']:
-            pp = PlotPanel(self,  -1, type, arrays, z=z_val )
-            self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
-            pp.Plot()
-
+        if arrays:
+            for type in ['IsoPT']:
+                pp = PlotPanel(self,  -1, type, arrays, z=z_val )
+                self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
+                pp.Plot()
+        else:
+            pub.sendMessage('log', ('warning', "Couldn't calculate for the given molar fraction (%s)" % z_val))
         
 
     def OnMakePxy(self, message):
-        case_id, case_name, arrays = message.data
+        case_id, case_name, arrays, t_val = message.data
 
-        print arrays
+        if arrays:
+            for type in ['Pxy', 'PxyPrho']:
+                pp = PlotPanel(self,  -1, type, arrays, t=t_val )
+                self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
+                pp.Plot()
+        else:
+            pub.sendMessage('log', ('warning', "Couldn't calculate for the given temperature (%s K)" % t_val))
 
-        pub.sendMessage('log', ('error', 'Pxy plot not implemented yet'))
 
     def OnMakeTxy(self, message):
-        case_id, case_name, arrays = message.data
+        case_id, case_name, arrays, p_val = message.data
 
-        print arrays
-        pub.sendMessage('log', ('error', 'Txy plot not implemented yet'))
-    
-
+        if arrays:
+            for type in ['Txy', 'TxyTrho']:
+                pp = PlotPanel(self,  -1, type, arrays, p=p_val )
+                self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
+                pp.Plot()
+        else:
+            pub.sendMessage('log', ('warning', "Couldn't calculate for the given pressure (%s bar)" % p_val))
 
 class VarsAndParamPanel(wx.Panel):
     """a panel with 2 columns of inputs. First colums input EOS variables. 
@@ -921,14 +931,16 @@ class CasePanel(scrolled.ScrolledPanel):
                 pub.sendMessage('make.isop', (self.case_id, self.name, curves_isop, z))
             
             elif diagram_selection == 2:   #pxy
-                self.api_manager.write_generic_inparam('t', self.t_input.GetValue())
+                t = self.t_input.GetValue()
+                self.api_manager.write_generic_inparam('t', t)
                 curves_pxy = self.api_manager.read_generic_output('pxy')
-                pub.sendMessage('make.pxy', (self.case_id, self.name, curves_pxy))
+                pub.sendMessage('make.pxy', (self.case_id, self.name, curves_pxy, t))
 
             elif diagram_selection == 3:   #txy
-                self.api_manager.write_generic_inparam('p', self.p_input.GetValue())
+                p = self.p_input.GetValue()
+                self.api_manager.write_generic_inparam('p', p)
                 curves_txy = self.api_manager.read_generic_output('txy')
-                pub.sendMessage('make.txy', (self.case_id, self.name, curves_txy))
+                pub.sendMessage('make.txy', (self.case_id, self.name, curves_txy, p))
             
         else:
             pub.sendMessage('log', ('error', "Nothing to calculate. Define the system first."))
