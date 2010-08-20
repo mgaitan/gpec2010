@@ -1,4 +1,30 @@
 
+import hashlib
+import pickle
+
+
+cache = {}
+
+def compute_key(function, args, kw):
+    key = pickle.dumps((function.func_name, args, kw))
+    return hashlib.sha1(key).hexdigest()
+
+def memoize():
+    def _memoize(function):
+        def __memoize(*args, **kw):
+            key = compute_key(function, args, kw)
+
+            if key not in cache.keys():     #we have'nt it already?
+                result = function(*args, **kw)   
+                cache[key] = result         #store a new one 
+            else:
+                print 'found in cache'
+
+            return cache[key]   
+        return __memoize
+    return _memoize
+
+
 class Counter():
     count = 0
     def __init__(self, init=0):

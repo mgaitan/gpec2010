@@ -6,13 +6,17 @@ import sys
 import cStringIO #for memory files
 
 
-from tools import killableprocess
+from tools import killableprocess, misc
 import subprocess
 
 from settings import PATH_BIN, TIMEOUT, PATH_TEMP, BIN_AVAILABLE
 import numpy as np
 
 from wx.lib.pubsub import Publisher as pub
+
+
+
+
 
 
 def clean_tmp():
@@ -92,7 +96,15 @@ class ApiManager():
         else:
             pub.sendMessage('log', ('error', 'Unknown fortran executable %s' % bin))
 
-    def write_conparin(self, direction, model_id, data):
+
+    @misc.memoize()
+    def conparin2comparout(self, direction, model_id, data):
+        self._write_conparin(direction, model_id, data)
+        return self._read_conparout(model_id)
+
+
+   
+    def _write_conparin(self, direction, model_id, data):
         """Write the input file CONPARIN.DAT ". data could be EOS variables or 
             model paramater""" 
 
@@ -149,7 +161,7 @@ class ApiManager():
         TxyGPEC or PxyGPEC respectively.
         """
 
-        type2file = {'z':'ZforIsop.dat', 'p':'PFORTXY.dat', 't':'TFORTXY.dat'}
+        type2file = {'z':'ZforIsop.dat', 'p':'PFORTXY.dat', 't':'TFORPXY.dat'}
         
         if type not in type2file.keys():
             pub.sendMessage('log', ('error', 'Unknown input file to write' ))
@@ -170,7 +182,7 @@ class ApiManager():
 
     
 
-    def read_conparout(self, model_id):
+    def _read_conparout(self, model_id):
         """COMPAROUT.DAT has two lines of data. First one is EOS vars and second 
             model parameters. """
 
@@ -191,8 +203,18 @@ class ApiManager():
                     
     
     def read_generic_output(self, type):
-        type2exe = {'isop':'IsoplethGPEC', 'pxy': 'PxyGPEC', 'txy': 'TxyGPEC'}
+        type2exe = {'gpec':'GPEC', 'isop':'IsoplethGPEC', 'pxy': 'PxyGPEC', 'txy': 'TxyGPEC'}
         
+        curve_types = {'gpec': {'VAP':4, 'CRI':5, 'CEP':6, 'LLV':10 },  #type:significatives columns
+                        'isop': { 'ISO':6, 
+                                    #'LLV':2,
+                                    #'CRI':2,
+                                                    },      #TODO ISOP data has different structure por critical point  
+                        'pxy': {'Pxy':7},
+                        'txy': {'Txy':7}
+                      }
+                        
+
         if type not in type2exe.keys():
             pub.sendMessage('log', ('error', 'Unknown executable' ))
             return
@@ -201,23 +223,23 @@ class ApiManager():
         
         filename = BIN_AVAILABLE[type2exe[type]]['out'][0]
 
+
         filepath = os.path.join(self.path_temp, filename)
         pub.sendMessage('add_txt', (filepath, self.case_id))
-    
+        
+        arrays = self.output2array(filepath, curve_types[type])
 
-    def read_gpecout(self):
+        print "------------- %s -------------" % type2exe[type], arrays 
+        return arrays
+
+    def output2array(self, filepath, curve_types):
         """Parses an gpecout.dat, detects numeric blocks and create arrays with them"""
 
         #TODO Generalize this to use with PXYOUT.DAT TXYOUT.DAT and ISOPOUT.DAT
 
-        ret = self.exec_fortran('GPEC')  #generate gpecout.dat
-        
-        
-        
-        filename = 'GPECOUT.DAT'
-
-        filepath = os.path.join(self.path_temp, filename)
-        curve_types = {'VAP':4, 'CRI':5, 'CEP':6, 'LLV':10 } #type:significatives columns
+    
+        #filepath = os.path.join(self.path_temp, filename)
+        #curve_types = {'VAP':4, 'CRI':5, 'CEP':6, 'LLV':10 } #type:significatives columns
 
         tokens = {}         #{(begin,end):'type', ...}
         begin = end = 0
@@ -277,6 +299,4 @@ class ApiManager():
 
 
             fh.close()
-
-        pub.sendMessage('add_txt', (filepath, self.case_id))
         return arrays_out

@@ -389,10 +389,11 @@ class VarsAndParamPanel(wx.Panel):
         else:
             data = [box.GetValue() for box in self.params]
 
-        self.api_manager.write_conparin(self.direction, self.model_id, data)
-
-        data = self.api_manager.read_conparout(self.model_id) 
+        #self.api_manager.write_conparin(self.direction, self.model_id, data)
+        #data = self.api_manager.read_conparout(self.model_id) 
         
+        data = self.api_manager.conparin2comparout(self.direction, self.model_id, data)
+
         if data is not None:
 
             #~ if self.direction == 0:
@@ -892,7 +893,7 @@ class CasePanel(scrolled.ScrolledPanel):
             #needed to ALL type of diagrams. TODO: check a way to cache result if parameter didn't change
 
             self.api_manager.write_gpecin(self.model_id, comp1, comp2, ncomb, 0, k12, l12, max_p)
-            curves = self.api_manager.read_gpecout()
+            curves = self.api_manager.read_generic_output('gpec')
 
             diagram_selection =  self.diagram_ch.GetSelection()
             
