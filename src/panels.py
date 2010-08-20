@@ -48,13 +48,13 @@ class PlotPanel(wx.Panel):
              * mpl navigation toolbar
              * Control panel for interaction"""
         
-    def __init__ (self, parent, id, diagram_type='PT', arrays=None):
+    def __init__ (self, parent, id, diagram_type='PT', arrays=None, **kwarg):
         
         wx.Panel.__init__(self, parent, id, style = wx.FULL_REPAINT_ON_RESIZE)
         
  
         
-        self.plot = getattr(plots, diagram_type)(self) #any type of diagram
+        self.plot = getattr(plots, diagram_type)(self, **kwarg) #any type of diagram
 
         self.plot.canvas.mpl_connect('button_release_event',        #binding matplotlib event
                                 self.onMouseButtonClick)
@@ -157,15 +157,26 @@ class SuitePlotsPanel(wx.Panel):
         #by default it include a log_messages panel
         
     def OnMakeIsop(self, message):
-        case_id, case_name, arrays = message.data
-        pub.sendMessage('log', ('error', 'ISOP plots Not implemented yet'))
+        case_id, case_name, arrays, z_val = message.data
+
+        for type in ['IsoPT']:
+            pp = PlotPanel(self,  -1, type, arrays, z=z_val )
+            self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
+            pp.Plot()
+
+        
 
     def OnMakePxy(self, message):
         case_id, case_name, arrays = message.data
+
+        print arrays
+
         pub.sendMessage('log', ('error', 'Pxy plot not implemented yet'))
 
     def OnMakeTxy(self, message):
         case_id, case_name, arrays = message.data
+
+        print arrays
         pub.sendMessage('log', ('error', 'Txy plot not implemented yet'))
     
 
@@ -903,10 +914,11 @@ class CasePanel(scrolled.ScrolledPanel):
                 pub.sendMessage('make.globalsuite', (self.case_id, self.name, curves))
 
             elif diagram_selection == 1:   #isopleth
-                self.api_manager.write_generic_inparam('z', self.z_input.GetValue())
+                z = self.z_input.GetValue()
+                self.api_manager.write_generic_inparam('z', z)
                 curves_isop = self.api_manager.read_generic_output('isop')
                 
-                pub.sendMessage('make.isop', (self.case_id, self.name, curves_isop))
+                pub.sendMessage('make.isop', (self.case_id, self.name, curves_isop, z))
             
             elif diagram_selection == 2:   #pxy
                 self.api_manager.write_generic_inparam('t', self.t_input.GetValue())

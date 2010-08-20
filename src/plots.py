@@ -13,7 +13,7 @@ import wx
 class BasePlot(object):
     """a base plot class for GPEC"""
 
-    def __init__(self, parent, arrays=None, title=None, xlabel="", ylabel="", system=(), projection="2d", zlabel="", ):
+    def __init__(self, parent, arrays=None, title=None, xlabel="", ylabel="", system=(), projection="2d", zlabel="", **karg):
 
         self.title = title
         if len(system)==2:
@@ -167,6 +167,44 @@ class PTrho(BasePlot):
                                        'type': 'LLV',
                                     } )
 
+
+
+class IsoPT(BasePlot):
+    """Isopleth PT diagram"""
+    
+    def __init__(self, parent, arrays=None, **kwarg):
+
+        self.short_title = u"Isopleth P-T"
+        self.title = u'Isopleth Graph for a Molar Fraction (Z=%s)' % kwarg['z']
+        self.xlabel = u'Temperature [K]'
+        self.ylabel = u'Pressure [bar]'
+
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
+
+    def setup_curves(self, arrays):
+
+        if 'ISO' in arrays.keys():
+            for num, vap_curve in enumerate(arrays['ISO']):
+                
+                counter = u'' if len(arrays['ISO']) == 1 else u' %i' % (num + 1)
+
+                self.curves.append( {'name': u'Isopleth line' + counter , 
+                                     'visible':True, 
+                                     'lines':( vap_curve[:,0], vap_curve[:,1]),
+                                      'color' : 'green',
+                                      'wx_id' : wx.NewId(),
+                                      'type': 'ISO',
+                                        } )             
+
+        if 'LLV' in arrays.keys():
+            for num, llv_curve in enumerate(arrays['LLV']):
+                self.curves.append( { 'name': 'LLV', 
+                                      'visible':True,
+                                      'lines': (llv_curve[:,0], llv_curve[:,1]),           #TODO
+                                      'color': 'red', 
+                                      'wx_id' : wx.NewId(),
+                                       'type': 'LLV',
+                                    } )
 
 
 
