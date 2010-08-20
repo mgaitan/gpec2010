@@ -62,7 +62,8 @@ class BasePlot(object):
         """plot all visible curves"""
         for curve in self.curves:
             if curve['visible']:
-                curve['line2d'] = self.axes.plot(*curve['lines'], color=curve['color'], label=curve['name'])
+                marker = '' if 'marker' not in curve.keys() else curve['marker']
+                curve['line2d'] = self.axes.plot(*curve['lines'], color=curve['color'], marker=marker, label=curve['name'])
         
 
         
@@ -175,7 +176,7 @@ class IsoPT(BasePlot):
     def __init__(self, parent, arrays=None, **kwarg):
 
         self.short_title = u"Isopleth P-T"
-        self.title = u'Isopleth Graph for a Molar Fraction (Z=%s)' % kwarg['z']
+        self.title = u'Isopleth Graph for a Composition (Z=%s)' % kwarg['z']
         self.xlabel = u'Temperature [K]'
         self.ylabel = u'Pressure [bar]'
 
@@ -198,15 +199,176 @@ class IsoPT(BasePlot):
 
         if 'LLV' in arrays.keys():
             for num, llv_curve in enumerate(arrays['LLV']):
-                self.curves.append( { 'name': 'LLV', 
-                                      'visible':True,
-                                      'lines': (llv_curve[:,0], llv_curve[:,1]),           #TODO
-                                      'color': 'red', 
+        
+                if llv_curve.shape == (2,):  
+
+                    self.curves.append( { 'name': 'LLV Critical Point', 
+                                          'visible':True,
+                                          'lines': (llv_curve[0], llv_curve[1]),           #TODO
+                                          'color': 'blue', 
+                                          'marker': '^',
+                                          'wx_id' : wx.NewId(),
+                                           'type': 'LLV',
+                                           
+                                        } )
+
+                else:
+
+                    self.curves.append( { 'name': 'LLV', 
+                                          'visible':True,
+                                          'lines': (llv_curve[:,0], llv_curve[:,1]),           #TODO
+                                          'color': 'blue', 
+                                          'wx_id' : wx.NewId(),
+                                           'type': 'LLV',
+                                        } )
+                    
+
+
+class IsoTx(BasePlot):
+    """Isopleth Tx diagram"""
+    
+    def __init__(self, parent, arrays=None, **kwarg):
+
+        self.short_title = u"Isopleth T-x"
+        self.title = u'T-x projection of the Isopleth Graph for a Composition (Z=%s)' % kwarg['z']
+        self.xlabel = u'Temperature [K]'
+        self.ylabel = u'Composition'
+
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
+
+    def setup_curves(self, arrays):
+
+        if 'ISO' in arrays.keys():
+            for num, vap_curve in enumerate(arrays['ISO']):
+                
+                counter = u'' if len(arrays['ISO']) == 1 else u' %i' % (num + 1)
+
+                self.curves.append( {'name': u'Isopleth line' + counter , 
+                                     'visible':True, 
+                                     'lines':( vap_curve[:,2], vap_curve[:,0]),
+                                      'color' : 'green',
                                       'wx_id' : wx.NewId(),
-                                       'type': 'LLV',
-                                    } )
+                                      'type': 'ISO',
+                                        } )             
+
+               
+                self.curves.append( {'name': u'Isopleth line' + counter , 
+                                     'visible':True, 
+                                     'lines':( vap_curve[:,3], vap_curve[:,0]),
+                                      'color' : 'green',
+                                      'wx_id' : wx.NewId(),
+                                      'type': 'ISO',
+                                        } )  
+
+        
+class IsoPx(BasePlot):
+    """Isopleth Px diagram"""
+    
+    def __init__(self, parent, arrays=None, **kwarg):
+
+        self.short_title = u"Isopleth P-x"
+        self.title = u'P-x projection of the Isopleth Graph for a Composition (Z=%s)' % kwarg['z']
+        self.xlabel = u'Composition'
+        self.ylabel = u'Pressure [bar]'
+
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
+
+    def setup_curves(self, arrays):
+
+        if 'ISO' in arrays.keys():
+            for num, vap_curve in enumerate(arrays['ISO']):
+                
+                counter = u'' if len(arrays['ISO']) == 1 else u' %i' % (num + 1)
+
+                self.curves.append( {'name': u'Isopleth line' + counter , 
+                                     'visible':True, 
+                                     'lines':( vap_curve[:,2], vap_curve[:,1]),
+                                      'color' : 'green',
+                                      'wx_id' : wx.NewId(),
+                                      'type': 'ISO',
+                                        } )
+               
+                self.curves.append( {'name': u'Isopleth line' + counter , 
+                                     'visible':True, 
+                                     'lines':( vap_curve[:,3], vap_curve[:,1]),
+                                      'color' : 'green',
+                                      'wx_id' : wx.NewId(),
+                                      'type': 'ISO',
+                                        } )     
 
 
+class IsoTrho(BasePlot):
+    """Isopleth Trho diagram"""
+    
+    def __init__(self, parent, arrays=None, **kwarg):
+
+        self.short_title = u"Isopleth T-\u03c1" 
+        self.title = u'T-\u03c1 projection of the Isopleth Graph for a Composition (Z=%s)' % kwarg['z']
+        self.xlabel = u'Density [mol/l]'
+        self.ylabel = u'Temperature [K]'
+        
+
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
+
+    def setup_curves(self, arrays):
+
+        if 'ISO' in arrays.keys():
+            for num, vap_curve in enumerate(arrays['ISO']):
+                
+                counter = u'' if len(arrays['ISO']) == 1 else u' %i' % (num + 1)
+
+                self.curves.append( {'name': u'Isopleth line X ' + counter , 
+                                     'visible':True, 
+                                     'lines':( vap_curve[:,4], vap_curve[:,0]),
+                                      'color' : 'green',
+                                      'wx_id' : wx.NewId(),
+                                      'type': 'ISO',
+                                        } )
+             
+                self.curves.append( {'name': u'Isopleth line Y' + counter , 
+                                     'visible':True, 
+                                     'lines':( vap_curve[:,5], vap_curve[:,0]),
+                                      'color' : 'green',
+                                      'wx_id' : wx.NewId(),
+                                      'type': 'ISO',
+                                        } )
+
+        
+class IsoPrho(BasePlot):
+    """Isopleth Prho diagram"""
+    
+    def __init__(self, parent, arrays=None, **kwarg):
+
+        self.short_title = u"Isopleth P-\u03c1" 
+        self.title = u'P-\u03c1 projection of the Isopleth Graph for a Composition (Z=%s)' % kwarg['z']
+        self.xlabel = u'Density [mol/l]'
+        self.ylabel = u'Temperature [K]'
+        
+
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
+
+    def setup_curves(self, arrays):
+
+        if 'ISO' in arrays.keys():
+            for num, vap_curve in enumerate(arrays['ISO']):
+                
+                counter = u'' if len(arrays['ISO']) == 1 else u' %i' % (num + 1)
+
+                self.curves.append( {'name': u'Isopleth line X' + counter , 
+                                     'visible':True, 
+                                     'lines':( vap_curve[:,4], vap_curve[:,1]),
+                                      'color' : 'green',
+                                      'wx_id' : wx.NewId(),
+                                      'type': 'ISO',
+                                        } )  
+
+                self.curves.append( {'name': u'Isopleth line Y' + counter , 
+                                     'visible':True, 
+                                     'lines':( vap_curve[:,5], vap_curve[:,1]),
+                                      'color' : 'green',
+                                      'wx_id' : wx.NewId(),
+                                      'type': 'ISO',
+                                        } )  
 
 class PT(BasePlot):
     """pressure-temperature diagram"""
@@ -309,7 +471,7 @@ class Pxy(BasePlot):
         self.title = u'Isothermal fluid phase equilibrium for T=%s [k]' % kwarg['t']
 
         self.ylabel = u'Pressure [bar]'
-        self.xlabel = u'Molar fraction '    #TODO DEFINE system inside the plot
+        self.xlabel = u'Composition '    #TODO DEFINE system inside the plot
         
 
         BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
@@ -385,7 +547,7 @@ class Txy(BasePlot):
         self.title = u'Isobaric fluid phase equilibrium for P=%s [bar]' % kwarg['p']
 
         self.ylabel = u'Temperature [k]'
-        self.xlabel = u'Molar fraction'    #TODO DEFINE system inside the plot
+        self.xlabel = u'Composition'    #TODO DEFINE system inside the plot
         
 
         BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        

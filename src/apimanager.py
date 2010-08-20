@@ -212,7 +212,7 @@ class ApiManager():
         
         curve_types = {'gpec': {'VAP':4, 'CRI':5, 'CEP':6, 'LLV':10 },  #type:significatives columns
                         'isop': { 'ISO':6, 
-                                    #'LLV':2,
+                                    'LLV':2,
                                     #'CRI':2,
                                                     },      #TODO ISOP data has different structure por critical point  
                         'pxy': {'Pxy':7},
@@ -283,7 +283,7 @@ class ApiManager():
                 
                 #write lines just of the block between (begin,end)
                 for l,line in enumerate(fh):
-                    if begin <= l < end:
+                    if begin <= l < end and len(get_numbers(line))>0:      #TODO think a better way to check the special case of col headers after mark
                         temp_w.write( line.replace('*', '') )    
             
 

@@ -160,7 +160,7 @@ class SuitePlotsPanel(wx.Panel):
         case_id, case_name, arrays, z_val = message.data
 
         if arrays:
-            for type in ['IsoPT']:
+            for type in ['IsoPT', 'IsoTx', 'IsoPx', 'IsoTrho', 'IsoPrho']:
                 pp = PlotPanel(self,  -1, type, arrays, z=z_val )
                 self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
                 pp.Plot()
