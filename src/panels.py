@@ -311,6 +311,8 @@ class VarsAndParamPanel(wx.Panel):
         self.Bind(wx.EVT_RADIOBUTTON, self.OnDirectionSelect, self.radio2 )
 
     def SetData(self, data):
+        """Set basic compound data on the panel"""
+
         self.compound_id = data[0]
         self.compound_name = data[1]    #in case the title != compound_name
         self.title.SetLabel(data[1]) 
@@ -319,6 +321,8 @@ class VarsAndParamPanel(wx.Panel):
         #TODO reset param columns. 
         self.EnableAll()
 
+
+
     def GetData(self):
         """Return a compound list [id, name, vars...]   useful to redefine the system"""
         if self.enabled:
@@ -326,7 +330,9 @@ class VarsAndParamPanel(wx.Panel):
 
     def GetTotalData(self):
         """Return a compound list tuple (name, (vars...), (param...))"""
-        self.OnButton(None) #Ensure last numbers
+
+        self.OnButton(None) #Ensure last numbers generating (as a programatical event)
+
         tmp_var = self.GetVarsValues()
         tmp_var = tmp_var[:-2] + [tmp_var[-1], tmp_var[-2]]  #gpecout has order changed: vc <-> omega
 
@@ -622,14 +628,12 @@ class TabbedCases(wx.Panel):
         wx.Panel.__init__(self, parent, id)
         self.nb = wx.aui.AuiNotebook(self, style = wx.aui.AUI_NB_TOP )
         
-        ico = os.path.join(PATH_ICONS, 'add.png')
+        
 
         self.AddNewCase(0) #a first one case
 
-        self.dummy = wx.Panel(self,-1)#dummy Panel
+        self.AddNewCaseButton() #the last `+` page
 
-        self.nb.AddPage(self.dummy, "", bitmap=wx.Bitmap(ico, wx.BITMAP_TYPE_PNG)) 
-        
         self.Bind(wx.aui.EVT_AUINOTEBOOK_PAGE_CHANGED, self.onPageChange, self.nb)
         self.Bind(wx.aui.EVT_AUINOTEBOOK_PAGE_CLOSED, self.onPageClose, self.nb) #TODO
 
@@ -639,7 +643,16 @@ class TabbedCases(wx.Panel):
 
         size = self.nb.GetPage(0).GetSize()
         self.SetSize(size)
+
+        self.veto = False   #to desactivate add new page on page change.
+
     
+    def AddNewCaseButton(self):
+        ico = os.path.join(PATH_ICONS, 'add.png')
+        self.dummy = wx.Panel(self,-1)  #dummy Panel
+        self.nb.AddPage(self.dummy, "", bitmap=wx.Bitmap(ico, wx.BITMAP_TYPE_PNG)) 
+        
+
 
     def onPageClose(self, evt):
         evt.Veto()
@@ -653,20 +666,28 @@ class TabbedCases(wx.Panel):
             
 
     def LoadCases(self, cases_data):
-        #delete all firt
         
-        if all( map(self.nb.RemovePage, range(self.nb.GetPageCount() - 1))):
-            print "all deleted"
-
+    
+        self.veto = True
+        
+        #delete all firt
+        for idx in  range(self.nb.GetPageCount()):
+            self.nb.RemovePage(idx)
 
         for idx, case_data in enumerate(cases_data):
-            case = self.AddNewCase(case_data['case_id'])    #idx
+            case = self.AddNewCase(idx)    #idx
             case.LoadEssential(case_data)
         
+        self.UpdatePagesTitle()
+        self.veto = False
 
+
+    def UpdatePagesTitle(self):
+        for idx in range(self.nb.GetPageCount() - 1):
+            self.nb.SetPageText(idx, self.nb.GetPage(idx).name)
 
     def onPageChange(self, evt):
-        if evt.GetSelection() + 1 == self.nb.GetPageCount(): #last tab selected
+        if evt.GetSelection() + 1 == self.nb.GetPageCount() and not self.veto: #last tab selected?
             self.AddNewCase(evt.GetSelection())
 
     def AddNewCase(self, location):
