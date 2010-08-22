@@ -80,6 +80,9 @@ class MainFrame(wx.Frame):
 
         self.Bind(wx.EVT_CLOSE, self.OnClose)
         self.Bind(wx.aui.EVT_AUI_PANE_CLOSE, self.OnClosePane)
+
+        #self.Bind(wx.aui.EVT_AUI_RENDER, self.OnDragSash)
+
         self.Maximize()
 
 
@@ -88,6 +91,9 @@ class MainFrame(wx.Frame):
         self.filename = None
         self.modified = False
     
+    def OnDragSash(self, evt):
+        print 'dragged', evt
+
 
     def FileSaveAs(self,event):
         """Save the project as a new file"""

@@ -812,8 +812,9 @@ class CasePanel(scrolled.ScrolledPanel):
         self.Bind(wx.EVT_BUTTON, self.OnLoadSystem, self.load_button)
         self.Bind(wx.EVT_BUTTON, self.OnMakePlots, self.plot_button)
         
-        #self.Bind(wx.EVT_CONTEXT_MENU, self.OnContextMenu)
+        
 
+        
 
     def OnSetDiagram(self, event):
         diagram_type_key = self.diagram_ch.GetSelection()
@@ -903,12 +904,11 @@ class CasePanel(scrolled.ScrolledPanel):
 
         p = self.GetParent()
         
-        if isinstance(p, wx.SplitterWindow):
-            
-            p.UpdateSize()
-        else:
-            p.SetClientSize(self.GetSize())
+        #update auipane
+        p.GetParent().GetParent()._mgr.Update() # SetClientSize(self.GetSize())
         
+    
+
 
     def SaveEssential(self):
         """Returns essential data"""
