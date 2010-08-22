@@ -1,5 +1,7 @@
 import wx
 import wx.aui
+import os
+import cPickle as pickle
 
 import apimanager
 from panels import SuitePlotsPanel, TabbedCases, InfoPanel
@@ -9,8 +11,8 @@ from wx.lib.pubsub import Publisher as pub
 
 class MainFrame(wx.Frame):
 
-    def __init__(self, parent, id=-1, title='GPEC',
-                 pos=wx.DefaultPosition, size=(800,600),
+    def __init__(self, parent, id=-1,
+                 pos=wx.DefaultPosition, title='GPEC', size=(800,600),
                  style=wx.DEFAULT_FRAME_STYLE | wx.MAXIMIZE ):
         wx.Frame.__init__(self, parent, id, title, pos, size, style=style)
 
@@ -18,6 +20,7 @@ class MainFrame(wx.Frame):
 
         self.SetBackgroundColour(wx.NullColour) #hack for win32
 
+        self.title = title
 
         self.CenterOnScreen()
 
@@ -28,6 +31,9 @@ class MainFrame(wx.Frame):
         menu = [
             ('&File', [
                 ('&Open', self.FileOpen),
+                ('&Save As...', self.FileSaveAs),
+                ('&Save', self.FileSave),
+                
                 (),
                 ('&Exit', self.onCloseWindow, "Quit this program"),
 
@@ -76,8 +82,49 @@ class MainFrame(wx.Frame):
         self.Bind(wx.aui.EVT_AUI_PANE_CLOSE, self.OnClosePane)
         self.Maximize()
 
+
+        self.dirname = ''
+        
+        self.filename = None
+        self.modified = False
+    
+
+    def FileSaveAs(self,event):
+        """Save the project as a new file"""
+        dlg = wx.FileDialog(self, "Save as", self.dirname, "", "*.gpc", \
+                wx.SAVE | wx.OVERWRITE_PROMPT)
+        if dlg.ShowModal() == wx.ID_OK:
+            # Open the file for write, write, close
+            self.filename=dlg.GetFilename()
+            self.dirname=dlg.GetDirectory()
+            self.FileSave(event)
+
+        dlg.Destroy()
+
+    def FileSave(self,event):
+        """Save the project in the file defined or in a new one"""
+
+        if self.filename is None:
+            self.FileSaveAs(event)
+        else:
+            data = self.cases_panel.SaveCases()
+
+            with open(os.path.join(self.dirname, self.filename),'w') as fh:
+                pickle.dump(data,fh)
+
+            self.SetTitle("%s <%s>" % (self.title, self.filename))
+            self.modified = False
+
+
+
+
+
+
     def OnClosePane(self, event):
         wx.CallAfter(self.egg)
+
+
+
 
     def egg(self):
         if all([not p.IsShown() for p in self._mgr.GetAllPanes()]):
@@ -108,7 +155,26 @@ class MainFrame(wx.Frame):
 
 
     def FileOpen(self, event):
-        self.Info(self, 'You chose File->Open')
+        dlg = wx.FileDialog(self, "Open Project", self.dirname, "", "*.gpc", wx.OPEN)
+        if dlg.ShowModal() == wx.ID_OK:
+            self.filename=dlg.GetFilename()
+            self.dirname=dlg.GetDirectory()
+
+            # Open the file, read the contents and set them into
+            # the text edit window
+            with open(os.path.join(self.dirname, self.filename),'r') as fh:
+                data = pickle.load(fh)
+                self.cases_panel.LoadCases(data)
+
+            # Report on name of latest file read
+            self.SetTitle("%s <%s>" % (self.title, self.filename))
+            
+            self.modified = False
+
+        dlg.Destroy()
+
+
+
     def EditCopy(self, event):
         self.Info(self, 'You chose Edit->Copy')
     def EditPaste(self, event):

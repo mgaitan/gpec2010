@@ -4,6 +4,9 @@
 import os
 import time
 import sys
+
+import cPickle as pickle
+
 #WX
 import wx
 import wx.aui
@@ -621,9 +624,11 @@ class TabbedCases(wx.Panel):
         
         ico = os.path.join(PATH_ICONS, 'add.png')
 
-        self.addNewCase(0) #a first one case
+        self.AddNewCase(0) #a first one case
 
-        self.nb.AddPage(wx.Panel(self,-1), "", bitmap=wx.Bitmap(ico, wx.BITMAP_TYPE_PNG)) #dummy Panel
+        self.dummy = wx.Panel(self,-1)#dummy Panel
+
+        self.nb.AddPage(self.dummy, "", bitmap=wx.Bitmap(ico, wx.BITMAP_TYPE_PNG)) 
         
         self.Bind(wx.aui.EVT_AUINOTEBOOK_PAGE_CHANGED, self.onPageChange, self.nb)
         self.Bind(wx.aui.EVT_AUINOTEBOOK_PAGE_CLOSED, self.onPageClose, self.nb) #TODO
@@ -641,21 +646,36 @@ class TabbedCases(wx.Panel):
         if evt.GetSelection() + 2 == self.nb.GetPageCount(): #last tab selected
             wx.CallAfter(self.nb.SetSelection,  0)
             
+    def SaveCases(self):
+        cases = [page.SaveEssential() for page in map(self.nb.GetPage, range(self.nb.GetPageCount() - 1))]
+        
+        return cases
             
-            
-            
+
+    def LoadCases(self, cases_data):
+        #delete all firt
+        
+        if all( map(self.nb.RemovePage, range(self.nb.GetPageCount() - 1))):
+            print "all deleted"
+
+
+        for idx, case_data in enumerate(cases_data):
+            case = self.AddNewCase(case_data['case_id'])    #idx
+            case.LoadEssential(case_data)
+        
 
 
     def onPageChange(self, evt):
         if evt.GetSelection() + 1 == self.nb.GetPageCount(): #last tab selected
-            self.addNewCase(evt.GetSelection())
+            self.AddNewCase(evt.GetSelection())
 
-    def addNewCase(self, location):
+    def AddNewCase(self, location):
         case = CasePanel(self, -1)
 
         self.nb.InsertPage(location, case, "Case %i" % case.case_id)
         wx.CallAfter(self.nb.SetSelection, location)
-
+        
+        return case #useful to chain 
         
  
     
@@ -869,9 +889,37 @@ class CasePanel(scrolled.ScrolledPanel):
             p.SetClientSize(self.GetSize())
         
 
+    def SaveEssential(self):
+        """Returns essential data"""
+        #TODO Add data from collapsable panel
+        
+        compounds_data =  [panel.GetData() for panel in self.panels if  panel.enabled ]  
+            
+
+        return {'compounds':compounds_data, 'case_id': self.case_id, 'case_name': self.name, 
+                                  'model_id':self.model_id }
+
+
+    def LoadEssential(self, essential_data ):
+        """Load data to restore a case"""
     
 
-    def OnLoadSystem(self, event):        
+        self.case_id = essential_data['case_id']
+        self.name = essential_data['case_name']
+
+        #it must saved before set compounds
+        self.OnSetModel(model_id= essential_data['model_id'] )
+
+        #compounds
+        for panel, data in zip (self.panels, essential_data['compounds']):
+            panel.SetData(data)
+        
+        
+
+    
+    
+
+    def OnLoadSystem(self, event=None):        
 
         #GET DATA IF vars-paramPanels are enabled
         compounds_data =  [panel.GetData() for panel in self.panels if  panel.enabled ]  
@@ -889,9 +937,9 @@ class CasePanel(scrolled.ScrolledPanel):
         dlg.Destroy()
 
 
-    def OnSetModel(self, event):
+    def OnSetModel(self, event=None, model_id=None):
 
-        self.model_id = self.model_options[event.GetString()]
+        self.model_id = model_id or self.model_options[event.GetString()]
 
 
         if self.model_id in (4,6):
