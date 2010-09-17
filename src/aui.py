@@ -9,6 +9,9 @@ from tools.misc import curry
 
 from wx.lib.pubsub import Publisher as pub
 
+import mvccontrollers
+
+
 class MainFrame(wx.Frame):
 
     def __init__(self, parent, id=-1,
@@ -238,6 +241,9 @@ if __name__ == "__main__":
                            #python and GPEC at the same time. Trying a magic clean-up
 
     app = wx.PySimpleApp(0)
+
+    
+
     wx.InitAllImageHandlers()
     main_frame = MainFrame(None, -1)
     app.SetTopWindow(main_frame)
