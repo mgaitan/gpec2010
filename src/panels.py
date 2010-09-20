@@ -56,9 +56,8 @@ class PlotPanel(wx.Panel):
         
     def __init__ (self, parent, id, diagram_type='PT', arrays=None, **kwarg):
         
-        wx.Panel.__init__(self, parent, id, style = wx.FULL_REPAINT_ON_RESIZE)
+        wx.Panel.__init__(self, parent, id, style = wx.FULL_REPAINT_ON_RESIZE, name=kwarg.pop('name', '') )
         
- 
         
         self.plot = getattr(plots, diagram_type)(self, **kwarg) #any type of diagram
 
@@ -127,7 +126,8 @@ class PlotPanel(wx.Panel):
         self.plot.plot()
 
 
-          
+
+       
    
 
 class SuitePlotsPanel(wx.Panel):
@@ -146,65 +146,69 @@ class SuitePlotsPanel(wx.Panel):
         self.SetSizerAndFit(sizer)
 
                 
-        pub.subscribe(self.OnMakeGlobalSuite, 'make.globalsuite')
-        pub.subscribe(self.OnMakeGlobalSuite3d, 'make.globalsuite3d')
-        pub.subscribe(self.OnMakeIsop, 'make.isop')
-        pub.subscribe(self.OnMakePxy, 'make.pxy')
-        pub.subscribe(self.OnMakeTxy, 'make.txy')
-
-
-    def OnMakeGlobalSuite3d(self, message):
-        case_id, case_name, arrays = message.data
-
-        for type in ['PTrho', 'PTx']:
-            pp = PlotPanel(self,  -1, type, arrays)
-            self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
-            pp.Plot()
-
-    def OnMakeGlobalSuite(self, message):
-        case_id, case_name, arrays = message.data
-
-        for type in ['PT', 'Tx', 'Px', 'Trho', 'Prho']:
-            pp = PlotPanel(self,  -1, type, arrays)
-            self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
-            pp.Plot()
-        
-        #by default it include a log_messages panel
-        
-    def OnMakeIsop(self, message):
-        case_id, case_name, arrays, z_val = message.data
-
-        if arrays:
-            for type in ['IsoPT', 'IsoTx', 'IsoPx', 'IsoTrho', 'IsoPrho']:
-                pp = PlotPanel(self,  -1, type, arrays, z=z_val )
-                self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
-                pp.Plot()
-        else:
-            pub.sendMessage('log', ('warning', "Couldn't calculate for the given molar fraction (%s)" % z_val))
+        pub.subscribe(self.OnMakePlots, 'make') #for all kind of suites
         
 
-    def OnMakePxy(self, message):
-        case_id, case_name, arrays, t_val = message.data
+    def OnMakePlots(self, message):
+        type = message.topic[1]
+        
+        if type == 'globalsuite':
+            case_id, case_name, arrays = message.data
 
-        if arrays:
-            for type in ['Pxy', 'PxyPrho']:
-                pp = PlotPanel(self,  -1, type, arrays, t=t_val )
+            for type in ['PT', 'Tx', 'Px', 'Trho', 'Prho']:
+                panel_name = 'case_%i_%s' % (case_id, type)
+                pp = PlotPanel(self,  -1, type, arrays, name=panel_name )   #name is useful to find the page later. 
+                
+                pub.sendMessage('add checkbox', (case_id, message.topic, pp.plot.short_title, panel_name))
+
                 self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
                 pp.Plot()
-        else:
-            pub.sendMessage('log', ('warning', "Couldn't calculate for the given temperature (%s K)" % t_val))
+        
+        elif type == 'globalsuite3d':
+            case_id, case_name, arrays = message.data
 
+            for type in ['PTrho', 'PTx']:
+                pp = PlotPanel(self,  -1, type, arrays, name='case_%i_%s' % (case_id, type))
+                #pub.sendMessage('panel added', (case_id
 
-    def OnMakeTxy(self, message):
-        case_id, case_name, arrays, p_val = message.data
-
-        if arrays:
-            for type in ['Txy', 'TxyTrho']:
-                pp = PlotPanel(self,  -1, type, arrays, p=p_val )
                 self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
-                pp.Plot()
-        else:
-            pub.sendMessage('log', ('warning', "Couldn't calculate for the given pressure (%s bar)" % p_val))
+                pp.Plot()           
+        
+        elif type == 'isop':
+            case_id, case_name, arrays, z_val = message.data
+
+            if arrays:
+                for type in ['IsoPT', 'IsoTx', 'IsoPx', 'IsoTrho', 'IsoPrho']:
+                    pp = PlotPanel(self,  -1, type, arrays, z=z_val, name='case_%i_%s' % (case_id, type) )
+                    self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
+
+
+                    pp.Plot()
+            else:
+                pub.sendMessage('log', ('warning', "Couldn't calculate for the given molar fraction (%s)" % z_val))
+                
+        elif type == 'pxy':
+            case_id, case_name, arrays, t_val = message.data
+
+            if arrays:
+                for type in ['Pxy', 'PxyPrho']:
+                    pp = PlotPanel(self,  -1, type, arrays, t=t_val, name='case_%i_%s' % (case_id, type) )
+                    self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
+                    pp.Plot()
+            else:
+                pub.sendMessage('log', ('warning', "Couldn't calculate for the given temperature (%s K)" % t_val))
+
+        elif type == 'txy':
+            case_id, case_name, arrays, p_val = message.data
+
+            if arrays:
+                for type in ['Txy', 'TxyTrho']:
+                    pp = PlotPanel(self,  -1, type, arrays, p=p_val, name='case_%i_%s' % (case_id, type) )
+                    self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
+                    pp.Plot()
+            else:
+                pub.sendMessage('log', ('warning', "Couldn't calculate for the given pressure (%s bar)" % p_val))
+
 
 class VarsAndParamPanel(wx.Panel):
     """a panel with 2 columns of inputs. First colums input EOS variables. 
@@ -1076,7 +1080,7 @@ class InfoPanel(wx.Panel):
         
         
 class PlotsTreePanel(wx.Panel):
-    """panel to show input an output text files"""
+    """panel to show/hide plots pages"""
 
 
     def __init__(self, parent, id):
@@ -1088,10 +1092,8 @@ class PlotsTreePanel(wx.Panel):
                                wx.lib.customtreectrl.TR_AUTO_CHECK_CHILD | 
                                wx.lib.customtreectrl.TR_AUTO_CHECK_PARENT )
 
-        
         self.root = self.tree.AddRoot("")
-        
-        
+                
         #self.Bind(wx.EVT_TREE_SEL_CHANGED, self.OnTreeSelChanged, self.tree)
        
         sizer = wx.BoxSizer(wx.HORIZONTAL)
@@ -1100,18 +1102,75 @@ class PlotsTreePanel(wx.Panel):
 
         self.SetSizerAndFit(sizer)
 
-        self.cases = {} #id:item_ID        
 
-        for case in range(4):
-            self.OnAddItem(case)
+        self.tree_data = {} 
+
+        
+        pub.subscribe(self.OnAddItem, 'add checkbox')
 
 
-    def OnAddItem(self, msg):
-        case_id = msg #TODO
-        node = self.tree.AppendItem(self.root, "Case %d" % case_id, ct_type=1)
-        self.cases[case_id] = node
+    def OnAddItem(self, message):
+        """
+        Case X 
+         |__ 2D
+         |  |__ Global
+         |  |   |___ PT
+         |  |   |___ Tx
+         |  |   |___ ...
+         |  |
+         |  |__ Isop (Z=z1)
+         |  |   |__ ...
+         |  |   |__ ...
+         |  |
+         |  |__ Txy (P=p1)
+         |  |   |__
+         |  |   |__
+         |  |
+         |  |__ Pxy (Z=z1)
+         |      |__ ...
+         |      |__ ...
+         |   
+         |__ 3D
+            |__ PTrho
+            |   |___ Global
+            |   |___ Isop
+            |   |___ Txy
+            |
+            |
+            |__ PTx
+               |___ PT
+               |___ Tx
+               |___ ...
+            
+        """
+        case_id, topic, type, panel_name = message.data
 
-        item = self.tree.AppendItem(node, "Case %d child" % case_id, ct_type=1)
+        category_translate = {'globalsuite': 'Global Phase', 'isop': 'Isopleths', 'txy': 'Txy', 'pxy': 'Pxy'}
+
+        category = category_translate[topic[1]] #globalsuite, isop, txy, pxy
+
+
+
+
+        if case_id not in self.tree_data.keys():
+            node = self.tree.AppendItem(self.root, "Case %d" % case_id, ct_type=1)
+            node2d = self.tree.AppendItem(node, "2D", ct_type=1)
+            node3d = self.tree.AppendItem(node, "3D", ct_type=1)
+            self.tree_data[case_id] = {'node': node, 'childs': {'2D': {'node': node2d, 'childs': {} }, 
+                                                                '3D': {'node': node2d, 'childs': {} }, 
+                                                               } 
+                                      }
+
+        if category not in self.tree_data[case_id]['childs']['2D']['childs'].keys():
+            parent_node = self.tree_data[case_id]['childs']['2D']['node']
+            node = self.tree.AppendItem(parent_node, category, ct_type=1)
+            self.tree_data[case_id]['childs']['2D']['childs'][category] = {'node': node, 'childs': {} }
+        
+
+        parent_node = self.tree_data[case_id]['childs']['2D']['childs'][category]['node']
+        node = self.tree.AppendItem(parent_node, type, ct_type=1)        
+        self.tree.SetPyData(node, panel_name)
+        self.tree.CheckItem2(node)
 
 
 class IOPanel(wx.Panel):
