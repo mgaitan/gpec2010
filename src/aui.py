@@ -4,13 +4,10 @@ import os
 import cPickle as pickle
 
 import apimanager
-from panels import SuitePlotsPanel, TabbedCases, InfoPanel
+from panels import SuitePlotsPanel, TabbedCases, InfoPanel, PlotsTreePanel
 from tools.misc import curry
 
 from wx.lib.pubsub import Publisher as pub
-
-import mvccontrollers
-
 
 class MainFrame(wx.Frame):
 
@@ -66,6 +63,14 @@ class MainFrame(wx.Frame):
 
         self.plots_panel = SuitePlotsPanel(self, -1)
         self.log_panel = InfoPanel(self, -1)
+
+
+        self.plots_tree_panel = PlotsTreePanel(self, -1)
+        self.plots_tree_auipane = wx.aui.AuiPaneInfo().\
+                          Name("plots_tree").Caption("Plots Manager").\
+                          Floatable(True)
+
+        self._mgr.AddPane(self.plots_tree_panel,self.plots_tree_auipane )
 
         # add the panes to the manager
         self._mgr.AddPane(self.cases_panel, self.cases_auipane )
@@ -241,9 +246,6 @@ if __name__ == "__main__":
                            #python and GPEC at the same time. Trying a magic clean-up
 
     app = wx.PySimpleApp(0)
-
-    
-
     wx.InitAllImageHandlers()
     main_frame = MainFrame(None, -1)
     app.SetTopWindow(main_frame)

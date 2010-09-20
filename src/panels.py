@@ -12,6 +12,7 @@ import wx
 import wx.aui
 
 import wx.lib.agw.aui as aui
+import wx.lib.customtreectrl 
 
 import wx.lib.buttons
 import ui.widgets
@@ -41,6 +42,8 @@ import plots
 
 
 from wx.lib.embeddedimage import PyEmbeddedImage
+
+
 
 
 
@@ -1072,18 +1075,48 @@ class InfoPanel(wx.Panel):
 
         
         
+class PlotsTreePanel(wx.Panel):
+    """panel to show input an output text files"""
 
 
+    def __init__(self, parent, id):
+        wx.Panel.__init__(self, parent, id)
 
-  
+        #TREE
+        self.tree = wx.lib.customtreectrl.CustomTreeCtrl(self, -1, wx.DefaultPosition, wx.DefaultSize,
+                               wx.TR_DEFAULT_STYLE | wx.TR_HIDE_ROOT | 
+                               wx.lib.customtreectrl.TR_AUTO_CHECK_CHILD | 
+                               wx.lib.customtreectrl.TR_AUTO_CHECK_PARENT )
+
         
+        self.root = self.tree.AddRoot("")
+        
+        
+        #self.Bind(wx.EVT_TREE_SEL_CHANGED, self.OnTreeSelChanged, self.tree)
+       
+        sizer = wx.BoxSizer(wx.HORIZONTAL)
+        
+        sizer.Add(self.tree, 1, wx.EXPAND) 
 
+        self.SetSizerAndFit(sizer)
+
+        self.cases = {} #id:item_ID        
+
+        for case in range(4):
+            self.OnAddItem(case)
+
+
+    def OnAddItem(self, msg):
+        case_id = msg #TODO
+        node = self.tree.AppendItem(self.root, "Case %d" % case_id, ct_type=1)
+        self.cases[case_id] = node
+
+        item = self.tree.AppendItem(node, "Case %d child" % case_id, ct_type=1)
 
 
 class IOPanel(wx.Panel):
     """an info panel to show input an output text files"""
 
-    #TODO!   #pub.subscribe(self.OnAddTextPage, 'add_txt')
 
     def __init__(self, parent, id):
         wx.Panel.__init__(self, parent, id)
@@ -1138,8 +1171,6 @@ class IOPanel(wx.Panel):
             #if case is unknown, create it
             node = self.tree.AppendItem(self.root, "Case %d" % case_id)
             self.cases[case_id] = node
-            
-        
         else:
             node = self.cases[case_id]
 
