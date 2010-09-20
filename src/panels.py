@@ -135,9 +135,8 @@ class SuitePlotsPanel(wx.Panel):
 
     def __init__(self, parent, id):
         wx.Panel.__init__(self, parent, id)
-        self.nb = wx.aui.AuiNotebook(self)
+        self.nb = wx.aui.AuiNotebook(self, style= wx.aui.AUI_NB_DEFAULT_STYLE ^ wx.aui.AUI_NB_CLOSE_ON_ACTIVE_TAB)
 
-       
 
         #pub.subscribe(self.OnAddPlot, 'plot.PT')
 
@@ -148,6 +147,28 @@ class SuitePlotsPanel(wx.Panel):
                 
         pub.subscribe(self.OnMakePlots, 'make') #for all kind of suites
         
+        pub.subscribe(self.HidePage, 'hide page') #from checkbox tree
+        pub.subscribe(self.ShowPage, 'show page') #from checkbox tree
+
+        self.hidden_page = {}
+
+
+    def HidePage(self, message):
+        """close page wich window is named as message.data and put in hidden_page"""
+        window = wx.FindWindowByName(message.data)
+        page_id = self.nb.GetPageIndex(window)
+
+        self.hidden_page[message.data] = (window, self.nb.GetPageText(page_id))
+        
+        self.nb.RemovePage(page_id)
+        
+    def ShowPage(self, message):
+        window, caption = self.hidden_page.pop(message.data)
+        self.nb.AddPage(window, caption)
+
+        
+
+
 
     def OnMakePlots(self, message):
         type = message.topic[1]
@@ -1171,6 +1192,19 @@ class PlotsTreePanel(wx.Panel):
         node = self.tree.AppendItem(parent_node, type, ct_type=1)        
         self.tree.SetPyData(node, panel_name)
         self.tree.CheckItem2(node)
+
+        self.Bind(wx.lib.customtreectrl.EVT_TREE_ITEM_CHECKED, self.OnItemChecked, self.tree)
+
+    def OnItemChecked(self, event):
+        item = event.GetItem()
+        panel_name = self.tree.GetPyData(item)
+    
+        if panel_name: 
+            if self.tree.IsItemChecked(item):
+                pub.sendMessage('show page', panel_name)
+            else:
+                pub.sendMessage('hide page', panel_name)
+        
 
 
 class IOPanel(wx.Panel):
