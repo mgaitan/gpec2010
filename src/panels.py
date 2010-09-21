@@ -152,6 +152,8 @@ class SuitePlotsPanel(wx.Panel):
 
         self.hidden_page = {}
 
+        self.suite_counter = 0  #unique ID to keep plots generated with the same click grouped
+
 
     def HidePage(self, message):
         """close page wich window is named as message.data and put in hidden_page"""
@@ -184,19 +186,19 @@ class SuitePlotsPanel(wx.Panel):
             case_id, case_name, arrays = message.data
 
             for type in ['PT', 'Tx', 'Px', 'Trho', 'Prho']:
-                panel_name = 'case_%i_%s' % (case_id, type)
+                panel_name = 'case_%i_suite_%i_%s' % (case_id, self.suite_counter, type)
                 pp = PlotPanel(self,  -1, type, arrays, name=panel_name )   #name is useful to find the page later. 
                 
                 pub.sendMessage('add checkbox', (case_id, message.topic, pp.plot.short_title, panel_name))
 
                 self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
-                pp.Plot()
-        
+                pp.Plot()        
+
         elif type == 'globalsuite3d':
             case_id, case_name, arrays = message.data
 
             for type in ['PTrho', 'PTx']:
-                panel_name = 'case_%i_%s' % (case_id, type)
+                panel_name = 'case_%i_suite_%i_%s' % (case_id, self.suite_counter, type)
                 pp = PlotPanel(self,  -1, type, arrays, name=panel_name)
                 
                 pub.sendMessage('add checkbox', (case_id, message.topic, pp.plot.short_title, panel_name))
@@ -209,12 +211,12 @@ class SuitePlotsPanel(wx.Panel):
 
             if arrays:
                 for type in ['IsoPT', 'IsoTx', 'IsoPx', 'IsoTrho', 'IsoPrho']:
-                    panel_name = 'case_%i_%s' % (case_id, type)
+                    panel_name = 'case_%i_suite_%i_%s_z_%s' % (case_id, self.suite_counter, type, z_val)
                     pp = PlotPanel(self,  -1, type, arrays, z=z_val, name=panel_name )
+
+                    pub.sendMessage('add checkbox', (case_id, message.topic, pp.plot.short_title, panel_name, '(Z = %s)' % z_val ))
+
                     self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
-
-                    pub.sendMessage('add checkbox', (case_id, message.topic, pp.plot.short_title, panel_name))
-
                     pp.Plot()
             else:
                 pub.sendMessage('log', ('warning', "Couldn't calculate for the given molar fraction (%s)" % z_val))
@@ -224,11 +226,11 @@ class SuitePlotsPanel(wx.Panel):
 
             if arrays:
                 for type in ['Pxy', 'PxyPrho']:
-                    panel_name = 'case_%i_%s' % (case_id, type)
+                    panel_name = 'case_%i_suite_%i_%s_t_%s' % (case_id, self.suite_counter, type, t_val)
                     pp = PlotPanel(self,  -1, type, arrays, t=t_val, name=panel_name)
                     self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
 
-                    pub.sendMessage('add checkbox', (case_id, message.topic, pp.plot.short_title, panel_name))
+                    pub.sendMessage('add checkbox', (case_id, message.topic, pp.plot.short_title, panel_name, '(T = %s K)' % t_val))
 
                     pp.Plot()
             else:
@@ -239,15 +241,17 @@ class SuitePlotsPanel(wx.Panel):
 
             if arrays:
                 for type in ['Txy', 'TxyTrho']:
-                    panel_name = 'case_%i_%s' % (case_id, type)
+                    panel_name = 'case_%i_suite_%i_%s_p_%s' % (case_id, self.suite_counter, type, p_val)
                     pp = PlotPanel(self,  -1, type, arrays, p=p_val, name=panel_name)
                     self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
             
-                    pub.sendMessage('add checkbox', (case_id, message.topic, pp.plot.short_title, panel_name))
+                    pub.sendMessage('add checkbox', (case_id, message.topic, pp.plot.short_title, panel_name, '(P = %s bar)' % p_val))
 
                     pp.Plot()
             else:
                 pub.sendMessage('log', ('warning', "Couldn't calculate for the given pressure (%s bar)" % p_val))
+
+        self.suite_counter += 1 
 
 
 class VarsAndParamPanel(wx.Panel):
@@ -1166,7 +1170,7 @@ class PlotsTreePanel(wx.Panel):
          |  |   |__
          |  |   |__
          |  |
-         |  |__ Pxy (Z=z1)
+         |  |__ Pxy (T=z1)
          |      |__ ...
          |      |__ ...
          |   
@@ -1183,13 +1187,16 @@ class PlotsTreePanel(wx.Panel):
                |___ ...
             
         """
-        case_id, topic, type, panel_name = message.data
+
 
         category_translate = {'globalsuite': 'Global Phase', 'isop': 'Isopleths', 'txy': 'Txy', 'pxy': 'Pxy'}
-
-        category = category_translate[topic[1]] #globalsuite, isop, txy, pxy
-
-
+        
+        if len(message.data) == 4:
+            case_id, topic, type, panel_name = message.data
+            category = category_translate[topic[1]] #globalsuite, isop, txy, pxy
+        elif len(message.data) == 5:
+            case_id, topic, type, panel_name, extra_var = message.data
+            category = category_translate[topic[1]] + " " + extra_var
 
 
         if case_id not in self.tree_data.keys():
