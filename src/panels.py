@@ -158,13 +158,17 @@ class SuitePlotsPanel(wx.Panel):
         window = wx.FindWindowByName(message.data)
         page_id = self.nb.GetPageIndex(window)
 
-        self.hidden_page[message.data] = (window, self.nb.GetPageText(page_id))
-        
+        self.hidden_page[message.data] = (window, self.nb.GetPageText(page_id))        
         self.nb.RemovePage(page_id)
         
     def ShowPage(self, message):
-        window, caption = self.hidden_page.pop(message.data)
-        self.nb.AddPage(window, caption)
+        try: 
+            window, caption = self.hidden_page.pop(message.data)
+            self.nb.AddPage(window, caption)
+        except KeyError:
+            print "key  error ", message.topic, message.data
+
+        
 
         
 
@@ -189,8 +193,10 @@ class SuitePlotsPanel(wx.Panel):
             case_id, case_name, arrays = message.data
 
             for type in ['PTrho', 'PTx']:
-                pp = PlotPanel(self,  -1, type, arrays, name='case_%i_%s' % (case_id, type))
-                #pub.sendMessage('panel added', (case_id
+                panel_name = 'case_%i_%s' % (case_id, type)
+                pp = PlotPanel(self,  -1, type, arrays, name=panel_name)
+                
+                pub.sendMessage('add checkbox', (case_id, message.topic, pp.plot.short_title, panel_name))
 
                 self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
                 pp.Plot()           
@@ -200,9 +206,11 @@ class SuitePlotsPanel(wx.Panel):
 
             if arrays:
                 for type in ['IsoPT', 'IsoTx', 'IsoPx', 'IsoTrho', 'IsoPrho']:
-                    pp = PlotPanel(self,  -1, type, arrays, z=z_val, name='case_%i_%s' % (case_id, type) )
+                    panel_name = 'case_%i_%s' % (case_id, type)
+                    pp = PlotPanel(self,  -1, type, arrays, z=z_val, name=panel_name )
                     self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
 
+                    pub.sendMessage('add checkbox', (case_id, message.topic, pp.plot.short_title, panel_name))
 
                     pp.Plot()
             else:
@@ -213,8 +221,12 @@ class SuitePlotsPanel(wx.Panel):
 
             if arrays:
                 for type in ['Pxy', 'PxyPrho']:
-                    pp = PlotPanel(self,  -1, type, arrays, t=t_val, name='case_%i_%s' % (case_id, type) )
+                    panel_name = 'case_%i_%s' % (case_id, type)
+                    pp = PlotPanel(self,  -1, type, arrays, t=t_val, name=panel_name)
                     self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
+
+                    pub.sendMessage('add checkbox', (case_id, message.topic, pp.plot.short_title, panel_name))
+
                     pp.Plot()
             else:
                 pub.sendMessage('log', ('warning', "Couldn't calculate for the given temperature (%s K)" % t_val))
@@ -224,8 +236,12 @@ class SuitePlotsPanel(wx.Panel):
 
             if arrays:
                 for type in ['Txy', 'TxyTrho']:
-                    pp = PlotPanel(self,  -1, type, arrays, p=p_val, name='case_%i_%s' % (case_id, type) )
+                    panel_name = 'case_%i_%s' % (case_id, type)
+                    pp = PlotPanel(self,  -1, type, arrays, p=p_val, name=panel_name)
                     self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
+            
+                    pub.sendMessage('add checkbox', (case_id, message.topic, pp.plot.short_title, panel_name))
+
                     pp.Plot()
             else:
                 pub.sendMessage('log', ('warning', "Couldn't calculate for the given pressure (%s bar)" % p_val))
@@ -1181,30 +1197,55 @@ class PlotsTreePanel(wx.Panel):
                                                                 '3D': {'node': node2d, 'childs': {} }, 
                                                                } 
                                       }
+            #self.tree.CheckItem2(node2d, True)
+
 
         if category not in self.tree_data[case_id]['childs']['2D']['childs'].keys():
             parent_node = self.tree_data[case_id]['childs']['2D']['node']
             node = self.tree.AppendItem(parent_node, category, ct_type=1)
             self.tree_data[case_id]['childs']['2D']['childs'][category] = {'node': node, 'childs': {} }
+            #self.tree.CheckItem2(node, True)
         
 
         parent_node = self.tree_data[case_id]['childs']['2D']['childs'][category]['node']
         node = self.tree.AppendItem(parent_node, type, ct_type=1)        
+
+        #self.tree.AutoCheckParent(node, True)
+
         self.tree.SetPyData(node, panel_name)
-        self.tree.CheckItem2(node)
+        
+        #self.tree.CheckItem2(node)
+        self.tree.CheckItem(node)
 
         self.Bind(wx.lib.customtreectrl.EVT_TREE_ITEM_CHECKED, self.OnItemChecked, self.tree)
 
     def OnItemChecked(self, event):
         item = event.GetItem()
         panel_name = self.tree.GetPyData(item)
-    
+        
+        
+        checked = self.tree.IsItemChecked(item)
+
+        print item, panel_name, checked
+
         if panel_name: 
-            if self.tree.IsItemChecked(item):
+            # means it's a child 
+            if checked:
                 pub.sendMessage('show page', panel_name)
             else:
                 pub.sendMessage('hide page', panel_name)
         
+        else:
+            (child, cookie) = self.tree.GetFirstChild(item)
+            while child:
+                #if child.GetType() == 1 and child.IsEnabled():
+                #    if checked != child.IsChecked():
+                #        return
+                self.tree.CheckItem(child, checked)      #recursiveness
+
+                (child, cookie) = self.tree.GetNextChild(item, cookie)
+
+
 
 
 class IOPanel(wx.Panel):
