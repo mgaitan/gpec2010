@@ -98,6 +98,16 @@ class MainFrame(wx.Frame):
         
         self.filename = None
         self.modified = False
+
+
+        #a few hackies to refresh the ugly window
+        pub.subscribe(self.RefreshMe, 'add checkbox')
+        pub.subscribe(self.RefreshMe, 'log')
+
+    def RefreshMe(self, message):
+        return self.Refresh()
+
+
     
     def OnDragSash(self, evt):
         print 'dragged', evt
@@ -252,4 +262,9 @@ if __name__ == "__main__":
     main_frame.Show()
 
     pub.sendMessage('log', ('ok', 'GPEC is ready. Define a system to begin') )
+
+
+#    import wx.lib.inspection
+#    wx.lib.inspection.InspectionTool().Show()
+
     app.MainLoop()

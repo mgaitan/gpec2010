@@ -159,11 +159,14 @@ class SuitePlotsPanel(wx.Panel):
         page_id = self.nb.GetPageIndex(window)
 
         self.hidden_page[message.data] = (window, self.nb.GetPageText(page_id))        
+
         self.nb.RemovePage(page_id)
+        window.Hide()
         
     def ShowPage(self, message):
         try: 
             window, caption = self.hidden_page.pop(message.data)
+            window.Show()
             self.nb.AddPage(window, caption)
         except KeyError:
             print "key  error ", message.topic, message.data
@@ -1197,14 +1200,14 @@ class PlotsTreePanel(wx.Panel):
                                                                 '3D': {'node': node2d, 'childs': {} }, 
                                                                } 
                                       }
-            #self.tree.CheckItem2(node2d, True)
+            self.tree.CheckItem2(node2d, True)
 
 
         if category not in self.tree_data[case_id]['childs']['2D']['childs'].keys():
             parent_node = self.tree_data[case_id]['childs']['2D']['node']
             node = self.tree.AppendItem(parent_node, category, ct_type=1)
             self.tree_data[case_id]['childs']['2D']['childs'][category] = {'node': node, 'childs': {} }
-            #self.tree.CheckItem2(node, True)
+            self.tree.CheckItem2(node, True)
         
 
         parent_node = self.tree_data[case_id]['childs']['2D']['childs'][category]['node']
@@ -1214,8 +1217,8 @@ class PlotsTreePanel(wx.Panel):
 
         self.tree.SetPyData(node, panel_name)
         
-        #self.tree.CheckItem2(node)
-        self.tree.CheckItem(node)
+        self.tree.CheckItem2(node)
+        #self.tree.CheckItem(node)
 
         self.Bind(wx.lib.customtreectrl.EVT_TREE_ITEM_CHECKED, self.OnItemChecked, self.tree)
 
@@ -1226,7 +1229,6 @@ class PlotsTreePanel(wx.Panel):
         
         checked = self.tree.IsItemChecked(item)
 
-        print item, panel_name, checked
 
         if panel_name: 
             # means it's a child 
