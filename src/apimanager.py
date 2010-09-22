@@ -210,7 +210,7 @@ class ApiManager():
     def read_generic_output(self, type):
         type2exe = {'gpec':'GPEC', 'isop':'IsoplethGPEC', 'pxy': 'PxyGPEC', 'txy': 'TxyGPEC'}
         
-        curve_types = {'gpec': {'VAP':4, 'CRI':5, 'CEP':6, 'LLV':10 },  #type:significatives columns
+        curve_types = {'gpec': {'VAP':4, 'CRI':5, 'CEP':6, 'LLV':10, 'AZE':6 },  #type:significatives columns
                         'isop': { 'ISO':6, 
                                     'LLV':2,
                                     #'CRI':2,

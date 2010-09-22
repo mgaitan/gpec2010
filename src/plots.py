@@ -169,6 +169,8 @@ class PTrho(BasePlot):
                                     } )
 
 
+
+
 class PTx(BasePlot):
     """PTx 3D projection"""
 
@@ -458,6 +460,17 @@ class PT(BasePlot):
                                        'type': 'LLV',
                                     } )
 
+        
+        if 'AZE' in arrays.keys():
+            for num, aze_curve in enumerate(arrays['AZE']):
+                self.curves.append( { 'name': u'Azeotropic line', 
+                                      'visible':True,
+                                      'lines': (aze_curve[:,0], aze_curve[:,1]),           #TODO
+                                      'color': 'magenta', 
+                                      'wx_id' : wx.NewId(),
+                                       'type': 'LLV',
+                                    } )
+
 
 
 class Tx(BasePlot):
@@ -500,6 +513,19 @@ class Tx(BasePlot):
                                       'wx_id' : wx.NewId(),
                                        'type': 'LLV',
                                     } )
+
+        if 'AZE' in arrays.keys():
+
+            for num, aze_curve in enumerate(arrays['AZE']):
+                self.curves.append( { 'name': u'Azeotropic line', 
+                                      'visible':True,
+                                      'lines': (aze_curve[:,2], aze_curve[:,0]),           #TODO
+                                      'color': 'magenta', 
+                                      'wx_id' : wx.NewId(),
+                                       'type': 'LLV',
+                                    } )
+
+
 
 class Pxy(BasePlot):
     """Pxy Px (isothermal)"""
@@ -695,6 +721,18 @@ class Px(BasePlot):
                                        'type': 'LLV',
                                     } )
 
+        if 'AZE' in arrays.keys():
+
+            for num, aze_curve in enumerate(arrays['AZE']):
+                self.curves.append( { 'name': u'Azeotropic line', 
+                                      'visible':True,
+                                      'lines': (aze_curve[:,2], aze_curve[:,1]),           #TODO
+                                      'color': 'magenta', 
+                                      'wx_id' : wx.NewId(),
+                                       'type': 'LLV',
+                                    } )
+
+
 
 
 class Trho(BasePlot):
@@ -718,19 +756,20 @@ class Trho(BasePlot):
 
                 self.curves.append( {'name': u'Vapor line (L)' + counter , 
                                      'visible':True, 
-                                     'lines':( vap_curve[:,2], vap_curve[:,0]),
+                                     'lines':(vap_curve[:,2], vap_curve[:,0], vap_curve[:,3], vap_curve[:,0]),
                                       'color' : 'green',
                                       'wx_id' : wx.NewId(),
                                       'type': 'VAP',
                                         } )      
-            
-                self.curves.append( {'name': u'Vapor line (V)' + counter , 
-                                     'visible':True, 
-                                     'lines':( vap_curve[:,3], vap_curve[:,0]),
-                                      'color' : 'green',
-                                      'wx_id' : wx.NewId(),
-                                      'type': 'VAP',
-                                        } )  
+                
+                if False:
+                    self.curves.append( {'name': u'Vapor line (V)' + counter , 
+                                         'visible':True, 
+                                         'lines':( vap_curve[:,3], vap_curve[:,0]),
+                                          'color' : 'green',
+                                          'wx_id' : wx.NewId(),
+                                          'type': 'VAP',
+                                            } )  
 
        
 
@@ -758,6 +797,18 @@ class Trho(BasePlot):
                                     } )
 
 
+        if 'AZE' in arrays.keys():
+
+            for num, aze_curve in enumerate(arrays['AZE']):
+                self.curves.append( { 'name': u'Azeotropic line', 
+                                      'visible':True,
+                                      'lines': (aze_curve[:,4], aze_curve[:,0]),           #TODO
+                                      'color': 'magenta', 
+                                      'wx_id' : wx.NewId(),
+                                       'type': 'LLV',
+                                    } )
+
+
 class Prho(BasePlot):
     """pressure-density diagram"""
     
@@ -779,19 +830,20 @@ class Prho(BasePlot):
 
                 self.curves.append( {'name': u'Vapor line (L)' + counter , 
                                      'visible':True, 
-                                     'lines':( vap_curve[:,2], vap_curve[:,1]),
+                                     'lines':( vap_curve[:,2], vap_curve[:,1], vap_curve[:,3], vap_curve[:,1]),
                                       'color' : 'green',
                                       'wx_id' : wx.NewId(),
                                       'type': 'VAP',
                                         } )      
-            
-                self.curves.append( {'name': u'Vapor line (V)' + counter , 
-                                     'visible':True, 
-                                     'lines':( vap_curve[:,3], vap_curve[:,1]),
-                                      'color' : 'green',
-                                      'wx_id' : wx.NewId(),
-                                      'type': 'VAP',
-                                        } )  
+        
+                if False:
+                    self.curves.append( {'name': u'Vapor line (V)' + counter , 
+                                         'visible':True, 
+                                         'lines':( vap_curve[:,3], vap_curve[:,1]),
+                                          'color' : 'green',
+                                          'wx_id' : wx.NewId(),
+                                          'type': 'VAP',
+                                            } )  
 
        
 
@@ -810,10 +862,21 @@ class Prho(BasePlot):
 
         if 'LLV' in arrays.keys():
             for num, llv_curve in enumerate(arrays['LLV']):
+
                 self.curves.append( { 'name': 'LLV', 
                                       'visible':True,
                                       'lines': (llv_curve[:,7], llv_curve[:,1]),           #TODO
                                       'color': 'red', 
+                                      'wx_id' : wx.NewId(),
+                                       'type': 'LLV',
+                                    } )
+
+        if 'AZE' in arrays.keys():
+            for num, aze_curve in enumerate(arrays['AZE']):
+                self.curves.append( { 'name': u'Azeotropic line', 
+                                      'visible':True,
+                                      'lines': (aze_curve[:,4], aze_curve[:,1], aze_curve[:,5], aze_curve[:,1]),           #TODO
+                                      'color': 'magenta', 
                                       'wx_id' : wx.NewId(),
                                        'type': 'LLV',
                                     } )
