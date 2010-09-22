@@ -470,23 +470,27 @@ class PT(BasePlot):
 
 
         if 'LLV' in arrays.keys():
-            
+            lines = []
             for num, llv_curve in enumerate(arrays['LLV']):
+                lines += [ llv_curve[:,0], llv_curve[:,1] ] 
 
-                self.curves.append( { 'name': 'LLV', 
+            self.curves.append( { 'name': 'LLV', 
                                       'visible':True,
-                                      'lines': (llv_curve[:,0], llv_curve[:,1]),           #TODO
-                                      'color': 'red', 
-                                      'wx_id' : wx.NewId(),
+                                      'lines': tuple(lines), 
+                                      'color': 'red',      #TODO all red ? or red and blue ?
+                                      'wx_id' : wx.NewId(), 
                                        'type': 'LLV',
                                     } )
 
         
         if 'AZE' in arrays.keys():
+            lines = []
             for num, aze_curve in enumerate(arrays['AZE']):
-                self.curves.append( { 'name': u'Azeotropic lines', 
+                lines += [ aze_curve[:,0], aze_curve[:,1] ] 
+
+            self.curves.append( { 'name': u'Azeotropic lines', 
                                       'visible':True,
-                                      'lines': (aze_curve[:,0], aze_curve[:,1]),           #TODO
+                                      'lines': tuple(lines),
                                       'color': 'magenta', 
                                       'wx_id' : wx.NewId(),
                                        'type': 'LLV',
