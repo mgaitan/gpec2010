@@ -128,7 +128,7 @@ class PTrho(BasePlot):
                 
                 counter = u'' if len(arrays['VAP']) == 1 else u' %i' % (num + 1)
 
-                self.curves.append( {'name': u'Vapor line (L)' + counter , 
+                self.curves.append( {'name': u'Pure compound vapor pressure lines (L)' + counter , 
                                      'visible':True, 
                                      'lines':( vap_curve[:,0], vap_curve[:,2], vap_curve[:,1]),
                                       'color' : 'green',
@@ -136,7 +136,7 @@ class PTrho(BasePlot):
                                       'type': 'VAP',
                                         } )             
 
-                self.curves.append( {'name': u'Vapor line (V)' + counter , 
+                self.curves.append( {'name': u'Pure compound vapor pressure lines (V)' + counter , 
                                      'visible':True, 
                                      'lines':( vap_curve[:,0], vap_curve[:,3], vap_curve[:,1]),
                                       'color' : 'green',
@@ -283,16 +283,26 @@ class IsoTx(BasePlot):
         if 'ISO' in arrays.keys():
             for num, vap_curve in enumerate(arrays['ISO']):
                 
-                counter = u'' if len(arrays['ISO']) == 1 else u' %i' % (num + 1)
 
-                self.curves.append( {'name': u'Isopleth line ' + counter , 
-                                     'visible':True, 
-                                     'lines':( vap_curve[:,2], vap_curve[:,0], vap_curve[:,3], vap_curve[:,0]),
+                self.curves.append( {'name': u'Incipient Face.',
+                                     'visible': True, 
+                                     'lines':( 1 - vap_curve[:,3], vap_curve[:,0]),
                                       'color' : 'green',
                                       'wx_id' : wx.NewId(),
                                       'type': 'ISO',
                                         } )             
 
+                #a same lenght vector constant at maximum ("z" composition given)
+                saturated =  np.repeat( np.max(vap_curve[:,2]), len(vap_curve[:,2]))    
+            
+
+                self.curves.append( {'name': u'Major (Saturated) Face.',
+                                     'visible':True, 
+                                     'lines':( saturated, vap_curve[:,0]),
+                                      'color' : 'red',
+                                      'wx_id' : wx.NewId(),
+                                      'type': 'ISO',
+                                        } )             
 
 
         
@@ -315,14 +325,25 @@ class IsoPx(BasePlot):
                 
                 counter = u'' if len(arrays['ISO']) == 1 else u' %i' % (num + 1)
 
-                self.curves.append( {'name': u'Isopleth line ' + counter , 
+                self.curves.append( {'name': u'Incipient Face.' + counter , 
                                      'visible':True, 
-                                     'lines':( vap_curve[:,2], vap_curve[:,1], vap_curve[:,3], vap_curve[:,1]),
+                                     'lines':( 1 - vap_curve[:,3], vap_curve[:,1]),
                                       'color' : 'green',
                                       'wx_id' : wx.NewId(),
                                       'type': 'ISO',
                                         } )
-               
+
+                #a same lenght vector constant at maximum ("z" composition given)
+                saturated =  np.repeat( np.max(vap_curve[:,2]), len(vap_curve[:,2]))    
+            
+
+                self.curves.append( {'name': u'Major (Saturated) Face.',
+                                     'visible':True, 
+                                     'lines':( saturated, vap_curve[:,1]),
+                                      'color' : 'red',
+                                      'wx_id' : wx.NewId(),
+                                      'type': 'ISO',
+                                        } )     
                 
 
 
@@ -343,16 +364,25 @@ class IsoTrho(BasePlot):
 
         if 'ISO' in arrays.keys():
             for num, vap_curve in enumerate(arrays['ISO']):
-                
-                counter = u'' if len(arrays['ISO']) == 1 else u' %i' % (num + 1)
 
-                self.curves.append( {'name': u'Isopleth line ' + counter , 
+                self.curves.append( {'name': u'Incipient Face.', 
                                      'visible':True, 
-                                     'lines':( vap_curve[:,4], vap_curve[:,0],  vap_curve[:,5], vap_curve[:,0]),
+                                     'lines':( vap_curve[:,4], vap_curve[:,0]),
                                       'color' : 'green',
                                       'wx_id' : wx.NewId(),
                                       'type': 'ISO',
                                         } )
+
+
+                self.curves.append( {'name': u'Major (Saturated) Face.',
+                                     'visible':True, 
+                                     'lines': (vap_curve[:,5], vap_curve[:,0]),
+                                      'color' : 'red',
+                                      'wx_id' : wx.NewId(),
+                                      'type': 'ISO',
+                                        } )     
+                
+           
         
                 
 
@@ -374,16 +404,24 @@ class IsoPrho(BasePlot):
 
         if 'ISO' in arrays.keys():
             for num, vap_curve in enumerate(arrays['ISO']):
-                
-                counter = u'' if len(arrays['ISO']) == 1 else u' %i' % (num + 1)
 
-                self.curves.append( {'name': u'Isopleth line ' + counter , 
+                self.curves.append( {'name': u'Incipient Face.', 
                                      'visible':True, 
-                                     'lines':( vap_curve[:,4], vap_curve[:,1], vap_curve[:,5], vap_curve[:,1]),
+                                     'lines':( vap_curve[:,4], vap_curve[:,1]),
                                       'color' : 'green',
                                       'wx_id' : wx.NewId(),
                                       'type': 'ISO',
-                                        } )  
+                                        } )
+
+
+                self.curves.append( {'name': u'Major (Saturated) Face.',
+                                     'visible':True, 
+                                     'lines': (vap_curve[:,5], vap_curve[:,1]),
+                                      'color' : 'red',
+                                      'wx_id' : wx.NewId(),
+                                      'type': 'ISO',
+                                        } )     
+                
 
 class PT(BasePlot):
     """pressure-temperature diagram"""
@@ -400,33 +438,41 @@ class PT(BasePlot):
     def setup_curves(self, arrays):
 
         if 'VAP' in arrays.keys():
+            lines = []
             for num, vap_curve in enumerate(arrays['VAP']):
-                
-                counter = u'' if len(arrays['VAP']) == 1 else u' %i' % (num + 1)
+                lines += [ vap_curve[:,0], vap_curve[:,1] ]
 
-                self.curves.append( {'name': u'Vapor line' + counter , 
+                #counter = u'' if len(arrays['VAP']) == 1 else u' %i' % (num + 1)
+
+            self.curves.append( {'name': u'Pure compound vapor pressure lines', # + counter , 
                                      'visible':True, 
-                                     'lines':( vap_curve[:,0], vap_curve[:,1]),
+                                     #'lines':( vap_curve[:,0], vap_curve[:,1]),
+                                      'lines': tuple(lines),
                                       'color' : 'green',
                                       'wx_id' : wx.NewId(),
                                       'type': 'VAP',
                                         } )             
 
         if 'CRI' in arrays.keys():
+            lines = []
             for num, cri_curve in enumerate(arrays['CRI']):
+                lines += [cri_curve[:,0],cri_curve[:,1]]
 
-                counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
-                self.curves.append( {'name': u'Critical line' + counter , 
-                                     'visible':True, 
-                                     'lines':(cri_curve[:,0],cri_curve[:,1]),
-                                     'color' : 'black',
-                                     'wx_id' : wx.NewId(),
-                                     'type': 'CRI'
-                                    } )
+                #counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
+            self.curves.append( {'name': u'Critical lines', 
+                                 'visible':True, 
+                                 #'lines':(cri_curve[:,0],cri_curve[:,1]),
+                                 'lines': tuple(lines),
+                                 'color' : 'black',
+                                 'wx_id' : wx.NewId(),
+                                 'type': 'CRI'
+                                } )
 
 
         if 'LLV' in arrays.keys():
+            
             for num, llv_curve in enumerate(arrays['LLV']):
+
                 self.curves.append( { 'name': 'LLV', 
                                       'visible':True,
                                       'lines': (llv_curve[:,0], llv_curve[:,1]),           #TODO
@@ -438,7 +484,7 @@ class PT(BasePlot):
         
         if 'AZE' in arrays.keys():
             for num, aze_curve in enumerate(arrays['AZE']):
-                self.curves.append( { 'name': u'Azeotropic line', 
+                self.curves.append( { 'name': u'Azeotropic lines', 
                                       'visible':True,
                                       'lines': (aze_curve[:,0], aze_curve[:,1]),           #TODO
                                       'color': 'magenta', 
@@ -464,17 +510,22 @@ class Tx(BasePlot):
                
         
         if 'CRI' in arrays.keys():
+            lines = []
             for num, cri_curve in enumerate(arrays['CRI']):
+                lines += [ cri_curve[:,3],cri_curve[:,0] ] 
 
-                counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
+                #counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
 
-                self.curves.append( {'name': u'Critical line' + counter, 
-                                     'visible':True, 
-                                     'lines':(cri_curve[:,3],cri_curve[:,0]),
-                                     'color' : 'black',
-                                     'wx_id' : wx.NewId(),
-                                     'type': 'CRI'
-                                    } )
+            #this block could be inside the for to split the critical lines in separated segments
+
+            self.curves.append( {'name': u'Critical lines', # + counter, 
+                                 'visible':True, 
+                                 #'lines':(cri_curve[:,3],cri_curve[:,0]),
+                                 'lines': tuple(lines),
+                                 'color' : 'black',
+                                 'wx_id' : wx.NewId(),
+                                 'type': 'CRI'
+                                } )
 
         if 'LLV' in arrays.keys():
             for num, llv_curve in enumerate(arrays['LLV']):
@@ -533,7 +584,7 @@ class Pxy(BasePlot):
 
                 counter = u'' if len(arrays['Pxy']) == 1 else u' %i' % (num + 1)
 
-                self.curves.append( {'name': u'Isothermal line ' + counter, 
+                self.curves.append( {'name': u'Isothermal lines ' + counter, 
                                      'visible':True, 
                                      'lines':(isot_curve[:,1],isot_curve[:,0], isot_curve[:,2],isot_curve[:,0]),
                                      'color' : 'black',
@@ -564,7 +615,7 @@ class PxyPrho(BasePlot):
 
                 counter = u'' if len(arrays['Pxy']) == 1 else u' %i' % (num + 1)
 
-                self.curves.append( {'name': u'Isothermal line ' + counter, 
+                self.curves.append( {'name': u'Isothermal lines ' + counter, 
                                      'visible':True, 
                                      'lines':(isot_curve[:,5],isot_curve[:,0], isot_curve[:,6], isot_curve[:,0]),
                                      'color' : 'black',
@@ -596,20 +647,12 @@ class Txy(BasePlot):
 
                 counter = u'' if len(arrays['Txy']) == 1 else u' %i' % (num + 1)
 
-                self.curves.append( {'name': u'Isobaric line X' + counter, 
+                self.curves.append( {'name': u'Isobaric lines' + counter, 
                                      'visible':True, 
-                                     'lines':(isob_curve[:,1],isob_curve[:,0]),
+                                     'lines':(isob_curve[:,1],isob_curve[:,0], isob_curve[:,2],isob_curve[:,0]),
                                      'color' : 'black',
                                      'wx_id' : wx.NewId(),
-                                     'type': 'Pxy'
-                                    } )
-
-                self.curves.append( {'name': u'Isobaric line Y' + counter, 
-                                     'visible':True, 
-                                     'lines':(isob_curve[:,2],isob_curve[:,0]),
-                                     'color' : 'black',
-                                     'wx_id' : wx.NewId(),
-                                     'type': 'Pxy'
+                                     'type': 'Txy'
                                     } )
 
 class TxyTrho(BasePlot):
@@ -634,21 +677,15 @@ class TxyTrho(BasePlot):
 
                 counter = u'' if len(arrays['Txy']) == 1 else u' %i' % (num + 1)
 
-                self.curves.append( {'name': u'Isobaric line X' + counter, 
+                self.curves.append( {'name': u'Isobaric lines' + counter, 
                                      'visible':True, 
-                                     'lines':(isob_curve[:,5],isob_curve[:,0]),
+                                     'lines':(isob_curve[:,5],isob_curve[:,0], isob_curve[:,6],isob_curve[:,0]),
                                      'color' : 'black',
                                      'wx_id' : wx.NewId(),
                                      'type': 'Pxy'
                                     } )
 
-                self.curves.append( {'name': u'Isobaric line Y' + counter, 
-                                     'visible':True, 
-                                     'lines':(isob_curve[:,6],isob_curve[:,0]),
-                                     'color' : 'black',
-                                     'wx_id' : wx.NewId(),
-                                     'type': 'Pxy'
-                                    } )
+                
 class Px(BasePlot):
     """P-x diagram"""
     
@@ -667,26 +704,34 @@ class Px(BasePlot):
                
         
         if 'CRI' in arrays.keys():
+            lines = []
             for num, cri_curve in enumerate(arrays['CRI']):
+                lines += [ cri_curve[:,3],cri_curve[:,1] ]
+        
 
-                counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
+                #counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
 
-                self.curves.append( {'name': u'Critical line' + counter, 
+            self.curves.append( {'name': u'Critical lines', # + counter, 
                                      'visible':True, 
-                                     'lines':(cri_curve[:,3],cri_curve[:,1]),
+                                     #'lines':(cri_curve[:,3],cri_curve[:,1]),
+                                     'lines': tuple(lines),
                                      'color' : 'black',
                                      'wx_id' : wx.NewId(),
                                      'type': 'CRI'
                                     } )
 
         if 'LLV' in arrays.keys():
+            lines = []
             for num, llv_curve in enumerate(arrays['LLV']):
+                lines += [llv_curve[:,2], llv_curve[:,1]]
             
-                counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
 
-                self.curves.append( { 'name': 'LLV' + counter, 
+                #counter = u'' if len(arrays['LLV']) == 1 else u' %i' % (num + 1)
+
+            self.curves.append( { 'name': 'LLV', #+ counter, 
                                       'visible':True,
-                                      'lines': (llv_curve[:,2], llv_curve[:,1]),   
+                                      #'lines': (llv_curve[:,2], llv_curve[:,1]),   
+                                      'lines': tuple(lines),
                                       'color': 'red', 
                                       'wx_id' : wx.NewId(),
                                        'type': 'LLV',
@@ -721,13 +766,16 @@ class Trho(BasePlot):
     def setup_curves(self, arrays):
 
         if 'VAP' in arrays.keys():
+            lines = []
             for num, vap_curve in enumerate(arrays['VAP']):
-                
-                counter = u'' if len(arrays['VAP']) == 1 else u' %i' % (num + 1)
+                lines += [ vap_curve[:,2], vap_curve[:,0], vap_curve[:,3], vap_curve[:,0] ] 
 
-                self.curves.append( {'name': u'Vapor line (L)' + counter , 
+                #counter = u'' if len(arrays['VAP']) == 1 else u' %i' % (num + 1)
+
+            self.curves.append( {'name': u'Pure compound vapor pressure lines', 
                                      'visible':True, 
-                                     'lines':(vap_curve[:,2], vap_curve[:,0], vap_curve[:,3], vap_curve[:,0]),
+                                      #'lines':(vap_curve[:,2], vap_curve[:,0], vap_curve[:,3], vap_curve[:,0]),
+                                      'lines': tuple(lines),
                                       'color' : 'green',
                                       'wx_id' : wx.NewId(),
                                       'type': 'VAP',
@@ -736,12 +784,16 @@ class Trho(BasePlot):
        
 
         if 'CRI' in arrays.keys():
+            lines = []
             for num, cri_curve in enumerate(arrays['CRI']):
+                lines += [cri_curve[:,2],cri_curve[:,0]]
+            
 
-                counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
-                self.curves.append( {'name': u'Critical line' + counter , 
+                #counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
+            self.curves.append( {'name': u'Critical lines', # + counter , 
                                      'visible':True, 
-                                     'lines':(cri_curve[:,2],cri_curve[:,0]),
+                                     #'lines':(cri_curve[:,2],cri_curve[:,0]),
+                                     'lines': tuple(lines),
                                      'color' : 'black',
                                      'wx_id' : wx.NewId(),
                                      'type': 'CRI'
@@ -752,8 +804,8 @@ class Trho(BasePlot):
             for num, llv_curve in enumerate(arrays['LLV']):
                 self.curves.append( { 'name': 'LLV', 
                                       'visible':True,
-                                      'lines': (llv_curve[:,7], llv_curve[:,0]),           #TODO
-                                      'color': 'red', 
+                                      'lines': (llv_curve[:,7], llv_curve[:,0], llv_curve[:,8], llv_curve[:,0]),           #TODO
+                                      'color': 'blue', 
                                       'wx_id' : wx.NewId(),
                                        'type': 'LLV',
                                     } )
@@ -764,7 +816,7 @@ class Trho(BasePlot):
             for num, aze_curve in enumerate(arrays['AZE']):
                 self.curves.append( { 'name': u'Azeotropic line', 
                                       'visible':True,
-                                      'lines': (aze_curve[:,4], aze_curve[:,0]),           #TODO
+                                      'lines': (aze_curve[:,4], aze_curve[:,0], aze_curve[:,5], aze_curve[:,0]),           #TODO
                                       'color': 'magenta', 
                                       'wx_id' : wx.NewId(),
                                        'type': 'LLV',
@@ -786,36 +838,34 @@ class Prho(BasePlot):
     def setup_curves(self, arrays):
 
         if 'VAP' in arrays.keys():
+            lines = []
             for num, vap_curve in enumerate(arrays['VAP']):
+                lines += [vap_curve[:,2], vap_curve[:,1], vap_curve[:,3], vap_curve[:,1] ]
+        
                 
-                counter = u'' if len(arrays['VAP']) == 1 else u' %i' % (num + 1)
+                #counter = u'' if len(arrays['VAP']) == 1 else u' %i' % (num + 1)
 
-                self.curves.append( {'name': u'Vapor line (L)' + counter , 
+            self.curves.append( {'name': u'Pure compound vapor pressure lines', 
                                      'visible':True, 
-                                     'lines':( vap_curve[:,2], vap_curve[:,1], vap_curve[:,3], vap_curve[:,1]),
+                                      #'lines':( vap_curve[:,2], vap_curve[:,1], vap_curve[:,3], vap_curve[:,1]),
+                                      'lines': tuple(lines),
                                       'color' : 'green',
                                       'wx_id' : wx.NewId(),
                                       'type': 'VAP',
                                         } )      
         
-                if False:
-                    self.curves.append( {'name': u'Vapor line (V)' + counter , 
-                                         'visible':True, 
-                                         'lines':( vap_curve[:,3], vap_curve[:,1]),
-                                          'color' : 'green',
-                                          'wx_id' : wx.NewId(),
-                                          'type': 'VAP',
-                                            } )  
-
        
 
         if 'CRI' in arrays.keys():
+            lines = []
             for num, cri_curve in enumerate(arrays['CRI']):
+                lines += [cri_curve[:,2],cri_curve[:,1]]
 
-                counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
-                self.curves.append( {'name': u'Critical line' + counter , 
+                #counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
+            self.curves.append( {'name': u'Critical lines', # + counter , 
                                      'visible':True, 
-                                     'lines':(cri_curve[:,2],cri_curve[:,1]),
+                                     #lines':(cri_curve[:,2],cri_curve[:,1]),
+                                     'lines': tuple(lines),
                                      'color' : 'black',
                                      'wx_id' : wx.NewId(),
                                      'type': 'CRI'
