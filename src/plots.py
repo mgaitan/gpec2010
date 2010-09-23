@@ -159,7 +159,7 @@ class PTrho(BasePlot):
             name = u'Pure compound vapor pressure lines'
             for num, vap_curve in enumerate(arrays['VAP']):
                 label = name if num == 0 else '_nolegend_'
-                lines += self.axes.plot(vap_curve[:,0], vap_curve[:,2], vap_curve[:,1], 'g', label=name),
+                lines += self.axes.plot(vap_curve[:,0], vap_curve[:,2], vap_curve[:,1], 'g', label=label),
                 lines += self.axes.plot(vap_curve[:,0], vap_curve[:,3], vap_curve[:,1], 'g', label='_nolegend_'),
 
             self.curves.append( {'name': name,
@@ -262,7 +262,7 @@ class PTx(BasePlot):
             name = u'Pure compound vapor pressure lines'
             for num, vap_curve in enumerate(arrays['VAP']):
                 label = name if num == 0 else '_nolegend_'
-                lines += self.axes.plot(vap_curve[:,0], np.repeat(1-num, len(vap_curve[:,0])) , vap_curve[:,1], 'g', label=name),
+                lines += self.axes.plot(vap_curve[:,0], np.repeat(1-num, len(vap_curve[:,0])) , vap_curve[:,1], 'g', label=label),
 
             self.curves.append( {'name': name,
                                      'visible':True, 
@@ -283,13 +283,9 @@ class PTx(BasePlot):
                 label = name if num == 0 else '_nolegend_'
                 lines +=  self.axes.plot(cri_curve[:,0],cri_curve[:,3], cri_curve[:,1], 'k', label=label)   #[ () ]
 
-            
-
-                #counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
             self.curves.append( {'name': name, # + counter , 
                                      'visible':True, 
-                                     #'lines':(cri_curve[:,0],cri_curve[:,3], cri_curve[:,1]),
-                                     'lines2d':  lines,  #self.axes.plot(*lines, label=name) ,
+                                     'lines2d':  lines, 
                                      'color' : 'black',
                                      'wx_id' : wx.NewId(),
                                      'type': 'CRI'
@@ -302,9 +298,10 @@ class PTx(BasePlot):
             name = 'LLV'
             for num, llv_curve in enumerate(arrays['LLV']):
                 label = name if num == 0 else '_nolengend_'
-                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,2], llv_curve[:,1], 'r', label=label)
+                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,2], llv_curve[:,1], 'b', label=label)
+                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,3], llv_curve[:,1], 'b', label='_nolegend_')
+                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,4], llv_curve[:,1], 'r', label=label)
 
-                #lines += [llv_curve[:,0], llv_curve[:,2], llv_curve[:,1], 'r']
             
             
             self.curves.append( { 'name': name, 
@@ -674,11 +671,8 @@ class Tx(BasePlot):
                 lines += self.axes.plot (llv_curve[:,2], llv_curve[:,0], 'b', label = label)
                 lines += self.axes.plot (llv_curve[:,3], llv_curve[:,0], 'b', label = '_nolegend_')
                 lines += self.axes.plot (llv_curve[:,4], llv_curve[:,0], 'r', label = label)
-                
+            
 
-
-
-                #counter = u'' if len(arrays['LLV']) == 1 else u' %i' % (num + 1)
 
             self.curves.append( { 'name': name, # + counter, 
                                       'visible':True,
