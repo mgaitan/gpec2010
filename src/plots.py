@@ -51,7 +51,7 @@ class BasePlot(object):
      
 
     def setup_curves (self):
-        """each one sutype declare curves as a group of line2d
+        """each one subtype declare curves as a group of lines2d
 
             - redefined by each sub class"""
 
@@ -61,9 +61,9 @@ class BasePlot(object):
     def plot(self):
         """plot all visible curves"""
         for curve in self.curves:
-            if curve['visible']:
+            if curve['visible'] and curve.has_key('lines'):
                 marker = '' if 'marker' not in curve.keys() else curve['marker']
-                curve['line2d'] = self.axes.plot(*curve['lines'], color=curve['color'], marker=marker, label=curve['name'])
+                curve['lines2d'] = self.axes.plot(*curve['lines'], color=curve['color'], marker=marker, label=curve['name'])
         
 
         
@@ -75,7 +75,7 @@ class BasePlot(object):
         curve = [curve for curve in self.curves  if curve['wx_id'] == wx_id][0]     #TODO better way?        
 
         curve['visible'] = not curve['visible']
-        for line in curve['line2d']:
+        for line in curve['lines2d']:
             line.set_visible(curve['visible']) 
 
         self.canvas.draw()
@@ -123,35 +123,42 @@ class PTrho(BasePlot):
 
     def setup_curves(self, arrays):
 
+        
         if 'VAP' in arrays.keys():
+            lines = []
+            name = u'Pure compound vapor pressure lines'
             for num, vap_curve in enumerate(arrays['VAP']):
-                
-                counter = u'' if len(arrays['VAP']) == 1 else u' %i' % (num + 1)
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot(vap_curve[:,0], vap_curve[:,2], vap_curve[:,1], 'g', label=name),
+                lines += self.axes.plot(vap_curve[:,0], vap_curve[:,3], vap_curve[:,1], 'g', label='_nolegend_'),
 
-                self.curves.append( {'name': u'Pure compound vapor pressure lines (L)' + counter , 
+            self.curves.append( {'name': name,
                                      'visible':True, 
-                                     'lines':( vap_curve[:,0], vap_curve[:,2], vap_curve[:,1]),
+                                     #'lines':( vap_curve[:,0], vap_curve[:,2], vap_curve[:,1]),
+                                      'lines2d': lines,
                                       'color' : 'green',
                                       'wx_id' : wx.NewId(),
                                       'type': 'VAP',
                                         } )             
 
-                self.curves.append( {'name': u'Pure compound vapor pressure lines (V)' + counter , 
-                                     'visible':True, 
-                                     'lines':( vap_curve[:,0], vap_curve[:,3], vap_curve[:,1]),
-                                      'color' : 'green',
-                                      'wx_id' : wx.NewId(),
-                                      'type': 'VAP',
-                                        } )
-
 
         if 'CRI' in arrays.keys():
+            lines = []
+            name = u'Critical lines' 
             for num, cri_curve in enumerate(arrays['CRI']):
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot(cri_curve[:,0],cri_curve[:,2], cri_curve[:,1], 'k', label=label)
 
-                counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
-                self.curves.append( {'name': u'Critical line' + counter , 
+
+            #axes plot format http://matplotlib.sourceforge.net/api/axes_api.html?highlight=axes.plot#matplotlib.axes.Axes.plot
+
+
+                #counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
+            
+            self.curves.append( {'name': name, 
                                      'visible':True, 
-                                     'lines':(cri_curve[:,0],cri_curve[:,2], cri_curve[:,1]),
+                                     #'lines':(cri_curve[:,0],cri_curve[:,2], cri_curve[:,1]),
+                                     'lines2d': lines, 
                                      'color' : 'black',
                                      'wx_id' : wx.NewId(),
                                      'type': 'CRI'
@@ -159,11 +166,39 @@ class PTrho(BasePlot):
 
 
         if 'LLV' in arrays.keys():
+            lines = []
+            name = 'LLV'
+
             for num, llv_curve in enumerate(arrays['LLV']):
-                self.curves.append( { 'name': 'LLV', 
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,1], llv_curve[:,7], 'r', label=label)
+
+            
+            self.curves.append( { 'name': name, 
                                       'visible':True,
-                                      'lines': (llv_curve[:,0], llv_curve[:,1], llv_curve[:,7]),           #TODO
+                                      #'lines': (llv_curve[:,0], llv_curve[:,1], llv_curve[:,7]),           #TODO
+                                      'lines2d': lines, #self.axes.plot(*lines, label = name),
                                       'color': 'red', 
+                                      'wx_id' : wx.NewId(),
+                                       'type': 'LLV',
+                                    } )
+
+        if 'AZE' in arrays.keys():
+            lines = []
+            name = u'Azeotropic lines'
+
+            for num, aze_curve in enumerate(arrays['AZE']):
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot(aze_curve[:,0], aze_curve[:,4], aze_curve[:,1], 'm', label = label) 
+                lines += self.axes.plot(aze_curve[:,0], aze_curve[:,5], aze_curve[:,1], 'm', label= '_nolegend_' ) 
+
+
+            
+            self.curves.append( { 'name': name, 
+                                      'visible':True,
+                                      #'lines': tuple(lines),
+                                      'lines2d': lines,
+                                      'color': 'magenta', 
                                       'wx_id' : wx.NewId(),
                                        'type': 'LLV',
                                     } )
@@ -188,12 +223,21 @@ class PTx(BasePlot):
 
 
         if 'CRI' in arrays.keys():
-            for num, cri_curve in enumerate(arrays['CRI']):
+            lines = []
 
-                counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
-                self.curves.append( {'name': u'Critical line' + counter , 
+            name = u'Critical lines'
+
+            for num, cri_curve in enumerate(arrays['CRI']):
+                label = name if num == 0 else '_nolegend_'
+                lines +=  self.axes.plot(cri_curve[:,0],cri_curve[:,3], cri_curve[:,1], 'k', label=label)   #[ () ]
+
+            
+
+                #counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
+            self.curves.append( {'name': name, # + counter , 
                                      'visible':True, 
-                                     'lines':(cri_curve[:,0],cri_curve[:,3], cri_curve[:,1]),
+                                     #'lines':(cri_curve[:,0],cri_curve[:,3], cri_curve[:,1]),
+                                     'lines2d':  lines,  #self.axes.plot(*lines, label=name) ,
                                      'color' : 'black',
                                      'wx_id' : wx.NewId(),
                                      'type': 'CRI'
@@ -201,14 +245,44 @@ class PTx(BasePlot):
 
 
         if 'LLV' in arrays.keys():
+
+            lines = []
+            name = 'LLV'
             for num, llv_curve in enumerate(arrays['LLV']):
-                self.curves.append( { 'name': 'LLV', 
+                label = name if num == 0 else '_nolengend_'
+                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,2], llv_curve[:,1], 'r', label=label)
+
+                #lines += [llv_curve[:,0], llv_curve[:,2], llv_curve[:,1], 'r']
+            
+            
+            self.curves.append( { 'name': name, 
                                       'visible':True,
-                                      'lines': (llv_curve[:,0], llv_curve[:,2], llv_curve[:,1]),           #TODO
+                                      #'lines': (llv_curve[:,0], llv_curve[:,2], llv_curve[:,1]),           #TODO
+                                      'lines2d': lines, #self.axes.plot(*lines, label=name),
                                       'color': 'red', 
                                       'wx_id' : wx.NewId(),
-                                       'type': 'LLV',
+                                      'type': 'LLV',
                                     } )
+
+        if 'AZE' in arrays.keys():
+
+            name = u'Azeotropic lines'
+            lines = []
+
+            for num, aze_curve in enumerate(arrays['AZE']):
+                label = name if num == 0 else '_nolengend_'
+                lines += self.axes.plot( aze_curve[:,0], aze_curve[:,2], aze_curve[:,1], 'm', label=label)
+
+            
+            self.curves.append( { 'name': name, 
+                                      'visible':True,
+                                      #'lines': tuple(lines),
+                                      'lines2d': lines,  #self.axes.plot(*lines, label=name),
+                                      'color': 'magenta', 
+                                      'wx_id' : wx.NewId(),
+                                       'type': 'AZE',
+                                    } )
+
 
 class IsoPT(BasePlot):
     """Isopleth PT diagram"""
@@ -439,15 +513,15 @@ class PT(BasePlot):
 
         if 'VAP' in arrays.keys():
             lines = []
+            name = u'Pure compound vapor pressure lines'
             for num, vap_curve in enumerate(arrays['VAP']):
-                lines += [ vap_curve[:,0], vap_curve[:,1] ]
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot( vap_curve[:,0], vap_curve[:,1], 'g' , label = label)
 
-                #counter = u'' if len(arrays['VAP']) == 1 else u' %i' % (num + 1)
-
-            self.curves.append( {'name': u'Pure compound vapor pressure lines', # + counter , 
+            self.curves.append( {'name': name, # + counter , 
                                      'visible':True, 
                                      #'lines':( vap_curve[:,0], vap_curve[:,1]),
-                                      'lines': tuple(lines),
+                                      'lines2d': lines,
                                       'color' : 'green',
                                       'wx_id' : wx.NewId(),
                                       'type': 'VAP',
@@ -455,14 +529,16 @@ class PT(BasePlot):
 
         if 'CRI' in arrays.keys():
             lines = []
+            name = u'Critical lines'
             for num, cri_curve in enumerate(arrays['CRI']):
-                lines += [cri_curve[:,0],cri_curve[:,1]]
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot(cri_curve[:,0],cri_curve[:,1], 'k', label=label)
 
-                #counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
-            self.curves.append( {'name': u'Critical lines', 
+                
+            self.curves.append( {'name': name, 
                                  'visible':True, 
                                  #'lines':(cri_curve[:,0],cri_curve[:,1]),
-                                 'lines': tuple(lines),
+                                 'lines2d': lines,
                                  'color' : 'black',
                                  'wx_id' : wx.NewId(),
                                  'type': 'CRI'
@@ -471,12 +547,14 @@ class PT(BasePlot):
 
         if 'LLV' in arrays.keys():
             lines = []
+            name = 'LLV'
             for num, llv_curve in enumerate(arrays['LLV']):
-                lines += [ llv_curve[:,0], llv_curve[:,1] ] 
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,1], 'r', label=label)
 
-            self.curves.append( { 'name': 'LLV', 
+            self.curves.append( { 'name': name, 
                                       'visible':True,
-                                      'lines': tuple(lines), 
+                                      'lines2d': lines, 
                                       'color': 'red',      #TODO all red ? or red and blue ?
                                       'wx_id' : wx.NewId(), 
                                        'type': 'LLV',
@@ -485,16 +563,19 @@ class PT(BasePlot):
         
         if 'AZE' in arrays.keys():
             lines = []
-            for num, aze_curve in enumerate(arrays['AZE']):
-                lines += [ aze_curve[:,0], aze_curve[:,1] ] 
+            name = u'Azeotropic lines'
 
-            self.curves.append( { 'name': u'Azeotropic lines', 
-                                      'visible':True,
-                                      'lines': tuple(lines),
-                                      'color': 'magenta', 
-                                      'wx_id' : wx.NewId(),
-                                       'type': 'LLV',
-                                    } )
+            for num, aze_curve in enumerate(arrays['AZE']):
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot( aze_curve[:,0], aze_curve[:,1], 'm', label = label)
+
+            self.curves.append( { 'name': name,
+                                  'visible':True,
+                                  'lines2d': lines,
+                                  'color': 'magenta', 
+                                  'wx_id' : wx.NewId(),
+                                   'type': 'LLV',
+                                } )
 
 
 
@@ -511,43 +592,46 @@ class Tx(BasePlot):
 
     def setup_curves(self, arrays):
 
+        #TODO VAP curves!
+
                
         
         if 'CRI' in arrays.keys():
             lines = []
+            name = u'Critical lines'
             for num, cri_curve in enumerate(arrays['CRI']):
-                lines += [ cri_curve[:,3],cri_curve[:,0] ] 
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot (cri_curve[:,3], cri_curve[:,0], 'k', label = label)
 
-                #counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
+            
 
-            #this block could be inside the for to split the critical lines in separated segments
-
-            self.curves.append( {'name': u'Critical lines', # + counter, 
+            self.curves.append( {'name': name , # + counter, 
                                  'visible':True, 
-                                 #'lines':(cri_curve[:,3],cri_curve[:,0]),
-                                 'lines': tuple(lines),
+                                 'lines2d': lines, 
                                  'color' : 'black',
                                  'wx_id' : wx.NewId(),
                                  'type': 'CRI'
                                 } )
 
+
         if 'LLV' in arrays.keys():
+            lines = []
+            name = 'LLV'
             for num, llv_curve in enumerate(arrays['LLV']):
-            
-                counter = u'' if len(arrays['LLV']) == 1 else u' %i' % (num + 1)
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot (llv_curve[:,2], llv_curve[:,0], 'b', label = label)
+                lines += self.axes.plot (llv_curve[:,3], llv_curve[:,0], 'b', label = '_nolegend_')
+                lines += self.axes.plot (llv_curve[:,4], llv_curve[:,0], 'r', label = label)
 
-                self.curves.append( { 'name': 'LLV' + counter, 
+
+
+                #counter = u'' if len(arrays['LLV']) == 1 else u' %i' % (num + 1)
+
+            self.curves.append( { 'name': name, # + counter, 
                                       'visible':True,
-                                      'lines': (llv_curve[:,2], llv_curve[:,0], llv_curve[:,3], llv_curve[:,0] ),   
+                                      #'lines': (llv_curve[:,2], llv_curve[:,0], llv_curve[:,3], llv_curve[:,0] ),   
+                                      'lines2d': lines,
                                       'color': 'blue', 
-                                      'wx_id' : wx.NewId(),
-                                       'type': 'LLV',
-                                    } )
-
-                self.curves.append( { 'name': 'LLV' + counter, 
-                                      'visible':True,
-                                      'lines': (llv_curve[:,4], llv_curve[:,0]),   
-                                      'color': 'red', 
                                       'wx_id' : wx.NewId(),
                                        'type': 'LLV',
                                     } )
@@ -555,13 +639,19 @@ class Tx(BasePlot):
 
         if 'AZE' in arrays.keys():
 
+            name = u'Azeotropic line'
+            lines = []
             for num, aze_curve in enumerate(arrays['AZE']):
-                self.curves.append( { 'name': u'Azeotropic line', 
-                                      'visible':True,
-                                      'lines': (aze_curve[:,2], aze_curve[:,0]),           #TODO
-                                      'color': 'magenta', 
-                                      'wx_id' : wx.NewId(),
-                                       'type': 'LLV',
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot( aze_curve[:,2], aze_curve[:,0], 'm', label=label)
+            
+
+            self.curves.append( { 'name': name, 
+                                  'visible':True,
+                                  'lines2d': lines, 
+                                  'color': 'magenta', 
+                                  'wx_id' : wx.NewId(),
+                                   'type': 'LLV',
                                     } )
 
 
@@ -705,20 +795,22 @@ class Px(BasePlot):
 
     def setup_curves(self, arrays):
 
-               
+        #TODO VAP ?
         
         if 'CRI' in arrays.keys():
             lines = []
+            name = u'Critical lines'
             for num, cri_curve in enumerate(arrays['CRI']):
-                lines += [ cri_curve[:,3],cri_curve[:,1] ]
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot( cri_curve[:,3],cri_curve[:,1], 'k', label = label)
         
 
                 #counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
 
-            self.curves.append( {'name': u'Critical lines', # + counter, 
+            self.curves.append( {'name': name, # + counter, 
                                      'visible':True, 
-                                     #'lines':(cri_curve[:,3],cri_curve[:,1]),
-                                     'lines': tuple(lines),
+                                     #'lines': tuple(lines),
+                                     'lines2d': lines, 
                                      'color' : 'black',
                                      'wx_id' : wx.NewId(),
                                      'type': 'CRI'
@@ -726,27 +818,34 @@ class Px(BasePlot):
 
         if 'LLV' in arrays.keys():
             lines = []
+            name = 'LLV'
+
             for num, llv_curve in enumerate(arrays['LLV']):
-                lines += [llv_curve[:,2], llv_curve[:,1]]
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot(llv_curve[:,2], llv_curve[:,1], 'r', label = label)
             
 
-                #counter = u'' if len(arrays['LLV']) == 1 else u' %i' % (num + 1)
-
-            self.curves.append( { 'name': 'LLV', #+ counter, 
+            self.curves.append( { 'name': name, #+ counter, 
                                       'visible':True,
                                       #'lines': (llv_curve[:,2], llv_curve[:,1]),   
-                                      'lines': tuple(lines),
+                                      #'lines': tuple(lines),
+                                      'lines2d': lines,
                                       'color': 'red', 
                                       'wx_id' : wx.NewId(),
                                        'type': 'LLV',
                                     } )
 
         if 'AZE' in arrays.keys():
+            lines = []
+            name = u'Azeotropic line'
 
             for num, aze_curve in enumerate(arrays['AZE']):
-                self.curves.append( { 'name': u'Azeotropic line', 
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot(aze_curve[:,2], aze_curve[:,1], 'm', label = label)
+
+            self.curves.append( { 'name': name, 
                                       'visible':True,
-                                      'lines': (aze_curve[:,2], aze_curve[:,1]),           #TODO
+                                      'lines2d': lines, 
                                       'color': 'magenta', 
                                       'wx_id' : wx.NewId(),
                                        'type': 'LLV',
@@ -771,15 +870,18 @@ class Trho(BasePlot):
 
         if 'VAP' in arrays.keys():
             lines = []
+            name = u'Pure compound vapor pressure lines'
             for num, vap_curve in enumerate(arrays['VAP']):
-                lines += [ vap_curve[:,2], vap_curve[:,0], vap_curve[:,3], vap_curve[:,0] ] 
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot( vap_curve[:,2], vap_curve[:,0], 'g', label = label)
+                lines += self.axes.plot( vap_curve[:,3], vap_curve[:,0], 'g', label = '_nolegend_')
 
-                #counter = u'' if len(arrays['VAP']) == 1 else u' %i' % (num + 1)
 
-            self.curves.append( {'name': u'Pure compound vapor pressure lines', 
+
+            self.curves.append( {'name': name, 
                                      'visible':True, 
                                       #'lines':(vap_curve[:,2], vap_curve[:,0], vap_curve[:,3], vap_curve[:,0]),
-                                      'lines': tuple(lines),
+                                      'lines2d': lines,
                                       'color' : 'green',
                                       'wx_id' : wx.NewId(),
                                       'type': 'VAP',
@@ -789,15 +891,17 @@ class Trho(BasePlot):
 
         if 'CRI' in arrays.keys():
             lines = []
+            name = u'Critical lines' 
             for num, cri_curve in enumerate(arrays['CRI']):
-                lines += [cri_curve[:,2],cri_curve[:,0]]
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot(cri_curve[:,2],cri_curve[:,0], 'k', label=label)
             
 
                 #counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
-            self.curves.append( {'name': u'Critical lines', # + counter , 
+            self.curves.append( {'name': name, # + counter , 
                                      'visible':True, 
                                      #'lines':(cri_curve[:,2],cri_curve[:,0]),
-                                     'lines': tuple(lines),
+                                     'lines2d': lines,
                                      'color' : 'black',
                                      'wx_id' : wx.NewId(),
                                      'type': 'CRI'
@@ -805,26 +909,41 @@ class Trho(BasePlot):
 
 
         if 'LLV' in arrays.keys():
+            lines = []
+            name = 'LLV'
             for num, llv_curve in enumerate(arrays['LLV']):
-                self.curves.append( { 'name': 'LLV', 
-                                      'visible':True,
-                                      'lines': (llv_curve[:,7], llv_curve[:,0], llv_curve[:,8], llv_curve[:,0]),           #TODO
-                                      'color': 'blue', 
-                                      'wx_id' : wx.NewId(),
-                                       'type': 'LLV',
-                                    } )
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot(llv_curve[:,7], llv_curve[:,0], 'b', label=label)
+                lines += self.axes.plot(llv_curve[:,8], llv_curve[:,0], 'b', label='_nolegend_')
+
+            #TODO and the red curve?
+
+
+            self.curves.append( { 'name': name, 
+                                  'visible':True,
+                                  'lines2d': lines,           #TODO
+                                  'color': 'blue', 
+                                  'wx_id' : wx.NewId(),
+                                   'type': 'LLV',
+                                } )
 
 
         if 'AZE' in arrays.keys():
-
+            name = u'Azeotropic lines'
+            lines = []
             for num, aze_curve in enumerate(arrays['AZE']):
-                self.curves.append( { 'name': u'Azeotropic line', 
-                                      'visible':True,
-                                      'lines': (aze_curve[:,4], aze_curve[:,0], aze_curve[:,5], aze_curve[:,0]),           #TODO
-                                      'color': 'magenta', 
-                                      'wx_id' : wx.NewId(),
-                                       'type': 'LLV',
-                                    } )
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot( aze_curve[:,4], aze_curve[:,0], 'm', label = label)
+                lines += self.axes.plot( aze_curve[:,5], aze_curve[:,0], 'm', label = '_nolegend_')
+    
+                
+            self.curves.append( { 'name': name, 
+                                  'visible':True,
+                                  'lines2d': lines,           #TODO
+                                  'color': 'magenta', 
+                                  'wx_id' : wx.NewId(),
+                                   'type': 'LLV',
+                                } )
 
 
 class Prho(BasePlot):
@@ -843,33 +962,37 @@ class Prho(BasePlot):
 
         if 'VAP' in arrays.keys():
             lines = []
+            name = u'Pure compound vapor pressure lines'
             for num, vap_curve in enumerate(arrays['VAP']):
-                lines += [vap_curve[:,2], vap_curve[:,1], vap_curve[:,3], vap_curve[:,1] ]
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot(vap_curve[:,2], vap_curve[:,1], 'g', label=label)
+                lines += self.axes.plot(vap_curve[:,3], vap_curve[:,1], 'g', label='_nolegend_')
         
                 
                 #counter = u'' if len(arrays['VAP']) == 1 else u' %i' % (num + 1)
 
-            self.curves.append( {'name': u'Pure compound vapor pressure lines', 
-                                     'visible':True, 
-                                      #'lines':( vap_curve[:,2], vap_curve[:,1], vap_curve[:,3], vap_curve[:,1]),
-                                      'lines': tuple(lines),
-                                      'color' : 'green',
-                                      'wx_id' : wx.NewId(),
-                                      'type': 'VAP',
-                                        } )      
+            self.curves.append( {'name': name, 
+                                 'visible':True, 
+                                  'lines2d': lines,
+                                  'color' : 'green',
+                                  'wx_id' : wx.NewId(),
+                                  'type': 'VAP',
+                                } )      
         
        
 
         if 'CRI' in arrays.keys():
             lines = []
-            for num, cri_curve in enumerate(arrays['CRI']):
-                lines += [cri_curve[:,2],cri_curve[:,1]]
+            name = u'Critical lines'
 
-                #counter = u'' if len(arrays['CRI']) == 1 else u' %i' % (num + 1)
-            self.curves.append( {'name': u'Critical lines', # + counter , 
+            for num, cri_curve in enumerate(arrays['CRI']):
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot(cri_curve[:,2],cri_curve[:,1], 'k', label=label)
+
+                
+            self.curves.append( {'name': name, 
                                      'visible':True, 
-                                     #lines':(cri_curve[:,2],cri_curve[:,1]),
-                                     'lines': tuple(lines),
+                                     'lines2d': lines,
                                      'color' : 'black',
                                      'wx_id' : wx.NewId(),
                                      'type': 'CRI'
@@ -877,22 +1000,34 @@ class Prho(BasePlot):
 
 
         if 'LLV' in arrays.keys():
+            lines = []
+            name = 'LLV'
             for num, llv_curve in enumerate(arrays['LLV']):
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot(llv_curve[:,7], llv_curve[:,1], 'r', label=label)                    
 
-                self.curves.append( { 'name': 'LLV', 
-                                      'visible':True,
-                                      'lines': (llv_curve[:,7], llv_curve[:,1]),           #TODO
-                                      'color': 'red', 
-                                      'wx_id' : wx.NewId(),
-                                       'type': 'LLV',
-                                    } )
+            
+            self.curves.append( { 'name': name, 
+                                  'visible':True,
+                                  'lines2d': lines,           #TODO
+                                  'color': 'red', 
+                                  'wx_id' : wx.NewId(),
+                                   'type': 'LLV',
+                                } )
 
         if 'AZE' in arrays.keys():
+            lines = []
+            name = u'Azeotropic lines'
             for num, aze_curve in enumerate(arrays['AZE']):
-                self.curves.append( { 'name': u'Azeotropic line', 
-                                      'visible':True,
-                                      'lines': (aze_curve[:,4], aze_curve[:,1], aze_curve[:,5], aze_curve[:,1]),           #TODO
-                                      'color': 'magenta', 
-                                      'wx_id' : wx.NewId(),
-                                       'type': 'LLV',
-                                    } )
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot(aze_curve[:,4], aze_curve[:,1], 'm', label=label)
+                lines += self.axes.plot(aze_curve[:,5], aze_curve[:,1], 'm', label='_nolegend_')
+    
+
+            self.curves.append( { 'name': name, 
+                                  'visible':True,
+                                  'lines2d': lines,
+                                  'color': 'magenta', 
+                                  'wx_id' : wx.NewId(),
+                                   'type': 'LLV',
+                                } )
