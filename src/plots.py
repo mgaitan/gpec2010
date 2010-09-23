@@ -262,8 +262,7 @@ class PTx(BasePlot):
             name = u'Pure compound vapor pressure lines'
             for num, vap_curve in enumerate(arrays['VAP']):
                 label = name if num == 0 else '_nolegend_'
-                lines += self.axes.plot(vap_curve[:,0], vap_curve[:,2], vap_curve[:,1], 'g', label=name),
-                lines += self.axes.plot(vap_curve[:,0], vap_curve[:,3], vap_curve[:,1], 'g', label='_nolegend_'),
+                lines += self.axes.plot(vap_curve[:,0], np.repeat(1-num, len(vap_curve[:,0])) , vap_curve[:,1], 'g', label=name),
 
             self.curves.append( {'name': name,
                                      'visible':True, 
