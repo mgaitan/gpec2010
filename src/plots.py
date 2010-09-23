@@ -22,6 +22,7 @@ class BasePlot(object):
         self.system = system
         self.arrays = arrays
 
+        self.parent = parent
         
         self.fig = Figure()     #dpi=self.dpi
         self.canvas = FigCanvas(parent, -1, self.fig)
@@ -42,6 +43,9 @@ class BasePlot(object):
 
         self.properties = {'Grid':wx.NewId(), 'Legends':wx.NewId(), 'Log X': wx.NewId(), 'Log Y': wx.NewId(), }
    
+        if projection == '3d':
+            self.properties['Set perspective...'] = wx.NewId()
+
 
         self.curves = []    #curves to plot
 
@@ -89,9 +93,14 @@ class BasePlot(object):
 
         elif prop == 'Legends':
             if self.axes.get_legend():
-                self.axes.legend_ = None        #a tricky way to remove lengeds
+                self.axes.legend_ = None        #a tricky way to remove lengeds 
             else:
+                #TODO check and show visible lines only
+
                 self.axes.legend(loc='best')  
+
+                
+
 
         elif prop == 'Log X':
             if self.axes.get_xscale() == 'linear':
@@ -105,6 +114,27 @@ class BasePlot(object):
             else:
                 self.axes.set_yscale('linear')
 
+        elif prop == 'Set perspective...':
+            
+            dlg = wx.TextEntryDialog(self.parent, u'Azimuthal angle', u'Set Perpective', 
+                                            defaultValue=str(self.axes.azim) )            
+            r = dlg.ShowModal()
+            if  r == wx.ID_CANCEL:
+                return 
+            elif r  == wx.ID_OK:
+                azim = float(dlg.GetValue())
+            
+            dlg = wx.TextEntryDialog(self.parent, u'Elevation angle', u'Set Perpective', 
+                                            defaultValue=str(self.axes.elev) )            
+            r = dlg.ShowModal()
+            if r  == wx.ID_CANCEL:
+                return 
+            elif r  == wx.ID_OK:
+                elev = float(dlg.GetValue())
+
+            self.axes.view_init(elev, azim)
+            
+    
 
 
         self.canvas.draw()
@@ -171,9 +201,13 @@ class PTrho(BasePlot):
 
             for num, llv_curve in enumerate(arrays['LLV']):
                 label = name if num == 0 else '_nolegend_'
-                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,1], llv_curve[:,7], 'r', label=label)
+                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,7], llv_curve[:,1], 'b', label=label)
+                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,8], llv_curve[:,1], 'b', label='_nolegend_')
+                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,9], llv_curve[:,1], 'r', label=label)
+                
 
-            
+
+
             self.curves.append( { 'name': name, 
                                       'visible':True,
                                       #'lines': (llv_curve[:,0], llv_curve[:,1], llv_curve[:,7]),           #TODO
@@ -220,6 +254,25 @@ class PTx(BasePlot):
         BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, projection='3d', zlabel=self.zlabel)        
 
     def setup_curves(self, arrays):
+
+
+
+        if 'VAP' in arrays.keys():
+            lines = []
+            name = u'Pure compound vapor pressure lines'
+            for num, vap_curve in enumerate(arrays['VAP']):
+                label = name if num == 0 else '_nolegend_'
+                lines += self.axes.plot(vap_curve[:,0], vap_curve[:,2], vap_curve[:,1], 'g', label=name),
+                lines += self.axes.plot(vap_curve[:,0], vap_curve[:,3], vap_curve[:,1], 'g', label='_nolegend_'),
+
+            self.curves.append( {'name': name,
+                                     'visible':True, 
+                                     #'lines':( vap_curve[:,0], vap_curve[:,2], vap_curve[:,1]),
+                                      'lines2d': lines,
+                                      'color' : 'green',
+                                      'wx_id' : wx.NewId(),
+                                      'type': 'VAP',
+                                        } )    
 
 
         if 'CRI' in arrays.keys():
@@ -622,6 +675,7 @@ class Tx(BasePlot):
                 lines += self.axes.plot (llv_curve[:,2], llv_curve[:,0], 'b', label = label)
                 lines += self.axes.plot (llv_curve[:,3], llv_curve[:,0], 'b', label = '_nolegend_')
                 lines += self.axes.plot (llv_curve[:,4], llv_curve[:,0], 'r', label = label)
+                
 
 
 
@@ -822,8 +876,11 @@ class Px(BasePlot):
 
             for num, llv_curve in enumerate(arrays['LLV']):
                 label = name if num == 0 else '_nolegend_'
-                lines += self.axes.plot(llv_curve[:,2], llv_curve[:,1], 'r', label = label)
-            
+                lines += self.axes.plot(llv_curve[:,2], llv_curve[:,1], 'b', label = label)
+                lines += self.axes.plot(llv_curve[:,3], llv_curve[:,1], 'b', label = '_nolegend_')
+                lines += self.axes.plot (llv_curve[:,4], llv_curve[:,1], 'r', label = label)
+
+
 
             self.curves.append( { 'name': name, #+ counter, 
                                       'visible':True,
@@ -915,6 +972,7 @@ class Trho(BasePlot):
                 label = name if num == 0 else '_nolegend_'
                 lines += self.axes.plot(llv_curve[:,7], llv_curve[:,0], 'b', label=label)
                 lines += self.axes.plot(llv_curve[:,8], llv_curve[:,0], 'b', label='_nolegend_')
+                lines += self.axes.plot (llv_curve[:,9], llv_curve[:,0], 'r', label = label)
 
             #TODO and the red curve?
 
@@ -1004,7 +1062,9 @@ class Prho(BasePlot):
             name = 'LLV'
             for num, llv_curve in enumerate(arrays['LLV']):
                 label = name if num == 0 else '_nolegend_'
-                lines += self.axes.plot(llv_curve[:,7], llv_curve[:,1], 'r', label=label)                    
+                lines += self.axes.plot(llv_curve[:,7], llv_curve[:,1], 'b', label=label)
+                lines += self.axes.plot(llv_curve[:,8], llv_curve[:,1], 'b', label='_nolegend_')
+                lines += self.axes.plot (llv_curve[:,9], llv_curve[:,1], 'r', label = label)
 
             
             self.curves.append( { 'name': name, 
