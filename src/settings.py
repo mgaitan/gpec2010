@@ -45,5 +45,12 @@ BIN_AVAILABLE = {'2PhPxy': {'in':['twophin.DAT2'], 'out': ['PXYOUT.DAT']} ,
                 }
 
 
-
 COMBINING_RULES = {0: 'van Der Waals', 1:'Lorentz-Berthelot'}
+
+PLOT_SUITES = {'globalsuite': ['PT', 'Tx', 'Px', 'Trho', 'Prho'], 
+               'isop': ['IsoPT', 'IsoTx', 'IsoPx', 'IsoTrho', 'IsoPrho'], 
+               'pxy': ['Pxy', 'PxyPrho'], 
+               'txy': ['Txy', 'TxyTrho']
+               }
+
+PLOT_IN_3D = True 

@@ -26,7 +26,7 @@ import  wx.lib.scrolledpanel as scrolled
 import  wx.py  as  py #for pyshell
 
 
-from settings import PATH_ICONS, MODELS_OPTIONS, VC_RATIO
+from settings import PATH_ICONS, MODELS_OPTIONS, VC_RATIO, PLOT_SUITES, PLOT_IN_3D
 
 from tools.misc import Counter
 
@@ -179,7 +179,7 @@ class SuitePlotsPanel(wx.Panel):
 
         #no matter wich type of diagrams, if it's the first plot this instances 3D plot panels
 
-        if not self.plot3d_instances.has_key(case_id):
+        if not self.plot3d_instances.has_key(case_id) and PLOT_IN_3D:
             self.plot3d_instances[case_id] = []
             for type in ['PTrho', 'PTx']:
                 panel_name = 'case_%i_%s' % (case_id, type)
@@ -197,7 +197,7 @@ class SuitePlotsPanel(wx.Panel):
         if type_suite == 'globalsuite':
             case_id, case_name, arrays = message.data
 
-            for type in ['PT', 'Tx', 'Px', 'Trho', 'Prho']:
+            for type in PLOT_SUITES[type_suite]:
                 panel_name = 'case_%i_suite_%i_%s' % (case_id, self.suite_counter, type)
                 pp = PlotPanel(self,  -1, type, arrays, name=panel_name )   #name is useful to find the page later. 
                 
@@ -212,7 +212,7 @@ class SuitePlotsPanel(wx.Panel):
             case_id, case_name, arrays, z_val = message.data
 
             if arrays:
-                for type in ['IsoPT', 'IsoTx', 'IsoPx', 'IsoTrho', 'IsoPrho']:
+                for type in PLOT_SUITES[type_suite]:
                     panel_name = 'case_%i_suite_%i_%s_z_%s' % (case_id, self.suite_counter, type, z_val)
                     pp = PlotPanel(self,  -1, type, arrays, z=z_val, name=panel_name )
 
@@ -227,7 +227,7 @@ class SuitePlotsPanel(wx.Panel):
             case_id, case_name, arrays, t_val = message.data
 
             if arrays:
-                for type in ['Pxy', 'PxyPrho']:
+                for type in PLOT_SUITES[type_suite]:
                     panel_name = 'case_%i_suite_%i_%s_t_%s' % (case_id, self.suite_counter, type, t_val)
                     pp = PlotPanel(self,  -1, type, arrays, t=t_val, name=panel_name)
                     self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
@@ -242,7 +242,7 @@ class SuitePlotsPanel(wx.Panel):
             case_id, case_name, arrays, p_val = message.data
 
             if arrays:
-                for type in ['Txy', 'TxyTrho']:
+                for type in PLOT_SUITES[type_suite]:
                     panel_name = 'case_%i_suite_%i_%s_p_%s' % (case_id, self.suite_counter, type, p_val)
                     pp = PlotPanel(self,  -1, type, arrays, p=p_val, name=panel_name)
                     self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))

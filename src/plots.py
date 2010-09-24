@@ -520,20 +520,28 @@ class IsoTrho(BasePlot):
     def setup_curves(self, arrays):
 
         if 'ISO' in arrays.keys():
-            for num, vap_curve in enumerate(arrays['ISO']):
+            lines_g = lines_r = []
+            name_g = u'Incipient Face.'
+            name_r = u'Major (Saturated) Face.'
 
-                self.curves.append( {'name': u'Incipient Face.', 
+            for num, vap_curve in enumerate(arrays['ISO']):
+                label_g = name_g if num == 0 else '_nolegend_'
+                label_r = name_r if num == 0 else '_nolegend_'
+                lines_g +=  self.plot(vap_curve[:,4], vap_curve[:,0], 'g', label=label_g)
+                lines_r +=  self.plot(vap_curve[:,5], vap_curve[:,0], 'r', label=label_r)
+
+            self.curves.append( {'name': u'Incipient Face.', 
                                      'visible':True, 
-                                     'lines':( vap_curve[:,4], vap_curve[:,0]),
+                                     'lines2d': lines_g,
                                       'color' : 'green',
                                       'wx_id' : wx.NewId(),
                                       'type': 'ISO',
                                         } )
 
 
-                self.curves.append( {'name': u'Major (Saturated) Face.',
+            self.curves.append( {'name': u'Major (Saturated) Face.',
                                      'visible':True, 
-                                     'lines': (vap_curve[:,5], vap_curve[:,0]),
+                                     'lines2d': lines_r,
                                       'color' : 'red',
                                       'wx_id' : wx.NewId(),
                                       'type': 'ISO',
