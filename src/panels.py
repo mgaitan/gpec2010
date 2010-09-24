@@ -106,12 +106,6 @@ class PlotPanel(wx.Panel):
                     self.Bind(wx.EVT_MENU, self.plot.OnToggleProperty, id=wx_id)
 
 
-            
-                # make a submenu
-                #sm = wx.Menu()
-                #sm.Append(self.popupID8, "sub item 1")
-                #sm.Append(self.popupID9, "sub item 1")
-                #self.menu.AppendMenu(self.popupID7, "Test Submenu", sm)
 
 
             # Popup the menu.  If an item is selected then its handler
@@ -145,12 +139,15 @@ class SuitePlotsPanel(wx.Panel):
         self.SetSizerAndFit(sizer)
 
                 
-        pub.subscribe(self.OnMakePlots, 'make') #for all kind of suites
+        pub.subscribe(self.MakePlots, 'make') #for all kind of suites
         
         pub.subscribe(self.HidePage, 'hide page') #from checkbox tree
         pub.subscribe(self.ShowPage, 'show page') #from checkbox tree
 
         self.hidden_page = {}
+
+        #plots in 3d are uniques for each cases. Every new data is drawn on the same plot#plots in 3d are uniques for each cases. Every new data is drawn on the same plot
+        self.plot3d_instances = {} 
 
         self.suite_counter = 0  #unique ID to keep plots generated with the same click grouped
 
@@ -175,38 +172,43 @@ class SuitePlotsPanel(wx.Panel):
 
         
 
+    def MakePlots(self, message):
         
 
+        case_id, case_name = message.data[0:2]
 
+        #no matter wich type of diagrams, if it's the first plot this instances 3D plot panels
 
-    def OnMakePlots(self, message):
-        type = message.topic[1]
+        if not self.plot3d_instances.has_key(case_id):
+            self.plot3d_instances[case_id] = []
+            for type in ['PTrho', 'PTx']:
+                panel_name = 'case_%i_%s' % (case_id, type)
+                pp3d = PlotPanel(self,  -1, type, name=panel_name)
+                self.plot3d_instances[case_id] += [pp3d]
+
+                pub.sendMessage('add checkbox', (case_id, 'globalsuite3d', pp3d.plot.short_title, panel_name))
+                self.nb.AddPage(pp3d, "%s (%s)" % (pp3d.plot.short_title, case_name))
         
-        if type == 'globalsuite':
+        
+        type_suite = message.topic[1]
+
+        print type_suite
+
+        if type_suite == 'globalsuite':
             case_id, case_name, arrays = message.data
 
             for type in ['PT', 'Tx', 'Px', 'Trho', 'Prho']:
                 panel_name = 'case_%i_suite_%i_%s' % (case_id, self.suite_counter, type)
                 pp = PlotPanel(self,  -1, type, arrays, name=panel_name )   #name is useful to find the page later. 
                 
-                pub.sendMessage('add checkbox', (case_id, message.topic, pp.plot.short_title, panel_name))
+                pub.sendMessage('add checkbox', (case_id, type_suite, pp.plot.short_title, panel_name))
 
                 self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
                 pp.Plot()        
-
-        elif type == 'globalsuite3d':
-            case_id, case_name, arrays = message.data
-
-            for type in ['PTrho', 'PTx']:
-                panel_name = 'case_%i_suite_%i_%s' % (case_id, self.suite_counter, type)
-                pp = PlotPanel(self,  -1, type, arrays, name=panel_name)
-                
-                pub.sendMessage('add checkbox', (case_id, message.topic, pp.plot.short_title, panel_name))
-
-                self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
-                pp.Plot()           
+            
+       
         
-        elif type == 'isop':
+        elif type_suite == 'isop':
             case_id, case_name, arrays, z_val = message.data
 
             if arrays:
@@ -214,14 +216,14 @@ class SuitePlotsPanel(wx.Panel):
                     panel_name = 'case_%i_suite_%i_%s_z_%s' % (case_id, self.suite_counter, type, z_val)
                     pp = PlotPanel(self,  -1, type, arrays, z=z_val, name=panel_name )
 
-                    pub.sendMessage('add checkbox', (case_id, message.topic, pp.plot.short_title, panel_name, '(Z = %s)' % z_val ))
+                    pub.sendMessage('add checkbox', (case_id, type_suite, pp.plot.short_title, panel_name, '(Z = %s)' % z_val ))
 
                     self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
                     pp.Plot()
             else:
                 pub.sendMessage('log', ('warning', "Couldn't calculate for the given molar fraction (%s)" % z_val))
                 
-        elif type == 'pxy':
+        elif type_suite == 'pxy':
             case_id, case_name, arrays, t_val = message.data
 
             if arrays:
@@ -230,13 +232,13 @@ class SuitePlotsPanel(wx.Panel):
                     pp = PlotPanel(self,  -1, type, arrays, t=t_val, name=panel_name)
                     self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
 
-                    pub.sendMessage('add checkbox', (case_id, message.topic, pp.plot.short_title, panel_name, '(T = %s K)' % t_val))
+                    pub.sendMessage('add checkbox', (case_id, type_suite, pp.plot.short_title, panel_name, '(T = %s K)' % t_val))
 
                     pp.Plot()
             else:
                 pub.sendMessage('log', ('warning', "Couldn't calculate for the given temperature (%s K)" % t_val))
 
-        elif type == 'txy':
+        elif type_suite == 'txy':
             case_id, case_name, arrays, p_val = message.data
 
             if arrays:
@@ -245,11 +247,22 @@ class SuitePlotsPanel(wx.Panel):
                     pp = PlotPanel(self,  -1, type, arrays, p=p_val, name=panel_name)
                     self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
             
-                    pub.sendMessage('add checkbox', (case_id, message.topic, pp.plot.short_title, panel_name, '(P = %s bar)' % p_val))
+                    pub.sendMessage('add checkbox', (case_id, type_suite, pp.plot.short_title, panel_name, '(P = %s bar)' % p_val))
 
                     pp.Plot()
             else:
                 pub.sendMessage('log', ('warning', "Couldn't calculate for the given pressure (%s bar)" % p_val))
+
+
+        #plot whatever on 3D plots.
+
+        for pp3d in self.plot3d_instances[case_id]:
+            kwarg = dict( [ (extra_var, float(locals()[extra_var])) for extra_var in ['z_val','t_val', 'p_val'] 
+                            if extra_var in locals() ] 
+                        )
+
+            pp3d.plot.setup_curves(arrays, **kwarg)
+            pp3d.Plot()
 
         self.suite_counter += 1 
 
@@ -814,17 +827,17 @@ class CasePanel(scrolled.ScrolledPanel):
         self.diag_hbox = wx.BoxSizer(wx.HORIZONTAL)
 
         self.diagram_types = {0: 'Global Phase', 
-                              1: 'Global Phase 3D',
-                              2: 'Isopheths',
-                              3: 'Pxy', 
-                              4: 'Txy',  }       
+                              #1: 'Global Phase 3d',
+                              1: 'Isopheths',
+                              2: 'Pxy', 
+                              3: 'Txy',  }       
 
         self.diagram_ch = wx.Choice(self, -1, choices = [self.diagram_types[key] 
                                          for key in sorted(self.diagram_types.keys())] )
 
         self.diagram_ch.SetSelection(0)
 
-        st = wx.StaticText(self, -1, "Diagram:", style=wx.ALIGN_RIGHT)
+        st = wx.StaticText(self, -1, "Diagrams:", style=wx.ALIGN_RIGHT)
         self.diag_hbox.Add(st, 1, flag= wx.ALIGN_RIGHT | wx.ALIGN_CENTER_VERTICAL, border=5)
 
         self.diag_hbox.Add(self.diagram_ch, 2, wx.EXPAND)
@@ -879,7 +892,7 @@ class CasePanel(scrolled.ScrolledPanel):
                 item.Show(False)
                 self.diag_hbox.Layout()
         
-        if diagram_type_key == 2:   #isopleth
+        if diagram_type_key == 1:   #isopleth
             
             label = wx.StaticText(self, -1, "Z")  #for isopleths
             self.z_input = ui.widgets.FloatCtrl(self, -1, "0.97")
@@ -887,7 +900,7 @@ class CasePanel(scrolled.ScrolledPanel):
             self.diag_hbox.Add(label, 0, flag= wx.ALIGN_CENTER_VERTICAL | wx.ALL , border=5)
             self.diag_hbox.Add(self.z_input, 1, wx.EXPAND | wx.ALL ^ wx.LEFT , border=5)
 
-        elif diagram_type_key == 3:   #pxy
+        elif diagram_type_key == 2:   #pxy
 
             label = wx.StaticText(self, -1, "T [K]")      #for pxy
             self.t_input = ui.widgets.FloatCtrl(self, -1, "300.0")
@@ -895,7 +908,7 @@ class CasePanel(scrolled.ScrolledPanel):
             self.diag_hbox.Add(label, 0, flag= wx.ALIGN_CENTER_VERTICAL | wx.ALL , border=5)
             self.diag_hbox.Add(self.t_input, 1, wx.EXPAND | wx.ALL ^ wx.LEFT , border=5)
 
-        elif diagram_type_key == 4: 
+        elif diagram_type_key == 3: 
 
             label = wx.StaticText(self, -1, "P [bar]")      #for txy
             self.p_input = ui.widgets.FloatCtrl(self, -1, "100.0")
@@ -1053,23 +1066,23 @@ class CasePanel(scrolled.ScrolledPanel):
             if diagram_selection == 0:   #global
                 pub.sendMessage('make.globalsuite', (self.case_id, self.name, curves))
 
-            if diagram_selection == 1:  #global 3D
-                pub.sendMessage('make.globalsuite3d', (self.case_id, self.name, curves))
+            #if diagram_selection == 1:  #global 3D
+            #    pub.sendMessage('make.globalsuite3d', (self.case_id, self.name, curves))
 
-            elif diagram_selection == 2:   #isopleth
+            elif diagram_selection == 1:   #isopleth
                 z = self.z_input.GetValue()
                 self.api_manager.write_generic_inparam('z', z)
                 curves_isop = self.api_manager.read_generic_output('isop')
                 
                 pub.sendMessage('make.isop', (self.case_id, self.name, curves_isop, z))
             
-            elif diagram_selection == 3:   #pxy
+            elif diagram_selection == 2:   #pxy
                 t = self.t_input.GetValue()
                 self.api_manager.write_generic_inparam('t', t)
                 curves_pxy = self.api_manager.read_generic_output('pxy')
                 pub.sendMessage('make.pxy', (self.case_id, self.name, curves_pxy, t))
 
-            elif diagram_selection == 4:   #txy
+            elif diagram_selection == 3:   #txy
                 p = self.p_input.GetValue()
                 self.api_manager.write_generic_inparam('p', p)
                 curves_txy = self.api_manager.read_generic_output('txy')
@@ -1150,10 +1163,10 @@ class PlotsTreePanel(wx.Panel):
         self.tree_data = {} 
 
         
-        pub.subscribe(self.OnAddItem, 'add checkbox')
+        pub.subscribe(self.AddCheckbox, 'add checkbox')
 
 
-    def OnAddItem(self, message):
+    def AddCheckbox(self, message):
         """
         Case X 
          |__ 2D
@@ -1193,10 +1206,10 @@ class PlotsTreePanel(wx.Panel):
         
         if len(message.data) == 4:
             case_id, topic, type, panel_name = message.data
-            category = category_translate[topic[1]] #globalsuite, globalsuite3d
+            category = category_translate[topic] #globalsuite, globalsuite3d
         elif len(message.data) == 5:
             case_id, topic, type, panel_name, extra_var = message.data
-            category = category_translate[topic[1]] + " " + extra_var
+            category = category_translate[topic] + " " + extra_var
 
 
         if case_id not in self.tree_data.keys():

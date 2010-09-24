@@ -80,8 +80,12 @@ class BasePlot(object):
 
         curve['visible'] = not curve['visible']
         for line in curve['lines2d']:
-            line.set_visible(curve['visible']) 
-
+            try:
+                line.set_visible(curve['visible']) 
+            except AttributeError:
+                for line_ in line:
+                    line_.set_visible(curve['visible']) 
+                
         self.canvas.draw()
 
     def OnToggleProperty(self, event):
@@ -151,7 +155,7 @@ class PTrho(BasePlot):
 
         BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, projection='3d', zlabel=self.zlabel)        
 
-    def setup_curves(self, arrays):
+    def setup_curves(self, arrays, **kwarg):
 
         
         if 'VAP' in arrays.keys():
@@ -237,7 +241,8 @@ class PTrho(BasePlot):
                                        'type': 'LLV',
                                     } )
 
-
+        print "keys", arrays.keys(), 
+        print "extra", kwarg
 
 
 class PTx(BasePlot):
@@ -253,7 +258,7 @@ class PTx(BasePlot):
 
         BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, projection='3d', zlabel=self.zlabel)        
 
-    def setup_curves(self, arrays):
+    def setup_curves(self, arrays, **kwarg):
 
 
 
@@ -306,7 +311,6 @@ class PTx(BasePlot):
             
             self.curves.append( { 'name': name, 
                                       'visible':True,
-                                      #'lines': (llv_curve[:,0], llv_curve[:,2], llv_curve[:,1]),           #TODO
                                       'lines2d': lines, #self.axes.plot(*lines, label=name),
                                       'color': 'red', 
                                       'wx_id' : wx.NewId(),
@@ -333,6 +337,28 @@ class PTx(BasePlot):
                                     } )
 
 
+        if 'ISO' in arrays.keys():
+            name = u'Isopleth lines (Z = %s)' % kwarg['z_val']
+            lines = []
+            for num, iso_curve in enumerate(arrays['ISO']):
+                label = name if num == 0 else '_nolengend_'
+                
+                lines += self.axes.plot(iso_curve[:,0], 1 - iso_curve[:,3] , iso_curve[:,1], 'g--', label=label),
+                                
+             #Tx: 1 - iso_curve[:,3], iso_curve[:,0]
+             #Px 1 - vap_curve[:,3], vap_curve[:,1]
+                        
+            self.curves.append( { 'name': name, 
+                                  'visible':True,
+                                  #'lines': tuple(lines),
+                                  'lines2d': lines,  #self.axes.plot(*lines, label=name),
+                                  'color': 'green', 
+                                  'wx_id' : wx.NewId(),
+                                  'type': 'ISO',
+                                } )
+
+
+
 class IsoPT(BasePlot):
     """Isopleth PT diagram"""
     
@@ -348,17 +374,21 @@ class IsoPT(BasePlot):
     def setup_curves(self, arrays):
 
         if 'ISO' in arrays.keys():
+            lines = []
+            name = u'Isopleth lines'
             for num, vap_curve in enumerate(arrays['ISO']):
+                label = name if num == 0 else '_nolengend_'
+                lines += self.axes.plot(vap_curve[:,0], vap_curve[:,1], 'k', label=label)
                 
-                counter = u'' if len(arrays['ISO']) == 1 else u' %i' % (num + 1)
+                
 
-                self.curves.append( {'name': u'Isopleth line' + counter , 
-                                     'visible':True, 
-                                     'lines':( vap_curve[:,0], vap_curve[:,1]),
-                                      'color' : 'green',
-                                      'wx_id' : wx.NewId(),
-                                      'type': 'ISO',
-                                        } )             
+            self.curves.append( {'name': name, 
+                                 'visible':True, 
+                                 'lines2d': lines,
+                                  'color' : 'black',
+                                  'wx_id' : wx.NewId(),
+                                  'type': 'ISO',
+                                    } )             
 
         if 'LLV' in arrays.keys():
             for num, llv_curve in enumerate(arrays['LLV']):
@@ -403,25 +433,29 @@ class IsoTx(BasePlot):
 
     def setup_curves(self, arrays):
 
+
+
         if 'ISO' in arrays.keys():
-            for num, vap_curve in enumerate(arrays['ISO']):
+            name = u'Isopleth lines'
+
+            for num, iso_curve in enumerate(arrays['ISO']):
                 
 
                 self.curves.append( {'name': u'Incipient Face.',
                                      'visible': True, 
-                                     'lines':( 1 - vap_curve[:,3], vap_curve[:,0]),
+                                     'lines':( 1 - iso_curve[:,3], iso_curve[:,0]),
                                       'color' : 'green',
                                       'wx_id' : wx.NewId(),
                                       'type': 'ISO',
                                         } )             
 
                 #a same lenght vector constant at maximum ("z" composition given)
-                saturated =  np.repeat( np.max(vap_curve[:,2]), len(vap_curve[:,2]))    
+                saturated =  np.repeat( np.max(iso_curve[:,2]), len(iso_curve[:,2]))    
             
 
                 self.curves.append( {'name': u'Major (Saturated) Face.',
                                      'visible':True, 
-                                     'lines':( saturated, vap_curve[:,0]),
+                                     'lines':( saturated, iso_curve[:,0]),
                                       'color' : 'red',
                                       'wx_id' : wx.NewId(),
                                       'type': 'ISO',
