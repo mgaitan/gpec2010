@@ -534,33 +534,29 @@ class IsoTrho(BasePlot):
     def setup_curves(self, arrays):
 
         if 'ISO' in arrays.keys():
-            lines_g = lines_r = []
+            #lines_g = []
+            #lines_r = []
+
+            lines = []
             name_g = u'Incipient Face.'
             name_r = u'Major (Saturated) Face.'
 
+            names = [name_g, name_r]
+            styles = ['g', 'r']
+
             for num, vap_curve in enumerate(arrays['ISO']):
-                label_g = name_g if num == 0 else '_nolegend_'
-                label_r = name_r if num == 0 else '_nolegend_'
-                lines_g +=  self.axes.plot(vap_curve[:,4], vap_curve[:,0], 'g', label=label_g)
-                lines_r +=  self.axes.plot(vap_curve[:,5], vap_curve[:,0], 'r', label=label_r)
+                lines +=  self.axes.plot(vap_curve[:,4], vap_curve[:,0], styles[num], label=names[num])
+                lines +=  self.axes.plot(vap_curve[:,5], vap_curve[:,0], styles[num], label='_nolegend_')
 
-            self.curves.append( {'name': u'Incipient Face.', 
-                                     'visible':True, 
-                                     'lines2d': lines_g,
-                                      'color' : 'green',
-                                      'wx_id' : wx.NewId(),
-                                      'type': 'ISO',
-                                        } )
+                self.curves.append( {'name': names[num], 
+                                         'visible':True, 
+                                         'lines2d': lines,
+                                          'color' : 'green',
+                                          'wx_id' : wx.NewId(),
+                                          'type': 'ISO',
+                                            } )
+                lines = []
 
-
-            self.curves.append( {'name': u'Major (Saturated) Face.',
-                                     'visible':True, 
-                                     'lines2d': lines_r,
-                                      'color' : 'red',
-                                      'wx_id' : wx.NewId(),
-                                      'type': 'ISO',
-                                        } )     
-                
            
         
                 
@@ -582,24 +578,25 @@ class IsoPrho(BasePlot):
     def setup_curves(self, arrays):
 
         if 'ISO' in arrays.keys():
+            lines = []
+            name_g = u'Incipient Face.'
+            name_r = u'Major (Saturated) Face.'
+
+            names = [name_g, name_r]
+            styles = ['g', 'r']
+
             for num, vap_curve in enumerate(arrays['ISO']):
-
-                self.curves.append( {'name': u'Incipient Face.', 
-                                     'visible':True, 
-                                     'lines':( vap_curve[:,4], vap_curve[:,1]),
-                                      'color' : 'green',
-                                      'wx_id' : wx.NewId(),
-                                      'type': 'ISO',
-                                        } )
-
-
-                self.curves.append( {'name': u'Major (Saturated) Face.',
-                                     'visible':True, 
-                                     'lines': (vap_curve[:,5], vap_curve[:,1]),
-                                      'color' : 'red',
-                                      'wx_id' : wx.NewId(),
-                                      'type': 'ISO',
-                                        } )     
+                lines +=  self.axes.plot(vap_curve[:,4], vap_curve[:,1], styles[num], label=names[num])
+                lines +=  self.axes.plot(vap_curve[:,5], vap_curve[:,1], styles[num], label='_nolegend_')
+                
+                self.curves.append( {'name': names[num], 
+                                         'visible':True, 
+                                         'lines2d': lines,
+                                          'color' : 'green',
+                                          'wx_id' : wx.NewId(),
+                                          'type': 'ISO',
+                                            } )
+                lines = []     
                 
 
 class PT(BasePlot):
