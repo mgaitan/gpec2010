@@ -1201,7 +1201,7 @@ class PlotsTreePanel(wx.Panel):
         """
 
 
-        category_translate = {'globalsuite': 'Global Phase', 'globalsuite3d': 'Global Phase 3D', 'isop': 'Isopleths', 'txy': 'Txy', 'pxy': 'Pxy'}
+        category_translate = {'globalsuite': 'Global Phase', 'globalsuite3d': '', 'isop': 'Isopleths', 'txy': 'Txy', 'pxy': 'Pxy'}
         
         if len(message.data) == 4:
             case_id, topic, type, panel_name = message.data
@@ -1219,22 +1219,27 @@ class PlotsTreePanel(wx.Panel):
                                                                 '3D': {'node': node3d, 'childs': {} }, 
                                                                } 
                                       }
-            self.tree.CheckItem2(node2d, True)
-
-
-        xD = '3D' if type == 'globalsuite3d' else '2D'
-
-        if category not in self.tree_data[case_id]['childs'][xD]['childs'].keys():
-            parent_node = self.tree_data[case_id]['childs'][xD]['node']
-            node = self.tree.AppendItem(parent_node, category, ct_type=1)
-            self.tree_data[case_id]['childs'][xD]['childs'][category] = {'node': node, 'childs': {} }
             self.tree.CheckItem2(node, True)
-        
+            self.tree.CheckChilds(node, True)
+            self.tree.ExpandAllChildren(node)
 
-        parent_node = self.tree_data[case_id]['childs'][xD]['childs'][category]['node']
+
+        if topic != 'globalsuite3d' and category not in self.tree_data[case_id]['childs']['2D']['childs'].keys():
+            parent_node = self.tree_data[case_id]['childs']['2D']['node']
+            node = self.tree.AppendItem(parent_node, category, ct_type=1)
+            self.tree_data[case_id]['childs']['2D']['childs'][category] = {'node': node, 'childs': {} }
+            self.tree.CheckItem2(node, True)
+            self.tree.Expand(parent_node)
+
+
+        if topic != 'globalsuite3d':
+            parent_node = self.tree_data[case_id]['childs']['2D']['childs'][category]['node']
+        else: 
+            parent_node = self.tree_data[case_id]['childs']['3D']['node']
+
         node = self.tree.AppendItem(parent_node, type, ct_type=1)        
 
-        #self.tree.AutoCheckParent(node, True)
+        self.tree.Expand(parent_node)
 
         self.tree.SetPyData(node, panel_name)
         
