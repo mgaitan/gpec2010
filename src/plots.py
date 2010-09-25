@@ -241,8 +241,76 @@ class PTrho(BasePlot):
                                        'type': 'LLV',
                                     } )
 
-        print "keys", arrays.keys(), 
-        print "extra", kwarg
+      
+
+        if 'ISO' in arrays.keys():
+
+            name = u'Isopleth lines (Z = %s)' % kwarg['z_val']
+            lines = []
+            for num, iso_curve in enumerate(arrays['ISO']):
+                label = name if num == 0 else '_nolengend_'
+                
+                lines += self.axes.plot(iso_curve[:,0], iso_curve[:,4], iso_curve[:,1], 'g--', label=label),
+                lines += self.axes.plot(iso_curve[:,0], iso_curve[:,5], iso_curve[:,1], 'g--', label='_nolegend_'),                                
+
+             
+            self.curves.append( { 'name': name, 
+                                  'visible':True,
+                                  #'lines': tuple(lines),
+                                  'lines2d': lines,  #self.axes.plot(*lines, label=name),
+                                  'color': 'green', 
+                                  'wx_id' : wx.NewId(),
+                                  'type': 'ISO',
+                                } )
+
+     
+
+
+        if 'Txy' in arrays.keys():
+
+            name = u'Isobaric lines (P = %s)' % kwarg['p_val']
+            lines = []
+            for num, iso_curve in enumerate(arrays['Txy']):
+                label = name if num == 0 else '_nolegend_'
+
+                lines += self.axes.plot(iso_curve[:,0], iso_curve[:,5], float(kwarg['p_val']), 'k-.', label=label),
+                lines += self.axes.plot(iso_curve[:,0], iso_curve[:,6], float(kwarg['p_val']), 'k-.', label='_nolegend_'),                                
+
+             
+            self.curves.append( { 'name': name, 
+                                  'visible':True,
+                                  #'lines': tuple(lines),
+                                  'lines2d': lines,  #self.axes.plot(*lines, label=name),
+                                  'color': 'green', 
+                                  'wx_id' : wx.NewId(),
+                                  'type': 'ISO',
+                                } )
+
+
+
+
+        if 'Pxy' in arrays.keys():
+
+            name = u'Isothermal lines (T = %s)' % kwarg['t_val']
+            lines = []
+            for num, iso_curve in enumerate(arrays['Pxy']):
+                label = name if num == 0 else '_nolegend_'
+
+                t_constant = np.repeat(float(kwarg['t_val']), len(iso_curve[:,1]))
+
+                lines += self.axes.plot(t_constant, iso_curve[:,5], iso_curve[:,0], 'y-.', label=label),
+                lines += self.axes.plot(t_constant, iso_curve[:,6], iso_curve[:,0], 'y-.', label='_nolegend_')
+
+             
+            self.curves.append( { 'name': name, 
+                                  'visible':True,
+                                  #'lines': tuple(lines),
+                                  'lines2d': lines,  #self.axes.plot(*lines, label=name),
+                                  'color': 'green', 
+                                  'wx_id' : wx.NewId(),
+                                  'type': 'ISO',
+                                } )
+
 
 
 class PTx(BasePlot):
@@ -268,6 +336,7 @@ class PTx(BasePlot):
             for num, vap_curve in enumerate(arrays['VAP']):
                 label = name if num == 0 else '_nolegend_'
                 lines += self.axes.plot(vap_curve[:,0], np.repeat(1-num, len(vap_curve[:,0])) , vap_curve[:,1], 'g', label=label),
+
 
             self.curves.append( {'name': name,
                                      'visible':True, 
