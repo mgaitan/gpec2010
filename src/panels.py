@@ -192,8 +192,6 @@ class SuitePlotsPanel(wx.Panel):
         
         type_suite = message.topic[1]
 
-        print type_suite
-
         if type_suite == 'globalsuite':
             case_id, case_name, arrays = message.data
 
@@ -256,13 +254,14 @@ class SuitePlotsPanel(wx.Panel):
 
         #plot whatever on 3D plots.
 
-        for pp3d in self.plot3d_instances[case_id]:
-            kwarg = dict( [ (extra_var, float(locals()[extra_var])) for extra_var in ['z_val','t_val', 'p_val'] 
-                            if extra_var in locals() ] 
-                        )
+        if PLOT_IN_3D:
+            for pp3d in self.plot3d_instances[case_id]:
+                kwarg = dict( [ (extra_var, float(locals()[extra_var])) for extra_var in ['z_val','t_val', 'p_val'] 
+                                if extra_var in locals() ] 
+                            )
 
-            pp3d.plot.setup_curves(arrays, **kwarg)
-            pp3d.Plot()
+                pp3d.plot.setup_curves(arrays, **kwarg)
+                pp3d.Plot()
 
         self.suite_counter += 1 
 

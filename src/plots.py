@@ -527,8 +527,8 @@ class IsoTrho(BasePlot):
             for num, vap_curve in enumerate(arrays['ISO']):
                 label_g = name_g if num == 0 else '_nolegend_'
                 label_r = name_r if num == 0 else '_nolegend_'
-                lines_g +=  self.plot(vap_curve[:,4], vap_curve[:,0], 'g', label=label_g)
-                lines_r +=  self.plot(vap_curve[:,5], vap_curve[:,0], 'r', label=label_r)
+                lines_g +=  self.axes.plot(vap_curve[:,4], vap_curve[:,0], 'g', label=label_g)
+                lines_r +=  self.axes.plot(vap_curve[:,5], vap_curve[:,0], 'r', label=label_r)
 
             self.curves.append( {'name': u'Incipient Face.', 
                                      'visible':True, 

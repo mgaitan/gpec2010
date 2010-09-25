@@ -28,7 +28,7 @@ def clean_tmp():
                 if os.path.isfile(file_path):
                     os.remove(file_path)
                 elif os.path.isdir(file_path) and os.path.split(file_path)[1] != '.svn' :
-                    rm_content(file_path)   #recursiveness
+                    rm_content(file_path)   #I love you (I love you (I love you (I love you (recursiveness))))
             except Exception, e:
                 print e
         if path != PATH_TEMP:
@@ -77,22 +77,23 @@ class ApiManager():
                 #On any non-Windows system, we run binaries through wine
                 args.append('wine')
 
+            
             args.append( os.path.join(PATH_BIN, bin + '.exe'))
 
-            proc = killableprocess.Popen(args, cwd=self.path_temp, stdout=subprocess.PIPE)    #kill if not return in TIMEOUT seconds
-            ret = proc.wait(timeout=TIMEOUT)
-
+            #proc = killableprocess.Popen(args, cwd=self.path_temp, stdout=subprocess.PIPE)    #kill if not return in TIMEOUT seconds
+            proc = subprocess.Popen(args, cwd=self.path_temp, stdout = subprocess.PIPE)
+            stdout_ret = proc.communicate()[0]
 
             pub.sendMessage('log', ('ok', '%s executed' % bin))
 
             for out in BIN_AVAILABLE[bin]['out']:
                 self.written.add((out))
 
-            for line  in proc.communicate()[0].splitlines():        #read stdout and send to log panel
+            for line  in stdout_ret.splitlines():        #read stdout and send to log panel
                 if line.strip():
                     pub.sendMessage('log', ('info', "%s output: %s" % (bin, line) ))
                 
-            return ret
+            return 0 # ret
         else:
             pub.sendMessage('log', ('error', 'Unknown fortran executable %s' % bin))
 
@@ -212,9 +213,9 @@ class ApiManager():
         
         curve_types = {'gpec': {'VAP':4, 'CRI':5, 'CEP':6, 'LLV':10, 'AZE':6 },  #type:significatives columns
                         'isop': { 'ISO':6, 
-                                    'LLV':2,
-                                    #'CRI':2,
-                                                    },      #TODO ISOP data has different structure por critical point  
+                                  'LLV':2,
+                                  #'CRI':2,   #TODO ISOP data has different structure por critical point  
+                                },    
                         'pxy': {'Pxy':7},
                         'txy': {'Txy':7}
                       }

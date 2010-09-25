@@ -53,4 +53,4 @@ PLOT_SUITES = {'globalsuite': ['PT', 'Tx', 'Px', 'Trho', 'Prho'],
                'txy': ['Txy', 'TxyTrho']
                }
 
-PLOT_IN_3D = True 
+PLOT_IN_3D = False #True 
