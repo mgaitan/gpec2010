@@ -338,6 +338,8 @@ class PTx(BasePlot):
 
 
         if 'ISO' in arrays.keys():
+
+
             name = u'Isopleth lines (Z = %s)' % kwarg['z_val']
             lines = []
             for num, iso_curve in enumerate(arrays['ISO']):
@@ -434,28 +436,33 @@ class IsoTx(BasePlot):
     def setup_curves(self, arrays):
 
 
-
         if 'ISO' in arrays.keys():
             name = u'Isopleth lines'
 
+            lines_g = []
+            lines_r = []
+            name_g = u'Incipient Face.'
+            name_r = u'Major (Saturated) Face.'
             for num, iso_curve in enumerate(arrays['ISO']):
-                
+                label_g = name_g if num == 0 else '_nolegend_'
+                label_r = name_r if num == 0 else '_nolegend_'
+                lines_g += self.axes.plot(1 - iso_curve[:,3], iso_curve[:,0], 'g', label=label_g)
+                saturated = np.repeat( np.max(iso_curve[:,2]), len(iso_curve[:,2]))
+                lines_r += self.axes.plot(saturated, iso_curve[:,0], 'r', label=label_r)
+            
 
-                self.curves.append( {'name': u'Incipient Face.',
+
+            self.curves.append( {'name': name_g,
                                      'visible': True, 
-                                     'lines':( 1 - iso_curve[:,3], iso_curve[:,0]),
+                                     'lines2d': lines_g,
                                       'color' : 'green',
                                       'wx_id' : wx.NewId(),
                                       'type': 'ISO',
                                         } )             
 
-                #a same lenght vector constant at maximum ("z" composition given)
-                saturated =  np.repeat( np.max(iso_curve[:,2]), len(iso_curve[:,2]))    
-            
-
-                self.curves.append( {'name': u'Major (Saturated) Face.',
+            self.curves.append( {'name': name_r,
                                      'visible':True, 
-                                     'lines':( saturated, iso_curve[:,0]),
+                                     'lines2d': lines_r,
                                       'color' : 'red',
                                       'wx_id' : wx.NewId(),
                                       'type': 'ISO',
