@@ -58,6 +58,8 @@ class PlotPanel(wx.Panel):
         
         wx.Panel.__init__(self, parent, id, style = wx.FULL_REPAINT_ON_RESIZE, name=kwarg.pop('name', '') )
         
+        self.parent = parent
+
         
         self.plot = getattr(plots, diagram_type)(self, **kwarg) #any type of diagram
 
@@ -116,10 +118,28 @@ class PlotPanel(wx.Panel):
 
 
     def Plot(self, event=None):
-        
+
+        self._SetSize()
         self.plot.plot()
 
+        self._resizeflag = False
+        
 
+
+    def _onSize( self, event ):
+        self._resizeflag = True
+
+    def _onIdle( self, evt ):
+        if self._resizeflag:
+            self._resizeflag = False
+            self._SetSize()
+
+    def _SetSize( self ):
+        pixels = tuple( self.parent.GetClientSize() )
+        self.SetSize( pixels )
+        self.plot.canvas.SetSize( pixels )
+        self.plot.fig.set_size_inches( float( pixels[0] )/self.plot.fig.get_dpi(),
+                                     float( pixels[1] )/self.plot.fig.get_dpi() )
 
        
    
@@ -129,7 +149,7 @@ class SuitePlotsPanel(wx.Panel):
 
     def __init__(self, parent, id):
         wx.Panel.__init__(self, parent, id)
-        self.nb = wx.aui.AuiNotebook(self, style= wx.aui.AUI_NB_DEFAULT_STYLE ^ wx.aui.AUI_NB_CLOSE_ON_ACTIVE_TAB)
+        self.nb = aui.AuiNotebook(self, style= wx.aui.AUI_NB_DEFAULT_STYLE ^ wx.aui.AUI_NB_CLOSE_ON_ACTIVE_TAB)
 
 
         #pub.subscribe(self.OnAddPlot, 'plot.PT')
@@ -144,12 +164,19 @@ class SuitePlotsPanel(wx.Panel):
         pub.subscribe(self.HidePage, 'hide page') #from checkbox tree
         pub.subscribe(self.ShowPage, 'show page') #from checkbox tree
 
+        pub.subscribe(self.ActivePage, 'active page') #when an item is selected 
+
         self.hidden_page = {}
 
         #plots in 3d are uniques for each cases. Every new data is drawn on the same plot#plots in 3d are uniques for each cases. Every new data is drawn on the same plot
         self.plot3d_instances = {} 
 
         self.suite_counter = 0  #unique ID to keep plots generated with the same click grouped
+
+    def ActivePage(self, message):
+        window = wx.FindWindowByName(message.data)
+        page_id = self.nb.GetPageIndex(window)
+        self.nb.SetSelection(page_id)   #TODO HERE CHECK THIS!
 
 
     def HidePage(self, message):
@@ -1161,9 +1188,20 @@ class PlotsTreePanel(wx.Panel):
 
         self.tree_data = {} 
 
-        
         pub.subscribe(self.AddCheckbox, 'add checkbox')
 
+
+        self.Bind(wx.EVT_TREE_SEL_CHANGED, self.OnTreeSelChanged, self.tree)
+
+
+    def OnTreeSelChanged(self, event):
+        item = event.GetItem()
+        panel_name = self.tree.GetPyData(item)
+        checked = self.tree.IsItemChecked(item)
+        if panel_name and checked:
+            pub.sendMessage('active page', panel_name)
+
+        
 
     def AddCheckbox(self, message):
         """
