@@ -80,20 +80,21 @@ class ApiManager():
             
             args.append( os.path.join(PATH_BIN, bin + '.exe'))
 
-            #proc = killableprocess.Popen(args, cwd=self.path_temp, stdout=subprocess.PIPE)    #kill if not return in TIMEOUT seconds
-            proc = subprocess.Popen(args, cwd=self.path_temp, stdout = subprocess.PIPE)
-            stdout_ret = proc.communicate()[0]
+            proc = killableprocess.Popen(args, cwd=self.path_temp)    #kill if not return in TIMEOUT seconds
+            #proc = subprocess.Popen(args, cwd=self.path_temp, stdout = subprocess.PIPE)
+            
+            ret = proc.wait(TIMEOUT) #proc.communicate()[0]
 
             pub.sendMessage('log', ('ok', '%s executed' % bin))
 
             for out in BIN_AVAILABLE[bin]['out']:
                 self.written.add((out))
 
-            for line  in stdout_ret.splitlines():        #read stdout and send to log panel
-                if line.strip():
-                    pub.sendMessage('log', ('info', "%s output: %s" % (bin, line) ))
-                
-            return 0 # ret
+            #for line  in stdout_ret.splitlines():        #read stdout and send to log panel
+            #    if line.strip():
+            #        pub.sendMessage('log', ('info', "%s output: %s" % (bin, line) ))
+             
+            return ret
         else:
             pub.sendMessage('log', ('error', 'Unknown fortran executable %s' % bin))
 
