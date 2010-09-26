@@ -149,7 +149,7 @@ class SuitePlotsPanel(wx.Panel):
 
     def __init__(self, parent, id):
         wx.Panel.__init__(self, parent, id)
-        self.nb = aui.AuiNotebook(self, style= wx.aui.AUI_NB_DEFAULT_STYLE ^ wx.aui.AUI_NB_CLOSE_ON_ACTIVE_TAB)
+        self.nb = aui.AuiNotebook(self, style= wx.aui.AUI_NB_DEFAULT_STYLE) # ^ wx.aui.AUI_NB_CLOSE_ON_ACTIVE_TAB)
 
 
         #pub.subscribe(self.OnAddPlot, 'plot.PT')
@@ -160,11 +160,11 @@ class SuitePlotsPanel(wx.Panel):
 
                 
         pub.subscribe(self.MakePlots, 'make') #for all kind of suites
-        
         pub.subscribe(self.HidePage, 'hide page') #from checkbox tree
         pub.subscribe(self.ShowPage, 'show page') #from checkbox tree
-
         pub.subscribe(self.ActivePage, 'active page') #when an item is selected 
+
+        self.Bind(aui.EVT_AUINOTEBOOK_PAGE_CLOSE, self.OnPageClosing, self.nb)
 
         self.hidden_page = {}
 
@@ -173,10 +173,20 @@ class SuitePlotsPanel(wx.Panel):
 
         self.suite_counter = 0  #unique ID to keep plots generated with the same click grouped
 
+    def OnPageClosing(self, event):
+        #event.Veto()
+        page_id = event.selection
+        panel_name = self.nb.GetPage(page_id).GetName()
+        pub.sendMessage('uncheck item', panel_name)
+        event.Veto()
+
+
+
     def ActivePage(self, message):
         window = wx.FindWindowByName(message.data)
         page_id = self.nb.GetPageIndex(window)
-        self.nb.SetSelection(page_id)   #TODO HERE CHECK THIS!
+        if page_id:
+            self.nb.SetSelection(page_id)  
 
 
     def HidePage(self, message):
@@ -1187,11 +1197,27 @@ class PlotsTreePanel(wx.Panel):
 
 
         self.tree_data = {} 
+        self.pydata_inverse = {} #'panel_name':node
+    
 
-        pub.subscribe(self.AddCheckbox, 'add checkbox')
-
+        pub.subscribe(self.AddCheckboxItem, 'add checkbox')
+        pub.subscribe(self.UncheckItem, 'uncheck item')
 
         self.Bind(wx.EVT_TREE_SEL_CHANGED, self.OnTreeSelChanged, self.tree)
+
+    def UncheckItem(self, message):
+        panel_name = message.data 
+        
+        print "panel name is : ", panel_name
+
+        try:
+            node = self.pydata_inverse[panel_name]
+            print node 
+
+            self.tree.CheckItem(node, False)
+        except KeyError:
+            print "key Error"
+            pass
 
 
     def OnTreeSelChanged(self, event):
@@ -1203,7 +1229,7 @@ class PlotsTreePanel(wx.Panel):
 
         
 
-    def AddCheckbox(self, message):
+    def AddCheckboxItem(self, message):
         """
         Case X 
          |__ 2D
@@ -1280,6 +1306,7 @@ class PlotsTreePanel(wx.Panel):
         self.tree.Expand(parent_node)
 
         self.tree.SetPyData(node, panel_name)
+        self.pydata_inverse[panel_name] = node
         
         self.tree.CheckItem2(node)
         #self.tree.CheckItem(node)
