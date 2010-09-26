@@ -563,8 +563,10 @@ class IsoTx(BasePlot):
                 label_g = name_g if num == 0 else '_nolegend_'
                 label_r = name_r if num == 0 else '_nolegend_'
                 lines_g += self.axes.plot(1 - iso_curve[:,3], iso_curve[:,0], 'g', label=label_g)
-                saturated = np.repeat( np.max(iso_curve[:,2]), len(iso_curve[:,0]))
-                lines_r += self.axes.plot(saturated, iso_curve[:,0], 'r', label=label_r)
+            
+                if num == 0:
+                    saturated = np.repeat( np.max(iso_curve[:,2]), len(iso_curve[:,0]))
+                    lines_r += self.axes.plot(saturated, iso_curve[:,0], 'r', label=label_r)
             
 
 
@@ -609,11 +611,11 @@ class IsoPx(BasePlot):
             for num, iso_curve in enumerate(arrays['ISO']):
                 label_g = name_g if num == 0 else '_nolegend_'
                 label_r = name_r if num == 0 else '_nolegend_'
-                
                 counter = u'' if len(arrays['ISO']) == 1 else u' %i' % (num + 1)
                 lines_g += self.axes.plot(1 - iso_curve[:,3], iso_curve[:,1], 'g', label=label_g)
-                saturated = np.repeat( np.max(iso_curve[:,2]), len(iso_curve[:,1]))
-                lines_r += self.axes.plot(saturated, iso_curve[:,1], 'r', label=label_r)
+                if num == 0:
+                    saturated = np.repeat( np.max(iso_curve[:,2]), len(iso_curve[:,1]))
+                    lines_r += self.axes.plot(saturated, iso_curve[:,1], 'r', label=label_r)
 
 
             self.curves.append( {'name': name_g,
