@@ -103,12 +103,13 @@ class PlotPanel(wx.Panel):
     
                 self.menu.AppendSeparator()
                 
-                for prop, wx_id in self.plot.properties.iteritems():
+                for prop, wx_id in self.plot.properties_normal.iteritems():
+                    self.menu.Append(wx_id, prop)
+                    self.Bind(wx.EVT_MENU, self.plot.OnSetupProperty, id=wx_id)
+
+                for prop, wx_id in self.plot.properties_check.iteritems():
                     self.menu.Append(wx_id, prop, kind=wx.ITEM_CHECK)
                     self.Bind(wx.EVT_MENU, self.plot.OnToggleProperty, id=wx_id)
-
-
-
 
             # Popup the menu.  If an item is selected then its handler
             # will be called before PopupMenu returns.
@@ -160,6 +161,7 @@ class SuitePlotsPanel(wx.Panel):
 
                 
         pub.subscribe(self.MakePlots, 'make') #for all kind of suites
+        pub.subscribe(self.MakeCustomPlot, 'make_custom') #for all kind of suites
         pub.subscribe(self.HidePage, 'hide page') #from checkbox tree
         pub.subscribe(self.ShowPage, 'show page') #from checkbox tree
         pub.subscribe(self.ActivePage, 'active page') #when an item is selected 
@@ -173,6 +175,7 @@ class SuitePlotsPanel(wx.Panel):
         self.plot3d_instances = {} 
 
         self.suite_counter = 0  #unique ID to keep plots generated with the same click grouped
+        self.custom_plot_counter = 0
 
     def OnPageClosing(self, event):
         """
@@ -302,6 +305,7 @@ class SuitePlotsPanel(wx.Panel):
             else:
                 pub.sendMessage('log', ('warning', "Couldn't calculate for the given pressure (%s bar)" % p_val))
 
+        
 
         #plot whatever on 3D plots.
 
@@ -315,6 +319,29 @@ class SuitePlotsPanel(wx.Panel):
                 pp3d.Plot()
 
         self.suite_counter += 1 
+
+    def MakeCustomPlot(self, message):
+                        
+        axes_from, axes_to = [wx.FindWindowByName(panel_name).plot.axes for panel_name in message.data]
+        
+        #check plot axis compatibilty
+        if axes_from.get_xlabel() != axes_to.get_xlabel() or axes_from.get_ylabel() != axes_to.get_ylabel():
+            pub.sendMessage('log', ('error', 'The axis of the plots you are trying combine are different'))
+            return
+        
+        self.custom_plot_counter += 1
+            
+        kwarg = {}
+        kwarg['title'] = u"Custom plot %s" % self.custom_plot_counter
+        kwarg['xlabel'] = axes_from.get_xlabel()
+        kwarg['ylabel'] = axes_from.get_ylabel()
+        kwarg['name'] = "_".join(message.data) + "_%s" % self.custom_plot_counter
+        pp = PlotPanel(self,  -1, 'CustomPlot', **kwarg)
+        
+        pp.plot.add_lines(axes_from.get_lines(), axes_to.get_lines())
+        
+        self.nb.AddPage(pp, kwarg['title'])
+        pub.sendMessage('add checkbox', (None, 'custom', kwarg['title'], kwarg['name']))
 
 
 class VarsAndParamPanel(wx.Panel):
@@ -1253,9 +1280,11 @@ class PlotsTreePanel(wx.Panel):
             event.Veto()
             return
         
-        print "from ", self.tree.GetPyData(self.draggedItem), " to ", self.tree.GetPyData(droppedItem)
         pub.sendMessage('refresh all', None)
+        pub.sendMessage('make_custom', (self.tree.GetPyData(self.draggedItem), self.tree.GetPyData(droppedItem) ))
 
+        
+        
         
 
     def SelectItem(self, message):
@@ -1317,21 +1346,34 @@ class PlotsTreePanel(wx.Panel):
                |___ PT
                |___ Tx
                |___ ...
-            
+        
+        Custom Plots
+           |
+           |_ Custom plot 1
+           |
+           |_ Custom plot 2
         """
 
 
-        category_translate = {'globalsuite': 'Global Phase', 'globalsuite3d': '', 'isop': 'Isopleths', 'txy': 'Txy', 'pxy': 'Pxy'}
+        category_translate = {'globalsuite': 'Global Phase', 
+                              'globalsuite3d': '', 
+                              'isop': 'Isopleths', 'txy': 'Txy', 
+                               'pxy': 'Pxy', 'custom': ''
+        }
         
         if len(message.data) == 4:
-            case_id, topic, type, panel_name = message.data
+            case_id, topic, title, panel_name = message.data
             category = category_translate[topic] #globalsuite, globalsuite3d
         elif len(message.data) == 5:
-            case_id, topic, type, panel_name, extra_var = message.data
+            case_id, topic, title, panel_name, extra_var = message.data
             category = category_translate[topic] + " " + extra_var
 
 
-        if case_id not in self.tree_data.keys():
+        if case_id is None and 'custom' not in self.tree_data.keys():
+            node = self.tree.AppendItem(self.root, "Custom plots", ct_type=1)
+            self.tree_data['custom'] = {'node': node, 'childs': {}}
+
+        elif case_id not in self.tree_data.keys() and case_id is not None:
             node = self.tree.AppendItem(self.root, "Case %d" % case_id, ct_type=1)
             node2d = self.tree.AppendItem(node, "2D", ct_type=1)
             node3d = self.tree.AppendItem(node, "3D", ct_type=1)
@@ -1344,7 +1386,8 @@ class PlotsTreePanel(wx.Panel):
             self.tree.ExpandAllChildren(node)
 
 
-        if topic != 'globalsuite3d' and category not in self.tree_data[case_id]['childs']['2D']['childs'].keys():
+
+        if topic not in ('globalsuite3d', 'custom') and category not in self.tree_data[case_id]['childs']['2D']['childs'].keys():
             parent_node = self.tree_data[case_id]['childs']['2D']['node']
             node = self.tree.AppendItem(parent_node, category, ct_type=1)
             self.tree_data[case_id]['childs']['2D']['childs'][category] = {'node': node, 'childs': {} }
@@ -1352,12 +1395,15 @@ class PlotsTreePanel(wx.Panel):
             self.tree.Expand(parent_node)
 
 
-        if topic != 'globalsuite3d':
-            parent_node = self.tree_data[case_id]['childs']['2D']['childs'][category]['node']
-        else: 
+        if topic == 'globalsuite3d':
             parent_node = self.tree_data[case_id]['childs']['3D']['node']
+        elif topic == 'custom':
+            parent_node = self.tree_data['custom']['node']
+        else:
+            parent_node = self.tree_data[case_id]['childs']['2D']['childs'][category]['node']
+         
 
-        node = self.tree.AppendItem(parent_node, type, ct_type=1)        
+        node = self.tree.AppendItem(parent_node, title, ct_type=1)        
 
         self.tree.Expand(parent_node)
 

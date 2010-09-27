@@ -41,18 +41,19 @@ class BasePlot(object):
         self.axes.set_autoscale_on(True)
                 
 
-        self.properties = {'Grid':wx.NewId(), 'Legends':wx.NewId(), 'Log X': wx.NewId(), 'Log Y': wx.NewId(), }
+        self.properties_check = {'Grid':wx.NewId(), 'Legends':wx.NewId(), 'Log X': wx.NewId(), 'Log Y': wx.NewId(), }
    
+        self.properties_normal = {'Set plot title...': wx.NewId()}
+
         if projection == '3d':
-            self.properties['Set perspective...'] = wx.NewId()
+            self.properties_normal['Set perspective...'] = wx.NewId()
 
 
         self.curves = []    #curves to plot
 
         if arrays:
             self.setup_curves()
-
-     
+    
 
     def setup_curves (self):
         """each one subtype declare curves as a group of lines2d
@@ -88,9 +89,47 @@ class BasePlot(object):
                 
         self.canvas.draw()
 
+    def OnSetupProperty(self, event):
+        wx_id = event.GetId()
+        prop = dict([[v,k] for k,v in self.properties_normal.items()])[wx_id] #inverted dict
+
+        if prop == 'Set perspective...':
+            
+            dlg = wx.TextEntryDialog(self.parent, u'Azimuthal angle', u'Set Perpective', 
+                                            defaultValue=str(self.axes.azim) )            
+            r = dlg.ShowModal()
+            if  r == wx.ID_CANCEL:
+                return 
+            elif r  == wx.ID_OK:
+                azim = float(dlg.GetValue())
+            
+            dlg = wx.TextEntryDialog(self.parent, u'Elevation angle', u'Set Perpective', 
+                                            defaultValue=str(self.axes.elev) )            
+            r = dlg.ShowModal()
+            if r  == wx.ID_CANCEL:
+                return 
+            elif r  == wx.ID_OK:
+                elev = float(dlg.GetValue())
+
+            self.axes.view_init(elev, azim)
+
+        elif prop == 'Set plot title...':
+            dlg = wx.TextEntryDialog(self.parent, u'Plot title', u'Set plot title', 
+                                            defaultValue=self.axes.get_title() )            
+            r = dlg.ShowModal()
+            if  r == wx.ID_CANCEL:
+                return 
+            
+            self.title = dlg.GetValue()
+            self.axes.set_title(self.title)
+
+        self.canvas.draw()    
+                
+
+
     def OnToggleProperty(self, event):
         wx_id = event.GetId()
-        prop = dict([[v,k] for k,v in self.properties.items()])[wx_id] #inverted dict
+        prop = dict([[v,k] for k,v in self.properties_check.items()])[wx_id] #inverted dict
 
         if prop == 'Grid':
             self.axes.grid()
@@ -118,30 +157,29 @@ class BasePlot(object):
             else:
                 self.axes.set_yscale('linear')
 
-        elif prop == 'Set perspective...':
             
-            dlg = wx.TextEntryDialog(self.parent, u'Azimuthal angle', u'Set Perpective', 
-                                            defaultValue=str(self.axes.azim) )            
-            r = dlg.ShowModal()
-            if  r == wx.ID_CANCEL:
-                return 
-            elif r  == wx.ID_OK:
-                azim = float(dlg.GetValue())
-            
-            dlg = wx.TextEntryDialog(self.parent, u'Elevation angle', u'Set Perpective', 
-                                            defaultValue=str(self.axes.elev) )            
-            r = dlg.ShowModal()
-            if r  == wx.ID_CANCEL:
-                return 
-            elif r  == wx.ID_OK:
-                elev = float(dlg.GetValue())
-
-            self.axes.view_init(elev, azim)
-            
-    
-
 
         self.canvas.draw()
+
+
+class CustomPlot(BasePlot):
+    def __init__ (self, parent, title, xlabel, ylabel, projection="2d", zlabel=""):
+        BasePlot.__init__(self, parent, None, title, xlabel, ylabel, projection=projection, zlabel=zlabel)
+
+    def add_lines(self, *lists_of_lines):
+        for lol in lists_of_lines:
+            self.axes.lines += lol
+            for line in lol:
+                name =  line.get_label()
+                if name != '_nolegend_':
+                    self.curves.append( { 'name': name,
+                                          'visible':True, 
+                                          'lines2d': lol,
+                                          'color': line.get_color(), 
+                                          'wx_id' : wx.NewId(),
+                                           'type': 'CUSTOM',
+                                        } )
+
 
 
 class PTrho(BasePlot):
@@ -248,7 +286,7 @@ class PTrho(BasePlot):
             name = u'Isopleth lines (Z = %s)' % kwarg['z_val']
             lines = []
             for num, iso_curve in enumerate(arrays['ISO']):
-                label = name if num == 0 else '_nolengend_'
+                label = name if num == 0 else '_nolegend_'
                 
                 lines += self.axes.plot(iso_curve[:,0], iso_curve[:,4], iso_curve[:,1], 'g--', label=label),
                 lines += self.axes.plot(iso_curve[:,0], iso_curve[:,5], iso_curve[:,1], 'g--', label='_nolegend_'),                                
@@ -371,7 +409,7 @@ class PTx(BasePlot):
             lines = []
             name = 'LLV'
             for num, llv_curve in enumerate(arrays['LLV']):
-                label = name if num == 0 else '_nolengend_'
+                label = name if num == 0 else '_nolegend_'
                 lines += self.axes.plot(llv_curve[:,0], llv_curve[:,2], llv_curve[:,1], 'b', label=label)
                 lines += self.axes.plot(llv_curve[:,0], llv_curve[:,3], llv_curve[:,1], 'b', label='_nolegend_')
                 lines += self.axes.plot(llv_curve[:,0], llv_curve[:,4], llv_curve[:,1], 'r', label=label)
@@ -392,7 +430,7 @@ class PTx(BasePlot):
             lines = []
 
             for num, aze_curve in enumerate(arrays['AZE']):
-                label = name if num == 0 else '_nolengend_'
+                label = name if num == 0 else '_nolegend_'
                 lines += self.axes.plot( aze_curve[:,0], aze_curve[:,2], aze_curve[:,1], 'm', label=label)
 
             
@@ -412,7 +450,7 @@ class PTx(BasePlot):
             name = u'Isopleth lines (Z = %s)' % kwarg['z_val']
             lines = []
             for num, iso_curve in enumerate(arrays['ISO']):
-                label = name if num == 0 else '_nolengend_'
+                label = name if num == 0 else '_nolegend_'
                 
                 lines += self.axes.plot(iso_curve[:,0], 1 - iso_curve[:,3] , iso_curve[:,1], 'g--', label=label),
                                 
@@ -495,7 +533,7 @@ class IsoPT(BasePlot):
             lines = []
             name = u'Isopleth lines'
             for num, vap_curve in enumerate(arrays['ISO']):
-                label = name if num == 0 else '_nolengend_'
+                label = name if num == 0 else '_nolegend_'
                 lines += self.axes.plot(vap_curve[:,0], vap_curve[:,1], 'k', label=label)
                 
                 
@@ -544,8 +582,8 @@ class IsoTx(BasePlot):
 
         self.short_title = u"Isopleth T-x"
         self.title = u'T-x projection of the Isopleth Graph for a Composition (Z=%s)' % kwarg['z']
-        self.xlabel = u'Temperature [K]'
-        self.ylabel = u'Composition'
+        self.xlabel = u'Composition'
+        self.ylabel = u'Temperature [K]'
 
         BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
 
