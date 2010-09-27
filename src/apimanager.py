@@ -101,7 +101,6 @@ class ApiManager():
 
     @misc.memoize()
     def conparin2conparout(self, direction, model_id, data):
-        print "conparin2conparout data", data 
         self._write_conparin(direction, model_id, data)
         return self._read_conparout(model_id)
 
@@ -205,7 +204,7 @@ class ApiManager():
             filepath = os.path.join(self.path_temp, filename)
             with open(filepath, 'r') as fh:
                 output = [get_numbers(line) for line in fh.readlines()]
-                
+
             pub.sendMessage('add_txt', (filepath, self.case_id))
 
             return output
@@ -238,7 +237,6 @@ class ApiManager():
         
         arrays = self.output2array(filepath, curve_types[type])
 
-        #print "------------- %s -------------" % type2exe[type], arrays 
         return arrays
 
     def output2array(self, filepath, curve_types):
@@ -257,7 +255,6 @@ class ApiManager():
            
 
             number_of_lines = len(fh.readlines())
-            #print 'number_of_lines: ' + `number_of_lines`
             fh.seek(0)
             
             #give skip from header and skip from footer

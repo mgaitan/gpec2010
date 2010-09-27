@@ -459,7 +459,9 @@ class VarsAndParamPanel(wx.Panel):
     def SetVarsValues(self, data):
         try:
             for box, data in zip(self.vars, data):
-                box.SetValue(str(data))
+                #for PC-SAFT and SPHCT om is 0.0 in CONPAOUT and should be ignored. 
+                if float(data) != 0.0:
+                    box.SetValue(str(data))
         except:
             pub.sendMessage('log', ('error',  "not enough data or boxes for EOS vars"))
             
