@@ -120,11 +120,10 @@ class ApiManager():
         filepath = os.path.join(self.path_temp, filename)
         template = "{0}  {1}\n {2}"
 
-    
-        #if model_id in (1,2,3):
-        #    data = data[:-2] + [data[-1], data[-2]]
-        # elif model_id in (4,6):
-        #    data = data[:-2] + [data[-1]]
+        if direction == 0 and model_id in (1,2,3):
+            data = data[:-2] + [data[-1], data[-2]]
+        elif direction == 0 and model_id in (4,6):
+            data = data[:-2] + [data[-1]]
 
 
         output = template.format (direction, model_id, "  ".join( data )) 
