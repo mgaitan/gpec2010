@@ -165,6 +165,7 @@ class SuitePlotsPanel(wx.Panel):
         pub.subscribe(self.ActivePage, 'active page') #when an item is selected 
 
         self.Bind(aui.EVT_AUINOTEBOOK_PAGE_CLOSE, self.OnPageClosing, self.nb)
+        self.Bind(aui.EVT_AUINOTEBOOK_PAGE_CHANGED, self.OnPageChange, self.nb)
 
         self.hidden_page = {}
 
@@ -174,11 +175,24 @@ class SuitePlotsPanel(wx.Panel):
         self.suite_counter = 0  #unique ID to keep plots generated with the same click grouped
 
     def OnPageClosing(self, event):
-        #event.Veto()
+        """
+        handler aui.EVT_AUINOTEBOOK_PAGE_CLOSE. This rely on UncheckItem on PlotTreePanel instance 
+        so the mechanism to backup the content of the page is used. 
+        """
         page_id = event.selection
         panel_name = self.nb.GetPage(page_id).GetName()
         pub.sendMessage('uncheck item', panel_name)
         event.Veto()
+
+    def OnPageChange(self, event):
+        """
+        handler aui.EVT_AUINOTEBOOK_PAGE_CLOSE. This rely on UncheckItem on PlotTreePanel instance 
+        so the mechanism to backup the content of the page is used. 
+        """
+        page_id = event.selection
+        panel_name = self.nb.GetPage(page_id).GetName()
+        pub.sendMessage('select item', panel_name)
+        #event.Veto()
 
 
 
@@ -1210,22 +1224,26 @@ class PlotsTreePanel(wx.Panel):
 
         pub.subscribe(self.AddCheckboxItem, 'add checkbox')
         pub.subscribe(self.UncheckItem, 'uncheck item')
+        pub.subscribe(self.SelectItem, 'select item')
 
         self.Bind(wx.EVT_TREE_SEL_CHANGED, self.OnTreeSelChanged, self.tree)
 
-    def UncheckItem(self, message):
+    def SelectItem(self, message):
         panel_name = message.data 
-        
-        print "panel name is : ", panel_name
-
         try:
             node = self.pydata_inverse[panel_name]
-            print node 
+            self.tree.SelectItem(node, True)
+        except KeyError:
+            print "key Error"
 
+    def UncheckItem(self, message):
+        panel_name = message.data 
+        try:
+            node = self.pydata_inverse[panel_name]
             self.tree.CheckItem(node, False)
         except KeyError:
             print "key Error"
-            pass
+            
 
 
     def OnTreeSelChanged(self, event):
