@@ -444,8 +444,7 @@ class VarsAndParamPanel(wx.Panel):
         for box in self.vars :
             box.Enable(flag)
         
-        if self.model_id != 3:
-            self.vars[2].Enable(False)
+        self.vars[2].Enable(False)
 
         self.button.Enable(flag)
         self.radio1.Enable(flag)
@@ -527,11 +526,12 @@ class VarsAndParamPanel(wx.Panel):
             data = [box.GetValue() for box in self.vars]
         else:
             data = [box.GetValue() for box in self.params]
+            
 
         #self.api_manager.write_conparin(self.direction, self.model_id, data)
         #data = self.api_manager.read_conparout(self.model_id) 
         
-        data = self.api_manager.conparin2comparout(self.direction, self.model_id, data)
+        data = self.api_manager.conparin2conparout(self.direction, self.model_id, data)
 
         if data is not None:
 

@@ -100,7 +100,8 @@ class ApiManager():
 
 
     @misc.memoize()
-    def conparin2comparout(self, direction, model_id, data):
+    def conparin2conparout(self, direction, model_id, data):
+        print "conparin2conparout data", data 
         self._write_conparin(direction, model_id, data)
         return self._read_conparout(model_id)
 
@@ -119,11 +120,11 @@ class ApiManager():
         filepath = os.path.join(self.path_temp, filename)
         template = "{0}  {1}\n {2}"
 
-
-        if model_id in (1,2,3):
-            data = data[:-2] + [data[-1], data[-2]]
-        elif model_id in (4,6):
-            data = data[:-2] + [data[-1]]
+    
+        #if model_id in (1,2,3):
+        #    data = data[:-2] + [data[-1], data[-2]]
+        # elif model_id in (4,6):
+        #    data = data[:-2] + [data[-1]]
 
 
         output = template.format (direction, model_id, "  ".join( data )) 
@@ -145,7 +146,9 @@ class ApiManager():
         filepath = os.path.join(self.path_temp, filename)
         template = "{0}\n{1} {2}\n%s" % "".join(['{%d}\n' % i for i in range(3, 12)])
 
-        if model == 4:                  #TODO  - this shoul come solved from the form, keeping a copy af acentric_factor
+
+        #TODO  - this should come solved from the form, keeping a copy af acentric_factor
+        if model == 4:                 
             comp1[1].append('1.168')
             comp2[1].append('1.168')
 

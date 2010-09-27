@@ -344,7 +344,7 @@ class SystemValidator(wx.PyValidator):
         
 
         def get_weight(tc, pc):
-            return float(tc)**WEIGHT_POWER / pc
+            return float(tc)**WEIGHT_POWER / float(pc)
 
         tc1 = self.compounds_data[0][2]
         tc2 = self.compounds_data[1][2]
