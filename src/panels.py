@@ -496,11 +496,12 @@ class VarsAndParamPanel(wx.Panel):
         """Update the form. Direction and enable of"""
 
         if self.direction == 0:
+            self.radio1.SetValue(True)
             for box in self.vars:
                 box.Enable(True)
         
-            if self.model_id != 3:
-                self.vars[2].Enable(False)
+            #if self.model_id != 3:
+            self.vars[2].Enable(False)
 
 
             for box in self.params:
@@ -508,6 +509,7 @@ class VarsAndParamPanel(wx.Panel):
             
             self.button.SetBitmapLabel(self.arrow[0])
         else:
+            self.radio2.SetValue(True)
             for box in self.vars:
                 box.Enable(False)
             for box in self.params:
@@ -535,10 +537,6 @@ class VarsAndParamPanel(wx.Panel):
 
         if data is not None:
 
-            #~ if self.direction == 0:
-                #~ self.SetParamsValues(data[1])
-            #~ else:
-                #~ self.SetVarsValues(data[0])
             
             self.SetVarsValues(data[0])
             self.SetParamsValues(data[1])
@@ -1059,9 +1057,13 @@ class CasePanel(scrolled.ScrolledPanel):
 
 
     def OnSetModel(self, event=None, model_id=None):
-
-        self.model_id = model_id or self.model_options[event.GetString()]
-
+        new_model_id = model_id or self.model_options[event.GetString()]
+        if self.model_id == new_model_id:
+            return 
+        else: 
+            self.model_id = new_model_id
+    
+        self.direction = 0
 
         if self.model_id in (4,6):
             #constraint  ``PC-SAFT`` y ``SPHCT`` exigen que la regla sea ``Lorentz-Berthelot``.
@@ -1073,7 +1075,11 @@ class CasePanel(scrolled.ScrolledPanel):
 
         for panel in self.panels:
             panel.model_id = self.model_id
+            panel.direction = self.direction
             panel.SetParamsForm(self.model_id)
+            panel.SetDirectionOnForm()
+
+        
 
         self.SetSizerAndFit(self.box)
         self.SetClientSize(self.GetSize())
