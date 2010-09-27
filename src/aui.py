@@ -103,6 +103,7 @@ class MainFrame(wx.Frame):
         #a few hackies to refresh the ugly window
         pub.subscribe(self.RefreshMe, 'add checkbox')
         pub.subscribe(self.RefreshMe, 'log')
+        pub.subscribe(self.RefreshMe, 'refresh all')
 
     def RefreshMe(self, message):
         return self.Refresh()

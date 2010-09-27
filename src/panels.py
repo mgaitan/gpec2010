@@ -1228,6 +1228,36 @@ class PlotsTreePanel(wx.Panel):
 
         self.Bind(wx.EVT_TREE_SEL_CHANGED, self.OnTreeSelChanged, self.tree)
 
+        self.Bind(wx.EVT_TREE_BEGIN_DRAG, self.OnBeginDrag, self.tree)
+    
+        self.Bind(wx.EVT_TREE_END_DRAG, self.OnEndDrag, self.tree)
+
+
+    def OnBeginDrag(self, event):
+        item = event.GetItem()
+        
+        if not self.tree.GetPyData(item):
+            #just allowing when the item is associated to a plot and not to a group of plot. 
+            event.Veto()
+            return 
+        
+        self.draggedItem = item
+        event.Allow()
+
+
+    def OnEndDrag(self, event):
+        droppedItem = event.GetItem()
+        if droppedItem == self.draggedItem or not self.tree.GetPyData(droppedItem):
+            # No way, we have been dropped in a dragged item
+            # or dropping in a not plot-associated item
+            event.Veto()
+            return
+        
+        print "from ", self.tree.GetPyData(self.draggedItem), " to ", self.tree.GetPyData(droppedItem)
+        pub.sendMessage('refresh all', None)
+
+        
+
     def SelectItem(self, message):
         panel_name = message.data 
         try:
