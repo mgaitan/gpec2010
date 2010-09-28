@@ -202,7 +202,7 @@ class SuitePlotsPanel(wx.Panel):
     def ActivePage(self, message):
         window = wx.FindWindowByName(message.data)
         page_id = self.nb.GetPageIndex(window)
-        if page_id:
+        if page_id is not None:
             self.nb.SetSelection(page_id)  
 
 
@@ -1309,9 +1309,12 @@ class PlotsTreePanel(wx.Panel):
         item = event.GetItem()
         panel_name = self.tree.GetPyData(item)
         checked = self.tree.IsItemChecked(item)
+        
+        
         if panel_name and checked:
             pub.sendMessage('active page', panel_name)
-
+            
+            
         
 
     def AddCheckboxItem(self, message):
