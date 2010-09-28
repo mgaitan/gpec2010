@@ -517,7 +517,7 @@ class CompoundFormDialog(sc.SizedDialog):
         self.controls.append(ui.widgets.FloatCtrl(pane, -1))
         self.controls[-1].SetSizerProps(expand=True)
         
-        wx.StaticText(pane, -1, u'Critical Volume [m³/Kmol]')
+        wx.StaticText(pane, -1, u'Critical Volume [m\u00B3/Kmol]')
         self.controls.append( ui.widgets.FloatCtrl(pane, -1))
         self.controls[-1].SetSizerProps(expand=True)
         

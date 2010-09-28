@@ -400,14 +400,14 @@ class VarsAndParamPanel(wx.Panel):
         self.gbs.Add(self.radio2, (1,4))
 
 
-        self.params_labels = {1: ((u'ac [bar·m⁶Kmol²]', u'descrip ac'), 
+        self.params_labels = {1: ((u'ac [bar·m\u2076Kmol\u00B2]', u'descrip ac'), 
                              ('b [l/mol]', 'descrip b'), (u'm', u'descrip m')  ),
-                         2: ((u'ac [bar·m⁶Kmol²]', u'descrip ac'), 
+                         2: ((u'ac [bar·m\u2076Kmol\u00B2]', u'descrip ac'), 
                              (u'b [l/mol]', u'descrip b'), (u'm', u'descrip m')  ),
-                         3: ((u'ac [bar·m⁶Kmol²]', u'descrip ac'), 
-                             (u'b [l/mol]', u'descrip b'), (u'ω', 'descrip '),
+                         3: ((u'ac [bar·m\u2076Kmol\u00B2]', u'descrip ac'), 
+                             (u'b [l/mol]', u'descrip b'), (u'\u03B5', 'descrip '),
                               ('k', 'descrip k') ),
-                         4: ((u'ε/k', u'descript ε/k'), (u'ρ', u'descript ρ'),
+                         4: ((u'ε/k', u'descript ε/k'), (u'\u03C1', u'descript \u03C1'),
                              (u'm', u'descript u') ),
                          6: ((u'T* [k]', u'descript T*'), (u'V* [l/mol]', 'descript V*'),
                              (u'c', u'descript c'))
