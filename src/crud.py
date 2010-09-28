@@ -30,24 +30,50 @@ class DefineSystemDialog(wx.Dialog):
 
         #database handler
         conn = sqlite3.connect('gpec.sqlite')
-        self.c = conn.cursor()
-        
+        self.c1 = conn.cursor()
+        self.c2 = conn.cursor()
+
         #cache database
-        self.c.execute("select id, name, tc, pc, vc, acentric_factor, vc_rat from compounds")
-        self.list_base_data = {}
-        for row in self.c:
-            id = row[0]
-            data = list(row[1:6])
-            data[-2] = data[-2] * row[6]   #VCeos = VCMODEL*VCrat  - TODO: MAKE this configurable
-            self.list_base_data[id] = tuple(data)
+        
+        self.table_category = {}
+        self.table_compounds = {}
+        
+        self.c1.execute("select id_category, name, editable from categories")
+
+        for row_cat in self.c1:
+            id_cat = row_cat[0]
+            self.table_category[id_cat] = tuple(row_cat[1:])
+            self.table_compounds[id_cat] = {}
+
+        
+            self.c2.execute("""select id, name, tc, pc, vc, acentric_factor,  
+                            vc_rat from compounds where id_category=%i""" % id_cat)
             
+            for row in self.c2:
+                id = row[0]
+                data = list(row[1:6])
+                data[-2] = data[-2] * row[6]   #VCeos = VCMODEL*VCrat  - TODO: MAKE this configurable
+                self.table_compounds[id_cat][id] = tuple(data)
+            
+       
+        
 
         self.notebook_1 = wx.Notebook(self, -1, style=0)
-        self.notebook_1_pane_1 = wx.Panel(self.notebook_1, -1)
+
+
+        self.notebook_panes = {}
+        self.list_base = {}
+
+        for id_cat in self.table_category.keys():
+            self.notebook_panes[id_cat] = wx.Panel(self.notebook_1, -1)
+            self.list_base[id_cat] = wx.ListCtrl(self.notebook_panes[id_cat], -1, style=wx.LC_REPORT|wx.SUNKEN_BORDER)
+
+        #self.notebook_1_pane_1 = wx.Panel(self.notebook_1, -1)
+        #self.notebook_1_pane_2 = wx.Panel(self.notebook_1, -1)
 
         self.search = wx.SearchCtrl(self, size=(200,-1))
 
-        self.list_base = wx.ListCtrl(self.notebook_1_pane_1, -1, style=wx.LC_REPORT|wx.SUNKEN_BORDER)
+        
         
 
         self.button_new = wx.BitmapButton(self, -1, wx.Bitmap(os.path.join(PATH_ICONS, "document-new.png")))
@@ -123,8 +149,11 @@ class DefineSystemDialog(wx.Dialog):
 
         self.search.ShowSearchButton(True)
         self.search.ShowCancelButton(True)
+        
+        for id_cat in self.table_category.keys():
+            self.list_base[id_cat].InsertColumn(0, "Compounds", width=185)
 
-        self.list_base.InsertColumn(0, "Compounds", width=185)
+        
         self.list_system.InsertColumn(0, "System", width=185)
 
         self.PopulateLists()
@@ -148,13 +177,21 @@ class DefineSystemDialog(wx.Dialog):
         sizer_16 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_21 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_7 = wx.BoxSizer(wx.HORIZONTAL)
-        sizer_14 = wx.BoxSizer(wx.HORIZONTAL)
+        
+        
         sizer_15 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_15.Add(self.search, 0, wx.ALL, 3)
         sizer_9.Add(sizer_15, 1, wx.EXPAND, 0)
-        sizer_14.Add(self.list_base, 1, wx.EXPAND, 0)
-        self.notebook_1_pane_1.SetSizer(sizer_14)
-        self.notebook_1.AddPage(self.notebook_1_pane_1, "Compound base")
+
+
+        
+        for id_cat, (name, editable)  in self.table_category.iteritems():
+            sizer_14 = wx.BoxSizer(wx.HORIZONTAL)
+            sizer_14.Add(self.list_base[id_cat], 1, wx.EXPAND, 0)        
+            self.notebook_panes[id_cat].SetSizer(sizer_14)
+            self.notebook_1.AddPage(self.notebook_panes[id_cat], name)
+
+
         sizer_7.Add(self.notebook_1, 1, wx.EXPAND, 0)
         sizer_9.Add(sizer_7, 7, wx.EXPAND, 0)
         sizer_21.Add(self.button_new, 0, wx.ALL, 3)
@@ -204,15 +241,17 @@ class DefineSystemDialog(wx.Dialog):
             else:
                 return False
 
-        self.list_base.DeleteAllItems()
-        for id, data in self.list_base_data.iteritems():
+        for id_cat in self.table_category.keys():
+    
+            self.list_base[id_cat].DeleteAllItems()
+            for id, data in self.table_compounds[id_cat].iteritems():
 
-            if filterer(data[0]):
-                #print filter, data[1]
-                self.list_base.Append([data[0]]) #name
-                key = self.list_base.GetItemCount() - 1
-                self.list_base.SetItemData(key, id)
-                        
+                if filterer(data[0]):
+                    #print filter, data[1]
+                    self.list_base[id_cat].Append([data[0]]) #name
+                    key = self.list_base[id_cat].GetItemCount() - 1
+                    self.list_base[id_cat].SetItemData(key, id)
+                            
 
 
 
@@ -264,16 +303,19 @@ class DefineSystemDialog(wx.Dialog):
         """Add the at the most two compounds selected to the system"""
 
         comp_left = 2 - self.list_system.GetItemCount()
-        comp_selected = self.list_base.GetSelectedItemCount()
+
+        id_cat = self.notebook_1.GetSelection() + 1
+
+        comp_selected = self.list_base[id_cat].GetSelectedItemCount()
 
         if  comp_selected <= comp_left:
 
             current = -1
             for iter in range(comp_selected):
-                key = self.list_base.GetNextSelected(current) 
-                id = self.list_base.GetItemData(key)    #compound's id
-                self.list_system.Append([self.list_base_data[id][0]]) 
-                self.compounds_data.append( [id] + list(self.list_base_data[id]))
+                key = self.list_base[id_cat].GetNextSelected(current) 
+                id = self.list_base[id_cat].GetItemData(key)    #compound's id
+                self.list_system.Append([self.table_compounds[id_cat][id][0]]) 
+                self.compounds_data.append( [id] + list(self.table_compounds[id_cat][id]))
                 current = key
         
         else:

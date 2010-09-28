@@ -23,7 +23,7 @@ import crud
 
 import  wx.lib.scrolledpanel as scrolled
 
-import  wx.py  as  py #for pyshell
+
 
 
 from settings import PATH_ICONS, MODELS_OPTIONS, VC_RATIO, PLOT_SUITES, PLOT_IN_3D
@@ -197,9 +197,13 @@ class SuitePlotsPanel(wx.Panel):
         pub.sendMessage('select item', panel_name)
         #event.Veto()
 
-
-
     def ActivePage(self, message):
+        """
+        handler for the topic 'active page' produced on PlotsTreePanel when 
+        the user select an item from the tree which is associated with a 
+        notebook page. 
+        """
+
         window = wx.FindWindowByName(message.data)
         page_id = self.nb.GetPageIndex(window)
         if page_id is not None:
@@ -207,7 +211,7 @@ class SuitePlotsPanel(wx.Panel):
 
 
     def HidePage(self, message):
-        """close page wich window is named as message.data and put in hidden_page"""
+        """close page which window is named as message.data and put in hidden_page"""
         window = wx.FindWindowByName(message.data)
         page_id = self.nb.GetPageIndex(window)
 
@@ -1182,7 +1186,18 @@ class ShellPanel(wx.Panel):
 
     def __init__(self, parent, id):
         wx.Panel.__init__(self, parent, id)
-        self.shell = py.shell.Shell(self, -1, introText='Welcome To GPEC' )
+
+        intro='Welcome To GPEC\n'
+        try:
+            import IPython.gui.wx.wxIPython as wxIP
+            self.shell = wxIP.IPShellWidget(self, intro)
+        except ImportError:
+            try:
+                import  wx.py  as  py #for pyshell
+                self.shell = py.shell.Shell(self, -1, introText=intro )
+            except :
+                self.shell = wx.Panel(self, -1)
+
    
         sizer = wx.BoxSizer()
         sizer.Add(self.shell, 1, wx.EXPAND)
