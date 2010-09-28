@@ -46,13 +46,13 @@ class DefineSystemDialog(wx.Dialog):
             self.table_compounds[id_cat] = {}
 
         
-            self.c2.execute("""select id, name, tc, pc, vc, acentric_factor,  
+            self.c2.execute("""select id, name, formula, formula_extended, tc, pc, vc, acentric_factor,  
                             vc_rat from compounds where id_category=%i""" % id_cat)
             
             for row in self.c2:
                 id = row[0]
-                data = list(row[1:6])
-                data[-2] = data[-2] * row[6]   #VCeos = VCMODEL*VCrat  - TODO: MAKE this configurable
+                data = list(row[1:8])
+                data[-2] = data[-2] * row[8]   #VCeos = VCMODEL*VCrat  - TODO: MAKE this configurable
                 self.table_compounds[id_cat][id] = tuple(data)
             
        
@@ -125,7 +125,8 @@ class DefineSystemDialog(wx.Dialog):
         self.Bind(wx.EVT_BUTTON, self.OnCancel, self.button_cancel)
 
         self.Bind(wx.EVT_CLOSE, self.OnCancel)
-
+        
+        self.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, self.OnPageChanged, self.notebook_1)
         
 
     def __set_properties(self):
@@ -156,6 +157,7 @@ class DefineSystemDialog(wx.Dialog):
         
         self.list_system.InsertColumn(0, "System", width=185)
 
+        self.OnPageChanged(None)
         self.PopulateLists()
 
     def __do_layout(self):
@@ -230,6 +232,21 @@ class DefineSystemDialog(wx.Dialog):
 
 # end of class MyFrame
 
+    def OnPageChanged(self, event):
+        """
+            handler for the event EVT_NOTEBOOK_PAGE_CHANGED. 
+           it enable or disables the crud buttons depending if the table
+            associated to the page is editable or not
+        """
+        page = self.notebook_1.GetSelection()
+        
+        id_cat = page + 1 if page >= 0 else 1
+
+        editable = False if self.table_category[id_cat][1] == 'False' else True
+
+        self.button_edit.Enable(editable)
+        self.button_remove.Enable(editable)
+
 
     def PopulateLists(self, filter=''):
         """populate compound base from cached database"""
@@ -258,36 +275,35 @@ class DefineSystemDialog(wx.Dialog):
     #EVENTS HANDLERS
 
     def OnNew(self, evt):
-        dlg = DataFormDialog(self, -1)
+        dlg = CompoundFormDialog(self, -1)
         dlg.CenterOnScreen()
 
         # this does not return until the dialog is closed.
         val = dlg.ShowModal()
     
-        if val == wx.ID_OK:
-            pass
-        else:
-            pass
+        if val == wx.OK:
+            print dlg.controls
 
         dlg.Destroy()
 
 
 
     def OnEdit(self, evt):
-        key = self.list_base.GetFirstSelected()
-        id = self.list_base.GetItemData(key)
-        data = self.list_base_data[id]
+        id_cat = self.notebook_1.GetSelection() + 1
 
-        dlg = DataFormDialog(self, -1, title="Edit compound", data=data)
+        key = self.list_base[id_cat].GetFirstSelected()
+        id = self.list_base[id_cat].GetItemData(key)
+        data = self.table_compounds[id_cat][id]
+
+        dlg = CompoundFormDialog(self, -1, title="Edit compound", data=[id_cat, id] + list(data))
         dlg.CenterOnScreen()
 
         # this does not return until the dialog is closed.
         val = dlg.ShowModal()
     
-        if val == wx.ID_OK:
-            pass
-        else:
-            pass
+        if val == wx.OK:
+            print dlg.controls
+
 
         dlg.Destroy()
 
@@ -382,16 +398,15 @@ class SystemValidator(wx.PyValidator):
         
     
     def TransferFromWindow(self):
-        """the compound 2 must be more heavy than 1""" 
-        
-
+        """the compound 2 must be heavier than 1""" 
+       
         def get_weight(tc, pc):
             return float(tc)**WEIGHT_POWER / float(pc)
 
-        tc1 = self.compounds_data[0][2]
-        tc2 = self.compounds_data[1][2]
-        pc1 = self.compounds_data[0][3]
-        pc2 = self.compounds_data[1][3]
+        tc1 = self.compounds_data[0][4]
+        tc2 = self.compounds_data[1][4]
+        pc1 = self.compounds_data[0][5]
+        pc2 = self.compounds_data[1][5]
 
         if get_weight(tc1, pc1) >  get_weight(tc2, pc2):
             
@@ -412,45 +427,103 @@ class SystemValidator(wx.PyValidator):
         return True    
 
 
-class DataFormDialog(sc.SizedDialog):
+class CompoundFormValidator(wx.PyValidator):
+    def __init__(self, data):
+        wx.PyValidator.__init__(self)
+        self.data = data
+
+    def Clone(self):
+        return CompoundFormValidator(self.data)
+    
+    def Validate(self, parent):
+        print "always valid"
+        return True
+        
+ 
+    
+    def TransferFromWindow(self):
+        return True   
+
+
+class NotEmptyValidator(wx.PyValidator):
+     def __init__(self):
+         wx.PyValidator.__init__(self)
+
+     def Clone(self):
+         """
+         Note that every validator must implement the Clone() method.
+         """
+         return NotEmptyValidator()
+
+     def Validate(self, win):
+         textCtrl = self.GetWindow()
+         text = textCtrl.GetValue()
+
+         if len(text) == 0:
+             wx.MessageBox("This field must contain some text", "Error")
+             textCtrl.SetBackgroundColour("pink")
+             textCtrl.SetFocus()
+             textCtrl.Refresh()
+             return False
+         else:
+             textCtrl.SetBackgroundColour(
+                 wx.SystemSettings_GetColour(wx.SYS_COLOUR_WINDOW))
+             textCtrl.Refresh()
+             return True
+
+     def TransferToWindow(self):
+         return True
+
+     def TransferFromWindow(self):
+         return True
+
+
+
+class CompoundFormDialog(sc.SizedDialog):
     def __init__(self, parent, id, title="New Compound", data=None ):
 
-        sc.SizedDialog.__init__(self, None, -1, title, 
-                        style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
+        sc.SizedDialog.__init__(self, None, -1, title )
+                        #style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
         
+        
+
         pane = self.GetContentsPane()
         pane.SetSizerType("form")
         
-        
+        self.data = data
         self.controls = []
 
         wx.StaticText(pane, -1, u'Name')
-        self.controls.append(wx.TextCtrl(pane, -1))
+        self.controls.append(wx.TextCtrl(pane, -1, validator=NotEmptyValidator()))
         self.controls[-1].SetSizerProps(expand=True)
         
         # row 2
         wx.StaticText(pane, -1, u'Formula')
-        self.controls.append(wx.TextCtrl(pane, -1))
+        self.controls.append(wx.TextCtrl(pane, -1, validator=NotEmptyValidator()))
         self.controls[-1].SetSizerProps(expand=True)
         
         # row 3
         wx.StaticText(pane, -1, u'Extended Formula')
-        self.controls.append(wx.TextCtrl(pane, -1))
+        self.controls.append(wx.TextCtrl(pane, -1, validator=NotEmptyValidator()))
         self.controls[-1].SetSizerProps(expand=True)
 
         # row 4
         wx.StaticText(pane, -1, u'Critical Temperature [K]')
         self.controls.append(ui.widgets.FloatCtrl(pane, -1))
-        
+        self.controls[-1].SetSizerProps(expand=True)
+
         #row 5
         wx.StaticText(pane, -1, u'Critical Pressure [bar]')
         self.controls.append(ui.widgets.FloatCtrl(pane, -1))
+        self.controls[-1].SetSizerProps(expand=True)
         
         wx.StaticText(pane, -1, u'Critical Volume [m³/Kmol]')
         self.controls.append( ui.widgets.FloatCtrl(pane, -1))
+        self.controls[-1].SetSizerProps(expand=True)
         
         wx.StaticText(pane, -1, "Acentric Factor")
         self.controls.append(  ui.widgets.FloatCtrl(pane, -1))
+        self.controls[-1].SetSizerProps(expand=True)
         
         # add dialog buttons
         self.SetButtonSizer(self.CreateStdDialogButtonSizer(wx.OK | wx.CANCEL))
@@ -458,20 +531,24 @@ class DataFormDialog(sc.SizedDialog):
         # a little trick to make sure that you can't resize the dialog to
         # less screen space than the controls need
         self.Fit()
-        self.SetMinSize(self.GetSize())
+        self.SetMinSize(self.GetBestSize())
 
-        if data is not None:
-            self.SetData(data)
+        #self.Bind(wx.EVT_BUTTON, self.OnOk)
+    
+        if self.data is not None:
+            id_cat, id = self.data[0:2]
 
-    def SetData(self, data):
-        print data
-        #assert len(data) == len(self.controls) + 1, 'Not enough data to fill the form'
-        
-        self.table = data[0]
-
-        for control, value in zip(self.controls, data[1:]):
-            control.SetValue(str(value))
-
+            for control, value in zip(self.controls, self.data[2:]):
+                control.SetValue(str(value))
+    
+    def OnOk(self, event):
+        if event.GetId == wx.ID_OK:
+            print "eureka"
+            print event.GetId(), wx.OK
+        else:
+            print "otra cosa"
+    
+        event.Skip()
 
 
 if __name__ == "__main__":

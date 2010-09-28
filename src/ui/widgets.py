@@ -25,10 +25,20 @@ class FloatValidator( wx.PyValidator):
         if not wx.Validator_IsSilent():
             wx.Bell()
 
+
+    def TransferToWindow(self):
+     return True
+
+    def TransferFromWindow(self):
+     return True
+
+
+
+
 class FloatCtrl(wx.TextCtrl):
-    def __init__(self, parent, id, value=0.0):
+    def __init__(self, parent, id, value=0.0, ):
         wx.TextCtrl.__init__(self, parent, id, str(value), \
-        validator = FloatValidator())
+                                validator = FloatValidator())
         self.SetMinSize((50,-1))
         self.SetMaxSize((100,-1))
         #self.SetFont(PlainFont(12))

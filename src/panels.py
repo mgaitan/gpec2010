@@ -1098,6 +1098,7 @@ class CasePanel(scrolled.ScrolledPanel):
         if dlg.ShowModal()  == wx.ID_OK:
         
             for panel, data in zip (self.panels, compounds_data):
+                data = data[0:2] + data[4:]
                 panel.SetData(data)
 
         dlg.Destroy()
