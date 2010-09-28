@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # A module to expose various thread/process/job related structures and
 # methods from kernel32
 #

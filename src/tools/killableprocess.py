@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # killableprocess - subprocesses which can be reliably killed
 #
 # Parts of this module are copied from the subprocess.py file contained
