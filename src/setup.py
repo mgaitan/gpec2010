@@ -16,7 +16,7 @@ dll_excludes = ['libgdk-win32-2.0-0.dll', 'libgobject-2.0-0.dll', 'tcl84.dll',
 setup(
     data_files = data, 
     options = {"py2exe": {"compressed": 2,
-                          "optimize": 2,
+                          "optimize": 0, #2,
                           "includes": includes,
                           "excludes": excludes,
                           "packages": packages,

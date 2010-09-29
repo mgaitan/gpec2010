@@ -59,18 +59,19 @@ class MainFrame(wx.Frame):
 
         # create several text controls
         self.cases_panel = TabbedCases(self, -1)
-        self.cases_auipane = wx.aui.AuiPaneInfo().Name("cases").\
-                          Caption(u"Cases").Left().MinSize(self.cases_panel.GetSize()).\
-                          MaxSize(self.cases_panel.GetSize()).\
-                          Layer(1).Position(2).CloseButton(True).MinimizeButton(True)
 
+        self.cases_auipane = wx.aui.AuiPaneInfo().Name("cases").\
+                          Caption(u"Cases").Left().MinSize(wx.Size(330, -1)).\
+                          Layer(1).Position(2).CloseButton(True).MinimizeButton(True)
+                          
+                          #MaxSize(self.cases_panel.GetSize()).\
         self.plots_panel = SuitePlotsPanel(self, -1)
         self.log_panel = InfoPanel(self, -1)
 
 
         self.plots_tree_panel = PlotsTreePanel(self, -1)
         self.plots_tree_auipane = wx.aui.AuiPaneInfo().\
-                          Name("plots_tree").Caption("Plots Manager").\
+                          Name("plots_tree").Caption("Manager").\
                           Floatable(True)
 
         self._mgr.AddPane(self.plots_tree_panel,self.plots_tree_auipane )
