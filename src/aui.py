@@ -4,6 +4,7 @@
 import wx
 import wx.aui
 import os
+import sys
 import cPickle as pickle
 
 import apimanager
@@ -55,13 +56,23 @@ class MainFrame(wx.Frame):
             ]),
         ]
 
+        
+
+
         self.SetMenuBar(self.BuildMenu(menu))
 
         # create several text controls
         self.cases_panel = TabbedCases(self, -1)
 
+        #ugly hack
+        if sys.platform != 'win32':
+            the_size = self.cases_panel.GetSize()
+        else:
+            the_size = wx.Size(330, -1)
+
+
         self.cases_auipane = wx.aui.AuiPaneInfo().Name("cases").\
-                          Caption(u"Cases").Left().MinSize(wx.Size(330, -1)).\
+                          Caption(u"Cases").Left().MinSize(the_size).MaxSize(the_size).\
                           Layer(1).Position(2).CloseButton(True).MinimizeButton(True)
                           
                           #MaxSize(self.cases_panel.GetSize()).\
