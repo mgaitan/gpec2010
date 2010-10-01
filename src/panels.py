@@ -1127,6 +1127,25 @@ class CasePanel(scrolled.ScrolledPanel):
             panel.SetParamsForm(self.model_id)
             panel.SetDirectionOnForm()
 
+            if self.model_id == 3:
+                #input VCrat
+                dlg = wx.TextEntryDialog(self, u'Vc ratio for %s' % panel.compound_name, u'Set Vc Ratio', 
+                                            defaultValue=str(panel.vc_ratio  if hasattr(panel, 'vc_ratio') else 1.168) )            
+                r = dlg.ShowModal()
+                if  r == wx.ID_CANCEL:
+                    return 
+                elif r  == wx.ID_OK :
+                    panel.vc_ratio = float(dlg.GetValue())
+                    values =  panel.GetVarsValues()
+                    panel.vc_back = values[2]
+                    values[2] = float(values[2]) * panel.vc_ratio
+                    panel.SetVarsValues(values)
+            elif hasattr(panel, 'vc_back'):
+                values =  panel.GetVarsValues()
+                values[2] = panel.vc_back
+                panel.SetVarsValues(values)
+        
+                
         
 
         self.SetSizerAndFit(self.box)

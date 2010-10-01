@@ -533,7 +533,7 @@ class IsoPT(BasePlot):
             name = u'Isopleth lines'
             for num, vap_curve in enumerate(arrays['ISO']):
                 label = name if num == 0 else '_nolegend_'
-                lines += self.axes.plot(vap_curve[:,0], vap_curve[:,1], color='#8F00FF', label=label)
+                lines += self.axes.plot(vap_curve[:,0], vap_curve[:,1], 'k', label=label)
                 
                 
 
@@ -647,12 +647,15 @@ class IsoPx(BasePlot):
 
             for num, iso_curve in enumerate(arrays['ISO']):
                 label_g = name_g if num == 0 else '_nolegend_'
-                label_r = name_r if num == 0 else '_nolegend_'
+                label_r = name_r if num == 0 else 'lala _nolegend_'
+                color_r = 'r' if num == 0 else 'r-'  #lala _nolegend_'
+
                 counter = u'' if len(arrays['ISO']) == 1 else u' %i' % (num + 1)
                 lines_g += self.axes.plot(1 - iso_curve[:,3], iso_curve[:,1], 'g', label=label_g)
-                if num == 0:
-                    saturated = np.repeat( np.max(iso_curve[:,2]), len(iso_curve[:,1]))
-                    lines_r += self.axes.plot(saturated, iso_curve[:,1], 'r', label=label_r)
+                
+                
+                saturated = np.repeat( np.max(iso_curve[:,2]), len(iso_curve[:,1]))
+                lines_r += self.axes.plot(saturated, iso_curve[:,1], 'r', label=label_r)
 
 
             self.curves.append( {'name': name_g,

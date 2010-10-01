@@ -52,7 +52,7 @@ class DefineSystemDialog(wx.Dialog):
             for row in self.c2:
                 id = row[0]
                 data = list(row[1:8])
-                data[-2] = data[-2] * row[8]   #VCeos = VCMODEL*VCrat  - TODO: MAKE this configurable
+                #data[-2] = data[-2] * row[8]   #VCeos = VCMODEL*VCrat  - TODO: MAKE this configurable
                 self.table_compounds[id_cat][id] = tuple(data)
             
        
