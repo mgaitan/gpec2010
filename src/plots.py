@@ -499,8 +499,8 @@ class PTx(BasePlot):
 
                 t_constant = np.repeat(float(kwarg['t_val']), len(iso_curve[:,0]))
 
-                lines += self.axes.plot(t_constant, iso_curve[:,5], iso_curve[:,0], 'y-.', label=label),
-                lines += self.axes.plot(t_constant, iso_curve[:,6], iso_curve[:,0], 'y-.', label='_nolegend_')
+                lines += self.axes.plot(t_constant, iso_curve[:,1], iso_curve[:,0], 'y-.', label=label),
+                lines += self.axes.plot(t_constant, iso_curve[:,2], iso_curve[:,0], 'y-.', label='_nolegend_')
 
              
             self.curves.append( { 'name': name, 

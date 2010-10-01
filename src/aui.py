@@ -64,7 +64,7 @@ class MainFrame(wx.Frame):
         # create several text controls
         self.cases_panel = TabbedCases(self, -1)
 
-        #ugly hack
+        #ugly hack to fix the size of case aui panel
         if sys.platform != 'win32':
             the_size = self.cases_panel.GetSize()
         else:
