@@ -286,17 +286,17 @@ class PTrho(BasePlot):
             name = u'Isopleth lines (Z = %s)' % kwarg['z_val']
             lines = []
             for num, iso_curve in enumerate(arrays['ISO']):
-                label = name if num == 0 else '_nolegend_'
-                
-                lines += self.axes.plot(iso_curve[:,0], iso_curve[:,4], iso_curve[:,1], 'g--', label=label),
-                lines += self.axes.plot(iso_curve[:,0], iso_curve[:,5], iso_curve[:,1], 'g--', label='_nolegend_'),                                
+                if num == 0:
+                    label = name if num == 0 else '_nolegend_'
+                    lines += self.axes.plot(iso_curve[:,0], iso_curve[:,4], iso_curve[:,1], color='#8F00FF', linestyle='dashed', label=label),
+                    lines += self.axes.plot(iso_curve[:,0], iso_curve[:,5], iso_curve[:,1], color='#8F00FF', linestyle='dashed', label='_nolegend_'),                                
 
              
             self.curves.append( { 'name': name, 
                                   'visible':True,
                                   #'lines': tuple(lines),
                                   'lines2d': lines,  #self.axes.plot(*lines, label=name),
-                                  'color': 'green', 
+                                  'color': 'violet', 
                                   'wx_id' : wx.NewId(),
                                   'type': 'ISO',
                                 } )
@@ -447,21 +447,20 @@ class PTx(BasePlot):
         if 'ISO' in arrays.keys():
 
 
-            name = u'Isopleth lines (Z = %s)' % kwarg['z_val']
+            name = u'Isopleth saturated line  (Z = %s)' % kwarg['z_val']
             lines = []
             for num, iso_curve in enumerate(arrays['ISO']):
-                label = name if num == 0 else '_nolegend_'
-                
-                lines += self.axes.plot(iso_curve[:,0], 1 - iso_curve[:,3] , iso_curve[:,1], 'g--', label=label),
+                if num == 0:
+                    label = name if num == 0 else '_nolegend_'
+                    saturated = np.repeat( np.max(iso_curve[:,2]), len(iso_curve[:,1]))
+                    lines += self.axes.plot(iso_curve[:,0], saturated, iso_curve[:,1], 
+                                            color='#8F00FF', linestyle='dashed', label=label),
                                 
-             #Tx: 1 - iso_curve[:,3], iso_curve[:,0]
-             #Px 1 - vap_curve[:,3], vap_curve[:,1]
-                        
             self.curves.append( { 'name': name, 
                                   'visible':True,
                                   #'lines': tuple(lines),
                                   'lines2d': lines,  #self.axes.plot(*lines, label=name),
-                                  'color': 'green', 
+                                  'color': 'violet', 
                                   'wx_id' : wx.NewId(),
                                   'type': 'ISO',
                                 } )
@@ -534,14 +533,14 @@ class IsoPT(BasePlot):
             name = u'Isopleth lines'
             for num, vap_curve in enumerate(arrays['ISO']):
                 label = name if num == 0 else '_nolegend_'
-                lines += self.axes.plot(vap_curve[:,0], vap_curve[:,1], 'k', label=label)
+                lines += self.axes.plot(vap_curve[:,0], vap_curve[:,1], color='#8F00FF', label=label)
                 
                 
 
             self.curves.append( {'name': name, 
                                  'visible':True, 
                                  'lines2d': lines,
-                                  'color' : 'black',
+                                  'color' : 'violet',
                                   'wx_id' : wx.NewId(),
                                   'type': 'ISO',
                                     } )             
