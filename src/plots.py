@@ -9,6 +9,7 @@ from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigCanvas
 from mpl_toolkits.mplot3d.axes3d import Axes3D
 
 import wx
+from wx.lib.pubsub import Publisher as pub
 
 class BasePlot(object):
     """a base plot class for GPEC"""
@@ -648,15 +649,17 @@ class IsoPx(BasePlot):
             for num, iso_curve in enumerate(arrays['ISO']):
                 label_g = name_g if num == 0 else '_nolegend_'
                 label_r = name_r if num == 0 else 'lala _nolegend_'
-                color_r = 'r' if num == 0 else 'r-'  #lala _nolegend_'
+                color = 'k' if num == 0 else 'c^'
 
                 counter = u'' if len(arrays['ISO']) == 1 else u' %i' % (num + 1)
                 lines_g += self.axes.plot(1 - iso_curve[:,3], iso_curve[:,1], 'g', label=label_g)
-                
-                
-                saturated = np.repeat( np.max(iso_curve[:,2]), len(iso_curve[:,1]))
-                lines_r += self.axes.plot(saturated, iso_curve[:,1], 'r', label=label_r)
 
+                max_val = max_val if 'max_val' in locals() else np.max(iso_curve[:,2])
+                saturated = np.repeat(max_val, len(iso_curve[:,1]))
+
+                lines_r += self.axes.plot(saturated, iso_curve[:,1], color, label=label_r)
+
+            pub.sendMessage('register', ('lines_r', lines_r))
 
             self.curves.append( {'name': name_g,
                                      'visible': True, 

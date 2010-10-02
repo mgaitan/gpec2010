@@ -26,7 +26,7 @@ import  wx.lib.scrolledpanel as scrolled
 
 
 
-from settings import PATH_ICONS, MODELS_OPTIONS, VC_RATIO, PLOT_SUITES, PLOT_IN_3D
+from settings import PATH_ICONS, MODELS_OPTIONS, VC_RATIO_DEFAULT, PLOT_SUITES, PLOT_IN_3D, IPYTHON_CONSOLE
 
 from tools.misc import Counter
 
@@ -1208,16 +1208,19 @@ class ShellPanel(wx.Panel):
         wx.Panel.__init__(self, parent, id)
 
         intro='Welcome To GPEC\n'
-        try:
-            import IPython.gui.wx.wxIPython as wxIP
-            self.shell = wxIP.IPShellWidget(self, intro)
-        except ImportError:
+        
+        if IPYTHON_CONSOLE:
             try:
-                import  wx.py  as  py #for pyshell
-                self.shell = py.shell.Shell(self, -1, introText=intro )
-            except :
-                self.shell = wx.Panel(self, -1)
-
+                import IPython.gui.wx.wxIPython as wxIP
+                self.shell = wxIP.IPShellWidget(self, intro)
+            except ImportError:
+                try:
+                    import  wx.py  as  py #for pyshell
+                    self.shell = py.shell.Shell(self, -1, introText=intro )
+                except :
+                    self.shell = wx.Panel(self, -1)
+        else:
+            self.shell = wx.Panel(self, -1)
    
         sizer = wx.BoxSizer()
         sizer.Add(self.shell, 1, wx.EXPAND)

@@ -119,6 +119,13 @@ class MainFrame(wx.Frame):
         pub.subscribe(self.RefreshMe, 'add checkbox')
         pub.subscribe(self.RefreshMe, 'log')
         pub.subscribe(self.RefreshMe, 'refresh all')
+            
+        self.registered = {}
+        pub.subscribe(self.Register, 'register')
+    
+
+    def Register(self,  message):
+        self.registered[message.data[0]] = message.data[1]
 
     def RefreshMe(self, message):
         return self.Refresh()
@@ -278,9 +285,5 @@ if __name__ == "__main__":
     main_frame.Show()
 
     pub.sendMessage('log', ('ok', 'GPEC is ready. Define a system to begin') )
-
-
-#    import wx.lib.inspection
-#    wx.lib.inspection.InspectionTool().Show()
 
     app.MainLoop()

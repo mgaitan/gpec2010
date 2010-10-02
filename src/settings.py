@@ -21,9 +21,10 @@ MODELS_OPTIONS = {'Soave-Redlich-Kwong':1,
                   'SPHCT':6}            #TODO; should it be inverted?
 
 
-VC_RATIO = 1.168    #relation MODEL/EXPERIMENTAL for critical volumen
+VC_RATIO_DEFAULT = 1.168    #relation MODEL/EXPERIMENTAL for critical volumen
 TIMEOUT = 10 #seconds to timeout the calculation 
 
+IPYTHON_CONSOLE = False
 
 WEIGHT_POWER = 14 # weight = (Tc ^ WEIGHT_POWER) / Pc
 
