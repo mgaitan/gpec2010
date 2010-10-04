@@ -451,11 +451,12 @@ class PTx(BasePlot):
             name = u'Isopleth saturated line  (Z = %s)' % kwarg['z_val']
             lines = []
             for num, iso_curve in enumerate(arrays['ISO']):
-                if num == 0:
-                    label = name if num == 0 else '_nolegend_'
-                    saturated = np.repeat( np.max(iso_curve[:,2]), len(iso_curve[:,1]))
-                    lines += self.axes.plot(iso_curve[:,0], saturated, iso_curve[:,1], 
-                                            color='#8F00FF', linestyle='dashed', label=label),
+                label = name if num == 0 else '_nolegend_'
+                
+                max_val = max_val if 'max_val' in locals() else np.max(iso_curve[:,2])
+                saturated = np.repeat(max_val, len(iso_curve[:,1]))
+                lines += self.axes.plot(iso_curve[:,0], saturated, iso_curve[:,1], 
+                                        color='#8F00FF', linestyle='dashed', label=label),
                                 
             self.curves.append( { 'name': name, 
                                   'visible':True,

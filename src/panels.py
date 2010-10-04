@@ -84,6 +84,10 @@ class PlotPanel(wx.Panel):
         #binding via pubsub
         #pub.subscribe(self.OnPlotPT, 'plot.PT')
 
+        pub.sendMessage('add_plot_instance', (self.GetName(), self.plot))
+        
+
+
     def onMouseMotion(self, event):
         if event.inaxes:
             pub.sendMessage('status', 'X=%g Y=%g' % (event.xdata, event.ydata) )
