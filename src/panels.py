@@ -898,11 +898,20 @@ class CasePanel(scrolled.ScrolledPanel):
 
 
         #collapsible for extra variables
-
-        self.cp = cp = pycp.PyCollapsiblePane(self, label='Other case variables',
-                                          style=wx.CP_DEFAULT_STYLE|wx.CP_NO_TLW_RESIZE|pycp.CP_GTK_EXPANDER)
-        self.MakeCollipsable(cp.GetPane())
-        self.box.Add(self.cp, 0, wx.RIGHT|wx.LEFT|wx.EXPAND, 25)
+        
+        #TODO this fail on MS Windows. It's not a time for stupid tasks
+        
+        #self.cp = cp = pycp.PyCollapsiblePane(self, label='Other case variables',
+        #                                  style=wx.CP_DEFAULT_STYLE|wx.CP_NO_TLW_RESIZE)
+        
+        self.cp = cp = wx.Panel(self, -1)
+        #self.MakeCollipsable(cp.GetPane())
+        self.MakeCollipsable(self.cp)
+        
+        tmp_box_sizer =  wx.StaticBoxSizer(wx.StaticBox(self, -1, "Other case variables"), wx.VERTICAL)
+        tmp_box_sizer.Add(self.cp, 0, wx.RIGHT|wx.LEFT|wx.EXPAND, 25)
+        
+        self.box.Add(tmp_box_sizer, 0, wx.RIGHT|wx.LEFT|wx.BOTTOM, 10)
 
 
         self.box.Add(wx.StaticLine(self), 0, wx.EXPAND)
@@ -1052,10 +1061,10 @@ class CasePanel(scrolled.ScrolledPanel):
         self.Fit()
 
         p = self.GetParent()
-        
         #update auipane
         p.GetParent().GetParent()._mgr.Update() # SetClientSize(self.GetSize())
         
+        pub.sendMessage('refresh all', None)
     
 
 
