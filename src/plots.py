@@ -243,10 +243,11 @@ class PTrho(BasePlot):
             name = 'LLV'
 
             for num, llv_curve in enumerate(arrays['LLV']):
-                label = name if num == 0 else '_nolegend_'
-                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,7], llv_curve[:,1], 'b', label=label)
+                label_b = 'Liquid in LLV' if num == 0 else '_nolegend_'
+                label_r = 'Vapor in LLV' if num == 0 else '_nolegend_'
+                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,7], llv_curve[:,1], 'b', label=label_b)
                 lines += self.axes.plot(llv_curve[:,0], llv_curve[:,8], llv_curve[:,1], 'b', label='_nolegend_')
-                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,9], llv_curve[:,1], 'r', label=label)
+                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,9], llv_curve[:,1], 'r', label=label_r)
                 
 
 
@@ -410,10 +411,11 @@ class PTx(BasePlot):
             lines = []
             name = 'LLV'
             for num, llv_curve in enumerate(arrays['LLV']):
-                label = name if num == 0 else '_nolegend_'
-                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,2], llv_curve[:,1], 'b', label=label)
+                label_b = 'Liquid in LLV' if num == 0 else '_nolegend_'
+                label_r = 'Vapor in LLV' if num == 0 else '_nolegend_'
+                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,2], llv_curve[:,1], 'b', label=label_b)
                 lines += self.axes.plot(llv_curve[:,0], llv_curve[:,3], llv_curve[:,1], 'b', label='_nolegend_')
-                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,4], llv_curve[:,1], 'r', label=label)
+                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,4], llv_curve[:,1], 'r', label=label_r)
 
             
             
