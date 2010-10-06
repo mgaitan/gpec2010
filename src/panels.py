@@ -977,22 +977,25 @@ class CasePanel(scrolled.ScrolledPanel):
     def OnSetDiagram(self, event):
         diagram_type_key = self.diagram_ch.GetSelection()
 
+        
 
-        
-        for pos in (2, 2):      #after remove first 2, pos 3 turns into pos 2. 
-            item = self.diag_hbox.GetItem(pos)
-            if (item != None) and (item.IsWindow()):
-                self.diag_hbox.Remove(pos)
-                item.Show(False)
-                self.diag_hbox.Layout()
-        
+        try:
+            for pos in (2,2):      #after remove first 2, pos 3 turns into pos 2. 
+                item = self.diag_hbox.GetItem(pos)
+                if item != None and item.IsWindow():
+                    self.diag_hbox.Remove(pos)
+                    item.Show(False)
+                    self.diag_hbox.Layout()
+        except:
+            pass
+             
         if diagram_type_key == 1:   #isopleth
             
             label = wx.StaticText(self, -1, "Z")  #for isopleths
             self.z_input = ui.widgets.FloatCtrl(self, -1, "0.97")
 
             self.diag_hbox.Add(label, 0, flag= wx.ALIGN_CENTER_VERTICAL | wx.ALL , border=5)
-            self.diag_hbox.Add(self.z_input, 1, wx.EXPAND | wx.ALL ^ wx.LEFT , border=5)
+            self.diag_hbox.Add(self.z_input, 1, wx.EXPAND | wx.RIGHT , border=5)
 
         elif diagram_type_key == 2:   #pxy
 
@@ -1000,7 +1003,7 @@ class CasePanel(scrolled.ScrolledPanel):
             self.t_input = ui.widgets.FloatCtrl(self, -1, "300.0")
 
             self.diag_hbox.Add(label, 0, flag= wx.ALIGN_CENTER_VERTICAL | wx.ALL , border=5)
-            self.diag_hbox.Add(self.t_input, 1, wx.EXPAND | wx.ALL ^ wx.LEFT , border=5)
+            self.diag_hbox.Add(self.t_input, 1, wx.EXPAND |  wx.EXPAND | wx.RIGHT , border=5)
 
         elif diagram_type_key == 3: 
 
@@ -1008,7 +1011,7 @@ class CasePanel(scrolled.ScrolledPanel):
             self.p_input = ui.widgets.FloatCtrl(self, -1, "100.0")
 
             self.diag_hbox.Add(label, 0, flag= wx.ALIGN_CENTER_VERTICAL | wx.ALL , border=5)
-            self.diag_hbox.Add(self.p_input, 1, wx.EXPAND | wx.ALL ^ wx.LEFT , border=5)
+            self.diag_hbox.Add(self.p_input, 1, wx.EXPAND |  wx.EXPAND | wx.RIGHT , border=5)
 
         self.diag_hbox.Layout()
 
