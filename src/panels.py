@@ -489,16 +489,19 @@ class VarsAndParamPanel(wx.Panel):
         return (self.compound_name, tmp_var, self.GetParamsValues())
 
 
+
     def EnableAll(self, flag=True):
         self.enabled = flag
+        self.radio1.Enable(flag)
+        self.radio2.Enable(flag)
+
         for box in self.vars :
             box.Enable(flag)
         
         self.vars[2].Enable(False)
 
         self.button.Enable(flag)
-        self.radio1.Enable(flag)
-        self.radio2.Enable(flag)
+    
         
 
     def GetVarsValues(self):
@@ -874,11 +877,11 @@ class CasePanel(scrolled.ScrolledPanel):
 
         self.model_options =  MODELS_OPTIONS
 
-        self.ch = wx.Choice(self, -1, choices = self.model_options.keys())
+        self.model_choice = wx.Choice(self, -1, choices = self.model_options.keys())
         
         #model ID by default
         self.model_id = 1
-        self.ch.SetSelection(0)
+        self.model_choice.SetSelection(0)
 
         first_row_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
@@ -888,7 +891,7 @@ class CasePanel(scrolled.ScrolledPanel):
         first_row_sizer.Add((10, 20), 0, wx.EXPAND)
 
         first_row_sizer.Add(wx.StaticText(self, -1, "Model:"), 0, flag= wx.ALIGN_RIGHT | wx.ALIGN_CENTER_VERTICAL, border=5)
-        first_row_sizer.Add(self.ch, 0, flag=wx.ALL | wx.ALIGN_CENTER_VERTICAL , border=5)
+        first_row_sizer.Add(self.model_choice, 0, flag=wx.ALL | wx.ALIGN_CENTER_VERTICAL , border=5)
         self.box.Add( first_row_sizer, 0, flag= wx.TOP | wx.LEFT | wx.FIXED_MINSIZE | wx.ALIGN_LEFT, border = 5)
 
         
@@ -970,7 +973,7 @@ class CasePanel(scrolled.ScrolledPanel):
 
         #Binding
         self.Bind(wx.EVT_COLLAPSIBLEPANE_CHANGED, self.OnPaneChanged, cp)
-        self.Bind(wx.EVT_CHOICE, self.OnSetModel, self.ch)
+        self.Bind(wx.EVT_CHOICE, self.OnSetModel, self.model_choice)
         self.Bind(wx.EVT_CHOICE, self.OnSetDiagram, self.diagram_ch)
         self.Bind(wx.EVT_BUTTON, self.OnLoadSystem, self.load_button)
         self.Bind(wx.EVT_BUTTON, self.OnMakePlots, self.plot_button)
@@ -1081,10 +1084,15 @@ class CasePanel(scrolled.ScrolledPanel):
         #TODO Add data from collapsable panel
         
         compounds_data =  [panel.GetData() for panel in self.panels if  panel.enabled ]  
-            
-
+           
+        combining_rule = self.combining_rules.GetSelection()
+        max_p  = self.max_p.GetValue()
+        l12 = self.l12.GetValue()
+        k12 = self.k12.GetValue()
+        
+ 
         return {'compounds':compounds_data, 'case_id': self.case_id, 'case_name': self.name, 
-                                  'model_id':self.model_id }
+                'model_id':self.model_id,  'combining_rule':combining_rule,  'extra':(max_p, l12, k12)}
 
 
     def LoadEssential(self, essential_data ):
@@ -1101,8 +1109,12 @@ class CasePanel(scrolled.ScrolledPanel):
         for panel, data in zip (self.panels, essential_data['compounds']):
             panel.SetData(data)
         
+        #extra (collapsible panel)
+        self.combining_rules.SetSelection(essential_data['combining_rule'])
+        for box, value in zip((self.max_p, self.l12, self.k12), essential_data['extra']):
+            box.SetValue(value)
         
-
+    
     
     
 
@@ -1161,18 +1173,32 @@ class CasePanel(scrolled.ScrolledPanel):
                     panel.vc_back = values[2]
                     values[2] = float(values[2]) * panel.vc_ratio
                     panel.SetVarsValues(values)
+
             elif hasattr(panel, 'vc_back'):
                 values =  panel.GetVarsValues()
                 values[2] = panel.vc_back
                 panel.SetVarsValues(values)
-        
-                
-        
 
         self.SetSizerAndFit(self.box)
         self.SetClientSize(self.GetSize())
 
+
+    def FreezeAll(self):
+        """Freeze the case"""
+
+        self.model_choice.Disable()
+        self.panels[0].EnableAll(False)
+        self.panels[1].EnableAll(False)
+        self.model_options
+        self.combining_rules.Disable()
+        self.max_p.Disable()
+        self.k12.Disable()
+        self.l12.Disable()
+        
+
+
     def GetSystem(self):
+        """return a list with the compounds name of the system"""
         return [c.compound_name for c in self.panels]
 
 
@@ -1501,9 +1527,6 @@ class PlotsTreePanel(wx.Panel):
         else:
             (child, cookie) = self.tree.GetFirstChild(item)
             while child:
-                #if child.GetType() == 1 and child.IsEnabled():
-                #    if checked != child.IsChecked():
-                #        return
                 self.tree.CheckItem(child, checked)      #recursiveness
 
                 (child, cookie) = self.tree.GetNextChild(item, cookie)
