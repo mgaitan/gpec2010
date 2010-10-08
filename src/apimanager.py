@@ -106,8 +106,8 @@ class ApiManager():
         return self._read_conparout(model_id)
 
     @misc.memoize()
-    def gpecin2gpecout(self, model, comp1, comp2, ncomb=0, ntdep=0, k12=0.0, l12=0.0, max_p=2000):
-        self._write_gpecin(model, comp1, comp2, ncomb, ntdep, k12, l12, max_p)
+    def gpecin2gpecout(self, model, comp1, comp2, ncomb=0, ntdep=0, k12=0.0, l12=0.0, max_p=2000, **kwargs):
+        self._write_gpecin(model, comp1, comp2, ncomb, ntdep, k12, l12, max_p, **kwargs)
         return self.read_generic_output('gpec')
 
 
@@ -136,7 +136,7 @@ class ApiManager():
 
         pub.sendMessage('add_txt', (filepath, self.case_id))
 
-    def _write_gpecin(self, model, comp1, comp2, ncomb=0, ntdep=0, k12=0.0, l12=0.0, max_p=2000):
+    def _write_gpecin(self, model, comp1, comp2, ncomb=0, ntdep=0, k12=0.0, l12=0.0, max_p=2000, **kwargs):
         """
         compX -> ('NAME', (const1, ..., constN), (param1, ... , paramM))
         """
@@ -147,9 +147,9 @@ class ApiManager():
 
 
         #TODO  - this should come solved from the form, keeping a copy af acentric_factor
-        if model == 4:                 
-            comp1[1].append('1.168')
-            comp2[1].append('1.168')
+        if model == 3:
+            comp1[1].append(kwargs['vc_rat1'])
+            comp2[1].append(kwargs['vc_rat2'])
 
         output = template.format(model, ncomb, ntdep, comp1[0], "  ".join(map(str, comp1[1])), 
                                 "  ".join(map(str, comp1[2])), comp2[0], "  ".join(map(str, comp2[1])), 

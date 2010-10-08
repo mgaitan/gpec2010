@@ -1188,7 +1188,12 @@ class CasePanel(scrolled.ScrolledPanel):
             #self.api_manager.write_gpecin(self.model_id, comp1, comp2, ncomb, 0, k12, l12, max_p)
             #curves = self.api_manager.read_generic_output('gpec')
         
-            curves = self.api_manager.gpecin2gpecout(self.model_id, comp1, comp2, ncomb, 0, k12, l12, max_p)
+            if self.model_id == 3:
+                kwargs = {'vc_rat1': self.panels[0].vc_ratio, 'vc_rat2': self.panels[1].vc_ratio}
+            else:
+                kwargs = {}
+
+            curves = self.api_manager.gpecin2gpecout(self.model_id, comp1, comp2, ncomb, 0, k12, l12, max_p, **kwargs)
 
             diagram_selection =  self.diagram_ch.GetSelection()
             
