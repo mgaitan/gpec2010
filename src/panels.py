@@ -437,10 +437,13 @@ class VarsAndParamPanel(wx.Panel):
         self.box.Add(gbs, 0, wx.ALL, 10)
 
 
+
+
         #set default on form
         self.direction = 0
         self.model_id = model_id
-      
+        
+        self.setup_data = setup_data
 
         if setup_data is not None:
             self.enabled = True
@@ -462,6 +465,8 @@ class VarsAndParamPanel(wx.Panel):
 
     def SetData(self, data):
         """Set basic compound data on the panel"""
+    
+        self.setup_data = data
 
         self.compound_id = data[0]
         self.compound_name = data[1]    #in case the title != compound_name
@@ -475,22 +480,38 @@ class VarsAndParamPanel(wx.Panel):
 
     def GetData(self):
         """Return a compound list [id, name, vars...]   useful to redefine the system"""
-        if self.enabled:
+        if self.setup_data:
             return [self.compound_id, self.compound_name] + self.GetVarsValues()
 
     def GetTotalData(self):
-        """Return a compound list tuple (name, (vars...), (param...))"""
+        """Return a compound list tuple (name, (vars...), (param...), (vc_ratio, vc_bak) )"""
 
         self.OnButton(None) #Ensure last numbers generating (as a programatical event)
 
+                
         tmp_var = self.GetVarsValues()
         tmp_var = tmp_var[:-2] + [tmp_var[-1], tmp_var[-2]]  #gpecout has order changed: vc <-> omega
+
+        
 
         return (self.compound_name, tmp_var, self.GetParamsValues())
 
 
 
-    def EnableAll(self, flag=True):
+    def EnableAll(self, flag=True, freeze=False):
+        """
+        enable or disable (defined by flag) the inputs of this panel. 
+        if 'freeze' mode is on, it's disable all in fact, but 
+        self.enabled is set to True. (so, user couldn't edit, but 
+        still be able to plot. 
+        """
+
+        if freeze:
+            flag = False
+            self.enabled = True
+        else :
+            self.enabled = flag 
+
         self.enabled = flag
         self.radio1.Enable(flag)
         self.radio2.Enable(flag)
@@ -502,11 +523,11 @@ class VarsAndParamPanel(wx.Panel):
 
         self.button.Enable(flag)
     
-        
+
 
     def GetVarsValues(self):
         """Return vars values of defined compound"""
-        if self.enabled:
+        if self.setup_data:
             return [box.GetValue() for box in self.vars]
 
     def SetVarsValues(self, data):
@@ -523,7 +544,7 @@ class VarsAndParamPanel(wx.Panel):
     
     def GetParamsValues(self):
         """Return params values of defined compound"""
-        if self.enabled:
+        if self.setup_data:
             return [box.GetValue() for box in self.params]
 
 
@@ -799,6 +820,28 @@ class TabbedCases(wx.Panel):
 
         self.veto = False   #to desactivate add new page on page change.
 
+        pub.subscribe(self.CloneCase, 'clone case')
+
+
+    def CloneCase (self, message):
+        """receive a message from a panel, with its essential data. 
+            this method create a new case and load that data
+            taking care about its name and id, to get a clone with other identity"""
+
+        data = message.data
+
+        clone = self.AddNewCase()
+        id_bak = clone.case_id
+        name_bak = clone.name
+
+
+        clone.LoadEssential(data)
+        clone.case_id = id_bak
+        clone.name = name_bak
+        clone.plots_history = []
+
+        self.UpdatePagesTitle()
+
     
     def AddNewCaseButton(self):
         ico = os.path.join(PATH_ICONS, 'add.png')
@@ -823,7 +866,7 @@ class TabbedCases(wx.Panel):
     
         self.veto = True
         
-        #delete all firt
+        #delete all first
         for idx in  range(self.nb.GetPageCount()):
             self.nb.RemovePage(idx)
 
@@ -843,7 +886,12 @@ class TabbedCases(wx.Panel):
         if evt.GetSelection() + 1 == self.nb.GetPageCount() and not self.veto: #last tab selected?
             self.AddNewCase(evt.GetSelection())
 
-    def AddNewCase(self, location):
+    def AddNewCase(self, location=-1):
+        """ create a new case tab at location or at the last position if location is not given"""
+
+        if location == -1:
+            location = self.nb.GetPageCount() - 1
+
         case = CasePanel(self, -1)
 
         self.nb.InsertPage(location, case, "Case %i" % case.case_id)
@@ -902,8 +950,6 @@ class CasePanel(scrolled.ScrolledPanel):
 
 
         #collapsible for extra variables
-        
-        #TODO this fail on MS Windows. It's not a time for stupid tasks
 
         if sys.platform == 'linux2':
             #on linux, if cp is an standard fixed panel, there is no space for see the button at bottom
@@ -914,7 +960,7 @@ class CasePanel(scrolled.ScrolledPanel):
             self.box.Add(self.cp, 0, wx.RIGHT|wx.LEFT|wx.BOTTOM, 10)
 
         else: 
-            #On Windows collapsible panel doesn't run very well
+            #On Windows collapsible panel doesn't run very well.  It's not a time for stupid tasks
             self.cp = cp = wx.Panel(self, -1)
             self.MakeCollipsable(self.cp)        
             tmp_box_sizer =  wx.StaticBoxSizer(wx.StaticBox(self, -1, "Other case variables"), wx.VERTICAL)
@@ -952,23 +998,14 @@ class CasePanel(scrolled.ScrolledPanel):
    
         self.plot_button = wx.lib.buttons.GenBitmapTextButton(self, -1, wx.Bitmap(os.path.join(PATH_ICONS,"plot.png")), "Plot!")
 
-
-        
-
-
         but_sizer =  wx.BoxSizer(wx.HORIZONTAL)
         
         but_sizer.Add(self.plot_button, 0, flag=wx.ALL , border=5)
 
         self.box.Add(but_sizer, 0, flag= wx.ALL | wx.FIXED_MINSIZE | wx.ALIGN_RIGHT, border = 5)
 
-        
-        #self.Bind(wx.EVT_COLLAPSIBLEPANE_CHANGED, self.OnPaneChanged, cp)
-
-
         self.SetSizerAndFit(self.box)
         self.SetClientSize(self.GetSize())
-
         self.SetupScrolling(scroll_x = False)
 
         #Binding
@@ -978,7 +1015,7 @@ class CasePanel(scrolled.ScrolledPanel):
         self.Bind(wx.EVT_BUTTON, self.OnLoadSystem, self.load_button)
         self.Bind(wx.EVT_BUTTON, self.OnMakePlots, self.plot_button)
         
-        
+        self.plots_history = []
 
         
 
@@ -1083,7 +1120,7 @@ class CasePanel(scrolled.ScrolledPanel):
         """Returns essential data"""
         #TODO Add data from collapsable panel
         
-        compounds_data =  [panel.GetData() for panel in self.panels if  panel.enabled ]  
+        compounds_data =  [panel.GetData() for panel in self.panels]  
            
         combining_rule = self.combining_rules.GetSelection()
         max_p  = self.max_p.GetValue()
@@ -1092,7 +1129,7 @@ class CasePanel(scrolled.ScrolledPanel):
         
  
         return {'compounds':compounds_data, 'case_id': self.case_id, 'case_name': self.name, 
-                'model_id':self.model_id,  'combining_rule':combining_rule,  'extra':(max_p, l12, k12)}
+                'model_id':self.model_id,  'combining_rule':combining_rule,  'extra':(max_p, l12, k12), 'history': self.plots_history}
 
 
     def LoadEssential(self, essential_data ):
@@ -1114,9 +1151,15 @@ class CasePanel(scrolled.ScrolledPanel):
         for box, value in zip((self.max_p, self.l12, self.k12), essential_data['extra']):
             box.SetValue(value)
         
+        self.plots_history = essential_data['history']
     
     
+    def ReplayHistory(self):
+        """ iter over plots_history to reconstruct plots again """
     
+        #TODO
+        pass
+
 
     def OnLoadSystem(self, event=None):        
 
@@ -1187,14 +1230,26 @@ class CasePanel(scrolled.ScrolledPanel):
         """Freeze the case"""
 
         self.model_choice.Disable()
-        self.panels[0].EnableAll(False)
-        self.panels[1].EnableAll(False)
+        self.panels[0].EnableAll(freeze=True)
+        self.panels[1].EnableAll(freeze=True)
         self.model_options
         self.combining_rules.Disable()
         self.max_p.Disable()
         self.k12.Disable()
         self.l12.Disable()
-        
+
+        self.Unbind(wx.EVT_BUTTON, self.load_button)
+        self.load_button.SetLabel('Clone case')
+        self.load_button.SetBitmapLabel(wx.Bitmap(os.path.join(PATH_ICONS,"edit-copy.png")))
+        self.Bind(wx.EVT_BUTTON, self.Clone, self.load_button)
+
+
+    def Clone(self, event):
+        """get data a send a message to TabbedCases to add a new case with the same parameters"""
+
+        data = self.SaveEssential()
+    
+        pub.sendMessage('clone case', data)
 
 
     def GetSystem(self):
@@ -1204,7 +1259,10 @@ class CasePanel(scrolled.ScrolledPanel):
 
     def OnMakePlots(self, event):
 
-        if self.panels[0].enabled and self.panels[1].enabled:
+        if self.panels[0].setup_data and self.panels[1].setup_data:
+
+            if len(self.plots_history) == 0:
+                self.FreezeAll()    
 
             comp1 = self.panels[0].GetTotalData()
             comp2 = self.panels[1].GetTotalData()
@@ -1228,27 +1286,32 @@ class CasePanel(scrolled.ScrolledPanel):
             if diagram_selection == 0:   #global
                 pub.sendMessage('make.globalsuite', (self.case_id, self.name, curves, self.GetSystem()))
 
-            #if diagram_selection == 1:  #global 3D
-            #    pub.sendMessage('make.globalsuite3d', (self.case_id, self.name, curves))
-
+                self.plots_history.append(('globalsuite'))
+                
             elif diagram_selection == 1:   #isopleth
                 z = self.z_input.GetValue()
                 self.api_manager.write_generic_inparam('z', z)
                 curves_isop = self.api_manager.read_generic_output('isop')
                 
                 pub.sendMessage('make.isop', (self.case_id, self.name, curves_isop, z,  self.GetSystem()))
-            
+                
+                self.plots_history.append(('isop', z))
+
             elif diagram_selection == 2:   #pxy
                 t = self.t_input.GetValue()
                 self.api_manager.write_generic_inparam('t', t)
                 curves_pxy = self.api_manager.read_generic_output('pxy')
                 pub.sendMessage('make.pxy', (self.case_id, self.name, curves_pxy, t,  self.GetSystem()))
 
+                self.plots_history.append(('pxy', t))
+
             elif diagram_selection == 3:   #txy
                 p = self.p_input.GetValue()
                 self.api_manager.write_generic_inparam('p', p)
                 curves_txy = self.api_manager.read_generic_output('txy')
                 pub.sendMessage('make.txy', (self.case_id, self.name, curves_txy, p,  self.GetSystem()))
+
+                self.plots_history.append(('txy', p))
             
         else:
             pub.sendMessage('log', ('error', "Nothing to calculate. Define the system first."))
