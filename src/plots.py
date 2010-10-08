@@ -169,9 +169,16 @@ class CustomPlot(BasePlot):
 
     def add_lines(self, *lists_of_lines):
         for lol in lists_of_lines:
-            self.axes.lines += lol
             for line in lol:
                 name =  line.get_label()
+                x, y = line.get_data()
+                color = line.get_color()
+                linestyle = line.get_linestyle()
+                marker = line.get_marker()
+                label = line.get_label()        
+
+                self.axes.plot(x,y,color=color,linestyle=linestyle, marker=marker, label=label) 
+
                 if name != '_nolegend_':
                     self.curves.append( { 'name': name,
                                           'visible':True, 
