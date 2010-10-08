@@ -62,8 +62,6 @@ class ApiManager():
         self.written = set()   #flags
 
 
-
-
     def exec_fortran(self, bin):
         """Execute a fortran program"""
         

@@ -815,8 +815,10 @@ class PT(BasePlot):
             lines = []
             name = 'LLV'
             for num, llv_curve in enumerate(arrays['LLV']):
-                label = name if num == 0 else '_nolegend_'
-                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,1], 'r', label=label)
+                label = 'Vapor in LLV' if num == 0 else  'Liquid in LLV' #'_nolegend_'
+                #label_b = 'Liquid in LLV' if num == 0 else '_nolegend_'
+                style = 'r' if num == 0 else 'b'
+                lines += self.axes.plot(llv_curve[:,0], llv_curve[:,1], style, label=label)
 
             self.curves.append( { 'name': name, 
                                       'visible':True,
@@ -840,7 +842,7 @@ class PT(BasePlot):
                                   'lines2d': lines,
                                   'color': 'magenta', 
                                   'wx_id' : wx.NewId(),
-                                   'type': 'LLV',
+                                  'type': 'LLV',
                                 } )
 
 
