@@ -1150,7 +1150,7 @@ class CasePanel(scrolled.ScrolledPanel):
             if self.model_id == 3:
                 #input VCrat
                 dlg = wx.TextEntryDialog(self, u'Vc ratio for %s' % panel.compound_name, u'Set Vc Ratio', 
-                                            defaultValue=str(panel.vc_ratio  if hasattr(panel, 'vc_ratio') else 1.168) )            
+                                            defaultValue=str(panel.vc_ratio  if hasattr(panel, 'vc_ratio') else VC_RATIO_DEFAULT) )            
                 r = dlg.ShowModal()
                 if  r == wx.ID_CANCEL:
                     return 

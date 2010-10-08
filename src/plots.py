@@ -290,8 +290,8 @@ class PTrho(BasePlot):
             for num, iso_curve in enumerate(arrays['ISO']):
                 if num == 0:
                     label = name if num == 0 else '_nolegend_'
-                    lines += self.axes.plot(iso_curve[:,0], iso_curve[:,4], iso_curve[:,1], color='#8F00FF', linestyle='dashed', label=label),
-                    lines += self.axes.plot(iso_curve[:,0], iso_curve[:,5], iso_curve[:,1], color='#8F00FF', linestyle='dashed', label='_nolegend_'),                                
+                    lines += self.axes.plot(iso_curve[:,0], iso_curve[:,4], iso_curve[:,1], 'g--', label=label),
+                    lines += self.axes.plot(iso_curve[:,0], iso_curve[:,5], iso_curve[:,1], 'g--', label='_nolegend_'),                                
 
              
             self.curves.append( { 'name': name, 
@@ -313,8 +313,8 @@ class PTrho(BasePlot):
             for num, iso_curve in enumerate(arrays['Txy']):
                 label = name if num == 0 else '_nolegend_'
 
-                lines += self.axes.plot(iso_curve[:,0], iso_curve[:,5], float(kwarg['p_val']), 'k-.', label=label),
-                lines += self.axes.plot(iso_curve[:,0], iso_curve[:,6], float(kwarg['p_val']), 'k-.', label='_nolegend_'),                                
+                lines += self.axes.plot(iso_curve[:,0], iso_curve[:,5], float(kwarg['p_val']), 'k--', label=label),
+                lines += self.axes.plot(iso_curve[:,0], iso_curve[:,6], float(kwarg['p_val']), 'k--', label='_nolegend_'),                                
 
              
             self.curves.append( { 'name': name, 
@@ -338,8 +338,8 @@ class PTrho(BasePlot):
 
                 t_constant = np.repeat(float(kwarg['t_val']), len(iso_curve[:,0]))
 
-                lines += self.axes.plot(t_constant, iso_curve[:,5], iso_curve[:,0], 'y-.', label=label),
-                lines += self.axes.plot(t_constant, iso_curve[:,6], iso_curve[:,0], 'y-.', label='_nolegend_')
+                lines += self.axes.plot(t_constant, iso_curve[:,5], iso_curve[:,0], 'k-.', label=label),
+                lines += self.axes.plot(t_constant, iso_curve[:,6], iso_curve[:,0], 'k-.', label='_nolegend_')
 
              
             self.curves.append( { 'name': name, 
@@ -457,8 +457,7 @@ class PTx(BasePlot):
                 
                 max_val = max_val if 'max_val' in locals() else np.max(iso_curve[:,2])
                 saturated = np.repeat(max_val, len(iso_curve[:,1]))
-                lines += self.axes.plot(iso_curve[:,0], saturated, iso_curve[:,1], 
-                                        color='#8F00FF', linestyle='dashed', label=label),
+                lines += self.axes.plot(iso_curve[:,0], saturated, iso_curve[:,1], 'g--', label=label),
                                 
             self.curves.append( { 'name': name, 
                                   'visible':True,
@@ -477,8 +476,8 @@ class PTx(BasePlot):
             for num, iso_curve in enumerate(arrays['Txy']):
                 label = name if num == 0 else '_nolegend_'
 
-                lines += self.axes.plot(iso_curve[:,0], iso_curve[:,1], float(kwarg['p_val']), 'k-.', label=label),
-                lines += self.axes.plot(iso_curve[:,0], iso_curve[:,2], float(kwarg['p_val']), 'k-.', label='_nolegend_'),                                
+                lines += self.axes.plot(iso_curve[:,0], iso_curve[:,1], float(kwarg['p_val']), 'k--', label=label),
+                lines += self.axes.plot(iso_curve[:,0], iso_curve[:,2], float(kwarg['p_val']), 'k--', label='_nolegend_'),                                
 
              
             self.curves.append( { 'name': name, 
@@ -502,8 +501,8 @@ class PTx(BasePlot):
 
                 t_constant = np.repeat(float(kwarg['t_val']), len(iso_curve[:,0]))
 
-                lines += self.axes.plot(t_constant, iso_curve[:,1], iso_curve[:,0], 'y-.', label=label),
-                lines += self.axes.plot(t_constant, iso_curve[:,2], iso_curve[:,0], 'y-.', label='_nolegend_')
+                lines += self.axes.plot(t_constant, iso_curve[:,1], iso_curve[:,0], 'k-.', label=label),
+                lines += self.axes.plot(t_constant, iso_curve[:,2], iso_curve[:,0], 'k-.', label='_nolegend_')
 
              
             self.curves.append( { 'name': name, 
@@ -537,7 +536,7 @@ class IsoPT(BasePlot):
             name = u'Isopleth lines'
             for num, vap_curve in enumerate(arrays['ISO']):
                 label = name if num == 0 else '_nolegend_'
-                lines += self.axes.plot(vap_curve[:,0], vap_curve[:,1], 'k', label=label)
+                lines += self.axes.plot(vap_curve[:,0], vap_curve[:,1], 'g', label=label)
                 
                 
 
@@ -567,8 +566,9 @@ class IsoPT(BasePlot):
 
                 else:
                     color = 'blue' if num % 2 == 0 else 'red'
+                    name  =  'Liquid in LLV' if num % 2 == 0 else 'Vapor in LLV'
 
-                    self.curves.append( { 'name': 'LLV', 
+                    self.curves.append( { 'name': name, 
                                           'visible':True,
                                           'lines': (llv_curve[:,0], llv_curve[:,1]),           #TODO
                                           'color': color, 
@@ -603,11 +603,11 @@ class IsoTx(BasePlot):
             for num, iso_curve in enumerate(arrays['ISO']):
                 label_g = name_g if num == 0 else '_nolegend_'
                 label_r = name_r if num == 0 else '_nolegend_'
-                lines_g += self.axes.plot(1 - iso_curve[:,3], iso_curve[:,0], 'g', label=label_g)
+                lines_g += self.axes.plot(1 - iso_curve[:,3], iso_curve[:,0], 'k', label=label_g)
             
                 if num == 0:
                     saturated = np.repeat( np.max(iso_curve[:,2]), len(iso_curve[:,0]))
-                    lines_r += self.axes.plot(saturated, iso_curve[:,0], 'r', label=label_r)
+                    lines_r += self.axes.plot(saturated, iso_curve[:,0], 'g', label=label_r)
             
 
 
@@ -651,11 +651,11 @@ class IsoPx(BasePlot):
 
             for num, iso_curve in enumerate(arrays['ISO']):
                 label_g = name_g if num == 0 else '_nolegend_'
-                label_r = name_r if num == 0 else 'lala _nolegend_'
-                color = 'k' if num == 0 else 'c^'
+                label_r = name_r if num == 0 else '_nolegend_'
+                color = 'g' #if num == 0 else ''
 
                 counter = u'' if len(arrays['ISO']) == 1 else u' %i' % (num + 1)
-                lines_g += self.axes.plot(1 - iso_curve[:,3], iso_curve[:,1], 'g', label=label_g)
+                lines_g += self.axes.plot(1 - iso_curve[:,3], iso_curve[:,1], 'k', label=label_g)
 
                 max_val = max_val if 'max_val' in locals() else np.max(iso_curve[:,2])
                 saturated = np.repeat(max_val, len(iso_curve[:,1]))
@@ -706,7 +706,7 @@ class IsoTrho(BasePlot):
             name_r = u'Major (Saturated) Face.'
 
             names = [name_g, name_r]
-            styles = ['g', 'r']
+            styles = ['k', 'g']
 
             for num, vap_curve in enumerate(arrays['ISO']):
                 lines +=  self.axes.plot(vap_curve[:,4], vap_curve[:,0], styles[num], label=names[num])
@@ -747,7 +747,7 @@ class IsoPrho(BasePlot):
             name_r = u'Major (Saturated) Face.'
 
             names = [name_g, name_r]
-            styles = ['g', 'r']
+            styles = ['k', 'g']
 
             for num, vap_curve in enumerate(arrays['ISO']):
                 lines +=  self.axes.plot(vap_curve[:,4], vap_curve[:,1], styles[num], label=names[num])
@@ -815,15 +815,14 @@ class PT(BasePlot):
             lines = []
             name = 'LLV'
             for num, llv_curve in enumerate(arrays['LLV']):
-                label = 'Vapor in LLV' if num == 0 else  'Liquid in LLV' #'_nolegend_'
-                #label_b = 'Liquid in LLV' if num == 0 else '_nolegend_'
+                label = 'Vapor in LLV' if num == 0 else  'Liquid in LLV'        #TODO check if aren't inverted
                 style = 'r' if num == 0 else 'b'
                 lines += self.axes.plot(llv_curve[:,0], llv_curve[:,1], style, label=label)
 
             self.curves.append( { 'name': name, 
                                       'visible':True,
                                       'lines2d': lines, 
-                                      'color': 'red',      #TODO all red ? or red and blue ?
+                                      'color': 'red',      
                                       'wx_id' : wx.NewId(), 
                                        'type': 'LLV',
                                     } )
@@ -884,18 +883,17 @@ class Tx(BasePlot):
 
         if 'LLV' in arrays.keys():
             lines = []
-            name = 'LLV'
             for num, llv_curve in enumerate(arrays['LLV']):
-                label = name if num == 0 else '_nolegend_'
-                lines += self.axes.plot (llv_curve[:,2], llv_curve[:,0], 'b', label = label)
+                label_b = 'Liquid in LLV' if num == 0 else '_nolegend_'
+                label_r = 'Vapor in LLV' if num == 0 else '_nolegend_'
+                lines += self.axes.plot (llv_curve[:,2], llv_curve[:,0], 'b', label = label_b)
                 lines += self.axes.plot (llv_curve[:,3], llv_curve[:,0], 'b', label = '_nolegend_')
-                lines += self.axes.plot (llv_curve[:,4], llv_curve[:,0], 'r', label = label)
+                lines += self.axes.plot (llv_curve[:,4], llv_curve[:,0], 'r', label = label_r)
             
 
 
-            self.curves.append( { 'name': name, # + counter, 
+            self.curves.append( { 'name': 'LLV', 
                                       'visible':True,
-                                      #'lines': (llv_curve[:,2], llv_curve[:,0], llv_curve[:,3], llv_curve[:,0] ),   
                                       'lines2d': lines,
                                       'color': 'blue', 
                                       'wx_id' : wx.NewId(),
@@ -1084,17 +1082,17 @@ class Px(BasePlot):
 
         if 'LLV' in arrays.keys():
             lines = []
-            name = 'LLV'
 
             for num, llv_curve in enumerate(arrays['LLV']):
-                label = name if num == 0 else '_nolegend_'
-                lines += self.axes.plot(llv_curve[:,2], llv_curve[:,1], 'b', label = label)
+                label_b = 'Liquid in LLV' if num == 0 else '_nolegend_'
+                label_r = 'Vapor in LLV' if num == 0 else '_nolegend_'
+                lines += self.axes.plot(llv_curve[:,2], llv_curve[:,1], 'b', label = label_b)
                 lines += self.axes.plot(llv_curve[:,3], llv_curve[:,1], 'b', label = '_nolegend_')
-                lines += self.axes.plot (llv_curve[:,4], llv_curve[:,1], 'r', label = label)
+                lines += self.axes.plot (llv_curve[:,4], llv_curve[:,1], 'r', label = label_r)
 
 
 
-            self.curves.append( { 'name': name, #+ counter, 
+            self.curves.append( { 'name': 'LLV',
                                       'visible':True,
                                       #'lines': (llv_curve[:,2], llv_curve[:,1]),   
                                       #'lines': tuple(lines),
