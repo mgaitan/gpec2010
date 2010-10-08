@@ -18,7 +18,7 @@ class BasePlot(object):
 
         self.title = title
         if len(system)==2:
-            self.title += '-  System %s-%s' % system 
+            self.title += '-  System %s-%s' % (system[0], system[1])
 
         self.system = system
         self.arrays = arrays
@@ -359,9 +359,9 @@ class PTx(BasePlot):
     def __init__(self, parent, arrays=None, system=()):
 
         self.short_title = u"P-T-x"
-        self.title = u'Pressure-Temperature-Composition projection of a global phase equilibrium diagram'
+        self.title = u'Pressure-Temperature-Composition projection of a global phase equilibrium diagram '
         self.xlabel = u'Temperature [K]'
-        self.ylabel = u'Composition'
+        self.ylabel = u'Composition' if not system else "%s molar fraction" % system[0] if not system else "%s molar fraction" % system[0]
         self.zlabel = u'Pressure [bar]'
 
         BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, projection='3d', zlabel=self.zlabel)        
@@ -581,11 +581,11 @@ class IsoPT(BasePlot):
 class IsoTx(BasePlot):
     """Isopleth Tx diagram"""
     
-    def __init__(self, parent, arrays=None, **kwarg):
+    def __init__(self, parent, arrays=None, system=(), **kwarg):
 
         self.short_title = u"Isopleth T-x"
         self.title = u'T-x projection of the Isopleth Graph for a Composition (Z=%s)' % kwarg['z']
-        self.xlabel = u'Composition'
+        self.xlabel = u'Composition' if not system else "%s molar fraction" % system[0]
         self.ylabel = u'Temperature [K]'
 
         BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
@@ -632,11 +632,11 @@ class IsoTx(BasePlot):
 class IsoPx(BasePlot):
     """Isopleth Px diagram"""
     
-    def __init__(self, parent, arrays=None, **kwarg):
+    def __init__(self, parent, arrays=None, system=(), **kwarg):
 
         self.short_title = u"Isopleth P-x"
         self.title = u'P-x projection of the Isopleth Graph for a Composition (Z=%s)' % kwarg['z']
-        self.xlabel = u'Composition'
+        self.xlabel = u'Composition' if not system else "%s molar fraction" % system[0]
         self.ylabel = u'Pressure [bar]'
 
         BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
@@ -849,10 +849,10 @@ class PT(BasePlot):
 class Tx(BasePlot):
     """T-x plot"""
     
-    def __init__(self, parent, arrays=None, system=()):
+    def __init__(self, parent, arrays=None, system=(), **kwargs):
         self.short_title = u"T-x"
         self.title = u'Temperature-Composition projection of a global phase equilibrium diagram'
-        self.xlabel = u'Composition'    #TODO DEFINE system inside the plot
+        self.xlabel = u'Composition' if not system else "%s molar fraction" % system[0]    #TODO DEFINE system inside the plot
         self.ylabel = u'Temperature [K]'
 
         BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system)        
@@ -923,12 +923,12 @@ class Tx(BasePlot):
 class Pxy(BasePlot):
     """Pxy Px (isothermal)"""
     
-    def __init__(self, parent, arrays=None, **kwarg):
+    def __init__(self, parent, arrays=None, system=(), **kwarg):
         self.short_title = u"Pxy (isothermal)"
         self.title = u'Isothermal fluid phase equilibrium for T=%s [k]' % kwarg['t']
 
         self.ylabel = u'Pressure [bar]'
-        self.xlabel = u'Composition '    #TODO DEFINE system inside the plot
+        self.xlabel = u'Composition' if not system else "%s molar fraction" % system[0]     #TODO DEFINE system inside the plot
         
 
         BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
@@ -986,12 +986,12 @@ class PxyPrho(BasePlot):
 class Txy(BasePlot):
     """Txy Tx (isobaric)"""
     
-    def __init__(self, parent, arrays=None, **kwarg):
+    def __init__(self, parent, arrays=None, system=(), **kwarg):
         self.short_title = u"Txy (isobaric)"
         self.title = u'Isobaric fluid phase equilibrium for P=%s [bar]' % kwarg['p']
 
         self.ylabel = u'Temperature [k]'
-        self.xlabel = u'Composition'    #TODO DEFINE system inside the plot
+        self.xlabel = u'Composition' if not system else "%s molar fraction" % system[0]    #TODO DEFINE system inside the plot
         
 
         BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
@@ -1052,7 +1052,7 @@ class Px(BasePlot):
         self.title = u'Pressure-Composition projection of a global phase equilibrium diagram'
 
         self.ylabel = u'Pressure [bar]'
-        self.xlabel = u'Composition'    #TODO DEFINE system inside the plot
+        self.xlabel = u'Composition' if not system else "%s molar fraction" % system[0]    #TODO DEFINE system inside the plot
         
 
         BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system)        
@@ -1094,8 +1094,6 @@ class Px(BasePlot):
 
             self.curves.append( { 'name': 'LLV',
                                       'visible':True,
-                                      #'lines': (llv_curve[:,2], llv_curve[:,1]),   
-                                      #'lines': tuple(lines),
                                       'lines2d': lines,
                                       'color': 'red', 
                                       'wx_id' : wx.NewId(),

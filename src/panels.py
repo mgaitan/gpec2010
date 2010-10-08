@@ -237,29 +237,30 @@ class SuitePlotsPanel(wx.Panel):
     def MakePlots(self, message):
         
 
-        case_id, case_name = message.data[0:2]
+        case_id, case_name, system = list(message.data[0:2]) + [message.data[-1]]
 
+        #3D
         #no matter wich type of diagrams, if it's the first plot this instances 3D plot panels
 
         if not self.plot3d_instances.has_key(case_id) and PLOT_IN_3D:
             self.plot3d_instances[case_id] = []
             for type in ['PTrho', 'PTx']:
                 panel_name = 'case_%i_%s' % (case_id, type)
-                pp3d = PlotPanel(self,  -1, type, name=panel_name)
+                pp3d = PlotPanel(self,  -1, type, name=panel_name, system=system)
                 self.plot3d_instances[case_id] += [pp3d]
 
                 pub.sendMessage('add checkbox', (case_id, 'globalsuite3d', pp3d.plot.short_title, panel_name))
                 self.nb.AddPage(pp3d, "%s (%s)" % (pp3d.plot.short_title, case_name))
-        
+        #2D
         
         type_suite = message.topic[1]
 
-        if type_suite == 'globalsuite':
-            case_id, case_name, arrays = message.data
+        if type_suite == 'globalsuite':            
+            case_id, case_name, arrays, system = message.data
 
             for type in PLOT_SUITES[type_suite]:
-                panel_name = 'case_%i_suite_%i_%s' % (case_id, self.suite_counter, type)
-                pp = PlotPanel(self,  -1, type, arrays, name=panel_name )   #name is useful to find the page later. 
+                panel_name = 'case_%i_suite_%i_%s' % (case_id, self.suite_counter, type )
+                pp = PlotPanel(self,  -1, type, arrays, name=panel_name, system=system )   #name is useful to find the page later. 
                 
                 pub.sendMessage('add checkbox', (case_id, type_suite, pp.plot.short_title, panel_name))
 
@@ -269,12 +270,12 @@ class SuitePlotsPanel(wx.Panel):
        
         
         elif type_suite == 'isop':
-            case_id, case_name, arrays, z_val = message.data
+            case_id, case_name, arrays, z_val, system = message.data
 
             if arrays:
                 for type in PLOT_SUITES[type_suite]:
                     panel_name = 'case_%i_suite_%i_%s_z_%s' % (case_id, self.suite_counter, type, z_val)
-                    pp = PlotPanel(self,  -1, type, arrays, z=z_val, name=panel_name )
+                    pp = PlotPanel(self,  -1, type, arrays, z=z_val, name=panel_name, system=system )
 
                     pub.sendMessage('add checkbox', (case_id, type_suite, pp.plot.short_title, panel_name, '(Z = %s)' % z_val ))
 
@@ -284,12 +285,12 @@ class SuitePlotsPanel(wx.Panel):
                 pub.sendMessage('log', ('warning', "Couldn't calculate for the given molar fraction (%s)" % z_val))
                 
         elif type_suite == 'pxy':
-            case_id, case_name, arrays, t_val = message.data
+            case_id, case_name, arrays, t_val, system = message.data
 
             if arrays:
                 for type in PLOT_SUITES[type_suite]:
                     panel_name = 'case_%i_suite_%i_%s_t_%s' % (case_id, self.suite_counter, type, t_val)
-                    pp = PlotPanel(self,  -1, type, arrays, t=t_val, name=panel_name)
+                    pp = PlotPanel(self,  -1, type, arrays, t=t_val, name=panel_name, system=system)
                     self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
 
                     pub.sendMessage('add checkbox', (case_id, type_suite, pp.plot.short_title, panel_name, '(T = %s K)' % t_val))
@@ -299,12 +300,12 @@ class SuitePlotsPanel(wx.Panel):
                 pub.sendMessage('log', ('warning', "Couldn't calculate for the given temperature (%s K)" % t_val))
 
         elif type_suite == 'txy':
-            case_id, case_name, arrays, p_val = message.data
+            case_id, case_name, arrays, p_val, system = message.data
 
             if arrays:
                 for type in PLOT_SUITES[type_suite]:
                     panel_name = 'case_%i_suite_%i_%s_p_%s' % (case_id, self.suite_counter, type, p_val)
-                    pp = PlotPanel(self,  -1, type, arrays, p=p_val, name=panel_name)
+                    pp = PlotPanel(self,  -1, type, arrays, p=p_val, name=panel_name, system=system)
                     self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
             
                     pub.sendMessage('add checkbox', (case_id, type_suite, pp.plot.short_title, panel_name, '(P = %s bar)' % p_val))
@@ -1171,6 +1172,10 @@ class CasePanel(scrolled.ScrolledPanel):
         self.SetSizerAndFit(self.box)
         self.SetClientSize(self.GetSize())
 
+    def GetSystem(self):
+        return [c.compound_name for c in self.panels]
+
+
     def OnMakePlots(self, event):
 
         if self.panels[0].enabled and self.panels[1].enabled:
@@ -1184,9 +1189,6 @@ class CasePanel(scrolled.ScrolledPanel):
 
 
             #needed to ALL type of diagrams. TODO: check a way to cache result if parameter didn't change
-
-            #self.api_manager.write_gpecin(self.model_id, comp1, comp2, ncomb, 0, k12, l12, max_p)
-            #curves = self.api_manager.read_generic_output('gpec')
         
             if self.model_id == 3:
                 kwargs = {'vc_rat1': self.panels[0].vc_ratio, 'vc_rat2': self.panels[1].vc_ratio}
@@ -1198,7 +1200,7 @@ class CasePanel(scrolled.ScrolledPanel):
             diagram_selection =  self.diagram_ch.GetSelection()
             
             if diagram_selection == 0:   #global
-                pub.sendMessage('make.globalsuite', (self.case_id, self.name, curves))
+                pub.sendMessage('make.globalsuite', (self.case_id, self.name, curves, self.GetSystem()))
 
             #if diagram_selection == 1:  #global 3D
             #    pub.sendMessage('make.globalsuite3d', (self.case_id, self.name, curves))
@@ -1208,19 +1210,19 @@ class CasePanel(scrolled.ScrolledPanel):
                 self.api_manager.write_generic_inparam('z', z)
                 curves_isop = self.api_manager.read_generic_output('isop')
                 
-                pub.sendMessage('make.isop', (self.case_id, self.name, curves_isop, z))
+                pub.sendMessage('make.isop', (self.case_id, self.name, curves_isop, z,  self.GetSystem()))
             
             elif diagram_selection == 2:   #pxy
                 t = self.t_input.GetValue()
                 self.api_manager.write_generic_inparam('t', t)
                 curves_pxy = self.api_manager.read_generic_output('pxy')
-                pub.sendMessage('make.pxy', (self.case_id, self.name, curves_pxy, t))
+                pub.sendMessage('make.pxy', (self.case_id, self.name, curves_pxy, t,  self.GetSystem()))
 
             elif diagram_selection == 3:   #txy
                 p = self.p_input.GetValue()
                 self.api_manager.write_generic_inparam('p', p)
                 curves_txy = self.api_manager.read_generic_output('txy')
-                pub.sendMessage('make.txy', (self.case_id, self.name, curves_txy, p))
+                pub.sendMessage('make.txy', (self.case_id, self.name, curves_txy, p,  self.GetSystem()))
             
         else:
             pub.sendMessage('log', ('error', "Nothing to calculate. Define the system first."))
