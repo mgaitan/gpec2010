@@ -491,7 +491,7 @@ class VarsAndParamPanel(wx.Panel):
     
         self.setup_data = data
 
-        self.compound_id = data[0]
+        self.compound_id = int(data[0])
         self.compound_name = data[1]    #in case the title != compound_name
         self.title.SetLabel(data[1]) 
         self.SetVarsValues(data[2:])
@@ -554,7 +554,7 @@ class VarsAndParamPanel(wx.Panel):
     def SetVarsValues(self, data):
         try:
             for box, data in zip(self.vars, data):
-                #for PC-SAFT and SPHCT om is 0.0 in CONPAOUT and should be ignored. 
+                #on PC-SAFT and SPHCT om is 0.0 in CONPAOUT and should be ignored. 
                 if float(data) != 0.0:
                     box.SetValue(str(data))
         except:
@@ -1134,15 +1134,14 @@ class CasePanel(scrolled.ScrolledPanel):
 
     def SaveEssential(self):
         """Returns essential data"""
-        #TODO check if vc_ratio for each compound is necessary
         
         
         compounds_data =  [panel.GetData() for panel in self.panels]  
            
         combining_rule = self.combining_rules.GetSelection()
-        max_p  = self.max_p.GetValue()
-        l12 = self.l12.GetValue()
-        k12 = self.k12.GetValue()
+        max_p  = float(self.max_p.GetValue())
+        l12 = float(self.l12.GetValue())
+        k12 = float(self.k12.GetValue())
         
  
         return {'compounds':compounds_data, 'case_id': self.case_id, 'case_name': self.name, 
@@ -1157,11 +1156,8 @@ class CasePanel(scrolled.ScrolledPanel):
         self.name = essential_data['case_name']
 
         #it must saved before set compounds
-        self.OnSetModel(model_id= essential_data['model_id'] ) #TODO it should be better raise the event programatically
-        #evt = wx.Event()
-        #evt.SetEventType(wx.EVT_CHOICE.typeId)
-        #wx.PostEvent(self.text, evt) 
-
+        self.OnSetModel(model_id= essential_data['model_id'] ) #TODO it would be better raise the event programatically
+        
         #compounds
         for panel, data in zip (self.panels, essential_data['compounds']):
             panel.SetData(data)
@@ -1169,7 +1165,7 @@ class CasePanel(scrolled.ScrolledPanel):
         #extra (collapsible panel)
         self.combining_rules.SetSelection(essential_data['combining_rule'])
         for box, value in zip((self.max_p, self.l12, self.k12), essential_data['extra']):
-            box.SetValue(value)
+            box.SetValue(str(value))
         
         self.plots_history = essential_data['history']
     
@@ -1310,6 +1306,7 @@ class CasePanel(scrolled.ScrolledPanel):
 
             
             if self.model_id == 3:  #on RK-PR add vc_ratio parameter
+                #TODO this fail on loaded RKPR case.
                 kwargs = {'vc_rat1': self.panels[0].vc_ratio, 'vc_rat2': self.panels[1].vc_ratio}
             else:
                 kwargs = {}
