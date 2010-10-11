@@ -13,6 +13,8 @@ from tools.misc import curry
 
 from wx.lib.pubsub import Publisher as pub
 
+from tools.misc import Counter
+
 class MainFrame(wx.Frame):
 
     def __init__(self, parent, id=-1,
@@ -204,11 +206,13 @@ class MainFrame(wx.Frame):
     def FileOpen(self, event):
         dlg = wx.FileDialog(self, "Open Project", self.dirname, "", "*.gpc", wx.OPEN)
         if dlg.ShowModal() == wx.ID_OK:
+            
+            Counter().reset()      #reset the singleton
+            apimanager.clean_tmp()
+            
             self.filename=dlg.GetFilename()
             self.dirname=dlg.GetDirectory()
 
-            # Open the file, read the contents and set them into
-            # the text edit window
             with open(os.path.join(self.dirname, self.filename),'r') as fh:
                 data = pickle.load(fh)
                 self.cases_panel.LoadCases(data)

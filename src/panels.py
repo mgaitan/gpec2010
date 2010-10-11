@@ -1279,9 +1279,8 @@ class CasePanel(scrolled.ScrolledPanel):
             comp2 = self.panels[1].GetTotalData()
 
             if not comp1 or not comp2:
-                #something fails on model param calcultions
+                #if something fails on model param calcultions => aborted
                 return 
-
 
             if len(self.plots_history) == 0:
                 #if it's first set of diagrams, freeze the case. 

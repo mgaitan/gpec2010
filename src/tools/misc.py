@@ -32,7 +32,10 @@ class Counter():
     count = 0
     def __init__(self, init=0):
         self.__class__.count +=  1
-        
+
+    def reset(self):
+        self.__class__.count = 0
+    
     def get_id(self):
         return self.__class__.count
 
