@@ -1167,6 +1167,7 @@ class CasePanel(scrolled.ScrolledPanel):
         for box, value in zip((self.max_p, self.l12, self.k12), essential_data['extra']):
             box.SetValue(str(value))
         
+        self.Refresh()        #necessary on Windows
         self.plots_history = essential_data['history']
     
     
@@ -1182,8 +1183,6 @@ class CasePanel(scrolled.ScrolledPanel):
         #GET DATA IF vars-paramPanels are enabled
         compounds_data =  [panel.GetData() for panel in self.panels if  panel.enabled ]  
         
-        
-
 
         dlg = crud.DefineSystemDialog(None, -1, compounds_data)        
     
