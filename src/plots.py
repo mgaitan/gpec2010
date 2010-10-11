@@ -17,8 +17,6 @@ class BasePlot(object):
     def __init__(self, parent, arrays=None, title=None, xlabel="", ylabel="", system=(), projection="2d", zlabel="", **karg):
 
         self.title = title
-        if len(system)==2:
-            self.title += '-  System %s-%s' % (system[0], system[1])
 
         self.system = system
         self.arrays = arrays
@@ -26,16 +24,23 @@ class BasePlot(object):
         self.parent = parent
         
         self.fig = Figure()     #dpi=self.dpi
+        
+
         self.canvas = FigCanvas(parent, -1, self.fig)
         
 
-        if projection == '3d':
+        self.projection = projection
+        if self.projection == '3d':
             self.axes = Axes3D(self.fig)
             self.axes.set_zlabel(zlabel)
+            self.fig.suptitle(title) 
         else: 
             self.axes = self.fig.add_subplot(111)
+            self.axes.set_title(title)
 
-        self.axes.set_title(title)
+        case_label = "%s + %s, %s EOS, Kij = %s, Lij = %s" % tuple(system)
+        self.fig.text(0.01, 0.01, case_label, fontsize=9,  horizontalalignment='left')
+
         self.axes.set_ylabel(ylabel)
         self.axes.set_xlabel(xlabel)
 
@@ -171,13 +176,19 @@ class CustomPlot(BasePlot):
         for lol in lists_of_lines:
             for line in lol:
                 name =  line.get_label()
-                x, y = line.get_data()
+               
+
                 color = line.get_color()
                 linestyle = line.get_linestyle()
                 marker = line.get_marker()
                 label = line.get_label()        
 
-                self.axes.plot(x,y,color=color,linestyle=linestyle, marker=marker, label=label) 
+                if self.projection == '3d':
+                    x, y, z = line._verts3d  #why the hell there is no get_zdata()
+                    self.axes.plot(x,y, z,color=color,linestyle=linestyle, marker=marker, label=label) 
+                else:
+                    x, y = line.get_data()
+                    self.axes.plot(x,y, color=color,linestyle=linestyle, marker=marker, label=label)
 
                 if name != '_nolegend_':
                     self.curves.append( { 'name': name,
@@ -205,21 +216,26 @@ class PTrho(BasePlot):
 
         
         if 'VAP' in arrays.keys():
-            lines = []
-            name = u'Pure compound vapor pressure lines'
-            for num, vap_curve in enumerate(arrays['VAP']):
-                label = name if num == 0 else '_nolegend_'
-                lines += self.axes.plot(vap_curve[:,0], vap_curve[:,2], vap_curve[:,1], 'g', label=label),
-                lines += self.axes.plot(vap_curve[:,0], vap_curve[:,3], vap_curve[:,1], 'g', label='_nolegend_'),
+            try:
+        
+                lines = []
+                name = u'Pure compound vapor pressure lines'
+                for num, vap_curve in enumerate(arrays['VAP']):
+                    label = name if num == 0 else '_nolegend_'
+                    lines += self.axes.plot(vap_curve[:,0], vap_curve[:,2], vap_curve[:,1], 'g', label=label),
+                    lines += self.axes.plot(vap_curve[:,0], vap_curve[:,3], vap_curve[:,1], 'g', label='_nolegend_'),
 
-            self.curves.append( {'name': name,
-                                     'visible':True, 
-                                     #'lines':( vap_curve[:,0], vap_curve[:,2], vap_curve[:,1]),
-                                      'lines2d': lines,
-                                      'color' : 'green',
-                                      'wx_id' : wx.NewId(),
-                                      'type': 'VAP',
-                                        } )             
+                self.curves.append( {'name': name,
+                                         'visible':True, 
+                                         #'lines':( vap_curve[:,0], vap_curve[:,2], vap_curve[:,1]),
+                                          'lines2d': lines,
+                                          'color' : 'green',
+                                          'wx_id' : wx.NewId(),
+                                          'type': 'VAP',
+                                            } )
+            except:
+                pub.sendMessage('log', ('error', u'There was an error trying to plot VAP curves on P-T-\u03c1. The diagram could not be accurate.'))
+
 
 
         if 'CRI' in arrays.keys():
@@ -527,14 +543,14 @@ class PTx(BasePlot):
 class IsoPT(BasePlot):
     """Isopleth PT diagram"""
     
-    def __init__(self, parent, arrays=None, **kwarg):
+    def __init__(self, parent, arrays=None, system=(), **kwarg):
 
         self.short_title = u"Isopleth P-T"
         self.title = u'Isopleth Graph for a Composition (Z = %s)' % kwarg['z']
         self.xlabel = u'Temperature [K]'
         self.ylabel = u'Pressure [bar]'
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwarg)        
 
     def setup_curves(self, arrays):
 
@@ -775,6 +791,7 @@ class PT(BasePlot):
     
     def __init__(self, parent, arrays=None, system=()):
 
+
         self.short_title = u"P-T"
         self.title = u'Pressure-Temperature projection of a global phase equilibrium diagram'
         self.xlabel = u'Temperature [K]'
@@ -839,17 +856,20 @@ class PT(BasePlot):
             lines = []
             name = u'Azeotropic lines'
 
-            for num, aze_curve in enumerate(arrays['AZE']):
-                label = name if num == 0 else '_nolegend_'
-                lines += self.axes.plot( aze_curve[:,0], aze_curve[:,1], 'm', label = label)
+            try:
+                for num, aze_curve in enumerate(arrays['AZE']):
+                    label = name if num == 0 else '_nolegend_'
+                    lines += self.axes.plot( aze_curve[:,0], aze_curve[:,1], 'm', label = label)
 
-            self.curves.append( { 'name': name,
-                                  'visible':True,
-                                  'lines2d': lines,
-                                  'color': 'magenta', 
-                                  'wx_id' : wx.NewId(),
-                                  'type': 'LLV',
-                                } )
+                self.curves.append( { 'name': name,
+                                      'visible':True,
+                                      'lines2d': lines,
+                                      'color': 'magenta', 
+                                      'wx_id' : wx.NewId(),
+                                      'type': 'LLV',
+                                    } )
+            except:
+                pub.sendMessage('log', ('error', 'There was an error trying to plot azeotropic lines. The diagram could not be accurate'))
 
 
 

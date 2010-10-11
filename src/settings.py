@@ -20,6 +20,12 @@ MODELS_OPTIONS = {'Soave-Redlich-Kwong':1,
                   'PC-SAFT':4, 
                   'SPHCT':6}            #TODO; should it be inverted?
 
+MODELS_OPTIONS_I = {1: 'SRK', 
+                  2:'Peng-Robinson',
+                  3:'RK-PR', 
+                  4:'PC-SAFT', 
+                  5:'SPHCT'} 
+
 
 VC_RATIO_DEFAULT = 1.168    #relation MODEL/EXPERIMENTAL for critical volumen
 TIMEOUT = 10 #seconds to timeout the calculation 

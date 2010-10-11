@@ -26,7 +26,7 @@ import  wx.lib.scrolledpanel as scrolled
 
 
 
-from settings import PATH_ICONS, MODELS_OPTIONS, VC_RATIO_DEFAULT, PLOT_SUITES, PLOT_IN_3D, IPYTHON_CONSOLE
+from settings import PATH_ICONS, MODELS_OPTIONS,MODELS_OPTIONS_I, VC_RATIO_DEFAULT, PLOT_SUITES, PLOT_IN_3D, IPYTHON_CONSOLE
 
 from tools.misc import Counter
 
@@ -316,7 +316,7 @@ class SuitePlotsPanel(wx.Panel):
 
         
 
-        #plot whatever on 3D plots.
+        #plot whatever on 3D diagrams.
 
         if PLOT_IN_3D:
             for pp3d in self.plot3d_instances[case_id]:
@@ -331,23 +331,46 @@ class SuitePlotsPanel(wx.Panel):
 
     def MakeCustomPlot(self, message):
                         
-        axes_from, axes_to = [wx.FindWindowByName(panel_name).plot.axes for panel_name in message.data]
+        plot_from, plot_to = [wx.FindWindowByName(panel_name).plot for panel_name in message.data]
+      
+        if plot_from.projection == '2d':
+            x_from, x_to = [ax.get_xlabel()[-4:] for ax in (plot_from.axes, plot_to.axes)]
+            y_from, y_to = [ax.get_ylabel()[-4:] for ax in (plot_from.axes, plot_to.axes)]
+            z_from, z_to = [None, None]
+        else:
+            #why the hell there is no a get_zlabel method? 
+            x_from, x_to = [ax.w_xaxis.get_label_text()[-4:] for ax in (plot_from.axes, plot_to.axes)]
+            y_from, y_to = [ax.w_yaxis.get_label_text()[-4:] for ax in (plot_from.axes, plot_to.axes)]
+            z_from, z_to = [ax.w_zaxis.get_label_text()[-4:] for ax in (plot_from.axes, plot_to.axes)]
+
         
+        #pub.sendMessage('add_plot_instance', ('a', axes_from))
+
         #check plot axis compatibilty
-        if axes_from.get_xlabel() != axes_to.get_xlabel() or axes_from.get_ylabel() != axes_to.get_ylabel():
-            pub.sendMessage('log', ('error', 'The axis of the plots you are trying combine are different'))
+        if x_from != x_to or y_from != y_to or z_from != z_to: 
+            pub.sendMessage('log', ('error', 'The axis of the plots you are trying to combine are differents'))
             return
         
         self.custom_plot_counter += 1
             
         kwarg = {}
         kwarg['title'] = u"Custom plot %s" % self.custom_plot_counter
-        kwarg['xlabel'] = axes_from.get_xlabel()
-        kwarg['ylabel'] = axes_from.get_ylabel()
+ 
         kwarg['name'] = "_".join(message.data) + "_%s" % self.custom_plot_counter
+
+        if plot_from.projection == '3d': 
+            kwarg['projection'] = '3d'
+            kwarg['zlabel'] = 'Molar fraction of compound 1' #plot_from.axes.w_zaxis.get_label_text()   #TODO on PTx composition could be for different compounds
+            kwarg['xlabel'] = plot_from.axes.w_xaxis.get_label_text()
+            kwarg['ylabel'] = plot_from.axes.w_yaxis.get_label_text()
+        else:
+            kwarg['xlabel'] = plot_from.axes.get_xlabel()
+            kwarg['ylabel'] = plot_from.axes.get_ylabel()
+
+
         pp = PlotPanel(self,  -1, 'CustomPlot', **kwarg)
         
-        pp.plot.add_lines(axes_from.get_lines(), axes_to.get_lines())
+        pp.plot.add_lines(plot_from.axes.get_lines(), plot_to.axes.get_lines())
         
         self.nb.AddPage(pp, kwarg['title'])
         pub.sendMessage('add checkbox', (None, 'custom', kwarg['title'], kwarg['name']))
@@ -1254,7 +1277,7 @@ class CasePanel(scrolled.ScrolledPanel):
 
     def GetSystem(self):
         """return a list with the compounds name of the system"""
-        return [c.compound_name for c in self.panels]
+        return [c.compound_name for c in self.panels] + [MODELS_OPTIONS_I[self.model_id], self.k12.GetValue(), self.l12.GetValue()]
 
 
     def OnMakePlots(self, event):
