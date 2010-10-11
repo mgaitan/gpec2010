@@ -880,22 +880,26 @@ class TabbedCases(wx.Panel):
         self.veto = True
         
         #delete all first
-        for idx in  range(self.nb.GetPageCount()):
+        for idx in range(self.nb.GetPageCount() - 1):
+            case = self.nb.GetPage(idx)
             self.nb.RemovePage(idx)
+            case.Destroy()
 
         for idx, case_data in enumerate(cases_data):
             case = self.AddNewCase(idx)    #idx
             case.LoadEssential(case_data)
 
         #self.AddNewCaseButton()
-        
         self.UpdatePagesTitle()
         self.veto = False
-
+        pub.sendMessage('refresh all', None)
 
     def UpdatePagesTitle(self):
         for idx in range(self.nb.GetPageCount() - 1):
-            self.nb.SetPageText(idx, self.nb.GetPage(idx).name)
+            case_panel = self.nb.GetPage(idx)
+            self.nb.SetPageText(idx, case_panel.name)
+            
+            
 
     def onPageChange(self, evt):
         if evt.GetSelection() + 1 == self.nb.GetPageCount() and not self.veto: #last tab selected?
@@ -1167,8 +1171,9 @@ class CasePanel(scrolled.ScrolledPanel):
         for box, value in zip((self.max_p, self.l12, self.k12), essential_data['extra']):
             box.SetValue(str(value))
         
-        self.Refresh()        #necessary on Windows
+        
         self.plots_history = essential_data['history']
+        self.Update()
     
     
     def ReplayHistory(self):

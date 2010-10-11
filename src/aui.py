@@ -130,7 +130,7 @@ class MainFrame(wx.Frame):
         self.registered[message.data[0]] = message.data[1]
 
     def RefreshMe(self, message):
-        return self.Refresh()
+       self.Refresh()
 
 
     
