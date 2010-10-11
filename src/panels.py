@@ -5,7 +5,7 @@ import os
 import time
 import sys
 
-import cPickle as pickle
+import pickle #cPickle as pickle
 
 #WX
 import wx
