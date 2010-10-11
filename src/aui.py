@@ -5,7 +5,7 @@ import wx
 import wx.aui
 import os
 import sys
-import cPickle as pickle
+import pickle #cPickle as pickle
 
 import apimanager
 from panels import SuitePlotsPanel, TabbedCases, InfoPanel, PlotsTreePanel
@@ -160,7 +160,7 @@ class MainFrame(wx.Frame):
         else:
             data = self.cases_panel.SaveCases()
 
-            with open(os.path.join(self.dirname, self.filename),'w') as fh:
+            with open(os.path.join(self.dirname, self.filename),'wb') as fh:
                 pickle.dump(data,fh)
 
             self.SetTitle("%s <%s>" % (self.title, self.filename))
@@ -215,7 +215,7 @@ class MainFrame(wx.Frame):
             self.filename=dlg.GetFilename()
             self.dirname=dlg.GetDirectory()
 
-            with open(os.path.join(self.dirname, self.filename),'r') as fh:
+            with open(os.path.join(self.dirname, self.filename),'rb') as fh:
                 data = pickle.load(fh)
                 self.cases_panel.LoadCases(data)
 
