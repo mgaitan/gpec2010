@@ -4,6 +4,7 @@
 import hashlib
 import pickle
 
+from settings import EOS, INV_EOS
 
 cache = {}
 
@@ -29,6 +30,7 @@ def memoize():
 
 
 class Counter():
+    """a singleton (but reseteable) counter to index cases."""
     count = 0
     def __init__(self, init=0):
         self.__class__.count +=  1
@@ -39,8 +41,11 @@ class Counter():
     def get_id(self):
         return self.__class__.count
 
-    
-        
+
+def ch_val2pos(choice, value):
+    """return the position for a given value for a wx.Choice window"""
+    eos = INV_EOS[value]
+    return choice.GetItems().index(eos)        
 
 
 

@@ -14,17 +14,19 @@ PATH_TEMP = os.path.join( os.getcwd(), "tmp" )
 
 PATH_ICONS = os.path.join( os.getcwd(), "icons" )
 
-MODELS_OPTIONS = {'Soave-Redlich-Kwong':1, 
+EOS = {'Soave-Redlich-Kwong':1, 
                   'Peng-Robinson':2,
                   'RK-PR':3, 
                   'PC-SAFT':4, 
                   'SPHCT':6}            #TODO; should it be inverted?
 
-MODELS_OPTIONS_I = {1: 'SRK', 
-                  2:'Peng-Robinson',
-                  3:'RK-PR', 
-                  4:'PC-SAFT', 
-                  5:'SPHCT'} 
+INV_EOS = dict([[v,k] for k,v in EOS.items()])
+
+EOS_SHORT = {1: 'SRK', 
+              2:'Peng-Robinson',
+              3:'RK-PR', 
+              4:'PC-SAFT', 
+              6:'SPHCT'} 
 
 
 VC_RATIO_DEFAULT = 1.168    #relation MODEL/EXPERIMENTAL for critical volumen

@@ -20,8 +20,6 @@ from wx.lib.pubsub import Publisher as pub
 
 
 
-
-
 def clean_tmp():
     """auxiliary function to clean all temporary files/dirs"""
     def rm_content(path):

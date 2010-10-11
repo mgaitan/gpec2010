@@ -145,6 +145,8 @@ class MainFrame(wx.Frame):
         if dlg.ShowModal() == wx.ID_OK:
             # Open the file for write, write, close
             self.filename=dlg.GetFilename()
+            if self.filename[-4:] != '.gpc':    
+                self.filename += '.gpc'
             self.dirname=dlg.GetDirectory()
             self.FileSave(event)
 

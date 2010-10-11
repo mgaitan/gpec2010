@@ -26,9 +26,9 @@ import  wx.lib.scrolledpanel as scrolled
 
 
 
-from settings import PATH_ICONS, MODELS_OPTIONS,MODELS_OPTIONS_I, VC_RATIO_DEFAULT, PLOT_SUITES, PLOT_IN_3D, IPYTHON_CONSOLE
+from settings import PATH_ICONS, EOS, EOS_SHORT, INV_EOS, VC_RATIO_DEFAULT, PLOT_SUITES, PLOT_IN_3D, IPYTHON_CONSOLE
 
-from tools.misc import Counter
+from tools.misc import Counter, ch_val2pos
 
 import matplotlib
 matplotlib.use('WXAgg')
@@ -886,6 +886,8 @@ class TabbedCases(wx.Panel):
         for idx, case_data in enumerate(cases_data):
             case = self.AddNewCase(idx)    #idx
             case.LoadEssential(case_data)
+
+        #self.AddNewCaseButton()
         
         self.UpdatePagesTitle()
         self.veto = False
@@ -936,13 +938,14 @@ class CasePanel(scrolled.ScrolledPanel):
 
         
 
-        self.model_options =  MODELS_OPTIONS
-
-        self.model_choice = wx.Choice(self, -1, choices = self.model_options.keys())
+        self.model_options =  EOS
+        self.model_choice = wx.Choice(self, -1, choices = sorted(self.model_options.keys()))
+        
         
         #model ID by default
         self.model_id = 1
-        self.model_choice.SetSelection(0)
+        position = ch_val2pos(self.model_choice, self.model_id)
+        self.model_choice.SetSelection(position)
 
         first_row_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
@@ -1154,7 +1157,10 @@ class CasePanel(scrolled.ScrolledPanel):
         self.name = essential_data['case_name']
 
         #it must saved before set compounds
-        self.OnSetModel(model_id= essential_data['model_id'] )
+        self.OnSetModel(model_id= essential_data['model_id'] ) #TODO it should be better raise the event programatically
+        #evt = wx.Event()
+        #evt.SetEventType(wx.EVT_CHOICE.typeId)
+        #wx.PostEvent(self.text, evt) 
 
         #compounds
         for panel, data in zip (self.panels, essential_data['compounds']):
@@ -1195,8 +1201,18 @@ class CasePanel(scrolled.ScrolledPanel):
 
 
     def OnSetModel(self, event=None, model_id=None):
+
+        if model_id:
+            flag_loading = True
+            position = ch_val2pos(self.model_choice, model_id)
+            self.model_choice.SetSelection(position)
+        else:
+            flag_loading = False
+
         new_model_id = model_id or self.model_options[event.GetString()]
+
         if self.model_id == new_model_id:
+            #not EOS change. do nothing.
             return 
         else: 
             self.model_id = new_model_id
@@ -1217,9 +1233,9 @@ class CasePanel(scrolled.ScrolledPanel):
             panel.SetParamsForm(self.model_id)
             panel.SetDirectionOnForm()
 
-            if self.model_id == 3:
+            if self.model_id == 3 and not flag_loading:
                 #input VCrat
-                dlg = wx.TextEntryDialog(self, u'Vc ratio for %s' % panel.compound_name, u'Set Vc Ratio', 
+                dlg = wx.TextEntryDialog(self, u'Vc ratio for %s' % panel.title.GetLabel(), u'Set Vc Ratio', 
                                             defaultValue=str(panel.vc_ratio  if hasattr(panel, 'vc_ratio') else VC_RATIO_DEFAULT) )            
                 r = dlg.ShowModal()
                 if  r == wx.ID_CANCEL:
@@ -1227,7 +1243,7 @@ class CasePanel(scrolled.ScrolledPanel):
                 elif r  == wx.ID_OK :
                     panel.vc_ratio = float(dlg.GetValue())
                     values =  panel.GetVarsValues()
-                    panel.vc_back = values[2]
+                    panel.vc_back = values[2]  #TODO check this. Workoaround to open a RKPR case saved
                     values[2] = float(values[2]) * panel.vc_ratio
                     panel.SetVarsValues(values)
 
@@ -1268,7 +1284,7 @@ class CasePanel(scrolled.ScrolledPanel):
 
     def GetSystem(self):
         """return a list with the compounds name of the system"""
-        return [c.compound_name for c in self.panels] + [MODELS_OPTIONS_I[self.model_id], self.k12.GetValue(), self.l12.GetValue()]
+        return [c.compound_name for c in self.panels] + [EOS_SHORT[self.model_id], self.k12.GetValue(), self.l12.GetValue()]
 
 
     def OnMakePlots(self, event):
