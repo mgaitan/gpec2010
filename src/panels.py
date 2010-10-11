@@ -509,15 +509,13 @@ class VarsAndParamPanel(wx.Panel):
     def GetTotalData(self):
         """Return a compound list tuple (name, (vars...), (param...), (vc_ratio, vc_bak) )"""
 
-        self.OnButton(None) #Ensure last numbers generating (as a programatical event)
-
+        if self.OnButton(None) == True: #Ensure last numbers generating (as a programatical event)
                 
-        tmp_var = self.GetVarsValues()
-        tmp_var = tmp_var[:-2] + [tmp_var[-1], tmp_var[-2]]  #gpecout has order changed: vc <-> omega
-
-        
-
-        return (self.compound_name, tmp_var, self.GetParamsValues())
+            tmp_var = self.GetVarsValues()
+            tmp_var = tmp_var[:-2] + [tmp_var[-1], tmp_var[-2]]  #gpecout has order changed: vc <-> omega
+            return (self.compound_name, tmp_var, self.GetParamsValues())
+        else: 
+            return False
 
 
 
@@ -551,7 +549,7 @@ class VarsAndParamPanel(wx.Panel):
     def GetVarsValues(self):
         """Return vars values of defined compound"""
         if self.setup_data:
-            return [box.GetValue() for box in self.vars]
+            return [float(box.GetValue()) for box in self.vars]
 
     def SetVarsValues(self, data):
         try:
@@ -619,8 +617,6 @@ class VarsAndParamPanel(wx.Panel):
 
 
 
-
-
     def OnButton(self, event):
     
         if self.direction == 0:
@@ -628,22 +624,16 @@ class VarsAndParamPanel(wx.Panel):
         else:
             data = [box.GetValue() for box in self.params]
             
-
-        #self.api_manager.write_conparin(self.direction, self.model_id, data)
-        #data = self.api_manager.read_conparout(self.model_id) 
-        
         data = self.api_manager.conparin2conparout(self.direction, self.model_id, data)
 
         if data is not None:
 
-            
             self.SetVarsValues(data[0])
             self.SetParamsValues(data[1])
-
+            return True
         else:
-            wx.Bell()
-            print "error handling ModelsParam output"
-            
+            pub.sendMessage('log',("error", "Error handling ModelsParam output. Upcoming calculations aborted."))
+            return False
 
 
 
@@ -1141,7 +1131,8 @@ class CasePanel(scrolled.ScrolledPanel):
 
     def SaveEssential(self):
         """Returns essential data"""
-        #TODO Add data from collapsable panel
+        #TODO check if vc_ratio for each compound is necessary
+        
         
         compounds_data =  [panel.GetData() for panel in self.panels]  
            
@@ -1282,22 +1273,28 @@ class CasePanel(scrolled.ScrolledPanel):
 
     def OnMakePlots(self, event):
 
-        if self.panels[0].setup_data and self.panels[1].setup_data:
-
-            if len(self.plots_history) == 0:
-                self.FreezeAll()    
+        if self.panels[0].setup_data and self.panels[1].setup_data:          #case is defined
 
             comp1 = self.panels[0].GetTotalData()
             comp2 = self.panels[1].GetTotalData()
+
+            if not comp1 or not comp2:
+                #something fails on model param calcultions
+                return 
+
+
+            if len(self.plots_history) == 0:
+                #if it's first set of diagrams, freeze the case. 
+                self.FreezeAll()    
+
             ncomb = self.combining_rules.GetSelection() 
             k12 = self.k12.GetValue()
             l12 = self.l12.GetValue()
             max_p = self.max_p.GetValue()
 
 
-            #needed to ALL type of diagrams. TODO: check a way to cache result if parameter didn't change
-        
-            if self.model_id == 3:
+            
+            if self.model_id == 3:  #on RK-PR add vc_ratio parameter
                 kwargs = {'vc_rat1': self.panels[0].vc_ratio, 'vc_rat2': self.panels[1].vc_ratio}
             else:
                 kwargs = {}
