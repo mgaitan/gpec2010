@@ -38,8 +38,9 @@ class BasePlot(object):
             self.axes = self.fig.add_subplot(111)
             self.axes.set_title(title)
 
-        case_label = "%s + %s, %s EOS, Kij = %s, Lij = %s" % tuple(system)
-        self.fig.text(0.01, 0.01, case_label, fontsize=9,  horizontalalignment='left')
+        if system:
+            case_label = "%s + %s, %s EOS, Kij = %s, Lij = %s" % tuple(system)
+            self.fig.text(0.01, 0.01, case_label, fontsize=9,  horizontalalignment='left')
 
         self.axes.set_ylabel(ylabel)
         self.axes.set_xlabel(xlabel)
@@ -169,8 +170,8 @@ class BasePlot(object):
 
 
 class CustomPlot(BasePlot):
-    def __init__ (self, parent, title, xlabel, ylabel, projection="2d", zlabel=""):
-        BasePlot.__init__(self, parent, None, title, xlabel, ylabel, projection=projection, zlabel=zlabel)
+    def __init__ (self, parent, title, xlabel, ylabel, projection="2d", zlabel="", system=(), **kwargs):
+        BasePlot.__init__(self, parent, None, title, xlabel, ylabel, system, projection=projection, zlabel=zlabel, **kwargs)
 
     def add_lines(self, *lists_of_lines):
         for lol in lists_of_lines:
@@ -202,7 +203,7 @@ class CustomPlot(BasePlot):
 
 
 class PTrho(BasePlot):
-    def __init__(self, parent, arrays=None, system=()):
+    def __init__(self, parent, arrays=None, system=(), **kwargs):
 
         self.short_title = u"P-T-\u03c1"
         self.title = u'Pressure-Temperature-Density projection of a global phase equilibrium diagram'
@@ -210,7 +211,7 @@ class PTrho(BasePlot):
         self.ylabel = u'Density [mol/l]'
         self.zlabel = u'Pressure [bar]'
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, projection='3d', zlabel=self.zlabel)        
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, projection='3d', zlabel=self.zlabel, **kwargs)        
 
     def setup_curves(self, arrays, **kwarg):
 
@@ -379,7 +380,7 @@ class PTrho(BasePlot):
 class PTx(BasePlot):
     """PTx 3D projection"""
 
-    def __init__(self, parent, arrays=None, system=()):
+    def __init__(self, parent, arrays=None, system=(), **kwargs):
 
         self.short_title = u"P-T-x"
         self.title = u'Pressure-Temperature-Composition projection of a global phase equilibrium diagram '
@@ -387,7 +388,7 @@ class PTx(BasePlot):
         self.ylabel = u'Composition' if not system else "%s molar fraction" % system[0] if not system else "%s molar fraction" % system[0]
         self.zlabel = u'Pressure [bar]'
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, projection='3d', zlabel=self.zlabel)        
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, projection='3d', zlabel=self.zlabel, **kwargs)        
 
     def setup_curves(self, arrays, **kwarg):
 
@@ -611,7 +612,7 @@ class IsoTx(BasePlot):
         self.xlabel = u'Composition' if not system else "%s molar fraction" % system[0]
         self.ylabel = u'Temperature [K]'
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwarg)        
 
     def setup_curves(self, arrays):
 
@@ -655,14 +656,14 @@ class IsoTx(BasePlot):
 class IsoPx(BasePlot):
     """Isopleth Px diagram"""
     
-    def __init__(self, parent, arrays=None, system=(), **kwarg):
+    def __init__(self, parent, arrays=None, system=(), **kwargs):
 
         self.short_title = u"Isopleth P-x"
-        self.title = u'P-x projection of the Isopleth Graph for a Composition (Z=%s)' % kwarg['z']
+        self.title = u'P-x projection of the Isopleth Graph for a Composition (Z=%s)' % kwargs['z']
         self.xlabel = u'Composition' if not system else "%s molar fraction" % system[0]
         self.ylabel = u'Pressure [bar]'
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
 
     def setup_curves(self, arrays):
 
@@ -752,7 +753,7 @@ class IsoTrho(BasePlot):
 class IsoPrho(BasePlot):
     """Isopleth Prho diagram"""
     
-    def __init__(self, parent, arrays=None, **kwarg):
+    def __init__(self, parent, arrays=None, system=(), **kwarg):
 
         self.short_title = u"Isopleth P-\u03c1" 
         self.title = u'P-\u03c1 projection of the Isopleth Graph for a Composition (Z=%s)' % kwarg['z']
@@ -760,7 +761,7 @@ class IsoPrho(BasePlot):
         self.ylabel = u'Temperature [K]'
         
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwarg)        
 
     def setup_curves(self, arrays):
 
@@ -789,7 +790,7 @@ class IsoPrho(BasePlot):
 class PT(BasePlot):
     """pressure-temperature diagram"""
     
-    def __init__(self, parent, arrays=None, system=()):
+    def __init__(self, parent, arrays=None, system=(), **kwarg):
 
 
         self.short_title = u"P-T"
@@ -797,7 +798,7 @@ class PT(BasePlot):
         self.xlabel = u'Temperature [K]'
         self.ylabel = u'Pressure [bar]'
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system)        
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwarg)        
 
     def setup_curves(self, arrays):
 
@@ -882,7 +883,7 @@ class Tx(BasePlot):
         self.xlabel = u'Composition' if not system else "%s molar fraction" % system[0]    #TODO DEFINE system inside the plot
         self.ylabel = u'Temperature [K]'
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system)        
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
 
     def setup_curves(self, arrays):
 
@@ -958,7 +959,7 @@ class Pxy(BasePlot):
         self.xlabel = u'Composition' if not system else "%s molar fraction" % system[0]     #TODO DEFINE system inside the plot
         
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwarg)        
 
     def setup_curves(self, arrays):
 
@@ -982,14 +983,14 @@ class Pxy(BasePlot):
 class PxyPrho(BasePlot):
     """Pxy P-Rho projection (isothermal)"""
     
-    def __init__(self, parent, arrays=None, **kwarg):
+    def __init__(self, parent, arrays=None, system=(), **kwargs):
         self.short_title = u"P-\u03c1 (isothermal)"
-        self.title = u'Pressure-Density of the Isothermal fluid phase equilibrium for T=%s [k]' % kwarg['t']
+        self.title = u'Pressure-Density of the Isothermal fluid phase equilibrium for T=%s [k]' % kwargs['t']
 
         self.ylabel = u'Pressure [bar]'
         self.xlabel = u'Density [mol/l]'    #TODO DEFINE system inside the plot
         
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
 
     def setup_curves(self, arrays):
 
@@ -1013,15 +1014,15 @@ class PxyPrho(BasePlot):
 class Txy(BasePlot):
     """Txy Tx (isobaric)"""
     
-    def __init__(self, parent, arrays=None, system=(), **kwarg):
+    def __init__(self, parent, arrays=None, system=(), **kwargs):
         self.short_title = u"Txy (isobaric)"
-        self.title = u'Isobaric fluid phase equilibrium for P=%s [bar]' % kwarg['p']
+        self.title = u'Isobaric fluid phase equilibrium for P=%s [bar]' % kwargs['p']
 
         self.ylabel = u'Temperature [k]'
         self.xlabel = u'Composition' if not system else "%s molar fraction" % system[0]    #TODO DEFINE system inside the plot
         
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
 
     def setup_curves(self, arrays):
 
@@ -1043,14 +1044,14 @@ class Txy(BasePlot):
 class TxyTrho(BasePlot):
     """Txy T-Rho projection (isobaric)"""
     
-    def __init__(self, parent, arrays=None, **kwarg):
+    def __init__(self, parent, arrays=None, system=(), **kwargs):
         self.short_title = u"T-\u03c1 (isobaric)"
-        self.title = u'Temperature-Density of the Isobaric fluid phase equilibrium for P=%s [bar]' % kwarg['p']
+        self.title = u'Temperature-Density of the Isobaric fluid phase equilibrium for P=%s [bar]' % kwargs['p']
 
         self.ylabel = u'Temperature [bar]'
         self.xlabel = u'Density [mol/l]'    #TODO DEFINE system inside the plot
         
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
 
     
     def setup_curves(self, arrays):
@@ -1074,7 +1075,7 @@ class TxyTrho(BasePlot):
 class Px(BasePlot):
     """P-x diagram"""
     
-    def __init__(self, parent, arrays=None, system=()):
+    def __init__(self, parent, arrays=None, system=(), **kwargs):
         self.short_title = u"P-x"
         self.title = u'Pressure-Composition projection of a global phase equilibrium diagram'
 
@@ -1082,7 +1083,7 @@ class Px(BasePlot):
         self.xlabel = u'Composition' if not system else "%s molar fraction" % system[0]    #TODO DEFINE system inside the plot
         
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system)        
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
 
     def setup_curves(self, arrays):
 
@@ -1149,14 +1150,14 @@ class Px(BasePlot):
 class Trho(BasePlot):
     """temperature-density diagram"""
     
-    def __init__(self, parent, arrays=None, system=()):
+    def __init__(self, parent, arrays=None, system=(), **kwargs):
 
         self.short_title = u'T-\u03c1'
         self.title = u'Temperature-Density projection of a global phase equilibrium diagram'
         self.xlabel = u'Density [mol/l]'
         self.ylabel = u'Temperature [K]'
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system)        
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
 
     def setup_curves(self, arrays):
 
@@ -1242,14 +1243,14 @@ class Trho(BasePlot):
 class Prho(BasePlot):
     """pressure-density diagram"""
     
-    def __init__(self, parent, arrays=None, system=()):
+    def __init__(self, parent, arrays=None, system=(), **kwargs):
 
         self.short_title = u'P-\u03c1'
         self.title = u'Pressure-Density projection of a global phase equilibrium diagram'
         self.xlabel = u'Density [mol/l]'
         self.ylabel = u'Pressure [bar]'
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system)        
+        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
 
     def setup_curves(self, arrays):
 

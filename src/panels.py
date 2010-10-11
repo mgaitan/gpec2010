@@ -282,7 +282,7 @@ class SuitePlotsPanel(wx.Panel):
                     self.nb.AddPage(pp, "%s (%s)" % (pp.plot.short_title, case_name))
                     pp.Plot()
             else:
-                pub.sendMessage('log', ('warning', "Couldn't calculate for the given molar fraction (%s)" % z_val))
+                pub.sendMessage('log', ('error', "Couldn't calculate for the given molar fraction (%s)" % z_val))
                 
         elif type_suite == 'pxy':
             case_id, case_name, arrays, t_val, system = message.data
@@ -297,7 +297,7 @@ class SuitePlotsPanel(wx.Panel):
 
                     pp.Plot()
             else:
-                pub.sendMessage('log', ('warning', "Couldn't calculate for the given temperature (%s K)" % t_val))
+                pub.sendMessage('log', ('error', "Couldn't calculate for the given temperature (%s K)" % t_val))
 
         elif type_suite == 'txy':
             case_id, case_name, arrays, p_val, system = message.data
@@ -312,7 +312,7 @@ class SuitePlotsPanel(wx.Panel):
 
                     pp.Plot()
             else:
-                pub.sendMessage('log', ('warning', "Couldn't calculate for the given pressure (%s bar)" % p_val))
+                pub.sendMessage('log', ('error', "Couldn't calculate for the given pressure (%s bar)" % p_val))
 
         
 
