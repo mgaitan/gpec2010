@@ -4,6 +4,8 @@ import matplotlib
  
 data = matplotlib.get_py2exe_datafiles() 
 
+data += ['LICENSE.txt']
+
 includes = ['numpy.core.umath']
 excludes = ['_gtkagg', '_tkagg', 'bsddb', 'curses', 'email', 'pywin.debugger',
             'pywin.debugger.dbgcon', 'pywin.dialogs', 'tcl',

@@ -75,14 +75,14 @@ class ApiManager():
             if sys.platform != 'win32':
                 #On any non-Windows system, we run binaries through wine
                 args.append('wine')
-
+  
             
             args.append( os.path.join(PATH_BIN, bin + '.exe'))
 
-            proc = killableprocess.Popen(args, cwd=self.path_temp)    #kill if not return in TIMEOUT seconds
-            #proc = subprocess.Popen(args, cwd=self.path_temp, stdout = subprocess.PIPE)
             
-            ret = proc.wait(TIMEOUT) #proc.communicate()[0]
+            proc = killableprocess.Popen(args, cwd=self.path_temp)  #kill if not return in TIMEOUT seconds
+            
+            ret = proc.wait(TIMEOUT)  #proc.communicate()[0]
 
             pub.sendMessage('log', ('ok', '%s executed' % bin))
 
