@@ -8,6 +8,8 @@ import sys
 import pickle #cPickle as pickle
 
 import apimanager
+import about 
+
 from panels import SuitePlotsPanel, TabbedCases, InfoPanel, PlotsTreePanel
 from tools.misc import curry
 
@@ -55,6 +57,10 @@ class MainFrame(wx.Frame):
                 #    ('&Three', curry(self.DataBox, 3)),
                 #    ('&Four', curry(self.DataBox, 4)),
                 #]),
+            ]),
+            ('&Help', [
+                ('&About', lambda evt: about.AboutBox(self)),
+
             ]),
         ]
 

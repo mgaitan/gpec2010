@@ -11,8 +11,8 @@ work_in_memory = False       #if temporary files are written to memory.
   
 
 PATH_TEMP = os.path.join( os.getcwd(), "tmp" )   
-
 PATH_ICONS = os.path.join( os.getcwd(), "icons" )
+
 
 EOS = {'Soave-Redlich-Kwong':1, 
                   'Peng-Robinson':2,
