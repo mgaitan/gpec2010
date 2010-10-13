@@ -323,8 +323,7 @@ histogramas, de superficie, etc.</p>
 <p class="caption">Ejemplos de gráficos logrados con Matplotlib</p>
 </div>
 </blockquote>
-<p>Aunque tiene su origen en la emulación de los comandos gráficos de Matlab® ,
-es totalamente independiente y puede usarse de una manera pythónica y orientada
+<p>Matplotlib puede usarse de una manera pythónica y orientada
 a objetos. Está principalmente escrito en Python, aunque se basa fuertemente
 en NumPy y otras extensiones para proveer buena performance incluso con
 arreglos grandes.</p>
@@ -345,9 +344,23 @@ muy logrado paquete para graficación 3D, graficación sobre mapas geográficos,
 utilidades para la interacción con Microsoft Excel®, etc.</li>
 </ul>
 </blockquote>
+<p>Matplotlib incluye una <em class="xref std std-term">API</em> que tiene su origen en la emulación de los comandos gráficos de Matlab®,
+denominada <em>PyPlot</em>, especialmente orientada a su uso interactivo. El siguiente
+código es un ejemplo extraído de <a class="reference internal" href="#st2009">[ST2009]</a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mf">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="_images/mpl_fig1.png" src="_images/mpl_fig1.png" />
+<p class="caption">Gráfico generado interactivamente</p>
+</div>
 </div>
 <div class="section" id="wxpython">
-<span id="id20"></span><h3>2.5.4. WxPython<a class="headerlink" href="#wxpython" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>2.5.4. WxPython<a class="headerlink" href="#wxpython" title="Enlazar permanentemente con este título">¶</a></h3>
 <p><a class="reference external" href="http://www.wxwindows.org/">wxWidgets</a> es una biblioteca en C++ que permite
 desarrollar interfaces gráficas para aplicaciones multiplataforma que corren
 en Microsoft Windows, OS X, GNU/Linux o UNIX de 32 o 64 bits.</p>
@@ -595,6 +608,13 @@ Python Software Foundation, <a class="reference external" href="http://www.pytho
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id22">[NR-RD2006]</a></td><td>Rappin, Noel - Dunn, Robin (2006) <em>wxPython in Action</em>, Manning Publications,
 Greenwich</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="st2009" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id20">[ST2009]</a></td><td>Tosi, Sandro (2009) <em>Matplotlib for Python Developers, Build remarkable publication
+quality plots the easy way</em>, Pack Publishing, Birmingham</td></tr>
 </tbody>
 </table>
 </div>

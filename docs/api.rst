@@ -183,7 +183,7 @@ Cuando ``SENTIDO`` es 1 el formato depende del modelo
 
        .. todo::
 
-            No aplica ?
+            No aplica
 
 
     -  6   SPHCT

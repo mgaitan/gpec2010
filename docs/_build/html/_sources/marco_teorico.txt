@@ -292,8 +292,7 @@ histogramas, de superficie, etc.
     
         Ejemplos de gráficos logrados con Matplotlib
 
-Aunque tiene su origen en la emulación de los comandos gráficos de Matlab® , 
-es totalamente independiente y puede usarse de una manera pythónica y orientada
+Matplotlib puede usarse de una manera pythónica y orientada
 a objetos. Está principalmente escrito en Python, aunque se basa fuertemente
 en NumPy y otras extensiones para proveer buena performance incluso con 
 arreglos grandes. 
@@ -313,8 +312,22 @@ se destaca por las siguientes características:
       muy logrado paquete para graficación 3D, graficación sobre mapas geográficos, 
       utilidades para la interacción con Microsoft Excel®, etc. 
 
+Matplotlib incluye una :term:`API` que tiene su origen en la emulación de los comandos gráficos de Matlab®, 
+denominada *PyPlot*, especialmente orientada a su uso interactivo. El siguiente 
+código es un ejemplo extraído de [ST2009]_ ::
 
-.. _wxpython:
+    >>> import matplotlib.pyplot as plt
+    >>> import numpy as np
+    >>> x = np.arange(0.0, 6.0, 0.01)
+    >>> plt.plot(x, x**2)
+    >>> plt.show()
+
+
+.. figure:: images/mpl_fig1.png
+
+   Gráfico generado interactivamente
+
+
 
 WxPython
 --------
@@ -487,3 +500,5 @@ Sphinx
 
 .. [NR-RD2006] Rappin, Noel - Dunn, Robin (2006) *wxPython in Action*, Manning Publications, 
                Greenwich
+.. [ST2009]  Tosi, Sandro (2009) *Matplotlib for Python Developers, Build remarkable publication 
+             quality plots the easy way*, Pack Publishing, Birmingham

@@ -24,11 +24,14 @@ Metodología
 
 .. _requerimientos:
 
-Requerimientos Funcionales
-===========================
+Requerimientos 
+===============
 
-    * Diagramas 2D
-    * Diagramas 3Dmaqueta de estructura
+Requerimientos funcionales
+---------------------------
+
+1. 
+1. Diagramas 3Dmaqueta de estructura
     * Modelos
     * Gestión de base de datos
     * etc ...

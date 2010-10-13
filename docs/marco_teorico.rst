@@ -1,8 +1,8 @@
 Marco Teórico
 **************
 
-Debido a la naturaleza multidisplinaria de este trabajo, posiblemente sea leído
-y evaluado por profesionales o interesados de/en las distintas áreas de incumbecia 
+Debido a la naturaleza multidisciplinaria de este trabajo, posiblemente sea leído
+y evaluado por profesionales o interesados de/en las distintas áreas de incumbecia
 (química y computación). 
 
     .. seealso::
@@ -20,16 +20,40 @@ Conceptos de diagramas de fases en termodinámica
 =================================================
 
 
-Conceptos de orientación a objetos
-==================================
+
+Metodologías de desarrollo de Software
+========================================
+
+Modelo en cascada versus modelo 
+
+Metodologías Ágiles
+--------------------
+
+El desarrollo de este trabajo ha sido guiado por un conjunto de preceptos 
+comunes a las *metodologías ágiles de desarrollo de software*. 
+Sin necesariamente ajustarse a ninguna en particular, se comparte
+la escala de valoración hecha en el Manifiesto [AG-MANIF]_ :
+
+    * Individuos e interacciones sobre procesos y herramientas
+    * Software funcionando sobre documentación extensiva
+    * Colaboración con el cliente sobre negociación contractual
+    * Respuesta ante el cambio sobre seguimiento [estricto] de un plan
+
+    (Esto es, aunque valoramos los elementos de la derecha,
+    valoramos más los de la izquierda).
+
+Las *implementaciones* del marco conceptual propuesto por el Manifiesto de 
+desarrollo ágil (como *eXtremme Programming* o *Scrum*) están estructuralmente 
+concebidas para el trabajo de muchos desarrallores abocados al mismo proyecto. 
+Como el desarrollo  del software estuvo a cargo de una sola persona 
+(con la colaboración y revisión de los directores) no se ajustó 
+a un método estrictamente definido para un equipo como los mencionados. 
+
+Sin embargo, muchas ideas propuestas por estos métodos han sido aplicadas, 
+concibiendo un desarrollo incremental e iterativo con énfasis
 
 
 
-Orientación a eventos
----------------------
-
-Metodologías
-============
 
 Desarrollo por etapas
 ---------------------
@@ -39,7 +63,6 @@ Refactoring
 
 Principios de diseño
 ====================
-
 
 DRY
 ---
@@ -167,7 +190,7 @@ al otro tipo de manera explícita.
 El lenguaje incluye una **robusta biblioteca estándar** (se dice habitualmente que *"Python 
 tiene con las baterías incluídas"*) con acceso a funcionalidades de todo tipo 
 como protocolos de internet, funciones matemáticas, manejo de hilos y multiprocesos, 
-pruebas unitarias y abstracción de llamadas al sistemas operativo subyacente, entre 
+pruebas unitarias, manipulación de XML y abstracción de llamadas al sistemas operativo subyacente, entre 
 muchas otras.
 
 Además de la incorporada, puede interfacear con diversas bibliotecas, por ejemplo
@@ -292,8 +315,7 @@ histogramas, de superficie, etc.
     
         Ejemplos de gráficos logrados con Matplotlib
 
-Aunque tiene su origen en la emulación de los comandos gráficos de Matlab® , 
-es totalamente independiente y puede usarse de una manera pythónica y orientada
+Matplotlib puede usarse de una manera pythónica y orientada
 a objetos. Está principalmente escrito en Python, aunque se basa fuertemente
 en NumPy y otras extensiones para proveer buena performance incluso con 
 arreglos grandes. 
@@ -313,8 +335,24 @@ se destaca por las siguientes características:
       muy logrado paquete para graficación 3D, graficación sobre mapas geográficos, 
       utilidades para la interacción con Microsoft Excel®, etc. 
 
+Matplotlib incluye una :term:`API` que tiene su origen en la emulación de los comandos gráficos de Matlab®, 
+denominada *PyPlot*, especialmente orientada a su uso interactivo. El siguiente 
+código es un ejemplo extraído de [ST2009]_ ::
 
-.. _wxpython:
+    >>> import matplotlib.pyplot as plt
+    >>> import numpy as np
+    >>> x = np.arange(0.0, 6.0, 0.01)
+    >>> plt.plot(x, x**2)
+    >>> plt.show()
+
+El resultado se observa en el siguiente gráfico:
+
+    
+    .. figure:: images/mpl_fig1.png
+       :alt: Figura
+
+       Gráfico generado interactivamente
+
 
 WxPython
 --------
@@ -396,11 +434,20 @@ de texto será actualizada con las coordenadas donde este se encuentra.
         Captura del ejemplo de marras
 
 
-
-
-            
+Como característica avanzada, wxPython incluye el módulo :abbr:`AUI (Advanced 
+User Interface)` que permite el desarrollo de interfaces de usuario orientadas
+a la :term:`usabilidad` y de alta calidad, abstrayendo y encapsulando 
+el control de aspectos comunes. En particular, este módulo 
+permite la gestión de *subframes*, de manera que los subcomponentes o subventanas
+pueden configurarse con mediante operaciones comunes como *abrir*, *cerrar* u *ocultar*, 
+y ser guardadas como *perspectivas* que el usuario puede recuperar 
+en posteriores sesiones de trabajo. 
+               
 Gestión de proyecto
 ===================
+
+
+
 
 Control de versiones
 --------------------
@@ -487,3 +534,15 @@ Sphinx
 
 .. [NR-RD2006] Rappin, Noel - Dunn, Robin (2006) *wxPython in Action*, Manning Publications, 
                Greenwich
+.. [ST2009]  Tosi, Sandro (2009) *Matplotlib for Python Developers, Build remarkable publication 
+             quality plots the easy way*, Pack Publishing, Birmingham
+
+.. [AG-MANIF]  Varios autores (2001), *Manifesto for Agile Software Development*, http://agilemanifesto.org/
+
+.. [LL-RJ2003] Lindstrom, Lowell - Jeffries, Ron (2003) *Extreme Programming and 
+               Agile Software Development Methodologies*, xprogramming.com
+
+.. [IS2004] Sommerville, Ian (2004) *Software Enginnering, 7th edition*, Pretince Hall, Harlow. 
+            Traducción al español por el Departamento de Ciencias de la Computación e Inteligencia 
+            Artificial de la Universidad de Alicante (2005). 
+            
