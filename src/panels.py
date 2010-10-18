@@ -1,50 +1,34 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
+#standard library
 import os
 import time
 import sys
-
 import pickle #cPickle as pickle
 
-#WX
-import wx
-import wx.aui
 
+#3th party
 import wx.lib.agw.aui as aui
-import wx.lib.customtreectrl 
-
-import wx.lib.buttons
 import ui.widgets
 import ui.PyCollapsiblePane as pycp
-
-import apimanager
-import crud
-
-import  wx.lib.scrolledpanel as scrolled
-
-
-
-
-from settings import PATH_ICONS, EOS, EOS_SHORT, INV_EOS, VC_RATIO_DEFAULT, PLOT_SUITES, PLOT_IN_3D, IPYTHON_CONSOLE
-
-from tools.misc import Counter, ch_val2pos
+from wx.lib.embeddedimage import PyEmbeddedImage
+from wx.lib.pubsub import Publisher as pub
+import wx.lib.scrolledpanel as scrolled
+import wx.lib.customtreectrl 
+import wx.lib.buttons
 
 import matplotlib
 matplotlib.use('WXAgg')
 from matplotlib.backends.backend_wxagg import NavigationToolbar2Wx as NavigationToolbar
 
-#pubsub
-from wx.lib.pubsub import Publisher as pub
-
-#plots
+# gpec modules
+import apimanager
+import crud
+from settings import PATH_ICONS, EOS, EOS_SHORT, INV_EOS, VC_RATIO_DEFAULT, PLOT_SUITES, PLOT_IN_3D, IPYTHON_CONSOLE
+from tools.misc import Counter, ch_val2pos
 import plots
-
-
-from wx.lib.embeddedimage import PyEmbeddedImage
-
-
-
 
 
 
@@ -154,7 +138,7 @@ class SuitePlotsPanel(wx.Panel):
 
     def __init__(self, parent, id):
         wx.Panel.__init__(self, parent, id)
-        self.nb = aui.AuiNotebook(self, style= wx.aui.AUI_NB_DEFAULT_STYLE) # ^ wx.aui.AUI_NB_CLOSE_ON_ACTIVE_TAB)
+        self.nb = aui.AuiNotebook(self, style= aui.AUI_NB_DEFAULT_STYLE) # ^ aui.AUI_NB_CLOSE_ON_ACTIVE_TAB)
 
 
         #pub.subscribe(self.OnAddPlot, 'plot.PT')
@@ -813,7 +797,7 @@ class TabbedCases(wx.Panel):
 
     def __init__(self, parent, id):
         wx.Panel.__init__(self, parent, id)
-        self.nb = wx.aui.AuiNotebook(self, style = wx.aui.AUI_NB_TOP )
+        self.nb = aui.AuiNotebook(self, style = aui.AUI_NB_TOP )
         
         
 
@@ -821,8 +805,8 @@ class TabbedCases(wx.Panel):
 
         self.AddNewCaseButton() #the last `+` page
 
-        self.Bind(wx.aui.EVT_AUINOTEBOOK_PAGE_CHANGED, self.onPageChange, self.nb)
-        self.Bind(wx.aui.EVT_AUINOTEBOOK_PAGE_CLOSED, self.onPageClose, self.nb) #TODO
+        self.Bind(aui.EVT_AUINOTEBOOK_PAGE_CHANGED, self.onPageChange, self.nb)
+        self.Bind(aui.EVT_AUINOTEBOOK_PAGE_CLOSED, self.onPageClose, self.nb) #TODO
 
         sizer = wx.BoxSizer()
         sizer.Add(self.nb, 1, wx.EXPAND)
@@ -1384,7 +1368,7 @@ class InfoPanel(wx.Panel):
 
     def __init__(self, parent, id):
         wx.Panel.__init__(self, parent, id)
-        self.nb = wx.aui.AuiNotebook(self, style=aui.AUI_NB_TOP | aui.AUI_NB_TAB_SPLIT )
+        self.nb = aui.AuiNotebook(self, style=aui.AUI_NB_TOP | aui.AUI_NB_TAB_SPLIT )
 
 
 
@@ -1407,7 +1391,7 @@ class InfoPanel(wx.Panel):
         self.SetSizerAndFit(sizer)
 
         
-        #self.Bind(wx.aui.EVT_AUINOTEBOOK_BUTTON, self.onPageChange)
+        #self.Bind(aui.EVT_AUINOTEBOOK_BUTTON, self.onPageChange)
 
         
         
