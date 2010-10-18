@@ -29,3 +29,12 @@ class AboutBox():
 
         # Then we call wx.AboutBox giving it that info object
         wx.AboutBox(info)
+
+if __name__ == '__main__':
+    app = wx.PySimpleApp(0)
+    wx.InitAllImageHandlers()
+    main_frame = AboutBox(None)
+    app.SetTopWindow(main_frame)
+    main_frame.Show()
+    app.MainLoop()
+ 

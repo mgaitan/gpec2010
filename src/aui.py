@@ -290,13 +290,11 @@ if __name__ == "__main__":
     apimanager.clean_tmp() #sometimes are problems with file handling between 
                            #python and GPEC at the same time. Trying a magic clean-up
 
-
     all_plots = {}
     def add_plot_instance(message):
         all_plots[message.data[0]] = message.data[1]
 
     pub.subscribe(add_plot_instance, 'add_plot_instance')
-    
     
     app = wx.PySimpleApp(0)
     wx.InitAllImageHandlers()
