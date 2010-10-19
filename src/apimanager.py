@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import re
@@ -79,11 +79,14 @@ class ApiManager():
             
             args.append( os.path.join(PATH_BIN, bin + '.exe'))
 
-            
-            proc = killableprocess.Popen(args, cwd=self.path_temp)  #kill if not return in TIMEOUT seconds
-            
-            ret = proc.wait(TIMEOUT)  #proc.communicate()[0]
-
+            try:
+                proc = killableprocess.Popen(args, cwd=self.path_temp)  #kill if not return in TIMEOUT seconds
+                ret = proc.wait(TIMEOUT)      #proc.communicate()[0]
+            except AttributeError:
+                #on windows 64bits, killableprocess not works
+                proc = subprocess.Popen(args, cwd=self.path_temp)  #kill if not return in TIMEOUT seconds
+                ret = proc.wait()
+                
             pub.sendMessage('log', ('ok', '%s executed' % bin))
 
             for out in BIN_AVAILABLE[bin]['out']:
