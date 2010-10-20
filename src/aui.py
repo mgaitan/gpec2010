@@ -235,12 +235,12 @@ class MainFrame(wx.Frame):
 
 
     def EditCopy(self, event):
-        self.Info(self, 'You chose Edit->Copy')
+        self.Info(self, 'This feature is not implemented yet')
     def EditPaste(self, event):
-        self.Info(self, 'You chose Edit->Paste')
+        self.Info(self, 'This feature is not implemented yet')
     def DataBox(self, num, event):
-        self.Info(self, 'You chose item %d' % (num,))
-    def Info(self, parent, message, caption = 'Better Menus'):
+        self.Info(self, 'This feature is not implemented yet %s' % (num,))
+    def Info(self, parent, message, caption = 'Not implemented yet'):
         dlg = wx.MessageDialog(parent, message, caption, \
             wx.OK | wx.ICON_INFORMATION)
         dlg.ShowModal()
