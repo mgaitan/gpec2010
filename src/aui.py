@@ -287,14 +287,19 @@ class MainFrame(wx.Frame):
 
 
 if __name__ == "__main__":
-    apimanager.clean_tmp() #sometimes are problems with file handling between 
-                           #python and GPEC at the same time. Trying a magic clean-up
 
     all_plots = {}
+
     def add_plot_instance(message):
         all_plots[message.data[0]] = message.data[1]
 
-    pub.subscribe(add_plot_instance, 'add_plot_instance')
+    def remove_plot_instance(message):
+        if message.data in all_plots:
+            all_plots.pop(message.data)
+
+
+    #pub.subscribe(add_plot_instance, 'add_plot_instance')
+    #pub.subscribe(remove_plot_instance, 'remove_plot_instance')
     
     app = wx.PySimpleApp(0)
     wx.InitAllImageHandlers()

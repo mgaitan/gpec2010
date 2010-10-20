@@ -29,7 +29,7 @@ class AboutBox():
 
         # Then we call wx.AboutBox giving it that info object
         wx.AboutBox(info)
-
+    
 if __name__ == '__main__':
     app = wx.PySimpleApp(0)
     wx.InitAllImageHandlers()

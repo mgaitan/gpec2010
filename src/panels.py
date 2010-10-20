@@ -150,8 +150,10 @@ class SuitePlotsPanel(wx.Panel):
                 
         pub.subscribe(self.MakePlots, 'make') #for all kind of suites
         pub.subscribe(self.MakeCustomPlot, 'make_custom') #for all kind of suites
+        
         pub.subscribe(self.HidePage, 'hide page') #from checkbox tree
         pub.subscribe(self.ShowPage, 'show page') #from checkbox tree
+        pub.subscribe(self.DeletePage, 'delete page') #from checkbox tree
         pub.subscribe(self.ActivePage, 'active page') #when an item is selected 
 
         self.Bind(aui.EVT_AUINOTEBOOK_PAGE_CLOSE, self.OnPageClosing, self.nb)
@@ -200,13 +202,17 @@ class SuitePlotsPanel(wx.Panel):
 
     def HidePage(self, message):
         """close page which window is named as message.data and put in hidden_page"""
+
+        
         window = wx.FindWindowByName(message.data)
         page_id = self.nb.GetPageIndex(window)
 
+        
         self.hidden_page[message.data] = (window, self.nb.GetPageText(page_id))        
-
         self.nb.RemovePage(page_id)
         window.Hide()
+    
+            
         
     def ShowPage(self, message):
         try: 
@@ -216,7 +222,22 @@ class SuitePlotsPanel(wx.Panel):
         except KeyError:
             print "key  error ", message.topic, message.data
 
+    def DeletePage(self, message):
+        """remove a plot page including its plot panel """
         
+        window = wx.FindWindowByName(message.data)
+        page_id = self.nb.GetPageIndex(window)
+
+        if message.data in self.hidden_page:
+            self.hidden_page.pop(message.data)
+
+        pub.sendMessage('remove_plot_instance', message.data)
+
+        try:
+            self.nb.RemovePage(page_id)
+            window.Destroy()        #TODO check this silent !
+        except:
+            pass
 
     def MakePlots(self, message):
         
@@ -473,6 +494,13 @@ class VarsAndParamPanel(wx.Panel):
     def SetData(self, data):
         """Set basic compound data on the panel"""
     
+        
+
+        if isinstance(data[-1], dict):
+            self.vc_ratio = data[-1]['vc_ratio']
+            self.vc_back = data[-1]['vc_back']
+            data = data[:-1]
+
         self.setup_data = data
 
         self.compound_id = int(data[0])
@@ -488,10 +516,15 @@ class VarsAndParamPanel(wx.Panel):
     def GetData(self):
         """Return a compound list [id, name, vars...]   useful to redefine the system"""
         if self.setup_data:
-            return [self.compound_id, self.compound_name] + self.GetVarsValues()
+            r =  [self.compound_id, self.compound_name] + self.GetVarsValues()
+
+            if hasattr(self, 'vc_ratio'):  
+                r += [{'vc_ratio': self.vc_ratio, 'vc_back': self.vc_back or 0.0}]
+
+            return r
 
     def GetTotalData(self):
-        """Return a compound list tuple (name, (vars...), (param...), (vc_ratio, vc_bak) )"""
+        """Return a compound list tuple (name, (vars...), (param...) )"""
 
         if self.OnButton(None) == True: #Ensure last numbers generating (as a programatical event)
                 
@@ -1295,7 +1328,7 @@ class CasePanel(scrolled.ScrolledPanel):
             
             if self.model_id == 3:  #on RK-PR add vc_ratio parameter
                 #TODO this fail on loaded RKPR case.
-                kwargs = {'vc_rat1': self.panels[0].vc_ratio, 'vc_rat2': self.panels[1].vc_ratio}
+                kwargs = {'vc_rat1': self.panels[0].vc_ratio or 1, 'vc_rat2': self.panels[1].vc_ratio or 1}
             else:
                 kwargs = {}
 
@@ -1424,16 +1457,20 @@ class PlotsTreePanel(wx.Panel):
     
 
         pub.subscribe(self.AddCheckboxItem, 'add checkbox')
+
+        
         pub.subscribe(self.UncheckItem, 'uncheck item')
         pub.subscribe(self.SelectItem, 'select item')
 
         self.Bind(wx.EVT_TREE_SEL_CHANGED, self.OnTreeSelChanged, self.tree)
 
         self.Bind(wx.EVT_TREE_BEGIN_DRAG, self.OnBeginDrag, self.tree)
-    
+
+        self.Bind(wx.EVT_TREE_DELETE_ITEM, self.OnDeleteItem, self.tree)
+
         self.Bind(wx.EVT_TREE_END_DRAG, self.OnEndDrag, self.tree)
 
-
+    
     def OnBeginDrag(self, event):
         item = event.GetItem()
         
@@ -1514,7 +1551,7 @@ class PlotsTreePanel(wx.Panel):
          |   
          |__ 3D
             |__ PTrho
-            |   |___ Global
+            |   |___ PT         #TODO
             |   |___ Isop
             |   |___ Txy
             |
@@ -1592,6 +1629,26 @@ class PlotsTreePanel(wx.Panel):
 
         self.Bind(wx.lib.customtreectrl.EVT_TREE_ITEM_CHECKED, self.OnItemChecked, self.tree)
 
+
+    def OnDeleteItem(self, event):
+
+        def remove_panel_name (item):
+            self.tree.GetPyData(item)
+            panel_name = get_panel_name(item)
+
+            if panel_name:
+                pub.sendMessage('delete page', panel_name)
+                self.tree.Delete(item)
+            else:
+                (child, cookie) = self.tree.GetFirstChild(item)
+                while child:
+                    remove_panel_name(child)
+                    (child, cookie) = self.tree.GetNextChild(item, cookie)
+
+        item = event.GetItem()
+        remove_panel_name (item)
+
+
     def OnItemChecked(self, event):
         item = event.GetItem()
         panel_name = self.tree.GetPyData(item)
@@ -1599,9 +1656,9 @@ class PlotsTreePanel(wx.Panel):
         
         checked = self.tree.IsItemChecked(item)
 
+        
 
-        if panel_name: 
-            # means it's a child 
+        if panel_name: # means it's a child 
             if checked:
                 pub.sendMessage('show page', panel_name)
             else:

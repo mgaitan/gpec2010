@@ -5,23 +5,22 @@ import re
 import string
 import os
 import sys
-
+import subprocess
 import cStringIO #for memory files
 
+import numpy as np
+from wx.lib.pubsub import Publisher as pub
 
 from tools import killableprocess, misc
-import subprocess
-
 from settings import PATH_BIN, TIMEOUT, PATH_TEMP, BIN_AVAILABLE
-import numpy as np
 
-from wx.lib.pubsub import Publisher as pub
 
 
 
 
 def clean_tmp():
     """auxiliary function to clean all temporary files/dirs"""
+
     def rm_content(path):
         for the_file in os.listdir(path):
             file_path = os.path.join(path, the_file)
