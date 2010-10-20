@@ -493,13 +493,20 @@ class VarsAndParamPanel(wx.Panel):
 
     def SetData(self, data):
         """Set basic compound data on the panel"""
-    
-        
+
 
         if isinstance(data[-1], dict):
-            self.vc_ratio = data[-1]['vc_ratio']
+            #necessary to work whidt thre original value. 
+            #this need a lot of testing 
+
             self.vc_back = data[-1]['vc_back']
+            if 'vc_ratio' in data[-1]: 
+                self.vc_ratio = data[-1]['vc_ratio']
+            data[4] = self.vc_back
             data = data[:-1]
+        else: 
+            #data come from database
+            self.vc_back = data[4] #save original value
 
         self.setup_data = data
 
@@ -519,7 +526,10 @@ class VarsAndParamPanel(wx.Panel):
             r =  [self.compound_id, self.compound_name] + self.GetVarsValues()
 
             if hasattr(self, 'vc_ratio'):  
-                r += [{'vc_ratio': self.vc_ratio, 'vc_back': self.vc_back or 0.0}]
+                r += [{'vc_ratio': self.vc_ratio, 'vc_back': self.vc_back if hasattr(self, 'vc_back') else float(r[-2]) }]
+            else:
+                r += [{'vc_back': self.vc_back if hasattr(self, 'vc_back') else float(r[-2]) }]
+        
 
             return r
 
@@ -569,13 +579,14 @@ class VarsAndParamPanel(wx.Panel):
             return [float(box.GetValue()) for box in self.vars]
 
     def SetVarsValues(self, data):
+        
         try:
-            for box, data in zip(self.vars, data):
+            for box, data_c in zip(self.vars, data):
                 #on PC-SAFT and SPHCT om is 0.0 in CONPAOUT and should be ignored. 
-                if float(data) != 0.0:
-                    box.SetValue(str(data))
+                if float(data_c) != 0.0:
+                    box.SetValue(str(data_c))
         except:
-            pub.sendMessage('log', ('error',  "not enough data or boxes for EOS vars"))
+            pub.sendMessage('log', ('error',  "not enough data or boxes for compounds vars"))
             
             
 
@@ -587,11 +598,13 @@ class VarsAndParamPanel(wx.Panel):
 
 
     def SetParamsValues(self, data):
+
+
         if len(data) == len(self.params):
             for box, data in zip(self.params, data):
                 box.SetValue(str(data))
         else:
-            pub.sendMessage('log', ('error',  "not enough data or boxes for EOS vars"))
+            pub.sendMessage('log', ('error',  "not enough data or boxes for EOS parameter"))
             
             
                 
@@ -648,6 +661,7 @@ class VarsAndParamPanel(wx.Panel):
             self.SetVarsValues(data[0])
             self.SetParamsValues(data[1])
             return True
+
         else:
             pub.sendMessage('log',("error", "Error handling ModelsParam output. Upcoming calculations aborted."))
             return False
@@ -1328,7 +1342,7 @@ class CasePanel(scrolled.ScrolledPanel):
             
             if self.model_id == 3:  #on RK-PR add vc_ratio parameter
                 #TODO this fail on loaded RKPR case.
-                kwargs = {'vc_rat1': self.panels[0].vc_ratio or 1, 'vc_rat2': self.panels[1].vc_ratio or 1}
+                kwargs = {'vc_rat1': self.panels[0].vc_ratio or 1.168, 'vc_rat2': self.panels[1].vc_ratio or 1.168}
             else:
                 kwargs = {}
 
