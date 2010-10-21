@@ -81,7 +81,7 @@ class ApiManager():
             try:
                 proc = killableprocess.Popen(args, cwd=self.path_temp)  #kill if not return in TIMEOUT seconds
                 ret = proc.wait(TIMEOUT)      #proc.communicate()[0]
-            except AttributeError:
+            except:
                 #on windows 64bits, killableprocess not works
                 proc = subprocess.Popen(args, cwd=self.path_temp)  #kill if not return in TIMEOUT seconds
                 ret = proc.wait()
