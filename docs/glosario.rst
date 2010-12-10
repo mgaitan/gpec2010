@@ -60,7 +60,7 @@ Computación
     polimorfismo
         pass
 
-    vector
+    arreglo
         pass
 
     wrapper
@@ -138,7 +138,10 @@ Computación
         no está disponible o el acceso a éste se encuentra restringido por un acuerdo de licencia, 
         o por tecnología anticopia.
 
-    
+
+    software cerrado
+        Forma poco precisa de denominar al :term:`software privativo`
+
 
 TODO's
 ======

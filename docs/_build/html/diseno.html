@@ -62,18 +62,82 @@
 <div class="section" id="casos-de-uso">
 <h3>5.2.1. Casos de uso<a class="headerlink" href="#casos-de-uso" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
-<div class="section" id="dise-o-de-base-de-datos">
-<h3>5.2.2. Diseño de Base de datos<a class="headerlink" href="#dise-o-de-base-de-datos" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="base-de-datos">
+<h3>5.2.2. Base de datos<a class="headerlink" href="#base-de-datos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El almacenamiento y gestión de la información necesaria como entrada para GPEC se realiza
+a través de un sistema de gestión de base de datos relacional. Se
+utilizó el software <a class="reference external" href="http://sqlite.org">Sqlite</a>  (versión 3) que respeta casi íntegramente
+el estándar <abbr title="Structured Query Language">SQL</abbr>  mediante una librería
+monolítica, portable, eficiente y compacta que es fácilmente interfaceable con Python <a class="footnote-reference" href="#id3" id="id1">[1]</a>.</p>
+<p>Una base de datos de <em>Sqlite</em> está autocontenida en un
+archivo binario que puede ser distribuído en conjunto con el software, sin
+requerir inicialización o un <em>servidor</em> de base de datos local o remoto.</p>
+<p>En particular, los datos almacenados son las constantes de compuestos
+químicos. Se incluye una vasta base de compuestos denominada <abbr>DIPPR</abbr> cuya
+modificación está vedada a través de la interfaz de usuario (modo <em>sólo lectura</em> <a class="footnote-reference" href="#id4" id="id2">[2]</a>),
+así como <em>compuestos definidos por el usuario</em> que pueden ser agregados como
+una copia de un compuesto <abbr>DIPPR</abbr> (que acepta, entonces, la modificación
+o ajuste de sus valores) o bien como un nuevo compuesto definido desde datos
+experimentales.</p>
+<div class="admonition-todo admonition " id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Siglas de dippr ?</p>
+</div>
 </div>
 </div>
 <div class="section" id="modelo-entidad-relaci-n">
 <h2>5.3. Modelo Entidad-Relación<a class="headerlink" href="#modelo-entidad-relaci-n" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="admonition-todo admonition " id="index-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">entidad-relacion</p>
+</div>
+</div>
+<div class="section" id="definici-n-de-las-tablas">
+<h2>5.4. Definición de las tablas<a class="headerlink" href="#definici-n-de-las-tablas" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="highlight-sql"><div class="highlight"><pre><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="ss">&quot;compounds&quot;</span> <span class="p">(</span><span class="ss">&quot;id&quot;</span> <span class="nb">INTEGER</span><span class="p">,</span><span class="ss">&quot;id_category&quot;</span> <span class="n">INTERGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span>
+                                                  <span class="n">AUTOINCREMENT</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">,</span>
+                          <span class="ss">&quot;name&quot;</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+                          <span class="ss">&quot;formula&quot;</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+                          <span class="ss">&quot;formula_extended&quot;</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+                          <span class="ss">&quot;tc&quot;</span> <span class="nb">FLOAT</span><span class="p">,</span>
+                          <span class="ss">&quot;pc&quot;</span> <span class="nb">FLOAT</span><span class="p">,</span>
+                          <span class="ss">&quot;vc&quot;</span> <span class="nb">FLOAT</span><span class="p">,</span>
+                          <span class="ss">&quot;acentric_factor&quot;</span> <span class="nb">FLOAT</span><span class="p">,</span>
+                          <span class="ss">&quot;vc_rat&quot;</span> <span class="nb">FLOAT</span> <span class="k">DEFAULT</span> <span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="mi">168</span><span class="p">)</span>
+                         <span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="ss">&quot;categories&quot;</span> <span class="p">(</span><span class="ss">&quot;id_category&quot;</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span>
+                                         <span class="n">AUTOINCREMENT</span>  <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+                           <span class="ss">&quot;name&quot;</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+                           <span class="ss">&quot;editable&quot;</span> <span class="n">BOOL</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">DEFAULT</span> <span class="k">True</span>
+                          <span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="ss">&quot;categories&quot;</span> <span class="k">VALUES</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;DIPPR&#39;</span><span class="p">,</span><span class="s1">&#39;False&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="ss">&quot;categories&quot;</span> <span class="k">VALUES</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;User defined&#39;</span><span class="p">,</span><span class="s1">&#39;True&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
 <div class="section" id="interacci-n-frontend-backend">
-<span id="frontend-backend"></span><h3>5.3.1. Interacción Frontend / Backend<a class="headerlink" href="#interacci-n-frontend-backend" title="Enlazar permanentemente con este título">¶</a></h3>
+<span id="frontend-backend"></span><h3>5.4.1. Interacción Frontend / Backend<a class="headerlink" href="#interacci-n-frontend-backend" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 </div>
 <div class="section" id="metodolog-a-de-relevamiento">
-<h2>5.4. Metodología de relevamiento<a class="headerlink" href="#metodolog-a-de-relevamiento" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>5.5. Metodología de relevamiento<a class="headerlink" href="#metodolog-a-de-relevamiento" title="Enlazar permanentemente con este título">¶</a></h2>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>De hecho, a partir de la versión 2.6 de Pythonsql, el modulo <tt class="docutils literal"><span class="pre">sqlite3</span></tt> forma
+parte de la biblioteca estándar de Python.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Sqlite no permite definir tablas o registros de datos como <em>sólo lectura</em>.
+Queda en potestad del desarrollador vedar la posilidad de modificación como parte
+del proceso de validación. Sin embargo, siempre es posible para un usuario abrir
+y modificar la información &#8220;manualmente&#8221; a través de un gestor que interprete
+el formato <em>sqlite</em>.</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 
@@ -92,14 +156,15 @@
 </li>
 <li><a class="reference internal" href="#diagrama-de-actividades">5.2. Diagrama de actividades</a><ul>
 <li><a class="reference internal" href="#casos-de-uso">5.2.1. Casos de uso</a></li>
-<li><a class="reference internal" href="#dise-o-de-base-de-datos">5.2.2. Diseño de Base de datos</a></li>
+<li><a class="reference internal" href="#base-de-datos">5.2.2. Base de datos</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#modelo-entidad-relaci-n">5.3. Modelo Entidad-Relación</a><ul>
-<li><a class="reference internal" href="#interacci-n-frontend-backend">5.3.1. Interacción Frontend / Backend</a></li>
+<li><a class="reference internal" href="#modelo-entidad-relaci-n">5.3. Modelo Entidad-Relación</a></li>
+<li><a class="reference internal" href="#definici-n-de-las-tablas">5.4. Definición de las tablas</a><ul>
+<li><a class="reference internal" href="#interacci-n-frontend-backend">5.4.1. Interacción Frontend / Backend</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#metodolog-a-de-relevamiento">5.4. Metodología de relevamiento</a></li>
+<li><a class="reference internal" href="#metodolog-a-de-relevamiento">5.5. Metodología de relevamiento</a></li>
 </ul>
 </li>
 </ul>
@@ -149,7 +214,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2010, Martín Gaitán.
-      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.1.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.5.
     </div>
   </body>
 </html>

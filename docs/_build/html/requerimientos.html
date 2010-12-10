@@ -53,33 +53,175 @@
 <h1>4. Ingeniería de requerimientos<a class="headerlink" href="#ingenier-a-de-requerimientos" title="Enlazar permanentemente con este título">¶</a></h1>
 <div class="section" id="relevamiento-de-la-versi-n-preexistente">
 <span id="relevamiento"></span><h2>4.1. Relevamiento de la versión preexistente<a class="headerlink" href="#relevamiento-de-la-versi-n-preexistente" title="Enlazar permanentemente con este título">¶</a></h2>
-<div class="section" id="aspectos-t-cnicos">
-<h3>4.1.1. Aspectos técnicos<a class="headerlink" href="#aspectos-t-cnicos" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="aspectos-hist-ricos">
+<h3>4.1.1. Aspectos históricos<a class="headerlink" href="#aspectos-hist-ricos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>La versión previa de GPEC es una aplicación para entornos Microsoft Windows (Windows 2000, Windows XP
+o superior) desarrollada en una arquitectura de dos bloques funcionales:</p>
+<ol class="arabic simple">
+<li><strong>Cálculos e implementación de algoritmos numéricos</strong>, desarrollados en Fortran</li>
+<li><strong>Interfaz de usuario, validación y graficación</strong> (<em>frontend</em>), desarrollado en Visual Basic</li>
+</ol>
+<p>Esta arquitectura respondió a dos cuestiones principales:</p>
+<ul class="simple">
+<li>La preexistencia de los programas de cálculo (ejecutables sin interfaz de usuario) que desarrolló
+el Dr. Martín Cismondi como tésis doctoral y mantiene hasta la actualidad, con la colaboración del
+Dr. Marcelo Sabaloy y la supervisión del Dr. Esteban Brignole,</li>
+<li>La necesidad pragmática de separar el desarrollo del <em>&#8220;Gpec visual&#8221;</em>, trabajo realizado
+por Diego Nuñez, del mantenimiento e implementación de nuevos algoritmos y
+ecuaciones de estado.</li>
+</ul>
+<p>La labor de Diego Nuñez se produjo en el marco de su pasantía en
+<a href="#id1"><span class="problematic" id="id2">:abbr:`PLAPIQUI (Planta Piloto de Ingeniería Química`_</span></a> durante los años
+2004 y 2005, cuando el Dr. Cismondi regreso</p>
+</div>
+<div class="section" id="descripci-n-general">
+<h3>4.1.2. Descripción general<a class="headerlink" href="#descripci-n-general" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>La interfaz visual de GPEC presenta al usuario una GUI para interactuar con los
+distintos parámetros del diagrama elegido, envía los parámetros a los algoritmos
+de cálculo y procesa las salidas de estos generando y mostrando los
+diferentes diagramas.</p>
+<div class="figure">
+<img alt="_images/visual_gpec1.png" src="_images/visual_gpec1.png" style="width: 80%;" />
+<p class="caption">Interfaz principal de <em>Visual Gpec</em>. Definiendo un sistema Methane-Methanol
+con la EoS RK-PR.</p>
+</div>
+<p>La comunicación con los algoritmos implementados en Fortran se realiza mediante
+archivos de texto plano en un formato cuya estructura <em>ad hoc</em> es comprendida por
+las dos partes (ver <a href="#id6"><span class="problematic" id="id7">`API`_</span></a>). Asimismo, los datos de salida que producen los algoritmos, son
+leídos por Visual Gpec desde archivos de texto para su posterior graficación.</p>
+<p>Dicha graficación se realiza mediante rutinas desarrolladas <em>ad hoc</em> para esta
+implementación. No se basa en ninguna biblioteca para estos fines.
+Es decir que los gráficos se generan mediante
+el trazado punto a punto sobre un <em>widget</em> tipo canvas. El control
+de escala, segmentación y demás funcionalidades básicas debió programarse desde cero.</p>
+<div class="figure">
+<img alt="_images/visual_gpec2.png" src="_images/visual_gpec2.png" style="width: 80%;" />
+<p class="caption">Visualizacion de un diagrama P-T para el sistema Methane-Methanol
+con modelo RK-PR.</p>
+</div>
+<p>El resultado de esto, si bien es aceptable y funcional, implicó muchas horas de
+desarrollo, con gráficos sólo 2D, poco configurables, que se pueden
+vectorizar ni exportar.</p>
+</div>
+<div class="section" id="licenciamiento">
+<h3>4.1.3. Licenciamiento<a class="headerlink" href="#licenciamiento" title="Enlazar permanentemente con este título">¶</a></h3>
+<p><em>Visual GPEC</em> no tiene una licencia explicitada pero se trata de
+un <em>freeware*</em>, es decir, un tipo de software que se distribuye  sin costo y
+está disponible para su uso por tiempo ilimitado. La última versión
+públicamente disponible era la 2.0</p>
+<p>Hasta el momento, GPEC no es Software Libre ni Opensource, ya que su código
+fuente no está  disponible.</p>
 </div>
 <div class="section" id="aspectos-de-ingenier-a-de-software">
-<h3>4.1.2. Aspectos de ingeniería de software<a class="headerlink" href="#aspectos-de-ingenier-a-de-software" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>4.1.4. Aspectos de ingeniería de software<a class="headerlink" href="#aspectos-de-ingenier-a-de-software" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Durante su desarrollo anterior, GPEC no adoptó ninguna metodología de
+desarrollo particular, salvo la concerniente a la separación
+funcional de la aplicación como se explica más arriba.</p>
+<p>Un problema manifestado por el equipo de desarrollo es el del versionamiento,
+ya que era incontrolable la coherencia entre los cambios realizados
+por más de un colaborador. Las modificaciones y los archivos circulan por email
+entre uno y otro, pero sin lograr sistematización y control sobre <em>quién cambió qué</em>.
+y a <em>qué versión de GPEC corresponde un determinado código fuente</em>.</p>
 </div>
 <div class="section" id="problemas-detectados">
-<h3>4.1.3. Problemas detectados<a class="headerlink" href="#problemas-detectados" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>4.1.5. Problemas detectados<a class="headerlink" href="#problemas-detectados" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="figure">
+<img alt="_images/visual_gpec3.png" src="_images/visual_gpec3.png" style="width: 80%;" />
+<p class="caption">Ventanas abiertas para obtener un nuevo compuesto desde la base de datos,
+para que sea listado y utilizable en el sistema. Poco usable.</p>
+</div>
 </div>
 </div>
 <div class="section" id="metodolog-a">
 <span id="metodologia"></span><h2>4.2. Metodología<a class="headerlink" href="#metodolog-a" title="Enlazar permanentemente con este título">¶</a></h2>
 </div>
+<div class="section" id="requerimientos">
+<span id="id3"></span><h2>4.3. Requerimientos<a class="headerlink" href="#requerimientos" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="requerimientos-funcionales">
-<span id="requerimientos"></span><h2>4.3. Requerimientos Funcionales<a class="headerlink" href="#requerimientos-funcionales" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>4.3.1. Requerimientos funcionales<a class="headerlink" href="#requerimientos-funcionales" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Todas las funcionalidades de la versión preexistente de GPEC deben igualarse y
+en lo posible mejorarse. Se detallan a continuación:</p>
+<ul>
+<li><p class="first">Generación del sistema binario: selección de dos sustancias.</p>
+</li>
+<li><p class="first">Gestión de Alta-Baja-Modificación de compuestos químicos. Se incluirá una base de datos
+con el software que el usuario puede manipular.</p>
+</li>
+<li><p class="first">Parametrización automatizada y manual</p>
+</li>
+<li><p class="first">Adecuación del formulario de entrada de parámetros para ecuaciones de estado (modelos)
+base molecular <a class="footnote-reference" href="#id5" id="id4">[1]</a> :</p>
 <blockquote>
 <ul class="simple">
-<li>Diagramas 2D</li>
-<li>Diagramas 3Dmaqueta de estructura</li>
-<li>Modelos</li>
-<li>Gestión de base de datos</li>
-<li>etc ...</li>
+<li>Soave-Redlich-Kwong EOS</li>
+<li>Peng-Robinson EOS</li>
+<li>RK-PR EOS</li>
+<li>Simplified Perturbed Hard Chain Theory EOS</li>
+<li>Perturbed Chain Statistical Associating Fluid Theory</li>
+<li>Group Contribution Equation of State</li>
 </ul>
 </blockquote>
+</li>
+<li><p class="first">Generación de suite de gráficos 2-D:</p>
+<blockquote>
+<ul class="simple">
+<li>Diagrama de equilibrio de fase global :<ul>
+<li>Presión - Temperatura</li>
+<li>Temperatura - Composición</li>
+<li>Temperatura - Densidad</li>
+<li>Presión - Composición</li>
+<li>Presión - Densidad</li>
+</ul>
+</li>
+<li>Diagramas Pxy, Txy, isopletas para una temperatura, presión o composición
+seleccionada respectivamente.</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">Generación de suite de gráficos 3-D:</p>
+<blockquote>
+<ul>
+<li><p class="first">Diagrama de equilibrio de fase global :</p>
+<blockquote>
+<ul class="simple">
+<li>Presión - Temperatura - Densidad</li>
+<li>Presión - Temperatura - Composición</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">Gestión de proyectos (manipulación múltiples casos de sistemas/modelo/gráfico)</p>
+</li>
+<li><p class="first">Gestión de persistencia de datos (abrir, guardar, etc.)</p>
+</li>
+<li><p class="first">Ejecución multiplataforma: GPEC debe ser capaz de utilizarse en entornos Windows y Linux</p>
+</li>
+<li><p class="first">Exportación de gráficos</p>
+</li>
+</ul>
 </div>
 <div class="section" id="requerimientos-no-funcionales">
-<h2>4.4. Requerimientos No Funcionales<a class="headerlink" href="#requerimientos-no-funcionales" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>4.3.2. Requerimientos no funcionales<a class="headerlink" href="#requerimientos-no-funcionales" title="Enlazar permanentemente con este título">¶</a></h3>
+<ul class="simple">
+<li>GPEC requiere flexibilidad que permita
+la extensibilidad de funcionalidades. Para esto se apunta a una arquitectura
+lógica modularizada que permita incorporar o extender funcionalidades de manera
+accesible.</li>
+<li>Manipulación de gráficos accesible: zoom, rotación, desplazamiento, ocultación de curvas, etc.</li>
+<li>Calidad y formatos de gráficos válidos para publicaciones científicas</li>
+<li>Configurabilidad de aspecto de los gráficos</li>
+<li>Usabilidad y claridad de las interfaces: Gpec debe poder usarse intuitivamente</li>
+</ul>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[1]</a></td><td>Para la parametrización de los datos de entrada para cada ecuación de
+estado fue menenester documentar la <a href="#id8"><span class="problematic" id="id9">`api`_</span></a></td></tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 
@@ -93,14 +235,19 @@
   <ul>
 <li><a class="reference internal" href="#">4. Ingeniería de requerimientos</a><ul>
 <li><a class="reference internal" href="#relevamiento-de-la-versi-n-preexistente">4.1. Relevamiento de la versión preexistente</a><ul>
-<li><a class="reference internal" href="#aspectos-t-cnicos">4.1.1. Aspectos técnicos</a></li>
-<li><a class="reference internal" href="#aspectos-de-ingenier-a-de-software">4.1.2. Aspectos de ingeniería de software</a></li>
-<li><a class="reference internal" href="#problemas-detectados">4.1.3. Problemas detectados</a></li>
+<li><a class="reference internal" href="#aspectos-hist-ricos">4.1.1. Aspectos históricos</a></li>
+<li><a class="reference internal" href="#descripci-n-general">4.1.2. Descripción general</a></li>
+<li><a class="reference internal" href="#licenciamiento">4.1.3. Licenciamiento</a></li>
+<li><a class="reference internal" href="#aspectos-de-ingenier-a-de-software">4.1.4. Aspectos de ingeniería de software</a></li>
+<li><a class="reference internal" href="#problemas-detectados">4.1.5. Problemas detectados</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#metodolog-a">4.2. Metodología</a></li>
-<li><a class="reference internal" href="#requerimientos-funcionales">4.3. Requerimientos Funcionales</a></li>
-<li><a class="reference internal" href="#requerimientos-no-funcionales">4.4. Requerimientos No Funcionales</a></li>
+<li><a class="reference internal" href="#requerimientos">4.3. Requerimientos</a><ul>
+<li><a class="reference internal" href="#requerimientos-funcionales">4.3.1. Requerimientos funcionales</a></li>
+<li><a class="reference internal" href="#requerimientos-no-funcionales">4.3.2. Requerimientos no funcionales</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -150,7 +297,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2010, Martín Gaitán.
-      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.1.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.5.
     </div>
   </body>
 </html>

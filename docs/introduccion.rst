@@ -12,7 +12,7 @@ ayudando a resolver complejos interrogantes que sin la capacidad computacional l
 científicos no hubieran podido responder. 
 
 Es evidente que en la actualidad las computadoras ya no son exclusivad de 
-selectos laboratorios y universidades, y su uso generalizado ha modificado 
+selectos laboratorios o universidades y su uso generalizado ha modificado 
 drásticamente la cultura y la calidad de vida de las personas, teniendo un rol
 *sine qua non* en el trabajo, la comunicación, el ocio, etc. 
 
@@ -28,9 +28,9 @@ forman parte del día a día en la labor de ingenieros e investigadores.
 
 Someramente puede hacerse aquí una distinción entre software científico/técnico 
 de propósito general como los mencionados (independientemente de que 
-tengan mayor aceptación en un campo que en otro) de los que son 
-de propósito específico (sofware aplicativo), como es es el caso del software 
-sobre el cual trata este proyecto. 
+tengan mayor aceptación en un campo u otro) de los que son 
+de propósito específico (software aplicativo), como es es el caso del software 
+sobre el cual trata este proyecto final. 
 
 Descripción
 ===========
@@ -41,13 +41,13 @@ para :term:`sistemas binarios <sistema binario>`, que se calculan mediante
 :term:`ecuaciones de estado <ecuación de estado>`. 
 Es útil para fines académicos, científicos y de desarrollo industrial. 
 
-*GPEC* fue desarrollado originalmente por el Dr. Martín Cismondi Duarte en el marco
-de su tesis doctoral [#]_ en Ingeniería Química por la Universidad Técnica de Dinamarca, 
-en 2005, y luego ampliado y mantenido junto a Diego Nuñez.
+*GPEC* fue desarrollado originalmente por el Dr. Martín Cismondi Duarte, codirector de este trabajo, 
+en el marco de su tesis doctoral [#]_ en Ingeniería Química por la Universidad Técnica de Dinamarca [#]_, 
+en 2005 y luego ampliado junto a Diego Nuñez.
 
 Está basado en métodos numéricos y algoritmos desarrollados principalmente por Cismondi 
 en colaboración con el Prof. Michael Michelsen, del Department of Chemical Engineering, 
-DTU (Dinamarca),  y el Prof. Marcelo Zabaloy de la Universidad Nacional del Sur, 
+DTU (Dinamarca), y el Prof. Marcelo Zabaloy de la Universidad Nacional del Sur, 
 (Argentina). 
 
 Actualmente es un proyecto dirigido por el Prof. Esteban Brignole de 
@@ -69,25 +69,25 @@ puede ver :ref:`frontend_backend`.
         llamar *GPEC* al conjunto de software, y es, salvo
         aclaración explícita, a la asepción que tiene en este libro. 
 
+.. seealso::
+
+        Para mayor detalle sobre la versión preexistente de GPEC ver :ref:`relevamiento`
 
 Motivación
 ==========
 
-GPEC  es un software que goza de cierta popularidad en el ambiente científico- 
-académico e industrial. La última versión previa a este trabajo fue descargada
-XXXX veces [#]_ de numerosos puntos geográficos. 
+GPEC es un software que goza de cierta popularidad en el ambiente científico- 
+académico. Se utiliza, por ejemplo, en el curso iintesivo de postgrado *High Pressure Technology in 
+Process and Chemical Industry* en el marco del programa Socrates Erasmus de la Unión Europea [#]_. 
+Dicho curso se dicta iterativamente en distintas universidades europeas de Alemania, 
+Italia, España, Holanda, etc. 
 
-    .. todo::
-        
-        buscar la estádistica de descargas de GPEC
- 
 Hasta el momento no se conoce ningún otro software con capacidades equivalentes, 
 lo que implica una creciente comunidad de usuarios, pertenecientes no sólo a instituciones académicas 
 y de investigación, si no también a industrias.
 
-
-algunos factores han sido determinantes para el virtual congelamiento de su desarrollo
-desde el año 2008: 
+Sin embargo, algunos factores han sido determinantes para el virtual congelamiento de su desarrollo
+desde el año 2008. En particular:
 
 * La falta de recursos técnicos especializados en el desarrollo de software
   vinculados a los grupos que impulsan GPEC
@@ -135,8 +135,11 @@ El objetivo principal que persigue este trabajo es:
 
 * Desarrollar un software *front-end* totalmente compatible con el back-end 
   existente que reemplace al actual (*Visual Gpec*), orientado a un desarrollo
-  prolongado y extensible, que satisfaciendo las funcionalidades con las que 
-  este cuenta y las amplie y mejore en algunos aspectos como la ergonomía, la calidad de los diagramas producidos, 
+  prolongado y extensible, basado en un lenguaje de programación moderno y bibliotecas
+  en desarrollo activo. 
+  Debe satisfacer las funcionalidades con las que 
+  la versión actual cuenta, ampliándolas y mejorándolas en algunos aspectos como 
+  la ergonomía, la calidad de los diagramas producidos, 
   la :term:`usabilidad` general, y aspecto visual del programa.
 
 Objetivos específicos
@@ -146,7 +149,7 @@ Los objetivos específicos del proyecto son:
 
 * Estudiar y documentar la versión preexistente del software. Vea :ref:`relevamiento`.
 
-* Dilucidar fallas de diseño desde el punto de vista del usuarios
+* Dilucidar fallas de diseño desde el punto de vista del usuario
   e idear sus soluciones para incluirlas como nuevos requerimientos.
 
 * Relevar nuevos requerimientos.
@@ -157,7 +160,7 @@ Los objetivos específicos del proyecto son:
 * Investigar tecnologías (lenguajes de programación, bibliotecas de funciones, 
   etc) y justificar las adoptadas. 
 
-* Codificar y documentar el software de manera que satisfaga el conjunto
+* Codificar y documentar el proyecto de manera que satisfaga el conjunto
   de requerimientos planteados.
 
 * Verificar y validar la implementación. 
@@ -168,11 +171,15 @@ Los objetivos específicos del proyecto son:
         :ref:`requerimientos`
 
 
+
+
 .. [#] Web: http://gpec.efn.uncor.edu
 
 .. [#] *Global phase equilibrium calculations: Critical lines, critical end points 
        and liquid-liquid-vapour equilibrium in binary mixtures*, M Cismondi, ML Michelsen 
        - The Journal of Supercritical Fluids, 2007 - Elsevier
+
+.. [#] Universidad Técnica de Dinamarca 
 
 .. [#] Es un instituto de investigación, educación y desarrollo de tecnología 
        con sede en la ciudad de Bahía Blanca, dependiente de la Universidad 
@@ -182,6 +189,6 @@ Los objetivos específicos del proyecto son:
 .. [#] Grupo de investigación de la Facultad de Ciencias Exáctas Físicas
        y Naturales. Web: http://www.idtq.efn.uncor.edu
 
-.. [#] Según estadísticas del sitio web de GPEC
+.. [#] 
 
 

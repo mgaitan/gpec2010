@@ -42,7 +42,7 @@
           <div class="body">
             
   <div class="section" id="especificaci-n-de-la-interfaz-de-comunicaci-n">
-<h1>Especificación de la interfaz de comunicación<a class="headerlink" href="#especificaci-n-de-la-interfaz-de-comunicaci-n" title="Enlazar permanentemente con este título">¶</a></h1>
+<span id="api"></span><h1>Especificación de la interfaz de comunicación<a class="headerlink" href="#especificaci-n-de-la-interfaz-de-comunicaci-n" title="Enlazar permanentemente con este título">¶</a></h1>
 <p>Esta documentación especifica la interfaz de archivos de entrada y salida
 para el conjunto de programas de cálculo que componen <em>GPEC</em>.
 Se ha realizado a través de un proceso de <em>ingeniería inversa</em>,
@@ -120,9 +120,9 @@ Esta bidireccionalidad del cálculo se especifica mediante el parametro <tt clas
 </div>
 </blockquote>
 <p>Formato General:</p>
-<div class="highlight-python"><pre>SENTIDO MODELO
-PARAM1    PARAM2    PARAM3    [PARAM4]</pre>
-</div>
+<blockquote>
+SENTIDO MODELO
+PARAM1    PARAM2    PARAM3    [PARAM4]</blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -212,9 +212,12 @@ de los parámetros del modelo</p>
 <p>Este modo se define con <tt class="docutils literal"><span class="pre">SENTIDO</span></tt> 0. Se definen las variables del compuesto.</p>
 <blockquote>
 <p>Modelos 1, 2, 3:</p>
-<div class="highlight-python"><pre>0 MODELO
- TC    PC    OM     VC</pre>
-</div>
+<blockquote>
+<dl class="docutils">
+<dt>0 MODELO</dt>
+<dd>TC    PC    OM     VC</dd>
+</dl>
+</blockquote>
 <p>Para los modelos 4 y 6 el formato es el siguiente:</p>
 <div class="highlight-python"><pre>0  MODELO
  TC    PC    OM</pre>
@@ -258,12 +261,12 @@ de los parámetros del modelo</p>
 </tbody>
 </table>
 </blockquote>
-<p>Todos los parámetros son editables en el formulario excepto <tt class="docutils literal"><span class="pre">VCeos</span></tt>.</p>
-<p>Para RK-PR el valor sí es editable y está asociado a un factor denominado
-<tt class="docutils literal"><span class="pre">Critical</span> <span class="pre">Volume</span> <span class="pre">Ratio</span> <span class="pre">Model/Experimental</span></tt> o <tt class="docutils literal"><span class="pre">VCrat</span></tt> que se fija a 1.168.</p>
-<blockquote>
-VCeos = VCmodel*VCrat</blockquote>
-<p>Para el modelo <tt class="docutils literal"><span class="pre">RK-PR</span></tt> se permite editar esta proporción.
+<p>Todos los parámetros son editables en el formulario excepto <tt class="docutils literal"><span class="pre">VCeos</span></tt>. Para
+RK-PR el valor sí es editable y está asociado a un factor denominado
+<tt class="docutils literal"><span class="pre">Critical</span> <span class="pre">Volume</span> <span class="pre">Ratio</span> <span class="pre">Model/Experimental</span></tt> o <tt class="docutils literal"><span class="pre">VCrat</span></tt> que se fija por omisión a 1.168.</p>
+<div class="math">
+<p><img src="_images/math/4e372fd2ed5c2097fb7092583587ece2c17151b9.png" alt="VCeos = VCmodel*VCrat" /></p>
+</div><p>Para el modelo <tt class="docutils literal"><span class="pre">RK-PR</span></tt> se permite editar esta proporción.
 Si el usuario define <tt class="docutils literal"><span class="pre">VCeos</span></tt>, se actualiza el <tt class="docutils literal"><span class="pre">VCrat</span></tt> y viceversa.</p>
 </div>
 <div class="section" id="modo-para-calcular-variables-del-compuesto">
@@ -272,9 +275,10 @@ Si el usuario define <tt class="docutils literal"><span class="pre">VCeos</span>
 <blockquote>
 <ul>
 <li><p class="first">1  <span class="target" id="soave-redlich-kwong">Soave-Redlich-Kwong</span></p>
-<div class="highlight-python"><pre>1   1
-ac    b    m</pre>
-</div>
+<blockquote>
+<p>1   1
+ac    b    m</p>
+</blockquote>
 <p>Detalle:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -317,7 +321,7 @@ ac    b    m</pre>
 </table>
 </li>
 <li><p class="first">2  Peng-Robinson</p>
-<p>Idem <a class="reference external" href="#soave-redlich-kwong">Soave-Redlich-Kwong</a></p>
+<p>Idem <a class="reference internal" href="#soave-redlich-kwong">Soave-Redlich-Kwong</a></p>
 </li>
 <li><p class="first">3  RK-PR</p>
 <div class="highlight-python"><pre>1   3
@@ -419,7 +423,7 @@ eps/k   ro    m</pre>
 <li><p class="first">5   GC</p>
 <div class="admonition-todo admonition " id="index-0">
 <p class="first admonition-title">Todo</p>
-<p class="last">No aplica ?</p>
+<p class="last">No aplica</p>
 </div>
 </li>
 <li><p class="first">6   SPHCT</p>
@@ -438,28 +442,29 @@ El formato es el mismo independientemente del sentido de cálculo, teniendo la
 primer línea las variables de estado del compuesto, y en la segunda, los
 parámetros propios del modelo.</p>
 <p>Formato General:</p>
-<div class="highlight-python"><pre>VAR1  VAR2   VAR3    VAR4
-PARM1 PARAM2 PARAM3  [...]</pre>
-</div>
+<blockquote>
+VAR1  VAR2   VAR3    VAR4
+PARM1 PARAM2 PARAM3  [...]</blockquote>
 <p>Detalle:</p>
 <blockquote>
 <ul>
-<li><p class="first">Para <a class="reference external" href="#soave-redlich-kwong">Soave-Redlich-Kwong</a> (id 1) y  <tt class="docutils literal"><span class="pre">Peng-Robinson</span></tt> (id 2):</p>
-<div class="highlight-python"><pre>TC    PC    VC    OM
-ac     b     m</pre>
-</div>
+<li><p class="first">Para <a class="reference internal" href="#soave-redlich-kwong">Soave-Redlich-Kwong</a> (id 1) y  <tt class="docutils literal"><span class="pre">Peng-Robinson</span></tt> (id 2):</p>
+<blockquote>
+<p>TC    PC    VC    OM
+ac     b     m</p>
+</blockquote>
 </li>
 <li><p class="first">Para  <tt class="docutils literal"><span class="pre">RK-PR</span></tt> (id 3):</p>
-<div class="highlight-python"><pre>TC    PC     VC    OM
-ac     b   del1     k</pre>
-</div>
+<blockquote>
+<p>TC    PC     VC    OM
+ac     b   del1     k</p>
+</blockquote>
 </li>
 <li><p class="first">Para  <tt class="docutils literal"><span class="pre">PC-SAFT</span></tt> (id 4):</p>
-<div class="highlight-python"><pre>TC    PC     VC    OM
-eps/k   ro    m</pre>
-</div>
-</li>
-<li><p class="first">Para  <tt class="docutils literal"><span class="pre">SPHCT</span></tt> (id 6):</p>
+<blockquote>
+<p>TC    PC     VC    OM
+eps/k   ro    m</p>
+</blockquote>
 </li>
 </ul>
 </blockquote>
@@ -497,7 +502,7 @@ MAX_P</pre>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">MODELO:</th><td class="field-body"><p class="first"><a class="reference external" href="#id-de-modelos">ID de Modelos</a></p>
+<tr class="field"><th class="field-name">MODELO:</th><td class="field-body"><p class="first"><a class="reference internal" href="#id-de-modelos">ID de Modelos</a></p>
 </td>
 </tr>
 <tr class="field"><th class="field-name">NCOMB:</th><td class="field-body"><p class="first">Regla de combinación</p>
@@ -545,7 +550,7 @@ MAX_P</pre>
 </td>
 </tr>
 <tr class="field"><th class="field-name">CONST:</th><td class="field-body"><p class="first">Constantes del compuesto.
-Para los <a class="reference external" href="#id-de-modelos">modelos</a> 1, 2 y 6 los parámetros son los siguientes:</p>
+Para los <a class="reference internal" href="#id-de-modelos">modelos</a> 1, 2 y 6 los parámetros son los siguientes:</p>
 <div class="highlight-python"><pre>TC    PC    OM    VC</pre>
 </div>
 <p>Para el modelo 4 se agrega un parámetro más:</p>
@@ -1025,7 +1030,7 @@ previo al cálculo:</p>
 <div class="section" id="pxyout-dat">
 <h2>PXYOUT.DAT<a class="headerlink" href="#pxyout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Es el archivo de salida para el diagrama Presión-Composición (diagrama isotermico).
-Tiene una estructura de <a class="reference external" href="#datos-tabulados">datos tabulados</a> como sigue:</p>
+Tiene una estructura de <a class="reference internal" href="#datos-tabulados">datos tabulados</a> como sigue:</p>
 <div class="highlight-python"><pre>T = TEMPERATURA K
 
    P       X(1)     Y(1)     Y(2)           X(2)    dX(mol/L) dY(mol/L) [...]
@@ -1039,7 +1044,7 @@ p.n       x1.n      y1.n     y2.n           x2.n    dX.n      dY.n      [...]</p
 </div>
 <div class="section" id="pfortxy-dat">
 <h2>PFORTXY.DAT<a class="headerlink" href="#pfortxy-dat" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Análogo a <a class="reference external" href="#tforpxy-dat">TFORPXY.dat</a> para el diagrama de presión constante, este archivo
+<p>Análogo a <a class="reference internal" href="#tforpxy-dat">TFORPXY.dat</a> para el diagrama de presión constante, este archivo
 indica el valor de presión definida por el usuario.</p>
 <blockquote>
 <blockquote>
@@ -1063,7 +1068,7 @@ de valores aceptados por el sistema.</p>
 <div class="section" id="txyout-dat">
 <h2>TXYOUT.DAT<a class="headerlink" href="#txyout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Datos tabulados de salida para diagramas isobáricos. Tiene
-la misma estructura que <a class="reference external" href="#pxyout-dat">PXYOUT.DAT</a> pero el parámetro constante es la temperatura
+la misma estructura que <a class="reference internal" href="#pxyout-dat">PXYOUT.DAT</a> pero el parámetro constante es la temperatura
 y la primer columna de datos tabulados es presión:</p>
 <div class="highlight-python"><pre>P = PRESION bar
 
@@ -1086,7 +1091,7 @@ que define el usuario.</p>
 <p class="last"><tt class="docutils literal"><span class="pre">IsoplethGPEC</span></tt> requiere, además de este archivo, que <tt class="docutils literal"><span class="pre">GPECIN.DAT</span></tt> y
 <tt class="docutils literal"><span class="pre">GPECOUT.DAT</span></tt> hayan sido generados.</p>
 </div>
-<p>Es similar a <a class="reference external" href="#pfortxy-dat">PFORTXY.DAT</a> y <a class="reference external" href="#tforpxy-dat">TFORPXY.dat</a> pero define un parámetro <tt class="docutils literal"><span class="pre">z</span></tt>
+<p>Es similar a <a class="reference internal" href="#pfortxy-dat">PFORTXY.DAT</a> y <a class="reference internal" href="#tforpxy-dat">TFORPXY.dat</a> pero define un parámetro <tt class="docutils literal"><span class="pre">z</span></tt>
 adimensional que representa la fracción de compuesto:</p>
 <div class="highlight-python"><pre>   Z
 
@@ -1170,8 +1175,8 @@ X1_min  X1_max</pre>
 <div class="section" id="fugout-dat">
 <h2>FUGOUT.DAT<a class="headerlink" href="#fugout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>El archivo de salida de datos para <em>Fugacidad-Composición</em> producido por
-<tt class="docutils literal"><span class="pre">FUGi</span></tt>. Tiene una estructura similar a <a class="reference external" href="#gpecout-dat">GPECOUT.DAT</a> y en particular
-una <a class="reference external" href="#cabecera">cabecera</a> y un bloque de <a class="reference external" href="#datos-tabulados">datos tabulados</a> que tiene la siguiente
+<tt class="docutils literal"><span class="pre">FUGi</span></tt>. Tiene una estructura similar a <a class="reference internal" href="#gpecout-dat">GPECOUT.DAT</a> y en particular
+una <a class="reference internal" href="#cabecera">cabecera</a> y un bloque de <a class="reference internal" href="#datos-tabulados">datos tabulados</a> que tiene la siguiente
 estructura:</p>
 <div class="highlight-python"><pre>  T(K)         P(bar)
   TEMPERATURA  PRESION
@@ -1228,7 +1233,7 @@ por el usuario.</td>
 </div>
 <div class="section" id="isoxtout-dat">
 <h2>IsoXTout.DAT<a class="headerlink" href="#isoxtout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Archivo de salida similar a <a class="reference external" href="#fugout-dat">FUGOUT.DAT</a> con una <a class="reference external" href="#cabecera">cabecera</a> con la siguiente
+<p>Archivo de salida similar a <a class="reference internal" href="#fugout-dat">FUGOUT.DAT</a> con una <a class="reference internal" href="#cabecera">cabecera</a> con la siguiente
 estructura:</p>
 <div class="highlight-python"><pre>T (K)       x1          x2
 TEMPERATURA PROPORCION  1-PROPORCION
@@ -1328,7 +1333,7 @@ previo a las columnas de datos.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2010, Martín Gaitán.
-      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.1.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.5.
     </div>
   </body>
 </html>

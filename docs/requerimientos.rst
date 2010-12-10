@@ -1,4 +1,3 @@
-*****************************
 Ingeniería de requerimientos
 *****************************
 
@@ -51,11 +50,32 @@ las dos partes (ver `API`_). Asimismo, los datos de salida que producen los algo
 leídos por Visual Gpec desde archivos de texto para su posterior graficación. 
 
 Dicha graficación se realiza mediante rutinas desarrolladas *ad hoc* para esta 
-implementación: los gráficos se generan a un nivel de abstracción muy bajo 
-(punto a punto, sobre un widget tipo canvas). 
+implementación. No se basa en ninguna biblioteca para estos fines. 
+Es decir que los gráficos se generan mediante 
+el trazado punto a punto sobre un *widget* tipo canvas. El control 
+de escala, segmentación y demás funcionalidades básicas debió programarse desde cero. 
+
+
+.. figure:: images/visual_gpec2.png
+   :width: 80%
+   
+   Visualizacion de un diagrama P-T para el sistema Methane-Methanol
+   con modelo RK-PR. 
 
 El resultado de esto, si bien es aceptable y funcional, implicó muchas horas de 
-desarrollo, con gráficos poco configurables y de baja calidad visual.  
+desarrollo, con gráficos sólo 2D, poco configurables, que no se pueden 
+vectorizar ni exportar. 
+
+Licenciamiento
+---------------
+
+*Visual GPEC* no tiene una licencia explicitada pero se trata de 
+un *freeware**, es decir, un tipo de software que se distribuye  sin costo y 
+está disponible para su uso por tiempo ilimitado. La última versión 
+públicamente disponible era la 2.0. 
+
+Hasta el momento, GPEC no es Software Libre ni Opensource, ya que su código 
+fuente no está  disponible. 
 
 
 Aspectos de ingeniería de software
@@ -65,11 +85,6 @@ Durante su desarrollo anterior, GPEC no adoptó ninguna metodología de
 desarrollo particular, salvo la concerniente a la separación  
 funcional de la aplicación como se explica más arriba. 
 
-.. figure:: images/visual_gpec2.png
-   :width: 80%
-   
-   Visualizacion de un diagrama P-T para el sistema Methane-Methanol
-   con modelo RK-PR. 
 
 
 Un problema manifestado por el equipo de desarrollo es el del versionamiento,
@@ -105,11 +120,79 @@ Requerimientos
 Requerimientos funcionales
 ---------------------------
 
-1. 
-1. Diagramas 3Dmaqueta de estructura
-    * Modelos
-    * Gestión de base de datos
-    * etc ...
+Todas las funcionalidades de la versión preexistente de GPEC deben igualarse y 
+en lo posible mejorarse. Se detallan a continuación:
 
-Requerimientos No Funcionales
-==============================
+
+* Generación del sistema binario: selección de dos sustancias. 
+* Gestión de de base de datos de constantes de compuestos químicos. Se incluirá una base de datos 
+  con el software que el usuario puede manipular.
+* Adecuación del formulario y archivo de entrada de parámetros para 
+  diferentes ecuaciones de estado (modelos) de base molecular [#]_ : 
+
+     * Soave-Redlich-Kwong 
+     * Peng-Robinson
+     * RK-PR
+     * Simplified Perturbed Hard Chain Theory
+     * Perturbed Chain Statistical Associating Fluid Theory (PC-SAFT)
+
+* Generación de suite de gráficos 2-D: 
+
+    * Diagrama de equilibrio de fase global :
+
+      * Presión - Temperatura (P-T)
+      * Temperatura - Composición (T-x)
+      * Temperatura - Densidad (T-ρ) 
+      * Presión - Composición (P-x)
+      * Presión - Densidad (P-ρ)
+
+    * Isopletas: diagramas para composición ``Z`` constante (rango definible [0, 1] ):
+        
+        * Presión - Temperatura (P-T)
+        * Temperatura - Composición (T-x)
+        * Temperatura - Densidad (T-ρ)
+        * Presión - Composición (P-x)
+        * Presión - Densidad (P-ρ)
+
+    * Diagramas isotérmicos (Pxy): diagramas para temperatura ``T [K]`` constante [#]_:
+
+        * Presión - Composición (Pxy)
+        * Presión - Densidad (P-ρ)
+
+    * Diagramas isobáricos (Txy): diagramas para presión ``P [bar]`` constante :
+
+        * Temperatura - Composición (Txy)
+        * Temperatura - Densidad  (T-ρ)
+
+* Generación de suite de gráficos 3-D: diagramas globales y de parámetros constantes 
+  automáticamente superpuestos para cada caso:
+
+        * Presión - Temperatura - Densidad
+        * Presión - Temperatura - Composición
+        
+* Superposición de diagramas compatibles
+* Gestión de proyectos (manipulación múltiples casos de sistemas/modelo/gráfico) 
+* Gestión de persistencia de datos (abrir, guardar, etc.)
+* Ejecución multiplataforma: GPEC debe ser capaz de utilizarse en entornos Windows y Linux
+* Exportación de gráficos 
+
+Requerimientos no funcionales
+-----------------------------
+
+* GPEC requiere flexibilidad que permita
+  la extensibilidad de funcionalidades. Para esto se apunta a una arquitectura 
+  lógica modularizada que permita incorporar o extender funcionalidades de manera 
+  accesible. 
+* Manipulación de gráficos accesible: zoom, rotación, desplazamiento, ocultación de curvas, etc.
+* Calidad y formatos de gráficos válidos para publicaciones científicas
+* Configurabilidad de aspecto de los gráficos
+* Usabilidad y claridad de las interfaces: debe poder usarse intuitivamente
+
+
+
+.. [#]  Para la parametrización de los datos de entrada para cada ecuación de 
+        estado fue menenester documentar la :ref:`api`.
+
+.. [#]  La validación de los rangos dinámicos (dependen de las constantes críticas
+        de los compuestos del sistema) la realizan los algoritmos de cálculo. El frontend
+        se limita a reportar un error en la obtención de los datos de salida. 

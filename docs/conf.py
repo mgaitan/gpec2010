@@ -212,10 +212,10 @@ latex_show_urls = False
 #                  \setkeys{Gin}{width=0.25\textwidth}"""
 
 # Documents to append as an appendix to all manuals.
-#latex_appendices = []
+latex_appendices = ['api', 'glosario']
 
 # If false, no module index is generated.
-#latex_domain_indices = True
+latex_domain_indices = False
 
 
 # Example configuration for intersphinx: refer to the Python standard library.

@@ -51,7 +51,7 @@
             
   <div class="section" id="marco-te-rico">
 <h1>2. Marco Teórico<a class="headerlink" href="#marco-te-rico" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>Debido a la naturaleza multidisplinaria de este trabajo, posiblemente sea leído
+<p>Debido a la naturaleza multidisciplinaria de este trabajo, posiblemente sea leído
 y evaluado por profesionales o interesados de/en las distintas áreas de incumbecia
 (química y computación).</p>
 <blockquote>
@@ -61,45 +61,80 @@ y evaluado por profesionales o interesados de/en las distintas áreas de incumbe
 </div>
 </blockquote>
 <p>Dado que no necesariamente se tiene un conocimiento
-sólido fuera de la especifidad de la profesión, en este capitulo se presentarán
+sólido fuera de la especifidad de la profesión, en este capítulo se presentarán
 conceptos generales (que no pretenten exhautividad pero sí precisión) de las dos áreas,
 útiles para la comprensión de este trabajo. Para definiciónes de términos puntuales,
 consulte el <a class="reference internal" href="glosario.html#glosario"><em>glosario</em></a>.</p>
-<div class="section" id="conceptos-de-diagramas-de-fases-en-termodin-mica">
-<h2>2.1. Conceptos de diagramas de fases en termodinámica<a class="headerlink" href="#conceptos-de-diagramas-de-fases-en-termodin-mica" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="conceptos-de-diagramas-y-equilibrio-de-fases">
+<h2>2.1. Conceptos de diagramas y equilibrio de fases<a class="headerlink" href="#conceptos-de-diagramas-y-equilibrio-de-fases" title="Enlazar permanentemente con este título">¶</a></h2>
 </div>
-<div class="section" id="conceptos-de-orientaci-n-a-objetos">
-<h2>2.2. Conceptos de orientación a objetos<a class="headerlink" href="#conceptos-de-orientaci-n-a-objetos" title="Enlazar permanentemente con este título">¶</a></h2>
-<div class="section" id="orientaci-n-a-eventos">
-<h3>2.2.1. Orientación a eventos<a class="headerlink" href="#orientaci-n-a-eventos" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="metodolog-as-de-desarrollo-de-software">
+<h2>2.2. Metodologías de desarrollo de Software<a class="headerlink" href="#metodolog-as-de-desarrollo-de-software" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="metodolog-as-giles">
+<h3>2.2.1. Metodologías Ágiles<a class="headerlink" href="#metodolog-as-giles" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El desarrollo de este trabajo ha sido guiado por un conjunto de preceptos
+comunes a las <em>metodologías ágiles de desarrollo de software</em>.
+Sin necesariamente ajustarse a ninguna en particular, se comparte
+la escala de valoración hecha en el Manifiesto <a class="reference internal" href="#ag-manif">[AG-MANIF]</a> :</p>
+<blockquote>
+<ul class="simple">
+<li>Individuos e interacciones sobre procesos y herramientas</li>
+<li>Software funcionando sobre documentación extensiva</li>
+<li>Colaboración con el cliente sobre negociación contractual</li>
+<li>Respuesta ante el cambio sobre seguimiento [estricto] de un plan</li>
+</ul>
+<p>(Esto es, aunque valoramos los elementos de la derecha,
+valoramos más los de la izquierda).</p>
+</blockquote>
+<p>Las <em>implementaciones</em> del marco conceptual propuesto por el Manifiesto de
+desarrollo ágil (como <em>eXtremme Programming</em> o <em>Scrum</em>) están estructuralmente
+concebidas para el trabajo de un equipo de trabajo abocado al mismo proyecto.
+Como el desarrollo  del software estuvo a cargo de una sola persona
+(con la colaboración y revisión de los directores) no se ajustó
+a un método estrictamente definido para un equipo como los mencionados.</p>
+<p>Sin embargo, muchas ideas propuestas por estos métodos han sido aplicadas,
+concibiendo un desarrollo incremental e iterativo con énfasis en la adaptabilidad
+de los requerimientos.</p>
+<p>Algunas de las técnicas y procesos ágiles involucrados en este desarrollo
+han sido la utilización de un lenguaje de muy alto nivel (ver <em class="xref std std-ref">tecnologias</em> ),
+la implementación de pruebas automatizadas, la utilización de bibliotecas
+probas para la implementación de aspectos específicos de la solución, entre
+otras.</p>
 </div>
+<div class="section" id="desarrollo-evolutivo-adaptado">
+<h3>2.2.2. Desarrollo evolutivo adaptado<a class="headerlink" href="#desarrollo-evolutivo-adaptado" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Según Sommerville en [IS2004], el desarrollo evolutivo se basa en la idea de
+una implementación inicial, exponiéndola a los comentarios del comitente o
+los usuarios, y refinándola a través de diferentes versiones preliminares
+(versiones <em>beta</em>) hasta obtener una versión que satisfaga el conjunto de
+requerimientos planteado.</p>
+<blockquote>
+<div class="figure">
+<object data="_images/desarrollo_evolutivo.svg" type="image/svg+xml" width="90%"><embed src="_images/desarrollo_evolutivo.svg" type="image/svg+xml" width="90%" /></object>
 </div>
-<div class="section" id="metodolog-as">
-<h2>2.3. Metodologías<a class="headerlink" href="#metodolog-as" title="Enlazar permanentemente con este título">¶</a></h2>
-<div class="section" id="desarrollo-por-etapas">
-<h3>2.3.1. Desarrollo por etapas<a class="headerlink" href="#desarrollo-por-etapas" title="Enlazar permanentemente con este título">¶</a></h3>
-</div>
-<div class="section" id="refactoring">
-<h3>2.3.2. Refactoring<a class="headerlink" href="#refactoring" title="Enlazar permanentemente con este título">¶</a></h3>
-</div>
-</div>
-<div class="section" id="principios-de-dise-o">
-<h2>2.4. Principios de diseño<a class="headerlink" href="#principios-de-dise-o" title="Enlazar permanentemente con este título">¶</a></h2>
-<div class="section" id="dry">
-<h3>2.4.1. DRY<a class="headerlink" href="#dry" title="Enlazar permanentemente con este título">¶</a></h3>
-<p><abbr title="Don't Reapeat Yourself">DRY</abbr> , &#8220;No te repitas&#8221; es un principi</p>
-</div>
-<div class="section" id="pareto">
-<h3>2.4.2. Pareto<a class="headerlink" href="#pareto" title="Enlazar permanentemente con este título">¶</a></h3>
-</div>
-<div class="section" id="loose-coupling">
-<h3>2.4.3. Loose Coupling<a class="headerlink" href="#loose-coupling" title="Enlazar permanentemente con este título">¶</a></h3>
+</blockquote>
+<p>Las actividades de especificación, desarrollo y validación se entrelazan en
+vez de separarse, con una rápida y constantes retroalimentación entre estas.</p>
+<p>Existen dos grandes tipos de desarrollos evolutivos:</p>
+<ol class="arabic simple">
+<li><em>Desarrollo exploratorio</em> donde el objetivo del proceso es trabajar con el
+cliente para explorar y precisar los requerimientos y obtener un sistema
+final. Se comienza con las partes del sistema que más cabalmente se
+comprenden y se evoluciona agregando nuevos atributos precisados por el
+comitente, la comunidad de usuarios o el propio equipo de desarrollo.</li>
+<li><em>Prototipos desechables</em> donde el objetivo del proceso es comprender
+mejor los requerimientos. Una vez evacuadas todas las incertidumbres, los
+prototipos se desechan y se diseña e implementa el sistema final desde el
+principio.</li>
+</ol>
+<p>En este trabajo se aplicó principlamente un proceso evolutivo de tipo exploratorio,
+basándose en estrategias de desarrollo ágil mencionadas previamente.</p>
 </div>
 </div>
 <div class="section" id="tecnolog-as-principales">
-<span id="tecnologias"></span><h2>2.5. Tecnologías principales<a class="headerlink" href="#tecnolog-as-principales" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>2.3. Tecnologías principales<a class="headerlink" href="#tecnolog-as-principales" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="python">
-<h3>2.5.1. Python<a class="headerlink" href="#python" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>2.3.1. Python<a class="headerlink" href="#python" title="Enlazar permanentemente con este título">¶</a></h3>
 <p><a class="reference external" href="http://python.org">Python</a> es un avanzado lenguaje de programación de alto nivel,
 <a class="reference internal" href="#term-interpretado"><em class="xref std std-term">interpretado</em></a>, <a class="reference internal" href="#term-multiparadigma"><em class="xref std std-term">multiparadigma</em></a> y <a class="reference internal" href="#term-multiplataforma"><em class="xref std std-term">multiplataforma</em></a>.</p>
 <blockquote>
@@ -125,11 +160,11 @@ del software, de manera que un mismo programa puede ser ejecutado en
 diferentes plataformas.</dd>
 </dl>
 </blockquote>
-<p>Un sencillo programa <em>&#8220;Hola Mundo&#8221;</em> <a class="footnote-reference" href="#id23" id="id2">[1]</a> en Python se ve así:</p>
+<p>Un sencillo programa <em>&#8220;Hola Mundo&#8221;</em> <a class="footnote-reference" href="#id26" id="id3">[1]</a> en Python se ve así:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="s">&quot;¡Hola Mundo!&quot;</span>
 </pre></div>
 </div>
-<p>Además, la mayoría de sus implementaciones <a class="footnote-reference" href="#id24" id="id3">[2]</a>, permiten ejecutar código en
+<p>Además, la mayoría de sus implementaciones <a class="footnote-reference" href="#id27" id="id4">[2]</a>, permiten ejecutar código en
 modo interactivo al estilo Matlab® u <em>Octave</em>,
 de manera que las expresiones pueden ser introducidas una a una y ver el resultado
 de su evaluación inmediatamente:</p>
@@ -143,9 +178,9 @@ de su evaluación inmediatamente:</p>
 <p>Esto resulta útil tanto para los principiantes que se están familiarizando con el lenguaje
 como para los programadores avanzados: se pueden probar porciones de código en el modo interactivo antes
 de integrarlo como parte de un programa.</p>
-<p>Por diseño <a class="footnote-reference" href="#id25" id="id4">[3]</a>, Python tiene sintaxis muy clara que facilita la legibilidad del código.
+<p>Por diseño <a class="footnote-reference" href="#id28" id="id5">[3]</a>, Python tiene sintaxis muy clara que facilita la legibilidad del código.
 Esta característica es la razón por la que Guido van Rossum, su creador,
-lo compara con &#8220;<a class="reference internal" href="glosario.html#term-pseudoc-digo"><em class="xref std std-term">pseudocódigo</em></a> ejecutable&#8221; <a class="footnote-reference" href="#id26" id="id5">[4]</a>. El siguiente programa
+lo compara con &#8220;<a class="reference internal" href="glosario.html#term-pseudoc-digo"><em class="xref std std-term">pseudocódigo</em></a> ejecutable&#8221; <a class="footnote-reference" href="#id29" id="id6">[4]</a>. El siguiente programa
 aplica conceptos de programación orientada  a objetos como <a class="reference internal" href="glosario.html#term-herencia"><em class="xref std std-term">herencia</em></a> y <a class="reference internal" href="glosario.html#term-polimorfismo"><em class="xref std std-term">polimorfismo</em></a>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Superclase que define un constructor común y</span>
@@ -202,7 +237,7 @@ al otro tipo de manera explícita.</p>
 <p>El lenguaje incluye una <strong>robusta biblioteca estándar</strong> (se dice habitualmente que <em>&#8220;Python
 tiene con las baterías incluídas&#8221;</em>) con acceso a funcionalidades de todo tipo
 como protocolos de internet, funciones matemáticas, manejo de hilos y multiprocesos,
-pruebas unitarias y abstracción de llamadas al sistemas operativo subyacente, entre
+pruebas unitarias, manipulación de XML y abstracción de llamadas al sistemas operativo subyacente, entre
 muchas otras.</p>
 <p>Además de la incorporada, puede interfacear con diversas bibliotecas, por ejemplo
 para desarrollar interfaces gráficas de usuario (<a class="reference internal" href="glosario.html#term-gui"><em class="xref std std-term">GUI</em></a>) (ver <em class="xref std std-ref">wxpython</em>), y
@@ -218,9 +253,9 @@ plantea Shannon Behrens en el prólogo de <a class="reference internal" href="#t
 Hubo un tiempo en el que las compañías me llamaban loco cuando insistía en usar Python.
 En estos días, simplemente no hay suficientes programadores Python para todos.
 Grandes empresas como Google, YouTube, VMware y DreamWorks están en una lucha
-constante para contratar todo buen talento Python que puedan encontrar. <a class="footnote-reference" href="#id28" id="id11">[5]</a></blockquote>
+constante para contratar todo buen talento Python que puedan encontrar. <a class="footnote-reference" href="#id31" id="id12">[5]</a></blockquote>
 <div class="section" id="python-en-el-software-cient-fico">
-<h4>2.5.1.1. Python en el software científico<a class="headerlink" href="#python-en-el-software-cient-fico" title="Enlazar permanentemente con este título">¶</a></h4>
+<h4>2.3.1.1. Python en el software científico<a class="headerlink" href="#python-en-el-software-cient-fico" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Como se afirma en <a class="reference internal" href="#jh-fp">[JH-FP]</a> en la sección <em>Who is using Python?</em>, el uso de
 Python en la computación científica  es tan amplio como el campo mismo.
 Los autores destacan muchos usos en distintas universidades y centros de investigación
@@ -245,7 +280,7 @@ para la exploración de petroleo.</p>
 <div class="admonition-ver-tambi-n admonition seealso">
 <p class="first admonition-title">Ver también</p>
 <p class="last">Muchos otros casos de éxito son detallados en el texto mencionado, en
-los dos volúmenes de <em>Python Success Stories</em> de la editorial O&#8217;Reilly&#8217;s <a class="footnote-reference" href="#id29" id="id13">[6]</a> y en
+los dos volúmenes de <em>Python Success Stories</em> de la editorial O&#8217;Reilly&#8217;s <a class="footnote-reference" href="#id32" id="id14">[6]</a> y en
 <a class="reference external" href="http://python.org/about/success/">http://python.org/about/success/</a></p>
 </div>
 </blockquote>
@@ -254,24 +289,24 @@ los dos volúmenes de <em>Python Success Stories</em> de la editorial O&#8217;Re
 </div>
 </div>
 <div class="section" id="numpy">
-<h3>2.5.2. NumPy<a class="headerlink" href="#numpy" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>2.3.2. NumPy<a class="headerlink" href="#numpy" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Los tipos de datos incorporados con Python nativamente para contener otros tipos
 de datos u objetos (en particular listas y tuplas), son muy eficientes pero
 están diseñados para ser multipropósito. Estos &#8220;contenedores&#8221; pueden albergar cualquier
 tipo de objeto (incluso una mezcla de ellos) y las listas, en particular, pueden mutar
 (agregar, modificar o borrar elementos) dinámicamente.</p>
-<p>Es decir, que si bien pueden usarse listas o tuplas como un <a class="reference internal" href="glosario.html#term-vector"><em class="xref std std-term">vector</em></a> de datos, no están
+<p>Es decir que si bien pueden usarse listas o tuplas como un <a class="reference internal" href="glosario.html#term-arreglo"><em class="xref std std-term">arreglo</em></a> de datos, no están
 especialmente concebidas para tal fin.</p>
 <blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Nota</p>
-<p class="last">Los siguientes párrafos descriptivos han sido tomados, en modo
+<p class="last">Los siguientes párrafos descriptivos han sido tomados, a modo
 de paráfrasis y traducido por el autor, del capitulo <em>What is NumPy?</em> de
 <a class="reference internal" href="#numpy-ug">[NumPy-UG]</a>.</p>
 </div>
 </blockquote>
 <p><a class="reference external" href="http://numpy.org">NumPy</a> es una biblioteca que extiende Python para complementar
-este aspecto, proveyendo un tipo de objeto vector multidimensional (<tt class="docutils literal"><span class="pre">narray</span></tt>) y
+este aspecto, proveyendo un tipo de objeto vector multidimensional (<tt class="docutils literal"><span class="pre">ndarray</span></tt>) y
 varios objetos derivados (como vectores enmascarados o matrices),
 además de rutinas optimizadas para la operación sobre estos vectores, incluyendo
 operaciones matemáticas y lógicas, manipulación de dimensiones, álgebra lineal,
@@ -290,8 +325,8 @@ pueden tener millones de elementos, se pagará el precio de una iteración inefi
 <div class="highlight-python"><div class="highlight"><pre><span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
 </pre></div>
 </div>
-<p>Dicho código funcionaría siempre que <tt class="docutils literal"><span class="pre">a</span></tt> y <tt class="docutils literal"><span class="pre">b</span></tt> tengan las mismas dimensiones,
-independientemente que sean uni o multidimensionales.</p>
+<p>Dicho código funcionaría siempre que <tt class="docutils literal"><span class="pre">a</span></tt> y <tt class="docutils literal"><span class="pre">b</span></tt> tengan las mismas
+dimensiones, independientemente que sean uni o multidimensionales.</p>
 <p>El ejemplo ilustra dos características de NumPy que son gran parte de las bases
 de su poder: <em>vectorización</em> y <em>broadcasting</em></p>
 <p>La <em>vectorización</em> describe la ausencia de iteraciones explícitas e indización
@@ -303,7 +338,7 @@ código C). La vectorización tiene muchas ventajas:</p>
 <li>Menos líneas de código habitualmente implican menos errores.</li>
 <li>El código se parece más a la notación matemática estándar (por lo que es más fácil,
 por lo general, corregir código asociado a construcciones matemáticas</li>
-<li>La vectorización redunda en un código más &#8220;pythónico&#8221; <a class="footnote-reference" href="#id30" id="id16">[7]</a></li>
+<li>La vectorización redunda en un código más &#8220;pythónico&#8221; <a class="footnote-reference" href="#id33" id="id17">[7]</a></li>
 </ul>
 </blockquote>
 <p>El <em>broadcasting</em> o <em>difusión</em> es el término que describe el comportamiento
@@ -312,7 +347,7 @@ las operaciones adoptan por defecto un comportamiento de este tipo (no sólo las
 aritméticas sino las lógicas, las funcionales y las de nivel de bits).</p>
 </div>
 <div class="section" id="matplotlib">
-<h3>2.5.3. Matplotlib<a class="headerlink" href="#matplotlib" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>2.3.3. Matplotlib<a class="headerlink" href="#matplotlib" title="Enlazar permanentemente con este título">¶</a></h3>
 <p><a class="reference external" href="http://matplotlib.sourceforge.net/">Matplotlib</a> es una biblioteca para Python,
 liberada como software libre, que permite la generación de diferentes tipos de gráficos en 2D y 3D con calidad
 de publicación. Se pueden generar gráficos cartesianos, polares, de barras,
@@ -327,7 +362,7 @@ histogramas, de superficie, etc.</p>
 a objetos. Está principalmente escrito en Python, aunque se basa fuertemente
 en NumPy y otras extensiones para proveer buena performance incluso con
 arreglos grandes.</p>
-<p>Sin bien existen otras bibliotecas libres con prestaciones similares <a class="footnote-reference" href="#id33" id="id18">[8]</a>, Matplotlib
+<p>Sin bien existen otras bibliotecas libres con prestaciones similares <a class="footnote-reference" href="#id36" id="id19">[8]</a>, Matplotlib
 se destaca por las siguientes características:</p>
 <blockquote>
 <ul class="simple">
@@ -354,13 +389,16 @@ código es un ejemplo extraído de <a class="reference internal" href="#st2009">
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+<p>El resultado se observa en el siguiente gráfico:</p>
+<blockquote>
 <div class="figure">
-<img alt="_images/mpl_fig1.png" src="_images/mpl_fig1.png" />
+<img alt="Figura" src="_images/mpl_fig1.png" />
 <p class="caption">Gráfico generado interactivamente</p>
 </div>
+</blockquote>
 </div>
 <div class="section" id="wxpython">
-<h3>2.5.4. WxPython<a class="headerlink" href="#wxpython" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>2.3.4. WxPython<a class="headerlink" href="#wxpython" title="Enlazar permanentemente con este título">¶</a></h3>
 <p><a class="reference external" href="http://www.wxwindows.org/">wxWidgets</a> es una biblioteca en C++ que permite
 desarrollar interfaces gráficas para aplicaciones multiplataforma que corren
 en Microsoft Windows, OS X, GNU/Linux o UNIX de 32 o 64 bits.</p>
@@ -434,87 +472,182 @@ de texto será actualizada con las coordenadas donde este se encuentra.</p>
 <p class="caption">Captura del ejemplo de marras</p>
 </div>
 </blockquote>
+<p>Como característica avanzada, wxPython incluye el módulo <abbr>AUI (Advanced
+User Interface)</abbr> que permite el desarrollo de interfaces de usuario orientadas
+a la <a class="reference internal" href="glosario.html#term-usabilidad"><em class="xref std std-term">usabilidad</em></a> y de alta calidad, abstrayendo y encapsulando
+el control de aspectos comunes. En particular, este módulo
+permite la gestión de <em>subframes</em>, de manera que los subcomponentes o subventanas
+pueden configurarse con mediante operaciones comunes como <em>abrir</em>, <em>cerrar</em> u <em>ocultar</em>,
+y ser guardadas como <em>perspectivas</em> que el usuario puede recuperar
+en posteriores sesiones de trabajo.</p>
 </div>
 </div>
 <div class="section" id="gesti-n-de-proyecto">
-<h2>2.6. Gestión de proyecto<a class="headerlink" href="#gesti-n-de-proyecto" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>2.4. Gestión de proyecto<a class="headerlink" href="#gesti-n-de-proyecto" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>En cualquier proyecto de software no trivial, sistematizar todos los aspectos del desarrollo
+es una necesidad ineludible. Esto incluye, por supuesto, la evolución del código,
+pero también su documentación, el reporte, seguimiento y solución de los errores
+detectados, la planificación de las etapas de desarrollo, la estimación de la
+carga de trabajo, etc.</p>
+<p>La gestión de proyecto es uno de los aspectos esenciales de la ingeniería
+de software. Como se explaya en [GR-STE2005], se necesita más que una buena
+idea y equipo de programadores talentosos para tener éxito con un proyecto de software.
+Exiten técnicas y herramientas para minimizar la ocurrencia de errores, la pérdida
+de información o tiempo.</p>
+<p>Del vasto conjunto de herramientas, se detallan aquí las utilizadas para el desarrollo
+de este trabajo.</p>
 <div class="section" id="control-de-versiones">
-<h3>2.6.1. Control de versiones<a class="headerlink" href="#control-de-versiones" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>2.4.1. Control de versiones<a class="headerlink" href="#control-de-versiones" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Un  <abbr title="Sistema de Control de Versiones">VCS</abbr> es un software capaz de llevar registro de
+la evolución incremental de cualquier conjunto de archivos, permitiendo
+recuperar &#8220;estados&#8221; anteriores (de una fecha en particular, por ejemplo) de
+una manera eficiente y automatizada. Cada vez que se detecta un cambio, el
+software de control almacena sólo la información necesaria (en particular &#8220;la
+diferencia&#8221; respecto a la versión anterior de cada archivo) en vez de guardar
+todo el archivo completo.</p>
+<p>En particular,tiene mucha utilidad para archivos de texto, como el código fuente de un
+software.</p>
+<p>El <abbr>VCS</abbr> utilizado para este proyecto fue  <a class="reference external" href="http://subversion.apache.org">Subversion</a> (frecuentemente
+abreviado <abbr>svn</abbr>).</p>
+<p><em>Subversion</em> es un VCS centralizado, es decir, requiere un servidor central
+(<em>repositorio</em>), generalmente accesible vía internet, que almacena todas las versiones
+(<em>revisiones</em>) de cada archivo. El usuario/desarrollador realiza un <em>commit</em> para enviar sus
+modificaciones locales al repositorio, y un <em>update</em> para actualizar la
+versión local (<em>copia de trabajo</em>) con la última versión (o la indicada
+explícitamente) del repositorio. Con cada <em>commit</em>, el sistema solicita la
+inclusión de un mensaje descriptivo de la modificación realizada, de manera
+de poder realizar un seguimiento y detectar un estado en particular si, por
+alguna razón, es necesario recuperar.</p>
+<p>Como servidor <em>svn</em> se utilizó el servicio de <em>Google Code</em>, que brinda
+un repositorio y otras herramientas de gestión de proyecto de manera
+gratuita, para desarrollos de software libre / open source.</p>
+<p>El proyecto se encuentra en la dirección <a class="reference external" href="http://code.google.com/p/gpec2010">http://code.google.com/p/gpec2010</a> .</p>
+</div>
+<div class="section" id="seguimiento-de-errores-y-propuestas">
+<h3>2.4.2. Seguimiento de errores y propuestas<a class="headerlink" href="#seguimiento-de-errores-y-propuestas" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El mismo servicio que provee el repositorio <em>svn</em> gratuito, incluye un
+sistema de gestión de errores (<em>bug tracker</em> o, más generalmente, <em>issue
+tracker</em>), del cual se ha hecho uso exhaustivo.</p>
+<p>Estos sistemas permiten la sistematización del &#8220;ciclo de vida&#8221; de un error,
+solicitud de funcionalidad o mejora. A través de una interfaz web
+(característica común a casi todos los sistemas de este tipo), el propio equipo de desarrollo
+o usuarios particulares pueden reportar un <em>incidente</em> (<em>issue</em>), con un mensaje breve y
+descriptivo que permita reproducir el error reportado, o bien fundamentando la necesidad
+de una mejora o nueva funcionalidad. El <em>issue</em> es asociado a
+palabras clave que identifican su estado (abierto, aceptado,
+rechazado, solucionado, etc), su gravedad o interes (bajo, normal, alto),
+etc. Por supuesto, cada una de estas palabras clave puede cambiar con el
+tiempo, adjuntando mensajes que indican las tareas realizadas en cada
+intervención, hasta que el <em>issue</em> sea cerrado, ya sea por que se logró una
+solución o se decidió descartarlo por alguna razón.</p>
+<p>La utidad de este tipo de sistemas permite la desentralización del reporte de
+errores, permitendo a la comunidad de usuarios participar de la mejora del
+software. También permite llevar registro de errores o funcionalidades
+pendientes en cada momento del desarrollo, facilitando la planificación de
+lanzamientos de nuevas versiones.</p>
 </div>
 <div class="section" id="documentaci-n">
-<h3>2.6.2. Documentación<a class="headerlink" href="#documentaci-n" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>2.4.3. Documentación<a class="headerlink" href="#documentaci-n" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Gran parte del desarrollo de un software así como el de un proyecto integrador o
+tésis en general, cualquiera sea el tópico, es la documentación. Contar con
+procedimientos y herramientas adecuadas para la realización de este trabajo es
+tan necesaria e importante como el lenguaje de programación adoptado para la
+codificación del software.</p>
+<p>A lo largo de todo el proyecto se fue documentando distintos aspectos del
+desarrollo, con distintos niveles de detalle. Se utilizaron las siguientes
+herramientas.</p>
 <div class="section" id="wiki">
-<h4>2.6.2.1. Wiki<a class="headerlink" href="#wiki" title="Enlazar permanentemente con este título">¶</a></h4>
+<h4>2.4.3.1. Wiki<a class="headerlink" href="#wiki" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>Una <em>wiki</em> es un sistema para la creación de documentos hipertextuales de
+manera sencilla. Con el permiso adecuado, un documento (en general una
+&#8220;página web&#8221;) se convierte en editable, pudiendo modificar o ampliar el
+contenido, incluir imágenes u otro tipo de información, o generar enlaces a otros documentos.</p>
+<p>El servicio <em>Google Code</em> incopora una <em>Wiki</em> que se ha utilizado como
+cuaderno de notas para llevar cuenta de las minutas, links de interés, etc.</p>
 </div>
 <div class="section" id="restructuredtext">
-<h4>2.6.2.2. restructuredText<a class="headerlink" href="#restructuredtext" title="Enlazar permanentemente con este título">¶</a></h4>
+<h4>2.4.3.2. restructuredText<a class="headerlink" href="#restructuredtext" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>El documento principal (la &#8220;tésis&#8221;) se ha escrito utilizando el lenguaje de
+marcado <a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/">reStructuredText</a>
+(<abbr>rst o rest</abbr>). <abbr>rst</abbr> permite aportar
+semántica a un documento de texto plano, de manera equivalente a <em>Latex</em>
+pero mucho más sencilla, conservando legibilidad en formato fuente.</p>
+<p>A través de diversas herramientas se puede convertir <em>rst</em> a distintos
+formatos, como html, pdf o código latex.</p>
 </div>
 <div class="section" id="sphinx">
-<h4>2.6.2.3. Sphinx<a class="headerlink" href="#sphinx" title="Enlazar permanentemente con este título">¶</a></h4>
-<table class="docutils footnote" frame="void" id="id23" rules="none">
+<h4>2.4.3.3. Sphinx<a class="headerlink" href="#sphinx" title="Enlazar permanentemente con este título">¶</a></h4>
+<p><a class="reference external" href="http://sphinx.pocoo.org">Sphinx</a> es una herramienta para la documentación de
+software. Si bien permite la <em>autodocumentación</em> (realizando introspección
+de las cadenas de documentación y las entidades del código fuente) está
+orientado a la creación de documentación escrita &#8220;por humanos&#8221;.</p>
+<p>Sphinx utiliza como formato de entrada el formato <a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/">restructuredText</a> y genera
+versiones en html (con motor de búsqueda y resaltado de código incorporado)
+y PDF de alta calidad a través de Latex.</p>
+<table class="docutils footnote" frame="void" id="id26" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>Python es un lenguaje estandarizado que tiene distintas implementaciones.
+<tr><td class="label"><a class="fn-backref" href="#id3">[1]</a></td><td>Python es un lenguaje estandarizado que tiene distintas implementaciones.
 La original y más utilizada es Cpython, implementada en C, pero existen
 implementaciones en Java (<a class="reference external" href="http://jython.org">http://jython.org</a>), .NET (<a class="reference external" href="http://www.ironpython.net/">http://www.ironpython.net/</a>)
 y Python mismo (<a class="reference external" href="http://codespeak.net/pypy">http://codespeak.net/pypy</a>)</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id24" rules="none">
+<table class="docutils footnote" frame="void" id="id27" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>Un programa {&#8220;Hola Mundo!&#8221;} es el que imprime el texto «Hola Mundo!» en un
+<tr><td class="label"><a class="fn-backref" href="#id4">[2]</a></td><td>Un programa {&#8220;Hola Mundo!&#8221;} es el que imprime el texto «Hola Mundo!» en un
 dispositivo de visualización (generalmente una pantalla de monitor).
 Se suele usar como introducción al estudio de un lenguaje de programación,
 siendo un primer ejercicio típico.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id25" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[3]</a></td><td>La hipótesis en la que se basó su creador es que el código fuente suele leerse
-muchas más veces de las que se escribe, ya sea por el mismo autor tiempo
-despues de haberlo escrito, o por otros programadores.</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id26" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id5">[4]</a></td><td><em>&#8220;Syntactically, Python code looks like executable pseudo code.&#8221;</em>, <a class="reference internal" href="#gvr1998">[GvR1998]</a></td></tr>
-</tbody>
-</table>
 <table class="docutils footnote" frame="void" id="id28" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id11">[5]</a></td><td>Traducción del inglés propia.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id5">[3]</a></td><td>La hipótesis en la que se basó su creador es que el código fuente suele leerse
+muchas más veces de las que se escribe, ya sea por el mismo autor tiempo
+despues de haberlo escrito, o por otros programadores.</td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id29" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id13">[6]</a></td><td><em>Python Success Stories: 8 True Tales of Flexibility, Speed, and Improved Productivity</em> (2002) y
-<em>Python Success Stories Volume II: 12 More True Tales</em> (2005), O&#8217;Reilly Associates</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id6">[4]</a></td><td><em>&#8220;Syntactically, Python code looks like executable pseudo code.&#8221;</em>, <a class="reference internal" href="#gvr1998">[GvR1998]</a></td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id30" rules="none">
+<table class="docutils footnote" frame="void" id="id31" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id16">[7]</a></td><td>El código que sigue los principios de legibilidad y transparencia propuestos
-por Python se dice que es &#8220;pythonico&#8221;. Contrariamente, el código opaco u ofuscado es
-bautizado como &#8220;no pythonico&#8221;. Ver <a class="reference internal" href="#pep8">[PEP8]</a> y <a class="reference internal" href="#pep20">[PEP20]</a>.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id12">[5]</a></td><td>Traducción del inglés propia.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id32" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id14">[6]</a></td><td><em>Python Success Stories: 8 True Tales of Flexibility, Speed, and Improved Productivity</em> (2002) y
+<em>Python Success Stories Volume II: 12 More True Tales</em> (2005), O&#8217;Reilly Associates</td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id33" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id18">[8]</a></td><td><a class="reference external" href="http://code.enthought.com/chaco/">Chaco</a> y <a class="reference external" href="http://gnuplot-py.sourceforge.net/">GNUplot-Py</a>
+<tr><td class="label"><a class="fn-backref" href="#id17">[7]</a></td><td>El código que sigue los principios de legibilidad y transparencia propuestos
+por Python se dice que es &#8220;pythonico&#8221;. Contrariamente, el código opaco u ofuscado es
+bautizado como &#8220;no pythonico&#8221;. Ver <a class="reference internal" href="#pep8">[PEP8]</a> y <a class="reference internal" href="#pep20">[PEP20]</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id36" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id19">[8]</a></td><td><a class="reference external" href="http://code.enthought.com/chaco/">Chaco</a> y <a class="reference external" href="http://gnuplot-py.sourceforge.net/">GNUplot-Py</a>
 son las más notables alternativas.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="gvr1998" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[GvR1998]</td><td><em>(<a class="fn-backref" href="#id9">1</a>, <a class="fn-backref" href="#id27">2</a>)</em> van Rossum, Guido (1998), <em>Glue it all together with Python</em>,
+<tr><td class="label">[GvR1998]</td><td><em>(<a class="fn-backref" href="#id10">1</a>, <a class="fn-backref" href="#id30">2</a>)</em> van Rossum, Guido (1998), <em>Glue it all together with Python</em>,
 Workshop on Compositional Software Architecture in Monterey,
 <a class="reference external" href="http://www.python.org/doc/essays/omg-darpa-mcc-position.html">http://www.python.org/doc/essays/omg-darpa-mcc-position.html</a></td></tr>
 </tbody>
@@ -530,35 +663,41 @@ Castelló de la Plana</td></tr>
 <table class="docutils citation" frame="void" id="tz2008" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id10">[TZ2008]</a></td><td>Ziadé, Tarek (2008),  <em>Expert Python programming</em>, Pack Publishing, Birmingham</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id11">[TZ2008]</a></td><td>Ziadé, Tarek (2008),  <em>Expert Python programming</em>, Pack Publishing, Birmingham</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="ma2010" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[MA2010]</td><td>Alchin, Marty  (2010), <em>Pro Python</em>, Apress, New York</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="jh-fp" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id12">[JH-FP]</a></td><td>Hunter, John D. - Pérez, Fernando, (n/d) <em>Practical Scientific Computing in Python</em>,</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id13">[JH-FP]</a></td><td>Hunter, John D. - Pérez, Fernando, (n/d) <em>Practical Scientific Computing in Python</em>,</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="tut-psf" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id7">[TUT-PSF]</a></td><td>van Rossum, Guido (2010), <em>The Python Tutorial v2.7</em>, Python Software Foundation,
-<a class="reference external" href="http://docs.python.org/tutorial/">http://docs.python.org/tutorial/</a> . Existe una traducción al español en  realizada
-por la comunidad Python Argentina en <a class="reference external" href="http://python.org.ar/pyar/Tutorial">http://python.org.ar/pyar/Tutorial</a></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id8">[TUT-PSF]</a></td><td>van Rossum, Guido (2010), <em>The Python Tutorial v2.7</em>, Python Software Foundation,
+<a class="reference external" href="http://docs.python.org/tutorial/">http://docs.python.org/tutorial/</a> . Existe una traducción al español realizada
+por la comunidad Python Argentina en <a class="reference external" href="http://tutorialpython.com.ar">http://tutorialpython.com.ar</a></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="mp2001" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id8">[MP2001]</a></td><td>Pilgrim, Mark (2001), <em>Dive into Python</em>, liberado bajo los términos
+<tr><td class="label"><a class="fn-backref" href="#id9">[MP2001]</a></td><td>Pilgrim, Mark (2001), <em>Dive into Python</em>, publicado bajo los términos
 de GNU Free Documentation License, <a class="reference external" href="http://diveintopython.org/">http://diveintopython.org/</a>. Existe
-una traducción al español disponible en <a class="reference external" href="http://www.gulic.org/almacen/diveintopython-5.4-es/">http://www.gulic.org/almacen/diveintopython-5.4-es/</a></td></tr>
+una traducción al español disponible en <a class="reference external" href="http://www.grulic.org/almacen/diveintopython-5.4-es/">http://www.grulic.org/almacen/diveintopython-5.4-es/</a></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="wikipedia1" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id6">[WIKIPEDIA1]</a></td><td>Contribuidores varios, <em>Polymorphism in object-oriented programming</em>,
+<tr><td class="label"><a class="fn-backref" href="#id7">[WIKIPEDIA1]</a></td><td>Contribuidores varios, <em>Polymorphism in object-oriented programming</em>,
 Wikipedia, The Free Encyclopedia, visto el 16 de agosto de 2010,
 <a class="reference external" href="http://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming">http://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming</a></td></tr>
 </tbody>
@@ -573,21 +712,21 @@ Simula Research Laboratory and Department of Informatics University of Oslo, Osl
 <table class="docutils citation" frame="void" id="pep8" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id31">[PEP8]</a></td><td>van Rossum, Guido - Warsaw, Barry (2001), <em>Python Enhancement Proposals (PEP) #8:
+<tr><td class="label"><a class="fn-backref" href="#id34">[PEP8]</a></td><td>van Rossum, Guido - Warsaw, Barry (2001), <em>Python Enhancement Proposals (PEP) #8:
 Style Guide for Python Code</em>, Python Software Foundation, <a class="reference external" href="http://www.python.org/dev/peps/pep-0008/">http://www.python.org/dev/peps/pep-0008/</a></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="pep20" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id32">[PEP20]</a></td><td>Peters, Tim (2004) <em>Python Enhancement Proposals (PEP) #20: The Zen of Python</em>,
+<tr><td class="label"><a class="fn-backref" href="#id35">[PEP20]</a></td><td>Peters, Tim (2004) <em>Python Enhancement Proposals (PEP) #20: The Zen of Python</em>,
 Python Software Foundation, <a class="reference external" href="http://www.python.org/dev/peps/pep-0020/">http://www.python.org/dev/peps/pep-0020/</a></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="numpy-ug" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id14">[NumPy-UG]</a></td><td>Scipy community, <em>NumPy User Guide</em>,  <a class="reference external" href="http://docs.scipy.org/doc/numpy">http://docs.scipy.org/doc/numpy</a></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id15">[NumPy-UG]</a></td><td>Scipy community, <em>NumPy User Guide</em>,  <a class="reference external" href="http://docs.scipy.org/doc/numpy">http://docs.scipy.org/doc/numpy</a></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="to2006" rules="none">
@@ -599,22 +738,50 @@ Python Software Foundation, <a class="reference external" href="http://www.pytho
 <table class="docutils citation" frame="void" id="mpldoc" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id19">[MPLDOC]</a></td><td>Hunter, J - Dale, D - Droettboom, M (2010), <em>Matplotlib documentation v1.0.0</em>,
+<tr><td class="label"><a class="fn-backref" href="#id20">[MPLDOC]</a></td><td>Hunter, J - Dale, D - Droettboom, M (2010), <em>Matplotlib documentation v1.0.0</em>,
 <a class="reference external" href="http://matplotlib.sourceforge.net/contents.html">http://matplotlib.sourceforge.net/contents.html</a></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="nr-rd2006" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id22">[NR-RD2006]</a></td><td>Rappin, Noel - Dunn, Robin (2006) <em>wxPython in Action</em>, Manning Publications,
+<tr><td class="label"><a class="fn-backref" href="#id23">[NR-RD2006]</a></td><td>Rappin, Noel - Dunn, Robin (2006) <em>wxPython in Action</em>, Manning Publications,
 Greenwich</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="st2009" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id20">[ST2009]</a></td><td>Tosi, Sandro (2009) <em>Matplotlib for Python Developers, Build remarkable publication
+<tr><td class="label"><a class="fn-backref" href="#id21">[ST2009]</a></td><td>Tosi, Sandro (2009) <em>Matplotlib for Python Developers, Build remarkable publication
 quality plots the easy way</em>, Pack Publishing, Birmingham</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="ag-manif" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[AG-MANIF]</a></td><td>Varios autores (2001), <em>Manifesto for Agile Software Development</em>, <a class="reference external" href="http://agilemanifesto.org/">http://agilemanifesto.org/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="ll-rj2003" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[LL-RJ2003]</td><td>Lindstrom, Lowell - Jeffries, Ron (2003) <em>Extreme Programming and
+Agile Software Development Methodologies</em>, <a class="reference external" href="http://xprogramming.com">http://xprogramming.com</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="is2004" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[IS2004]</td><td>Sommerville, Ian (2004) <em>Software Enginnering, 7th edition</em>, Pretince Hall, Harlow.
+Traducción al español por el Departamento de Ciencias de la Computación e Inteligencia
+Artificial de la Universidad de Alicante (2005).</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="gr-ste2005" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[GR-STE2005]</td><td>Greene, Jeniffer - Steelman, Andrew (2005) <em>Applied Software Project Management</em>,
+O&#8217;Reilly Associates, New York</td></tr>
 </tbody>
 </table>
 </div>
@@ -631,38 +798,29 @@ quality plots the easy way</em>, Pack Publishing, Birmingham</td></tr>
   <h3><a href="index.html">Contenidos</a></h3>
   <ul>
 <li><a class="reference internal" href="#">2. Marco Teórico</a><ul>
-<li><a class="reference internal" href="#conceptos-de-diagramas-de-fases-en-termodin-mica">2.1. Conceptos de diagramas de fases en termodinámica</a></li>
-<li><a class="reference internal" href="#conceptos-de-orientaci-n-a-objetos">2.2. Conceptos de orientación a objetos</a><ul>
-<li><a class="reference internal" href="#orientaci-n-a-eventos">2.2.1. Orientación a eventos</a></li>
+<li><a class="reference internal" href="#conceptos-de-diagramas-y-equilibrio-de-fases">2.1. Conceptos de diagramas y equilibrio de fases</a></li>
+<li><a class="reference internal" href="#metodolog-as-de-desarrollo-de-software">2.2. Metodologías de desarrollo de Software</a><ul>
+<li><a class="reference internal" href="#metodolog-as-giles">2.2.1. Metodologías Ágiles</a></li>
+<li><a class="reference internal" href="#desarrollo-evolutivo-adaptado">2.2.2. Desarrollo evolutivo adaptado</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#metodolog-as">2.3. Metodologías</a><ul>
-<li><a class="reference internal" href="#desarrollo-por-etapas">2.3.1. Desarrollo por etapas</a></li>
-<li><a class="reference internal" href="#refactoring">2.3.2. Refactoring</a></li>
+<li><a class="reference internal" href="#tecnolog-as-principales">2.3. Tecnologías principales</a><ul>
+<li><a class="reference internal" href="#python">2.3.1. Python</a><ul>
+<li><a class="reference internal" href="#python-en-el-software-cient-fico">2.3.1.1. Python en el software científico</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#principios-de-dise-o">2.4. Principios de diseño</a><ul>
-<li><a class="reference internal" href="#dry">2.4.1. DRY</a></li>
-<li><a class="reference internal" href="#pareto">2.4.2. Pareto</a></li>
-<li><a class="reference internal" href="#loose-coupling">2.4.3. Loose Coupling</a></li>
+<li><a class="reference internal" href="#numpy">2.3.2. NumPy</a></li>
+<li><a class="reference internal" href="#matplotlib">2.3.3. Matplotlib</a></li>
+<li><a class="reference internal" href="#wxpython">2.3.4. WxPython</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#tecnolog-as-principales">2.5. Tecnologías principales</a><ul>
-<li><a class="reference internal" href="#python">2.5.1. Python</a><ul>
-<li><a class="reference internal" href="#python-en-el-software-cient-fico">2.5.1.1. Python en el software científico</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#numpy">2.5.2. NumPy</a></li>
-<li><a class="reference internal" href="#matplotlib">2.5.3. Matplotlib</a></li>
-<li><a class="reference internal" href="#wxpython">2.5.4. WxPython</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#gesti-n-de-proyecto">2.6. Gestión de proyecto</a><ul>
-<li><a class="reference internal" href="#control-de-versiones">2.6.1. Control de versiones</a></li>
-<li><a class="reference internal" href="#documentaci-n">2.6.2. Documentación</a><ul>
-<li><a class="reference internal" href="#wiki">2.6.2.1. Wiki</a></li>
-<li><a class="reference internal" href="#restructuredtext">2.6.2.2. restructuredText</a></li>
-<li><a class="reference internal" href="#sphinx">2.6.2.3. Sphinx</a></li>
+<li><a class="reference internal" href="#gesti-n-de-proyecto">2.4. Gestión de proyecto</a><ul>
+<li><a class="reference internal" href="#control-de-versiones">2.4.1. Control de versiones</a></li>
+<li><a class="reference internal" href="#seguimiento-de-errores-y-propuestas">2.4.2. Seguimiento de errores y propuestas</a></li>
+<li><a class="reference internal" href="#documentaci-n">2.4.3. Documentación</a><ul>
+<li><a class="reference internal" href="#wiki">2.4.3.1. Wiki</a></li>
+<li><a class="reference internal" href="#restructuredtext">2.4.3.2. restructuredText</a></li>
+<li><a class="reference internal" href="#sphinx">2.4.3.3. Sphinx</a></li>
 </ul>
 </li>
 </ul>
@@ -716,7 +874,7 @@ quality plots the easy way</em>, Pack Publishing, Birmingham</td></tr>
     </div>
     <div class="footer">
         &copy; Copyright 2010, Martín Gaitán.
-      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.1.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.5.
     </div>
   </body>
 </html>

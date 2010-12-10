@@ -412,7 +412,6 @@ Semana 14 - 15
 - Testing y debugging
 - Release Beta
 
-
 Bibliografía
 ============
 

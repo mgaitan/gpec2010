@@ -12,7 +12,7 @@ Casos de uso
 |   Un sistema binario es la combinación de dos compuestos  |
 |   químicos. Se deben poder seleccionar una combinación    |
 |   cualquiera de 2 compuestos un listado o base de datos   |
-|   de compuestos   disponibles.                            |
+|   de compuestos disponibles.                              |
 +-----------------------------------------------------------+
 | **Actores:**                                              |
 |   Usuario                                                 |
@@ -187,18 +187,6 @@ Casos de uso
 
 
 
-
-
-
-.. graphviz::
-
-   digraph foo {
-      "bar" -> "baz";
-   }
-
-
-.. image:: http://yuml.me/diagram/scruffy/usecase/[Customer]-(Login), [Customer]-(note: Cust can be registered or not{bg:beige}).png
-       
 
 Template
 ++++++++

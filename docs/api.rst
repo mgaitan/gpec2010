@@ -1,3 +1,5 @@
+.. _api:
+
 Especificación de la interfaz de comunicación
 ==============================================
 
@@ -36,7 +38,8 @@ Esta bidireccionalidad del cálculo se especifica mediante el parametro ``SENTID
  .. note:: el archivo se encuentra en realidad en `./INOUTS/CONPARIN.DAT`
         
 
-Formato General::
+Formato General:
+
 
     SENTIDO MODELO
     PARAM1    PARAM2    PARAM3    [PARAM4]   
@@ -76,7 +79,7 @@ Modo para calcular parámetros del modelo
 Este modo se define con ``SENTIDO`` 0. Se definen las variables del compuesto. 
 
     
-  Modelos 1, 2, 3::
+  Modelos 1, 2, 3:
 
     0 MODELO
      TC    PC    OM     VC
@@ -103,12 +106,13 @@ Detalle:
  ==========  ===================  ========
 
 
-Todos los parámetros son editables en el formulario excepto ``VCeos``.
+Todos los parámetros son editables en el formulario excepto ``VCeos``. Para 
+RK-PR el valor sí es editable y está asociado a un factor denominado  
+``Critical Volume Ratio Model/Experimental`` o ``VCrat`` que se fija por omisión a 1.168. 
 
-Para RK-PR el valor sí es editable y está asociado a un factor denominado 
-``Critical Volume Ratio Model/Experimental`` o ``VCrat`` que se fija a 1.168. 
+.. math::
 
-    VCeos = VCmodel*VCrat
+   VCeos = VCmodel*VCrat
 
 Para el modelo ``RK-PR`` se permite editar esta proporción. 
 Si el usuario define ``VCeos``, se actualiza el ``VCrat`` y viceversa.
@@ -122,7 +126,6 @@ Cuando ``SENTIDO`` es 1 el formato depende del modelo
     
     - 1  _`Soave-Redlich-Kwong`
     
-      ::
         
         1   1   
         ac    b    m
@@ -195,37 +198,35 @@ Cuando ``SENTIDO`` es 1 el formato depende del modelo
 
 CONPAROUT.DAT
 -------------
+
 Es el archivo de salida para el cálculo de parámetros y constantes. 
 El formato es el mismo independientemente del sentido de cálculo, teniendo la 
 primer línea las variables de estado del compuesto, y en la segunda, los 
 parámetros propios del modelo. 
 
 
-Formato General::
+Formato General:
 
     VAR1  VAR2   VAR3    VAR4
     PARM1 PARAM2 PARAM3  [...]
 
 Detalle:
 
-     - Para `Soave-Redlich-Kwong`_ (id 1) y  ``Peng-Robinson`` (id 2)::
+     - Para `Soave-Redlich-Kwong`_ (id 1) y  ``Peng-Robinson`` (id 2):
         
            TC    PC    VC    OM
            ac     b     m
 
  
-     - Para  ``RK-PR`` (id 3)::
+     - Para  ``RK-PR`` (id 3):
         
            TC    PC     VC    OM
            ac     b   del1     k
 
-     - Para  ``PC-SAFT`` (id 4)::
+     - Para  ``PC-SAFT`` (id 4):
 
            TC    PC     VC    OM
-           eps/k   ro    m
-
-     - Para  ``SPHCT`` (id 6)::
-        
+           eps/k   ro    m 
         
         
 

@@ -12,7 +12,7 @@ ayudando a resolver complejos interrogantes que sin la capacidad computacional l
 científicos no hubieran podido responder. 
 
 Es evidente que en la actualidad las computadoras ya no son exclusivad de 
-selectos laboratorios y universidades, y su uso generalizado ha modificado 
+selectos laboratorios o universidades y su uso generalizado ha modificado 
 drásticamente la cultura y la calidad de vida de las personas, teniendo un rol
 *sine qua non* en el trabajo, la comunicación, el ocio, etc. 
 
@@ -29,7 +29,7 @@ forman parte del día a día en la labor de ingenieros e investigadores.
 Someramente puede hacerse aquí una distinción entre software científico/técnico 
 de propósito general como los mencionados (independientemente de que 
 tengan mayor aceptación en un campo que en otro) de los que son 
-de propósito específico (sofware aplicativo), como es es el caso del software 
+de propósito específico (software aplicativo), como es es el caso del software 
 sobre el cual trata este proyecto. 
 
 Descripción
@@ -41,13 +41,13 @@ para :term:`sistemas binarios <sistema binario>`, que se calculan mediante
 :term:`ecuaciones de estado <ecuación de estado>`. 
 Es útil para fines académicos, científicos y de desarrollo industrial. 
 
-*GPEC* fue desarrollado originalmente por el Dr. Martín Cismondi Duarte en el marco
-de su tesis doctoral [#]_ en Ingeniería Química por la Universidad Técnica de Dinamarca, 
+*GPEC* fue desarrollado originalmente por el Dr. Martín Cismondi Duarte, codirector de este trabajo, 
+en el marco de su tesis doctoral [#]_ en Ingeniería Química por la Universidad Técnica de Dinamarca, 
 en 2005, y luego ampliado y mantenido junto a Diego Nuñez.
 
 Está basado en métodos numéricos y algoritmos desarrollados principalmente por Cismondi 
 en colaboración con el Prof. Michael Michelsen, del Department of Chemical Engineering, 
-DTU (Dinamarca),  y el Prof. Marcelo Zabaloy de la Universidad Nacional del Sur, 
+DTU (Dinamarca), y el Prof. Marcelo Zabaloy de la Universidad Nacional del Sur, 
 (Argentina). 
 
 Actualmente es un proyecto dirigido por el Prof. Esteban Brignole de 
@@ -135,8 +135,11 @@ El objetivo principal que persigue este trabajo es:
 
 * Desarrollar un software *front-end* totalmente compatible con el back-end 
   existente que reemplace al actual (*Visual Gpec*), orientado a un desarrollo
-  prolongado y extensible, que satisfaciendo las funcionalidades con las que 
-  este cuenta y las amplie y mejore en algunos aspectos como la ergonomía, la calidad de los diagramas producidos, 
+  prolongado y extensible, basado en un lenguaje de programación moderno y bibliotecas
+  en desarrollo activo. 
+  Debe satisfacer las funcionalidades con las que 
+  la versión actual cuenta, ampliándolas y mejorándolas en algunos aspectos como 
+  la ergonomía, la calidad de los diagramas producidos, 
   la :term:`usabilidad` general, y aspecto visual del programa.
 
 Objetivos específicos
@@ -146,7 +149,7 @@ Los objetivos específicos del proyecto son:
 
 * Estudiar y documentar la versión preexistente del software. Vea :ref:`relevamiento`.
 
-* Dilucidar fallas de diseño desde el punto de vista del usuarios
+* Dilucidar fallas de diseño desde el punto de vista del usuario
   e idear sus soluciones para incluirlas como nuevos requerimientos.
 
 * Relevar nuevos requerimientos.
@@ -157,7 +160,7 @@ Los objetivos específicos del proyecto son:
 * Investigar tecnologías (lenguajes de programación, bibliotecas de funciones, 
   etc) y justificar las adoptadas. 
 
-* Codificar y documentar el software de manera que satisfaga el conjunto
+* Codificar y documentar el proyecto de manera que satisfaga el conjunto
   de requerimientos planteados.
 
 * Verificar y validar la implementación. 

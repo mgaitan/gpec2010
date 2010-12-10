@@ -1,8 +1,8 @@
 Marco Teórico
 **************
 
-Debido a la naturaleza multidisplinaria de este trabajo, posiblemente sea leído
-y evaluado por profesionales o interesados de/en las distintas áreas de incumbecia 
+Debido a la naturaleza multidisciplinaria de este trabajo, posiblemente sea leído
+y evaluado por profesionales o interesados de/en las distintas áreas de incumbecia
 (química y computación). 
 
     .. seealso::
@@ -10,49 +10,85 @@ y evaluado por profesionales o interesados de/en las distintas áreas de incumbe
         :ref:`trabajo_interdisciplinario`.
 
 Dado que no necesariamente se tiene un conocimiento
-sólido fuera de la especifidad de la profesión, en este capitulo se presentarán 
+sólido fuera de la especifidad de la profesión, en este capítulo se presentarán 
 conceptos generales (que no pretenten exhautividad pero sí precisión) de las dos áreas, 
 útiles para la comprensión de este trabajo. Para definiciónes de términos puntuales, 
 consulte el :ref:`glosario <glosario>`.
 
 
-Conceptos de diagramas de fases en termodinámica
-=================================================
-
-
-Conceptos de orientación a objetos
-==================================
+Conceptos de diagramas y equilibrio de fases 
+=============================================
 
 
 
-Orientación a eventos
----------------------
+Metodologías de desarrollo de Software
+========================================
 
-Metodologías
-============
+Metodologías Ágiles
+--------------------
 
-Desarrollo por etapas
----------------------
+El desarrollo de este trabajo ha sido guiado por un conjunto de preceptos 
+comunes a las *metodologías ágiles de desarrollo de software*. 
+Sin necesariamente ajustarse a ninguna en particular, se comparte
+la escala de valoración hecha en el Manifiesto [AG-MANIF]_ :
 
-Refactoring
------------
+    * Individuos e interacciones sobre procesos y herramientas
+    * Software funcionando sobre documentación extensiva
+    * Colaboración con el cliente sobre negociación contractual
+    * Respuesta ante el cambio sobre seguimiento [estricto] de un plan
 
-Principios de diseño
-====================
+    (Esto es, aunque valoramos los elementos de la derecha,
+    valoramos más los de la izquierda).
+
+Las *implementaciones* del marco conceptual propuesto por el Manifiesto de 
+desarrollo ágil (como *eXtremme Programming* o *Scrum*) están estructuralmente 
+concebidas para el trabajo de un equipo de trabajo abocado al mismo proyecto. 
+Como el desarrollo  del software estuvo a cargo de una sola persona 
+(con la colaboración y revisión de los directores) no se ajustó 
+a un método estrictamente definido para un equipo como los mencionados. 
+
+Sin embargo, muchas ideas propuestas por estos métodos han sido aplicadas, 
+concibiendo un desarrollo incremental e iterativo con énfasis en la adaptabilidad 
+de los requerimientos. 
+
+Algunas de las técnicas y procesos ágiles involucrados en este desarrollo 
+han sido la utilización de un lenguaje de muy alto nivel (ver :ref:`tecnologias` ), 
+la implementación de pruebas automatizadas, la utilización de bibliotecas 
+probas para la implementación de aspectos específicos de la solución, entre 
+otras. 
+
+Desarrollo evolutivo adaptado
+-----------------------------
+
+Según Sommerville en [IS2004], el desarrollo evolutivo se basa en la idea de 
+una implementación inicial, exponiéndola a los comentarios del comitente o 
+los usuarios, y refinándola a través de diferentes versiones preliminares 
+(versiones *beta*) hasta obtener una versión que satisfaga el conjunto de 
+requerimientos planteado. 
 
 
-DRY
----
-:abbr:`DRY (Don't Reapeat Yourself)` , "No te repitas" es un principi
+ .. figure:: images/desarrollo_evolutivo.svg
+    :width: 90 %
 
+Las actividades de especificación, desarrollo y validación se entrelazan en 
+vez de separarse, con una rápida y constantes retroalimentación entre estas. 
 
-Pareto
-------
+Existen dos grandes tipos de desarrollos evolutivos: 
 
-Loose Coupling
---------------
+1.  *Desarrollo exploratorio* donde el objetivo del proceso es trabajar con el 
+    cliente para explorar y precisar los requerimientos y obtener un sistema 
+    final. Se comienza con las partes del sistema que más cabalmente se 
+    comprenden y se evoluciona agregando nuevos atributos precisados por el 
+    comitente, la comunidad de usuarios o el propio equipo de desarrollo. 
 
-.. _tecnologias:
+2.  *Prototipos desechables* donde el objetivo del proceso es comprender 
+    mejor los requerimientos. Una vez evacuadas todas las incertidumbres, los 
+    prototipos se desechan y se diseña e implementa el sistema final desde el 
+    principio.
+
+En este trabajo se aplicó principlamente un proceso evolutivo de tipo exploratorio, 
+basándose en estrategias de desarrollo ágil mencionadas previamente. 
+
 
 Tecnologías principales
 ========================
@@ -167,7 +203,7 @@ al otro tipo de manera explícita.
 El lenguaje incluye una **robusta biblioteca estándar** (se dice habitualmente que *"Python 
 tiene con las baterías incluídas"*) con acceso a funcionalidades de todo tipo 
 como protocolos de internet, funciones matemáticas, manejo de hilos y multiprocesos, 
-pruebas unitarias y abstracción de llamadas al sistemas operativo subyacente, entre 
+pruebas unitarias, manipulación de XML y abstracción de llamadas al sistemas operativo subyacente, entre 
 muchas otras.
 
 Además de la incorporada, puede interfacear con diversas bibliotecas, por ejemplo
@@ -228,17 +264,17 @@ están diseñados para ser multipropósito. Estos "contenedores" pueden albergar
 tipo de objeto (incluso una mezcla de ellos) y las listas, en particular, pueden mutar
 (agregar, modificar o borrar elementos) dinámicamente. 
 
-Es decir, que si bien pueden usarse listas o tuplas como un :term:`vector` de datos, no están 
+Es decir que si bien pueden usarse listas o tuplas como un :term:`arreglo` de datos, no están 
 especialmente concebidas para tal fin. 
 
     .. note:: 
 
-        Los siguientes párrafos descriptivos han sido tomados, en modo
+        Los siguientes párrafos descriptivos han sido tomados, a modo
         de paráfrasis y traducido por el autor, del capitulo *What is NumPy?* de
         [NumPy-UG]_.
 
 `NumPy <http://numpy.org>`_ es una biblioteca que extiende Python para complementar
-este aspecto, proveyendo un tipo de objeto vector multidimensional (``narray``) y 
+este aspecto, proveyendo un tipo de objeto vector multidimensional (``ndarray``) y 
 varios objetos derivados (como vectores enmascarados o matrices), 
 además de rutinas optimizadas para la operación sobre estos vectores, incluyendo 
 operaciones matemáticas y lógicas, manipulación de dimensiones, álgebra lineal, 
@@ -259,8 +295,8 @@ Esta operación, siendo ``a`` y ``b`` objetos *ndarray* de NumPy, resultaría en
 
     c = a * b
 
-Dicho código funcionaría siempre que ``a`` y ``b`` tengan las mismas dimensiones, 
-independientemente que sean uni o multidimensionales. 
+Dicho código funcionaría siempre que ``a`` y ``b`` tengan las mismas 
+dimensiones, independientemente que sean uni o multidimensionales. 
 
 El ejemplo ilustra dos características de NumPy que son gran parte de las bases 
 de su poder: *vectorización* y *broadcasting* 
@@ -322,11 +358,13 @@ código es un ejemplo extraído de [ST2009]_ ::
     >>> plt.plot(x, x**2)
     >>> plt.show()
 
+El resultado se observa en el siguiente gráfico:
 
-.. figure:: images/mpl_fig1.png
+    
+    .. figure:: images/mpl_fig1.png
+       :alt: Figura
 
-   Gráfico generado interactivamente
-
+       Gráfico generado interactivamente
 
 
 WxPython
@@ -409,26 +447,142 @@ de texto será actualizada con las coordenadas donde este se encuentra.
         Captura del ejemplo de marras
 
 
-
-
-            
+Como característica avanzada, wxPython incluye el módulo :abbr:`AUI (Advanced 
+User Interface)` que permite el desarrollo de interfaces de usuario orientadas
+a la :term:`usabilidad` y de alta calidad, abstrayendo y encapsulando 
+el control de aspectos comunes. En particular, este módulo 
+permite la gestión de *subframes*, de manera que los subcomponentes o subventanas
+pueden configurarse con mediante operaciones comunes como *abrir*, *cerrar* u *ocultar*, 
+y ser guardadas como *perspectivas* que el usuario puede recuperar 
+en posteriores sesiones de trabajo. 
+               
 Gestión de proyecto
 ===================
+
+En cualquier proyecto de software no trivial, sistematizar todos los aspectos del desarrollo 
+es una necesidad ineludible. Esto incluye, por supuesto, la evolución del código, 
+pero también su documentación, el reporte, seguimiento y solución de los errores 
+detectados, la planificación de las etapas de desarrollo, la estimación de la 
+carga de trabajo, etc. 
+
+La gestión de proyecto es uno de los aspectos esenciales de la ingeniería 
+de software. Como se explaya en [GR-STE2005], se necesita más que una buena 
+idea y equipo de programadores talentosos para tener éxito con un proyecto de software. 
+Exiten técnicas y herramientas para minimizar la ocurrencia de errores, la pérdida 
+de información o tiempo. 
+
+Del vasto conjunto de herramientas, se detallan aquí las utilizadas para el desarrollo 
+de este trabajo.
 
 Control de versiones
 --------------------
 
+Un  :abbr:`VCS (Sistema de Control de Versiones)` es un software capaz de llevar registro de 
+la evolución incremental de cualquier conjunto de archivos, permitiendo 
+recuperar "estados" anteriores (de una fecha en particular, por ejemplo) de 
+una manera eficiente y automatizada. Cada vez que se detecta un cambio, el 
+software de control almacena sólo la información necesaria (en particular "la 
+diferencia" respecto a la versión anterior de cada archivo) en vez de guardar 
+todo el archivo completo. 
+
+En particular,tiene mucha utilidad para archivos de texto, como el código fuente de un 
+software. 
+
+El :abbr:`VCS` utilizado para este proyecto fue  `Subversion 
+<http://subversion.apache.org>`_ (frecuentemente 
+abreviado :abbr:`svn`). 
+
+*Subversion* es un VCS centralizado, es decir, requiere un servidor central 
+(*repositorio*), generalmente accesible vía internet, que almacena todas las versiones 
+(*revisiones*) de cada archivo. El usuario/desarrollador realiza un *commit* para enviar sus 
+modificaciones locales al repositorio, y un *update* para actualizar la 
+versión local (*copia de trabajo*) con la última versión (o la indicada 
+explícitamente) del repositorio. Con cada *commit*, el sistema solicita la 
+inclusión de un mensaje descriptivo de la modificación realizada, de manera 
+de poder realizar un seguimiento y detectar un estado en particular si, por 
+alguna razón, es necesario recuperar.
+
+Como servidor *svn* se utilizó el servicio de *Google Code*, que brinda 
+un repositorio y otras herramientas de gestión de proyecto de manera 
+gratuita, para desarrollos de software libre / open source. 
+
+El proyecto se encuentra en la dirección http://code.google.com/p/gpec2010 . 
+
+Seguimiento de errores y propuestas
+------------------------------------
+
+El mismo servicio que provee el repositorio *svn* gratuito, incluye un 
+sistema de gestión de errores (*bug tracker* o, más generalmente, *issue 
+tracker*), del cual se ha hecho uso exhaustivo. 
+
+Estos sistemas permiten la sistematización del "ciclo de vida" de un error, 
+solicitud de funcionalidad o mejora. A través de una interfaz web 
+(característica común a casi todos los sistemas de este tipo), el propio equipo de desarrollo 
+o usuarios particulares pueden reportar un *incidente* (*issue*), con un mensaje breve y 
+descriptivo que permita reproducir el error reportado, o bien fundamentando la necesidad 
+de una mejora o nueva funcionalidad. El *issue* es asociado a 
+palabras clave que identifican su estado (abierto, aceptado, 
+rechazado, solucionado, etc), su gravedad o interes (bajo, normal, alto),  
+etc. Por supuesto, cada una de estas palabras clave puede cambiar con el 
+tiempo, adjuntando mensajes que indican las tareas realizadas en cada 
+intervención, hasta que el *issue* sea cerrado, ya sea por que se logró una 
+solución o se decidió descartarlo por alguna razón. 
+
+La utidad de este tipo de sistemas permite la desentralización del reporte de 
+errores, permitendo a la comunidad de usuarios participar de la mejora del 
+software. También permite llevar registro de errores o funcionalidades 
+pendientes en cada momento del desarrollo, facilitando la planificación de 
+lanzamientos de nuevas versiones.
+
 Documentación
 -------------
+
+Gran parte del desarrollo de un software así como el de un proyecto integrador o 
+tésis en general, cualquiera sea el tópico, es la documentación. Contar con 
+procedimientos y herramientas adecuadas para la realización de este trabajo es 
+tan necesaria e importante como el lenguaje de programación adoptado para la 
+codificación del software. 
+
+A lo largo de todo el proyecto se fue documentando distintos aspectos del 
+desarrollo, con distintos niveles de detalle. Se utilizaron las siguientes 
+herramientas.
 
 Wiki
 ^^^^
 
+Una *wiki* es un sistema para la creación de documentos hipertextuales de 
+manera sencilla. Con el permiso adecuado, un documento (en general una 
+"página web") se convierte en editable, pudiendo modificar o ampliar el 
+contenido, incluir imágenes u otro tipo de información, o generar enlaces a otros documentos.  
+
+El servicio *Google Code* incopora una *Wiki* que se ha utilizado como 
+cuaderno de notas para llevar cuenta de las minutas, links de interés, etc.  
+
 restructuredText
 ^^^^^^^^^^^^^^^^
 
+El documento principal (la "tésis") se ha escrito utilizando el lenguaje de 
+marcado `reStructuredText <http://docutils.sourceforge.net/docs/user/rst/>`_ 
+(:abbr:`rst o rest`). :abbr:`rst` permite aportar 
+semántica a un documento de texto plano, de manera equivalente a *Latex* 
+pero mucho más sencilla, conservando legibilidad en formato fuente. 
+
+A través de diversas herramientas se puede convertir *rst* a distintos 
+formatos, como html, pdf o código latex. 
+
 Sphinx
 ^^^^^^
+
+`Sphinx <http://sphinx.pocoo.org>`_ es una herramienta para la documentación de 
+software. Si bien permite la *autodocumentación* (realizando introspección 
+de las cadenas de documentación y las entidades del código fuente) está 
+orientado a la creación de documentación escrita "por humanos".  
+
+Sphinx utiliza como formato de entrada el formato restructuredText_ y genera 
+versiones en html (con motor de búsqueda y resaltado de código incorporado) 
+y PDF de alta calidad a través de Latex. 
+
+
 
 .. [#]  Python es un lenguaje estandarizado que tiene distintas implementaciones. 
         La original y más utilizada es Cpython, implementada en C, pero existen
@@ -468,15 +622,17 @@ Sphinx
                                            
 .. [TZ2008]  Ziadé, Tarek (2008),  *Expert Python programming*, Pack Publishing, Birmingham
 
+.. [MA2010]  Alchin, Marty  (2010), *Pro Python*, Apress, New York
+
 .. [JH-FP]  Hunter, John D. - Pérez, Fernando, (n/d) *Practical Scientific Computing in Python*,
 
 .. [TUT-PSF] van Rossum, Guido (2010), *The Python Tutorial v2.7*, Python Software Foundation, 
-             http://docs.python.org/tutorial/ . Existe una traducción al español en  realizada
-             por la comunidad Python Argentina en http://python.org.ar/pyar/Tutorial
+             http://docs.python.org/tutorial/ . Existe una traducción al español realizada
+             por la comunidad Python Argentina en http://tutorialpython.com.ar
 
-.. [MP2001]  Pilgrim, Mark (2001), *Dive into Python*, liberado bajo los términos 
+.. [MP2001]  Pilgrim, Mark (2001), *Dive into Python*, publicado bajo los términos 
              de GNU Free Documentation License, http://diveintopython.org/. Existe 
-             una traducción al español disponible en http://www.gulic.org/almacen/diveintopython-5.4-es/
+             una traducción al español disponible en http://www.grulic.org/almacen/diveintopython-5.4-es/
             
 .. [WIKIPEDIA1]  Contribuidores varios, *Polymorphism in object-oriented programming*, 
                  Wikipedia, The Free Encyclopedia, visto el 16 de agosto de 2010, 
@@ -502,3 +658,15 @@ Sphinx
                Greenwich
 .. [ST2009]  Tosi, Sandro (2009) *Matplotlib for Python Developers, Build remarkable publication 
              quality plots the easy way*, Pack Publishing, Birmingham
+
+.. [AG-MANIF]  Varios autores (2001), *Manifesto for Agile Software Development*, http://agilemanifesto.org/
+
+.. [LL-RJ2003] Lindstrom, Lowell - Jeffries, Ron (2003) *Extreme Programming and 
+               Agile Software Development Methodologies*, http://xprogramming.com
+
+.. [IS2004] Sommerville, Ian (2004) *Software Enginnering, 7th edition*, Pretince Hall, Harlow. 
+            Traducción al español por el Departamento de Ciencias de la Computación e Inteligencia 
+            Artificial de la Universidad de Alicante (2005). 
+
+.. [GR-STE2005] Greene, Jeniffer - Steelman, Andrew (2005) *Applied Software Project Management*,
+                O'Reilly Associates, New York    

@@ -16,14 +16,4 @@ Contenidos:
     implementacion
     verificacion
     conclusiones
-    glosario
-
-
-
-Indices y tablas
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
+    
