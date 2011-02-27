@@ -179,7 +179,7 @@ Los objetivos específicos del proyecto son:
        and liquid-liquid-vapour equilibrium in binary mixtures*, M Cismondi, ML Michelsen 
        - The Journal of Supercritical Fluids, 2007 - Elsevier
 
-.. [#] Universidad Técnica de Dinamarca 
+.. [#] DTU - Danmarks Tekniske Universitet. Web http://www.dtu.dk/
 
 .. [#] Es un instituto de investigación, educación y desarrollo de tecnología 
        con sede en la ciudad de Bahía Blanca, dependiente de la Universidad 
@@ -189,6 +189,6 @@ Los objetivos específicos del proyecto son:
 .. [#] Grupo de investigación de la Facultad de Ciencias Exáctas Físicas
        y Naturales. Web: http://www.idtq.efn.uncor.edu
 
-.. [#] 
+.. [#] http://atom.uni-mb.si/Labs/lab_sep/socrates.htm
 
 

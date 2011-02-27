@@ -63,7 +63,7 @@ de escala, segmentación y demás funcionalidades básicas debió programarse de
    con modelo RK-PR. 
 
 El resultado de esto, si bien es aceptable y funcional, implicó muchas horas de 
-desarrollo, con gráficos sólo 2D, poco configurables, que se pueden 
+desarrollo, con gráficos sólo 2D, poco configurables, que no se pueden 
 vectorizar ni exportar. 
 
 Licenciamiento
@@ -72,9 +72,7 @@ Licenciamiento
 *Visual GPEC* no tiene una licencia explicitada pero se trata de 
 un *freeware**, es decir, un tipo de software que se distribuye  sin costo y 
 está disponible para su uso por tiempo ilimitado. La última versión 
-públicamente disponible era la 2.0 
-
-
+públicamente disponible era la 2.0. 
 
 Hasta el momento, GPEC no es Software Libre ni Opensource, ya que su código 
 fuente no está  disponible. 
@@ -127,39 +125,52 @@ en lo posible mejorarse. Se detallan a continuación:
 
 
 * Generación del sistema binario: selección de dos sustancias. 
-* Gestión de Alta-Baja-Modificación de compuestos químicos. Se incluirá una base de datos 
+* Gestión de de base de datos de constantes de compuestos químicos. Se incluirá una base de datos 
   con el software que el usuario puede manipular.
-* Parametrización automatizada y manual 
-* Adecuación del formulario de entrada de parámetros para ecuaciones de estado (modelos)
-  base molecular [#]_ : 
+* Adecuación del formulario y archivo de entrada de parámetros para 
+  diferentes ecuaciones de estado (modelos) de base molecular [#]_ : 
 
-     * Soave-Redlich-Kwong EOS 
-     * Peng-Robinson EOS 
-     * RK-PR EOS 
-     * Simplified Perturbed Hard Chain Theory EOS
-     * Perturbed Chain Statistical Associating Fluid Theory 
-     * Group Contribution Equation of State 
+     * Soave-Redlich-Kwong 
+     * Peng-Robinson
+     * RK-PR
+     * Simplified Perturbed Hard Chain Theory
+     * Perturbed Chain Statistical Associating Fluid Theory (PC-SAFT)
 
 * Generación de suite de gráficos 2-D: 
 
     * Diagrama de equilibrio de fase global :
 
-      * Presión - Temperatura
-      * Temperatura - Composición
-      * Temperatura - Densidad 
-      * Presión - Composición 
-      * Presión - Densidad 
+      * Presión - Temperatura (P-T)
+      * Temperatura - Composición (T-x)
+      * Temperatura - Densidad (T-ρ) 
+      * Presión - Composición (P-x)
+      * Presión - Densidad (P-ρ)
 
-    * Diagramas Pxy, Txy, isopletas para una temperatura, presión o composición 
-      seleccionada respectivamente. 
+    * Isopletas: diagramas para composición ``Z`` constante (rango definible [0, 1] ):
+        
+        * Presión - Temperatura (P-T)
+        * Temperatura - Composición (T-x)
+        * Temperatura - Densidad (T-ρ)
+        * Presión - Composición (P-x)
+        * Presión - Densidad (P-ρ)
 
-* Generación de suite de gráficos 3-D: 
+    * Diagramas isotérmicos (Pxy): diagramas para temperatura ``T [K]`` constante [#]_:
 
-    * Diagrama de equilibrio de fase global :
+        * Presión - Composición (Pxy)
+        * Presión - Densidad (P-ρ)
+
+    * Diagramas isobáricos (Txy): diagramas para presión ``P [bar]`` constante :
+
+        * Temperatura - Composición (Txy)
+        * Temperatura - Densidad  (T-ρ)
+
+* Generación de suite de gráficos 3-D: diagramas globales y de parámetros constantes 
+  automáticamente superpuestos para cada caso:
 
         * Presión - Temperatura - Densidad
         * Presión - Temperatura - Composición
-
+        
+* Superposición de diagramas compatibles
 * Gestión de proyectos (manipulación múltiples casos de sistemas/modelo/gráfico) 
 * Gestión de persistencia de datos (abrir, guardar, etc.)
 * Ejecución multiplataforma: GPEC debe ser capaz de utilizarse en entornos Windows y Linux
@@ -175,9 +186,13 @@ Requerimientos no funcionales
 * Manipulación de gráficos accesible: zoom, rotación, desplazamiento, ocultación de curvas, etc.
 * Calidad y formatos de gráficos válidos para publicaciones científicas
 * Configurabilidad de aspecto de los gráficos
-* Usabilidad y claridad de las interfaces: Gpec debe poder usarse intuitivamente
+* Usabilidad y claridad de las interfaces: debe poder usarse intuitivamente
 
 
 
 .. [#]  Para la parametrización de los datos de entrada para cada ecuación de 
-        estado fue menenester documentar la `api`_
+        estado fue menenester documentar la :ref:`api`.
+
+.. [#]  La validación de los rangos dinámicos (dependen de las constantes críticas
+        de los compuestos del sistema) la realizan los algoritmos de cálculo. El frontend
+        se limita a reportar un error en la obtención de los datos de salida. 

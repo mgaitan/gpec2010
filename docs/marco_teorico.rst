@@ -10,14 +10,66 @@ y evaluado por profesionales o interesados de/en las distintas áreas de incumbe
         :ref:`trabajo_interdisciplinario`.
 
 Dado que no necesariamente se tiene un conocimiento
-sólido fuera de la especifidad de la profesión, en este capítulo se presentarán 
+sólido fuera de la especificidad de la profesión, en este capítulo se presentarán 
 conceptos generales (que no pretenten exhautividad pero sí precisión) de las dos áreas, 
 útiles para la comprensión de este trabajo. Para definiciónes de términos puntuales, 
 consulte el :ref:`glosario <glosario>`.
 
 
-Conceptos de diagramas y equilibrio de fases 
-=============================================
+Conceptos de equilibrio de fases y sus diagramas
+================================================
+
+El estudio introductorio de la termodinámica se centra en sustancias puras o 
+mezclas a composición constante. En este caso, el sistema es descripto por 
+dos variables.  Un diagrama de fase típico para estos 
+sistemas, es el *Presión vs. temperatura* :
+
+    .. figure: images/Phase-diag2.svg
+       :width: 530px
+       
+       La línea verde indica los puntos de congelamiento. La azul los de 
+       ebullición. La línea punteada muestra un 
+       comportamiento particular del agua. 
+
+Así, para determinada presión y temperatura, la sustancia o mezcla constante 
+puede estar en fase líquida, gaseosa o sólida, o bien en un punto crítico.     
+       
+Para sistemas binarios (mezcla de dos componentes) la *composición* se vuelve 
+una variable del sistema. Es decir, que porcentaje o fracción de la mezcla 
+corresponde a cada una de las dos sustancias del sistema. La composición 
+habitualmente se mide en fracción molar, fracción masa, o concentración 
+molar. 
+
+Al coexistir dos sustancias, para un determinado punto *T, P, composición* el 
+sistema puede no estar en una fase absoluta sino en un equilibrio de dos 
+fases, por ejemplo vapor/líquido, líquido/líquido, vapor/sólido, 
+líquido/sólido .
+
+Según [SM-VN-AG2000]_ :
+
+    (...) se reconoce al equilibrio como una condición estática 
+    donde, con el tiempo, no ocurre cambio alguno en las propiedades 
+    macroscópicas de un sistema, lo cual implica un balance de todos los 
+    potenciales que pueden ocasionar un cambio. 
+
+Por ejemplo, un sistema aislado que consta de las fases en contacto estrecho 
+líquido y vapor, con el tiempo alcanza un estado final donde no existe 
+tendencia a que suceda un cambio en sí mismo. La temperatura, la presión y 
+las composiciones de fase logran los valores finales que en adelante 
+permanecen fijos, por lo que el sistema logra el equilibrio [#]_
+
+Los equilibrios entre fases tienen un rol muy importante en la tecnología 
+química, alcanzando una gran diversidad de aplicaciones, principalmente 
+en procesos de separación de la industria química, petroquímica y el sector 
+de hidrocarburos, pero también en novedosos procesos basados en fluidos 
+supercríticos que han alcanzado un gran desarrollo en las últimas décadas. 
+Estos equilibrios pueden presentar cierta complejidad, especialmente a altas 
+presiones, y son representados por medio de distintos tipos de diagramas de 
+fases. 
+
+El modelado cuantitativo de los equilibrios de fases se realiza principalmente, 
+y cada vez más, utilizando :term:`ecuaciones de estado` (:abbr:`EoS`)
+
 
 
 
@@ -42,13 +94,13 @@ la escala de valoración hecha en el Manifiesto [AG-MANIF]_ :
 
 Las *implementaciones* del marco conceptual propuesto por el Manifiesto de 
 desarrollo ágil (como *eXtremme Programming* o *Scrum*) están estructuralmente 
-concebidas para el trabajo de un equipo de trabajo abocado al mismo proyecto. 
+concebidas para el trabajo de un equipo de desarrollo abocado al mismo proyecto. 
 Como el desarrollo  del software estuvo a cargo de una sola persona 
 (con la colaboración y revisión de los directores) no se ajustó 
 a un método estrictamente definido para un equipo como los mencionados. 
 
 Sin embargo, muchas ideas propuestas por estos métodos han sido aplicadas, 
-concibiendo un desarrollo incremental e iterativo con énfasis en la adaptabilidad 
+concibiendo un desarrollo evolutivo con énfasis en la adaptabilidad 
 de los requerimientos. 
 
 Algunas de las técnicas y procesos ágiles involucrados en este desarrollo 
@@ -582,7 +634,12 @@ Sphinx utiliza como formato de entrada el formato restructuredText_ y genera
 versiones en html (con motor de búsqueda y resaltado de código incorporado) 
 y PDF de alta calidad a través de Latex. 
 
-
+.. [#]  A pesar de eso, en el nivel microscópico las condiciones no son estáticas. 
+        Las moléculas contenidas en una fase en un determinado instante son 
+        diferentes a las que después ocuparan la misma fase, es decir, existe 
+        intercambio de de moléculas en la zona interfacial, aunque al ser de 
+        igual rapidez promedio en ambas direcciones no ocurre transferencia 
+        neta de material. 
 
 .. [#]  Python es un lenguaje estandarizado que tiene distintas implementaciones. 
         La original y más utilizada es Cpython, implementada en C, pero existen
@@ -611,6 +668,9 @@ y PDF de alta calidad a través de Latex.
 
 .. [#]  `Chaco <http://code.enthought.com/chaco/>`_ y `GNUplot-Py <http://gnuplot-py.sourceforge.net/>`_ 
         son las más notables alternativas. 
+
+.. [SM-VN-AG2000] Smith, JM - Van Ness, HC - Abbott, MM  (2000), *Introducción a la termodinámica en ingeniería química - 
+                  6ta Edición*, McGraw-Hill, New York
 
 .. [GvR1998]  van Rossum, Guido (1998), *Glue it all together with Python*, 
               Workshop on Compositional Software Architecture in Monterey, 

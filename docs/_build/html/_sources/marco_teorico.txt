@@ -16,8 +16,22 @@ conceptos generales (que no pretenten exhautividad pero sí precisión) de las d
 consulte el :ref:`glosario <glosario>`.
 
 
-Conceptos de diagramas y equilibrio de fases 
-=============================================
+Conceptos de equilibrio de fases y sus diagramas
+================================================
+
+Los equilibrios entre fases tienen un rol muy importante en la tecnología 
+química, alcanzando una gran diversidad de aplicaciones, principalmente 
+en procesos de separación de la industria química, petroquímica y el sector 
+de hidrocarburos, pero también en novedosos procesos basados en fluidos 
+supercríticos que han alcanzado un gran desarrollo en las últimas décadas. 
+Estos equilibrios pueden presentar cierta complejidad, especialmente a altas 
+presiones, y son representados por medio de distintos tipos de diagramas de 
+fases. 
+
+El modelado cuantitativo de los equilibrios de fases se realiza principalmente, 
+y cada vez más, utilizando :term:`ecuaciones de estado` (:abbr:`EoS`)
+
+
 
 
 
@@ -42,13 +56,13 @@ la escala de valoración hecha en el Manifiesto [AG-MANIF]_ :
 
 Las *implementaciones* del marco conceptual propuesto por el Manifiesto de 
 desarrollo ágil (como *eXtremme Programming* o *Scrum*) están estructuralmente 
-concebidas para el trabajo de un equipo de trabajo abocado al mismo proyecto. 
+concebidas para el trabajo de un equipo de desarrollo abocado al mismo proyecto. 
 Como el desarrollo  del software estuvo a cargo de una sola persona 
 (con la colaboración y revisión de los directores) no se ajustó 
 a un método estrictamente definido para un equipo como los mencionados. 
 
 Sin embargo, muchas ideas propuestas por estos métodos han sido aplicadas, 
-concibiendo un desarrollo incremental e iterativo con énfasis en la adaptabilidad 
+concibiendo un desarrollo evolutivo con énfasis en la adaptabilidad 
 de los requerimientos. 
 
 Algunas de las técnicas y procesos ágiles involucrados en este desarrollo 
@@ -60,7 +74,7 @@ otras.
 Desarrollo evolutivo adaptado
 -----------------------------
 
-Según Sommerville en [IS2004], el desarrollo evolutivo se basa en la idea de 
+Según Sommerville en [IS2004]_, el desarrollo evolutivo se basa en la idea de 
 una implementación inicial, exponiéndola a los comentarios del comitente o 
 los usuarios, y refinándola a través de diferentes versiones preliminares 
 (versiones *beta*) hasta obtener una versión que satisfaga el conjunto de 

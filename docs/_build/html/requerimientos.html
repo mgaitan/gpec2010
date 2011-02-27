@@ -87,7 +87,7 @@ con la EoS RK-PR.</p>
 </div>
 <p>La comunicación con los algoritmos implementados en Fortran se realiza mediante
 archivos de texto plano en un formato cuya estructura <em>ad hoc</em> es comprendida por
-las dos partes (ver <a href="#id6"><span class="problematic" id="id7">`API`_</span></a>). Asimismo, los datos de salida que producen los algoritmos, son
+las dos partes (ver <a href="#id8"><span class="problematic" id="id9">`API`_</span></a>). Asimismo, los datos de salida que producen los algoritmos, son
 leídos por Visual Gpec desde archivos de texto para su posterior graficación.</p>
 <p>Dicha graficación se realiza mediante rutinas desarrolladas <em>ad hoc</em> para esta
 implementación. No se basa en ninguna biblioteca para estos fines.
@@ -100,7 +100,7 @@ de escala, segmentación y demás funcionalidades básicas debió programarse de
 con modelo RK-PR.</p>
 </div>
 <p>El resultado de esto, si bien es aceptable y funcional, implicó muchas horas de
-desarrollo, con gráficos sólo 2D, poco configurables, que se pueden
+desarrollo, con gráficos sólo 2D, poco configurables, que no se pueden
 vectorizar ni exportar.</p>
 </div>
 <div class="section" id="licenciamiento">
@@ -108,7 +108,7 @@ vectorizar ni exportar.</p>
 <p><em>Visual GPEC</em> no tiene una licencia explicitada pero se trata de
 un <em>freeware*</em>, es decir, un tipo de software que se distribuye  sin costo y
 está disponible para su uso por tiempo ilimitado. La última versión
-públicamente disponible era la 2.0</p>
+públicamente disponible era la 2.0.</p>
 <p>Hasta el momento, GPEC no es Software Libre ni Opensource, ya que su código
 fuente no está  disponible.</p>
 </div>
@@ -144,53 +144,73 @@ en lo posible mejorarse. Se detallan a continuación:</p>
 <ul>
 <li><p class="first">Generación del sistema binario: selección de dos sustancias.</p>
 </li>
-<li><p class="first">Gestión de Alta-Baja-Modificación de compuestos químicos. Se incluirá una base de datos
+<li><p class="first">Gestión de de base de datos de constantes de compuestos químicos. Se incluirá una base de datos
 con el software que el usuario puede manipular.</p>
 </li>
-<li><p class="first">Parametrización automatizada y manual</p>
-</li>
-<li><p class="first">Adecuación del formulario de entrada de parámetros para ecuaciones de estado (modelos)
-base molecular <a class="footnote-reference" href="#id5" id="id4">[1]</a> :</p>
+<li><p class="first">Adecuación del formulario y archivo de entrada de parámetros para
+diferentes ecuaciones de estado (modelos) de base molecular <a class="footnote-reference" href="#id6" id="id4">[1]</a> :</p>
 <blockquote>
-<ul class="simple">
-<li>Soave-Redlich-Kwong EOS</li>
-<li>Peng-Robinson EOS</li>
-<li>RK-PR EOS</li>
-<li>Simplified Perturbed Hard Chain Theory EOS</li>
-<li>Perturbed Chain Statistical Associating Fluid Theory</li>
-<li>Group Contribution Equation of State</li>
+<div><ul class="simple">
+<li>Soave-Redlich-Kwong</li>
+<li>Peng-Robinson</li>
+<li>RK-PR</li>
+<li>Simplified Perturbed Hard Chain Theory</li>
+<li>Perturbed Chain Statistical Associating Fluid Theory (PC-SAFT)</li>
 </ul>
-</blockquote>
+</div></blockquote>
 </li>
 <li><p class="first">Generación de suite de gráficos 2-D:</p>
 <blockquote>
-<ul class="simple">
-<li>Diagrama de equilibrio de fase global :<ul>
-<li>Presión - Temperatura</li>
-<li>Temperatura - Composición</li>
-<li>Temperatura - Densidad</li>
-<li>Presión - Composición</li>
-<li>Presión - Densidad</li>
-</ul>
-</li>
-<li>Diagramas Pxy, Txy, isopletas para una temperatura, presión o composición
-seleccionada respectivamente.</li>
-</ul>
-</blockquote>
-</li>
-<li><p class="first">Generación de suite de gráficos 3-D:</p>
-<blockquote>
-<ul>
+<div><ul>
 <li><p class="first">Diagrama de equilibrio de fase global :</p>
-<blockquote>
 <ul class="simple">
+<li>Presión - Temperatura (P-T)</li>
+<li>Temperatura - Composición (T-x)</li>
+<li>Temperatura - Densidad (T-ρ)</li>
+<li>Presión - Composición (P-x)</li>
+<li>Presión - Densidad (P-ρ)</li>
+</ul>
+</li>
+<li><p class="first">Isopletas: diagramas para composición <tt class="docutils literal"><span class="pre">Z</span></tt> constante (rango definible [0, 1] ):</p>
+<blockquote>
+<div><ul class="simple">
+<li>Presión - Temperatura (P-T)</li>
+<li>Temperatura - Composición (T-x)</li>
+<li>Temperatura - Densidad (T-ρ)</li>
+<li>Presión - Composición (P-x)</li>
+<li>Presión - Densidad (P-ρ)</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Diagramas isotérmicos (Pxy): diagramas para temperatura <tt class="docutils literal"><span class="pre">T</span> <span class="pre">[K]</span></tt> constante <a class="footnote-reference" href="#id7" id="id5">[2]</a>:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Presión - Composición (Pxy)</li>
+<li>Presión - Densidad (P-ρ)</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Diagramas isobáricos (Txy): diagramas para presión <tt class="docutils literal"><span class="pre">P</span> <span class="pre">[bar]</span></tt> constante :</p>
+<blockquote>
+<div><ul class="simple">
+<li>Temperatura - Composición (Txy)</li>
+<li>Temperatura - Densidad  (T-ρ)</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Generación de suite de gráficos 3-D: diagramas globales y de parámetros constantes
+automáticamente superpuestos para cada caso:</p>
+<blockquote>
+<div><ul class="simple">
 <li>Presión - Temperatura - Densidad</li>
 <li>Presión - Temperatura - Composición</li>
 </ul>
-</blockquote>
+</div></blockquote>
 </li>
-</ul>
-</blockquote>
+<li><p class="first">Superposición de diagramas compatibles</p>
 </li>
 <li><p class="first">Gestión de proyectos (manipulación múltiples casos de sistemas/modelo/gráfico)</p>
 </li>
@@ -212,13 +232,21 @@ accesible.</li>
 <li>Manipulación de gráficos accesible: zoom, rotación, desplazamiento, ocultación de curvas, etc.</li>
 <li>Calidad y formatos de gráficos válidos para publicaciones científicas</li>
 <li>Configurabilidad de aspecto de los gráficos</li>
-<li>Usabilidad y claridad de las interfaces: Gpec debe poder usarse intuitivamente</li>
+<li>Usabilidad y claridad de las interfaces: debe poder usarse intuitivamente</li>
 </ul>
-<table class="docutils footnote" frame="void" id="id5" rules="none">
+<table class="docutils footnote" frame="void" id="id6" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id4">[1]</a></td><td>Para la parametrización de los datos de entrada para cada ecuación de
-estado fue menenester documentar la <a href="#id8"><span class="problematic" id="id9">`api`_</span></a></td></tr>
+estado fue menenester documentar la <a class="reference internal" href="api.html#api"><em>Especificación de la interfaz de comunicación</em></a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[2]</a></td><td>La validación de los rangos dinámicos (dependen de las constantes críticas
+de los compuestos del sistema) la realizan los algoritmos de cálculo. El frontend
+se limita a reportar un error en la obtención de los datos de salida.</td></tr>
 </tbody>
 </table>
 </div>
@@ -297,7 +325,7 @@ estado fue menenester documentar la <a href="#id8"><span class="problematic" id=
     </div>
     <div class="footer">
         &copy; Copyright 2010, Martín Gaitán.
-      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.5.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
     </div>
   </body>
 </html>

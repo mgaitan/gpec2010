@@ -50,7 +50,7 @@ ya que se carecía de documentación fehaciente.</p>
 <div class="section" id="tabla-de-incidencia">
 <h2>Tabla de incidencia<a class="headerlink" href="#tabla-de-incidencia" title="Enlazar permanentemente con este título">¶</a></h2>
 <blockquote>
-<table border="1" class="docutils">
+<div><table border="1" class="docutils">
 <colgroup>
 <col width="60%" />
 <col width="17%" />
@@ -105,7 +105,7 @@ ya que se carecía de documentación fehaciente.</p>
 </tr>
 </tbody>
 </table>
-</blockquote>
+</div></blockquote>
 </div>
 <div class="section" id="conparin-dat">
 <h2>CONPARIN.DAT<a class="headerlink" href="#conparin-dat" title="Enlazar permanentemente con este título">¶</a></h2>
@@ -114,15 +114,15 @@ modelos en función de las constantes de cada compuesto, o bien, en sentido cont
 ajustar las constantes en función de parámetros del modelo definido por el usuario.
 Esta bidireccionalidad del cálculo se especifica mediante el parametro <tt class="docutils literal"><span class="pre">SENTIDO</span></tt>.</p>
 <blockquote>
-<div class="admonition note">
+<div><div class="admonition note">
 <p class="first admonition-title">Nota</p>
 <p class="last">el archivo se encuentra en realidad en <cite>./INOUTS/CONPARIN.DAT</cite></p>
 </div>
-</blockquote>
+</div></blockquote>
 <p>Formato General:</p>
 <blockquote>
-SENTIDO MODELO
-PARAM1    PARAM2    PARAM3    [PARAM4]</blockquote>
+<div>SENTIDO MODELO
+PARAM1    PARAM2    PARAM3    [PARAM4]</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -211,25 +211,25 @@ de los parámetros del modelo</p>
 <h3>Modo para calcular parámetros del modelo<a class="headerlink" href="#modo-para-calcular-par-metros-del-modelo" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Este modo se define con <tt class="docutils literal"><span class="pre">SENTIDO</span></tt> 0. Se definen las variables del compuesto.</p>
 <blockquote>
-<p>Modelos 1, 2, 3:</p>
+<div><p>Modelos 1, 2, 3:</p>
 <blockquote>
-<dl class="docutils">
+<div><dl class="docutils">
 <dt>0 MODELO</dt>
 <dd>TC    PC    OM     VC</dd>
 </dl>
-</blockquote>
+</div></blockquote>
 <p>Para los modelos 4 y 6 el formato es el siguiente:</p>
 <div class="highlight-python"><pre>0  MODELO
  TC    PC    OM</pre>
 </div>
-</blockquote>
+</div></blockquote>
 <div class="admonition attention">
 <p class="first admonition-title">Atención</p>
 <p class="last">El ejecutable a invocar para el cálculo en los modelos 4 o 6 es <tt class="docutils literal"><span class="pre">PCSAFT</span></tt></p>
 </div>
 <p>Detalle:</p>
 <blockquote>
-<table border="1" class="docutils">
+<div><table border="1" class="docutils">
 <colgroup>
 <col width="27%" />
 <col width="51%" />
@@ -260,7 +260,7 @@ de los parámetros del modelo</p>
 </tr>
 </tbody>
 </table>
-</blockquote>
+</div></blockquote>
 <p>Todos los parámetros son editables en el formulario excepto <tt class="docutils literal"><span class="pre">VCeos</span></tt>. Para
 RK-PR el valor sí es editable y está asociado a un factor denominado
 <tt class="docutils literal"><span class="pre">Critical</span> <span class="pre">Volume</span> <span class="pre">Ratio</span> <span class="pre">Model/Experimental</span></tt> o <tt class="docutils literal"><span class="pre">VCrat</span></tt> que se fija por omisión a 1.168.</p>
@@ -273,12 +273,12 @@ Si el usuario define <tt class="docutils literal"><span class="pre">VCeos</span>
 <h3>Modo para calcular variables del compuesto<a class="headerlink" href="#modo-para-calcular-variables-del-compuesto" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Cuando <tt class="docutils literal"><span class="pre">SENTIDO</span></tt> es 1 el formato depende del modelo</p>
 <blockquote>
-<ul>
+<div><ul>
 <li><p class="first">1  <span class="target" id="soave-redlich-kwong">Soave-Redlich-Kwong</span></p>
 <blockquote>
-<p>1   1
+<div><p>1   1
 ac    b    m</p>
-</blockquote>
+</div></blockquote>
 <p>Detalle:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -432,7 +432,7 @@ T*   V*   c</pre>
 </div>
 </li>
 </ul>
-</blockquote>
+</div></blockquote>
 </div>
 </div>
 <div class="section" id="conparout-dat">
@@ -443,31 +443,31 @@ primer línea las variables de estado del compuesto, y en la segunda, los
 parámetros propios del modelo.</p>
 <p>Formato General:</p>
 <blockquote>
-VAR1  VAR2   VAR3    VAR4
-PARM1 PARAM2 PARAM3  [...]</blockquote>
+<div>VAR1  VAR2   VAR3    VAR4
+PARM1 PARAM2 PARAM3  [...]</div></blockquote>
 <p>Detalle:</p>
 <blockquote>
-<ul>
+<div><ul>
 <li><p class="first">Para <a class="reference internal" href="#soave-redlich-kwong">Soave-Redlich-Kwong</a> (id 1) y  <tt class="docutils literal"><span class="pre">Peng-Robinson</span></tt> (id 2):</p>
 <blockquote>
-<p>TC    PC    VC    OM
+<div><p>TC    PC    VC    OM
 ac     b     m</p>
-</blockquote>
+</div></blockquote>
 </li>
 <li><p class="first">Para  <tt class="docutils literal"><span class="pre">RK-PR</span></tt> (id 3):</p>
 <blockquote>
-<p>TC    PC     VC    OM
+<div><p>TC    PC     VC    OM
 ac     b   del1     k</p>
-</blockquote>
+</div></blockquote>
 </li>
 <li><p class="first">Para  <tt class="docutils literal"><span class="pre">PC-SAFT</span></tt> (id 4):</p>
 <blockquote>
-<p>TC    PC     VC    OM
+<div><p>TC    PC     VC    OM
 eps/k   ro    m</p>
-</blockquote>
+</div></blockquote>
 </li>
 </ul>
-</blockquote>
+</div></blockquote>
 </div>
 <div class="section" id="gpecin-dat">
 <h2>GPECIN.DAT<a class="headerlink" href="#gpecin-dat" title="Enlazar permanentemente con este título">¶</a></h2>
@@ -1047,8 +1047,8 @@ p.n       x1.n      y1.n     y2.n           x2.n    dX.n      dY.n      [...]</p
 <p>Análogo a <a class="reference internal" href="#tforpxy-dat">TFORPXY.dat</a> para el diagrama de presión constante, este archivo
 indica el valor de presión definida por el usuario.</p>
 <blockquote>
-<blockquote>
-PRESION</blockquote>
+<div><blockquote>
+<div>PRESION</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1063,7 +1063,7 @@ de valores aceptados por el sistema.</p>
 </tr>
 </tbody>
 </table>
-</blockquote>
+</div></blockquote>
 </div>
 <div class="section" id="txyout-dat">
 <h2>TXYOUT.DAT<a class="headerlink" href="#txyout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
@@ -1130,7 +1130,7 @@ t_llv.n     p_llv.n</pre>
 </div>
 <p>Detalle:</p>
 <blockquote>
-<table class="docutils field-list" frame="void" rules="none">
+<div><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -1141,7 +1141,7 @@ la cantidad de bloque <tt class="docutils literal"><span class="pre">CRI</span><
 </tr>
 </tbody>
 </table>
-</blockquote>
+</div></blockquote>
 <p>El bloque de datos tabulados <tt class="docutils literal"><span class="pre">ISO</span></tt> tiene 6 cifras significativas.</p>
 </div>
 <div class="section" id="fugin-dat">
@@ -1154,7 +1154,7 @@ X1_min  X1_max</pre>
 </div>
 <p>Detalle:</p>
 <blockquote>
-<table class="docutils field-list" frame="void" rules="none">
+<div><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -1170,7 +1170,7 @@ X1_min  X1_max</pre>
 </tr>
 </tbody>
 </table>
-</blockquote>
+</div></blockquote>
 </div>
 <div class="section" id="fugout-dat">
 <h2>FUGOUT.DAT<a class="headerlink" href="#fugout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
@@ -1189,7 +1189,7 @@ FUG
 </div>
 <p>Detalle:</p>
 <blockquote>
-<table class="docutils field-list" frame="void" rules="none">
+<div><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -1199,7 +1199,7 @@ FUG
 </tr>
 </tbody>
 </table>
-</blockquote>
+</div></blockquote>
 <p>Las tres columnas de datos son significativas.</p>
 </div>
 <div class="section" id="isoxtin-dat">
@@ -1212,7 +1212,7 @@ RHO_min RHO_max PASO_DENS</pre>
 </div>
 <p>Detalle:</p>
 <blockquote>
-<table class="docutils field-list" frame="void" rules="none">
+<div><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -1229,7 +1229,7 @@ por el usuario.</td>
 </tr>
 </tbody>
 </table>
-</blockquote>
+</div></blockquote>
 </div>
 <div class="section" id="isoxtout-dat">
 <h2>IsoXTout.DAT<a class="headerlink" href="#isoxtout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
@@ -1247,7 +1247,7 @@ rho.max     rho.max</pre>
 </div>
 <p>Detalle:</p>
 <blockquote>
-<table class="docutils field-list" frame="void" rules="none">
+<div><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -1257,7 +1257,7 @@ rho.max     rho.max</pre>
 </tr>
 </tbody>
 </table>
-</blockquote>
+</div></blockquote>
 <p>Notar que el bloque de datos no tiene un identificador de tres letras
 previo a las columnas de datos.</p>
 </div>
@@ -1333,7 +1333,7 @@ previo a las columnas de datos.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2010, Martín Gaitán.
-      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.5.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
     </div>
   </body>
 </html>
