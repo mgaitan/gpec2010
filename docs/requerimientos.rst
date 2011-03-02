@@ -85,8 +85,6 @@ Durante su desarrollo anterior, GPEC no adoptó ninguna metodología de
 desarrollo particular, salvo la concerniente a la separación  
 funcional de la aplicación como se explica más arriba. 
 
-
-
 Un problema manifestado por el equipo de desarrollo es el del versionamiento,
 ya que era incontrolable la coherencia entre los cambios realizados 
 por más de un colaborador. Las modificaciones y los archivos circulan por email

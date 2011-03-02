@@ -10,7 +10,7 @@ y evaluado por profesionales o interesados de/en las distintas áreas de incumbe
         :ref:`trabajo_interdisciplinario`.
 
 Dado que no necesariamente se tiene un conocimiento
-sólido fuera de la especifidad de la profesión, en este capítulo se presentarán 
+sólido fuera de la especificidad de la profesión, en este capítulo se presentarán 
 conceptos generales (que no pretenten exhautividad pero sí precisión) de las dos áreas, 
 útiles para la comprensión de este trabajo. Para definiciónes de términos puntuales, 
 consulte el :ref:`glosario <glosario>`.
@@ -18,6 +18,80 @@ consulte el :ref:`glosario <glosario>`.
 
 Conceptos de equilibrio de fases y sus diagramas
 ================================================
+
+Algunas definiciones
+--------------------
+
+
+Un **diagrama de fase** es un tipo de gráfico utilizado para mostrar 
+las condiciones en las que distintas fases termodinámicas de un sistema pueden ocurrir en 
+equilibrio. Se representa en función de variables que caracterizan el estado 
+intesivo del sistema físicoquímico (funciones de estado).  
+
+El estudio introductorio de la termodinámica se centra en sustancias puras o 
+mezclas a composición constante. En este caso, el sistema es descripto por 
+dos variables.  Un diagrama de fase típico para estos 
+sistemas, es el *Presión vs. temperatura* :
+
+    .. figure:: images/Phase-diag_es.svg
+       :width: 530px
+       
+       La línea verde indica los puntos de congelamiento. La azul los de 
+       ebullición. La línea punteada muestra un 
+       comportamiento particular del agua. 
+
+Así, para determinada presión y temperatura, la sustancia o mezcla constante 
+puede estar en fase líquida, gaseosa o sólida, o bien en un punto crítico.     
+Es decir, qué porcentaje o fracción de la mezcla corresponde a cada una de las 
+dos sustancias del sistema. La composición habitualmente se mide en fracción molar, 
+fracción masa, o concentración molar. 
+
+
+Para **sistemas binarios** (una mezcla de dos componentes) la *composición* 
+(o, complementariamente, la *densidad*) se vuelve 
+una variable del sistema, cuya representación gráfica son curvas en el 
+espacio *R³* (gráfico tridimensional). Para un determinado estado *T-P-x* (*x* es 
+composición, en general expresada como fracción del compuesto más volátil) el 
+sistema se encuentra en *zonas de equilibrio* vapor/líquido, líquido/líquido, vapor/sólido, 
+líquido/sólido u otros casos particulares. 
+
+   .. figure:: images/ejTipo1.png
+      :width: 530px
+
+      Un diagrama P-T-x para un sistema binario de Tipo I. 
+
+La proyección ortogonal de estas curvas tridimensionales sobre los planos 
+correspondientes genera los gráficos cartesianos bidimensionales PT, Px, Tx 
+(y sus análogos para densidad) que son típicos de la   bibliografía del tema. 
+
+    .. figure:: images/ejemploTx.png
+       :width: 530px
+
+       Un diagrama T-x para un sistema binario, mostrando la línea crítica y 
+       otras informaciones. 
+
+El **comportamiento termodinámico de los sistemas binarios** no es uniforme 
+cualesquiera sean los compuestos de la mezcla. Existen seis **tipos de 
+comportamiento**, de los cuales los tipos I, II, III y IV (enumerados en orden 
+creciente de complejidad) son los más comunes (todas calculables a través de 
+GPEC). Esta complejidad creciente del comportomaniento se observa en la aparación 
+de fases líquido-líquido, líquido-líquido-vapor, líneas azeotrópicas, etc. 
+
+Equilibrio termodinámico
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Según [SM-VN-AG2000]_ :
+
+    (...) se reconoce al equilibrio como una condición estática 
+    donde, con el tiempo, no ocurre cambio alguno en las propiedades 
+    macroscópicas de un sistema, lo cual implica un balance de todos los 
+    potenciales que pueden ocasionar un cambio. 
+
+Por ejemplo, un sistema aislado que consta de las fases en contacto estrecho 
+líquido y vapor, con el tiempo alcanza un estado final donde no existe 
+tendencia a que suceda un cambio en sí mismo. La temperatura, la presión y 
+las composiciones de fase logran los valores finales que en adelante 
+permanecen fijos, por lo que el sistema logra el equilibrio [#]_ . 
 
 Los equilibrios entre fases tienen un rol muy importante en la tecnología 
 química, alcanzando una gran diversidad de aplicaciones, principalmente 
@@ -28,11 +102,39 @@ Estos equilibrios pueden presentar cierta complejidad, especialmente a altas
 presiones, y son representados por medio de distintos tipos de diagramas de 
 fases. 
 
-El modelado cuantitativo de los equilibrios de fases se realiza principalmente, 
-y cada vez más, utilizando :term:`ecuaciones de estado` (:abbr:`EoS`)
+Ecuaciones de Estado 
+^^^^^^^^^^^^^^^^^^^^
+El modelado cuantitativo de los equilibrios de fases se realiza principalmente 
+utilizando **ecuaciones de estado** (:abbr:`EoS (Equation of State)`). Estas son relaciones 
+matemáticas (modelos matemáticos) entre dos o más funciones de 
+estado asociadas a la materia como la temperatura, la presión, el volumen o 
+la energía interna. 
+
+Como ejemplo conocido en cualquier curso introductorio de química, 
+la *ley del gas ideal* es una ecuación de estado, que al  
+considerar el volumen molecular nulo y a las fuerzas de atracción-repulsión 
+despreciables, limita su utilidad para modelar gases reales. 
+
+ .. figure:: images/leygasideal.png
+    
+    *p* es la presión absoluta, *V el volumen, *T*, *n* la cantidad de materia, 
+    y *R* la constante del gas ideal.
+
+La **ecuación de Van der Waals** (1873) [#]_ es una ecuación que generaliza la ecuación de los gases 
+ideales, teniendo en consideración tanto el volumen finito de las 
+moléculas de gas como otros efectos que afectan al término de presiones
+
+  .. figure:: images/vander.png
+    
+     *a* y *b* son constantes físicas de la sustancia en cuestión. 
 
 
+Muchas de las **ecuaciones de estado modernas** son mejoras y correcciones 
+a la ecuación original de Van der Waals (denominadas ecuaciones de estado 
+cúbicas). Por ejemplo la ecuación de Redlich–Kwong, Peng-Robinson, Elliott-Suresh-Donohue, etc. 
 
+GPEC es capaz de realizar los cálculos usando cinco diferentes ecuaciones de 
+estado (ver :ref:'Requerimientos funcionales').
 
 
 Metodologías de desarrollo de Software
@@ -103,6 +205,7 @@ Existen dos grandes tipos de desarrollos evolutivos:
 En este trabajo se aplicó principlamente un proceso evolutivo de tipo exploratorio, 
 basándose en estrategias de desarrollo ágil mencionadas previamente. 
 
+.. _tecnologias:
 
 Tecnologías principales
 ========================
@@ -206,8 +309,7 @@ de código equivalente en otros lenguajes de programación.
 En Python el **tipado de datos es dinámico** (al igual que la asignación de memoria), 
 es decir que el tipo de dato (entero, cadena, punto flotante u otros tipos de más alto nivel como listas o diccionarios) 
 se determina automáticamente al momento de la asignación de la variable, a diferencia 
-de los lenguajes de tipado estático  (como Java o C) que exigen la declaración de todas las varibles con sus tipos antes de 
-ser utilizadas. Sin embargo, el **tipado es fuerte**,  ya que una vez que la variable 
+de los lenguajes de tipado estático  (como Java o C) que exigen la declaración de todas las varibles con sus tipos antes de ser utilizadas. Sin embargo, el **tipado es fuerte**,  ya que una vez que la variable 
 adquiere un tipo (o sea, ha sido asignada), queda determinado su tratamiento. Por ejemplo la operación 
 ``+`` entre cadenas de texto retorna la concatenación de las cadenas, mientras 
 que entre tipos numéricos retorna la suma. Intentar operar con ``+`` entre un 
@@ -221,8 +323,8 @@ pruebas unitarias, manipulación de XML y abstracción de llamadas al sistemas o
 muchas otras.
 
 Además de la incorporada, puede interfacear con diversas bibliotecas, por ejemplo
-para desarrollar interfaces gráficas de usuario (:term:`GUI`) (ver :ref:`wxpython`), y 
-a la vez es extensible en C o C++. 
+para desarrollar interfaces gráficas de usuario (:term:`GUI`) (ver 
+:ref:`WxPython`), y a la vez es extensible en C o C++. 
 
 Esta facilidad de integración permite que frecuentemente sea utilizado 
 como *"lenguaje pegamento"* (ver [GvR1998]_ ) para interconectar código que 
@@ -251,7 +353,7 @@ del mundo:
   herramientas de visualización de trayectorias.
 
 * El Space Telescope Science Institute (STScI) lo usa en muchos aspectos de su pipeline, 
-  planificando la adquisición de datos del telescopio Hubble, administrando volúmenes
+  planificando la adquisición de datos del telescopio Hubble, administrando volumenes
   de información y analizando imágenes atronómicas. 
   
 * La *National Oceanic Atmospheric Administration* (NOAA) usa Python para 
@@ -266,7 +368,7 @@ del mundo:
     .. seealso::
    
         Muchos otros casos de éxito son detallados en el texto mencionado, en 
-        los dos volúmenes de *Python Success Stories* de la editorial O'Reilly's [#]_ y en 
+        los dos volumenes de *Python Success Stories* de la editorial O'Reilly's [#]_ y en 
         http://python.org/about/success/
            
 NumPy
@@ -380,6 +482,8 @@ El resultado se observa en el siguiente gráfico:
 
        Gráfico generado interactivamente
 
+
+.. _wxpython:
 
 WxPython
 --------
@@ -596,17 +700,25 @@ Sphinx utiliza como formato de entrada el formato restructuredText_ y genera
 versiones en html (con motor de búsqueda y resaltado de código incorporado) 
 y PDF de alta calidad a través de Latex. 
 
+.. [#]  A pesar de eso, en el nivel microscópico las condiciones no son estáticas. 
+        Las moléculas contenidas en una fase en un determinado instante son 
+        diferentes a las que después ocuparan la misma fase, es decir, existe 
+        intercambio de de moléculas en la zona interfacial, aunque al ser de 
+        igual rapidez promedio en ambas direcciones no ocurre transferencia 
+        neta de material. 
 
-
-.. [#]  Python es un lenguaje estandarizado que tiene distintas implementaciones. 
-        La original y más utilizada es Cpython, implementada en C, pero existen
-        implementaciones en Java (http://jython.org), .NET (http://www.ironpython.net/)
-        y Python mismo (http://codespeak.net/pypy)
+.. [#]  Por este descubrimiento, Van der Waals recibió el Premio Nobel de Química 
+        en 1910
 
 .. [#]  Un programa {"Hola Mundo!"} es el que imprime el texto «Hola Mundo!» en un 
         dispositivo de visualización (generalmente una pantalla de monitor). 
         Se suele usar como introducción al estudio de un lenguaje de programación, 
         siendo un primer ejercicio típico.
+
+.. [#]  Python es un lenguaje estandarizado que tiene distintas implementaciones. 
+        La original y más utilizada es Cpython, implementada en C, pero existen
+        implementaciones en Java (http://jython.org), .NET (http://www.ironpython.net/)
+        y Python mismo (http://codespeak.net/pypy)
 
 .. [#]  La hipótesis en la que se basó su creador es que el código fuente suele leerse 
         muchas más veces de las que se escribe, ya sea por el mismo autor tiempo 
@@ -625,6 +737,9 @@ y PDF de alta calidad a través de Latex.
 
 .. [#]  `Chaco <http://code.enthought.com/chaco/>`_ y `GNUplot-Py <http://gnuplot-py.sourceforge.net/>`_ 
         son las más notables alternativas. 
+
+.. [SM-VN-AG2000] Smith, JM - Van Ness, HC - Abbott, MM  (2000), *Introducción a la termodinámica en ingeniería química - 
+                  6ta Edición*, McGraw-Hill, New York
 
 .. [GvR1998]  van Rossum, Guido (1998), *Glue it all together with Python*, 
               Workshop on Compositional Software Architecture in Monterey, 

@@ -1,0 +1,282 @@
+%PDF-1.3
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+% 'BasicFonts': class PDFDictionary 
+1 0 obj
+% The standard fonts dictionary
+<< /F1 2 0 R
+ /F2 3 0 R
+ /F3 7 0 R >>
+endobj
+% 'F1': class PDFType1Font 
+2 0 obj
+% Font Helvetica
+<< /BaseFont /Helvetica
+ /Encoding /WinAnsiEncoding
+ /Name /F1
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'F2': class PDFType1Font 
+3 0 obj
+% Font Helvetica-Bold
+<< /BaseFont /Helvetica-Bold
+ /Encoding /WinAnsiEncoding
+ /Name /F2
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'Annot.NUMBER1': class PDFDictionary 
+4 0 obj
+<< /A << /S /URI
+ /Type /Action
+ /URI (http://python.org/) >>
+ /Border [ 0
+ 0
+ 0 ]
+ /Rect [ 463.0927
+ 722.5936
+ 494.2227
+ 734.5936 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER2': class PDFDictionary 
+5 0 obj
+<< /A << /S /URI
+ /Type /Action
+ /URI (http://matplotlib.sourceforge.net/) >>
+ /Border [ 0
+ 0
+ 0 ]
+ /Rect [ 278.05
+ 710.5936
+ 320.84
+ 722.5936 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER3': class PDFDictionary 
+6 0 obj
+<< /A << /S /URI
+ /Type /Action
+ /URI (http://wxpython.org/) >>
+ /Border [ 0
+ 0
+ 0 ]
+ /Rect [ 62.69291
+ 698.5936
+ 106.0429
+ 710.5936 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'F3': class PDFType1Font 
+7 0 obj
+% Font Helvetica-Oblique
+<< /BaseFont /Helvetica-Oblique
+ /Encoding /WinAnsiEncoding
+ /Name /F3
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'Annot.NUMBER4': class LinkAnnotation 
+8 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 10 0 R
+ /XYZ
+ 68.69291
+ 380.8043
+ 0 ]
+ /Rect [ 311.5584
+ 476.5936
+ 321.0636
+ 488.5936 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER5': class LinkAnnotation 
+9 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 10 0 R
+ /XYZ
+ 288.8929
+ 489.8436
+ 0 ]
+ /Rect [ 68.69291
+ 367.5543
+ 74.25291
+ 379.5543 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Page1': class PDFPage 
+10 0 obj
+% Page dictionary
+<< /Annots [ 4 0 R
+ 5 0 R
+ 6 0 R
+ 8 0 R
+ 9 0 R ]
+ /Contents 14 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 13 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'R11': class PDFCatalog 
+11 0 obj
+% Document Root
+<< /Outlines 15 0 R
+ /PageLabels 16 0 R
+ /PageMode /UseNone
+ /Pages 13 0 R
+ /Type /Catalog >>
+endobj
+% 'R12': class PDFInfo 
+12 0 obj
+<< /Author ()
+ /CreationDate (D:20101004161332+03'00')
+ /Keywords ()
+ /Producer (ReportLab http://www.reportlab.com)
+ /Subject (\(unspecified\))
+ /Title (Frontend GPEC 2010) >>
+endobj
+% 'R13': class PDFPages 
+13 0 obj
+% page tree
+<< /Count 1
+ /Kids [ 10 0 R ]
+ /Type /Pages >>
+endobj
+% 'R14': class PDFStream 
+14 0 obj
+% page stream
+<< /Length 3779 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 741.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 9.64 Tm /F2 20 Tf 24 TL 135.4749 0 Td (Frontend GPEC 2010) Tj T* -135.4749 0 Td ET
+Q
+Q
+q
+1 0 0 1 62.69291 671.0236 cm
+q
+BT 1 0 0 1 0 52.82 Tm 1.86998 Tw 12 TL /F1 10 Tf 0 0 0 rg (El nuevo frontend desarrollado para el software GPEC est\341 desarrollado en lenguaje ) Tj 0 0 .501961 rg (Python) Tj 0 0 0 rg (, basado) Tj T* 0 Tw .69284 Tw (principalmente en la biblioteca para graficaci\363n ) Tj 0 0 .501961 rg (Matplotlib) Tj 0 0 0 rg (, y el toolkit para interfaces gr\341ficas de usuario) Tj T* 0 Tw 2.242706 Tw 0 0 .501961 rg (wxPython) Tj 0 0 0 rg (. Esta combinaci\363n de tecnolog\355as permiten un software \355ntegramente basado en Software) Tj T* 0 Tw .307633 Tw (Libre, capaz de ejecutarse en sistemas Windows, Linux o Mac y heredero de las ventajas de un lenguaje) Tj T* 0 Tw (simple, potente y elegante.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 605.0236 cm
+q
+BT 1 0 0 1 0 52.82 Tm 2.132485 Tw 12 TL /F1 10 Tf 0 0 0 rg (El desarrollo de este trabajo ha sido enmarcado en el uso de ) Tj /F3 10 Tf (metodolog\355as \341giles de desarrollo de) Tj T* 0 Tw 1.443555 Tw (software) Tj /F1 10 Tf (, que sumado a las caracter\355sticas de Python configuran una alta capacidad de adaptaci\363n al) Tj T* 0 Tw 1.325697 Tw (cambio e incorporaci\363n de requerimientos y un r\341pido prototipado de funcionalidades. M\341s a\372n, se ha) Tj T* 0 Tw .699213 Tw (utilizado una arquitectura basada en paso de mensajes \(patr\363n ) Tj /F3 10 Tf (pub/sub) Tj /F1 10 Tf (\) que mantiene un acoplamiento) Tj T* 0 Tw (bajo entre las distintas partes del programa, permitiendo flexibilidad y extensibilidad.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 515.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 76.82 Tm /F1 10 Tf 12 TL 1.643059 Tw (El nuevo frontend interact\372a con los ejecutables que implementan los algoritmos de c\341lculo num\351rico) Tj T* 0 Tw .67561 Tw (\(desarrollados en Fortran\) de la misma manera que su versi\363n precedente. Es decir, se ha respetado la) Tj T* 0 Tw .718651 Tw (interfaz de comunicaci\363n existente basada en archivos de texto plano. A trav\351s de un an\341lisis sint\341ctico) Tj T* 0 Tw 2.349984 Tw (\(parsing\) de los archivos de salida, los datos num\351ricos se convierten a vectores de punto flotante) Tj T* 0 Tw 3.267674 Tw (manipulables en Python y graficables con Matplolib. Adem\341s de producir gr\341ficos con calidad de) Tj T* 0 Tw .021647 Tw (publicaci\363n exportables a m\372ltiples formatos, esta biblioteca permite realizar gr\341ficos en 3D, funcionalidad) Tj T* 0 Tw (aprovechada en esta nueva versi\363n como la m\341s significativa mejora.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 461.0236 cm
+q
+BT 1 0 0 1 0 40.82 Tm 2.080697 Tw 12 TL /F1 10 Tf 0 0 0 rg (Por \372ltimo, un aspecto especialmente estudiado ha sido la usabilidad y ergonom\355a del programa. El) Tj T* 0 Tw 3.090651 Tw (objetivo ha sido clarificar la interfaz para que su uso sea intuitivo manteniendo accesible toda la) Tj T* 0 Tw 2.833184 Tw (informaci\363n y soportando a su vez m\372ltiples casos ) Tj /F1 8 Tf 0 0 .501961 rg 5 Ts (1 ) Tj /F1 10 Tf 0 0 0 rg 0 Ts (en la misma sesi\363n de trabajo. Esto permite) Tj T* 0 Tw (comparar y/o superponer lo resultados y acceder a los datos num\351ricos cuando es necesario.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 404.3307 cm
+Q
+q
+1 0 0 1 62.69291 375.9843 cm
+n 0 14.17323 m 469.8898 14.17323 l S
+Q
+q
+1 0 0 1 62.69291 363.9843 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 0 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (1) Tj T* ET
+Q
+Q
+q
+1 0 0 1 91.03937 0 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (Conjunci\363n de un sistema binario y un modelo de c\341lculo) Tj T* ET
+Q
+Q
+q
+Q
+Q
+ 
+endstream
+
+endobj
+% 'R15': class PDFOutlines 
+15 0 obj
+<< /Count 0
+ /Type /Outlines >>
+endobj
+% 'R16': class PDFPageLabels 
+16 0 obj
+% Document Root
+<< /Nums [ 0
+ 17 0 R ] >>
+endobj
+% 'R17': class PDFPageLabel 
+17 0 obj
+% None
+<< /S /D
+ /St 1 >>
+endobj
+xref
+0 18
+0000000000 65535 f
+0000000113 00000 n
+0000000233 00000 n
+0000000398 00000 n
+0000000585 00000 n
+0000000821 00000 n
+0000001069 00000 n
+0000001295 00000 n
+0000001489 00000 n
+0000001730 00000 n
+0000001956 00000 n
+0000002289 00000 n
+0000002448 00000 n
+0000002675 00000 n
+0000002783 00000 n
+0000006665 00000 n
+0000006748 00000 n
+0000006841 00000 n
+trailer
+<< /ID 
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com) 
+ [(\005\205\264:\316u!N\313\334\032>\000\316p\373) (\005\205\264:\316u!N\313\334\032>\000\316p\373)] 
+
+ /Info 12 0 R
+ /Root 11 0 R
+ /Size 18 >>
+startxref
+6888
+%%EOF
