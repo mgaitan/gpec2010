@@ -139,6 +139,12 @@ creación de instaladores Windows.
    Creando un instalador Windows a partir de un *zip* con el contenido 
    resultante de *py2exe*
  
+Compatibilidad
+^^^^^^^^^^^^^^^
+
+La instalación de GPEC se ha probado satisfactoriamente en sistemas Windows 
+XP, Windows Vista y Windows 7. 
+
 
 Instalación en sistemas Linux
 -----------------------------
@@ -156,7 +162,7 @@ declaradas. El usuario (o el instalador automatizado, como *easy_install*)
 son los encargados de asegurar el cumplimiento de esta dependencia, ya sea 
 verificando que está previamente instalada en el sistema o instalandola. 
 
-Si bien esto genera cierto *overhead* en primera instancia, porque una 
+Aunque esto genera cierto *overhead* en primera instancia, porque una 
 dependencia (por ejemplo, *Matplotlib*) es instalada completamente, esta 
 política permite una optimización cuando existen dependencias comunes en 
 diversas aplicaciones. En nuestro ejemplo, si dos aplicaciones requieren 
@@ -166,40 +172,76 @@ filosofía Unix que se resume en su famoso leitmotif:
 
     "Write programs that do one thing... and do it well" [#]_
 
+
+Sin embargo, por falta de masa crítica y tiempo, al momento de la 
+presentación no se realizaron instaladores ni paquetes especificos para una 
+distribución Linux, aunque la instalación mediante el código fuente es 
+trivial, dado que Python no reqiere compilacion. Los siguientes comandos son 
+suficientes para la obstención de la última versión de GPEC y sus 
+dependencias::
+
+
+    $ sudo apt-get install python-matplotlib python-matplotlib-data python-numpy 
+      python-wxgtk2.8 wine subversion
+    $ svn checkout https://gpec2010.googlecode.com/svn/trunk/src gpec
+
+Y para ejecutarlo, simplemente se invoca el script principal::
+
+
+    $ python gpec/aui.py
+
+
+
 La dependencia con Wine
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 El *backend* de GPEC, desarrollado en Fortran por el Dr. Cismondi, ha sido compilado mediante 
-Microsoft Fotran y se compone de un conjunto de ejecutables Windows (``.exe``). 
+Microsoft Fortran y se compone de un conjunto de ejecutables Windows (``.exe``). 
 Si bien el código es Fortran estándar y compatible con compiladores libres (como 
 `GNU Fortran <http://gcc.gnu.org/fortran/>`_ ) pudiéndose generar ejecutables 
 específicos para sistemas Linux, existe una dependencia con la librería 
 propietaria  *IMSL® Numerical Libraries*, que brinda un conjunto de rutinas 
-matemáticas (álgebra lineal, cálculo matricial, etc.). 
+matemáticas (álgebra lineal, cálculo matricial, etc.) que se utilizan en la 
+implementación de los algoritmos.  
 
 Esta dependencia impide, por el momento, generar una versión completamente 
 nativa para plataformas Linux (y, a priori, la posibilidad de liberar 
 completamente el código). 
 
-La solución 
+Para permitir la ejecución sobre Windows es necesario la utilización de 
+*Wine*, un software que ofrece una capa de compatibilidad para aplicaciones  
+DOS, Windows 3.x, y win32, proveyendo una implementación alternativa (y parcial) 
+del núcleo NT. 
+
+A través de Wine, los ejecutables Fortran de GPEC funcionan perfectamente. 
+La función que invoca estos ejecutables verifica el sistema operativo en que 
+se está corriendo la aplicación y en caso de no ser Windows, invoca a Wine::
+
+
+       args = []
+       if sys.platform != 'win32':
+           #On any non-Windows system, we run binaries through wine
+           args.append('wine')
+        
+       args.append( os.path.join(PATH_BIN, bin + '.exe'))
+  
+
+
+Distribución y soporte
+-----------------------
+
+Dada la gratuidad de GPEC, cada nueva versión se deja disponible 
+automáticmente en la sección de descargas del sitio de desarrollo, 
+http://code.google.com/p/gpec2010/downloads/list
+y también en su sitio oficial http://gpec.efn.uncor.edu
+
+También se ha creado un grupo de correo , que intenta nuclear a la 
+comunidad de usuarios e interesados en GPEC. Allí se remiten novedades del 
+desarrollo, se contestan dudas y se recibe *feedback* de los usuarios. La 
+dirección del grupo es http://groups.google.com.ar/group/gpec-discuss 
 
 
 
-
-
-Ejecución en Linux
-^^^^^^^^^^^^^^^^^^
-
-No obstante, por falta de masa crítica y urgencia, al momento de 
-presentación de este trabajo, 
-
-no se especificó 
-
-
-$ sudo apt-get install python-matplotlib python-matplotlib-data python-numpy python-wxgtk2.8 wine subversion
-$ svn checkout https://gpec2010.googlecode.com/svn/trunk/src gpec
-$ cd gpec
-$ python aui.py
 
 
 

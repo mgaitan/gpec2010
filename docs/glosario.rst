@@ -142,7 +142,7 @@ Computación
                 `Definición de Software Libre <http://www.gnu.org/philosophy/free-sw.es.html>`_
 
     software privativo
-        El software propietario (también llamado privativo, de código cerrado o software no libre) 
+        El software privativo (también llamado propietario, de código cerrado o software no libre) 
         es cualquier programa informático en el que el usuario final tiene limitaciones para usarlo, 
         modificarlo o redistribuirlo (con o sin modificaciones), o cuyo código fuente 
         no está disponible o el acceso a éste se encuentra restringido por un acuerdo de licencia, 

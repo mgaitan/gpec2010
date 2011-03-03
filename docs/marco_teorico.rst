@@ -64,6 +64,7 @@ correspondientes genera los gráficos cartesianos bidimensionales PT, Px, Tx
 (y sus análogos para densidad) que son típicos de la   bibliografía del tema. 
 
 .. figure:: images/ejemploTx.png
+   :width: 50%
 
    Un diagrama T-x para un sistema binario, mostrando la línea crítica y 
    otras informaciones. 
@@ -74,6 +75,12 @@ comportamiento**, de los cuales los tipos I, II, III y IV (enumerados en orden
 creciente de complejidad) son los más comunes (todas calculables a través de 
 GPEC). Esta complejidad creciente del comportomaniento se observa en la aparación 
 de fases líquido-líquido, líquido-líquido-vapor, líneas azeotrópicas, etc. 
+
+.. figure:: images/beha_types.png
+   :width: 80%
+
+   Representación de diagramas P-T para los primeros 4 tipos de comportamiento
+
 
 Equilibrio termodinámico
 ^^^^^^^^^^^^^^^^^^^^^^^^
