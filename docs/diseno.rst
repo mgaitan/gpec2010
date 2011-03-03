@@ -90,7 +90,7 @@ Metodología de relevamiento
 
 
 
-.. [#] De hecho, a partir de la versión 2.6 de Pythonsql, el modulo ``sqlite3`` forma 
+.. [#] De hecho, a partir de la versión 2.6 de Python, el modulo ``sqlite3`` forma 
        parte de la biblioteca estándar de Python. 
 
 .. [#] Sqlite no permite definir tablas o registros de datos como *sólo lectura*. 

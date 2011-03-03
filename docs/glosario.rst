@@ -38,6 +38,13 @@ Computación
         Es la arquitectura de **supercomputadores** más utilizada en la actualidad.
 
 
+    ambiente de desarrollo
+        Es el conjunto de lenguajes de programación, bibliotecas, utilitarios y
+        herramientas instaladas y debidamente configuradas en un equipo, que es
+        necesario para el desarrollo informático. Cuando todo este conjunto está 
+        integrado en una sóla aplicación se lo denomina :abbr:`IDE (Integrated 
+        Development Enviroment)`. 
+
     hacker
         Persona que disfruta aprendiendo detalles de los sistemas (informáticos, 
         de comunicaciones u otro tipo), y cómo extender sus capacidades,  
@@ -49,10 +56,13 @@ Computación
             *What is a Hacker?*, Brian Harvey, University of California, Berkeley,
             http://www.cs.berkeley.edu/~bh/hacker.html
 
+        
+
     GUI
         pass
 
     API
+        
 
     herencia
         pass
