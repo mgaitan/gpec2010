@@ -167,11 +167,14 @@ compuesto químico se encuentran en tablas separadas.
 .. figure:: images/bbdd.png
    :width: 80%
 
-   Visualización de algunas estructuras y datos de la base de datos de Visual 
+   Visualización de algunas estructuras y datos de la base de Visual 
    GPEC mediante el utilitario *gmdb2*. 
 
 Sumado a esto, dada la ineficiencia del formato, el archivo de base de datos 
 estándar (sin datos extra del usuario)  ocupa *45.2Mb* de espacio en disco. 
+
+
+
 
 
 .. _metodologia:

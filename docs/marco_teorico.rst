@@ -22,6 +22,8 @@ Conceptos de equilibrio de fases y sus diagramas
 Algunas definiciones
 --------------------
 
+Diagrama de fase de sistemas binarios
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Un **diagrama de fase** es un tipo de gráfico utilizado para mostrar 
 las condiciones en las que distintas fases termodinámicas de un sistema pueden ocurrir en 
@@ -83,7 +85,7 @@ de fases líquido-líquido, líquido-líquido-vapor, líneas azeotrópicas, etc.
 
 
 Equilibrio termodinámico
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Según [SM-VN-AG2000]_ :
 
@@ -140,6 +142,25 @@ cúbicas). Por ejemplo la ecuación de Redlich–Kwong, Peng-Robinson, Elliott-S
 
 GPEC es capaz de realizar los cálculos usando cinco diferentes ecuaciones de 
 estado (ver :ref:'Requerimientos funcionales').
+
+
+Aplicación y utilidad
+----------------------
+
+Los equilibrios entre fases tienen un rol muy importante en la tecnología química, 
+alcanzando una gran diversidad de aplicaciones, principalmente en procesos de
+separación de la industria química, petroquímica y el sector
+de hidrocarburos, así como en novedosos procesos basados en fluídos 
+supercríticos, de gran desarrollo y creciente interés en las últimas 
+décadas, como la generación de co-cristales, producción de biodiesel, 
+secado supercrítico, cromatografía supercrítica, etc.  [#]_
+
+Como ejemplificación del interés de la industria y la academia sobre esta 
+área de investigación, vale mencionar la experiencia del curso *Advanced 
+Course on Thermodynamic Models* [#]_ , dictada por los profesores Michael Michelsen 
+y Jørgen Mollerup de la Universidad Técnica de Dinamarca, ,  que 
+ha convocado a centenares de profesionales de diversas firmas como British 
+Petroleum, Chevron, Phillips, Shell y muchas otras de ronombre mundial. 
 
 
 Metodologías de desarrollo de Software
@@ -713,6 +734,13 @@ y PDF de alta calidad a través de Latex.
 
 .. [#]  Por este descubrimiento, Van der Waals recibió el Premio Nobel de Química 
         en 1910
+
+.. [#]  Para un listado más abarcativo, ver `Supercritical fluid: 
+        Applications <http://en.wikipedia.org/wiki/Supercritical_fluid#Applications>`_
+        
+.. [#]  Este curso se realizó durante 2010 por primera 
+        vez en Latinoamérica, organizado desde IDTQ, con participantes de Brasil, Canadá, Chile, 
+        Alemania y varias otras procedencias. Ver http://www.course.efn.uncor.edu/
 
 .. [#]  Un programa {"Hola Mundo!"} es el que imprime el texto «Hola Mundo!» en un 
         dispositivo de visualización (generalmente una pantalla de monitor). 
