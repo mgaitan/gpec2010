@@ -13,8 +13,7 @@ Flujo de trabajo general
 Diagrama de actividades
 -----------------------
 
-Casos de uso   
-============
+
 
 
 Base de datos

@@ -1,6 +1,24 @@
 Ingeniería de requerimientos
 *****************************
 
+Metodología de relevamiento
+===========================
+
+Para el relevamiento de requerimientos se realizaron entrevistas informales 
+con el comitente, una evaluación exhaustiva de la versión preexistente y, 
+basado en el modelo de :ref:`desarrollo evolutivo adaptado` (que se explica 
+en :ref:`Marco Teórico`), sucesivas presentaciones de prototipos que se 
+fueron adaptando según las observaciones de la parte interesada. 
+
+Además se utilizó un *issue tracker* para permitir que los usuarios 
+adviertan de errores en la versión en desarrollo o propongan mejoras o nuevas 
+funcionalidades. 
+
+El proceso de relevamiento incluyó entrevistas con el desarrollador de *Visual 
+Gpec* y con investigadores de :abbr:`PLAPIQUI` involucrados, como 
+desarrolladores o usuarios, en GPEC. 
+
+
 .. _relevamiento:
 
 Relevamiento de la versión preexistente
@@ -173,20 +191,16 @@ compuesto químico se encuentran en tablas separadas.
 Sumado a esto, dada la ineficiencia del formato, el archivo de base de datos 
 estándar (sin datos extra del usuario)  ocupa *45.2Mb* de espacio en disco. 
 
+Casos de uso   
+============
 
 
-
-
-.. _metodologia:
-
-Metodología
-===========
 
 
 .. _requerimientos:
 
-Requerimientos 
-===============
+Especificación de requerimientos 
+==================================
 
 Requerimientos funcionales
 ---------------------------
@@ -237,7 +251,7 @@ en lo posible mejorarse. Se detallan a continuación:
 
 * Generación de suite de gráficos 3-D: diagramas globales y de parámetros constantes 
   automáticamente superpuestos para cada caso:
-
+    
         * Presión - Temperatura - Composición
         * Presión - Temperatura - Densidad
                 
@@ -250,14 +264,80 @@ en lo posible mejorarse. Se detallan a continuación:
 Requerimientos no funcionales
 -----------------------------
 
-* GPEC requiere flexibilidad que permita
-  la extensibilidad de funcionalidades. Para esto se apunta a una arquitectura 
+* GPEC requiere flexibilidad que permita la extensibilidad de funcionalidades. Para esto se apunta a una arquitectura 
   lógica modularizada que permita incorporar o extender funcionalidades de manera 
   accesible. 
 * Manipulación de gráficos accesible: zoom, rotación, desplazamiento, ocultación de curvas, etc.
 * Calidad y formatos de gráficos válidos para publicaciones científicas
 * Configurabilidad de aspecto de los gráficos
 * Usabilidad y claridad de las interfaces: debe poder usarse intuitivamente
+
+
+Casos de uso
+============
+
+Casos de uso destacados
+----------------------
+
+Se especifican en esta sección, de manera no formal [#]_, un conjunto de casos de 
+uso de especial interés para el diseño del software. 
+
+Un proyecto, muchos "casos" 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Una tarea frecuente del usuario (investigador) es la comparación entre 
+distintos "casos" de estudio. Esto puede ser, un mismo sistema binario con 
+aplicando diferentes coeficientes, las mismas condiciones con diferentes 
+modelo de cálculo, o bien directamente distintos sistemas. 
+
+Es decir que debe existir el concepto de **proyecto** como un conjunto de 
+múltiples **casos**, gestionados desde una misma interfaz de usuario. 
+
+
+    .. note:: Dado que se presta a confunsión, vale reiterar que **caso** en 
+              pertenece al contexto químico y es la conjunción de un sistema binario, un 
+              modelo de cálculo (ecuación de estado) y sus respectivos 
+              parámetros, y **caso de uso** refiere al ámbito de la 
+              ingeniería de software y se trata de una técnica para 
+              sistematizar requerimientos y compartamientos esperados del sistema. 
+            
+
+Gráficos en 3D
+^^^^^^^^^^^^^^   
+
+La información resultante de los cálculos brinda conjuntos (vectores) de datos para 
+múltiples variables (presión, temperatura, composición, densidad, etc) 
+Tomando tres vectores de datos en vez de dos, pueden graficarse diagramas 3D, 
+(por ejemplo *P-T-composición*) sin necesidad de alterar el backend de manera 
+alguna.
+
+Superposición automática
+^^^^^^^^^^^^^^^^^^^^^^^^  
+
+Dada la visualización 3D, es común que el investigador desee 
+superponer diagramas de línea de contorno (isobaras, isopletas, etc.) sobre 
+el diagrama de fase global del mismo caso para ver su disposición tridimensional. 
+
+Este comportamiento debe ser automático. Es decir, cualquiera sea el diagrama 
+solicitado, debe generar un diagrama 2D independiente y trazar estas mismas 
+curvas sobre un diagrama 3D común para todo el caso. 
+
+Superposición manual
+^^^^^^^^^^^^^^^^^^^^
+
+El usuario puede necesitar superponer visualmente diagramas 2D, ya sean estos 
+del mismo caso (por ejemplo, un diagrama P-T global con una isopleta) o bien 
+de distintos casos (por ejemplo, diagramas PT correspondientes a distintas 
+mezclas)
+
+
+
+Diagramas de caso de uso
+--------------------------
+
+.. todo:: diagramas caso de uso 
+
+
 
 
 .. [#]  Este problema es conocido como *DLL Hell* (infierno de las DLL). Ver 

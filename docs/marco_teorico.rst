@@ -150,17 +150,17 @@ Aplicación y utilidad
 Los equilibrios entre fases tienen un rol muy importante en la tecnología química, 
 alcanzando una gran diversidad de aplicaciones, principalmente en procesos de
 separación de la industria química, petroquímica y el sector
-de hidrocarburos, así como en novedosos procesos basados en fluídos 
+de hidrocarburos, pero también en novedosos procesos basados en fluídos 
 supercríticos, de gran desarrollo y creciente interés en las últimas 
-décadas, como la generación de co-cristales, producción de biodiesel, 
-secado supercrítico, cromatografía supercrítica, etc.  [#]_
+décadas, como la generación de co-cristales, la producción de biodiesel, 
+secado supercrítico, cromatografía supercrítica, etc. [#]_
 
 Como ejemplificación del interés de la industria y la academia sobre esta 
 área de investigación, vale mencionar la experiencia del curso *Advanced 
 Course on Thermodynamic Models* [#]_ , dictada por los profesores Michael Michelsen 
-y Jørgen Mollerup de la Universidad Técnica de Dinamarca, ,  que 
+y Jørgen Mollerup de la Universidad Técnica de Dinamarca, que 
 ha convocado a centenares de profesionales de diversas firmas como British 
-Petroleum, Chevron, Phillips, Shell y muchas otras de ronombre mundial. 
+Petroleum, Chevron, Phillips, Shell y muchas otras de renombre mundial. 
 
 
 Metodologías de desarrollo de Software
