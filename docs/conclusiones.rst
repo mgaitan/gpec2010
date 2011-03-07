@@ -61,6 +61,10 @@ de ciencias e ingenierías usen herramientas open source para todas sus necesida
 computacionales, mejorando así la calidad de la enseñanza y el aprendizaje" [#]_ . 
 Uno de las tres pilares programáticos es el uso de Python para la computación científica. 
 
+Además, Python ha obtenido el premio a "mejor lenguaje de programación" 
+durante 3 ediones consecutivas (2008-2010) en el programa 
+*Readers' Choice Awards* de la revista especializada *Linux Journal* [#]_
+
 Por otra parte, el conjunto de herramientas complementarias (Matplotlib y Numpy) constituyen
 a esta altura casi un estándar de facto para el software científico con Python, 
 con probado éxito de integración y cuyas comunidades de desarrolladores y 
@@ -139,18 +143,34 @@ con la complejidad) de 2.4 ::
     SLOCCount, Copyright (C) 2001-2004 David A. Wheeler
 
 
-
 Impacto
 =======
 
+Si bien la publicación y difusión de las versiones públicas de este software
+se han mantenido como versiones "beta" manteniendo en paralelo el acceso a descarga 
+de la versión anterior como version "estable", esta nueva versión de GPEC ya ha 
+tenido experiencias de uso. 
 
+Durante el mes de noviembre de 2010, la cátedra *Termodinámica*, correspondiente al 
+4º cuatrimestre de la carrera Ingeniería Química de la Facultad de Ciencias Exáctas, 
+Físicas y Naturales (Universidad Nacional de Córdoba), utilizó la nueva versión
+para su prácticas de laboratorio, con gran aceptación y buenos resultados por parte
+de los alumnos. 
 
+Con vista a la experiencia del corriente año, la cátedra de la asignatura tiene como plan 
+preparar un artículo sobre la mejora pedagógica de la ensañanza de termodinámica
+asistida con el uso de esta nueva versión de GPEC. 
 
+Asimismo, este trabajo permitió la publicación de un *poster* titulado 
+"Una nueva interfaz de usuario y mayores prestaciones para el software GPEC", 
+con la firma del desarrollador y los directores Cismondi y Wolfmann, 
+en las conferencias PyCon Argentina 2010 [#]_ y RITeQ 2010 [#]_
 
-.. _lineas_abiertas:
-
-Lineas de trabajo abiertas
-==========================
+.. figure:: images/poster.jpg
+   :width: 50%
+    
+   Poster expuesto en el congreso PyCon Argentina 2010. Fotografía de Elías
+   Andrawos. 
 
 
 .. _experiencia:
@@ -158,11 +178,40 @@ Lineas de trabajo abiertas
 Experiencia de trabajo
 ======================
 
+El trabajo interdisplinario que ha involucrado profesionales del área de la ingeniería en 
+computación y de la ingeniería química ha sido exitoso y abre las puertas a nuevas 
+y más profundas colaboraciones.
+
+Si bien GPEC en sí constituye el principal logro, la experiencia de trabajo y la 
+*know how* adquirido repercute en beneficio no sólo del autor, sino de las distintas áreas, 
+los docentes involucrados y futuros tesistas que se aboquen a un proyecto similar
+o a la continuación de este mismo. 
+
+Asimismo, en el mes de enero de 2011 se presentó un proyecto al programa "Córdoba Innovadora", 
+impulsado por una articulación de Agencia para el Desarrollo Económico de la 
+ciudad de Córdoba, el Gobierno de la Provincia de Córdoba y la Municipalidad de Córdoba
+cuyo objeto es el cofinanciamiento de "la implementación de innovaciones que mejoren productos, procesos, 
+sistemas de organización, marketing y/o comercialización" [#]_ . El proyecto lleva
+como título "Adaptación, manipulación y graficación de datos utilizando el lenguaje
+de programación Python", y se trata de un programa de capacitación para investigadores
+de IDTQ, basado en la experiencia adquirida con las tecnologías involucradas en este 
+proyecto. 
+
+
+.. _lineas_abiertas:
+
+Lineas de trabajo abiertas
+==========================
+
+El estado 
+
 
 
 .. [#]  Sitio web: http://conference.scipy.org
 
 .. [#]  Sitio web: http://fossee.in/
+
+.. [#]  Sitio web: http://www.linuxjournal.com/content/readers-choice-awards-2010
 
 .. [#]  Con cierta perspicacia puede observarse que el autor bautizó el nombre clave del proyecto 
         como ``GPEC 2010`` (tal es el nombre utilizado en *Google Code*) 
@@ -172,8 +221,14 @@ Experiencia de trabajo
 .. [#]  Cocomo es un algoritmo de estimación de costos de software que utiliza una regresión
         de la evolución del proyecto. Ver http://en.wikipedia.org/wiki/COCOMO . 
 
-
 .. [#]  Una corrección no desestimable a este cálculo es que se calcula el costo de la 
         documentación fuente en *restructuredText* y la generada en HTML de manera automática 
         con *Sphinx*,  que representa aproximadamente un 23% del costo total
 
+.. [#]  "Conferencia Python Argentina", sitio web:  http://ar.pycon.org/2010/about/
+
+.. [#]  "II Reunión Interdisciplinaria de Tecnología y Procesos Químicos". Sitio 
+        web: http://riteq.efn.uncor.edu
+
+.. [#]  Al término de la presentación de este reporte la agencia organizadora no
+        ha expedido sobre la aprobación o no del proyecto. Sitio web: http://adec.org.ar/
