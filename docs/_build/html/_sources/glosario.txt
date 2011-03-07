@@ -38,6 +38,13 @@ Computación
         Es la arquitectura de **supercomputadores** más utilizada en la actualidad.
 
 
+    ambiente de desarrollo
+        Es el conjunto de lenguajes de programación, bibliotecas, utilitarios y
+        herramientas instaladas y debidamente configuradas en un equipo, que es
+        necesario para el desarrollo informático. Cuando todo este conjunto está 
+        integrado en una sóla aplicación se lo denomina :abbr:`IDE (Integrated 
+        Development Enviroment)`. 
+
     hacker
         Persona que disfruta aprendiendo detalles de los sistemas (informáticos, 
         de comunicaciones u otro tipo), y cómo extender sus capacidades,  
@@ -49,10 +56,13 @@ Computación
             *What is a Hacker?*, Brian Harvey, University of California, Berkeley,
             http://www.cs.berkeley.edu/~bh/hacker.html
 
+        
+
     GUI
         pass
 
     API
+        
 
     herencia
         pass
@@ -132,7 +142,7 @@ Computación
                 `Definición de Software Libre <http://www.gnu.org/philosophy/free-sw.es.html>`_
 
     software privativo
-        El software propietario (también llamado privativo, de código cerrado o software no libre) 
+        El software privativo (también llamado propietario, de código cerrado o software no libre) 
         es cualquier programa informático en el que el usuario final tiene limitaciones para usarlo, 
         modificarlo o redistribuirlo (con o sin modificaciones), o cuyo código fuente 
         no está disponible o el acceso a éste se encuentra restringido por un acuerdo de licencia, 

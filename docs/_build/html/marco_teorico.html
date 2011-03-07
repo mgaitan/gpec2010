@@ -69,6 +69,8 @@ consulte el <a class="reference internal" href="glosario.html#glosario"><em>glos
 <h2>2.1. Conceptos de equilibrio de fases y sus diagramas<a class="headerlink" href="#conceptos-de-equilibrio-de-fases-y-sus-diagramas" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="algunas-definiciones">
 <h3>2.1.1. Algunas definiciones<a class="headerlink" href="#algunas-definiciones" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="diagrama-de-fase-de-sistemas-binarios">
+<h4>2.1.1.1. Diagrama de fase de sistemas binarios<a class="headerlink" href="#diagrama-de-fase-de-sistemas-binarios" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Un <strong>diagrama de fase</strong> es un tipo de gráfico utilizado para mostrar
 las condiciones en las que distintas fases termodinámicas de un sistema pueden ocurrir en
 equilibrio. Se representa en función de variables que caracterizan el estado
@@ -79,7 +81,7 @@ dos variables.  Un diagrama de fase típico para estos
 sistemas, es el <em>Presión vs. temperatura</em> :</p>
 <blockquote>
 <div><div class="figure">
-<object data="_images/Phase-diag_es3.svg" type="image/svg+xml" width="530px"><embed src="_images/Phase-diag_es3.svg" type="image/svg+xml" width="530px" /></object>
+<img alt="_images/Phase-diag_es3.png" src="_images/Phase-diag_es3.png" />
 <p class="caption">La línea verde indica los puntos de congelamiento. La azul los de
 ebullición. La línea punteada muestra un
 comportamiento particular del agua.</p>
@@ -99,28 +101,31 @@ sistema se encuentra en <em>zonas de equilibrio</em> vapor/líquido, líquido/l�
 líquido/sólido u otros casos particulares.</p>
 <blockquote>
 <div><div class="figure">
-<img alt="_images/ejTipo13.png" src="_images/ejTipo13.png" style="width: 530px;" />
+<img alt="_images/ejTipo17.png" src="_images/ejTipo17.png" style="width: 530px;" />
 <p class="caption">Un diagrama P-T-x para un sistema binario de Tipo I.</p>
 </div>
 </div></blockquote>
 <p>La proyección ortogonal de estas curvas tridimensionales sobre los planos
 correspondientes genera los gráficos cartesianos bidimensionales PT, Px, Tx
 (y sus análogos para densidad) que son típicos de la   bibliografía del tema.</p>
-<blockquote>
-<div><div class="figure">
-<img alt="_images/ejemploTx2.png" src="_images/ejemploTx2.png" style="width: 530px;" />
+<div class="figure">
+<img alt="_images/ejemploTx6.png" src="_images/ejemploTx6.png" style="width: 50%;" />
 <p class="caption">Un diagrama T-x para un sistema binario, mostrando la línea crítica y
 otras informaciones.</p>
 </div>
-</div></blockquote>
 <p>El <strong>comportamiento termodinámico de los sistemas binarios</strong> no es uniforme
 cualesquiera sean los compuestos de la mezcla. Existen seis <strong>tipos de
 comportamiento</strong>, de los cuales los tipos I, II, III y IV (enumerados en orden
 creciente de complejidad) son los más comunes (todas calculables a través de
 GPEC). Esta complejidad creciente del comportomaniento se observa en la aparación
 de fases líquido-líquido, líquido-líquido-vapor, líneas azeotrópicas, etc.</p>
+<div class="figure">
+<img alt="_images/beha_types.png" src="_images/beha_types.png" style="width: 80%;" />
+<p class="caption">Representación de diagramas P-T para los primeros 4 tipos de comportamiento</p>
+</div>
+</div>
 <div class="section" id="equilibrio-termodin-mico">
-<h4>2.1.1.1. Equilibrio termodinámico<a class="headerlink" href="#equilibrio-termodin-mico" title="Enlazar permanentemente con este título">¶</a></h4>
+<h4>2.1.1.2. Equilibrio termodinámico<a class="headerlink" href="#equilibrio-termodin-mico" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Según <a class="reference internal" href="#sm-vn-ag2000">[SM-VN-AG2000]</a> :</p>
 <blockquote>
 <div>(...) se reconoce al equilibrio como una condición estática
@@ -131,7 +136,7 @@ potenciales que pueden ocasionar un cambio.</div></blockquote>
 líquido y vapor, con el tiempo alcanza un estado final donde no existe
 tendencia a que suceda un cambio en sí mismo. La temperatura, la presión y
 las composiciones de fase logran los valores finales que en adelante
-permanecen fijos, por lo que el sistema logra el equilibrio <a class="footnote-reference" href="#id31" id="id2">[1]</a> .</p>
+permanecen fijos, por lo que el sistema logra el equilibrio <a class="footnote-reference" href="#id33" id="id2">[1]</a> .</p>
 <p>Los equilibrios entre fases tienen un rol muy importante en la tecnología
 química, alcanzando una gran diversidad de aplicaciones, principalmente
 en procesos de separación de la industria química, petroquímica y el sector
@@ -142,7 +147,7 @@ presiones, y son representados por medio de distintos tipos de diagramas de
 fases.</p>
 </div>
 <div class="section" id="ecuaciones-de-estado">
-<h4>2.1.1.2. Ecuaciones de Estado<a class="headerlink" href="#ecuaciones-de-estado" title="Enlazar permanentemente con este título">¶</a></h4>
+<h4>2.1.1.3. Ecuaciones de Estado<a class="headerlink" href="#ecuaciones-de-estado" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>El modelado cuantitativo de los equilibrios de fases se realiza principalmente
 utilizando <strong>ecuaciones de estado</strong> (<abbr title="Equation of State">EoS</abbr>). Estas son relaciones
 matemáticas (modelos matemáticos) entre dos o más funciones de
@@ -154,17 +159,17 @@ considerar el volumen molecular nulo y a las fuerzas de atracción-repulsión
 despreciables, limita su utilidad para modelar gases reales.</p>
 <blockquote>
 <div><div class="figure">
-<img alt="_images/leygasideal3.png" src="_images/leygasideal3.png" />
+<img alt="_images/leygasideal7.png" src="_images/leygasideal7.png" />
 <p class="caption"><em>p</em> es la presión absoluta, <em>V el volumen, *T</em>, <em>n</em> la cantidad de materia,
 y <em>R</em> la constante del gas ideal.</p>
 </div>
 </div></blockquote>
-<p>La <strong>ecuación de Van der Waals</strong> (1873) <a class="footnote-reference" href="#id32" id="id3">[2]</a> es una ecuación que generaliza la ecuación de los gases
+<p>La <strong>ecuación de Van der Waals</strong> (1873) <a class="footnote-reference" href="#id34" id="id3">[2]</a> es una ecuación que generaliza la ecuación de los gases
 ideales, teniendo en consideración tanto el volumen finito de las
 moléculas de gas como otros efectos que afectan al término de presiones</p>
 <blockquote>
 <div><div class="figure">
-<img alt="_images/vander3.png" src="_images/vander3.png" />
+<img alt="_images/vander7.png" src="_images/vander7.png" />
 <p class="caption"><em>a</em> y <em>b</em> son constantes físicas de la sustancia en cuestión.</p>
 </div>
 </div></blockquote>
@@ -174,6 +179,22 @@ cúbicas). Por ejemplo la ecuación de Redlich–Kwong, Peng-Robinson, Elliott-S
 <p>GPEC es capaz de realizar los cálculos usando cinco diferentes ecuaciones de
 estado (ver :ref:&#8217;Requerimientos funcionales&#8217;).</p>
 </div>
+</div>
+<div class="section" id="aplicaci-n-y-utilidad">
+<h3>2.1.2. Aplicación y utilidad<a class="headerlink" href="#aplicaci-n-y-utilidad" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Los equilibrios entre fases tienen un rol muy importante en la tecnología química,
+alcanzando una gran diversidad de aplicaciones, principalmente en procesos de
+separación de la industria química, petroquímica y el sector
+de hidrocarburos, pero también en novedosos procesos basados en fluídos
+supercríticos, de gran desarrollo y creciente interés en las últimas
+décadas, como la generación de co-cristales, la producción de biodiesel,
+secado supercrítico, cromatografía supercrítica, etc. <a class="footnote-reference" href="#id35" id="id4">[3]</a></p>
+<p>Como ejemplificación del interés de la industria y la academia sobre esta
+área de investigación, vale mencionar la experiencia del curso <em>Advanced
+Course on Thermodynamic Models</em> <a class="footnote-reference" href="#id36" id="id5">[4]</a> , dictada por los profesores Michael Michelsen
+y Jørgen Mollerup de la Universidad Técnica de Dinamarca, que
+ha convocado a centenares de profesionales de diversas firmas como British
+Petroleum, Chevron, Phillips, Shell y muchas otras de renombre mundial.</p>
 </div>
 </div>
 <div class="section" id="metodolog-as-de-desarrollo-de-software">
@@ -218,7 +239,7 @@ los usuarios, y refinándola a través de diferentes versiones preliminares
 requerimientos planteado.</p>
 <blockquote>
 <div><div class="figure">
-<object data="_images/desarrollo_evolutivo15.svg" type="image/svg+xml" width="90%"><embed src="_images/desarrollo_evolutivo15.svg" type="image/svg+xml" width="90%" /></object>
+<img alt="_images/desarrollo_evolutivo2.png" src="_images/desarrollo_evolutivo2.png" />
 </div>
 </div></blockquote>
 <p>Las actividades de especificación, desarrollo y validación se entrelazan en
@@ -268,11 +289,11 @@ del software, de manera que un mismo programa puede ser ejecutado en
 diferentes plataformas.</dd>
 </dl>
 </div></blockquote>
-<p>Un sencillo programa <em>&#8220;Hola Mundo&#8221;</em> <a class="footnote-reference" href="#id33" id="id7">[3]</a> en Python se ve así:</p>
+<p>Un sencillo programa <em>&#8220;Hola Mundo&#8221;</em> <a class="footnote-reference" href="#id37" id="id9">[5]</a> en Python se ve así:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="s">&quot;¡Hola Mundo!&quot;</span>
 </pre></div>
 </div>
-<p>Además, la mayoría de sus implementaciones <a class="footnote-reference" href="#id34" id="id8">[4]</a>, permiten ejecutar código en
+<p>Además, la mayoría de sus implementaciones <a class="footnote-reference" href="#id38" id="id10">[6]</a>, permiten ejecutar código en
 modo interactivo al estilo Matlab® u <em>Octave</em>,
 de manera que las expresiones pueden ser introducidas una a una y ver el resultado
 de su evaluación inmediatamente:</p>
@@ -286,9 +307,9 @@ de su evaluación inmediatamente:</p>
 <p>Esto resulta útil tanto para los principiantes que se están familiarizando con el lenguaje
 como para los programadores avanzados: se pueden probar porciones de código en el modo interactivo antes
 de integrarlo como parte de un programa.</p>
-<p>Por diseño <a class="footnote-reference" href="#id35" id="id9">[5]</a>, Python tiene sintaxis muy clara que facilita la legibilidad del código.
+<p>Por diseño <a class="footnote-reference" href="#id39" id="id11">[7]</a>, Python tiene sintaxis muy clara que facilita la legibilidad del código.
 Esta característica es la razón por la que Guido van Rossum, su creador,
-lo compara con &#8220;<a class="reference internal" href="glosario.html#term-pseudoc-digo"><em class="xref std std-term">pseudocódigo</em></a> ejecutable&#8221; <a class="footnote-reference" href="#id36" id="id10">[6]</a>. El siguiente programa
+lo compara con &#8220;<a class="reference internal" href="glosario.html#term-pseudoc-digo"><em class="xref std std-term">pseudocódigo</em></a> ejecutable&#8221; <a class="footnote-reference" href="#id40" id="id12">[8]</a>. El siguiente programa
 aplica conceptos de programación orientada  a objetos como <a class="reference internal" href="glosario.html#term-herencia"><em class="xref std std-term">herencia</em></a> y <a class="reference internal" href="glosario.html#term-polimorfismo"><em class="xref std std-term">polimorfismo</em></a>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Superclase que define un constructor común y</span>
@@ -360,7 +381,7 @@ plantea Shannon Behrens en el prólogo de <a class="reference internal" href="#t
 <div>Hubo un tiempo en el que las compañías me llamaban loco cuando insistía en usar Python.
 En estos días, simplemente no hay suficientes programadores Python para todos.
 Grandes empresas como Google, YouTube, VMware y DreamWorks están en una lucha
-constante para contratar todo buen talento Python que puedan encontrar. <a class="footnote-reference" href="#id38" id="id16">[7]</a></div></blockquote>
+constante para contratar todo buen talento Python que puedan encontrar. <a class="footnote-reference" href="#id42" id="id18">[9]</a></div></blockquote>
 <div class="section" id="python-en-el-software-cient-fico">
 <h4>2.3.1.1. Python en el software científico<a class="headerlink" href="#python-en-el-software-cient-fico" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Como se afirma en <a class="reference internal" href="#jh-fp">[JH-FP]</a> en la sección <em>Who is using Python?</em>, el uso de
@@ -387,7 +408,7 @@ para la exploración de petroleo.</p>
 <div><div class="admonition-ver-tambi-n admonition seealso">
 <p class="first admonition-title">Ver también</p>
 <p class="last">Muchos otros casos de éxito son detallados en el texto mencionado, en
-los dos volumenes de <em>Python Success Stories</em> de la editorial O&#8217;Reilly&#8217;s <a class="footnote-reference" href="#id39" id="id18">[8]</a> y en
+los dos volumenes de <em>Python Success Stories</em> de la editorial O&#8217;Reilly&#8217;s <a class="footnote-reference" href="#id43" id="id20">[10]</a> y en
 <a class="reference external" href="http://python.org/about/success/">http://python.org/about/success/</a></p>
 </div>
 </div></blockquote>
@@ -445,7 +466,7 @@ código C). La vectorización tiene muchas ventajas:</p>
 <li>Menos líneas de código habitualmente implican menos errores.</li>
 <li>El código se parece más a la notación matemática estándar (por lo que es más fácil,
 por lo general, corregir código asociado a construcciones matemáticas</li>
-<li>La vectorización redunda en un código más &#8220;pythónico&#8221; <a class="footnote-reference" href="#id40" id="id21">[9]</a></li>
+<li>La vectorización redunda en un código más &#8220;pythónico&#8221; <a class="footnote-reference" href="#id44" id="id23">[11]</a></li>
 </ul>
 </div></blockquote>
 <p>El <em>broadcasting</em> o <em>difusión</em> es el término que describe el comportamiento
@@ -461,7 +482,7 @@ de publicación. Se pueden generar gráficos cartesianos, polares, de barras,
 histogramas, de superficie, etc.</p>
 <blockquote>
 <div><div class="figure">
-<img alt="_images/matplotlib_examples15.png" src="_images/matplotlib_examples15.png" />
+<img alt="_images/matplotlib_examples19.png" src="_images/matplotlib_examples19.png" />
 <p class="caption">Ejemplos de gráficos logrados con Matplotlib</p>
 </div>
 </div></blockquote>
@@ -469,7 +490,7 @@ histogramas, de superficie, etc.</p>
 a objetos. Está principalmente escrito en Python, aunque se basa fuertemente
 en NumPy y otras extensiones para proveer buena performance incluso con
 arreglos grandes.</p>
-<p>Sin bien existen otras bibliotecas libres con prestaciones similares <a class="footnote-reference" href="#id43" id="id23">[10]</a>, Matplotlib
+<p>Sin bien existen otras bibliotecas libres con prestaciones similares <a class="footnote-reference" href="#id47" id="id25">[12]</a>, Matplotlib
 se destaca por las siguientes características:</p>
 <blockquote>
 <div><ul class="simple">
@@ -499,13 +520,13 @@ código es un ejemplo extraído de <a class="reference internal" href="#st2009">
 <p>El resultado se observa en el siguiente gráfico:</p>
 <blockquote>
 <div><div class="figure">
-<img alt="Figura" src="_images/mpl_fig115.png" />
+<img alt="Figura" src="_images/mpl_fig119.png" />
 <p class="caption">Gráfico generado interactivamente</p>
 </div>
 </div></blockquote>
 </div>
 <div class="section" id="wxpython">
-<span id="id26"></span><h3>2.3.4. WxPython<a class="headerlink" href="#wxpython" title="Enlazar permanentemente con este título">¶</a></h3>
+<span id="id28"></span><h3>2.3.4. WxPython<a class="headerlink" href="#wxpython" title="Enlazar permanentemente con este título">¶</a></h3>
 <p><a class="reference external" href="http://www.wxwindows.org/">wxWidgets</a> es una biblioteca en C++ que permite
 desarrollar interfaces gráficas para aplicaciones multiplataforma que corren
 en Microsoft Windows, OS X, GNU/Linux o UNIX de 32 o 64 bits.</p>
@@ -521,7 +542,7 @@ si se corre en Windows®, como una <em>aplicación GNOME</em> si se corre sobre 
 de escritorio GNOME en Linux, y como una aplicación OS/X en platafomas Mac:</p>
 <blockquote>
 <div><div class="figure">
-<img alt="_images/wxpython_example15.png" src="_images/wxpython_example15.png" />
+<img alt="_images/wxpython_example19.png" src="_images/wxpython_example19.png" />
 <p class="caption">El mismo programa wxPython ejecutado en Windows, Linux y Mac</p>
 </div>
 </div></blockquote>
@@ -575,7 +596,7 @@ En este caso se asocia el evento <tt class="docutils literal"><span class="pre">
 de texto será actualizada con las coordenadas donde este se encuentra.</p>
 <blockquote>
 <div><div class="figure">
-<img alt="_images/wxpython_ventana15.png" src="_images/wxpython_ventana15.png" />
+<img alt="_images/wxpython_ventana19.png" src="_images/wxpython_ventana19.png" />
 <p class="caption">Captura del ejemplo de marras</p>
 </div>
 </div></blockquote>
@@ -691,7 +712,7 @@ orientado a la creación de documentación escrita &#8220;por humanos&#8221;.</p
 <p>Sphinx utiliza como formato de entrada el formato <a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/">restructuredText</a> y genera
 versiones en html (con motor de búsqueda y resaltado de código incorporado)
 y PDF de alta calidad a través de Latex.</p>
-<table class="docutils footnote" frame="void" id="id31" rules="none">
+<table class="docutils footnote" frame="void" id="id33" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>A pesar de eso, en el nivel microscópico las condiciones no son estáticas.
@@ -702,70 +723,85 @@ igual rapidez promedio en ambas direcciones no ocurre transferencia
 neta de material.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id32" rules="none">
+<table class="docutils footnote" frame="void" id="id34" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>Por este descubrimiento, Van der Waals recibió el Premio Nobel de Química
 en 1910</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id33" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id7">[3]</a></td><td>Un programa {&#8220;Hola Mundo!&#8221;} es el que imprime el texto «Hola Mundo!» en un
-dispositivo de visualización (generalmente una pantalla de monitor).
-Se suele usar como introducción al estudio de un lenguaje de programación,
-siendo un primer ejercicio típico.</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id34" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id8">[4]</a></td><td>Python es un lenguaje estandarizado que tiene distintas implementaciones.
-La original y más utilizada es Cpython, implementada en C, pero existen
-implementaciones en Java (<a class="reference external" href="http://jython.org">http://jython.org</a>), .NET (<a class="reference external" href="http://www.ironpython.net/">http://www.ironpython.net/</a>)
-y Python mismo (<a class="reference external" href="http://codespeak.net/pypy">http://codespeak.net/pypy</a>)</td></tr>
-</tbody>
-</table>
 <table class="docutils footnote" frame="void" id="id35" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id9">[5]</a></td><td>La hipótesis en la que se basó su creador es que el código fuente suele leerse
-muchas más veces de las que se escribe, ya sea por el mismo autor tiempo
-despues de haberlo escrito, o por otros programadores.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id4">[3]</a></td><td>Para un listado más abarcativo, ver <a class="reference external" href="http://en.wikipedia.org/wiki/Supercritical_fluid#Applications">Supercritical fluid:
+Applications</a></td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id36" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id10">[6]</a></td><td><em>&#8220;Syntactically, Python code looks like executable pseudo code.&#8221;</em>, <a class="reference internal" href="#gvr1998">[GvR1998]</a></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id5">[4]</a></td><td>Este curso se realizó durante 2010 por primera
+vez en Latinoamérica, organizado desde IDTQ, con participantes de Brasil, Canadá, Chile,
+Alemania y varias otras procedencias. Ver <a class="reference external" href="http://www.course.efn.uncor.edu/">http://www.course.efn.uncor.edu/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id37" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id9">[5]</a></td><td>Un programa {&#8220;Hola Mundo!&#8221;} es el que imprime el texto «Hola Mundo!» en un
+dispositivo de visualización (generalmente una pantalla de monitor).
+Se suele usar como introducción al estudio de un lenguaje de programación,
+siendo un primer ejercicio típico.</td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id38" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id16">[7]</a></td><td>Traducción del inglés propia.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id10">[6]</a></td><td>Python es un lenguaje estandarizado que tiene distintas implementaciones.
+La original y más utilizada es Cpython, implementada en C, pero existen
+implementaciones en Java (<a class="reference external" href="http://jython.org">http://jython.org</a>), .NET (<a class="reference external" href="http://www.ironpython.net/">http://www.ironpython.net/</a>)
+y Python mismo (<a class="reference external" href="http://codespeak.net/pypy">http://codespeak.net/pypy</a>)</td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id39" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id18">[8]</a></td><td><em>Python Success Stories: 8 True Tales of Flexibility, Speed, and Improved Productivity</em> (2002) y
-<em>Python Success Stories Volume II: 12 More True Tales</em> (2005), O&#8217;Reilly Associates</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id11">[7]</a></td><td>La hipótesis en la que se basó su creador es que el código fuente suele leerse
+muchas más veces de las que se escribe, ya sea por el mismo autor tiempo
+despues de haberlo escrito, o por otros programadores.</td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id40" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id21">[9]</a></td><td>El código que sigue los principios de legibilidad y transparencia propuestos
-por Python se dice que es &#8220;pythonico&#8221;. Contrariamente, el código opaco u ofuscado es
-bautizado como &#8220;no pythonico&#8221;. Ver <a class="reference internal" href="#pep8">[PEP8]</a> y <a class="reference internal" href="#pep20">[PEP20]</a>.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id12">[8]</a></td><td><em>&#8220;Syntactically, Python code looks like executable pseudo code.&#8221;</em>, <a class="reference internal" href="#gvr1998">[GvR1998]</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id42" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id18">[9]</a></td><td>Traducción del inglés propia.</td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id43" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id23">[10]</a></td><td><a class="reference external" href="http://code.enthought.com/chaco/">Chaco</a> y <a class="reference external" href="http://gnuplot-py.sourceforge.net/">GNUplot-Py</a>
+<tr><td class="label"><a class="fn-backref" href="#id20">[10]</a></td><td><em>Python Success Stories: 8 True Tales of Flexibility, Speed, and Improved Productivity</em> (2002) y
+<em>Python Success Stories Volume II: 12 More True Tales</em> (2005), O&#8217;Reilly Associates</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id44" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id23">[11]</a></td><td>El código que sigue los principios de legibilidad y transparencia propuestos
+por Python se dice que es &#8220;pythonico&#8221;. Contrariamente, el código opaco u ofuscado es
+bautizado como &#8220;no pythonico&#8221;. Ver <a class="reference internal" href="#pep8">[PEP8]</a> y <a class="reference internal" href="#pep20">[PEP20]</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id47" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id25">[12]</a></td><td><a class="reference external" href="http://code.enthought.com/chaco/">Chaco</a> y <a class="reference external" href="http://gnuplot-py.sourceforge.net/">GNUplot-Py</a>
 son las más notables alternativas.</td></tr>
 </tbody>
 </table>
@@ -779,7 +815,7 @@ son las más notables alternativas.</td></tr>
 <table class="docutils citation" frame="void" id="gvr1998" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[GvR1998]</td><td><em>(<a class="fn-backref" href="#id14">1</a>, <a class="fn-backref" href="#id37">2</a>)</em> van Rossum, Guido (1998), <em>Glue it all together with Python</em>,
+<tr><td class="label">[GvR1998]</td><td><em>(<a class="fn-backref" href="#id16">1</a>, <a class="fn-backref" href="#id41">2</a>)</em> van Rossum, Guido (1998), <em>Glue it all together with Python</em>,
 Workshop on Compositional Software Architecture in Monterey,
 <a class="reference external" href="http://www.python.org/doc/essays/omg-darpa-mcc-position.html">http://www.python.org/doc/essays/omg-darpa-mcc-position.html</a></td></tr>
 </tbody>
@@ -795,7 +831,7 @@ Castelló de la Plana</td></tr>
 <table class="docutils citation" frame="void" id="tz2008" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id15">[TZ2008]</a></td><td>Ziadé, Tarek (2008),  <em>Expert Python programming</em>, Pack Publishing, Birmingham</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id17">[TZ2008]</a></td><td>Ziadé, Tarek (2008),  <em>Expert Python programming</em>, Pack Publishing, Birmingham</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="ma2010" rules="none">
@@ -807,13 +843,13 @@ Castelló de la Plana</td></tr>
 <table class="docutils citation" frame="void" id="jh-fp" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id17">[JH-FP]</a></td><td>Hunter, John D. - Pérez, Fernando, (n/d) <em>Practical Scientific Computing in Python</em>,</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id19">[JH-FP]</a></td><td>Hunter, John D. - Pérez, Fernando, (n/d) <em>Practical Scientific Computing in Python</em>,</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="tut-psf" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id12">[TUT-PSF]</a></td><td>van Rossum, Guido (2010), <em>The Python Tutorial v2.7</em>, Python Software Foundation,
+<tr><td class="label"><a class="fn-backref" href="#id14">[TUT-PSF]</a></td><td>van Rossum, Guido (2010), <em>The Python Tutorial v2.7</em>, Python Software Foundation,
 <a class="reference external" href="http://docs.python.org/tutorial/">http://docs.python.org/tutorial/</a> . Existe una traducción al español realizada
 por la comunidad Python Argentina en <a class="reference external" href="http://tutorialpython.com.ar">http://tutorialpython.com.ar</a></td></tr>
 </tbody>
@@ -821,7 +857,7 @@ por la comunidad Python Argentina en <a class="reference external" href="http://
 <table class="docutils citation" frame="void" id="mp2001" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id13">[MP2001]</a></td><td>Pilgrim, Mark (2001), <em>Dive into Python</em>, publicado bajo los términos
+<tr><td class="label"><a class="fn-backref" href="#id15">[MP2001]</a></td><td>Pilgrim, Mark (2001), <em>Dive into Python</em>, publicado bajo los términos
 de GNU Free Documentation License, <a class="reference external" href="http://diveintopython.org/">http://diveintopython.org/</a>. Existe
 una traducción al español disponible en <a class="reference external" href="http://www.grulic.org/almacen/diveintopython-5.4-es/">http://www.grulic.org/almacen/diveintopython-5.4-es/</a></td></tr>
 </tbody>
@@ -829,7 +865,7 @@ una traducción al español disponible en <a class="reference external" href="ht
 <table class="docutils citation" frame="void" id="wikipedia1" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id11">[WIKIPEDIA1]</a></td><td>Contribuidores varios, <em>Polymorphism in object-oriented programming</em>,
+<tr><td class="label"><a class="fn-backref" href="#id13">[WIKIPEDIA1]</a></td><td>Contribuidores varios, <em>Polymorphism in object-oriented programming</em>,
 Wikipedia, The Free Encyclopedia, visto el 16 de agosto de 2010,
 <a class="reference external" href="http://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming">http://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming</a></td></tr>
 </tbody>
@@ -844,21 +880,21 @@ Simula Research Laboratory and Department of Informatics University of Oslo, Osl
 <table class="docutils citation" frame="void" id="pep8" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id41">[PEP8]</a></td><td>van Rossum, Guido - Warsaw, Barry (2001), <em>Python Enhancement Proposals (PEP) #8:
+<tr><td class="label"><a class="fn-backref" href="#id45">[PEP8]</a></td><td>van Rossum, Guido - Warsaw, Barry (2001), <em>Python Enhancement Proposals (PEP) #8:
 Style Guide for Python Code</em>, Python Software Foundation, <a class="reference external" href="http://www.python.org/dev/peps/pep-0008/">http://www.python.org/dev/peps/pep-0008/</a></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="pep20" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id42">[PEP20]</a></td><td>Peters, Tim (2004) <em>Python Enhancement Proposals (PEP) #20: The Zen of Python</em>,
+<tr><td class="label"><a class="fn-backref" href="#id46">[PEP20]</a></td><td>Peters, Tim (2004) <em>Python Enhancement Proposals (PEP) #20: The Zen of Python</em>,
 Python Software Foundation, <a class="reference external" href="http://www.python.org/dev/peps/pep-0020/">http://www.python.org/dev/peps/pep-0020/</a></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="numpy-ug" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id19">[NumPy-UG]</a></td><td>Scipy community, <em>NumPy User Guide</em>,  <a class="reference external" href="http://docs.scipy.org/doc/numpy">http://docs.scipy.org/doc/numpy</a></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id21">[NumPy-UG]</a></td><td>Scipy community, <em>NumPy User Guide</em>,  <a class="reference external" href="http://docs.scipy.org/doc/numpy">http://docs.scipy.org/doc/numpy</a></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="to2006" rules="none">
@@ -870,28 +906,28 @@ Python Software Foundation, <a class="reference external" href="http://www.pytho
 <table class="docutils citation" frame="void" id="mpldoc" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id24">[MPLDOC]</a></td><td>Hunter, J - Dale, D - Droettboom, M (2010), <em>Matplotlib documentation v1.0.0</em>,
+<tr><td class="label"><a class="fn-backref" href="#id26">[MPLDOC]</a></td><td>Hunter, J - Dale, D - Droettboom, M (2010), <em>Matplotlib documentation v1.0.0</em>,
 <a class="reference external" href="http://matplotlib.sourceforge.net/contents.html">http://matplotlib.sourceforge.net/contents.html</a></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="nr-rd2006" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id28">[NR-RD2006]</a></td><td>Rappin, Noel - Dunn, Robin (2006) <em>wxPython in Action</em>, Manning Publications,
+<tr><td class="label"><a class="fn-backref" href="#id30">[NR-RD2006]</a></td><td>Rappin, Noel - Dunn, Robin (2006) <em>wxPython in Action</em>, Manning Publications,
 Greenwich</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="st2009" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id25">[ST2009]</a></td><td>Tosi, Sandro (2009) <em>Matplotlib for Python Developers, Build remarkable publication
+<tr><td class="label"><a class="fn-backref" href="#id27">[ST2009]</a></td><td>Tosi, Sandro (2009) <em>Matplotlib for Python Developers, Build remarkable publication
 quality plots the easy way</em>, Pack Publishing, Birmingham</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="ag-manif" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[AG-MANIF]</a></td><td>Varios autores (2001), <em>Manifesto for Agile Software Development</em>, <a class="reference external" href="http://agilemanifesto.org/">http://agilemanifesto.org/</a></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id6">[AG-MANIF]</a></td><td>Varios autores (2001), <em>Manifesto for Agile Software Development</em>, <a class="reference external" href="http://agilemanifesto.org/">http://agilemanifesto.org/</a></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="ll-rj2003" rules="none">
@@ -904,7 +940,7 @@ Agile Software Development Methodologies</em>, <a class="reference external" hre
 <table class="docutils citation" frame="void" id="is2004" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id5">[IS2004]</a></td><td>Sommerville, Ian (2004) <em>Software Enginnering, 7th edition</em>, Pretince Hall, Harlow.
+<tr><td class="label"><a class="fn-backref" href="#id7">[IS2004]</a></td><td>Sommerville, Ian (2004) <em>Software Enginnering, 7th edition</em>, Pretince Hall, Harlow.
 Traducción al español por el Departamento de Ciencias de la Computación e Inteligencia
 Artificial de la Universidad de Alicante (2005).</td></tr>
 </tbody>
@@ -932,10 +968,12 @@ O&#8217;Reilly Associates, New York</td></tr>
 <li><a class="reference internal" href="#">2. Marco Teórico</a><ul>
 <li><a class="reference internal" href="#conceptos-de-equilibrio-de-fases-y-sus-diagramas">2.1. Conceptos de equilibrio de fases y sus diagramas</a><ul>
 <li><a class="reference internal" href="#algunas-definiciones">2.1.1. Algunas definiciones</a><ul>
-<li><a class="reference internal" href="#equilibrio-termodin-mico">2.1.1.1. Equilibrio termodinámico</a></li>
-<li><a class="reference internal" href="#ecuaciones-de-estado">2.1.1.2. Ecuaciones de Estado</a></li>
+<li><a class="reference internal" href="#diagrama-de-fase-de-sistemas-binarios">2.1.1.1. Diagrama de fase de sistemas binarios</a></li>
+<li><a class="reference internal" href="#equilibrio-termodin-mico">2.1.1.2. Equilibrio termodinámico</a></li>
+<li><a class="reference internal" href="#ecuaciones-de-estado">2.1.1.3. Ecuaciones de Estado</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#aplicaci-n-y-utilidad">2.1.2. Aplicación y utilidad</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#metodolog-as-de-desarrollo-de-software">2.2. Metodologías de desarrollo de Software</a><ul>
