@@ -20,20 +20,20 @@ ocultación de curvas, escala logarítmica, visualización de grilla, etc.
 
 La generación de diagramas 3D constituye una funcionalidad de alta repercusión,
 sobre todo para la compresión y el estudio introductorio del comportamiento del 
-equilibrio de fase. La naturaleza interactiva (rotación, superposición de diagramas)
-permite complementar y asimilar el conocimiento que es mucho más complejo basandose
+equilibrio de fases. La naturaleza interactiva (rotación, superposición de diagramas)
+permite complementar y asimilar el conocimiento, tarea compleja basandose
 en diagramas 2D típicos de la bibliografía. 
 
 Como ya se ha mencionado, un aspecto de especial interés fue la mejora 
-en la usabilidad que ha sido estudiado mediante algunas pruebas (por ejemplo, el 
+en la usabilidad que ha sido estudiada mediante algunas pruebas (por ejemplo, el 
 comportamiento de usuarios con conocimiento del dominio del problema que usan 
 por primera vez la aplicación, o usuarios que no comprenden el dominio pero logran 
 hacer "funcionar" el programa intuitivamente). La conclusión es que la 
 interfaz es intuitiva y bien lograda aunque se trate de un aspecto sensible 
 a un proceso de mejora continua. 
 
-La calidad de la los gráficos, exportable en múltiples formatos aptos para formatos 
-de publicación científica (por ejemplo :abbr:`EPS (Encapsulated PostScript)`, 
+La calidad de la los gráficos, exportable en múltiples formatos aptos para 
+la publicación científica (por ejemplo :abbr:`EPS (Encapsulated PostScript)`, 
 incrustable en documentos generados con LaTeX) también es una característica 
 superadora y bien recibida por los usuarios, ya que evita el procesamiento gráfico
 de "capturas de pantalla" (con resultados de pobre calidad) o la graficación 
@@ -167,7 +167,7 @@ con la firma del desarrollador y los directores Cismondi y Wolfmann,
 en las conferencias PyCon Argentina 2010 [#]_ y RITeQ 2010 [#]_
 
 .. figure:: images/poster.jpg
-   :width: 50%
+   :width: 80%
     
    Poster expuesto en el congreso PyCon Argentina 2010. Fotografía de Elías
    Andrawos. 
@@ -203,7 +203,7 @@ proyecto.
 Lineas de trabajo abiertas
 ==========================
 
-El estado 
+
 
 
 
