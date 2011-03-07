@@ -120,7 +120,7 @@ se eleva a 3 desarrolladores/año y **u$s 151.358** de costo total [#]_.
 
 Mediante la herramienta `SLOCCount <http://www.dwheeler.com/sloccount/>`_ 
 de David Wheeler el conteo de líneas es de 5634, un esfuerzo de 14.74 meses y un 
-costo total estimado de **$ 162,167**, devido a un factor de *overhead* (relacionado
+costo total estimado de **$ 162,167**, debido a un factor de *overhead* (relacionado
 con la complejidad) de 2.4 :: 
  
 
@@ -178,7 +178,7 @@ en las conferencias PyCon Argentina 2010 [#]_ y RITeQ 2010 [#]_
 Experiencia de trabajo
 ======================
 
-El trabajo interdisplinario que ha involucrado profesionales del área de la ingeniería en 
+El trabajo interdisciplinario que ha involucrado profesionales del área de la ingeniería en 
 computación y de la ingeniería química ha sido exitoso y abre las puertas a nuevas 
 y más profundas colaboraciones.
 
@@ -202,6 +202,78 @@ proyecto.
 
 Lineas de trabajo abiertas
 ==========================
+
+Mejora y "refactorización" a patrones de diseño
+-----------------------------------------------
+
+Como se ha visto, GPEC se vale de diversos patrones de diseño de software y 
+especialmente del patrón *Publisher/Subscriber*. No obstante, para garantizar
+aspectos como mantenibilidad, escalabilidad y seguridad del software sería deseable
+realizar un proceso de refactorización a patrones ([JK1999]), en particular en lo 
+concerniente a una arquitectura de separación más acabado entre lógica e interfaz.
+
+
+GPEC como aplicación Web
+-------------------------
+
+Con la popularización y el incremento de velocidad de los accesos a Internet, 
+en los últimos años la "computación en la nube" (Cloud Computing) [#]_
+se ha constituido como una tendencia para el desarrollo de software en general, 
+excediendo los dominios de las *redes sociales*, los juegos y las aplicaciones
+orientadas a la comunicación corporativa que dieron su origen. 
+
+Esta tendencia se acentúa día a día con nuevos dispositivos que acceden a la red 
+(como *smartphones*, *tablets* o *netbooks*) que sin importar cuanto poder de cálculo
+tengan por sí mismos, pueden acceder información y solicitar procesamientos 
+a servidores online. 
+
+Aplicaciones en la "nube" como `Google Docs <http://docs.google.com>`_ virtualmente
+reemplazan paquetes de software de escritorio para ofimática, con la ventaja de independizar al 
+usuario del soporte físico de la información, las actualizaciones del software, 
+y el características subyacentes de su equipo cliente. Se suman además las posibilidades "multiusuario" 
+que brinda la red; por ejemplo, la edición simultánea de un documento entre distintos
+usuarios. 
+
+Intentos más osados (y aún algo inmaduros) como `eyeOS <http://eyeos.info/>`_ 
+intentan constituirse en un reemplazo total del sistema 
+operativo, integrando ofimática, almacenamiento de datos, comunicación, edición 
+gráfica, etc. en un "escritorio virtual" accesible via web. 
+
+Llevado al campo del software científico, donde el aspecto colaborativo es escencial
+por génesis, el paradigma tiene especial asidero y de esto da cuenta, por ejemplo, 
+la conferencia *Science Online London* realizada en 2010 [#]_ cuya pregunta
+disparadora es *"¿Cómo la web está cambiando la ciencia?"*
+Entre muchos aspectos considerables para una respuesta,  surge como ejemplo aplicado
+la plataforma `Sage Notebook <http://www.sagenb.org/>`_,  que brinda una aplicación  
+online, interactiva, colaborativa y abierta para el desarrollo matemático. 
+
+Dado el desarrollo actual, este escenario es técnicamente viable al corto plazo. 
+Es decir, es posible, sin demasiado trabajo, convertir (o complementar) GPEC como 
+aplicación web, de manera que el usuario no tenga que bajar ni instalar ningun software en su equipo
+y pueda generar diagramas directamente "online". 
+
+Nuevas funcionalidades
+----------------------
+
+Durante el transcurso del proyecto surgieron muchas ideas de mejoras posibles. 
+Se listan a continuación algunas de ellas: 
+
+* Consola interactiva que permita la manipulación avanzada de gráficos y vectores
+  de datos. Esta característica ha sido parcialemente implementada. 
+ 
+* Métricas automáticas de los diagramas que indiquen rangos interfaciales y puntos críticos
+  de manera más precisa
+
+* Generación de videos de animación a partir de una rotación paso a paso de un diagrama 3D 
+  y la correspondiente captura (exportación). 
+  
+* Configurabilidad de los parámetros de visualización, que permitan de manera no 
+  programática cambiar colores, espesores, estilos y demás opciones de las curvas
+  trazadas. Esto permitiría, por ejemplo, optimizar un diagrama para la presentación
+  en escala de grises, donde el contraste de distintos colores muchas veces 
+  se vuelve indistinguible. 
+
+* Mejora en la interoperabilidad y exportación de datos. 
 
 
 
@@ -232,3 +304,10 @@ Lineas de trabajo abiertas
 
 .. [#]  Al término de la presentación de este reporte la agencia organizadora no
         ha expedido sobre la aprobación o no del proyecto. Sitio web: http://adec.org.ar/
+
+.. [#]  El "cloud computing" es un paradigma que permite ofrecer servicios de computación a través de Internet.
+
+.. [#]  "How is the web changing science?". Sitio web:  http://www.scienceonlinelondon.org/        
+
+.. [JK1999] Kerievsky, Joshua (1999) *Refactoring to Patterns*, Addison-Wesley
+
