@@ -234,10 +234,10 @@ y el características subyacentes de su equipo cliente. Se suman además las pos
 que brinda la red; por ejemplo, la edición simultánea de un documento entre distintos
 usuarios. 
 
-Intentos más osados (y aún algo inmaduros) como `eyeOS <http://eyeos.info/>`_ 
+Intentos más osados (aunque algo inmaduros) como `eyeOS <http://eyeos.info/>`_ 
 intentan constituirse en un reemplazo total del sistema 
 operativo, integrando ofimática, almacenamiento de datos, comunicación, edición 
-gráfica, etc. en un "escritorio virtual" accesible via web. 
+gráfica, ocio, etc. en un "escritorio virtual" accesible via web. 
 
 Llevado al campo del software científico, donde el aspecto colaborativo es escencial
 por génesis, el paradigma tiene especial asidero y de esto da cuenta, por ejemplo, 
@@ -251,6 +251,9 @@ Dado el desarrollo actual, este escenario es técnicamente viable al corto plazo
 Es decir, es posible, sin demasiado trabajo, convertir (o complementar) GPEC como 
 aplicación web, de manera que el usuario no tenga que bajar ni instalar ningun software en su equipo
 y pueda generar diagramas directamente "online". 
+
+Esta posibilidad implica una potencial estrategia de comercialización, en el marco
+de lo que se conoce como :abbr:`SaaS (Software as a Service)` [#]_
 
 Nuevas funcionalidades
 ----------------------
@@ -308,6 +311,8 @@ Se listan a continuación algunas de ellas:
 .. [#]  El "cloud computing" es un paradigma que permite ofrecer servicios de computación a través de Internet.
 
 .. [#]  "How is the web changing science?". Sitio web:  http://www.scienceonlinelondon.org/        
+
+.. [#]  Ver http://en.wikipedia.org/wiki/Software_as_a_service
 
 .. [JK1999] Kerievsky, Joshua (1999) *Refactoring to Patterns*, Addison-Wesley
 
