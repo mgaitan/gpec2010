@@ -144,6 +144,7 @@ class DefineSystemDialog(wx.Dialog):
         self.button_edit.SetToolTipString('Edit selected compound')
         self.button_duplicate.SetToolTipString('Duplicate selected compound')
         self.button_remove.SetToolTipString('Remove selected compound from database')
+        
         self.button_add2system.SetToolTipString('Add selected compound to the system')
         self.button_remove4system.SetToolTipString('Remove selected compound from system')
 
