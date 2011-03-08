@@ -205,7 +205,7 @@ latex_use_parts = False
 latex_show_pagerefs = False
 
 # If true, show URL addresses after external links.
-latex_show_urls = False
+latex_show_urls = True #False
 
 # Additional stuff for the LaTeX preamble.
 #latex_preamble = """\usepackage{graphicx}

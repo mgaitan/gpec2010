@@ -21,7 +21,7 @@ ocultación de curvas, escala logarítmica, visualización de grilla, etc.
 La generación de diagramas 3D constituye una funcionalidad de alta repercusión,
 sobre todo para la compresión y el estudio introductorio del comportamiento del 
 equilibrio de fases. La naturaleza interactiva (rotación, superposición de diagramas)
-permite complementar y asimilar el conocimiento, tarea compleja basandose
+permite complementar y asimilar el conocimiento, tarea compleja basándose
 en diagramas 2D típicos de la bibliografía. 
 
 Como ya se ha mencionado, un aspecto de especial interés fue la mejora 
@@ -200,7 +200,7 @@ proyecto.
 
 .. _lineas_abiertas:
 
-Lineas de trabajo abiertas
+Líneas de trabajo abiertas
 ==========================
 
 Mejora y "refactorización" a patrones de diseño

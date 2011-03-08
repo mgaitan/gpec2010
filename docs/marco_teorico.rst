@@ -651,6 +651,12 @@ gratuita, para desarrollos de software libre / open source.
 
 El proyecto se encuentra en la dirección http://code.google.com/p/gpec2010 . 
 
+.. figure:: images/google_code.png
+   :width: 90%
+
+    Portada del proyecto en Google Code. 
+
+
 Seguimiento de errores y propuestas
 ------------------------------------
 
@@ -707,11 +713,11 @@ restructuredText
 El documento principal (la "tésis") se ha escrito utilizando el lenguaje de 
 marcado `reStructuredText <http://docutils.sourceforge.net/docs/user/rst/>`_ 
 (:abbr:`rst o rest`). :abbr:`rst` permite aportar 
-semántica a un documento de texto plano, de manera equivalente a *Latex* 
+semántica a un documento de texto plano, de manera equivalente a *LaTeX* 
 pero mucho más sencilla, conservando legibilidad en formato fuente. 
 
 A través de diversas herramientas se puede convertir *rst* a distintos 
-formatos, como html, pdf o código latex. 
+formatos, como html, pdf o código LaTeX compilable. 
 
 Sphinx
 ^^^^^^
