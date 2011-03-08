@@ -1,10 +1,7 @@
 Diseño
 ****** 
 
-.. _justificacion_diseno:
 
-Justificación de diseño
-------------------------
 
 
 Flujo de trabajo general
@@ -86,6 +83,16 @@ Interacción Frontend / Backend
 
 Metodología de relevamiento
 ----------------------------
+
+
+
+
+
+
+.. _justificacion_diseno:
+
+Justificación de diseño
+------------------------
 
 
 

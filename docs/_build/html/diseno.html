@@ -51,16 +51,14 @@
             
   <div class="section" id="dise-o">
 <h1>5. Diseño<a class="headerlink" href="#dise-o" title="Enlazar permanentemente con este título">¶</a></h1>
-<div class="section" id="justificaci-n-de-dise-o">
-<span id="justificacion-diseno"></span><h2>5.1. Justificación de diseño<a class="headerlink" href="#justificaci-n-de-dise-o" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="flujo-de-trabajo-general">
-<h3>5.1.1. Flujo de trabajo general<a class="headerlink" href="#flujo-de-trabajo-general" title="Enlazar permanentemente con este título">¶</a></h3>
-</div>
-</div>
+<h2>5.1. Flujo de trabajo general<a class="headerlink" href="#flujo-de-trabajo-general" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="diagrama-de-actividades">
-<h2>5.2. Diagrama de actividades<a class="headerlink" href="#diagrama-de-actividades" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>5.1.1. Diagrama de actividades<a class="headerlink" href="#diagrama-de-actividades" title="Enlazar permanentemente con este título">¶</a></h3>
+</div>
+</div>
 <div class="section" id="base-de-datos">
-<h3>5.2.1. Base de datos<a class="headerlink" href="#base-de-datos" title="Enlazar permanentemente con este título">¶</a></h3>
+<h2>5.2. Base de datos<a class="headerlink" href="#base-de-datos" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>El almacenamiento y gestión de la información necesaria como entrada para GPEC se realiza
 a través de un sistema de gestión de base de datos relacional. Se
 utilizó el software <a class="reference external" href="http://sqlite.org">Sqlite</a>  (versión 3) que respeta casi íntegramente
@@ -80,17 +78,15 @@ experimentales.</p>
 <p class="first admonition-title">Todo</p>
 <p class="last">Siglas de dippr ?</p>
 </div>
-</div>
-</div>
 <div class="section" id="modelo-entidad-relaci-n">
-<h2>5.3. Modelo Entidad-Relación<a class="headerlink" href="#modelo-entidad-relaci-n" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>5.2.1. Modelo Entidad-Relación<a class="headerlink" href="#modelo-entidad-relaci-n" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="admonition-todo admonition " id="index-1">
 <p class="first admonition-title">Todo</p>
 <p class="last">entidad-relacion</p>
 </div>
 </div>
 <div class="section" id="definici-n-de-las-tablas">
-<h2>5.4. Definición de las tablas<a class="headerlink" href="#definici-n-de-las-tablas" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>5.2.2. Definición de las tablas<a class="headerlink" href="#definici-n-de-las-tablas" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="highlight-sql"><div class="highlight"><pre><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="ss">&quot;compounds&quot;</span> <span class="p">(</span><span class="ss">&quot;id&quot;</span> <span class="nb">INTEGER</span><span class="p">,</span><span class="ss">&quot;id_category&quot;</span> <span class="n">INTERGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span>
                                                   <span class="n">AUTOINCREMENT</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">,</span>
                           <span class="ss">&quot;name&quot;</span> <span class="nb">VARCHAR</span><span class="p">,</span>
@@ -112,12 +108,15 @@ experimentales.</p>
 <span class="k">INSERT</span> <span class="k">INTO</span> <span class="ss">&quot;categories&quot;</span> <span class="k">VALUES</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;User defined&#39;</span><span class="p">,</span><span class="s1">&#39;True&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
+</div>
+</div>
 <div class="section" id="interacci-n-frontend-backend">
-<span id="frontend-backend"></span><h3>5.4.1. Interacción Frontend / Backend<a class="headerlink" href="#interacci-n-frontend-backend" title="Enlazar permanentemente con este título">¶</a></h3>
-</div>
-</div>
+<span id="frontend-backend"></span><h2>5.3. Interacción Frontend / Backend<a class="headerlink" href="#interacci-n-frontend-backend" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="metodolog-a-de-relevamiento">
-<h2>5.5. Metodología de relevamiento<a class="headerlink" href="#metodolog-a-de-relevamiento" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>5.3.1. Metodología de relevamiento<a class="headerlink" href="#metodolog-a-de-relevamiento" title="Enlazar permanentemente con este título">¶</a></h3>
+</div>
+<div class="section" id="justificaci-n-de-dise-o">
+<span id="justificacion-diseno"></span><h3>5.3.2. Justificación de diseño<a class="headerlink" href="#justificaci-n-de-dise-o" title="Enlazar permanentemente con este título">¶</a></h3>
 <table class="docutils footnote" frame="void" id="id3" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
@@ -137,6 +136,7 @@ el formato <em>sqlite</em>.</td></tr>
 </table>
 </div>
 </div>
+</div>
 
 
           </div>
@@ -147,20 +147,20 @@ el formato <em>sqlite</em>.</td></tr>
   <h3><a href="index.html">Contenidos</a></h3>
   <ul>
 <li><a class="reference internal" href="#">5. Diseño</a><ul>
-<li><a class="reference internal" href="#justificaci-n-de-dise-o">5.1. Justificación de diseño</a><ul>
-<li><a class="reference internal" href="#flujo-de-trabajo-general">5.1.1. Flujo de trabajo general</a></li>
+<li><a class="reference internal" href="#flujo-de-trabajo-general">5.1. Flujo de trabajo general</a><ul>
+<li><a class="reference internal" href="#diagrama-de-actividades">5.1.1. Diagrama de actividades</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#diagrama-de-actividades">5.2. Diagrama de actividades</a><ul>
-<li><a class="reference internal" href="#base-de-datos">5.2.1. Base de datos</a></li>
+<li><a class="reference internal" href="#base-de-datos">5.2. Base de datos</a><ul>
+<li><a class="reference internal" href="#modelo-entidad-relaci-n">5.2.1. Modelo Entidad-Relación</a></li>
+<li><a class="reference internal" href="#definici-n-de-las-tablas">5.2.2. Definición de las tablas</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#modelo-entidad-relaci-n">5.3. Modelo Entidad-Relación</a></li>
-<li><a class="reference internal" href="#definici-n-de-las-tablas">5.4. Definición de las tablas</a><ul>
-<li><a class="reference internal" href="#interacci-n-frontend-backend">5.4.1. Interacción Frontend / Backend</a></li>
+<li><a class="reference internal" href="#interacci-n-frontend-backend">5.3. Interacción Frontend / Backend</a><ul>
+<li><a class="reference internal" href="#metodolog-a-de-relevamiento">5.3.1. Metodología de relevamiento</a></li>
+<li><a class="reference internal" href="#justificaci-n-de-dise-o">5.3.2. Justificación de diseño</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#metodolog-a-de-relevamiento">5.5. Metodología de relevamiento</a></li>
 </ul>
 </li>
 </ul>

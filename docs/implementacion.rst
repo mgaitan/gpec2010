@@ -78,12 +78,12 @@ Ventajas
   Sin embargo, la eficiencia no suele ser proporcional en sistemas de alta
   demanda computacional.  
 
-Implementación en GPEC
-^^^^^^^^^^^^^^^^^^^^^^^^
+Python Pubsub
+^^^^^^^^^^^^^
 
 En GPEC se ha utilizado el paquete `Python Pubsub <http://pubsub.sourceforge.net/>`_
 de Oliver Schoenborn, en su versión 1 [#]_ . Esta implementación es muy sencilla
-y se basa en la existencia de un objeto único (Ver :ref:`singleton`), ``pub``
+y se basa en la existencia de un objeto único (Ver :term:`singleton`), ``pub``, 
 que controla el envío y las suscripción a los mensajes. Se describe en el siguiente 
 código::
 
@@ -121,11 +121,173 @@ Cuyo diagrama de secuencia es el siguiente:
    via *Pub/Sub*
 
 
-Singleton
----------
+Ejemplos de uso
+^^^^^^^^^^^^^^^
 
-Ejemplos de implementación
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Panel de mensajes
++++++++++++++++++
+
+Como se ha dicho, PubSub constituye el patrón principal y toda la *orientación
+a eventos* se basa en una comunicación vía esta biblioteca. 
+
+El ejemplo canónico es el **panel de log** (registro de mensajes de usuario), donde
+se registra una crónica de eventos de interés para el usuario, denotados en 
+su categoría con un símbolo y la hora del suceso. 
+
+.. figure:: images/log_msg.png
+   :width: 80%
+
+   A través de PubSub, cualquier parte del programa envía avisos que el panel
+   (un *receptor*) mostrará al usuario. 
+
+En la incialización del panel se realiza la subscripción a los mensajes con 
+tópico ``'log'``, y asigna como acción el método ``OnAppendLog()``::
+
+
+    class LogMessagesPanel(wx.Panel):
+        def __init__(self, parent, id):
+            wx.Panel.__init__(self, parent, id)
+
+            self.list = wx.ListCtrl(self, -1,  style=  wx.LC_REPORT|wx.SUNKEN_BORDER)
+            self.setupList()
+
+            sizer = wx.BoxSizer()
+            sizer.Add(self.list, 1, wx.EXPAND)
+            self.SetSizerAndFit(sizer)
+        
+            pub.subscribe(self.OnAppendLog, 'log')
+
+
+Ante la recepción de un mensaje se produce la invocación del método
+adjuntando como parámetro un *objeto mensaje* (``msg``) en cuyo atributo ``data``
+se almacena la información enviada por el remitente::
+
+
+    def OnAppendLog(self, msg):
+        ico = self.icon_map[msg.data[0]]
+
+        message = msg.data[1]
+        index = self.list.InsertImageStringItem(sys.maxint, message, ico)
+        self.list.SetStringItem(index, 1, time.strftime('%H:%M:%S'))
+        self.list.EnsureVisible(index) #keep scroll at bottom
+
+        if msg.data[0] == 'error':
+            wx.Bell()
+
+La información en ``msg.data`` es, por convención de diseño, una tupla
+de la forma ``(asunto, mensaje de usuario)``. Los asuntos posibles están asociados 
+al icono que los representan: 
+
+    =============  ============= =========================
+     Asunto         Símbolo       Descripción  
+    =============  ============= =========================
+      *ok*          |ok|          Acción existosa               
+      *info*        |info|        Información importante
+      *warning*     |warning|     Advertencia  
+      *error*       |error|       Error
+    =============  ============= =========================
+
+
+.. |ok| image:: images/ok.png
+.. |info| image:: images/info.png
+.. |warning| image:: images/warning.png
+.. |error| image:: images/error.png
+
+Como se observa en el código, en caso de un mensaje del tipo "error", además
+de agregar el mensaje se ejecuta ``wx.Bell()`` que produce una alerta sonora. 
+
+El *remitente* de mensajes de log se realiza desde múltiples puntos. Por ejemplo
+ante la carga de la aplicación, cuando se define un sistema, cuando se realiza
+un cálculo (mediante la invocación a un ejecutable del *backend*), etc. 
+Por ejemplo, en el código de ejecución de la aplicación, en ``aui.py`` se 
+observa::
+
+
+    (...)
+    main_frame.Show()
+    pub.sendMessage('log', ('ok', 'GPEC is ready. Define a system to begin') )
+    app.MainLoop()
+
+
+Generación de gráficos
+++++++++++++++++++++++
+
+Otro uso de PubSub es la generación de gráficos. Se resume en el siguiente 
+diagrama de secuencia:
+
+
+.. figure:: images/uml_sec_makeplot.png
+   :width: 100%
+
+
+Esto significa que el panel de definición de casos está independizado del 
+panel contenedor de los gráficos generados a traves de PubSub. 
+El mencanismo invocación del backend (desde donde se obtienen los datos a graficar) 
+se verá más adelante. 
+
+Exposición de archivos de datos
++++++++++++++++++++++++++++++++
+
+Cada invocación a un ejecutable del backend dependen de una entrada 
+y produce una salida [#]_ en un archivo de texto. Para usuarios avanzados que conocen 
+la estructura y significado de estos archivos (descriptos en :ref:'api'), es 
+deseable que tengan un acceso al contenido desde la propia aplicación, para 
+encontrar información numérica puntual cuya precisión se pierde en un gráfico. 
+
+.. figure:: images/inpout.png
+   :width: 80%
+
+Esta tarea se hace a través de PubSub. El emisor envía un mensaje con tópico
+``add_txt`` adjuntando como información una tupla con la ruta al archivo 
+y el caso al que este cálculo pertenence. 
+
+Por ejemplo, la función que escribe el archivo de entrada para el cálculo de 
+parámetros es la siguiente::
+
+
+.. literalinclude:: ../src/apimanager.py
+   :pyobject: ApiManager._write_conparin
+
+
+El atributo :py:attr:`path_temp` está definido en el constructor de la clase 
+:py:class:`API` y se trata de una ruta a un subdirectorio en la carpeta temporal, 
+abstraída del sistema operativo subyacente mediante el módulo :py:mod:`tempfile`
+
+El receptor de este mensaje es :py:class:`IOPanel` que maneja el mensaje con el 
+método :py:meth:`OnAddItem` .
+
+
+
+.. literalinclude:: ../src/panels.py
+   :pyobject: IOPanel.OnAddItem
+
+
+Tabla de incidencias de mensajes
+++++++++++++++++++++++++++++++++
+
+
+  ==============  ======================  ========================= =================== 
+   Tópico           Descripción             Emisor/es                 Receptor/es    
+  ==============  ======================  ========================= ===================
+   log              Mensaje al usuario      varios                    LogMessagesPanel
+   add_txt          Expone archivo de       ApiManager.*              IOPanel
+                    backend
+   clone case       Crear un nuevo caso     CasePanel.Clone           TabbedCases
+                    a partir del actual
+   make.*           Invoca el cálculo y     CasePanel.OnMakePlots     SuitePlotsPanel
+                    genera el gráfico
+   refresh all      Refresca la interfaz    varios                    MainFrame
+                    de usuario
+   active page      Trae a primer           PlotsTreePanel            SuitePlotsPanel
+                    plano una pestaña 
+                    de los gráficos
+  ==============  ======================  ========================= ===================
+
+Para un listado completo puede analizar el código fuente ejecutando 
+``grep -r "pub.sendMessage"`` sobre el directorio de código fuente raiz
+de GPEC
+
+
 
         
 Diagramas principales
@@ -162,9 +324,16 @@ Pruebas de usabilidad
 
 
 
-.. [#]  En 2010 el autor de este software reescribió completamente la :term:`API`, 
+.. [#]  En 2010 el autor de *Python PySub* reescribió completamente la :term:`API`, 
         agrengando una orientación a objetos del paso de mensajes más poderosa, 
         a la que llamó *version 3*. 
+
+
+.. [#]  En realidad, la llamada está intercedida por una función decoradora (``memoize``)
+        que realiza un *caché* de los resultados la primera vez que se invoca. Si en 
+        sucesivas llamadas los parámetros coinciden, se devuelven los datos 
+        almacenados en memoria, tarea mucho más rápida que recalcular. 
+        
 
 
 .. [vdLaar2002]  van de Laar, F. (2002).  *Publish/Subscribe as architectural style 

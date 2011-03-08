@@ -51,43 +51,351 @@
             
   <div class="section" id="implementaci-n">
 <h1>6. Implementación<a class="headerlink" href="#implementaci-n" title="Enlazar permanentemente con este título">¶</a></h1>
-<div class="section" id="estilo-de-codificaci-n">
-<h2>6.1. Estilo de codificación<a class="headerlink" href="#estilo-de-codificaci-n" title="Enlazar permanentemente con este título">¶</a></h2>
-<div class="section" id="pep8">
-<h3>6.1.1. PEP8<a class="headerlink" href="#pep8" title="Enlazar permanentemente con este título">¶</a></h3>
-</div>
-</div>
 <div class="section" id="patrones-de-dise-o">
-<h2>6.2. Patrones de diseño<a class="headerlink" href="#patrones-de-dise-o" title="Enlazar permanentemente con este título">¶</a></h2>
-<div class="section" id="pubsub">
-<h3>6.2.1. PubSub<a class="headerlink" href="#pubsub" title="Enlazar permanentemente con este título">¶</a></h3>
-<div class="section" id="ejemplos-implementaci-n">
-<h4>6.2.1.1. Ejemplos Implementación<a class="headerlink" href="#ejemplos-implementaci-n" title="Enlazar permanentemente con este título">¶</a></h4>
+<h2>6.1. Patrones de diseño<a class="headerlink" href="#patrones-de-dise-o" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="publish-subscribe">
+<h3>6.1.1. Publish/Subscribe<a class="headerlink" href="#publish-subscribe" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Un patrón de diseño (también catalogado como patrón de mensajería) de recurrente
+aplicación en GPEC ha sido <em>Publish/Subscribe</em>, frencuentemente abreviado <em>Pubsub</em>.
+Se trata de una arquitectura de paso de mensajes desacoplada (y en algunas implementaciones distribuída)
+donde existen &#8220;remitentes&#8221; (o &#8220;publicadores&#8221;) que envían mensajes ante el acaecimiento
+de un suceso específico (por ejemplo, un evento originado por el usuario como
+el click sobre un botón) sin conocimiento alguno sobre &#8220;qué sucede despues&#8221;
+con el mensaje. Análogamente existen &#8220;receptores&#8221; (o &#8220;suscriptores&#8221;) que en cuya inicialización
+se define a qué tipo de mensajes se suscribirán (el tipo se define en función
+del &#8220;asunto&#8221; o &#8220;topic&#8221;) y qué acción (un método o función)
+debe ejecutarse cuando un mensaje de tal tipo arribe.</p>
+<div class="figure">
+<img alt="_images/pubsub_concept7.png" src="_images/pubsub_concept7.png" style="width: 60%;" />
+<p class="caption">Diagrama conceptual de la arquitectura <em>Pub/Sub</em></p>
+</div>
+<p>Como se describe en <a class="reference internal" href="#vdlaar2002">[vdLaar2002]</a> Pubsub facilita el desacople de componentes
+(<em>callables</em>, módulos, paquetes) dentro de una aplicación. Los conceptos involucrados son:</p>
+<ul class="simple">
+<li>Permitir que partes de un aplicación evien mensajes &#8220;al resto de la aplicación&#8221;
+sin tener que conocer:<ul>
+<li><em>si</em> el mensaje será manejado y usufructuado:<ul>
+<li>puede suceder que el mensaje se ignore completamente</li>
+<li>o que sea manejado en muchas partes diferentes de la aplicación</li>
+</ul>
+</li>
+<li><em>cómo</em> será manejado el mensaje:<ul>
+<li>al publicador no le importa qué se hará con el mensaje y su contenido;</li>
+<li>tampoco hay control del orden en que un mensaje dado se enviará al resto
+de la aplicación (comportamiento no determinístico).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Permitiendo que partes de una aplicación reciban y manejen mensajes desde
+&#8220;el resto de la aplicación&#8221; sin tener que conocer <em>quién</em> envió el mensaje.</li>
+</ul>
+<p>Un <em>receptor</em> (<em>listerner</em>) es &#8220;una parte de la aplicación que quiere
+recibir mensajes&#8221;. Un receptor se suscribe a uno o más tópicos. Un <em>emisor</em>
+(<em>sender</em>) es cualquier parte de la aplicación que envía (deposita en
+el intermediario) un mensaje con un tópico dado, y opcionalmente, cualquier información
+adjunta. Este intermediario (a veces conocido como <em>broker</em>, o directamente
+<em>pubsub</em>) entrega este mensaje a todos los receptores suscriptos.</p>
+<div class="section" id="ventajas">
+<h4>6.1.1.1. Ventajas<a class="headerlink" href="#ventajas" title="Enlazar permanentemente con este título">¶</a></h4>
+<ul class="simple">
+<li><strong>Acoplamiento débil</strong>: la topología de Pubsub, basada en la intermediación y el
+desconocimiento de identidades y comportamientos de los objetos que interactuan
+permite un desacople de los componentes de la aplicación. Esto significa
+que las distintas &#8220;partes&#8221; de la aplicación son independientes entre sí, de modo
+que pueden facilmente desactivarse componentes no críticos sin afectar al conjunto
+de la aplicación. Esta estrategia es útil para realizar pruebas de seguridad.</li>
+<li><strong>Funcionalidad configurable</strong> : Dado que un emisor no tiene necesidad de conocer
+la existencia de un receptor, es fácil diseñar una arquitectura basada en &#8220;plugins&#8221;
+que permite mantener un núcleo y agregar funcionalidades extra con posterioridad
+(incluso desarrolladas por terceros). Esto trae aparejada la posibilidad de
+adaptar, mediante extensiones que se activan o no, las características
+del software en función de las necesidades del usuario.</li>
+<li><strong>Escalabilidad</strong>: En las implementaciones distribuidas de demanda moderada (donde los mensajes
+se transmiten entre múltiples procesos o, incluso, equipos), PubSub provee
+una arquitectura mucho más simple y autogestionada que la típica topología
+<em>cliente/servidor</em> para tareas de procesamiento paralelo o
+Sin embargo, la eficiencia no suele ser proporcional en sistemas de alta
+demanda computacional.</li>
+</ul>
+</div>
+<div class="section" id="python-pubsub">
+<h4>6.1.1.2. Python Pubsub<a class="headerlink" href="#python-pubsub" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>En GPEC se ha utilizado el paquete <a class="reference external" href="http://pubsub.sourceforge.net/">Python Pubsub</a>
+de Oliver Schoenborn, en su versión 1 <a class="footnote-reference" href="#id7" id="id3">[1]</a> . Esta implementación es muy sencilla
+y se basa en la existencia de un objeto único (Ver <em class="xref std std-term">singleton</em>), <tt class="docutils literal"><span class="pre">pub</span></tt>,
+que controla el envío y las suscripción a los mensajes. Se describe en el siguiente
+código:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pubsub</span> <span class="kn">import</span> <span class="n">pub</span>
+
+<span class="c"># declaración de la  función &quot;destino&quot;</span>
+
+<span class="k">def</span> <span class="nf">destino</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">&#39;Mensaje con argumentos arg1=&quot;</span><span class="si">%s</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">  arg2=&quot;</span><span class="si">%s</span><span class="s">&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
+
+<span class="c"># declaración de suscripción</span>
+
+<span class="n">pub</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">destino</span><span class="p">,</span> <span class="s">&#39;asuntoParticular&#39;</span><span class="p">)</span>
+
+<span class="c"># función que envía un mensaje</span>
+
+<span class="k">def</span> <span class="nf">hacer_algo_y_avisar</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">&#39;Se enviará un mensaje&#39;</span>
+    <span class="n">pub</span><span class="o">.</span><span class="n">sendMessage</span><span class="p">(</span><span class="s">&#39;asuntoParticular&#39;</span><span class="p">,</span> <span class="n">arg1</span><span class="o">=</span><span class="mf">123</span><span class="p">,</span> <span class="n">arg2</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s">&#39;abc&#39;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s">&#39;def&#39;</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+
+    <span class="n">hacer_algo_y_avisar</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Cuyo diagrama de secuencia es el siguiente:</p>
+</div>
+<div class="section" id="ejemplos-de-uso">
+<h4>6.1.1.3. Ejemplos de uso<a class="headerlink" href="#ejemplos-de-uso" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="section" id="panel-de-mensajes">
+<h5>6.1.1.3.1. Panel de mensajes<a class="headerlink" href="#panel-de-mensajes" title="Enlazar permanentemente con este título">¶</a></h5>
+<p>Como se ha dicho, PubSub constituye el patrón principal y toda la <em>orientación
+a eventos</em> se basa en una comunicación vía esta biblioteca.</p>
+<p>El ejemplo canónico es el <strong>panel de log</strong> (registro de mensajes de usuario), donde
+se registra una crónica de eventos de interés para el usuario, denotados en
+su categoría con un símbolo y la hora del suceso.</p>
+<div class="figure">
+<img alt="_images/log_msg6.png" src="_images/log_msg6.png" style="width: 80%;" />
+<p class="caption">A través de PubSub, cualquier parte del programa envía avisos que el panel
+(un <em>receptor</em>) mostrará al usuario.</p>
+</div>
+<p>En la incialización del panel se realiza la subscripción a los mensajes con
+tópico <tt class="docutils literal"><span class="pre">'log'</span></tt>, y asigna como acción el método <tt class="docutils literal"><span class="pre">OnAppendLog()</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">LogMessagesPanel</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">Panel</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="n">wx</span><span class="o">.</span><span class="n">Panel</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">list</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">ListCtrl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mf">1</span><span class="p">,</span>  <span class="n">style</span><span class="o">=</span>  <span class="n">wx</span><span class="o">.</span><span class="n">LC_REPORT</span><span class="o">|</span><span class="n">wx</span><span class="o">.</span><span class="n">SUNKEN_BORDER</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setupList</span><span class="p">()</span>
+
+        <span class="n">sizer</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">BoxSizer</span><span class="p">()</span>
+        <span class="n">sizer</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetSizerAndFit</span><span class="p">(</span><span class="n">sizer</span><span class="p">)</span>
+
+        <span class="n">pub</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OnAppendLog</span><span class="p">,</span> <span class="s">&#39;log&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ante la recepción de un mensaje se produce la invocación del método
+adjuntando como parámetro un <em>objeto mensaje</em> (<tt class="docutils literal"><span class="pre">msg</span></tt>) en cuyo atributo <tt class="docutils literal"><span class="pre">data</span></tt>
+se almacena la información enviada por el remitente:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">OnAppendLog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+    <span class="n">ico</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">icon_map</span><span class="p">[</span><span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mf">0</span><span class="p">]]</span>
+
+    <span class="n">message</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">InsertImageStringItem</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">maxint</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">ico</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">SetStringItem</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%H:%M:%S&#39;</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">EnsureVisible</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="c">#keep scroll at bottom</span>
+
+    <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;error&#39;</span><span class="p">:</span>
+        <span class="n">wx</span><span class="o">.</span><span class="n">Bell</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>La información en <tt class="docutils literal"><span class="pre">msg.data</span></tt> es, por convención de diseño, una tupla
+de la forma <tt class="docutils literal"><span class="pre">(asunto,</span> <span class="pre">mensaje</span> <span class="pre">de</span> <span class="pre">usuario)</span></tt>. Los asuntos posibles están asociados
+al icono que los representan:</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="49%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Asunto</th>
+<th class="head">Símbolo</th>
+<th class="head">Descripción</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><em>ok</em></td>
+<td><img alt="ok" src="_images/ok5.png" /></td>
+<td>Acción existosa</td>
+</tr>
+<tr><td><em>info</em></td>
+<td><img alt="info" src="_images/info5.png" /></td>
+<td>Información importante</td>
+</tr>
+<tr><td><em>warning</em></td>
+<td><img alt="warning" src="_images/warning5.png" /></td>
+<td>Advertencia</td>
+</tr>
+<tr><td><em>error</em></td>
+<td><img alt="error" src="_images/error5.png" /></td>
+<td>Error</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Como se observa en el código, en caso de un mensaje del tipo &#8220;error&#8221;, además
+de agregar el mensaje se ejecuta <tt class="docutils literal"><span class="pre">wx.Bell()</span></tt> que produce una alerta sonora.</p>
+<p>El <em>remitente</em> de mensajes de log se realiza desde múltiples puntos. Por ejemplo
+ante la carga de la aplicación, cuando se define un sistema, cuando se realiza
+un cálculo (mediante la invocación a un ejecutable del <em>backend</em>), etc.
+Por ejemplo, en el código de ejecución de la aplicación, en <tt class="docutils literal"><span class="pre">aui.py</span></tt> se
+observa:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">main_frame</span><span class="o">.</span><span class="n">Show</span><span class="p">()</span>
+<span class="n">pub</span><span class="o">.</span><span class="n">sendMessage</span><span class="p">(</span><span class="s">&#39;log&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s">&#39;ok&#39;</span><span class="p">,</span> <span class="s">&#39;GPEC is ready. Define a system to begin&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">MainLoop</span><span class="p">()</span>
+</pre></div>
 </div>
 </div>
-<div class="section" id="modelo-vista-controlador">
-<h3>6.2.2. Modelo-Vista-Controlador<a class="headerlink" href="#modelo-vista-controlador" title="Enlazar permanentemente con este título">¶</a></h3>
-<div class="section" id="ejemplos-de-implementaci-n">
-<h4>6.2.2.1. Ejemplos de implementación<a class="headerlink" href="#ejemplos-de-implementaci-n" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="section" id="generaci-n-de-gr-ficos">
+<h5>6.1.1.3.2. Generación de gráficos<a class="headerlink" href="#generaci-n-de-gr-ficos" title="Enlazar permanentemente con este título">¶</a></h5>
+<p>Otro uso de PubSub es la generación de gráficos. Se resume en el siguiente
+diagrama de secuencia:</p>
+<div class="figure">
+<img alt="_images/uml_sec_makeplot5.png" src="_images/uml_sec_makeplot5.png" style="width: 100%;" />
+</div>
+<p>Esto significa que el panel de definición de casos está independizado del
+panel contenedor de los gráficos generados a traves de PubSub.
+El mencanismo invocación del backend (desde donde se obtienen los datos a graficar)
+se verá más adelante.</p>
+</div>
+<div class="section" id="exposici-n-de-archivos-de-datos">
+<h5>6.1.1.3.3. Exposición de archivos de datos<a class="headerlink" href="#exposici-n-de-archivos-de-datos" title="Enlazar permanentemente con este título">¶</a></h5>
+<p>Cada invocación a un ejecutable del backend dependen de una entrada
+y produce una salida <a class="footnote-reference" href="#id8" id="id4">[2]</a> en un archivo de texto. Para usuarios avanzados que conocen
+la estructura y significado de estos archivos (descriptos en :ref:&#8217;api&#8217;), es
+deseable que tengan un acceso al contenido desde la propia aplicación, para
+encontrar información numérica puntual cuya precisión se pierde en un gráfico.</p>
+<div class="figure">
+<img alt="_images/inpout1.png" src="_images/inpout1.png" style="width: 80%;" />
+</div>
+<p>Esta tarea se hace a través de PubSub. El emisor envía un mensaje con tópico
+<tt class="docutils literal"><span class="pre">add_txt</span></tt> adjuntando como información una tupla con la ruta al archivo
+y el caso al que este cálculo pertenence.</p>
+<p>Por ejemplo, la función que escribe el archivo de entrada para el cálculo de
+parámetros es la siguiente:</p>
+<div class="highlight-python"><pre>.. literalinclude:: ../src/apimanager.py</pre>
+</div>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">pyobject:</th><td class="field-body">ApiManager._write_conparin</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>El atributo <tt class="xref py py-attr docutils literal"><span class="pre">path_temp</span></tt> está definido en el constructor de la clase
+<tt class="xref py py-class docutils literal"><span class="pre">API</span></tt> y se trata de una ruta a un subdirectorio en la carpeta temporal,
+abstraída del sistema operativo subyacente mediante el módulo <tt class="xref py py-mod docutils literal"><span class="pre">tempfile</span></tt></p>
+<p>El receptor de este mensaje es <tt class="xref py py-class docutils literal"><span class="pre">IOPanel</span></tt> que maneja el mensaje con el
+método <tt class="xref py py-meth docutils literal"><span class="pre">OnAddItem()</span></tt> .</p>
+<div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">OnAddItem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+
+        <span class="n">filepath</span><span class="p">,</span> <span class="n">case_id</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">data</span>
+
+        <span class="n">head</span><span class="p">,</span><span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">case_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cases</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="c">#if case is unknown, create it</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">AppendItem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s">&quot;Case </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">case_id</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cases</span><span class="p">[</span><span class="n">case_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cases</span><span class="p">[</span><span class="n">case_id</span><span class="p">]</span>
+
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span> <span class="n">filepath</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">fh</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+            <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">AppendItem</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">SetPyData</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+                    
+
+        <span class="c">#self.tree.Expand(node)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">SelectItem</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>  <span class="c">#TODO refresh text_ctrl?</span>
+        
+</pre></div>
 </div>
 </div>
-<div class="section" id="singleton">
-<h3>6.2.3. Singleton<a class="headerlink" href="#singleton" title="Enlazar permanentemente con este título">¶</a></h3>
-<div class="section" id="id1">
-<h4>6.2.3.1. Ejemplos de implementación<a class="headerlink" href="#id1" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="section" id="tabla-de-incidencias-de-mensajes">
+<h5>6.1.1.3.4. Tabla de incidencias de mensajes<a class="headerlink" href="#tabla-de-incidencias-de-mensajes" title="Enlazar permanentemente con este título">¶</a></h5>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="28%" />
+<col width="31%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Tópico</th>
+<th class="head">Descripción</th>
+<th class="head">Emisor/es</th>
+<th class="head">Receptor/es</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>log</td>
+<td>Mensaje al usuario</td>
+<td>varios</td>
+<td>LogMessagesPanel</td>
+</tr>
+<tr><td>add_txt</td>
+<td>Expone archivo de
+backend</td>
+<td>ApiManager.*</td>
+<td>IOPanel</td>
+</tr>
+<tr><td>clone case</td>
+<td>Crear un nuevo caso
+a partir del actual</td>
+<td>CasePanel.Clone</td>
+<td>TabbedCases</td>
+</tr>
+<tr><td>make.*</td>
+<td>Invoca el cálculo y
+genera el gráfico</td>
+<td>CasePanel.OnMakePlots</td>
+<td>SuitePlotsPanel</td>
+</tr>
+<tr><td>refresh all</td>
+<td>Refresca la interfaz
+de usuario</td>
+<td>varios</td>
+<td>MainFrame</td>
+</tr>
+<tr><td>active page</td>
+<td>Trae a primer
+plano una pestaña
+de los gráficos</td>
+<td>PlotsTreePanel</td>
+<td>SuitePlotsPanel</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Para un listado completo puede analizar el código fuente ejecutando
+<a href="#id5"><span class="problematic" id="id6">``</span></a>grep -r &#8220;pub.sendMessage&#8221; `` sobre el directorio de código fuente raiz
+de GPEC</p>
+</div>
 </div>
 </div>
 </div>
 <div class="section" id="diagramas-principales">
-<h2>6.3. Diagramas principales<a class="headerlink" href="#diagramas-principales" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>6.2. Diagramas principales<a class="headerlink" href="#diagramas-principales" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="diagramas-de-componentes">
-<h3>6.3.1. Diagramas de componentes<a class="headerlink" href="#diagramas-de-componentes" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>6.2.1. Diagramas de componentes<a class="headerlink" href="#diagramas-de-componentes" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="de-clases">
-<h3>6.3.2. de clases<a class="headerlink" href="#de-clases" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>6.2.2. de clases<a class="headerlink" href="#de-clases" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="de-secuencia">
-<h3>6.3.3. de secuencia<a class="headerlink" href="#de-secuencia" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>6.2.3. de secuencia<a class="headerlink" href="#de-secuencia" title="Enlazar permanentemente con este título">¶</a></h3>
+</div>
+</div>
+<div class="section" id="estilo-de-codificaci-n">
+<h2>6.3. Estilo de codificación<a class="headerlink" href="#estilo-de-codificaci-n" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="pep8">
+<h3>6.3.1. PEP8<a class="headerlink" href="#pep8" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 </div>
 <div class="section" id="interfaz-de-usuario">
@@ -97,6 +405,31 @@
 </div>
 <div class="section" id="pruebas-de-usabilidad">
 <h3>6.4.2. Pruebas de usabilidad<a class="headerlink" href="#pruebas-de-usabilidad" title="Enlazar permanentemente con este título">¶</a></h3>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[1]</a></td><td>En 2010 el autor de <em>Python PySub</em> reescribió completamente la <em class="xref std std-term">API</em>,
+agrengando una orientación a objetos del paso de mensajes más poderosa,
+a la que llamó <em>version 3</em>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[2]</a></td><td>En realidad, la llamada está intercedida por una función decoradora (<tt class="docutils literal"><span class="pre">memoize</span></tt>)
+que realiza un <em>caché</em> de los resultados la primera vez que se invoca. Si en
+sucesivas llamadas los parámetros coinciden, se devuelven los datos
+almacenados en memoria, tarea mucho más rápida que recalcular.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="vdlaar2002" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[vdLaar2002]</a></td><td>van de Laar, F. (2002).  <em>Publish/Subscribe as architectural style
+for component interaction (Mater&#8217;s thesis)</em>, Phillips Research
+Laboratories, Eindhoven</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -110,29 +443,29 @@
   <h3><a href="index.html">Contenidos</a></h3>
   <ul>
 <li><a class="reference internal" href="#">6. Implementación</a><ul>
-<li><a class="reference internal" href="#estilo-de-codificaci-n">6.1. Estilo de codificación</a><ul>
-<li><a class="reference internal" href="#pep8">6.1.1. PEP8</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#patrones-de-dise-o">6.2. Patrones de diseño</a><ul>
-<li><a class="reference internal" href="#pubsub">6.2.1. PubSub</a><ul>
-<li><a class="reference internal" href="#ejemplos-implementaci-n">6.2.1.1. Ejemplos Implementación</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#modelo-vista-controlador">6.2.2. Modelo-Vista-Controlador</a><ul>
-<li><a class="reference internal" href="#ejemplos-de-implementaci-n">6.2.2.1. Ejemplos de implementación</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#singleton">6.2.3. Singleton</a><ul>
-<li><a class="reference internal" href="#id1">6.2.3.1. Ejemplos de implementación</a></li>
+<li><a class="reference internal" href="#patrones-de-dise-o">6.1. Patrones de diseño</a><ul>
+<li><a class="reference internal" href="#publish-subscribe">6.1.1. Publish/Subscribe</a><ul>
+<li><a class="reference internal" href="#ventajas">6.1.1.1. Ventajas</a></li>
+<li><a class="reference internal" href="#python-pubsub">6.1.1.2. Python Pubsub</a></li>
+<li><a class="reference internal" href="#ejemplos-de-uso">6.1.1.3. Ejemplos de uso</a><ul>
+<li><a class="reference internal" href="#panel-de-mensajes">6.1.1.3.1. Panel de mensajes</a></li>
+<li><a class="reference internal" href="#generaci-n-de-gr-ficos">6.1.1.3.2. Generación de gráficos</a></li>
+<li><a class="reference internal" href="#exposici-n-de-archivos-de-datos">6.1.1.3.3. Exposición de archivos de datos</a></li>
+<li><a class="reference internal" href="#tabla-de-incidencias-de-mensajes">6.1.1.3.4. Tabla de incidencias de mensajes</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#diagramas-principales">6.3. Diagramas principales</a><ul>
-<li><a class="reference internal" href="#diagramas-de-componentes">6.3.1. Diagramas de componentes</a></li>
-<li><a class="reference internal" href="#de-clases">6.3.2. de clases</a></li>
-<li><a class="reference internal" href="#de-secuencia">6.3.3. de secuencia</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#diagramas-principales">6.2. Diagramas principales</a><ul>
+<li><a class="reference internal" href="#diagramas-de-componentes">6.2.1. Diagramas de componentes</a></li>
+<li><a class="reference internal" href="#de-clases">6.2.2. de clases</a></li>
+<li><a class="reference internal" href="#de-secuencia">6.2.3. de secuencia</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#estilo-de-codificaci-n">6.3. Estilo de codificación</a><ul>
+<li><a class="reference internal" href="#pep8">6.3.1. PEP8</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#interfaz-de-usuario">6.4. Interfaz de Usuario</a><ul>

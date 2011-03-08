@@ -36,6 +36,7 @@ dos variables.  Un diagrama de fase típico para estos
 sistemas, es el *Presión vs. temperatura* :
 
     .. figure:: images/Phase-diag_es.png
+       :width: 80%
        
        La línea verde indica los puntos de congelamiento. La azul los de 
        ebullición. La línea punteada muestra un 
@@ -57,7 +58,7 @@ sistema se encuentra en *zonas de equilibrio* vapor/líquido, líquido/líquido,
 líquido/sólido u otros casos particulares. 
 
    .. figure:: images/ejTipo1.png
-      :width: 530px
+      :width: 80%
 
       Un diagrama P-T-x para un sistema binario de Tipo I. 
 
@@ -66,7 +67,7 @@ correspondientes genera los gráficos cartesianos bidimensionales PT, Px, Tx
 (y sus análogos para densidad) que son típicos de la   bibliografía del tema. 
 
 .. figure:: images/ejemploTx.png
-   :width: 50%
+   :width: 80%
 
    Un diagrama T-x para un sistema binario, mostrando la línea crítica y 
    otras informaciones. 
@@ -118,23 +119,27 @@ estado asociadas a la materia como la temperatura, la presión, el volumen o
 la energía interna. 
 
 Como ejemplo conocido en cualquier curso introductorio de química, 
-la *ley del gas ideal* es una ecuación de estado, que al  
+la :eq:`Ley del gas ideal` es una ecuación de estado, que al  
 considerar el volumen molecular nulo y a las fuerzas de atracción-repulsión 
 despreciables, limita su utilidad para modelar gases reales. 
 
- .. figure:: images/leygasideal.png
-    
-    *p* es la presión absoluta, *V el volumen, *T*, *n* la cantidad de materia, 
-    y *R* la constante del gas ideal.
+ .. math:: pV=nRT
+    :label: Ley del gas ideal
 
-La **ecuación de Van der Waals** (1873) [#]_ es una ecuación que generaliza la ecuación de los gases 
+:math:`p` es la presión absoluta, :math:`V` el volumen, :math:`T` la temperatura, 
+:math:`n` la cantidad de materia y :math:`R` la constante del gas ideal.
+
+La  :eq:`Ecuación de Van der Waals` (1873) [#]_ es una ecuación que generaliza la ecuación de los gases 
 ideales, teniendo en consideración tanto el volumen finito de las 
 moléculas de gas como otros efectos que afectan al término de presiones
 
-  .. figure:: images/vander.png
-    
-     *a* y *b* son constantes físicas de la sustancia en cuestión. 
+.. math:: 
+   :label: EoS de Van der Waals
 
+    \left(P + \frac{a}{\upsilon^2}\right)\left(\upsilon-b\right) = RT
+
+
+:math:`a` y :math:`b` son constantes físicas de la sustancia en cuestión. 
 
 Muchas de las **ecuaciones de estado modernas** son mejoras y correcciones 
 a la ecuación original de Van der Waals (denominadas ecuaciones de estado 
