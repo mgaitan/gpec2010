@@ -242,7 +242,7 @@ Esta tarea se hace a través de PubSub. El emisor envía un mensaje con tópico
 y el caso al que este cálculo pertenence. 
 
 Por ejemplo, la función que escribe el archivo de entrada para el cálculo de 
-parámetros es la siguiente::
+parámetros es la siguiente:
 
 
 .. literalinclude:: ../src/apimanager.py
@@ -285,7 +285,69 @@ Tabla de incidencias de mensajes
 
 Para un listado completo puede analizar el código fuente ejecutando 
 ``grep -r "pub.sendMessage"`` sobre el directorio de código fuente raiz
-de GPEC
+de GPEC. [#]_ 
+
+
+Algoritmo de análisis sintáctico
+==================================
+
+Como ya se ha hecho mención, la comunicación con los ejecutables del *backend* 
+se realiza mediante archivos de texto. Los archivos de salida, en particular, 
+contienen (en arreglos de columnas) los vectores de datos para cada variable
+de una curva. 
+
+La tarea de delimitar la información de un texto se denomina en la lingüistica
+*Análisis sintáctico* y es también un área de la informática de utilidad en la 
+implementación de diversos software (como ejemplo notorio, los compiladores). 
+
+Este trabajo implementa un analizador sintáctico (denominado 
+*parser*, en ingles) para extraer los vectores numéricos (ordenados como un arreglo
+bidimensionales) de los archivos de salida, obteniendo así la información necesaria
+para graficar cada curva.
+
+.. note:: 
+
+   Para una comprensión cabal del algoritmo, es necesario estár familiarizado
+   con la definición de la interfaz. Una descripción exhaustiva se expone 
+   en :ref:`api`. 
+
+Descripción
+------------
+
+El algoritmo se basa en identificar *tokens* (marcas) que declaran el inicio y final
+de información válida para un diagrama, determinando así la porción de texto 
+(números flotantes en formato texto) que debe extraerse. Este texto se convierte
+a un objeto array de :py:mod:`numpy`.
+
+Las marcas de inicio son cadena de tres letras mayúsculas (``VAP``,``CRI``,``LLV``, etc.)
+y un renglón vacío marca el final del bloque de información.
+
+.. figure:: images/parser.png
+   :width: 80%
+
+   Topología de la información extractada
+
+Una estructura de datos basadas en asociaciones clave-valor (diccionarios), 
+define los tipos posibles de curvas y las columnas significativas que se deben 
+extraer para cada una. Iterando sobre todas las líneas del archivo se obtiene 
+un nuevo diccionario cuya clave es una tupla de la forma ``(inicio, fin)`` y el 
+tipo de curva como valor. 
+
+Con esta información simplemente se "recorta" el archivo fuente completo del cual 
+se realiza una copia residente en memoria [#]_ para importarlo
+y convertirlo a flotantes mediante la función :py:func:`numpy.loadtxt`
+
+
+Código fuente
+-------------
+
+.. literalinclude:: ../src/apimanager.py
+   :pyobject: ApiManager.output2array
+
+
+
+
+
 
 
 
@@ -334,6 +396,12 @@ Pruebas de usabilidad
         sucesivas llamadas los parámetros coinciden, se devuelven los datos 
         almacenados en memoria, tarea mucho más rápida que recalcular. 
         
+.. [#]  El comando ``grep -r`` busca de manera recursiva una cadena (o una expresión
+        regular) sobre sobre los archivos de un directorio
+
+.. [#]  El módulo :py:mod:`cStringIO` provee un tipo de *buffers* de cadenas
+        de caractéres con la misma interfaz que un archivo de texto normal. 
+        Las operaciones con la información en memoria son altamente eficientes.
 
 
 .. [vdLaar2002]  van de Laar, F. (2002).  *Publish/Subscribe as architectural style 

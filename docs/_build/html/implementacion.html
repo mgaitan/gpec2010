@@ -66,7 +66,7 @@ se define a qué tipo de mensajes se suscribirán (el tipo se define en función
 del &#8220;asunto&#8221; o &#8220;topic&#8221;) y qué acción (un método o función)
 debe ejecutarse cuando un mensaje de tal tipo arribe.</p>
 <div class="figure">
-<img alt="_images/pubsub_concept7.png" src="_images/pubsub_concept7.png" style="width: 60%;" />
+<img alt="_images/pubsub_concept12.png" src="_images/pubsub_concept12.png" style="width: 60%;" />
 <p class="caption">Diagrama conceptual de la arquitectura <em>Pub/Sub</em></p>
 </div>
 <p>Como se describe en <a class="reference internal" href="#vdlaar2002">[vdLaar2002]</a> Pubsub facilita el desacople de componentes
@@ -160,7 +160,7 @@ a eventos</em> se basa en una comunicación vía esta biblioteca.</p>
 se registra una crónica de eventos de interés para el usuario, denotados en
 su categoría con un símbolo y la hora del suceso.</p>
 <div class="figure">
-<img alt="_images/log_msg6.png" src="_images/log_msg6.png" style="width: 80%;" />
+<img alt="_images/log_msg11.png" src="_images/log_msg11.png" style="width: 80%;" />
 <p class="caption">A través de PubSub, cualquier parte del programa envía avisos que el panel
 (un <em>receptor</em>) mostrará al usuario.</p>
 </div>
@@ -213,19 +213,19 @@ al icono que los representan:</p>
 </thead>
 <tbody valign="top">
 <tr><td><em>ok</em></td>
-<td><img alt="ok" src="_images/ok5.png" /></td>
+<td><img alt="ok" src="_images/ok10.png" /></td>
 <td>Acción existosa</td>
 </tr>
 <tr><td><em>info</em></td>
-<td><img alt="info" src="_images/info5.png" /></td>
+<td><img alt="info" src="_images/info10.png" /></td>
 <td>Información importante</td>
 </tr>
 <tr><td><em>warning</em></td>
-<td><img alt="warning" src="_images/warning5.png" /></td>
+<td><img alt="warning" src="_images/warning10.png" /></td>
 <td>Advertencia</td>
 </tr>
 <tr><td><em>error</em></td>
-<td><img alt="error" src="_images/error5.png" /></td>
+<td><img alt="error" src="_images/error10.png" /></td>
 <td>Error</td>
 </tr>
 </tbody>
@@ -250,7 +250,7 @@ observa:</p>
 <p>Otro uso de PubSub es la generación de gráficos. Se resume en el siguiente
 diagrama de secuencia:</p>
 <div class="figure">
-<img alt="_images/uml_sec_makeplot5.png" src="_images/uml_sec_makeplot5.png" style="width: 100%;" />
+<img alt="_images/uml_sec_makeplot10.png" src="_images/uml_sec_makeplot10.png" style="width: 100%;" />
 </div>
 <p>Esto significa que el panel de definición de casos está independizado del
 panel contenedor de los gráficos generados a traves de PubSub.
@@ -265,25 +265,38 @@ la estructura y significado de estos archivos (descriptos en :ref:&#8217;api&#82
 deseable que tengan un acceso al contenido desde la propia aplicación, para
 encontrar información numérica puntual cuya precisión se pierde en un gráfico.</p>
 <div class="figure">
-<img alt="_images/inpout1.png" src="_images/inpout1.png" style="width: 80%;" />
+<img alt="_images/inpout6.png" src="_images/inpout6.png" style="width: 80%;" />
 </div>
 <p>Esta tarea se hace a través de PubSub. El emisor envía un mensaje con tópico
 <tt class="docutils literal"><span class="pre">add_txt</span></tt> adjuntando como información una tupla con la ruta al archivo
 y el caso al que este cálculo pertenence.</p>
 <p>Por ejemplo, la función que escribe el archivo de entrada para el cálculo de
 parámetros es la siguiente:</p>
-<div class="highlight-python"><pre>.. literalinclude:: ../src/apimanager.py</pre>
+<div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">_write_conparin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">model_id</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Write the input file CONPARIN.DAT &quot;. data could be EOS variables or </span>
+<span class="sd">            model paramater&quot;&quot;&quot;</span> 
+
+        <span class="n">filename</span> <span class="o">=</span> <span class="s">&#39;CONPARIN.DAT&#39;</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_temp</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="s">&quot;{0}  {1}</span><span class="se">\n</span><span class="s"> {2}&quot;</span>
+
+        <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="mf">0</span> <span class="ow">and</span> <span class="n">model_id</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="mf">2</span><span class="p">,</span><span class="mf">3</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="o">-</span><span class="mf">2</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mf">1</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mf">2</span><span class="p">]]</span>
+        <span class="k">elif</span> <span class="n">direction</span> <span class="o">==</span> <span class="mf">0</span> <span class="ow">and</span> <span class="n">model_id</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">4</span><span class="p">,</span><span class="mf">6</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="o">-</span><span class="mf">2</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mf">1</span><span class="p">]]</span>
+
+
+        <span class="n">output</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">format</span> <span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">model_id</span><span class="p">,</span> <span class="s">&quot;  &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">data</span> <span class="p">))</span> 
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span> <span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+            <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+            <span class="n">fh</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">written</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">filename</span><span class="p">))</span>      <span class="c">#conparin written</span>
+
+        <span class="n">pub</span><span class="o">.</span><span class="n">sendMessage</span><span class="p">(</span><span class="s">&#39;add_txt&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">case_id</span><span class="p">))</span>
+</pre></div>
 </div>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field"><th class="field-name">pyobject:</th><td class="field-body">ApiManager._write_conparin</td>
-</tr>
-</tbody>
-</table>
-</div></blockquote>
 <p>El atributo <tt class="xref py py-attr docutils literal"><span class="pre">path_temp</span></tt> está definido en el constructor de la clase
 <tt class="xref py py-class docutils literal"><span class="pre">API</span></tt> y se trata de una ruta a un subdirectorio en la carpeta temporal,
 abstraída del sistema operativo subyacente mediante el módulo <tt class="xref py py-mod docutils literal"><span class="pre">tempfile</span></tt></p>
@@ -374,37 +387,148 @@ de los gráficos</td>
 </table>
 </div></blockquote>
 <p>Para un listado completo puede analizar el código fuente ejecutando
-<a href="#id5"><span class="problematic" id="id6">``</span></a>grep -r &#8220;pub.sendMessage&#8221; `` sobre el directorio de código fuente raiz
-de GPEC</p>
+<tt class="docutils literal"><span class="pre">grep</span> <span class="pre">-r</span> <span class="pre">&quot;pub.sendMessage&quot;</span></tt> sobre el directorio de código fuente raiz
+de GPEC. <a class="footnote-reference" href="#id9" id="id5">[3]</a></p>
 </div>
+</div>
+</div>
+</div>
+<div class="section" id="algoritmo-de-an-lisis-sint-ctico">
+<h2>6.2. Algoritmo de análisis sintáctico<a class="headerlink" href="#algoritmo-de-an-lisis-sint-ctico" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Como ya se ha hecho mención, la comunicación con los ejecutables del <em>backend</em>
+se realiza mediante archivos de texto. Los archivos de salida, en particular,
+contienen (en arreglos de columnas) los vectores de datos para cada variable
+de una curva.</p>
+<p>La tarea de delimitar la información de un texto se denomina en la lingüistica
+<em>Análisis sintáctico</em> y es también un área de la informática de utilidad en la
+implementación de diversos software (como ejemplo notorio, los compiladores).</p>
+<p>Este trabajo implementa un analizador sintáctico (denominado
+<em>parser</em>, en ingles) para extraer los vectores numéricos (ordenados como un arreglo
+bidimensionales) de los archivos de salida, obteniendo así la información necesaria
+para graficar cada curva.</p>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">Para una comprensión cabal del algoritmo, es necesario estár familiarizado
+con la definición de la interfaz. Una descripción exhaustiva se expone
+en <a class="reference internal" href="api.html#api"><em>Especificación de la interfaz de comunicación</em></a>.</p>
+</div>
+<div class="section" id="descripci-n">
+<h3>6.2.1. Descripción<a class="headerlink" href="#descripci-n" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El algoritmo se basa en identificar <em>tokens</em> (marcas) que declaran el inicio y final
+de información válida para un diagrama, determinando así la porción de texto
+(números flotantes en formato texto) que debe extraerse. Este texto se convierte
+a un objeto array de <tt class="xref py py-mod docutils literal"><span class="pre">numpy</span></tt>.</p>
+<p>Las marcas de inicio son cadena de tres letras mayúsculas (<tt class="docutils literal"><span class="pre">VAP</span></tt>,``CRI``,``LLV``, etc.)
+y un renglón vacío marca el final del bloque de información.</p>
+<div class="figure">
+<img alt="_images/parser1.png" src="_images/parser1.png" style="width: 80%;" />
+<p class="caption">Topología de la información analizada</p>
+</div>
+<p>Una estructura de datos basadas en asociaciones clave-valor (diccionarios),
+define los tipos posibles de curvas y las columnas significativas que se deben
+extraer para cada una. Iterando sobre todas las líneas del archivo se obtiene
+un nuevo diccionario cuya clave es una tupla de la forma <tt class="docutils literal"><span class="pre">(inicio,</span> <span class="pre">fin)</span></tt> y el
+tipo de curva como valor.</p>
+<p>Con esta información simplemente se &#8220;recorta&#8221; el archivo fuente completo del cual
+se realiza una copia residente en memoria <a class="footnote-reference" href="#id10" id="id6">[4]</a> para importarlo
+y convertirlo a flotantes mediante la función <tt class="xref py py-func docutils literal"><span class="pre">numpy.loadtxt()</span></tt></p>
+</div>
+<div class="section" id="c-digo-fuente">
+<h3>6.2.2. Código fuente<a class="headerlink" href="#c-digo-fuente" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">output2array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">curve_types</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parses gpecout.dat, PXYOUT.DAT TXYOUT.DAT or ISOPOUT.DAT</span>
+<span class="sd">        Detects numeric blocks and create arrays with them&quot;&quot;&quot;</span>
+
+        <span class="n">tokens</span> <span class="o">=</span> <span class="p">{}</span>         <span class="c">#{(begin,end):&#39;type&#39;, ...}</span>
+        <span class="n">begin</span> <span class="o">=</span> <span class="mf">0</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="mf">0</span>
+        
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+
+            <span class="n">number_of_lines</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fh</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span>
+            <span class="n">fh</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mf">0</span><span class="p">)</span>
+            
+            <span class="c">#give skip from header and skip from footer</span>
+            <span class="k">for</span> <span class="n">line_number</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fh</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">begin</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">:</span>
+                    <span class="c">#looking for a curve TOKEN : &#39;VAP&#39;, &#39;CRI&#39; etc...</span>
+                    <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">in</span> <span class="n">curve_types</span><span class="p">:</span>
+                        <span class="n">begin</span> <span class="o">=</span> <span class="n">line_number</span> <span class="o">+</span> <span class="mf">1</span>
+                        <span class="n">curve_type</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                
+                <span class="k">elif</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">or</span> <span class="n">line_number</span><span class="o">==</span><span class="n">number_of_lines</span><span class="o">-</span><span class="mf">1</span><span class="p">:</span>
+                    <span class="c">#looking for a blank line which determines the end of </span>
+                    <span class="c">#arrays block.</span>
+                            
+                    <span class="n">end</span> <span class="o">=</span> <span class="n">line_number</span>
+                    <span class="n">tokens</span><span class="p">[(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">)]</span> <span class="o">=</span> <span class="n">curve_type</span>
+
+            <span class="n">arrays_out</span> <span class="o">=</span> <span class="p">{}</span>     <span class="c">#Format: {type: [array1, array2, ... ], ...  }</span>
+            
+            <span class="k">for</span> <span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">),</span> <span class="n">curve_type</span> <span class="ow">in</span> <span class="n">sorted</span><span class="p">(</span><span class="n">tokens</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+                
+                <span class="n">fh</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mf">0</span><span class="p">)</span>
+                <span class="n">temp_w</span> <span class="o">=</span> <span class="n">cStringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>       <span class="c">#a memory file to write </span>
+                
+                <span class="c">#write lines just of the block between (begin,end)</span>
+                <span class="k">for</span> <span class="n">l</span><span class="p">,</span><span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fh</span><span class="p">):</span>
+
+                    <span class="k">if</span> <span class="n">begin</span> <span class="o">&lt;=</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">end</span> <span class="ow">and</span> \
+                        <span class="nb">len</span><span class="p">(</span><span class="n">get_numbers</span><span class="p">(</span><span class="n">line</span><span class="p">))</span><span class="o">&gt;</span><span class="mf">0</span><span class="p">:</span>      
+                    
+                        <span class="c">#a way to check the special case of col </span>
+                        <span class="c">#headers after mark</span>
+                        <span class="n">temp_w</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;*&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span> <span class="p">)</span>    
+            
+                <span class="c">#a copy to read</span>
+                <span class="n">temp_r</span> <span class="o">=</span> <span class="n">cStringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">temp_w</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>      
+                
+                <span class="c">#retrieve significative columns from a dictionary. </span>
+                <span class="c">#(begin,end)=&gt;type=&gt;num_cols </span>
+
+                <span class="n">signif_cols</span><span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">curve_types</span><span class="p">[</span><span class="n">tokens</span><span class="p">[(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">)]])</span>
+                <span class="n">curve_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">temp_r</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="n">signif_cols</span><span class="p">)</span>
+
+                <span class="n">temp_w</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="n">temp_r</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+                <span class="c">#if it&#39;s a new type on the dict, create it.</span>
+                <span class="k">if</span> <span class="n">curve_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">arrays_out</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">arrays_out</span><span class="p">[</span><span class="n">curve_type</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c">#TODO should it be a ndarray ?</span>
+                
+                <span class="n">arrays_out</span><span class="p">[</span><span class="n">curve_type</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">curve_array</span><span class="p">)</span>
+
+            <span class="n">fh</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">arrays_out</span>
+</pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="diagramas-principales">
-<h2>6.2. Diagramas principales<a class="headerlink" href="#diagramas-principales" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>6.3. Diagramas principales<a class="headerlink" href="#diagramas-principales" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="diagramas-de-componentes">
-<h3>6.2.1. Diagramas de componentes<a class="headerlink" href="#diagramas-de-componentes" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>6.3.1. Diagramas de componentes<a class="headerlink" href="#diagramas-de-componentes" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="de-clases">
-<h3>6.2.2. de clases<a class="headerlink" href="#de-clases" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>6.3.2. de clases<a class="headerlink" href="#de-clases" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="de-secuencia">
-<h3>6.2.3. de secuencia<a class="headerlink" href="#de-secuencia" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>6.3.3. de secuencia<a class="headerlink" href="#de-secuencia" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 </div>
 <div class="section" id="estilo-de-codificaci-n">
-<h2>6.3. Estilo de codificación<a class="headerlink" href="#estilo-de-codificaci-n" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>6.4. Estilo de codificación<a class="headerlink" href="#estilo-de-codificaci-n" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="pep8">
-<h3>6.3.1. PEP8<a class="headerlink" href="#pep8" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>6.4.1. PEP8<a class="headerlink" href="#pep8" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 </div>
 <div class="section" id="interfaz-de-usuario">
-<h2>6.4. Interfaz de Usuario<a class="headerlink" href="#interfaz-de-usuario" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>6.5. Interfaz de Usuario<a class="headerlink" href="#interfaz-de-usuario" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="justificaci-n-de-dise-o">
-<h3>6.4.1. Justificación de diseño<a class="headerlink" href="#justificaci-n-de-dise-o" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>6.5.1. Justificación de diseño<a class="headerlink" href="#justificaci-n-de-dise-o" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="pruebas-de-usabilidad">
-<h3>6.4.2. Pruebas de usabilidad<a class="headerlink" href="#pruebas-de-usabilidad" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>6.5.2. Pruebas de usabilidad<a class="headerlink" href="#pruebas-de-usabilidad" title="Enlazar permanentemente con este título">¶</a></h3>
 <table class="docutils footnote" frame="void" id="id7" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
@@ -420,6 +544,21 @@ a la que llamó <em>version 3</em>.</td></tr>
 que realiza un <em>caché</em> de los resultados la primera vez que se invoca. Si en
 sucesivas llamadas los parámetros coinciden, se devuelven los datos
 almacenados en memoria, tarea mucho más rápida que recalcular.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[3]</a></td><td>El comando <tt class="docutils literal"><span class="pre">grep</span> <span class="pre">-r</span></tt> busca de manera recursiva una cadena (o una expresión
+regular) sobre sobre los archivos de un directorio</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id10" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[4]</a></td><td>El módulo <tt class="xref py py-mod docutils literal"><span class="pre">cStringIO</span></tt> provee un tipo de <em>buffers</em> de cadenas
+de caractéres con la misma interfaz que un archivo de texto normal.
+Las operaciones con la información en memoria son altamente eficientes.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="vdlaar2002" rules="none">
@@ -458,19 +597,24 @@ Laboratories, Eindhoven</td></tr>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#diagramas-principales">6.2. Diagramas principales</a><ul>
-<li><a class="reference internal" href="#diagramas-de-componentes">6.2.1. Diagramas de componentes</a></li>
-<li><a class="reference internal" href="#de-clases">6.2.2. de clases</a></li>
-<li><a class="reference internal" href="#de-secuencia">6.2.3. de secuencia</a></li>
+<li><a class="reference internal" href="#algoritmo-de-an-lisis-sint-ctico">6.2. Algoritmo de análisis sintáctico</a><ul>
+<li><a class="reference internal" href="#descripci-n">6.2.1. Descripción</a></li>
+<li><a class="reference internal" href="#c-digo-fuente">6.2.2. Código fuente</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#estilo-de-codificaci-n">6.3. Estilo de codificación</a><ul>
-<li><a class="reference internal" href="#pep8">6.3.1. PEP8</a></li>
+<li><a class="reference internal" href="#diagramas-principales">6.3. Diagramas principales</a><ul>
+<li><a class="reference internal" href="#diagramas-de-componentes">6.3.1. Diagramas de componentes</a></li>
+<li><a class="reference internal" href="#de-clases">6.3.2. de clases</a></li>
+<li><a class="reference internal" href="#de-secuencia">6.3.3. de secuencia</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#interfaz-de-usuario">6.4. Interfaz de Usuario</a><ul>
-<li><a class="reference internal" href="#justificaci-n-de-dise-o">6.4.1. Justificación de diseño</a></li>
-<li><a class="reference internal" href="#pruebas-de-usabilidad">6.4.2. Pruebas de usabilidad</a></li>
+<li><a class="reference internal" href="#estilo-de-codificaci-n">6.4. Estilo de codificación</a><ul>
+<li><a class="reference internal" href="#pep8">6.4.1. PEP8</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#interfaz-de-usuario">6.5. Interfaz de Usuario</a><ul>
+<li><a class="reference internal" href="#justificaci-n-de-dise-o">6.5.1. Justificación de diseño</a></li>
+<li><a class="reference internal" href="#pruebas-de-usabilidad">6.5.2. Pruebas de usabilidad</a></li>
 </ul>
 </li>
 </ul>

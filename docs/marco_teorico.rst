@@ -143,7 +143,8 @@ moléculas de gas como otros efectos que afectan al término de presiones
 
 Muchas de las **ecuaciones de estado modernas** son mejoras y correcciones 
 a la ecuación original de Van der Waals (denominadas ecuaciones de estado 
-cúbicas). Por ejemplo la ecuación de Redlich–Kwong, Peng-Robinson, Elliott-Suresh-Donohue, etc. 
+cúbicas). Por ejemplo la ecuación de Soave-Redlich-Kwong (1972), Peng-Robinson (1976), 
+Elliott-Suresh-Donohue (1990), etc. 
 
 GPEC es capaz de realizar los cálculos usando cinco diferentes ecuaciones de 
 estado (ver :ref:'Requerimientos funcionales').
