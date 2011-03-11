@@ -255,6 +255,12 @@ y pueda generar diagramas directamente "online".
 Esta posibilidad implica una potencial estrategia de comercialización, en el marco
 de lo que se conoce como :abbr:`SaaS (Software as a Service)` [#]_
 
+Importación y graficación de datos experimentales
+--------------------------------------------------
+
+.. todo:: Importación y graficación de datos experimentales
+
+
 Nuevas funcionalidades
 ----------------------
 
@@ -278,7 +284,7 @@ Se listan a continuación algunas de ellas:
 
 * Mejora en la interoperabilidad y exportación de datos. 
 
-
+* Soporte de impresión
 
 
 

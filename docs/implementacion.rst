@@ -220,6 +220,8 @@ diagrama de secuencia:
    :width: 100%
 
 
+.. todo:: grafico en vertical, + resolucion
+
 Esto significa que el panel de definición de casos está independizado del 
 panel contenedor de los gráficos generados a traves de PubSub. 
 El mencanismo invocación del backend (desde donde se obtienen los datos a graficar) 
@@ -246,7 +248,7 @@ parámetros es la siguiente:
 
 
 .. literalinclude:: ../src/apimanager.py
-   :pyobject: ApiManager._write_conparin
+   :pyobject: ApiManager.write_conparin
 
 
 El atributo :py:attr:`path_temp` está definido en el constructor de la clase 
@@ -286,6 +288,162 @@ Tabla de incidencias de mensajes
 Para un listado completo puede analizar el código fuente ejecutando 
 ``grep -r "pub.sendMessage"`` sobre el directorio de código fuente raiz
 de GPEC. [#]_ 
+
+
+Invocación de ejecutables del backend
+=====================================
+
+La comunicación frontend-backend se describe en el siguiente diagrama de secuencia 
+donde se resalta el ciclo de vida del objeto :py:class:`ApiManager` donde está 
+implementada la lógica de tratamimiento de la interfaz de comunicación. 
+
+El caso particular representado es la obtención de datos el cálculo del diagrama
+de fase global (que se obtiene mediante el ejecutable :program:`GPEC.exe`) 
+satisfaciendo las precondiciones de ejecución (por ejemplo, que exista el archivo 
+de entrada :file:`GPECIN.DAT`, que exista permiso de ejecución, que exista
+permiso de escritura en la carpeta destino). En caso de error por algún motivo
+(conocido o no), se remite un mensaje de log y se cancela la ejecución. 
+
+
+.. _front-back:
+
+.. figure:: images/uml_front-back_vertical.png
+   :width: 100%
+
+   Secuencia de la comunicación frontend-backend
+
+
+La dependencia con Wine
+------------------------
+
+El *backend* de GPEC, codificado en Fortran por Cismondi, ha sido compilado mediante 
+Microsoft Fortran y se compone de un conjunto de ejecutables Windows (``.exe``). 
+Si bien el código es Fortran estándar y compatible con compiladores libres (como 
+`GNU Fortran <http://gcc.gnu.org/fortran/>`_ ) pudiéndose generar ejecutables 
+específicos para sistemas Linux, existe una dependencia con la librería 
+propietaria  *IMSL® Numerical Libraries*, que brinda un conjunto de rutinas 
+matemáticas (álgebra lineal, cálculo matricial, etc.) que se utilizan en la 
+implementación de los algoritmos.  
+
+Esta dependencia impide, por el momento, generar una versión completamente 
+nativa para plataformas Linux (y, a priori, la posibilidad de liberar 
+completamente el código). 
+
+Para permitir la ejecución sobre Windows es necesario la utilización de 
+*Wine*, un software que ofrece una capa de compatibilidad para aplicaciones  
+DOS, Windows 3.x, y win32, proveyendo una implementación alternativa (y parcial) 
+del núcleo NT. 
+
+A través de Wine, los ejecutables Fortran de GPEC funcionan perfectamente. 
+La función que invoca estos ejecutables verifica el sistema operativo en que 
+se está corriendo la aplicación y en caso de no ser Windows, invoca a Wine::
+
+
+       args = []
+       if sys.platform != 'win32':
+           #On any non-Windows system, we run binaries through wine
+           args.append('wine')
+        
+       args.append( os.path.join(PATH_BIN, bin + '.exe'))
+
+
+.. note::
+   
+   Esta dependencia es salvable utilizando la versión para Linux de la biblioteca
+   *IMSL* pero que únicamente es compilable mediante `Intel® Fortran Composer 
+   <http://software.intel.com/en-us/articles/intel-composer-xe/>`_ , con lo cual 
+   se duplica la dependencia de software privativo.  
+
+
+Memorización de resultados costosos
+====================================
+
+Como se observa :ref:`front-back`, el proceso de comunicación y obtención de los 
+datos desde el backend no es trivial. Más aún, considerando que, dada la arquitectura
+heredada interviene de manera insalvable la escritura y lectura a disco, el 
+proceso también es costoso [#]_ a nivel computacional. 
+
+Tomando de ventaja de la condición determinística de la operación (para los mismos 
+parámetros de entrada, es decir el caso, se obtiene siempre el mismo resultado) 
+se puede calcular una vez, guardar el resultado en memoria, y devolverlo sin 
+recalcular cada vez que la operación con exáctamente los mismos parámetros 
+es solicitada de nuevo. A este proceso se lo denomina :dfn:`caché de datos`. 
+
+Esto tiene validez, además, dado que la probabilidad de que los parámetros
+sean los mismos es alta. Por ejemplo, en el siguiente caso de uso:
+
+    El usuario necesita generar una isopleta para determinada composición
+    (o cualquier otra curva no global). Para esto, GPEC requiere haber
+    calculado el diagrama global previamente (los ejecutables requieren :file:`GPECOUT.DAT`
+    como precondición de entrada), de modo que este cálculo se realiza
+    sin mostrar los diagramas. 
+    Si posteriormente el usuario decide que necesita los diagramas globales, 
+    simplemente se grafican el respaldo en memoria sin realizar la el cálculo
+    mediante backend. 
+
+Por último, dado el manejo referencial de memoria que hace Python, la permanencia 
+del array en memoria no está duplicada respecto al que se utiliza para graficar.
+
+Algoritmo y patrón utilizados
+------------------------------
+
+El algoritmo utilizado para la implementación de cacheo de datos se llama 
+:dfn:`memoize`[#]_ y es descripto en detalle en [ZIADE2008]_ , cuya versión 
+se ha utilizado. 
+
+Esta implementación se basa en el :term:`patrón Decorator`, que en términos
+simplificados realiza una transformación dinámica de una función o método, 
+agregándole una funcionalidad que no tiene por sí misma.
+
+.. figure:: images/Decorator_UML_class_diagram.png
+   :width: 60% 
+
+    Diagrama de clases del patrón *Decorator*
+
+Expresandolo en términos matemáticos, se trata de una :dfn:`composición de funciones`:
+
+.. math::
+   :label:`composición de funciones`
+
+    X \to \,\,Y\;\; \to \;\;\,Z
+
+    x \mapsto f(x) \mapsto g(f(x))
+
+
+En este caso, la funcionalidad agregada a la función que se "decora" es la siguiente:
+
+1. Se obtienen todos los parámetros de la función y con ellos se genera 
+   un *hash*, es decir, una clave de cadena de caracteres unívoca para ese conjunto de datos. 
+
+2. Se evalua si ese *hash* existe como clave en el diccionario que almacena resultados
+   "memorizados". 
+
+3. Depende del resultado
+   
+   A. Si la clave existe en el diccionario (o sea, el resultado para esos parámetros 
+      se calculó previamente) se devuelve el valor de la entrada sin llamar a la función
+      decorada. 
+
+   B. Si la clave no existe (lo que implica que es la primera vez que se llama la función
+      con los parámetros dados) se invoca a la función decorada y con el resultado 
+      se agrega una entrada en el diccionario ``hash:resultado``. Además, se devuelve 
+      el resultado. 
+    
+
+.. todo:: decoradores *alla python*
+
+Código fuente
+-------------
+
+.. literalinclude:: ../src/tools/misc.py
+   :pyobject: compute_key
+
+.. literalinclude:: ../src/tools/misc.py
+   :pyobject: memoize
+
+
+
+
 
 
 Algoritmo de análisis sintáctico
@@ -333,9 +491,11 @@ extraer para cada una. Iterando sobre todas las líneas del archivo se obtiene
 un nuevo diccionario cuya clave es una tupla de la forma ``(inicio, fin)`` y el 
 tipo de curva como valor. 
 
-Con esta información simplemente se "recorta" el archivo fuente completo del cual 
+Con esta información simplemente se "recorta" el archivo de texto completo del cual 
 se realiza una copia residente en memoria [#]_ para importarlo
-y convertirlo a flotantes mediante la función :py:func:`numpy.loadtxt`
+y convertirlo a arreglos de números flotantes de doble precisión 
+mediante la función :py:func:`numpy.loadtxt` que acepta como parámetro 
+opcional la cantidad de columnas significativas que deben interpretarse [#]_.
 
 
 Código fuente
@@ -348,40 +508,27 @@ Código fuente
 
 
 
+Interfaz Gráfica de Usuario (GUI)
+=================================
 
+Concepto: paneles, contenedores
+---------------------------------
 
+El uso de Advanced User Interface
+---------------------------------
 
-        
-Diagramas principales
-=====================
-        
-Diagramas de componentes
-------------------------
-
-de clases
-----------
-
-de secuencia
--------------
-
-
-
-Estilo de codificación
-======================
-    
-PEP8       
-----
-
-
-
-Interfaz de Usuario
-====================
         
 Justificación de diseño
 -----------------------
 
 Pruebas de usabilidad
 ---------------------
+
+
+Integración Matplotlib-WxPython
+===============================
+
+
 
 
 
@@ -403,6 +550,17 @@ Pruebas de usabilidad
         de caractéres con la misma interfaz que un archivo de texto normal. 
         Las operaciones con la información en memoria son altamente eficientes.
 
+.. [#]  "Mientras que las velocidades de CPU y las capacidades de memporia se han 
+         incrementado enormemente, otros aspectos concernientes a la performance
+         como las velocidades de acceso a disco se han quedado en el tiempo. Como 
+         consecuencia, estas latencias son cada vez más seguido un cuello de botella
+         en la performance global del sistema". http://en.wikipedia.org/wiki/Moore's_law#Importance_of_non-CPU_bottlenecks
+
+.. [#]  También llamado :dfn:`memoization`. Ver http://en.wikipedia.org/wiki/Memoization
+
+
+.. [#]  Una referencia completa de esta función se encuentra en 
+        http://docs.scipy.org/doc/numpy/reference/generated/numpy.loadtxt.html
 
 .. [vdLaar2002]  van de Laar, F. (2002).  *Publish/Subscribe as architectural style 
                  for component interaction (Mater's thesis)*, Phillips Research

@@ -192,38 +192,6 @@ Y para ejecutarlo, simplemente se invoca el script principal::
 
 
 
-La dependencia con Wine
-^^^^^^^^^^^^^^^^^^^^^^^
-
-El *backend* de GPEC, desarrollado en Fortran por el Dr. Cismondi, ha sido compilado mediante 
-Microsoft Fortran y se compone de un conjunto de ejecutables Windows (``.exe``). 
-Si bien el código es Fortran estándar y compatible con compiladores libres (como 
-`GNU Fortran <http://gcc.gnu.org/fortran/>`_ ) pudiéndose generar ejecutables 
-específicos para sistemas Linux, existe una dependencia con la librería 
-propietaria  *IMSL® Numerical Libraries*, que brinda un conjunto de rutinas 
-matemáticas (álgebra lineal, cálculo matricial, etc.) que se utilizan en la 
-implementación de los algoritmos.  
-
-Esta dependencia impide, por el momento, generar una versión completamente 
-nativa para plataformas Linux (y, a priori, la posibilidad de liberar 
-completamente el código). 
-
-Para permitir la ejecución sobre Windows es necesario la utilización de 
-*Wine*, un software que ofrece una capa de compatibilidad para aplicaciones  
-DOS, Windows 3.x, y win32, proveyendo una implementación alternativa (y parcial) 
-del núcleo NT. 
-
-A través de Wine, los ejecutables Fortran de GPEC funcionan perfectamente. 
-La función que invoca estos ejecutables verifica el sistema operativo en que 
-se está corriendo la aplicación y en caso de no ser Windows, invoca a Wine::
-
-
-       args = []
-       if sys.platform != 'win32':
-           #On any non-Windows system, we run binaries through wine
-           args.append('wine')
-        
-       args.append( os.path.join(PATH_BIN, bin + '.exe'))
   
 
 

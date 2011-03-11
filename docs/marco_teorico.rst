@@ -364,7 +364,7 @@ en otro lenguaje de más bajo nivel, permitiendo aprovechar las ventajas de Pyth
 
 Python ha ganado popularidad no sólo entre programadores aficionados
 sino en el mercado altamente competitivo de la industria del software. Como 
-plantea Shannon Behrens en el prólogo de [TZ2008]_:
+plantea Shannon Behrens en el prólogo de [ZIADE2008]_:
     
     Hubo un tiempo en el que las compañías me llamaban loco cuando insistía en usar Python. 
     En estos días, simplemente no hay suficientes programadores Python para todos. 
@@ -793,7 +793,7 @@ y PDF de alta calidad a través de Latex.
                 Departamento de Lenguajes y Sistemas Informáticos, Universitat Jaume I,
                 Castelló de la Plana
                                            
-.. [TZ2008]  Ziadé, Tarek (2008),  *Expert Python programming*, Pack Publishing, Birmingham
+.. [ZIADE2008]  Ziadé, Tarek (2008),  *Expert Python programming*, Pack Publishing, Birmingham
 
 .. [MA2010]  Alchin, Marty  (2010), *Pro Python*, Apress, New York
 
