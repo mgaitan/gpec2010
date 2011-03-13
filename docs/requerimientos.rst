@@ -170,7 +170,8 @@ distintos.
 
 Por poner otro ejemplo, el botón principal para el inicio del cálculo 
 (|play| ) se encuentra en una barra de herramientas con otras funciones no 
-obligatorias para la ejecución. 
+obligatorias para la ejecución. Es decir, las herramientas carecen de un contexto
+que facilite la ubicuidad. 
 
 .. |play| image:: images/play.png
 

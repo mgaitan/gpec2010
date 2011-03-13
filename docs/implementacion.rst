@@ -1,11 +1,8 @@
 Implementación
 ***************
-
-Patrones de diseño
-===================
         
-Publish/Subscribe
------------------
+El patrón Publish/Subscribe
+===========================
 
 Un patrón de diseño (también catalogado como patrón de mensajería) de recurrente 
 aplicación en GPEC ha sido *Publish/Subscribe*, frencuentemente abreviado *Pubsub*. 
@@ -54,7 +51,7 @@ adjunta. Este intermediario (a veces conocido como *broker*, o directamente
 *pubsub*) entrega este mensaje a todos los receptores suscriptos. 
 
 Ventajas
-^^^^^^^^
+--------
 
 - **Acoplamiento débil**: la topología de Pubsub, basada en la intermediación y el 
   desconocimiento de identidades y comportamientos de los objetos que interactuan 
@@ -78,8 +75,8 @@ Ventajas
   Sin embargo, la eficiencia no suele ser proporcional en sistemas de alta
   demanda computacional.  
 
-Python Pubsub
-^^^^^^^^^^^^^
+Pubsub en Python
+-----------------
 
 En GPEC se ha utilizado el paquete `Python Pubsub <http://pubsub.sourceforge.net/>`_
 de Oliver Schoenborn, en su versión 1 [#]_ . Esta implementación es muy sencilla
@@ -120,12 +117,11 @@ Cuyo diagrama de secuencia es el siguiente:
    Diagrama de secuencia para una interacción sencilla entre emisor y receptor
    via *Pub/Sub*
 
-
-Ejemplos de uso
-^^^^^^^^^^^^^^^
+Usos en GPEC
+------------
 
 Panel de mensajes
-+++++++++++++++++
+^^^^^^^^^^^^^^^^^
 
 Como se ha dicho, PubSub constituye el patrón principal y toda la *orientación
 a eventos* se basa en una comunicación vía esta biblioteca. 
@@ -210,17 +206,18 @@ observa::
 
 
 Generación de gráficos
-++++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^^^^
 
-Otro uso de PubSub es la generación de gráficos. Se resume en el siguiente 
+Otro uso de ``PubSub`` es la generación de gráficos. Se resume en el siguiente 
 diagrama de secuencia:
 
 
-.. figure:: images/uml_sec_makeplot.png
-   :width: 100%
+.. figure:: images/uml_sec_makeplot_vertical.png
+   :width: 65%
+   
+   Secuencia para la generación de un diagrama desde el evento generado por 
+   el usuario 
 
-
-.. todo:: grafico en vertical, + resolucion
 
 Esto significa que el panel de definición de casos está independizado del 
 panel contenedor de los gráficos generados a traves de PubSub. 
@@ -384,23 +381,21 @@ sean los mismos es alta. Por ejemplo, en el siguiente caso de uso:
 Por último, dado el manejo referencial de memoria que hace Python, la permanencia 
 del array en memoria no está duplicada respecto al que se utiliza para graficar.
 
-Algoritmo y patrón utilizados
-------------------------------
+Patrón *decorator* 
+-------------------
 
-El algoritmo utilizado para la implementación de cacheo de datos se llama 
-:dfn:`memoize`[#]_ y es descripto en detalle en [ZIADE2008]_ , cuya versión 
-se ha utilizado. 
-
-Esta implementación se basa en el :term:`patrón Decorator`, que en términos
+Una forma habitual de implementar el mecanismo de 
+*caché* es a través del :term:`patrón Decorator`, que en términos
 simplificados realiza una transformación dinámica de una función o método, 
-agregándole una funcionalidad que no tiene por sí misma.
+agregándole una funcionalidad que no tiene por sí misma, o más en general, 
+alterando de alguna manera el resultado devuelto. 
 
 .. figure:: images/Decorator_UML_class_diagram.png
    :width: 60% 
 
     Diagrama de clases del patrón *Decorator*
 
-Expresandolo en términos matemáticos, se trata de una :dfn:`composición de funciones`:
+Expresándolo en términos matemáticos, se trata de una :dfn:`composición de funciones`:
 
 .. math::
    :label:`composición de funciones`
@@ -409,8 +404,46 @@ Expresandolo en términos matemáticos, se trata de una :dfn:`composición de fu
 
     x \mapsto f(x) \mapsto g(f(x))
 
+Desde la versión 2.4, Python tiene una nomenclatura facilitada para la 
+escritura de decoradores. Una estructura genérica para la definición 
+de una función decoradora, que se compone de un :term:`wrapper`
+de dos funciones anidadas [#]_,  es la siguiente::
+ 
 
-En este caso, la funcionalidad agregada a la función que se "decora" es la siguiente:
+    >>> def mydecorator(function):
+    ...     def _mydecorator(*args, **kw):
+    ...         # hacer las tareas de 'decoración' 
+    ...         # antes de llamar a la funcion decorada 
+    ...         res = function(*args, **kw)
+    ...         # hacer otras cosas antes de devolver el resultado
+    ...         return res
+    ...     # se devuelve la subfunción
+    ...     return _mydecorator
+    ...
+    >>>
+
+Cuando se tiene una funcion cualquier que se quiere decorar, simplemente
+se utiliza la sintaxis ``@mydecorator`` justo antes de la función en 
+cuestion. Por ejemplo::
+
+    >>> @mydecorator
+    >>> def mifuncion(): 
+    ...     pass
+    >>>
+    
+Al llamar a :py:func:`mifuncion` se obtiene en realidad 
+``mydecorator(mifuncion())``. La ventaja sintáctica de Python es que permite 
+
+
+Algoritmo de caché de datos
+------------------------------
+
+El algoritmo utilizado para la implementación del sistema de *caché* se llama 
+:dfn:`memoize`[#]_ y es descripto en detalle en [ZIADE2008]_ , cuya versión, 
+parcialmente simplificada, se ha utilizado. 
+
+En este caso, la funcionalidad que aporta el decorador a la 
+función que se "decora" es la siguiente:
 
 1. Se obtienen todos los parámetros de la función y con ellos se genera 
    un *hash*, es decir, una clave de cadena de caracteres unívoca para ese conjunto de datos. 
@@ -418,19 +451,17 @@ En este caso, la funcionalidad agregada a la función que se "decora" es la sigu
 2. Se evalua si ese *hash* existe como clave en el diccionario que almacena resultados
    "memorizados". 
 
-3. Depende del resultado
+3. Dependiendo del resultado anterior
    
    A. Si la clave existe en el diccionario (o sea, el resultado para esos parámetros 
-      se calculó previamente) se devuelve el valor de la entrada sin llamar a la función
-      decorada. 
+      se calculó previamente) se devuelve el valor de la entrada sin llamar a 
+      la función decorada. 
 
-   B. Si la clave no existe (lo que implica que es la primera vez que se llama la función
-      con los parámetros dados) se invoca a la función decorada y con el resultado 
-      se agrega una entrada en el diccionario ``hash:resultado``. Además, se devuelve 
-      el resultado. 
+   B. Si la clave no existe (lo que implica que es la primera vez que se llama la   
+      función con los parámetros dados) se invoca a la función decorada y con el 
+      resultado se agrega una entrada en el diccionario ``hash:resultado``. Además, 
+      se devuelve el resultado. 
     
-
-.. todo:: decoradores *alla python*
 
 Código fuente
 -------------
@@ -440,10 +471,6 @@ Código fuente
 
 .. literalinclude:: ../src/tools/misc.py
    :pyobject: memoize
-
-
-
-
 
 
 Algoritmo de análisis sintáctico
@@ -511,11 +538,250 @@ Código fuente
 Interfaz Gráfica de Usuario (GUI)
 =================================
 
-Concepto: paneles, contenedores
----------------------------------
+Contenedores y *sizer*
+-----------------------
 
-El uso de Advanced User Interface
----------------------------------
+En la introducción general a :ref:`wx` vista en :ref:`marco` se hizo referencia
+a la clase :py:class:`wx.Panel` describiéndola como *"un contenedor de otros 
+objetos gráficos"*. 
+
+Tradicionalmente, uno de los problemas más complicados en la programación de 
+:term:`GUI` es el manejo de la disposición física de los componentes en el espacio
+disponible (:term:`layout`). En los comienzos, la solución fue el posicionamiento 
+absoluto donde el programador explicitaba el tamaño y la posición exácta 
+del *widget* en la pantalla [#]_ . Esta estrategia acarrea una batería de problemas
+ya que sólo funciona correctamente si se tiene control total sobre el espacio 
+disponible, es decir, controlando la resolución de pantalla del equipo del cliente,
+el tamaño de tipografía estándar que ha elegido, etc. pero se vuelve inmanejable 
+cuando el *layout* es dinámico, es decir, que cambia en función de alguna acción
+del usuario. 
+
+Para solucionar este problema wxPython, y en general, todos los frameworks para 
+la construcción de GUIs modernas, utilizan el concepto de *sizers*, que son algoritmos
+automáticos que distribuyen los elementos de la interfaz de una menera predeterminada. 
+
+Un ``sizer`` en wxPython es un objeto visualmente invisible que no es un contenedor (como son, por ejemplo, 
+ :py:class:`Panel`, :py:class:`Frame` o una página de un elemento :py:class:`wx.Notebook`)
+sino que simplemente indican cómo se ubican originalmente y cómo se comportan visualmente
+los elementos ante un evento que afecte  la apariencia de la aplicación. 
+Todo los *sizers* son instancias de una subclase de la clase abstracta :py:class:`wx.Sizer`
+
+
+.. seealso:: 
+
+   Para una explicación exhaustiva sobre el tema, vea el capitulo 11 de *wxPython in Action*, 
+   ([NR-RD2006]_ )
+
+Por ejemplo, ``sizer`` permite dividir el espacio, cualquier este sea, en porciones
+proporcionales de filas o columnas, y ubicar allí elementos (como botones o campos de 
+texto), definiendo atributos como su alineación horizontal o vertical, el tamaño 
+(proporcional al espacio, fijo, con límite máximo, etc). Asímismo, un ``sizer`` 
+puede contener a otros de manera anidada, definiendo una cuadrícula con espacios para ubicar los 
+*widgets* controladores [#]_. 
+
+
+.. figure:: images/wxglade-sizer.png
+   :width: 80%
+    
+   Diseño con *sizers* de una ventana de la aplicación mediante la utilidad 
+   `wxGlade <http://wxglade.sourceforge.net>`_
+ 
+
+El hecho de que un sizer no sea un contenedor indica que ``parent`` de cualquier elemento 
+aún debe serlo. Es decir, un elemento cualquier (por ejemplo, un botón) está en incrustado
+en un contenedor (por ejemplo, un panel) pero ubicado según indica un sizer que está 
+haciado al mismo contenedor. 
+
+Uso en la aplicación
+^^^^^^^^^^^^^^^^^^^^
+
+En GPEC, toda la distribución de componentes está dispuesta a través de ``sizers``. 
+Como ejemplo, se muestra la parte superior de un panel para la definición de un caso
+donde consta el uso anidado de ``sizers`` de distinto tipo. 
+
+.. figure:: images/sizers-example.png
+   :width: 85%
+    
+   Distribución mediante *sizers* de componentes. El contenido del ``GridBagSizer``
+   es dinámico, cambiando su contenido en función de un evento de cambio de 
+   opción (evento ``wx.EVT_CHOICE``) del menú de modelos. 
+ 
+Se observa que existe un panel contenedor principal, :py:class:`CasePanel` cuyo 
+*sizer* principal es por filas (``wx.BoxSizer(wx.VERTICAL)``) al que se le suman
+ 2 instancias del panel , :py:class:`VarsAndParamsPanel` (sólo se muestra uno, pero 
+corresponde 1 para cada compuesto del sistema binario) cuyo layout se basa en un 
+:py:class:`wx.GridBagSizer` de 6 filas por 5 columnas. 
+
+La porción de código relevante se describe a continuación:: 
+
+    class CasePanel(scrolled.ScrolledPanel):
+        def __init__(self, parent, id):
+ 
+            scrolled.ScrolledPanel.__init__(self, parent, id, 
+                                                style = wx.TAB_TRAVERSAL
+                                                | wx.CLIP_CHILDREN
+                                                | wx.FULL_REPAINT_ON_RESIZE)
+            
+            
+            
+            self.box = wx.BoxSizer(wx.VERTICAL)   # <- sizer principal    
+            self.model_choice = wx.Choice(self, -1, 
+                choices = sorted(self.model_options.keys()))
+            
+        
+            first_row_sizer = wx.BoxSizer(wx.HORIZONTAL) # <- sizer secundario
+
+            self.load_button = wx.lib.buttons.GenBitmapTextButton(self, -1, 
+                    wx.Bitmap(os.path.join(PATH_ICONS,"compose.png")), 
+                    "Define system")
+            
+            first_row_sizer.Add(self.load_button, 0, 
+                flag=wx.ALL | wx.ALIGN_LEFT | wx.EXPAND , border=5)
+
+            first_row_sizer.Add((10, 20), 0, wx.EXPAND)
+
+            first_row_sizer.Add(wx.StaticText(self, -1, "Model:"))
+            first_row_sizer.Add(self.model_choice)                 # <- menu
+            self.box.Add( first_row_sizer, 0, flag= wx.TOP 
+                                              | wx.LEFT 
+                                              | wx.FIXED_MINSIZE 
+                                              | wx.ALIGN_LEFT, border = 5)
+
+            
+            self.panels = (VarsAndParamPanel(self,-1),  
+                            VarsAndParamPanel(self,-1))
+
+            self.box.Add(self.panels[0], 0, wx.EXPAND )     # <-- subpanel 1
+            self.box.Add(self.panels[1], 0, wx.EXPAND )     
+
+
+    class VarsAndParamPanel(wx.Panel):
+        """a panel with 2 columns of inputs. First colums input EOS variables. 
+            The second one are the inputs to model parameters (change depending
+            the model selected). 
+            This parameter are related and is possible to calcule a group of values
+            defining the other one. 
+            """
+
+        def __init__(self, parent, id, model_id=1, setup_data=None):
+            """setup_data: (id, name, tc, pc, vc, om)"""
+
+            wx.Panel.__init__(self, parent, id, style = wx.TAB_TRAVERSAL
+                         | wx.CLIP_CHILDREN
+                         | wx.FULL_REPAINT_ON_RESIZE
+                         )
+
+            gbs = self.gbs = ui.widgets.GridBagSizerEnh(6, 5)    
+
+
+
+
+El uso de la *Advanced User Interface*
+--------------------------------------
+
+La ventana principal de la aplicación :py:class:`MainFrame` definida en :file:`aui.py`
+es una de subclase de la clase :py:class:`wx.Frame` pero el manejo de la distribución
+de sus componentes se basa en una librería especial denominado *Advanced User Interface*, 
+que reside en :py:class:`wx.aui`. 
+
+Esta librería está construída sobre la pila de componentes de wxPython y permite 
+implementar "interfaces avanzadas" a través del control de "subventanas" 
+automatizado de eventos como  maximizar (ocupar toda la ventana principal), cerrar (no se muestra en la ventana 
+principal) o restaurar (vuelve a la posición original) entre otras.  
+
+Comparando con los resultados que se obtienen, utilizar :py:class:`wx.aui` tiende
+a ser trivial. Básicamente consiste en dos objetos: 
+
+- Un manejador, :py:class:`wx.aui.AuiManager`, que se encarga de toda la lógica
+  de control, mantener el estado de las ventanas y lanzar los métodos automáticos
+  cuando ocurren eventos sobre la interfaz. 
+
+- Al menos una instancia  :py:class:`wx.aui.AuiPaneInfo`
+  que define una "subventana" a la que se le asocia el contenido a mostrar, en general, 
+  un panel principal de `wx`. 
+
+.. figure:: images/gpec_aui_max.png
+   :width: 100%
+
+   La interfaz avanzada de GPEC visualizando 2 de los 4 paneles por defecto. 
+   Yendo a :menuselection:‘View --> Restore default view‘ se reestablece la 
+   estructura original.  
+
+Conociendo la utilidad de estos objetos, un extracto 
+relevante de :py:class:`MainFrame` es el siguiente::
+
+    class MainFrame(wx.Frame):
+
+        def __init__(self, parent, id=-1,
+                     pos=wx.DefaultPosition, title='GPEC', size=(800,600),
+                     style=wx.DEFAULT_FRAME_STYLE | wx.MAXIMIZE ):
+            wx.Frame.__init__(self, parent, id, title, pos, size, style=style)
+
+            self._mgr = wx.aui.AuiManager(self)      #<- manejador
+
+            self.cases_panel = TabbedCases(self, -1)
+
+            self.cases_auipane = wx.aui.AuiPaneInfo().Name("cases").\
+                Caption(u"Cases").Left().MinSize(the_size).MaxSize(the_size).\
+                Layer(1).Position(2).CloseButton(True).MinimizeButton(True)
+
+            self._mgr.AddPane(self.cases_panel, self.cases_auipane )
+            self._mgr.Update()
+            self.Maximize()
+
+En el código se observa la siguiente secuencia 
+
+    1. Se instancia el manejador de ``wx.aui``
+
+    2. Se instancia el panel de contenido, en este caso :py:class:`TabbedCases`
+
+    3. Se instancia la subventana :py:class:`wx.aui.AuiPaneInfo` con todas sus 
+       propiedades (ubicación, título, tamaño mínimo, etc. ) 
+
+    4. Se define que el contenido de la subventana será el panel antes generado
+       y se lo agrega al manejador. 
+
+    5. Se actuliza el layout 
+
+Una observación en el paso 3 es que para definir los atributos del panel
+se utiliza una técnica denominada *encadenado de métodos* (*Method chaining*) [#]_
+donde la ejecución de un método de un objeto devuelve el objeto en sí, posibilitando
+"encadenar" la ejución de otro método. 
+
+La interfaz por defecto de GPEC se compone de 4 instancias 
+de :py:class:`AuiPaneInfo` cuyo contenido se lista en la siguiente tabla: 
+
+   =========  =====================  =================================== 
+    Título     Panel de contenido     Descripción del contenido
+   =========  =====================  =================================== 
+    Cases      TabbedCases            Definición de casos
+    Plots      SuitePlotsPanel        Pestañas de gráficos
+    Manager    PlotsTreePanel         Árbol de manejo gráficos
+    Info       InfoPanel              Panel de informaciones diversas
+   =========  =====================  =================================== 
+
+
+La gestión avanzada de pestañas
+--------------------------------
+
+En el área de las interfaces gráficas de usuario, la navegación por pestañas 
+(:abbr:`tabbed document interface (TDI)`) se refiere a la posibilidad de que 
+varios paneles con información estén contenidos dentro de una sola ventana o panel 
+principal, usando pestañas para alternar entre ellos. Es típico su uso en 
+los navegadores web modernos, como Mozilla Firefox. GPEC hace uso extendido 
+de esta arquitectura, en el soporte de múltiples casos, múltiples gráficos, 
+e varios paneles de información.
+
+En wxPython existen múltiples implementaciones de controladores de pestañas y se 
+ha hecho uso de :py:class:`AuiNotebook`, que forma parte de las 
+`Advanced Generic Widgets <http://xoomer.virgilio.it/infinity77/AGW_Docs/>`_ (*AGW*)
+desarrolladas por el programador italiano Andrea Gavana. 
+
+Toda la librería *AGW* forma parte del paquete estándar de ``wx`` y reside en 
+``wx.lib.agw.aui``. 
+
+
+
 
         
 Justificación de diseño
@@ -556,11 +822,29 @@ Integración Matplotlib-WxPython
          consecuencia, estas latencias son cada vez más seguido un cuello de botella
          en la performance global del sistema". http://en.wikipedia.org/wiki/Moore's_law#Importance_of_non-CPU_bottlenecks
 
-.. [#]  También llamado :dfn:`memoization`. Ver http://en.wikipedia.org/wiki/Memoization
+.. [#]  También llamado :dfn:`memoization`. 
+        Ver http://en.wikipedia.org/wiki/Memoization
+
+.. [#]  Cuando se necesita pasar parámetros específicos al decorador 
+        (además de los que se pasan en la llamada a la función decorada)
+        se necesita una forma sutilmente más compleja, donde la declaración 
+        del decorador tiene un subnivel más de *wrappering*, o sea, 3 
+        funciones anidadas.
 
 
 .. [#]  Una referencia completa de esta función se encuentra en 
         http://docs.scipy.org/doc/numpy/reference/generated/numpy.loadtxt.html
+
+.. [#]  Una aproximación de este tipo, relativa al tamaño de la ventana, utiliza
+        la versión anterior de GPEC.
+
+.. [#]  Para layout de estilo cuadrícula se utiliza una de las implementaciones de la clase abstracta :py:class:`wx.Sizer`
+        es :py:class:`GridSizer`    
+
+.. [#]  Esta técnica es ampliamente utilizada en frameworks Javascript  
+        como `jQuery <http://jquery.com>`, dada que su alta expresividad produce 
+        código más compacto, característica muy relevante en el ambiente web. 
+        Ver http://en.wikipedia.org/wiki/Method_chaining
 
 .. [vdLaar2002]  van de Laar, F. (2002).  *Publish/Subscribe as architectural style 
                  for component interaction (Mater's thesis)*, Phillips Research

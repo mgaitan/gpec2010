@@ -1,3 +1,5 @@
+.. _marco:
+
 Marco Teórico
 **************
 
@@ -149,7 +151,6 @@ Elliott-Suresh-Donohue (1990), etc.
 GPEC es capaz de realizar los cálculos usando cinco diferentes ecuaciones de 
 estado (ver :ref:'Requerimientos funcionales').
 
-
 Aplicación y utilidad
 ----------------------
 
@@ -168,6 +169,10 @@ y Jørgen Mollerup de la Universidad Técnica de Dinamarca, que
 ha convocado a centenares de profesionales de diversas firmas como British 
 Petroleum, Chevron, Phillips, Shell y muchas otras de renombre mundial. 
 
+Estado del arte
+---------------
+
+.. todo:: estado del arte
 
 Metodologías de desarrollo de Software
 ========================================
@@ -241,8 +246,18 @@ basándose en estrategias de desarrollo ágil mencionadas previamente.
 Tecnologías principales
 ========================
 
-Python 
-------
+Se expondrá a continuación una introducción a las características y conceptos
+claves de las tecnologías de software que se han utilizado en este proyecto. 
+
+
+    ..seealso:: 
+
+    En el capítulo :ref:`implementacion` se ahonda en algunos aspectos 
+    para explicar cuestiones particulares.  
+     
+
+Lenguaje de programación Python 
+-------------------------------
 
 `Python <http://python.org>`_ es un avanzado lenguaje de programación de alto nivel, 
 :term:`interpretado`, :term:`multiparadigma` y :term:`multiplataforma`. 
@@ -355,7 +370,7 @@ muchas otras.
 
 Además de la incorporada, puede interfacear con diversas bibliotecas, por ejemplo
 para desarrollar interfaces gráficas de usuario (:term:`GUI`) (ver 
-:ref:`WxPython`), y a la vez es extensible en C o C++. 
+:ref:`wx`), y a la vez es extensible en C o C++. 
 
 Esta facilidad de integración permite que frecuentemente sea utilizado 
 como *"lenguaje pegamento"* (ver [GvR1998]_ ) para interconectar código que 
@@ -510,11 +525,12 @@ El resultado se observa en el siguiente gráfico:
     
     .. figure:: images/mpl_fig1.png
        :alt: Figura
+       :width: 75% 
 
        Gráfico generado interactivamente
 
 
-.. _wxpython:
+.. _wx:
 
 WxPython
 --------
@@ -528,7 +544,7 @@ para el lenguaje de programación Python. Junto a Python permite el desarrollo
 rápido de aplicaciones gráficas de escritorio multiplataforma.
 
 Una de las características sobresalientes de wxWidgets es su uso nativo de 
-las API gráficas de cada entorno de ventanas, brindando una apariencia y experiencia
+las APIs gráficas de cada entorno, brindando una apariencia y experiencia
 de uso nativa para cada ambiente. Esto significa la misma aplicación, sin modificaciones
 (al menos significativas), adopta las características gráficas definidas por el 
 usuario en el entorno de escritorio. En concreto: se ve como *una aplicación Windows* 
@@ -577,8 +593,8 @@ Se expondrán estos conceptos con un ejemplo::
         app.MainLoop()
 
 
-La subclase ``MyFrame`` hereda de la clase ``wx.Frame`` y extiende su 
-constructor incluyendo un objeto ``Panel`` (elemento contenedor de otros 
+La subclase ``MyFrame`` hereda de la clase :py:class:`wx.Frame` y extiende su 
+constructor incluyendo un objeto :py:class:`Panel`` (elemento contenedor de otros 
 objetos gráficos), una línea de texto estática y una caja de texto 
 denominada ``self.posCtrl``. 
 
