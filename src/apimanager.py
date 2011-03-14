@@ -102,7 +102,7 @@ class ApiManager():
 
     @misc.memoize()
     def conparin2conparout(self, direction, model_id, data):
-        self._write_conparin(direction, model_id, data)
+        self.write_conparin(direction, model_id, data)
         return self._read_conparout(model_id)
 
     @misc.memoize()
@@ -112,7 +112,7 @@ class ApiManager():
 
 
    
-    def _write_conparin(self, direction, model_id, data):
+    def write_conparin(self, direction, model_id, data):
         """Write the input file CONPARIN.DAT ". data could be EOS variables or 
             model paramater""" 
 
@@ -232,7 +232,6 @@ class ApiManager():
         
         filename = BIN_AVAILABLE[type2exe[type]]['out'][0]
 
-
         filepath = os.path.join(self.path_temp, filename)
         pub.sendMessage('add_txt', (filepath, self.case_id))
         
@@ -241,19 +240,14 @@ class ApiManager():
         return arrays
 
     def output2array(self, filepath, curve_types):
-        """Parses an gpecout.dat isopou ... , detects numeric blocks and create arrays with them"""
-
-        #TODO Generalize this to use with PXYOUT.DAT TXYOUT.DAT and ISOPOUT.DAT
-
-    
-        #filepath = os.path.join(self.path_temp, filename)
-        #curve_types = {'VAP':4, 'CRI':5, 'CEP':6, 'LLV':10 } #type:significatives columns
+        """Parses gpecout.dat, PXYOUT.DAT TXYOUT.DAT or ISOPOUT.DAT
+        Detects numeric blocks and create arrays with them"""
 
         tokens = {}         #{(begin,end):'type', ...}
-        begin = end = 0
+        begin = 0
+        end = 0
         
         with open(filepath, 'r') as fh:
-           
 
             number_of_lines = len(fh.readlines())
             fh.seek(0)
@@ -265,48 +259,49 @@ class ApiManager():
                     if line.strip() in curve_types:
                         begin = line_number + 1
                         curve_type = line.strip()
-                else:
-                    #looking for a blank line which determines the end of arrays block.
-                    
+                
+                elif not line.strip() or line_number==number_of_lines-1:
+                    #looking for a blank line which determines the end of 
+                    #arrays block.
+                            
+                    end = line_number
+                    tokens[(begin, end)] = curve_type
 
-                    if not line.strip() or line_number==number_of_lines-1:
-                        end = line_number
-                        tokens[(begin, end)] = curve_type
-
-            arrays_out = {}     #Format: {type: [array1, array2, ... ], ...  }
-            
+            arrays_out = {}     #Format: {type: [array1,array2, ...], ...}
             
             for (begin, end), curve_type in sorted(tokens.items()):
                 
-
                 fh.seek(0)
-                
                 temp_w = cStringIO.StringIO()       #a memory file to write 
                 
                 #write lines just of the block between (begin,end)
                 for l,line in enumerate(fh):
-                    if begin <= l < end and len(get_numbers(line))>0:      #TODO think a better way to check the special case of col headers after mark
+
+                    if begin <= l < end and \
+                        len(get_numbers(line))>0:      
+                    
+                        #a way to check the special case of col 
+                        #headers after mark
                         temp_w.write( line.replace('*', '') )    
             
-
-                temp_r = cStringIO.StringIO(temp_w.getvalue())      #and copy to read
+                #a copy to read
+                temp_r = cStringIO.StringIO(temp_w.getvalue())      
                 
+                #retrieve significative columns from a dictionary. 
+                #(begin,end)=>type=>num_cols 
 
-                #retrieve significative columns from a dictionary. (begin,end)=>type=>num_cols 
-                significatives_cols= range(curve_types[tokens[(begin, end)]])
-
-                curve_array = np.loadtxt(temp_r, usecols=significatives_cols)
+                signif_cols= range(curve_types[tokens[(begin, end)]])
+                curve_array = np.loadtxt(temp_r, usecols=signif_cols)
 
                 temp_w.close()
                 temp_r.close()
 
-
                 #if it's a new type on the dict, create it.
                 if curve_type not in arrays_out.keys():
-                    arrays_out[curve_type] = []         #TODO should it be a ndarray ?
+                    #TODO should it be a ndarray ?
+                    arrays_out[curve_type] = []  
                 
                 arrays_out[curve_type].append(curve_array)
-
 
             fh.close()
         return arrays_out

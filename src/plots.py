@@ -30,23 +30,11 @@ class BasePlot(object):
         
 
         self.projection = projection
-        if self.projection == '3d':
-            self.axes = Axes3D(self.fig)
-            self.axes.set_zlabel(zlabel)
-            self.fig.suptitle(title) 
-        else: 
-            self.axes = self.fig.add_subplot(111)
-            self.axes.set_title(title)
-
+       
         if system:
             case_label = "%s + %s, %s EOS, Kij = %s, Lij = %s" % tuple(system)
             self.fig.text(0.01, 0.01, case_label, fontsize=9,  horizontalalignment='left')
-
-        self.axes.set_ylabel(ylabel)
-        self.axes.set_xlabel(xlabel)
-
-        self.axes.set_autoscale_on(True)
-                
+         
 
         self.properties_check = {'Grid':wx.NewId(), 'Legends':wx.NewId(), 'Log X': wx.NewId(), 'Log Y': wx.NewId(), }
    
@@ -58,8 +46,7 @@ class BasePlot(object):
 
         self.curves = []    #curves to plot
 
-        if arrays:
-            self.setup_curves()
+
     
 
     def setup_curves (self):
@@ -168,10 +155,44 @@ class BasePlot(object):
 
         self.canvas.draw()
 
+class Plot2D(BasePlot):
+    def __init__ (self, parent, arrays=None, title=None, xlabel="", ylabel="", system=(), projection="2d", zlabel="", **kwargs):
 
-class CustomPlot(BasePlot):
-    def __init__ (self, parent, title, xlabel, ylabel, projection="2d", zlabel="", system=(), **kwargs):
         BasePlot.__init__(self, parent, None, title, xlabel, ylabel, system, projection=projection, zlabel=zlabel, **kwargs)
+
+        self.axes = self.fig.add_subplot(111)
+        self.axes.set_title(title)
+
+        self.axes.set_ylabel(ylabel)
+        self.axes.set_xlabel(xlabel)
+
+        self.axes.set_autoscale_on(True)
+
+        if arrays:
+            self.setup_curves()
+
+
+class Plot3D(BasePlot):
+    def __init__ (self, parent, arrays=None, title=None, xlabel="", ylabel="", system=(), 
+                    projection="3d", zlabel="", **kwargs):
+
+        BasePlot.__init__(self, parent, None, title, xlabel, ylabel, system, projection=projection, zlabel=zlabel, **kwargs)
+
+        self.axes = Axes3D(self.fig)
+        self.axes.set_ylabel(ylabel)
+        self.axes.set_xlabel(xlabel)
+
+        self.axes.set_zlabel(zlabel)
+        self.fig.suptitle(title) 
+
+        if arrays:
+            self.setup_curves()
+
+
+
+class CustomPlot(Plot2D):
+    def __init__ (self, parent, title, xlabel, ylabel, projection="2d", zlabel="", system=(), **kwargs):
+        Plot2D.__init__(self, parent, None, title, xlabel, ylabel, system, projection=projection, zlabel=zlabel, **kwargs)
 
     def add_lines(self, *lists_of_lines):
         for lol in lists_of_lines:
@@ -202,7 +223,7 @@ class CustomPlot(BasePlot):
 
 
 
-class PTrho(BasePlot):
+class PTrho(Plot3D):
     def __init__(self, parent, arrays=None, system=(), **kwargs):
 
         self.short_title = u"P-T-\u03c1"
@@ -211,7 +232,7 @@ class PTrho(BasePlot):
         self.ylabel = u'Density [mol/l]'
         self.zlabel = u'Pressure [bar]'
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, projection='3d', zlabel=self.zlabel, **kwargs)        
+        Plot3D.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, projection='3d', zlabel=self.zlabel, **kwargs)        
 
     def setup_curves(self, arrays, **kwarg):
 
@@ -377,7 +398,7 @@ class PTrho(BasePlot):
 
 
 
-class PTx(BasePlot):
+class PTx(Plot3D):
     """PTx 3D projection"""
 
     def __init__(self, parent, arrays=None, system=(), **kwargs):
@@ -388,7 +409,7 @@ class PTx(BasePlot):
         self.ylabel = u'Composition' if not system else "%s molar fraction" % system[0] if not system else "%s molar fraction" % system[0]
         self.zlabel = u'Pressure [bar]'
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, projection='3d', zlabel=self.zlabel, **kwargs)        
+        Plot3D.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, projection='3d', zlabel=self.zlabel, **kwargs)        
 
     def setup_curves(self, arrays, **kwarg):
 
@@ -541,7 +562,7 @@ class PTx(BasePlot):
 
 
 
-class IsoPT(BasePlot):
+class IsoPT(Plot2D):
     """Isopleth PT diagram"""
     
     def __init__(self, parent, arrays=None, system=(), **kwarg):
@@ -551,7 +572,7 @@ class IsoPT(BasePlot):
         self.xlabel = u'Temperature [K]'
         self.ylabel = u'Pressure [bar]'
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwarg)        
+        Plot2D.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwarg)        
 
     def setup_curves(self, arrays):
 
@@ -602,7 +623,7 @@ class IsoPT(BasePlot):
                     
 
 
-class IsoTx(BasePlot):
+class IsoTx(Plot2D):
     """Isopleth Tx diagram"""
     
     def __init__(self, parent, arrays=None, system=(), **kwarg):
@@ -612,7 +633,7 @@ class IsoTx(BasePlot):
         self.xlabel = u'Composition' if not system else "%s molar fraction" % system[0]
         self.ylabel = u'Temperature [K]'
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwarg)        
+        Plot2D.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwarg)        
 
     def setup_curves(self, arrays):
 
@@ -653,7 +674,7 @@ class IsoTx(BasePlot):
 
 
         
-class IsoPx(BasePlot):
+class IsoPx(Plot2D):
     """Isopleth Px diagram"""
     
     def __init__(self, parent, arrays=None, system=(), **kwargs):
@@ -663,7 +684,7 @@ class IsoPx(BasePlot):
         self.xlabel = u'Composition' if not system else "%s molar fraction" % system[0]
         self.ylabel = u'Pressure [bar]'
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
+        Plot2D.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
 
     def setup_curves(self, arrays):
 
@@ -706,7 +727,7 @@ class IsoPx(BasePlot):
                 
 
 
-class IsoTrho(BasePlot):
+class IsoTrho(Plot2D):
     """Isopleth Trho diagram"""
     
     def __init__(self, parent, arrays=None, **kwarg):
@@ -717,7 +738,7 @@ class IsoTrho(BasePlot):
         self.ylabel = u'Temperature [K]'
         
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
+        Plot2D.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, **kwarg)        
 
     def setup_curves(self, arrays):
 
@@ -750,7 +771,7 @@ class IsoTrho(BasePlot):
                 
 
         
-class IsoPrho(BasePlot):
+class IsoPrho(Plot2D):
     """Isopleth Prho diagram"""
     
     def __init__(self, parent, arrays=None, system=(), **kwarg):
@@ -761,7 +782,7 @@ class IsoPrho(BasePlot):
         self.ylabel = u'Temperature [K]'
         
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwarg)        
+        Plot2D.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwarg)        
 
     def setup_curves(self, arrays):
 
@@ -787,7 +808,7 @@ class IsoPrho(BasePlot):
                 lines = []     
                 
 
-class PT(BasePlot):
+class PT(Plot2D):
     """pressure-temperature diagram"""
     
     def __init__(self, parent, arrays=None, system=(), **kwarg):
@@ -798,7 +819,7 @@ class PT(BasePlot):
         self.xlabel = u'Temperature [K]'
         self.ylabel = u'Pressure [bar]'
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwarg)        
+        Plot2D.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwarg)        
 
     def setup_curves(self, arrays):
 
@@ -874,7 +895,7 @@ class PT(BasePlot):
 
 
 
-class Tx(BasePlot):
+class Tx(Plot2D):
     """T-x plot"""
     
     def __init__(self, parent, arrays=None, system=(), **kwargs):
@@ -883,7 +904,7 @@ class Tx(BasePlot):
         self.xlabel = u'Composition' if not system else "%s molar fraction" % system[0]    #TODO DEFINE system inside the plot
         self.ylabel = u'Temperature [K]'
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
+        Plot2D.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
 
     def setup_curves(self, arrays):
 
@@ -948,7 +969,7 @@ class Tx(BasePlot):
 
 
 
-class Pxy(BasePlot):
+class Pxy(Plot2D):
     """Pxy Px (isothermal)"""
     
     def __init__(self, parent, arrays=None, system=(), **kwarg):
@@ -959,7 +980,7 @@ class Pxy(BasePlot):
         self.xlabel = u'Composition' if not system else "%s molar fraction" % system[0]     #TODO DEFINE system inside the plot
         
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwarg)        
+        Plot2D.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwarg)        
 
     def setup_curves(self, arrays):
 
@@ -980,7 +1001,7 @@ class Pxy(BasePlot):
 
 
 
-class PxyPrho(BasePlot):
+class PxyPrho(Plot2D):
     """Pxy P-Rho projection (isothermal)"""
     
     def __init__(self, parent, arrays=None, system=(), **kwargs):
@@ -990,7 +1011,7 @@ class PxyPrho(BasePlot):
         self.ylabel = u'Pressure [bar]'
         self.xlabel = u'Density [mol/l]'    #TODO DEFINE system inside the plot
         
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
+        Plot2D.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
 
     def setup_curves(self, arrays):
 
@@ -1011,7 +1032,7 @@ class PxyPrho(BasePlot):
 
 
 
-class Txy(BasePlot):
+class Txy(Plot2D):
     """Txy Tx (isobaric)"""
     
     def __init__(self, parent, arrays=None, system=(), **kwargs):
@@ -1022,7 +1043,7 @@ class Txy(BasePlot):
         self.xlabel = u'Composition' if not system else "%s molar fraction" % system[0]    #TODO DEFINE system inside the plot
         
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
+        Plot2D.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
 
     def setup_curves(self, arrays):
 
@@ -1041,7 +1062,7 @@ class Txy(BasePlot):
                                      'type': 'Txy'
                                     } )
 
-class TxyTrho(BasePlot):
+class TxyTrho(Plot2D):
     """Txy T-Rho projection (isobaric)"""
     
     def __init__(self, parent, arrays=None, system=(), **kwargs):
@@ -1051,7 +1072,7 @@ class TxyTrho(BasePlot):
         self.ylabel = u'Temperature [bar]'
         self.xlabel = u'Density [mol/l]'    #TODO DEFINE system inside the plot
         
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
+        Plot2D.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
 
     
     def setup_curves(self, arrays):
@@ -1072,7 +1093,7 @@ class TxyTrho(BasePlot):
                                     } )
 
                 
-class Px(BasePlot):
+class Px(Plot2D):
     """P-x diagram"""
     
     def __init__(self, parent, arrays=None, system=(), **kwargs):
@@ -1083,7 +1104,7 @@ class Px(BasePlot):
         self.xlabel = u'Composition' if not system else "%s molar fraction" % system[0]    #TODO DEFINE system inside the plot
         
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
+        Plot2D.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
 
     def setup_curves(self, arrays):
 
@@ -1147,7 +1168,7 @@ class Px(BasePlot):
 
 
 
-class Trho(BasePlot):
+class Trho(Plot2D):
     """temperature-density diagram"""
     
     def __init__(self, parent, arrays=None, system=(), **kwargs):
@@ -1157,7 +1178,7 @@ class Trho(BasePlot):
         self.xlabel = u'Density [mol/l]'
         self.ylabel = u'Temperature [K]'
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
+        Plot2D.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
 
     def setup_curves(self, arrays):
 
@@ -1240,7 +1261,7 @@ class Trho(BasePlot):
                                 } )
 
 
-class Prho(BasePlot):
+class Prho(Plot2D):
     """pressure-density diagram"""
     
     def __init__(self, parent, arrays=None, system=(), **kwargs):
@@ -1250,7 +1271,7 @@ class Prho(BasePlot):
         self.xlabel = u'Density [mol/l]'
         self.ylabel = u'Pressure [bar]'
 
-        BasePlot.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
+        Plot2D.__init__(self, parent, arrays, self.title, self.xlabel, self.ylabel, system, **kwargs)        
 
     def setup_curves(self, arrays):
 
