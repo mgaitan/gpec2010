@@ -210,6 +210,8 @@ la implementación de pruebas automatizadas, la utilización de bibliotecas
 probas para la implementación de aspectos específicos de la solución, entre 
 otras. 
 
+.. _desarrollo:
+
 Desarrollo evolutivo adaptado
 -----------------------------
 
@@ -250,10 +252,10 @@ Se expondrá a continuación una introducción a las características y concepto
 claves de las tecnologías de software que se han utilizado en este proyecto. 
 
 
-    ..seealso:: 
+    .. seealso:: 
 
-    En el capítulo :ref:`implementacion` se ahonda en algunos aspectos 
-    para explicar cuestiones particulares.  
+       En el capítulo :ref:`implementacion` se ahonda en algunos aspectos 
+       para explicar cuestiones particulares.  
      
 
 Lenguaje de programación Python 
@@ -676,7 +678,7 @@ El proyecto se encuentra en la dirección http://code.google.com/p/gpec2010 .
 .. figure:: images/google_code.png
    :width: 90%
 
-    Portada del proyecto en Google Code. 
+   Portada del proyecto en Google Code. 
 
 
 Seguimiento de errores y propuestas

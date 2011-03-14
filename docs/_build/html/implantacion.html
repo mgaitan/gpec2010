@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>8. Implantación &mdash; &lt;project&gt;</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="&lt;project&gt;" href="index.html" />
+    <link rel="next" title="9. Conclusiones" href="conclusiones.html" />
+    <link rel="prev" title="7. Verificación y Validación" href="verificacion.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="conclusiones.html" title="9. Conclusiones"
+             accesskey="N">siguiente</a> |</li>
+        <li class="right" >
+          <a href="verificacion.html" title="7. Verificación y Validación"
+             accesskey="P">anterior</a> |</li>
+        <li><a href="index.html">&lt;project&gt;</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="implantaci-n">
+<span id="implantacion"></span><h1>8. Implantación<a class="headerlink" href="#implantaci-n" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="empaquetado-para-sistemas-windows">
+<h2>8.1. Empaquetado para sistemas Windows<a class="headerlink" href="#empaquetado-para-sistemas-windows" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Como requisito, se especificó que GPEC debía ser capaz de ejecutarse en
+plataformas Windows® y Linux. Para satisfacer esta condición la tecnología
+utilizada se eligió intrínsecamente multiplataforma, aunque el
+<a class="reference internal" href="glosario.html#term-ambiente-de-desarrollo"><em class="xref std std-term">ambiente de desarrollo</em></a> principal haya estado basado en Linux.</p>
+<p>Por supuesto, para realizar pruebas de compatibilidad y asegurar el
+funcionamiento en windows, se debió instalar un ambiente análogo con
+versiones para este sistema operativo.</p>
+<p>Sin embargo, la distribución del software para usuarios Windows no puede
+basarse en la reproducción de un ambiente de desarrollo, es decir, la
+instalación por separado del lenguaje Python (intérprete) y las diversas
+bibliotecas necesarias para la ejecución del software. Esto, en primer lugar,
+porque complica la utilización al usuario inexperto, y en segundo lugar
+porque resulta ineficiente en términos de tamaño teniendo en cuenta que sólo parte
+(algunos módulos)  de las bibliotecas intrísecas de Python y las bibliotecas
+de terceros son utilizadas en GPEC.</p>
+<p>Por poner un ejemplo, la biblioteca de graficación <em>Matplotlib</em> incluye
+soporte para la integración con otras bibliotecas para interfaces gráficas
+(como Qt, GTK, etc ) que no son utilizadas en GPEC al estar basada, como se ha
+especificado, en <em>WxWidget</em>.</p>
+<div class="section" id="py2exe-separar-s-lo-lo-necesario">
+<h3>8.1.1. Py2exe: separar sólo lo necesario<a class="headerlink" href="#py2exe-separar-s-lo-lo-necesario" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Para realizar el estudio de cuáles son los módulos (y sus respectivas
+dependencias) unívocamente necesarios  se utilizó el software <a class="reference external" href="http://www.py2exe.org/">py2exe</a></p>
+<p><em>py2exe</em> es una extensión a las Python Distribution Utilities
+(“Distutils”) que convierte scripts de Python en aplicaciones ejecutables
+en windows (.exe) sin requerir la instalación por separado del intérprete o
+bibliotecas.</p>
+<p>Partiendo de un ambiente de desarrollo Windows con todos los requerimientos
+satisfechos, <em>py2exe</em> realiza un <strong>árbol de dependencias</strong> y genera una
+carpeta incluyendo únicamente los módulos estrictamente necesarios, así
+como una copia de las librerías dinámicas (.dll) necesarias para la
+ejecución. Además, puede realizar la conversión del código python a
+<em>bytecode</em> (formato binario más rápidamente interpretable por Python) y
+agregar una cierta compresión, de manera de optimizar el tamaño del paquete
+resultante.</p>
+<div class="figure">
+<img alt="_images/py2exe_21.png" src="_images/py2exe_21.png" style="width: 671px;" />
+<p class="caption">Salida final de la ejecución de <em>py2exe</em> enumerando las librerías dinámicas
+complementarias que son necesarias para la ejecución del programa. Todas
+estas son comunes en cualquier instalación por defecto de Windows.</p>
+</div>
+<p>La configuración de <em>py2exe</em> se realiza a través de un
+módulo estándar de las <em>Distutils</em> denominado <tt class="docutils literal"><span class="pre">setup.py</span></tt>.
+Allí se especifican variables y directrices necesarias, como el nivel de
+compresión, cuál es el módulo principal (que será convertido en el
+&#8221;.exe&#8221;), datos extra que deben ser incluídos (por ejemplo, la base de datos),
+etc.</p>
+<p>El <tt class="docutils literal"><span class="pre">setup.py</span></tt> de GPEC es el siguiente:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">distutils.core</span> <span class="kn">import</span> <span class="n">setup</span>
+<span class="kn">import</span> <span class="nn">py2exe</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">get_py2exe_datafiles</span><span class="p">()</span>
+
+<span class="n">data</span> <span class="o">+=</span> <span class="p">[</span><span class="s">&#39;LICENSE.txt&#39;</span><span class="p">]</span>
+
+<span class="n">includes</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;numpy.core.umath&#39;</span><span class="p">]</span>
+<span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;_gtkagg&#39;</span><span class="p">,</span> <span class="s">&#39;_tkagg&#39;</span><span class="p">,</span> <span class="s">&#39;bsddb&#39;</span><span class="p">,</span> <span class="s">&#39;curses&#39;</span><span class="p">,</span> <span class="s">&#39;email&#39;</span><span class="p">,</span> <span class="s">&#39;pywin.debugger&#39;</span><span class="p">,</span>
+            <span class="s">&#39;pywin.debugger.dbgcon&#39;</span><span class="p">,</span> <span class="s">&#39;pywin.dialogs&#39;</span><span class="p">,</span> <span class="s">&#39;tcl&#39;</span><span class="p">,</span>
+            <span class="s">&#39;Tkconstants&#39;</span><span class="p">,</span> <span class="s">&#39;Tkinter&#39;</span><span class="p">]</span>
+<span class="n">packages</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">dll_excludes</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;libgdk-win32-2.0-0.dll&#39;</span><span class="p">,</span> <span class="s">&#39;libgobject-2.0-0.dll&#39;</span><span class="p">,</span> <span class="s">&#39;tcl84.dll&#39;</span><span class="p">,</span>
+                <span class="s">&#39;tk84.dll&#39;</span><span class="p">]</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="n">data_files</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;py2exe&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s">&quot;compressed&quot;</span><span class="p">:</span> <span class="mf">2</span><span class="p">,</span>
+                          <span class="s">&quot;optimize&quot;</span><span class="p">:</span> <span class="mf">0</span><span class="p">,</span> <span class="c">#2,</span>
+                          <span class="s">&quot;includes&quot;</span><span class="p">:</span> <span class="n">includes</span><span class="p">,</span>
+                          <span class="s">&quot;excludes&quot;</span><span class="p">:</span> <span class="n">excludes</span><span class="p">,</span>
+                          <span class="s">&quot;packages&quot;</span><span class="p">:</span> <span class="n">packages</span><span class="p">,</span>
+                          <span class="s">&quot;dll_excludes&quot;</span><span class="p">:</span> <span class="n">dll_excludes</span><span class="p">,</span>
+                          <span class="s">&quot;bundle_files&quot;</span><span class="p">:</span> <span class="mf">3</span><span class="p">,</span>
+                          <span class="s">&quot;dist_dir&quot;</span><span class="p">:</span> <span class="s">&quot;dist&quot;</span><span class="p">,</span>
+                          <span class="s">&quot;xref&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+                          <span class="s">&quot;skip_archive&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+                          <span class="s">&quot;ascii&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+                          <span class="s">&quot;custom_boot_script&quot;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">,</span>
+                         <span class="p">}</span>
+              <span class="p">},</span>
+    <span class="n">windows</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;aui.py&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>El resultado de <em>py2exe</em> es una carpeta <tt class="docutils literal"><span class="pre">./dist</span></tt> que incluye todo el código
+fuente de la aplicación en formato <em>bytecode</em> con todas las
+bibliotecas necesarias así como el intérprete de Python empaquetado como
+biblioteca dinámica.</p>
+<div class="figure">
+<img alt="_images/py2exe_31.png" src="_images/py2exe_31.png" style="width: 719px;" />
+<p class="caption">Resultado de la ejecución de <em>py2exe</em></p>
+</div>
+<p>Ejecutando <tt class="docutils literal"><span class="pre">aui.exe</span></tt> se ejecutaría la aplicación distribuible.</p>
+</div>
+<div class="section" id="generaci-n-de-un-instalador">
+<h3>8.1.2. Generación de un instalador<a class="headerlink" href="#generaci-n-de-un-instalador" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Si bien la distribución de la carpeta <tt class="docutils literal"><span class="pre">./dist</span></tt>, posiblemente en formato
+comprimido (<tt class="docutils literal"><span class="pre">.zip</span></tt>, <tt class="docutils literal"><span class="pre">.rar</span></tt>, etc.), es suficiente para correr la
+aplicación y esta se encuentra optimizada, el usuario Windows
+está acostumbrado a la utilización de <em>instaladores</em> que disponen los
+archivos en un directorio para tal menester (<tt class="docutils literal"><span class="pre">&quot;windows/programs</span> <span class="pre">files&quot;</span></tt> en
+general), realizan tareas como la &#8220;registración de la aplicación&#8221; y generan
+entradas de acceso rápido en el &#8220;Menú de Inicio&#8221;, por ejemplo.</p>
+<p>Para realizar un instalador a partir del directorio generado por <em>py2exe</em> se
+utilizó la aplicación <a class="reference external" href="http://nsis.sourceforge.net/">NSIS (Nullsoft Scriptable Install System)</a>, que es una software open source para la
+creación de instaladores Windows.</p>
+<div class="figure">
+<img alt="_images/py2exe_31.png" src="_images/py2exe_31.png" style="width: 615px;" />
+<p class="caption">Creando un instalador Windows a partir de un <em>zip</em> con el contenido
+resultante de <em>py2exe</em></p>
+</div>
+</div>
+<div class="section" id="compatibilidad">
+<h3>8.1.3. Compatibilidad<a class="headerlink" href="#compatibilidad" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>La instalación de GPEC se ha probado satisfactoriamente en sistemas Windows
+XP, Windows Vista y Windows 7.</p>
+</div>
+</div>
+<div class="section" id="instalaci-n-en-sistemas-linux">
+<h2>8.2. Instalación en sistemas Linux<a class="headerlink" href="#instalaci-n-en-sistemas-linux" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Para entornos Linux, el empaquetado y la distribución se realiza mediante las
+nombradas <em>Python Distribution Utilities (“Distutils”)</em> . En términos
+generales, es un análogo al utilitario <tt class="docutils literal"><span class="pre">make</span></tt> muy común en flujos de
+desarrollo basadas en lenguaje C o C++, que permite la declaración de
+dependencias y la instalación de un paquete Python, ya sea esta una
+aplicación en sí, una extensión o un módulo de funciones auxiliares.</p>
+<p>La diferencia fundamental con el empaquetado para Windows es que no se
+distribuye el conjunto de dependencias, sino que estas son simplemente
+declaradas. El usuario (o el instalador automatizado, como <em>easy_install</em>)
+son los encargados de asegurar el cumplimiento de esta dependencia, ya sea
+verificando que está previamente instalada en el sistema o instalandola.</p>
+<p>Aunque esto genera cierto <em>overhead</em> en primera instancia, porque una
+dependencia (por ejemplo, <em>Matplotlib</em>) es instalada completamente, esta
+política permite una optimización cuando existen dependencias comunes en
+diversas aplicaciones. En nuestro ejemplo, si dos aplicaciones requieren
+<em>Matplotlib</em>, utilizan una única versión instalada en el sistema. Esta coincidencia de
+dependencias es altamente frencuente en sistemas Linux, heredada de la
+filosofía Unix que se resume en su famoso leitmotif:</p>
+<blockquote>
+<div>&#8220;Write programs that do one thing... and do it well&#8221; <a class="footnote-reference" href="#id2" id="id1">[1]</a></div></blockquote>
+<p>Sin embargo, por falta de masa crítica y tiempo, al momento de la
+presentación no se realizaron instaladores ni paquetes especificos para una
+distribución Linux, aunque la instalación mediante el código fuente es
+trivial, dado que Python no reqiere compilacion. Los siguientes comandos son
+suficientes para la obstención de la última versión de GPEC y sus
+dependencias:</p>
+<div class="highlight-python"><pre>$ sudo apt-get install python-matplotlib python-matplotlib-data python-numpy
+  python-wxgtk2.8 wine subversion
+$ svn checkout https://gpec2010.googlecode.com/svn/trunk/src gpec</pre>
+</div>
+<p>Y para ejecutarlo, simplemente se invoca el script principal:</p>
+<div class="highlight-python"><pre>$ python gpec/aui.py</pre>
+</div>
+</div>
+<div class="section" id="distribuci-n-y-soporte">
+<h2>8.3. Distribución y soporte<a class="headerlink" href="#distribuci-n-y-soporte" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Dada la gratuidad de GPEC, cada nueva versión se deja disponible
+automáticmente en la sección de descargas del sitio de desarrollo,
+<a class="reference external" href="http://code.google.com/p/gpec2010/downloads/list">http://code.google.com/p/gpec2010/downloads/list</a>
+y también en su sitio oficial <a class="reference external" href="http://gpec.efn.uncor.edu">http://gpec.efn.uncor.edu</a></p>
+<p>También se ha creado un grupo de correo , que intenta nuclear a la
+comunidad de usuarios e interesados en GPEC. Allí se remiten novedades del
+desarrollo, se contestan dudas y se recibe <em>feedback</em> de los usuarios. La
+dirección del grupo es <a class="reference external" href="http://groups.google.com.ar/group/gpec-discuss">http://groups.google.com.ar/group/gpec-discuss</a></p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>&#8220;Escribe programas que hagan una cosa... y hazlo bien&#8221;
+Ver <a class="reference external" href="http://en.wikipedia.org/wiki/Unix_philosophy">http://en.wikipedia.org/wiki/Unix_philosophy</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">8. Implantación</a><ul>
+<li><a class="reference internal" href="#empaquetado-para-sistemas-windows">8.1. Empaquetado para sistemas Windows</a><ul>
+<li><a class="reference internal" href="#py2exe-separar-s-lo-lo-necesario">8.1.1. Py2exe: separar sólo lo necesario</a></li>
+<li><a class="reference internal" href="#generaci-n-de-un-instalador">8.1.2. Generación de un instalador</a></li>
+<li><a class="reference internal" href="#compatibilidad">8.1.3. Compatibilidad</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#instalaci-n-en-sistemas-linux">8.2. Instalación en sistemas Linux</a></li>
+<li><a class="reference internal" href="#distribuci-n-y-soporte">8.3. Distribución y soporte</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="verificacion.html"
+                        title="Capítulo anterior">7. Verificación y Validación</a></p>
+  <h4>Próximo tema</h4>
+  <p class="topless"><a href="conclusiones.html"
+                        title="Próximo capítulo">9. Conclusiones</a></p>
+  <h3>Esta página</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/implantacion.txt"
+           rel="nofollow">Enseñar el código</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introduzca los términos de búsqueda o un módulo, clase o nombre de función.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="conclusiones.html" title="9. Conclusiones"
+             >siguiente</a> |</li>
+        <li class="right" >
+          <a href="verificacion.html" title="7. Verificación y Validación"
+             >anterior</a> |</li>
+        <li><a href="index.html">&lt;project&gt;</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Martín Gaitán.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,122 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Frontend GPEC 2010 &mdash; &lt;project&gt;</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="&lt;project&gt;" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li><a href="../index.html">&lt;project&gt;</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="frontend-gpec-2010">
+<h1>Frontend GPEC 2010<a class="headerlink" href="#frontend-gpec-2010" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>El nuevo frontend desarrollado para el software GPEC está desarrollado en
+lenguaje <a class="reference external" href="http://python.org/">Python</a>, basado principalmente en la
+biblioteca para graficación <a class="reference external" href="http://matplotlib.sourceforge.net/">Matplotlib</a>, y el toolkit para interfaces gráficas
+de usuario <a class="reference external" href="http://wxpython.org/">wxPython</a>. Esta combinación de
+tecnologías permiten un software íntegramente basado en Software Libre,
+capaz de ejecutarse en sistemas Windows, Linux o Mac y heredero de las
+ventajas de un lenguaje simple, potente y elegante.</p>
+<p>El desarrollo de este trabajo ha sido enmarcado en el uso de <em>metodologías
+ágiles de desarrollo de software</em>, que sumado a las características de
+Python configuran una alta capacidad de adaptación al cambio e incorporación
+de requerimientos y un rápido prototipado de funcionalidades. Más aún, se
+ha utilizado una arquitectura basada en paso de mensajes (patrón <em>pub/sub</em>)
+que mantiene un acoplamiento bajo entre las distintas partes del programa,
+permitiendo flexibilidad y extensibilidad.</p>
+<p>El nuevo frontend interactúa con los ejecutables que implementan los
+algoritmos de cálculo numérico (desarrollados en Fortran) de la misma manera
+que su versión precedente. Es decir, se ha respetado la interfaz de
+comunicación existente basada en archivos de texto plano. A través de un
+análisis sintáctico (parsing) de los archivos de salida, los datos
+numéricos se convierten a vectores de punto flotante manipulables en Python y graficables con Matplolib. Además de producir gráficos con calidad de publicación exportables a múltiples formatos, esta biblioteca permite realizar gráficos en 3D, funcionalidad aprovechada en esta nueva versión como la más significativa mejora.</p>
+<p>Por último, un aspecto especialmente estudiado ha sido la usabilidad y
+ergonomía del programa. El objetivo ha sido clarificar la interfaz para que
+su uso sea intuitivo manteniendo accesible toda la información y soportando a
+su vez múltiples casos <a class="footnote-reference" href="#id2" id="id1">[1]</a> en la misma sesión de trabajo. Esto permite
+comparar y/o superponer lo resultados y acceder a los datos numéricos cuando
+es necesario.</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Conjunción de un sistema binario y un modelo de cálculo</td></tr>
+</tbody>
+</table>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>Esta página</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/poster/resumen_poster.txt"
+           rel="nofollow">Enseñar el código</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introduzca los términos de búsqueda o un módulo, clase o nombre de función.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Índice General"
+             >índice</a></li>
+        <li><a href="../index.html">&lt;project&gt;</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Martín Gaitán.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

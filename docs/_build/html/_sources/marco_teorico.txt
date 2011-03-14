@@ -1,3 +1,5 @@
+.. _marco:
+
 Marco Teórico
 **************
 
@@ -143,11 +145,11 @@ moléculas de gas como otros efectos que afectan al término de presiones
 
 Muchas de las **ecuaciones de estado modernas** son mejoras y correcciones 
 a la ecuación original de Van der Waals (denominadas ecuaciones de estado 
-cúbicas). Por ejemplo la ecuación de Soave-Redlich-Kwong (1972), Peng-Robinson, Elliott-Suresh-Donohue, etc. 
+cúbicas). Por ejemplo la ecuación de Soave-Redlich-Kwong (1972), Peng-Robinson (1976), 
+Elliott-Suresh-Donohue (1990), etc. 
 
 GPEC es capaz de realizar los cálculos usando cinco diferentes ecuaciones de 
 estado (ver :ref:'Requerimientos funcionales').
-
 
 Aplicación y utilidad
 ----------------------
@@ -167,6 +169,10 @@ y Jørgen Mollerup de la Universidad Técnica de Dinamarca, que
 ha convocado a centenares de profesionales de diversas firmas como British 
 Petroleum, Chevron, Phillips, Shell y muchas otras de renombre mundial. 
 
+Estado del arte
+---------------
+
+.. todo:: estado del arte
 
 Metodologías de desarrollo de Software
 ========================================
@@ -204,6 +210,8 @@ la implementación de pruebas automatizadas, la utilización de bibliotecas
 probas para la implementación de aspectos específicos de la solución, entre 
 otras. 
 
+.. _desarrollo:
+
 Desarrollo evolutivo adaptado
 -----------------------------
 
@@ -240,8 +248,18 @@ basándose en estrategias de desarrollo ágil mencionadas previamente.
 Tecnologías principales
 ========================
 
-Python 
-------
+Se expondrá a continuación una introducción a las características y conceptos
+claves de las tecnologías de software que se han utilizado en este proyecto. 
+
+
+    .. seealso:: 
+
+       En el capítulo :ref:`implementacion` se ahonda en algunos aspectos 
+       para explicar cuestiones particulares.  
+     
+
+Lenguaje de programación Python 
+-------------------------------
 
 `Python <http://python.org>`_ es un avanzado lenguaje de programación de alto nivel, 
 :term:`interpretado`, :term:`multiparadigma` y :term:`multiplataforma`. 
@@ -354,7 +372,7 @@ muchas otras.
 
 Además de la incorporada, puede interfacear con diversas bibliotecas, por ejemplo
 para desarrollar interfaces gráficas de usuario (:term:`GUI`) (ver 
-:ref:`WxPython`), y a la vez es extensible en C o C++. 
+:ref:`wx`), y a la vez es extensible en C o C++. 
 
 Esta facilidad de integración permite que frecuentemente sea utilizado 
 como *"lenguaje pegamento"* (ver [GvR1998]_ ) para interconectar código que 
@@ -363,7 +381,7 @@ en otro lenguaje de más bajo nivel, permitiendo aprovechar las ventajas de Pyth
 
 Python ha ganado popularidad no sólo entre programadores aficionados
 sino en el mercado altamente competitivo de la industria del software. Como 
-plantea Shannon Behrens en el prólogo de [TZ2008]_:
+plantea Shannon Behrens en el prólogo de [ZIADE2008]_:
     
     Hubo un tiempo en el que las compañías me llamaban loco cuando insistía en usar Python. 
     En estos días, simplemente no hay suficientes programadores Python para todos. 
@@ -509,11 +527,12 @@ El resultado se observa en el siguiente gráfico:
     
     .. figure:: images/mpl_fig1.png
        :alt: Figura
+       :width: 75% 
 
        Gráfico generado interactivamente
 
 
-.. _wxpython:
+.. _wx:
 
 WxPython
 --------
@@ -527,7 +546,7 @@ para el lenguaje de programación Python. Junto a Python permite el desarrollo
 rápido de aplicaciones gráficas de escritorio multiplataforma.
 
 Una de las características sobresalientes de wxWidgets es su uso nativo de 
-las API gráficas de cada entorno de ventanas, brindando una apariencia y experiencia
+las APIs gráficas de cada entorno, brindando una apariencia y experiencia
 de uso nativa para cada ambiente. Esto significa la misma aplicación, sin modificaciones
 (al menos significativas), adopta las características gráficas definidas por el 
 usuario en el entorno de escritorio. En concreto: se ve como *una aplicación Windows* 
@@ -576,8 +595,8 @@ Se expondrán estos conceptos con un ejemplo::
         app.MainLoop()
 
 
-La subclase ``MyFrame`` hereda de la clase ``wx.Frame`` y extiende su 
-constructor incluyendo un objeto ``Panel`` (elemento contenedor de otros 
+La subclase ``MyFrame`` hereda de la clase :py:class:`wx.Frame` y extiende su 
+constructor incluyendo un objeto :py:class:`Panel`` (elemento contenedor de otros 
 objetos gráficos), una línea de texto estática y una caja de texto 
 denominada ``self.posCtrl``. 
 
@@ -659,7 +678,7 @@ El proyecto se encuentra en la dirección http://code.google.com/p/gpec2010 .
 .. figure:: images/google_code.png
    :width: 90%
 
-    Portada del proyecto en Google Code. 
+   Portada del proyecto en Google Code. 
 
 
 Seguimiento de errores y propuestas
@@ -792,7 +811,7 @@ y PDF de alta calidad a través de Latex.
                 Departamento de Lenguajes y Sistemas Informáticos, Universitat Jaume I,
                 Castelló de la Plana
                                            
-.. [TZ2008]  Ziadé, Tarek (2008),  *Expert Python programming*, Pack Publishing, Birmingham
+.. [ZIADE2008]  Ziadé, Tarek (2008),  *Expert Python programming*, Pack Publishing, Birmingham
 
 .. [MA2010]  Alchin, Marty  (2010), *Pro Python*, Apress, New York
 

@@ -61,8 +61,21 @@ Computación
     GUI
         pass
 
+        .. seealso::  :term:`layout`
+
     API
-        
+        pass
+
+    decorator
+        pass
+
+        .. seealso::  :term:`wrapper`
+    
+    singleton
+        pass
+
+    layout
+        pass
 
     herencia
         pass

@@ -1,3 +1,5 @@
+.. _implementacion:
+
 Implementación
 ***************
         
@@ -385,7 +387,7 @@ Patrón *decorator*
 -------------------
 
 Una forma habitual de implementar el mecanismo de 
-*caché* es a través del :term:`patrón Decorator`, que en términos
+*caché* es a través del patrón  :term:`Decorator`, que en términos
 simplificados realiza una transformación dinámica de una función o método, 
 agregándole una funcionalidad que no tiene por sí misma, o más en general, 
 alterando de alguna manera el resultado devuelto. 
@@ -393,16 +395,15 @@ alterando de alguna manera el resultado devuelto.
 .. figure:: images/Decorator_UML_class_diagram.png
    :width: 60% 
 
-    Diagrama de clases del patrón *Decorator*
+   Diagrama de clases del patrón *Decorator*
 
 Expresándolo en términos matemáticos, se trata de una :dfn:`composición de funciones`:
 
 .. math::
-   :label:`composición de funciones`
 
-    X \to \,\,Y\;\; \to \;\;\,Z
+   X \to \,\,Y\;\; \to \;\;\,Z
 
-    x \mapsto f(x) \mapsto g(f(x))
+   x \mapsto f(x) \mapsto g(f(x))
 
 Desde la versión 2.4, Python tiene una nomenclatura facilitada para la 
 escritura de decoradores. Una estructura genérica para la definición 
@@ -439,7 +440,7 @@ Algoritmo de caché de datos
 ------------------------------
 
 El algoritmo utilizado para la implementación del sistema de *caché* se llama 
-:dfn:`memoize`[#]_ y es descripto en detalle en [ZIADE2008]_ , cuya versión, 
+:dfn:`memoize` [#]_ y es descripto en detalle en [ZIADE2008]_ , cuya versión, 
 parcialmente simplificada, se ha utilizado. 
 
 En este caso, la funcionalidad que aporta el decorador a la 
@@ -538,7 +539,7 @@ Código fuente
 Interfaz Gráfica de Usuario (GUI)
 =================================
 
-Contenedores y *sizer*
+Contenedores y *sizers*
 -----------------------
 
 En la introducción general a :ref:`wx` vista en :ref:`marco` se hizo referencia
@@ -560,17 +561,17 @@ Para solucionar este problema wxPython, y en general, todos los frameworks para
 la construcción de GUIs modernas, utilizan el concepto de *sizers*, que son algoritmos
 automáticos que distribuyen los elementos de la interfaz de una menera predeterminada. 
 
-Un ``sizer`` en wxPython es un objeto visualmente invisible que no es un contenedor (como son, por ejemplo, 
- :py:class:`Panel`, :py:class:`Frame` o una página de un elemento :py:class:`wx.Notebook`)
+Un ``sizer`` en wxPython es un objeto invisible que no es un contenedor (como son, por ejemplo, 
+:py:class:`Panel`, :py:class:`Frame` o una página de un elemento :py:class:`wx.Notebook`)
 sino que simplemente indican cómo se ubican originalmente y cómo se comportan visualmente
 los elementos ante un evento que afecte  la apariencia de la aplicación. 
 Todo los *sizers* son instancias de una subclase de la clase abstracta :py:class:`wx.Sizer`
 
+    .. seealso:: 
 
-.. seealso:: 
+       Para una explicación exhaustiva sobre el tema, vea el capitulo 11 de 
+        *"wxPython in Action"*, [NR-RD2006]_ 
 
-   Para una explicación exhaustiva sobre el tema, vea el capitulo 11 de *wxPython in Action*, 
-   ([NR-RD2006]_ )
 
 Por ejemplo, ``sizer`` permite dividir el espacio, cualquier este sea, en porciones
 proporcionales de filas o columnas, y ubicar allí elementos (como botones o campos de 
@@ -581,7 +582,7 @@ puede contener a otros de manera anidada, definiendo una cuadrícula con espacio
 
 
 .. figure:: images/wxglade-sizer.png
-   :width: 80%
+   :width: 95%
     
    Diseño con *sizers* de una ventana de la aplicación mediante la utilidad 
    `wxGlade <http://wxglade.sourceforge.net>`_
@@ -599,18 +600,18 @@ En GPEC, toda la distribución de componentes está dispuesta a través de ``siz
 Como ejemplo, se muestra la parte superior de un panel para la definición de un caso
 donde consta el uso anidado de ``sizers`` de distinto tipo. 
 
-.. figure:: images/sizers-example.png
-   :width: 85%
+.. figure:: images/sizers_example.png
+   :width: 90%
     
    Distribución mediante *sizers* de componentes. El contenido del ``GridBagSizer``
    es dinámico, cambiando su contenido en función de un evento de cambio de 
    opción (evento ``wx.EVT_CHOICE``) del menú de modelos. 
  
-Se observa que existe un panel contenedor principal, :py:class:`CasePanel` cuyo 
-*sizer* principal es por filas (``wx.BoxSizer(wx.VERTICAL)``) al que se le suman
- 2 instancias del panel , :py:class:`VarsAndParamsPanel` (sólo se muestra uno, pero 
-corresponde 1 para cada compuesto del sistema binario) cuyo layout se basa en un 
-:py:class:`wx.GridBagSizer` de 6 filas por 5 columnas. 
+Se observa que existe un panel contenedor principal, :py:class:`CasePanel` cuyo *sizer* 
+principal es por filas (``wx.BoxSizer(wx.VERTICAL)``) al que se le suman 
+2 instancias del panel , :py:class:`VarsAndParamsPanel` (sólo se muestra uno, pero 
+corresponde 1 para cada compuesto del sistema binario) cuyo layout 
+se basa en un :py:class:`wx.GridBagSizer` de 6 filas por 5 columnas. 
 
 La porción de código relevante se describe a continuación:: 
 
@@ -701,14 +702,14 @@ a ser trivial. Básicamente consiste en dos objetos:
   un panel principal de `wx`. 
 
 .. figure:: images/gpec_aui_max.png
-   :width: 100%
+   :width: 95%
 
    La interfaz avanzada de GPEC visualizando 2 de los 4 paneles por defecto. 
-   Yendo a :menuselection:‘View --> Restore default view‘ se reestablece la 
-   estructura original.  
 
-Conociendo la utilidad de estos objetos, un extracto 
-relevante de :py:class:`MainFrame` es el siguiente::
+Vale comentar que luego de cualquier cambio, yendo a :menuselection:‘View --> Restore default view‘ se reestablece la 
+estructura original.  
+
+Un extracto relevante de :py:class:`MainFrame` es el siguiente::
 
     class MainFrame(wx.Frame):
 

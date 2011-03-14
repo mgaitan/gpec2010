@@ -6,8 +6,8 @@ Metodología de relevamiento
 
 Para el relevamiento de requerimientos se realizaron entrevistas informales 
 con el comitente, una evaluación exhaustiva de la versión preexistente y, 
-basado en el modelo de :ref:`desarrollo evolutivo adaptado` (que se explica 
-en :ref:`Marco Teórico`), sucesivas presentaciones de prototipos que se 
+basado en el modelo de :ref:`desarrollo` (que se explica 
+en :ref:`marco`), sucesivas presentaciones de prototipos que se 
 fueron adaptando según las observaciones de la parte interesada. 
 
 Además se utilizó un *issue tracker* para permitir que los usuarios 
@@ -65,7 +65,7 @@ diferentes diagramas.
 La comunicación con los algoritmos implementados en Fortran se realiza mediante
 archivos de texto plano en un formato cuya estructura *ad hoc* es comprendida por 
 las dos partes. Como se verá en breve, esta interfaz de comunicación se ha respetado
-(ver `API`_). Asimismo, los datos de salida que producen los algoritmos, son 
+(ver :ref:`api`). Asimismo, los datos de salida que producen los algoritmos, son 
 leídos por Visual Gpec desde archivos de texto para su posterior 
 graficación, que se realiza mediante rutinas desarrolladas *ad hoc* para esta 
 implementación. Es decir, no se utiliza en ninguna biblioteca para estos fines. 
@@ -278,13 +278,13 @@ Casos de uso
 ============
 
 Casos de uso destacados
-----------------------
+-----------------------
 
-Se especifican en esta sección, de manera no formal [#]_, un conjunto de casos de 
+Se especifican en esta sección, de manera no formal, un conjunto de casos de 
 uso de especial interés para el diseño del software. 
 
-Un proyecto, muchos "casos" 
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Un proyecto, muchos casos
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Una tarea frecuente del usuario (investigador) es la comparación entre 
 distintos "casos" de estudio. Esto puede ser, un mismo sistema binario con 

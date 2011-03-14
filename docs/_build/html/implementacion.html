@@ -50,11 +50,9 @@
           <div class="body">
             
   <div class="section" id="implementaci-n">
-<h1>6. Implementación<a class="headerlink" href="#implementaci-n" title="Enlazar permanentemente con este título">¶</a></h1>
-<div class="section" id="patrones-de-dise-o">
-<h2>6.1. Patrones de diseño<a class="headerlink" href="#patrones-de-dise-o" title="Enlazar permanentemente con este título">¶</a></h2>
-<div class="section" id="publish-subscribe">
-<h3>6.1.1. Publish/Subscribe<a class="headerlink" href="#publish-subscribe" title="Enlazar permanentemente con este título">¶</a></h3>
+<span id="implementacion"></span><h1>6. Implementación<a class="headerlink" href="#implementaci-n" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="el-patr-n-publish-subscribe">
+<h2>6.1. El patrón Publish/Subscribe<a class="headerlink" href="#el-patr-n-publish-subscribe" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Un patrón de diseño (también catalogado como patrón de mensajería) de recurrente
 aplicación en GPEC ha sido <em>Publish/Subscribe</em>, frencuentemente abreviado <em>Pubsub</em>.
 Se trata de una arquitectura de paso de mensajes desacoplada (y en algunas implementaciones distribuída)
@@ -66,7 +64,7 @@ se define a qué tipo de mensajes se suscribirán (el tipo se define en función
 del &#8220;asunto&#8221; o &#8220;topic&#8221;) y qué acción (un método o función)
 debe ejecutarse cuando un mensaje de tal tipo arribe.</p>
 <div class="figure">
-<img alt="_images/pubsub_concept12.png" src="_images/pubsub_concept12.png" style="width: 60%;" />
+<img alt="_images/pubsub_concept24.png" src="_images/pubsub_concept24.png" style="width: 60%;" />
 <p class="caption">Diagrama conceptual de la arquitectura <em>Pub/Sub</em></p>
 </div>
 <p>Como se describe en <a class="reference internal" href="#vdlaar2002">[vdLaar2002]</a> Pubsub facilita el desacople de componentes
@@ -97,7 +95,7 @@ el intermediario) un mensaje con un tópico dado, y opcionalmente, cualquier inf
 adjunta. Este intermediario (a veces conocido como <em>broker</em>, o directamente
 <em>pubsub</em>) entrega este mensaje a todos los receptores suscriptos.</p>
 <div class="section" id="ventajas">
-<h4>6.1.1.1. Ventajas<a class="headerlink" href="#ventajas" title="Enlazar permanentemente con este título">¶</a></h4>
+<h3>6.1.1. Ventajas<a class="headerlink" href="#ventajas" title="Enlazar permanentemente con este título">¶</a></h3>
 <ul class="simple">
 <li><strong>Acoplamiento débil</strong>: la topología de Pubsub, basada en la intermediación y el
 desconocimiento de identidades y comportamientos de los objetos que interactuan
@@ -119,11 +117,11 @@ Sin embargo, la eficiencia no suele ser proporcional en sistemas de alta
 demanda computacional.</li>
 </ul>
 </div>
-<div class="section" id="python-pubsub">
-<h4>6.1.1.2. Python Pubsub<a class="headerlink" href="#python-pubsub" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="section" id="pubsub-en-python">
+<h3>6.1.2. Pubsub en Python<a class="headerlink" href="#pubsub-en-python" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En GPEC se ha utilizado el paquete <a class="reference external" href="http://pubsub.sourceforge.net/">Python Pubsub</a>
-de Oliver Schoenborn, en su versión 1 <a class="footnote-reference" href="#id7" id="id3">[1]</a> . Esta implementación es muy sencilla
-y se basa en la existencia de un objeto único (Ver <em class="xref std std-term">singleton</em>), <tt class="docutils literal"><span class="pre">pub</span></tt>,
+de Oliver Schoenborn, en su versión 1 <a class="footnote-reference" href="#id16" id="id2">[1]</a> . Esta implementación es muy sencilla
+y se basa en la existencia de un objeto único (Ver <a class="reference internal" href="glosario.html#term-singleton"><em class="xref std std-term">singleton</em></a>), <tt class="docutils literal"><span class="pre">pub</span></tt>,
 que controla el envío y las suscripción a los mensajes. Se describe en el siguiente
 código:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pubsub</span> <span class="kn">import</span> <span class="n">pub</span>
@@ -150,17 +148,17 @@ código:</p>
 </div>
 <p>Cuyo diagrama de secuencia es el siguiente:</p>
 </div>
-<div class="section" id="ejemplos-de-uso">
-<h4>6.1.1.3. Ejemplos de uso<a class="headerlink" href="#ejemplos-de-uso" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="section" id="usos-en-gpec">
+<h3>6.1.3. Usos en GPEC<a class="headerlink" href="#usos-en-gpec" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="section" id="panel-de-mensajes">
-<h5>6.1.1.3.1. Panel de mensajes<a class="headerlink" href="#panel-de-mensajes" title="Enlazar permanentemente con este título">¶</a></h5>
+<h4>6.1.3.1. Panel de mensajes<a class="headerlink" href="#panel-de-mensajes" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Como se ha dicho, PubSub constituye el patrón principal y toda la <em>orientación
 a eventos</em> se basa en una comunicación vía esta biblioteca.</p>
 <p>El ejemplo canónico es el <strong>panel de log</strong> (registro de mensajes de usuario), donde
 se registra una crónica de eventos de interés para el usuario, denotados en
 su categoría con un símbolo y la hora del suceso.</p>
 <div class="figure">
-<img alt="_images/log_msg11.png" src="_images/log_msg11.png" style="width: 80%;" />
+<img alt="_images/log_msg23.png" src="_images/log_msg23.png" style="width: 80%;" />
 <p class="caption">A través de PubSub, cualquier parte del programa envía avisos que el panel
 (un <em>receptor</em>) mostrará al usuario.</p>
 </div>
@@ -213,19 +211,19 @@ al icono que los representan:</p>
 </thead>
 <tbody valign="top">
 <tr><td><em>ok</em></td>
-<td><img alt="ok" src="_images/ok10.png" /></td>
+<td><img alt="ok" src="_images/ok22.png" /></td>
 <td>Acción existosa</td>
 </tr>
 <tr><td><em>info</em></td>
-<td><img alt="info" src="_images/info10.png" /></td>
+<td><img alt="info" src="_images/info22.png" /></td>
 <td>Información importante</td>
 </tr>
 <tr><td><em>warning</em></td>
-<td><img alt="warning" src="_images/warning10.png" /></td>
+<td><img alt="warning" src="_images/warning22.png" /></td>
 <td>Advertencia</td>
 </tr>
 <tr><td><em>error</em></td>
-<td><img alt="error" src="_images/error10.png" /></td>
+<td><img alt="error" src="_images/error22.png" /></td>
 <td>Error</td>
 </tr>
 </tbody>
@@ -246,33 +244,34 @@ observa:</p>
 </div>
 </div>
 <div class="section" id="generaci-n-de-gr-ficos">
-<h5>6.1.1.3.2. Generación de gráficos<a class="headerlink" href="#generaci-n-de-gr-ficos" title="Enlazar permanentemente con este título">¶</a></h5>
-<p>Otro uso de PubSub es la generación de gráficos. Se resume en el siguiente
+<h4>6.1.3.2. Generación de gráficos<a class="headerlink" href="#generaci-n-de-gr-ficos" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>Otro uso de <tt class="docutils literal"><span class="pre">PubSub</span></tt> es la generación de gráficos. Se resume en el siguiente
 diagrama de secuencia:</p>
 <div class="figure">
-<img alt="_images/uml_sec_makeplot10.png" src="_images/uml_sec_makeplot10.png" style="width: 100%;" />
+<img alt="_images/uml_sec_makeplot_vertical4.png" src="_images/uml_sec_makeplot_vertical4.png" style="width: 65%;" />
+<p class="caption">Secuencia para la generación de un diagrama desde el evento generado por
+el usuario</p>
 </div>
 <p>Esto significa que el panel de definición de casos está independizado del
 panel contenedor de los gráficos generados a traves de PubSub.
 El mencanismo invocación del backend (desde donde se obtienen los datos a graficar)
 se verá más adelante.</p>
-</div>
 <div class="section" id="exposici-n-de-archivos-de-datos">
-<h5>6.1.1.3.3. Exposición de archivos de datos<a class="headerlink" href="#exposici-n-de-archivos-de-datos" title="Enlazar permanentemente con este título">¶</a></h5>
+<h5>6.1.3.2.1. Exposición de archivos de datos<a class="headerlink" href="#exposici-n-de-archivos-de-datos" title="Enlazar permanentemente con este título">¶</a></h5>
 <p>Cada invocación a un ejecutable del backend dependen de una entrada
-y produce una salida <a class="footnote-reference" href="#id8" id="id4">[2]</a> en un archivo de texto. Para usuarios avanzados que conocen
+y produce una salida <a class="footnote-reference" href="#id17" id="id3">[2]</a> en un archivo de texto. Para usuarios avanzados que conocen
 la estructura y significado de estos archivos (descriptos en :ref:&#8217;api&#8217;), es
 deseable que tengan un acceso al contenido desde la propia aplicación, para
 encontrar información numérica puntual cuya precisión se pierde en un gráfico.</p>
 <div class="figure">
-<img alt="_images/inpout6.png" src="_images/inpout6.png" style="width: 80%;" />
+<img alt="_images/inpout18.png" src="_images/inpout18.png" style="width: 80%;" />
 </div>
 <p>Esta tarea se hace a través de PubSub. El emisor envía un mensaje con tópico
 <tt class="docutils literal"><span class="pre">add_txt</span></tt> adjuntando como información una tupla con la ruta al archivo
 y el caso al que este cálculo pertenence.</p>
 <p>Por ejemplo, la función que escribe el archivo de entrada para el cálculo de
 parámetros es la siguiente:</p>
-<div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">_write_conparin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">model_id</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">write_conparin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">model_id</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Write the input file CONPARIN.DAT &quot;. data could be EOS variables or </span>
 <span class="sd">            model paramater&quot;&quot;&quot;</span> 
 
@@ -330,7 +329,7 @@ método <tt class="xref py py-meth docutils literal"><span class="pre">OnAddItem
 </div>
 </div>
 <div class="section" id="tabla-de-incidencias-de-mensajes">
-<h5>6.1.1.3.4. Tabla de incidencias de mensajes<a class="headerlink" href="#tabla-de-incidencias-de-mensajes" title="Enlazar permanentemente con este título">¶</a></h5>
+<h5>6.1.3.2.2. Tabla de incidencias de mensajes<a class="headerlink" href="#tabla-de-incidencias-de-mensajes" title="Enlazar permanentemente con este título">¶</a></h5>
 <blockquote>
 <div><table border="1" class="docutils">
 <colgroup>
@@ -388,13 +387,183 @@ de los gráficos</td>
 </div></blockquote>
 <p>Para un listado completo puede analizar el código fuente ejecutando
 <tt class="docutils literal"><span class="pre">grep</span> <span class="pre">-r</span> <span class="pre">&quot;pub.sendMessage&quot;</span></tt> sobre el directorio de código fuente raiz
-de GPEC. <a class="footnote-reference" href="#id9" id="id5">[3]</a></p>
+de GPEC. <a class="footnote-reference" href="#id18" id="id4">[3]</a></p>
 </div>
+</div>
+</div>
+</div>
+<div class="section" id="invocaci-n-de-ejecutables-del-backend">
+<h2>6.2. Invocación de ejecutables del backend<a class="headerlink" href="#invocaci-n-de-ejecutables-del-backend" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>La comunicación frontend-backend se describe en el siguiente diagrama de secuencia
+donde se resalta el ciclo de vida del objeto <tt class="xref py py-class docutils literal"><span class="pre">ApiManager</span></tt> donde está
+implementada la lógica de tratamimiento de la interfaz de comunicación.</p>
+<p>El caso particular representado es la obtención de datos el cálculo del diagrama
+de fase global (que se obtiene mediante el ejecutable <strong class="program">GPEC.exe</strong>)
+satisfaciendo las precondiciones de ejecución (por ejemplo, que exista el archivo
+de entrada <tt class="file docutils literal"><span class="pre">GPECIN.DAT</span></tt>, que exista permiso de ejecución, que exista
+permiso de escritura en la carpeta destino). En caso de error por algún motivo
+(conocido o no), se remite un mensaje de log y se cancela la ejecución.</p>
+<div class="figure" id="front-back">
+<img alt="_images/uml_front-back_vertical7.png" src="_images/uml_front-back_vertical7.png" style="width: 100%;" />
+<p class="caption">Secuencia de la comunicación frontend-backend</p>
+</div>
+<div class="section" id="la-dependencia-con-wine">
+<h3>6.2.1. La dependencia con Wine<a class="headerlink" href="#la-dependencia-con-wine" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El <em>backend</em> de GPEC, codificado en Fortran por Cismondi, ha sido compilado mediante
+Microsoft Fortran y se compone de un conjunto de ejecutables Windows (<tt class="docutils literal"><span class="pre">.exe</span></tt>).
+Si bien el código es Fortran estándar y compatible con compiladores libres (como
+<a class="reference external" href="http://gcc.gnu.org/fortran/">GNU Fortran</a> ) pudiéndose generar ejecutables
+específicos para sistemas Linux, existe una dependencia con la librería
+propietaria  <em>IMSL® Numerical Libraries</em>, que brinda un conjunto de rutinas
+matemáticas (álgebra lineal, cálculo matricial, etc.) que se utilizan en la
+implementación de los algoritmos.</p>
+<p>Esta dependencia impide, por el momento, generar una versión completamente
+nativa para plataformas Linux (y, a priori, la posibilidad de liberar
+completamente el código).</p>
+<p>Para permitir la ejecución sobre Windows es necesario la utilización de
+<em>Wine</em>, un software que ofrece una capa de compatibilidad para aplicaciones
+DOS, Windows 3.x, y win32, proveyendo una implementación alternativa (y parcial)
+del núcleo NT.</p>
+<p>A través de Wine, los ejecutables Fortran de GPEC funcionan perfectamente.
+La función que invoca estos ejecutables verifica el sistema operativo en que
+se está corriendo la aplicación y en caso de no ser Windows, invoca a Wine:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">args</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">!=</span> <span class="s">&#39;win32&#39;</span><span class="p">:</span>
+    <span class="c">#On any non-Windows system, we run binaries through wine</span>
+    <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;wine&#39;</span><span class="p">)</span>
+
+<span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PATH_BIN</span><span class="p">,</span> <span class="n">bin</span> <span class="o">+</span> <span class="s">&#39;.exe&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">Esta dependencia es salvable utilizando la versión para Linux de la biblioteca
+<em>IMSL</em> pero que únicamente es compilable mediante <a class="reference external" href="http://software.intel.com/en-us/articles/intel-composer-xe/">Intel® Fortran Composer</a> , con lo cual
+se duplica la dependencia de software privativo.</p>
+</div>
+</div>
+</div>
+<div class="section" id="memorizaci-n-de-resultados-costosos">
+<h2>6.3. Memorización de resultados costosos<a class="headerlink" href="#memorizaci-n-de-resultados-costosos" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Como se observa <a class="reference internal" href="#front-back"><em>Secuencia de la comunicación frontend-backend</em></a>, el proceso de comunicación y obtención de los
+datos desde el backend no es trivial. Más aún, considerando que, dada la arquitectura
+heredada interviene de manera insalvable la escritura y lectura a disco, el
+proceso también es costoso <a class="footnote-reference" href="#id19" id="id5">[4]</a> a nivel computacional.</p>
+<p>Tomando de ventaja de la condición determinística de la operación (para los mismos
+parámetros de entrada, es decir el caso, se obtiene siempre el mismo resultado)
+se puede calcular una vez, guardar el resultado en memoria, y devolverlo sin
+recalcular cada vez que la operación con exáctamente los mismos parámetros
+es solicitada de nuevo. A este proceso se lo denomina <em class="dfn">caché de datos</em>.</p>
+<p>Esto tiene validez, además, dado que la probabilidad de que los parámetros
+sean los mismos es alta. Por ejemplo, en el siguiente caso de uso:</p>
+<blockquote>
+<div>El usuario necesita generar una isopleta para determinada composición
+(o cualquier otra curva no global). Para esto, GPEC requiere haber
+calculado el diagrama global previamente (los ejecutables requieren <tt class="file docutils literal"><span class="pre">GPECOUT.DAT</span></tt>
+como precondición de entrada), de modo que este cálculo se realiza
+sin mostrar los diagramas.
+Si posteriormente el usuario decide que necesita los diagramas globales,
+simplemente se grafican el respaldo en memoria sin realizar la el cálculo
+mediante backend.</div></blockquote>
+<p>Por último, dado el manejo referencial de memoria que hace Python, la permanencia
+del array en memoria no está duplicada respecto al que se utiliza para graficar.</p>
+<div class="section" id="patr-n-decorator">
+<h3>6.3.1. Patrón <em>decorator</em><a class="headerlink" href="#patr-n-decorator" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Una forma habitual de implementar el mecanismo de
+<em>caché</em> es a través del patrón  <a class="reference internal" href="glosario.html#term-decorator"><em class="xref std std-term">Decorator</em></a>, que en términos
+simplificados realiza una transformación dinámica de una función o método,
+agregándole una funcionalidad que no tiene por sí misma, o más en general,
+alterando de alguna manera el resultado devuelto.</p>
+<div class="figure">
+<img alt="_images/Decorator_UML_class_diagram6.png" src="_images/Decorator_UML_class_diagram6.png" style="width: 60%;" />
+<p class="caption">Diagrama de clases del patrón <em>Decorator</em></p>
+</div>
+<p>Expresándolo en términos matemáticos, se trata de una <em class="dfn">composición de funciones</em>:</p>
+<div class="math">
+<p><img src="_images/math/a6aa91817f451ebfb474c5a537d779e732b24bbb.png" alt="X \to \,\,Y\;\; \to \;\;\,Z
+
+x \mapsto f(x) \mapsto g(f(x))" /></p>
+</div><p>Desde la versión 2.4, Python tiene una nomenclatura facilitada para la
+escritura de decoradores. Una estructura genérica para la definición
+de una función decoradora, que se compone de un <a class="reference internal" href="glosario.html#term-wrapper"><em class="xref std std-term">wrapper</em></a>
+de dos funciones anidadas <a class="footnote-reference" href="#id20" id="id6">[5]</a>,  es la siguiente:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">mydecorator</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">_mydecorator</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="c"># hacer las tareas de &#39;decoración&#39;</span>
+<span class="gp">... </span>        <span class="c"># antes de llamar a la funcion decorada</span>
+<span class="gp">... </span>        <span class="n">res</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="c"># hacer otras cosas antes de devolver el resultado</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">res</span>
+<span class="gp">... </span>    <span class="c"># se devuelve la subfunción</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">_mydecorator</span>
+<span class="gp">...</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>Cuando se tiene una funcion cualquier que se quiere decorar, simplemente
+se utiliza la sintaxis <tt class="docutils literal"><span class="pre">&#64;mydecorator</span></tt> justo antes de la función en
+cuestion. Por ejemplo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nd">@mydecorator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">mifuncion</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>Al llamar a <tt class="xref py py-func docutils literal"><span class="pre">mifuncion()</span></tt> se obtiene en realidad
+<tt class="docutils literal"><span class="pre">mydecorator(mifuncion())</span></tt>. La ventaja sintáctica de Python es que permite</p>
+</div>
+<div class="section" id="algoritmo-de-cach-de-datos">
+<h3>6.3.2. Algoritmo de caché de datos<a class="headerlink" href="#algoritmo-de-cach-de-datos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El algoritmo utilizado para la implementación del sistema de <em>caché</em> se llama
+<em class="dfn">memoize</em> <a class="footnote-reference" href="#id21" id="id7">[6]</a> y es descripto en detalle en <a class="reference internal" href="marco_teorico.html#ziade2008">[ZIADE2008]</a> , cuya versión,
+parcialmente simplificada, se ha utilizado.</p>
+<p>En este caso, la funcionalidad que aporta el decorador a la
+función que se &#8220;decora&#8221; es la siguiente:</p>
+<ol class="arabic simple">
+<li>Se obtienen todos los parámetros de la función y con ellos se genera
+un <em>hash</em>, es decir, una clave de cadena de caracteres unívoca para ese conjunto de datos.</li>
+<li>Se evalua si ese <em>hash</em> existe como clave en el diccionario que almacena resultados
+&#8220;memorizados&#8221;.</li>
+<li>Dependiendo del resultado anterior<ol class="upperalpha">
+<li>Si la clave existe en el diccionario (o sea, el resultado para esos parámetros
+se calculó previamente) se devuelve el valor de la entrada sin llamar a
+la función decorada.</li>
+<li>Si la clave no existe (lo que implica que es la primera vez que se llama la
+función con los parámetros dados) se invoca a la función decorada y con el
+resultado se agrega una entrada en el diccionario <tt class="docutils literal"><span class="pre">hash:resultado</span></tt>. Además,
+se devuelve el resultado.</li>
+</ol>
+</li>
+</ol>
+</div>
+<div class="section" id="c-digo-fuente">
+<h3>6.3.3. Código fuente<a class="headerlink" href="#c-digo-fuente" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">compute_key</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kw</span><span class="p">):</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">((</span><span class="n">function</span><span class="o">.</span><span class="n">func_name</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kw</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha1</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">memoize</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">_memoize</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">__memoize</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">compute_key</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kw</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cache</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>     <span class="c">#we have&#39;nt it already?</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>   
+                <span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>         <span class="c">#store a new one </span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&#39;found in cache&#39;</span>          <span class="c">#TODO may be it&#39;s a better idea get a file and parse it again instead </span>
+                                                <span class="c">#cache the whole arrays. </span>
+
+            <span class="k">return</span> <span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>   
+        <span class="k">return</span> <span class="n">__memoize</span>
+    <span class="k">return</span> <span class="n">_memoize</span>
+</pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="algoritmo-de-an-lisis-sint-ctico">
-<h2>6.2. Algoritmo de análisis sintáctico<a class="headerlink" href="#algoritmo-de-an-lisis-sint-ctico" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>6.4. Algoritmo de análisis sintáctico<a class="headerlink" href="#algoritmo-de-an-lisis-sint-ctico" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Como ya se ha hecho mención, la comunicación con los ejecutables del <em>backend</em>
 se realiza mediante archivos de texto. Los archivos de salida, en particular,
 contienen (en arreglos de columnas) los vectores de datos para cada variable
@@ -413,7 +582,7 @@ con la definición de la interfaz. Una descripción exhaustiva se expone
 en <a class="reference internal" href="api.html#api"><em>Especificación de la interfaz de comunicación</em></a>.</p>
 </div>
 <div class="section" id="descripci-n">
-<h3>6.2.1. Descripción<a class="headerlink" href="#descripci-n" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>6.4.1. Descripción<a class="headerlink" href="#descripci-n" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>El algoritmo se basa en identificar <em>tokens</em> (marcas) que declaran el inicio y final
 de información válida para un diagrama, determinando así la porción de texto
 (números flotantes en formato texto) que debe extraerse. Este texto se convierte
@@ -421,20 +590,22 @@ a un objeto array de <tt class="xref py py-mod docutils literal"><span class="pr
 <p>Las marcas de inicio son cadena de tres letras mayúsculas (<tt class="docutils literal"><span class="pre">VAP</span></tt>,``CRI``,``LLV``, etc.)
 y un renglón vacío marca el final del bloque de información.</p>
 <div class="figure">
-<img alt="_images/parser1.png" src="_images/parser1.png" style="width: 80%;" />
-<p class="caption">Topología de la información analizada</p>
+<img alt="_images/parser13.png" src="_images/parser13.png" style="width: 80%;" />
+<p class="caption">Topología de la información extractada</p>
 </div>
 <p>Una estructura de datos basadas en asociaciones clave-valor (diccionarios),
 define los tipos posibles de curvas y las columnas significativas que se deben
 extraer para cada una. Iterando sobre todas las líneas del archivo se obtiene
 un nuevo diccionario cuya clave es una tupla de la forma <tt class="docutils literal"><span class="pre">(inicio,</span> <span class="pre">fin)</span></tt> y el
 tipo de curva como valor.</p>
-<p>Con esta información simplemente se &#8220;recorta&#8221; el archivo fuente completo del cual
-se realiza una copia residente en memoria <a class="footnote-reference" href="#id10" id="id6">[4]</a> para importarlo
-y convertirlo a flotantes mediante la función <tt class="xref py py-func docutils literal"><span class="pre">numpy.loadtxt()</span></tt></p>
+<p>Con esta información simplemente se &#8220;recorta&#8221; el archivo de texto completo del cual
+se realiza una copia residente en memoria <a class="footnote-reference" href="#id22" id="id9">[7]</a> para importarlo
+y convertirlo a arreglos de números flotantes de doble precisión
+mediante la función <tt class="xref py py-func docutils literal"><span class="pre">numpy.loadtxt()</span></tt> que acepta como parámetro
+opcional la cantidad de columnas significativas que deben interpretarse <a class="footnote-reference" href="#id23" id="id10">[8]</a>.</p>
 </div>
-<div class="section" id="c-digo-fuente">
-<h3>6.2.2. Código fuente<a class="headerlink" href="#c-digo-fuente" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="id11">
+<h3>6.4.2. Código fuente<a class="headerlink" href="#id11" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">output2array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">curve_types</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Parses gpecout.dat, PXYOUT.DAT TXYOUT.DAT or ISOPOUT.DAT</span>
 <span class="sd">        Detects numeric blocks and create arrays with them&quot;&quot;&quot;</span>
@@ -463,7 +634,7 @@ y convertirlo a flotantes mediante la función <tt class="xref py py-func docuti
                     <span class="n">end</span> <span class="o">=</span> <span class="n">line_number</span>
                     <span class="n">tokens</span><span class="p">[(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">)]</span> <span class="o">=</span> <span class="n">curve_type</span>
 
-            <span class="n">arrays_out</span> <span class="o">=</span> <span class="p">{}</span>     <span class="c">#Format: {type: [array1, array2, ... ], ...  }</span>
+            <span class="n">arrays_out</span> <span class="o">=</span> <span class="p">{}</span>     <span class="c">#Format: {type: [array1,array2, ...], ...}</span>
             
             <span class="k">for</span> <span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">),</span> <span class="n">curve_type</span> <span class="ow">in</span> <span class="n">sorted</span><span class="p">(</span><span class="n">tokens</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
                 
@@ -494,7 +665,8 @@ y convertirlo a flotantes mediante la función <tt class="xref py py-func docuti
 
                 <span class="c">#if it&#39;s a new type on the dict, create it.</span>
                 <span class="k">if</span> <span class="n">curve_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">arrays_out</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                    <span class="n">arrays_out</span><span class="p">[</span><span class="n">curve_type</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c">#TODO should it be a ndarray ?</span>
+                    <span class="c">#TODO should it be a ndarray ?</span>
+                    <span class="n">arrays_out</span><span class="p">[</span><span class="n">curve_type</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>  
                 
                 <span class="n">arrays_out</span><span class="p">[</span><span class="n">curve_type</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">curve_array</span><span class="p">)</span>
 
@@ -504,61 +676,342 @@ y convertirlo a flotantes mediante la función <tt class="xref py py-func docuti
 </div>
 </div>
 </div>
-<div class="section" id="diagramas-principales">
-<h2>6.3. Diagramas principales<a class="headerlink" href="#diagramas-principales" title="Enlazar permanentemente con este título">¶</a></h2>
-<div class="section" id="diagramas-de-componentes">
-<h3>6.3.1. Diagramas de componentes<a class="headerlink" href="#diagramas-de-componentes" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="interfaz-gr-fica-de-usuario-gui">
+<h2>6.5. Interfaz Gráfica de Usuario (GUI)<a class="headerlink" href="#interfaz-gr-fica-de-usuario-gui" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="contenedores-y-sizer">
+<h3>6.5.1. Contenedores y <em>sizer</em><a class="headerlink" href="#contenedores-y-sizer" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>En la introducción general a <a class="reference internal" href="marco_teorico.html#wx"><em>WxPython</em></a> vista en <a class="reference internal" href="marco_teorico.html#marco"><em>Marco Teórico</em></a> se hizo referencia
+a la clase <tt class="xref py py-class docutils literal"><span class="pre">wx.Panel</span></tt> describiéndola como <em>&#8220;un contenedor de otros
+objetos gráficos&#8221;</em>.</p>
+<p>Tradicionalmente, uno de los problemas más complicados en la programación de
+<a class="reference internal" href="glosario.html#term-gui"><em class="xref std std-term">GUI</em></a> es el manejo de la disposición física de los componentes en el espacio
+disponible (<a class="reference internal" href="glosario.html#term-layout"><em class="xref std std-term">layout</em></a>). En los comienzos, la solución fue el posicionamiento
+absoluto donde el programador explicitaba el tamaño y la posición exácta
+del <em>widget</em> en la pantalla <a class="footnote-reference" href="#id24" id="id12">[9]</a> . Esta estrategia acarrea una batería de problemas
+ya que sólo funciona correctamente si se tiene control total sobre el espacio
+disponible, es decir, controlando la resolución de pantalla del equipo del cliente,
+el tamaño de tipografía estándar que ha elegido, etc. pero se vuelve inmanejable
+cuando el <em>layout</em> es dinámico, es decir, que cambia en función de alguna acción
+del usuario.</p>
+<p>Para solucionar este problema wxPython, y en general, todos los frameworks para
+la construcción de GUIs modernas, utilizan el concepto de <em>sizers</em>, que son algoritmos
+automáticos que distribuyen los elementos de la interfaz de una menera predeterminada.</p>
+<p>Un <tt class="docutils literal"><span class="pre">sizer</span></tt> en wxPython es un objeto invisible que no es un contenedor (como son, por ejemplo,
+<tt class="xref py py-class docutils literal"><span class="pre">Panel</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">Frame</span></tt> o una página de un elemento <tt class="xref py py-class docutils literal"><span class="pre">wx.Notebook</span></tt>)
+sino que simplemente indican cómo se ubican originalmente y cómo se comportan visualmente
+los elementos ante un evento que afecte  la apariencia de la aplicación.
+Todo los <em>sizers</em> son instancias de una subclase de la clase abstracta <tt class="xref py py-class docutils literal"><span class="pre">wx.Sizer</span></tt></p>
+<div class="admonition-ver-tambi-n admonition seealso">
+<p class="first admonition-title">Ver también</p>
+<p class="last">Para una explicación exhaustiva sobre el tema, vea el capitulo 11 de <em>wxPython in Action</em>,
+(<a class="reference internal" href="marco_teorico.html#nr-rd2006">[NR-RD2006]</a> )</p>
 </div>
-<div class="section" id="de-clases">
-<h3>6.3.2. de clases<a class="headerlink" href="#de-clases" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Por ejemplo, <tt class="docutils literal"><span class="pre">sizer</span></tt> permite dividir el espacio, cualquier este sea, en porciones
+proporcionales de filas o columnas, y ubicar allí elementos (como botones o campos de
+texto), definiendo atributos como su alineación horizontal o vertical, el tamaño
+(proporcional al espacio, fijo, con límite máximo, etc). Asímismo, un <tt class="docutils literal"><span class="pre">sizer</span></tt>
+puede contener a otros de manera anidada, definiendo una cuadrícula con espacios para ubicar los
+<em>widgets</em> controladores <a class="footnote-reference" href="#id25" id="id14">[10]</a>.</p>
+<div class="figure">
+<img alt="_images/wxglade-sizer3.png" src="_images/wxglade-sizer3.png" style="width: 80%;" />
+<p class="caption">Diseño con <em>sizers</em> de una ventana de la aplicación mediante la utilidad
+<a class="reference external" href="http://wxglade.sourceforge.net">wxGlade</a></p>
 </div>
-<div class="section" id="de-secuencia">
-<h3>6.3.3. de secuencia<a class="headerlink" href="#de-secuencia" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El hecho de que un sizer no sea un contenedor indica que <tt class="docutils literal"><span class="pre">parent</span></tt> de cualquier elemento
+aún debe serlo. Es decir, un elemento cualquier (por ejemplo, un botón) está en incrustado
+en un contenedor (por ejemplo, un panel) pero ubicado según indica un sizer que está
+haciado al mismo contenedor.</p>
+<div class="section" id="uso-en-la-aplicaci-n">
+<h4>6.5.1.1. Uso en la aplicación<a class="headerlink" href="#uso-en-la-aplicaci-n" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>En GPEC, toda la distribución de componentes está dispuesta a través de <tt class="docutils literal"><span class="pre">sizers</span></tt>.
+Como ejemplo, se muestra la parte superior de un panel para la definición de un caso
+donde consta el uso anidado de <tt class="docutils literal"><span class="pre">sizers</span></tt> de distinto tipo.</p>
+<div class="figure">
+<img alt="_images/sizers_example1.png" src="_images/sizers_example1.png" style="width: 90%;" />
+<p class="caption">Distribución mediante <em>sizers</em> de componentes. El contenido del <tt class="docutils literal"><span class="pre">GridBagSizer</span></tt>
+es dinámico, cambiando su contenido en función de un evento de cambio de
+opción (evento <tt class="docutils literal"><span class="pre">wx.EVT_CHOICE</span></tt>) del menú de modelos.</p>
+</div>
+<p>Se observa que existe un panel contenedor principal, <tt class="xref py py-class docutils literal"><span class="pre">CasePanel</span></tt> cuyo <em>sizer</em>
+principal es por filas (<tt class="docutils literal"><span class="pre">wx.BoxSizer(wx.VERTICAL)</span></tt>) al que se le suman
+2 instancias del panel , <tt class="xref py py-class docutils literal"><span class="pre">VarsAndParamsPanel</span></tt> (sólo se muestra uno, pero
+corresponde 1 para cada compuesto del sistema binario) cuyo layout
+se basa en un <tt class="xref py py-class docutils literal"><span class="pre">wx.GridBagSizer</span></tt> de 6 filas por 5 columnas.</p>
+<p>La porción de código relevante se describe a continuación:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CasePanel</span><span class="p">(</span><span class="n">scrolled</span><span class="o">.</span><span class="n">ScrolledPanel</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+
+        <span class="n">scrolled</span><span class="o">.</span><span class="n">ScrolledPanel</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span>
+                                            <span class="n">style</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">TAB_TRAVERSAL</span>
+                                            <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">CLIP_CHILDREN</span>
+                                            <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">FULL_REPAINT_ON_RESIZE</span><span class="p">)</span>
+
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">BoxSizer</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">VERTICAL</span><span class="p">)</span>   <span class="c"># &lt;- sizer principal</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_choice</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">Choice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mf">1</span><span class="p">,</span>
+            <span class="n">choices</span> <span class="o">=</span> <span class="n">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_options</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+
+
+        <span class="n">first_row_sizer</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">BoxSizer</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">)</span> <span class="c"># &lt;- sizer secundario</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_button</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">buttons</span><span class="o">.</span><span class="n">GenBitmapTextButton</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mf">1</span><span class="p">,</span>
+                <span class="n">wx</span><span class="o">.</span><span class="n">Bitmap</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PATH_ICONS</span><span class="p">,</span><span class="s">&quot;compose.png&quot;</span><span class="p">)),</span>
+                <span class="s">&quot;Define system&quot;</span><span class="p">)</span>
+
+        <span class="n">first_row_sizer</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">load_button</span><span class="p">,</span> <span class="mf">0</span><span class="p">,</span>
+            <span class="n">flag</span><span class="o">=</span><span class="n">wx</span><span class="o">.</span><span class="n">ALL</span> <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">ALIGN_LEFT</span> <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span> <span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="mf">5</span><span class="p">)</span>
+
+        <span class="n">first_row_sizer</span><span class="o">.</span><span class="n">Add</span><span class="p">((</span><span class="mf">10</span><span class="p">,</span> <span class="mf">20</span><span class="p">),</span> <span class="mf">0</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span><span class="p">)</span>
+
+        <span class="n">first_row_sizer</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">StaticText</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mf">1</span><span class="p">,</span> <span class="s">&quot;Model:&quot;</span><span class="p">))</span>
+        <span class="n">first_row_sizer</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_choice</span><span class="p">)</span>                 <span class="c"># &lt;- menu</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span> <span class="n">first_row_sizer</span><span class="p">,</span> <span class="mf">0</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">TOP</span>
+                                          <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">LEFT</span>
+                                          <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">FIXED_MINSIZE</span>
+                                          <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">ALIGN_LEFT</span><span class="p">,</span> <span class="n">border</span> <span class="o">=</span> <span class="mf">5</span><span class="p">)</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">panels</span> <span class="o">=</span> <span class="p">(</span><span class="n">VarsAndParamPanel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">-</span><span class="mf">1</span><span class="p">),</span>
+                        <span class="n">VarsAndParamPanel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">-</span><span class="mf">1</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">panels</span><span class="p">[</span><span class="mf">0</span><span class="p">],</span> <span class="mf">0</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span> <span class="p">)</span>     <span class="c"># &lt;-- subpanel 1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">panels</span><span class="p">[</span><span class="mf">1</span><span class="p">],</span> <span class="mf">0</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span> <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">VarsAndParamPanel</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">Panel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;a panel with 2 columns of inputs. First colums input EOS variables.</span>
+<span class="sd">        The second one are the inputs to model parameters (change depending</span>
+<span class="sd">        the model selected).</span>
+<span class="sd">        This parameter are related and is possible to calcule a group of values</span>
+<span class="sd">        defining the other one.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">model_id</span><span class="o">=</span><span class="mf">1</span><span class="p">,</span> <span class="n">setup_data</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;setup_data: (id, name, tc, pc, vc, om)&quot;&quot;&quot;</span>
+
+        <span class="n">wx</span><span class="o">.</span><span class="n">Panel</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">TAB_TRAVERSAL</span>
+                     <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">CLIP_CHILDREN</span>
+                     <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">FULL_REPAINT_ON_RESIZE</span>
+                     <span class="p">)</span>
+
+        <span class="n">gbs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gbs</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">GridBagSizerEnh</span><span class="p">(</span><span class="mf">6</span><span class="p">,</span> <span class="mf">5</span><span class="p">)</span>
+</pre></div>
 </div>
 </div>
-<div class="section" id="estilo-de-codificaci-n">
-<h2>6.4. Estilo de codificación<a class="headerlink" href="#estilo-de-codificaci-n" title="Enlazar permanentemente con este título">¶</a></h2>
-<div class="section" id="pep8">
-<h3>6.4.1. PEP8<a class="headerlink" href="#pep8" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
+<div class="section" id="el-uso-de-la-advanced-user-interface">
+<h3>6.5.2. El uso de la <em>Advanced User Interface</em><a class="headerlink" href="#el-uso-de-la-advanced-user-interface" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>La ventana principal de la aplicación <tt class="xref py py-class docutils literal"><span class="pre">MainFrame</span></tt> definida en <tt class="file docutils literal"><span class="pre">aui.py</span></tt>
+es una de subclase de la clase <tt class="xref py py-class docutils literal"><span class="pre">wx.Frame</span></tt> pero el manejo de la distribución
+de sus componentes se basa en una librería especial denominado <em>Advanced User Interface</em>,
+que reside en <tt class="xref py py-class docutils literal"><span class="pre">wx.aui</span></tt>.</p>
+<p>Esta librería está construída sobre la pila de componentes de wxPython y permite
+implementar &#8220;interfaces avanzadas&#8221; a través del control de &#8220;subventanas&#8221;
+automatizado de eventos como  maximizar (ocupar toda la ventana principal), cerrar (no se muestra en la ventana
+principal) o restaurar (vuelve a la posición original) entre otras.</p>
+<p>Comparando con los resultados que se obtienen, utilizar <tt class="xref py py-class docutils literal"><span class="pre">wx.aui</span></tt> tiende
+a ser trivial. Básicamente consiste en dos objetos:</p>
+<ul class="simple">
+<li>Un manejador, <tt class="xref py py-class docutils literal"><span class="pre">wx.aui.AuiManager</span></tt>, que se encarga de toda la lógica
+de control, mantener el estado de las ventanas y lanzar los métodos automáticos
+cuando ocurren eventos sobre la interfaz.</li>
+<li>Al menos una instancia  <tt class="xref py py-class docutils literal"><span class="pre">wx.aui.AuiPaneInfo</span></tt>
+que define una &#8220;subventana&#8221; a la que se le asocia el contenido a mostrar, en general,
+un panel principal de <cite>wx</cite>.</li>
+</ul>
+<div class="figure">
+<img alt="_images/gpec_aui_max3.png" src="_images/gpec_aui_max3.png" style="width: 100%;" />
+<p class="caption">La interfaz avanzada de GPEC visualizando 2 de los 4 paneles por defecto.
+Yendo a :menuselection:‘View &#8211;&gt; Restore default view‘ se reestablece la
+estructura original.</p>
 </div>
-<div class="section" id="interfaz-de-usuario">
-<h2>6.5. Interfaz de Usuario<a class="headerlink" href="#interfaz-de-usuario" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Conociendo la utilidad de estos objetos, un extracto
+relevante de <tt class="xref py py-class docutils literal"><span class="pre">MainFrame</span></tt> es el siguiente:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MainFrame</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">Frame</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="nb">id</span><span class="o">=-</span><span class="mf">1</span><span class="p">,</span>
+                 <span class="n">pos</span><span class="o">=</span><span class="n">wx</span><span class="o">.</span><span class="n">DefaultPosition</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&#39;GPEC&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mf">800</span><span class="p">,</span><span class="mf">600</span><span class="p">),</span>
+                 <span class="n">style</span><span class="o">=</span><span class="n">wx</span><span class="o">.</span><span class="n">DEFAULT_FRAME_STYLE</span> <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">MAXIMIZE</span> <span class="p">):</span>
+        <span class="n">wx</span><span class="o">.</span><span class="n">Frame</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mgr</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">aui</span><span class="o">.</span><span class="n">AuiManager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>      <span class="c">#&lt;- manejador</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cases_panel</span> <span class="o">=</span> <span class="n">TabbedCases</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mf">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cases_auipane</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">aui</span><span class="o">.</span><span class="n">AuiPaneInfo</span><span class="p">()</span><span class="o">.</span><span class="n">Name</span><span class="p">(</span><span class="s">&quot;cases&quot;</span><span class="p">)</span><span class="o">.</span>\
+            <span class="n">Caption</span><span class="p">(</span><span class="s">u&quot;Cases&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">Left</span><span class="p">()</span><span class="o">.</span><span class="n">MinSize</span><span class="p">(</span><span class="n">the_size</span><span class="p">)</span><span class="o">.</span><span class="n">MaxSize</span><span class="p">(</span><span class="n">the_size</span><span class="p">)</span><span class="o">.</span>\
+            <span class="n">Layer</span><span class="p">(</span><span class="mf">1</span><span class="p">)</span><span class="o">.</span><span class="n">Position</span><span class="p">(</span><span class="mf">2</span><span class="p">)</span><span class="o">.</span><span class="n">CloseButton</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">MinimizeButton</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mgr</span><span class="o">.</span><span class="n">AddPane</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cases_panel</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cases_auipane</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mgr</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Maximize</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>En el código se observa la siguiente secuencia</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Se instancia el manejador de <tt class="docutils literal"><span class="pre">wx.aui</span></tt></li>
+<li>Se instancia el panel de contenido, en este caso <tt class="xref py py-class docutils literal"><span class="pre">TabbedCases</span></tt></li>
+<li>Se instancia la subventana <tt class="xref py py-class docutils literal"><span class="pre">wx.aui.AuiPaneInfo</span></tt> con todas sus
+propiedades (ubicación, título, tamaño mínimo, etc. )</li>
+<li>Se define que el contenido de la subventana será el panel antes generado
+y se lo agrega al manejador.</li>
+<li>Se actuliza el layout</li>
+</ol>
+</div></blockquote>
+<p>Una observación en el paso 3 es que para definir los atributos del panel
+se utiliza una técnica denominada <em>encadenado de métodos</em> (<em>Method chaining</em>) <a class="footnote-reference" href="#id26" id="id15">[11]</a>
+donde la ejecución de un método de un objeto devuelve el objeto en sí, posibilitando
+&#8220;encadenar&#8221; la ejución de otro método.</p>
+<p>La interfaz por defecto de GPEC se compone de 4 instancias
+de <tt class="xref py py-class docutils literal"><span class="pre">AuiPaneInfo</span></tt> cuyo contenido se lista en la siguiente tabla:</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="32%" />
+<col width="54%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Título</th>
+<th class="head">Panel de contenido</th>
+<th class="head">Descripción del contenido</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Cases</td>
+<td>TabbedCases</td>
+<td>Definición de casos</td>
+</tr>
+<tr><td>Plots</td>
+<td>SuitePlotsPanel</td>
+<td>Pestañas de gráficos</td>
+</tr>
+<tr><td>Manager</td>
+<td>PlotsTreePanel</td>
+<td>Árbol de manejo gráficos</td>
+</tr>
+<tr><td>Info</td>
+<td>InfoPanel</td>
+<td>Panel de informaciones diversas</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="la-gesti-n-avanzada-de-pesta-as">
+<h3>6.5.3. La gestión avanzada de pestañas<a class="headerlink" href="#la-gesti-n-avanzada-de-pesta-as" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>En el área de las interfaces gráficas de usuario, la navegación por pestañas
+(<abbr title="TDI">tabbed document interface</abbr>) se refiere a la posibilidad de que
+varios paneles con información estén contenidos dentro de una sola ventana o panel
+principal, usando pestañas para alternar entre ellos. Es típico su uso en
+los navegadores web modernos, como Mozilla Firefox. GPEC hace uso extendido
+de esta arquitectura, en el soporte de múltiples casos, múltiples gráficos,
+e varios paneles de información.</p>
+<p>En wxPython existen múltiples implementaciones de controladores de pestañas y se
+ha hecho uso de <tt class="xref py py-class docutils literal"><span class="pre">AuiNotebook</span></tt>, que forma parte de las
+<a class="reference external" href="http://xoomer.virgilio.it/infinity77/AGW_Docs/">Advanced Generic Widgets</a> (<em>AGW</em>)
+desarrolladas por el programador italiano Andrea Gavana.</p>
+<p>Toda la librería <em>AGW</em> forma parte del paquete estándar de <tt class="docutils literal"><span class="pre">wx</span></tt> y reside en
+<tt class="docutils literal"><span class="pre">wx.lib.agw.aui</span></tt>.</p>
+</div>
 <div class="section" id="justificaci-n-de-dise-o">
-<h3>6.5.1. Justificación de diseño<a class="headerlink" href="#justificaci-n-de-dise-o" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>6.5.4. Justificación de diseño<a class="headerlink" href="#justificaci-n-de-dise-o" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="pruebas-de-usabilidad">
-<h3>6.5.2. Pruebas de usabilidad<a class="headerlink" href="#pruebas-de-usabilidad" title="Enlazar permanentemente con este título">¶</a></h3>
-<table class="docutils footnote" frame="void" id="id7" rules="none">
+<h3>6.5.5. Pruebas de usabilidad<a class="headerlink" href="#pruebas-de-usabilidad" title="Enlazar permanentemente con este título">¶</a></h3>
+</div>
+</div>
+<div class="section" id="integraci-n-matplotlib-wxpython">
+<h2>6.6. Integración Matplotlib-WxPython<a class="headerlink" href="#integraci-n-matplotlib-wxpython" title="Enlazar permanentemente con este título">¶</a></h2>
+<table class="docutils footnote" frame="void" id="id16" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[1]</a></td><td>En 2010 el autor de <em>Python PySub</em> reescribió completamente la <em class="xref std std-term">API</em>,
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>En 2010 el autor de <em>Python PySub</em> reescribió completamente la <a class="reference internal" href="glosario.html#term-api"><em class="xref std std-term">API</em></a>,
 agrengando una orientación a objetos del paso de mensajes más poderosa,
 a la que llamó <em>version 3</em>.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id8" rules="none">
+<table class="docutils footnote" frame="void" id="id17" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[2]</a></td><td>En realidad, la llamada está intercedida por una función decoradora (<tt class="docutils literal"><span class="pre">memoize</span></tt>)
+<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>En realidad, la llamada está intercedida por una función decoradora (<tt class="docutils literal"><span class="pre">memoize</span></tt>)
 que realiza un <em>caché</em> de los resultados la primera vez que se invoca. Si en
 sucesivas llamadas los parámetros coinciden, se devuelven los datos
 almacenados en memoria, tarea mucho más rápida que recalcular.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id9" rules="none">
+<table class="docutils footnote" frame="void" id="id18" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id5">[3]</a></td><td>El comando <tt class="docutils literal"><span class="pre">grep</span> <span class="pre">-r</span></tt> busca de manera recursiva una cadena (o una expresión
+<tr><td class="label"><a class="fn-backref" href="#id4">[3]</a></td><td>El comando <tt class="docutils literal"><span class="pre">grep</span> <span class="pre">-r</span></tt> busca de manera recursiva una cadena (o una expresión
 regular) sobre sobre los archivos de un directorio</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id10" rules="none">
+<table class="docutils footnote" frame="void" id="id19" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id6">[4]</a></td><td>El módulo <tt class="xref py py-mod docutils literal"><span class="pre">cStringIO</span></tt> provee un tipo de <em>buffers</em> de cadenas
+<tr><td class="label"><a class="fn-backref" href="#id5">[4]</a></td><td>El módulo <tt class="xref py py-mod docutils literal"><span class="pre">cStringIO</span></tt> provee un tipo de <em>buffers</em> de cadenas
 de caractéres con la misma interfaz que un archivo de texto normal.
 Las operaciones con la información en memoria son altamente eficientes.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id20" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[5]</a></td><td>&#8220;Mientras que las velocidades de CPU y las capacidades de memporia se han
+incrementado enormemente, otros aspectos concernientes a la performance
+como las velocidades de acceso a disco se han quedado en el tiempo. Como
+consecuencia, estas latencias son cada vez más seguido un cuello de botella
+en la performance global del sistema&#8221;. <a class="reference external" href="http://en.wikipedia.org/wiki/Moore's_law#Importance_of_non-CPU_bottlenecks">http://en.wikipedia.org/wiki/Moore&#8217;s_law#Importance_of_non-CPU_bottlenecks</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id21" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[6]</a></td><td>También llamado <em class="dfn">memoization</em>.
+Ver <a class="reference external" href="http://en.wikipedia.org/wiki/Memoization">http://en.wikipedia.org/wiki/Memoization</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id22" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id9">[7]</a></td><td>Cuando se necesita pasar parámetros específicos al decorador
+(además de los que se pasan en la llamada a la función decorada)
+se necesita una forma sutilmente más compleja, donde la declaración
+del decorador tiene un subnivel más de <em>wrappering</em>, o sea, 3
+funciones anidadas.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id23" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id10">[8]</a></td><td>Una referencia completa de esta función se encuentra en
+<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.loadtxt.html">http://docs.scipy.org/doc/numpy/reference/generated/numpy.loadtxt.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id24" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id12">[9]</a></td><td>Una aproximación de este tipo, relativa al tamaño de la ventana, utiliza
+la versión anterior de GPEC.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id25" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id14">[10]</a></td><td>Para layout de estilo cuadrícula se utiliza una de las implementaciones de la clase abstracta <tt class="xref py py-class docutils literal"><span class="pre">wx.Sizer</span></tt>
+es <tt class="xref py py-class docutils literal"><span class="pre">GridSizer</span></tt></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id26" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id15">[11]</a></td><td>Esta técnica es ampliamente utilizada en frameworks Javascript
+como <cite>jQuery &lt;http://jquery.com&gt;</cite>, dada que su alta expresividad produce
+código más compacto, característica muy relevante en el ambiente web.
+Ver <a class="reference external" href="http://en.wikipedia.org/wiki/Method_chaining">http://en.wikipedia.org/wiki/Method_chaining</a></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="vdlaar2002" rules="none">
@@ -571,7 +1024,6 @@ Laboratories, Eindhoven</td></tr>
 </table>
 </div>
 </div>
-</div>
 
 
           </div>
@@ -582,41 +1034,47 @@ Laboratories, Eindhoven</td></tr>
   <h3><a href="index.html">Contenidos</a></h3>
   <ul>
 <li><a class="reference internal" href="#">6. Implementación</a><ul>
-<li><a class="reference internal" href="#patrones-de-dise-o">6.1. Patrones de diseño</a><ul>
-<li><a class="reference internal" href="#publish-subscribe">6.1.1. Publish/Subscribe</a><ul>
-<li><a class="reference internal" href="#ventajas">6.1.1.1. Ventajas</a></li>
-<li><a class="reference internal" href="#python-pubsub">6.1.1.2. Python Pubsub</a></li>
-<li><a class="reference internal" href="#ejemplos-de-uso">6.1.1.3. Ejemplos de uso</a><ul>
-<li><a class="reference internal" href="#panel-de-mensajes">6.1.1.3.1. Panel de mensajes</a></li>
-<li><a class="reference internal" href="#generaci-n-de-gr-ficos">6.1.1.3.2. Generación de gráficos</a></li>
-<li><a class="reference internal" href="#exposici-n-de-archivos-de-datos">6.1.1.3.3. Exposición de archivos de datos</a></li>
-<li><a class="reference internal" href="#tabla-de-incidencias-de-mensajes">6.1.1.3.4. Tabla de incidencias de mensajes</a></li>
+<li><a class="reference internal" href="#el-patr-n-publish-subscribe">6.1. El patrón Publish/Subscribe</a><ul>
+<li><a class="reference internal" href="#ventajas">6.1.1. Ventajas</a></li>
+<li><a class="reference internal" href="#pubsub-en-python">6.1.2. Pubsub en Python</a></li>
+<li><a class="reference internal" href="#usos-en-gpec">6.1.3. Usos en GPEC</a><ul>
+<li><a class="reference internal" href="#panel-de-mensajes">6.1.3.1. Panel de mensajes</a></li>
+<li><a class="reference internal" href="#generaci-n-de-gr-ficos">6.1.3.2. Generación de gráficos</a><ul>
+<li><a class="reference internal" href="#exposici-n-de-archivos-de-datos">6.1.3.2.1. Exposición de archivos de datos</a></li>
+<li><a class="reference internal" href="#tabla-de-incidencias-de-mensajes">6.1.3.2.2. Tabla de incidencias de mensajes</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#algoritmo-de-an-lisis-sint-ctico">6.2. Algoritmo de análisis sintáctico</a><ul>
-<li><a class="reference internal" href="#descripci-n">6.2.1. Descripción</a></li>
-<li><a class="reference internal" href="#c-digo-fuente">6.2.2. Código fuente</a></li>
+<li><a class="reference internal" href="#invocaci-n-de-ejecutables-del-backend">6.2. Invocación de ejecutables del backend</a><ul>
+<li><a class="reference internal" href="#la-dependencia-con-wine">6.2.1. La dependencia con Wine</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#diagramas-principales">6.3. Diagramas principales</a><ul>
-<li><a class="reference internal" href="#diagramas-de-componentes">6.3.1. Diagramas de componentes</a></li>
-<li><a class="reference internal" href="#de-clases">6.3.2. de clases</a></li>
-<li><a class="reference internal" href="#de-secuencia">6.3.3. de secuencia</a></li>
+<li><a class="reference internal" href="#memorizaci-n-de-resultados-costosos">6.3. Memorización de resultados costosos</a><ul>
+<li><a class="reference internal" href="#patr-n-decorator">6.3.1. Patrón <em>decorator</em></a></li>
+<li><a class="reference internal" href="#algoritmo-de-cach-de-datos">6.3.2. Algoritmo de caché de datos</a></li>
+<li><a class="reference internal" href="#c-digo-fuente">6.3.3. Código fuente</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#estilo-de-codificaci-n">6.4. Estilo de codificación</a><ul>
-<li><a class="reference internal" href="#pep8">6.4.1. PEP8</a></li>
+<li><a class="reference internal" href="#algoritmo-de-an-lisis-sint-ctico">6.4. Algoritmo de análisis sintáctico</a><ul>
+<li><a class="reference internal" href="#descripci-n">6.4.1. Descripción</a></li>
+<li><a class="reference internal" href="#id11">6.4.2. Código fuente</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#interfaz-de-usuario">6.5. Interfaz de Usuario</a><ul>
-<li><a class="reference internal" href="#justificaci-n-de-dise-o">6.5.1. Justificación de diseño</a></li>
-<li><a class="reference internal" href="#pruebas-de-usabilidad">6.5.2. Pruebas de usabilidad</a></li>
+<li><a class="reference internal" href="#interfaz-gr-fica-de-usuario-gui">6.5. Interfaz Gráfica de Usuario (GUI)</a><ul>
+<li><a class="reference internal" href="#contenedores-y-sizer">6.5.1. Contenedores y <em>sizer</em></a><ul>
+<li><a class="reference internal" href="#uso-en-la-aplicaci-n">6.5.1.1. Uso en la aplicación</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#el-uso-de-la-advanced-user-interface">6.5.2. El uso de la <em>Advanced User Interface</em></a></li>
+<li><a class="reference internal" href="#la-gesti-n-avanzada-de-pesta-as">6.5.3. La gestión avanzada de pestañas</a></li>
+<li><a class="reference internal" href="#justificaci-n-de-dise-o">6.5.4. Justificación de diseño</a></li>
+<li><a class="reference internal" href="#pruebas-de-usabilidad">6.5.5. Pruebas de usabilidad</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#integraci-n-matplotlib-wxpython">6.6. Integración Matplotlib-WxPython</a></li>
 </ul>
 </li>
 </ul>
