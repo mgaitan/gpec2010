@@ -73,6 +73,9 @@ Computación
     
     singleton
         pass
+    
+    middleware
+        pass
 
     layout
         pass

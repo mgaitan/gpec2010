@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6. Implementación &mdash; &lt;project&gt;</title>
+    <title>7. Implementación &mdash; &lt;project&gt;</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -24,8 +24,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="top" title="&lt;project&gt;" href="index.html" />
-    <link rel="next" title="7. Verificación y Validación" href="verificacion.html" />
-    <link rel="prev" title="5. Diseño" href="diseno.html" /> 
+    <link rel="next" title="8. Verificación y Validación" href="verificacion.html" />
+    <link rel="prev" title="6. Arquitectura" href="arquitectura.html" /> 
   </head>
   <body>
     <div class="related">
@@ -35,10 +35,10 @@
           <a href="genindex.html" title="Índice General"
              accesskey="I">índice</a></li>
         <li class="right" >
-          <a href="verificacion.html" title="7. Verificación y Validación"
+          <a href="verificacion.html" title="8. Verificación y Validación"
              accesskey="N">siguiente</a> |</li>
         <li class="right" >
-          <a href="diseno.html" title="5. Diseño"
+          <a href="arquitectura.html" title="6. Arquitectura"
              accesskey="P">anterior</a> |</li>
         <li><a href="index.html">&lt;project&gt;</a> &raquo;</li> 
       </ul>
@@ -50,115 +50,21 @@
           <div class="body">
             
   <div class="section" id="implementaci-n">
-<span id="implementacion"></span><h1>6. Implementación<a class="headerlink" href="#implementaci-n" title="Enlazar permanentemente con este título">¶</a></h1>
-<div class="section" id="el-patr-n-publish-subscribe">
-<h2>6.1. El patrón Publish/Subscribe<a class="headerlink" href="#el-patr-n-publish-subscribe" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Un patrón de diseño (también catalogado como patrón de mensajería) de recurrente
-aplicación en GPEC ha sido <em>Publish/Subscribe</em>, frencuentemente abreviado <em>Pubsub</em>.
-Se trata de una arquitectura de paso de mensajes desacoplada (y en algunas implementaciones distribuída)
-donde existen &#8220;remitentes&#8221; (o &#8220;publicadores&#8221;) que envían mensajes ante el acaecimiento
-de un suceso específico (por ejemplo, un evento originado por el usuario como
-el click sobre un botón) sin conocimiento alguno sobre &#8220;qué sucede despues&#8221;
-con el mensaje. Análogamente existen &#8220;receptores&#8221; (o &#8220;suscriptores&#8221;) que en cuya inicialización
-se define a qué tipo de mensajes se suscribirán (el tipo se define en función
-del &#8220;asunto&#8221; o &#8220;topic&#8221;) y qué acción (un método o función)
-debe ejecutarse cuando un mensaje de tal tipo arribe.</p>
-<div class="figure">
-<img alt="_images/pubsub_concept28.png" src="_images/pubsub_concept28.png" style="width: 60%;" />
-<p class="caption">Diagrama conceptual de la arquitectura <em>Pub/Sub</em></p>
-</div>
-<p>Como se describe en <a class="reference internal" href="#vdlaar2002">[vdLaar2002]</a> Pubsub facilita el desacople de componentes
-(<em>callables</em>, módulos, paquetes) dentro de una aplicación. Los conceptos involucrados son:</p>
-<ul class="simple">
-<li>Permitir que partes de un aplicación evien mensajes &#8220;al resto de la aplicación&#8221;
-sin tener que conocer:<ul>
-<li><em>si</em> el mensaje será manejado y usufructuado:<ul>
-<li>puede suceder que el mensaje se ignore completamente</li>
-<li>o que sea manejado en muchas partes diferentes de la aplicación</li>
-</ul>
-</li>
-<li><em>cómo</em> será manejado el mensaje:<ul>
-<li>al publicador no le importa qué se hará con el mensaje y su contenido;</li>
-<li>tampoco hay control del orden en que un mensaje dado se enviará al resto
-de la aplicación (comportamiento no determinístico).</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Permitiendo que partes de una aplicación reciban y manejen mensajes desde
-&#8220;el resto de la aplicación&#8221; sin tener que conocer <em>quién</em> envió el mensaje.</li>
-</ul>
-<p>Un <em>receptor</em> (<em>listerner</em>) es &#8220;una parte de la aplicación que quiere
-recibir mensajes&#8221;. Un receptor se suscribe a uno o más tópicos. Un <em>emisor</em>
-(<em>sender</em>) es cualquier parte de la aplicación que envía (deposita en
-el intermediario) un mensaje con un tópico dado, y opcionalmente, cualquier información
-adjunta. Este intermediario (a veces conocido como <em>broker</em>, o directamente
-<em>pubsub</em>) entrega este mensaje a todos los receptores suscriptos.</p>
-<div class="section" id="ventajas">
-<h3>6.1.1. Ventajas<a class="headerlink" href="#ventajas" title="Enlazar permanentemente con este título">¶</a></h3>
-<ul class="simple">
-<li><strong>Acoplamiento débil</strong>: la topología de Pubsub, basada en la intermediación y el
-desconocimiento de identidades y comportamientos de los objetos que interactuan
-permite un desacople de los componentes de la aplicación. Esto significa
-que las distintas &#8220;partes&#8221; de la aplicación son independientes entre sí, de modo
-que pueden facilmente desactivarse componentes no críticos sin afectar al conjunto
-de la aplicación. Esta estrategia es útil para realizar pruebas de seguridad.</li>
-<li><strong>Funcionalidad configurable</strong> : Dado que un emisor no tiene necesidad de conocer
-la existencia de un receptor, es fácil diseñar una arquitectura basada en &#8220;plugins&#8221;
-que permite mantener un núcleo y agregar funcionalidades extra con posterioridad
-(incluso desarrolladas por terceros). Esto trae aparejada la posibilidad de
-adaptar, mediante extensiones que se activan o no, las características
-del software en función de las necesidades del usuario.</li>
-<li><strong>Escalabilidad</strong>: En las implementaciones distribuidas de demanda moderada (donde los mensajes
-se transmiten entre múltiples procesos o, incluso, equipos), PubSub provee
-una arquitectura mucho más simple y autogestionada que la típica topología
-<em>cliente/servidor</em> para tareas de procesamiento paralelo o
-Sin embargo, la eficiencia no suele ser proporcional en sistemas de alta
-demanda computacional.</li>
-</ul>
-</div>
-<div class="section" id="pubsub-en-python">
-<h3>6.1.2. Pubsub en Python<a class="headerlink" href="#pubsub-en-python" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>En GPEC se ha utilizado el paquete <a class="reference external" href="http://pubsub.sourceforge.net/">Python Pubsub</a>
-de Oliver Schoenborn, en su versión 1 <a class="footnote-reference" href="#id16" id="id2">[1]</a> . Esta implementación es muy sencilla
-y se basa en la existencia de un objeto único (Ver <a class="reference internal" href="glosario.html#term-singleton"><em class="xref std std-term">singleton</em></a>), <tt class="docutils literal"><span class="pre">pub</span></tt>,
-que controla el envío y las suscripción a los mensajes. Se describe en el siguiente
-código:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pubsub</span> <span class="kn">import</span> <span class="n">pub</span>
-
-<span class="c"># declaración de la  función &quot;destino&quot;</span>
-
-<span class="k">def</span> <span class="nf">destino</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="k">print</span> <span class="s">&#39;Mensaje con argumentos arg1=&quot;</span><span class="si">%s</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">  arg2=&quot;</span><span class="si">%s</span><span class="s">&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
-
-<span class="c"># declaración de suscripción</span>
-
-<span class="n">pub</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">destino</span><span class="p">,</span> <span class="s">&#39;asuntoParticular&#39;</span><span class="p">)</span>
-
-<span class="c"># función que envía un mensaje</span>
-
-<span class="k">def</span> <span class="nf">hacer_algo_y_avisar</span><span class="p">():</span>
-    <span class="k">print</span> <span class="s">&#39;Se enviará un mensaje&#39;</span>
-    <span class="n">pub</span><span class="o">.</span><span class="n">sendMessage</span><span class="p">(</span><span class="s">&#39;asuntoParticular&#39;</span><span class="p">,</span> <span class="n">arg1</span><span class="o">=</span><span class="mf">123</span><span class="p">,</span> <span class="n">arg2</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s">&#39;abc&#39;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s">&#39;def&#39;</span><span class="p">))</span>
-
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
-
-    <span class="n">hacer_algo_y_avisar</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Cuyo diagrama de secuencia es el siguiente:</p>
-</div>
-<div class="section" id="usos-en-gpec">
-<h3>6.1.3. Usos en GPEC<a class="headerlink" href="#usos-en-gpec" title="Enlazar permanentemente con este título">¶</a></h3>
+<span id="implementacion"></span><h1>7. Implementación<a class="headerlink" href="#implementaci-n" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="utilizaci-n-de-publish-suscribe-en-gpec">
+<span id="uso-pubsub"></span><h2>7.1. Utilización de Publish/Suscribe en GPEC<a class="headerlink" href="#utilizaci-n-de-publish-suscribe-en-gpec" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>En <a class="reference internal" href="tecnologias.html#pubsub"><em>El patrón Publish/Subscribe</em></a> (ver <a class="reference internal" href="marco_teorico.html#marco"><em>Marco Teórico</em></a>) se describió el patrón PubSub y la implementación
+utilizada para diferentes aspectos del funcionamiento de GPEC. Aquí se describen
+más en detalles estos usos.</p>
 <div class="section" id="panel-de-mensajes">
-<h4>6.1.3.1. Panel de mensajes<a class="headerlink" href="#panel-de-mensajes" title="Enlazar permanentemente con este título">¶</a></h4>
+<h3>7.1.1. Panel de mensajes<a class="headerlink" href="#panel-de-mensajes" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Como se ha dicho, PubSub constituye el patrón principal y toda la <em>orientación
-a eventos</em> se basa en una comunicación vía esta biblioteca.</p>
+a eventos</em> de la biblioteca se basa en una comunicación vía esta biblioteca.</p>
 <p>El ejemplo canónico es el <strong>panel de log</strong> (registro de mensajes de usuario), donde
 se registra una crónica de eventos de interés para el usuario, denotados en
 su categoría con un símbolo y la hora del suceso.</p>
 <div class="figure">
-<img alt="_images/log_msg27.png" src="_images/log_msg27.png" style="width: 80%;" />
+<img alt="_images/log_msg36.png" src="_images/log_msg36.png" style="width: 80%;" />
 <p class="caption">A través de PubSub, cualquier parte del programa envía avisos que el panel
 (un <em>receptor</em>) mostrará al usuario.</p>
 </div>
@@ -211,19 +117,19 @@ al icono que los representan:</p>
 </thead>
 <tbody valign="top">
 <tr><td><em>ok</em></td>
-<td><img alt="ok" src="_images/ok26.png" /></td>
+<td><img alt="ok" src="_images/ok35.png" /></td>
 <td>Acción existosa</td>
 </tr>
 <tr><td><em>info</em></td>
-<td><img alt="info" src="_images/info26.png" /></td>
+<td><img alt="info" src="_images/info35.png" /></td>
 <td>Información importante</td>
 </tr>
 <tr><td><em>warning</em></td>
-<td><img alt="warning" src="_images/warning26.png" /></td>
+<td><img alt="warning" src="_images/warning35.png" /></td>
 <td>Advertencia</td>
 </tr>
 <tr><td><em>error</em></td>
-<td><img alt="error" src="_images/error26.png" /></td>
+<td><img alt="error" src="_images/error35.png" /></td>
 <td>Error</td>
 </tr>
 </tbody>
@@ -243,12 +149,12 @@ observa:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="generaci-n-de-gr-ficos">
-<h4>6.1.3.2. Generación de gráficos<a class="headerlink" href="#generaci-n-de-gr-ficos" title="Enlazar permanentemente con este título">¶</a></h4>
-<p>Otro uso de <tt class="docutils literal"><span class="pre">PubSub</span></tt> es la generación de gráficos. Se resume en el siguiente
-diagrama de secuencia:</p>
+<div class="section" id="solicitud-de-gr-ficaci-n">
+<h3>7.1.2. Solicitud de gráficación<a class="headerlink" href="#solicitud-de-gr-ficaci-n" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Otro uso de <tt class="docutils literal"><span class="pre">PubSub</span></tt> se produce durante la solicitud de
+de generación gráficos. Se resume en el siguiente diagrama de secuencia:</p>
 <div class="figure">
-<img alt="_images/uml_sec_makeplot_vertical8.png" src="_images/uml_sec_makeplot_vertical8.png" style="width: 65%;" />
+<img alt="_images/uml_sec_makeplot_vertical17.png" src="_images/uml_sec_makeplot_vertical17.png" style="width: 60%;" />
 <p class="caption">Secuencia para la generación de un diagrama desde el evento generado por
 el usuario</p>
 </div>
@@ -256,15 +162,21 @@ el usuario</p>
 panel contenedor de los gráficos generados a traves de PubSub.
 El mencanismo invocación del backend (desde donde se obtienen los datos a graficar)
 se verá más adelante.</p>
+<p>El objeto <tt class="xref py py-class docutils literal"><span class="pre">SuitePlotsPanel</span></tt> es el panel de pestañas donde se muestran
+los gráficos de todos los casos de un proyecto. Cada una de estas pestañas
+contiene un objeto <tt class="xref py py-class docutils literal"><span class="pre">PlotPanel</span></tt> que es el que soporta
+la integración con Matplotlib y contiene el diagrama en sí.
+Esta integración se verá en <a class="reference internal" href="#matplotlibwx"><em>Integración Matplotlib-WxPython</em></a> .</p>
+</div>
 <div class="section" id="exposici-n-de-archivos-de-datos">
-<h5>6.1.3.2.1. Exposición de archivos de datos<a class="headerlink" href="#exposici-n-de-archivos-de-datos" title="Enlazar permanentemente con este título">¶</a></h5>
+<h3>7.1.3. Exposición de archivos de datos<a class="headerlink" href="#exposici-n-de-archivos-de-datos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Cada invocación a un ejecutable del backend dependen de una entrada
-y produce una salida <a class="footnote-reference" href="#id17" id="id3">[2]</a> en un archivo de texto. Para usuarios avanzados que conocen
+y produce una salida <a class="footnote-reference" href="#id21" id="id1">[1]</a> en un archivo de texto. Para usuarios avanzados que conocen
 la estructura y significado de estos archivos (descriptos en :ref:&#8217;api&#8217;), es
 deseable que tengan un acceso al contenido desde la propia aplicación, para
 encontrar información numérica puntual cuya precisión se pierde en un gráfico.</p>
 <div class="figure">
-<img alt="_images/inpout22.png" src="_images/inpout22.png" style="width: 80%;" />
+<img alt="_images/inpout31.png" src="_images/inpout31.png" style="width: 80%;" />
 </div>
 <p>Esta tarea se hace a través de PubSub. El emisor envía un mensaje con tópico
 <tt class="docutils literal"><span class="pre">add_txt</span></tt> adjuntando como información una tupla con la ruta al archivo
@@ -329,7 +241,9 @@ método <tt class="xref py py-meth docutils literal"><span class="pre">OnAddItem
 </div>
 </div>
 <div class="section" id="tabla-de-incidencias-de-mensajes">
-<h5>6.1.3.2.2. Tabla de incidencias de mensajes<a class="headerlink" href="#tabla-de-incidencias-de-mensajes" title="Enlazar permanentemente con este título">¶</a></h5>
+<h3>7.1.4. Tabla de incidencias de mensajes<a class="headerlink" href="#tabla-de-incidencias-de-mensajes" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Se lista aquí una tabla con diferentes tipos de mensajes, su utilidad, emisor/es
+y destinatario/s:</p>
 <blockquote>
 <div><table border="1" class="docutils">
 <colgroup>
@@ -387,13 +301,11 @@ de los gráficos</td>
 </div></blockquote>
 <p>Para un listado completo puede analizar el código fuente ejecutando
 <tt class="docutils literal"><span class="pre">grep</span> <span class="pre">-r</span> <span class="pre">&quot;pub.sendMessage&quot;</span></tt> sobre el directorio de código fuente raiz
-de GPEC. <a class="footnote-reference" href="#id18" id="id4">[3]</a></p>
-</div>
-</div>
+de GPEC. <a class="footnote-reference" href="#id22" id="id2">[2]</a></p>
 </div>
 </div>
 <div class="section" id="invocaci-n-de-ejecutables-del-backend">
-<h2>6.2. Invocación de ejecutables del backend<a class="headerlink" href="#invocaci-n-de-ejecutables-del-backend" title="Enlazar permanentemente con este título">¶</a></h2>
+<span id="backend"></span><h2>7.2. Invocación de ejecutables del backend<a class="headerlink" href="#invocaci-n-de-ejecutables-del-backend" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>La comunicación frontend-backend se describe en el siguiente diagrama de secuencia
 donde se resalta el ciclo de vida del objeto <tt class="xref py py-class docutils literal"><span class="pre">ApiManager</span></tt> donde está
 implementada la lógica de tratamimiento de la interfaz de comunicación.</p>
@@ -404,11 +316,11 @@ de entrada <tt class="file docutils literal"><span class="pre">GPECIN.DAT</span>
 permiso de escritura en la carpeta destino). En caso de error por algún motivo
 (conocido o no), se remite un mensaje de log y se cancela la ejecución.</p>
 <div class="figure" id="front-back">
-<img alt="_images/uml_front-back_vertical11.png" src="_images/uml_front-back_vertical11.png" style="width: 100%;" />
+<img alt="_images/uml_front-back_vertical20.png" src="_images/uml_front-back_vertical20.png" style="width: 100%;" />
 <p class="caption">Secuencia de la comunicación frontend-backend</p>
 </div>
 <div class="section" id="la-dependencia-con-wine">
-<h3>6.2.1. La dependencia con Wine<a class="headerlink" href="#la-dependencia-con-wine" title="Enlazar permanentemente con este título">¶</a></h3>
+<span id="wine"></span><h3>7.2.1. La dependencia con Wine<a class="headerlink" href="#la-dependencia-con-wine" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>El <em>backend</em> de GPEC, codificado en Fortran por Cismondi, ha sido compilado mediante
 Microsoft Fortran y se compone de un conjunto de ejecutables Windows (<tt class="docutils literal"><span class="pre">.exe</span></tt>).
 Si bien el código es Fortran estándar y compatible con compiladores libres (como
@@ -444,11 +356,11 @@ se duplica la dependencia de software privativo.</p>
 </div>
 </div>
 <div class="section" id="memorizaci-n-de-resultados-costosos">
-<h2>6.3. Memorización de resultados costosos<a class="headerlink" href="#memorizaci-n-de-resultados-costosos" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>7.3. Memorización de resultados costosos<a class="headerlink" href="#memorizaci-n-de-resultados-costosos" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Como se observa <a class="reference internal" href="#front-back"><em>Secuencia de la comunicación frontend-backend</em></a>, el proceso de comunicación y obtención de los
 datos desde el backend no es trivial. Más aún, considerando que, dada la arquitectura
 heredada interviene de manera insalvable la escritura y lectura a disco, el
-proceso también es costoso <a class="footnote-reference" href="#id19" id="id5">[4]</a> a nivel computacional.</p>
+proceso también es costoso <a class="footnote-reference" href="#id23" id="id3">[3]</a> a nivel computacional.</p>
 <p>Tomando de ventaja de la condición determinística de la operación (para los mismos
 parámetros de entrada, es decir el caso, se obtiene siempre el mismo resultado)
 se puede calcular una vez, guardar el resultado en memoria, y devolverlo sin
@@ -468,14 +380,14 @@ mediante backend.</div></blockquote>
 <p>Por último, dado el manejo referencial de memoria que hace Python, la permanencia
 del array en memoria no está duplicada respecto al que se utiliza para graficar.</p>
 <div class="section" id="patr-n-decorator">
-<h3>6.3.1. Patrón <em>decorator</em><a class="headerlink" href="#patr-n-decorator" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>7.3.1. Patrón <em>decorator</em><a class="headerlink" href="#patr-n-decorator" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Una forma habitual de implementar el mecanismo de
 <em>caché</em> es a través del patrón  <a class="reference internal" href="glosario.html#term-decorator"><em class="xref std std-term">Decorator</em></a>, que en términos
 simplificados realiza una transformación dinámica de una función o método,
 agregándole una funcionalidad que no tiene por sí misma, o más en general,
 alterando de alguna manera el resultado devuelto.</p>
 <div class="figure">
-<img alt="_images/Decorator_UML_class_diagram10.png" src="_images/Decorator_UML_class_diagram10.png" style="width: 60%;" />
+<img alt="_images/Decorator_UML_class_diagram19.png" src="_images/Decorator_UML_class_diagram19.png" style="width: 60%;" />
 <p class="caption">Diagrama de clases del patrón <em>Decorator</em></p>
 </div>
 <p>Expresándolo en términos matemáticos, se trata de una <em class="dfn">composición de funciones</em>:</p>
@@ -486,7 +398,7 @@ x \mapsto f(x) \mapsto g(f(x))" /></p>
 </div><p>Desde la versión 2.4, Python tiene una nomenclatura facilitada para la
 escritura de decoradores. Una estructura genérica para la definición
 de una función decoradora, que se compone de un <a class="reference internal" href="glosario.html#term-wrapper"><em class="xref std std-term">wrapper</em></a>
-de dos funciones anidadas <a class="footnote-reference" href="#id20" id="id6">[5]</a>,  es la siguiente:</p>
+de dos funciones anidadas <a class="footnote-reference" href="#id24" id="id4">[4]</a>,  es la siguiente:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">mydecorator</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="nf">_mydecorator</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="c"># hacer las tareas de &#39;decoración&#39;</span>
@@ -513,9 +425,9 @@ cuestion. Por ejemplo:</p>
 <tt class="docutils literal"><span class="pre">mydecorator(mifuncion())</span></tt>. La ventaja sintáctica de Python es que permite</p>
 </div>
 <div class="section" id="algoritmo-de-cach-de-datos">
-<h3>6.3.2. Algoritmo de caché de datos<a class="headerlink" href="#algoritmo-de-cach-de-datos" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>7.3.2. Algoritmo de caché de datos<a class="headerlink" href="#algoritmo-de-cach-de-datos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>El algoritmo utilizado para la implementación del sistema de <em>caché</em> se llama
-<em class="dfn">memoize</em> <a class="footnote-reference" href="#id21" id="id7">[6]</a> y es descripto en detalle en <a class="reference internal" href="marco_teorico.html#ziade2008">[ZIADE2008]</a> , cuya versión,
+<em class="dfn">memoize</em> <a class="footnote-reference" href="#id25" id="id5">[5]</a> y es descripto en detalle en <a class="reference internal" href="tecnologias.html#ziade2008">[ZIADE2008]</a> , cuya versión,
 parcialmente simplificada, se ha utilizado.</p>
 <p>En este caso, la funcionalidad que aporta el decorador a la
 función que se &#8220;decora&#8221; es la siguiente:</p>
@@ -537,7 +449,7 @@ se devuelve el resultado.</li>
 </ol>
 </div>
 <div class="section" id="c-digo-fuente">
-<h3>6.3.3. Código fuente<a class="headerlink" href="#c-digo-fuente" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>7.3.3. Código fuente<a class="headerlink" href="#c-digo-fuente" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">compute_key</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kw</span><span class="p">):</span>
     <span class="n">key</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">((</span><span class="n">function</span><span class="o">.</span><span class="n">func_name</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kw</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha1</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
@@ -563,7 +475,7 @@ se devuelve el resultado.</li>
 </div>
 </div>
 <div class="section" id="algoritmo-de-an-lisis-sint-ctico">
-<h2>6.4. Algoritmo de análisis sintáctico<a class="headerlink" href="#algoritmo-de-an-lisis-sint-ctico" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>7.4. Algoritmo de análisis sintáctico<a class="headerlink" href="#algoritmo-de-an-lisis-sint-ctico" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Como ya se ha hecho mención, la comunicación con los ejecutables del <em>backend</em>
 se realiza mediante archivos de texto. Los archivos de salida, en particular,
 contienen (en arreglos de columnas) los vectores de datos para cada variable
@@ -582,7 +494,7 @@ con la definición de la interfaz. Una descripción exhaustiva se expone
 en <a class="reference internal" href="api.html#api"><em>Especificación de la interfaz de comunicación</em></a>.</p>
 </div>
 <div class="section" id="descripci-n">
-<h3>6.4.1. Descripción<a class="headerlink" href="#descripci-n" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>7.4.1. Descripción<a class="headerlink" href="#descripci-n" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>El algoritmo se basa en identificar <em>tokens</em> (marcas) que declaran el inicio y final
 de información válida para un diagrama, determinando así la porción de texto
 (números flotantes en formato texto) que debe extraerse. Este texto se convierte
@@ -590,7 +502,7 @@ a un objeto array de <tt class="xref py py-mod docutils literal"><span class="pr
 <p>Las marcas de inicio son cadena de tres letras mayúsculas (<tt class="docutils literal"><span class="pre">VAP</span></tt>,``CRI``,``LLV``, etc.)
 y un renglón vacío marca el final del bloque de información.</p>
 <div class="figure">
-<img alt="_images/parser17.png" src="_images/parser17.png" style="width: 80%;" />
+<img alt="_images/parser26.png" src="_images/parser26.png" style="width: 80%;" />
 <p class="caption">Topología de la información extractada</p>
 </div>
 <p>Una estructura de datos basadas en asociaciones clave-valor (diccionarios),
@@ -599,13 +511,13 @@ extraer para cada una. Iterando sobre todas las líneas del archivo se obtiene
 un nuevo diccionario cuya clave es una tupla de la forma <tt class="docutils literal"><span class="pre">(inicio,</span> <span class="pre">fin)</span></tt> y el
 tipo de curva como valor.</p>
 <p>Con esta información simplemente se &#8220;recorta&#8221; el archivo de texto completo del cual
-se realiza una copia residente en memoria <a class="footnote-reference" href="#id22" id="id9">[7]</a> para importarlo
+se realiza una copia residente en memoria <a class="footnote-reference" href="#id26" id="id7">[6]</a> para importarlo
 y convertirlo a arreglos de números flotantes de doble precisión
 mediante la función <tt class="xref py py-func docutils literal"><span class="pre">numpy.loadtxt()</span></tt> que acepta como parámetro
-opcional la cantidad de columnas significativas que deben interpretarse <a class="footnote-reference" href="#id23" id="id10">[8]</a>.</p>
+opcional la cantidad de columnas significativas que deben interpretarse <a class="footnote-reference" href="#id27" id="id8">[7]</a>.</p>
 </div>
-<div class="section" id="id11">
-<h3>6.4.2. Código fuente<a class="headerlink" href="#id11" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="id9">
+<h3>7.4.2. Código fuente<a class="headerlink" href="#id9" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">output2array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">curve_types</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Parses gpecout.dat, PXYOUT.DAT TXYOUT.DAT or ISOPOUT.DAT</span>
 <span class="sd">        Detects numeric blocks and create arrays with them&quot;&quot;&quot;</span>
@@ -677,17 +589,17 @@ opcional la cantidad de columnas significativas que deben interpretarse <a class
 </div>
 </div>
 <div class="section" id="interfaz-gr-fica-de-usuario-gui">
-<h2>6.5. Interfaz Gráfica de Usuario (GUI)<a class="headerlink" href="#interfaz-gr-fica-de-usuario-gui" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>7.5. Interfaz Gráfica de Usuario (GUI)<a class="headerlink" href="#interfaz-gr-fica-de-usuario-gui" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="contenedores-y-sizers">
-<h3>6.5.1. Contenedores y <em>sizers</em><a class="headerlink" href="#contenedores-y-sizers" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>En la introducción general a <a class="reference internal" href="marco_teorico.html#wx"><em>WxPython</em></a> vista en <a class="reference internal" href="marco_teorico.html#marco"><em>Marco Teórico</em></a> se hizo referencia
+<h3>7.5.1. Contenedores y <em>sizers</em><a class="headerlink" href="#contenedores-y-sizers" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>En la introducción general a <a class="reference internal" href="tecnologias.html#wx"><em>WxPython</em></a> vista en <a class="reference internal" href="marco_teorico.html#marco"><em>Marco Teórico</em></a> se hizo referencia
 a la clase <tt class="xref py py-class docutils literal"><span class="pre">wx.Panel</span></tt> describiéndola como <em>&#8220;un contenedor de otros
 objetos gráficos&#8221;</em>.</p>
 <p>Tradicionalmente, uno de los problemas más complicados en la programación de
 <a class="reference internal" href="glosario.html#term-gui"><em class="xref std std-term">GUI</em></a> es el manejo de la disposición física de los componentes en el espacio
 disponible (<a class="reference internal" href="glosario.html#term-layout"><em class="xref std std-term">layout</em></a>). En los comienzos, la solución fue el posicionamiento
 absoluto donde el programador explicitaba el tamaño y la posición exácta
-del <em>widget</em> en la pantalla <a class="footnote-reference" href="#id24" id="id12">[9]</a> . Esta estrategia acarrea una batería de problemas
+del <em>widget</em> en la pantalla <a class="footnote-reference" href="#id28" id="id10">[8]</a> . Esta estrategia acarrea una batería de problemas
 ya que sólo funciona correctamente si se tiene control total sobre el espacio
 disponible, es decir, controlando la resolución de pantalla del equipo del cliente,
 el tamaño de tipografía estándar que ha elegido, etc. pero se vuelve inmanejable
@@ -706,7 +618,7 @@ Todo los <em>sizers</em> son instancias de una subclase de la clase abstracta <t
 <p class="first admonition-title">Ver también</p>
 <dl class="last docutils">
 <dt>Para una explicación exhaustiva sobre el tema, vea el capitulo 11 de</dt>
-<dd><em>&#8220;wxPython in Action&#8221;</em>, <a class="reference internal" href="marco_teorico.html#nr-rd2006">[NR-RD2006]</a></dd>
+<dd><em>&#8220;wxPython in Action&#8221;</em>, <a class="reference internal" href="tecnologias.html#nr-rd2006">[NR-RD2006]</a></dd>
 </dl>
 </div>
 </div></blockquote>
@@ -715,9 +627,9 @@ proporcionales de filas o columnas, y ubicar allí elementos (como botones o cam
 texto), definiendo atributos como su alineación horizontal o vertical, el tamaño
 (proporcional al espacio, fijo, con límite máximo, etc). Asímismo, un <tt class="docutils literal"><span class="pre">sizer</span></tt>
 puede contener a otros de manera anidada, definiendo una cuadrícula con espacios para ubicar los
-<em>widgets</em> controladores <a class="footnote-reference" href="#id25" id="id14">[10]</a>.</p>
+<em>widgets</em> controladores <a class="footnote-reference" href="#id29" id="id12">[9]</a>.</p>
 <div class="figure">
-<img alt="_images/wxglade-sizer7.png" src="_images/wxglade-sizer7.png" style="width: 95%;" />
+<img alt="_images/wxglade-sizer16.png" src="_images/wxglade-sizer16.png" style="width: 95%;" />
 <p class="caption">Diseño con <em>sizers</em> de una ventana de la aplicación mediante la utilidad
 <a class="reference external" href="http://wxglade.sourceforge.net">wxGlade</a></p>
 </div>
@@ -726,12 +638,12 @@ aún debe serlo. Es decir, un elemento cualquier (por ejemplo, un botón) está 
 en un contenedor (por ejemplo, un panel) pero ubicado según indica un sizer que está
 haciado al mismo contenedor.</p>
 <div class="section" id="uso-en-la-aplicaci-n">
-<h4>6.5.1.1. Uso en la aplicación<a class="headerlink" href="#uso-en-la-aplicaci-n" title="Enlazar permanentemente con este título">¶</a></h4>
+<h4>7.5.1.1. Uso en la aplicación<a class="headerlink" href="#uso-en-la-aplicaci-n" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>En GPEC, toda la distribución de componentes está dispuesta a través de <tt class="docutils literal"><span class="pre">sizers</span></tt>.
 Como ejemplo, se muestra la parte superior de un panel para la definición de un caso
 donde consta el uso anidado de <tt class="docutils literal"><span class="pre">sizers</span></tt> de distinto tipo.</p>
 <div class="figure">
-<img alt="_images/sizers_example5.png" src="_images/sizers_example5.png" style="width: 90%;" />
+<img alt="_images/sizers_example14.png" src="_images/sizers_example14.png" style="width: 90%;" />
 <p class="caption">Distribución mediante <em>sizers</em> de componentes. El contenido del <tt class="docutils literal"><span class="pre">GridBagSizer</span></tt>
 es dinámico, cambiando su contenido en función de un evento de cambio de
 opción (evento <tt class="docutils literal"><span class="pre">wx.EVT_CHOICE</span></tt>) del menú de modelos.</p>
@@ -805,7 +717,7 @@ se basa en un <tt class="xref py py-class docutils literal"><span class="pre">wx
 </div>
 </div>
 <div class="section" id="el-uso-de-la-advanced-user-interface">
-<h3>6.5.2. El uso de la <em>Advanced User Interface</em><a class="headerlink" href="#el-uso-de-la-advanced-user-interface" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>7.5.2. El uso de la <em>Advanced User Interface</em><a class="headerlink" href="#el-uso-de-la-advanced-user-interface" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>La ventana principal de la aplicación <tt class="xref py py-class docutils literal"><span class="pre">MainFrame</span></tt> definida en <tt class="file docutils literal"><span class="pre">aui.py</span></tt>
 es una de subclase de la clase <tt class="xref py py-class docutils literal"><span class="pre">wx.Frame</span></tt> pero el manejo de la distribución
 de sus componentes se basa en una librería especial denominado <em>Advanced User Interface</em>,
@@ -825,7 +737,7 @@ que define una &#8220;subventana&#8221; a la que se le asocia el contenido a mos
 un panel principal de <cite>wx</cite>.</li>
 </ul>
 <div class="figure">
-<img alt="_images/gpec_aui_max7.png" src="_images/gpec_aui_max7.png" style="width: 95%;" />
+<img alt="_images/gpec_aui_max16.png" src="_images/gpec_aui_max16.png" style="width: 95%;" />
 <p class="caption">La interfaz avanzada de GPEC visualizando 2 de los 4 paneles por defecto.</p>
 </div>
 <p>Vale comentar que luego de cualquier cambio, yendo a :menuselection:‘View &#8211;&gt; Restore default view‘ se reestablece la
@@ -864,7 +776,7 @@ y se lo agrega al manejador.</li>
 </ol>
 </div></blockquote>
 <p>Una observación en el paso 3 es que para definir los atributos del panel
-se utiliza una técnica denominada <em>encadenado de métodos</em> (<em>Method chaining</em>) <a class="footnote-reference" href="#id26" id="id15">[11]</a>
+se utiliza una técnica denominada <em>encadenado de métodos</em> (<em>Method chaining</em>) <a class="footnote-reference" href="#id30" id="id13">[10]</a>
 donde la ejecución de un método de un objeto devuelve el objeto en sí, posibilitando
 &#8220;encadenar&#8221; la ejución de otro método.</p>
 <p>La interfaz por defecto de GPEC se compone de 4 instancias
@@ -904,7 +816,7 @@ de <tt class="xref py py-class docutils literal"><span class="pre">AuiPaneInfo</
 </div></blockquote>
 </div>
 <div class="section" id="la-gesti-n-avanzada-de-pesta-as">
-<h3>6.5.3. La gestión avanzada de pestañas<a class="headerlink" href="#la-gesti-n-avanzada-de-pesta-as" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>7.5.3. La gestión avanzada de pestañas<a class="headerlink" href="#la-gesti-n-avanzada-de-pesta-as" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En el área de las interfaces gráficas de usuario, la navegación por pestañas
 (<abbr title="TDI">tabbed document interface</abbr>) se refiere a la posibilidad de que
 varios paneles con información estén contenidos dentro de una sola ventana o panel
@@ -923,116 +835,323 @@ de la intefaz avanzada de Python <tt class="docutils literal"><span class="pre">
 como <em>drag &amp; drop de pestañas</em> entre distintos paneles, o la visualización
 simultánea de múltiples pestañas.</p>
 <div class="figure">
-<img alt="_images/auinotebook.png" src="_images/auinotebook.png" style="width: 95%;" />
+<img alt="_images/auinotebook9.png" src="_images/auinotebook9.png" style="width: 100%;" />
 <p class="caption">El control <tt class="docutils literal"><span class="pre">AuiNotebook</span></tt> de los gráficos mostrando 2 diagramas en simultáneo</p>
 </div>
 </div>
-<div class="section" id="justificaci-n-de-dise-o">
-<h3>6.5.4. Justificación de diseño<a class="headerlink" href="#justificaci-n-de-dise-o" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="justificaci-n-del-dise-o-de-ui">
+<h3>7.5.4. Justificación del diseño de UI<a class="headerlink" href="#justificaci-n-del-dise-o-de-ui" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Como se ha mencionado, la usabilidad e intuitividad de la interfaz de usuario
+ha sido un requerimiento de especial atención. Mucha bibliografía fue consultada
+al respecto, rescantando en particular muchos conceptos y consejos de Joel Spolsky
+en <a class="reference internal" href="#spolsky2001">[Spolsky2001]</a> <a class="footnote-reference" href="#id31" id="id15">[11]</a> . Entre muchos, se destacan:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Brindar contextos intuitivos y secuencias de operación lógicas.</li>
+<li>Minimizar las opciones en simultáneo. Cada opción es una decisión que se le
+exige al usuario.</li>
+<li>Los usuarios no leen manuales (de hecho tampoco leen mensajes en pantalla si son largos)</li>
+<li>Convenciones por sobre configuraciones: limitar los parámetros requeridos</li>
+<li>Valerse de las costumbres del usuario: no reinventar la rueda</li>
+</ul>
+</div></blockquote>
+<p>Un software complejo con un acabado estudio de usabilidad es
+<a class="reference external" href="http://code.enthought.com/projects/mayavi/">Mayavi</a> , que ha servido de inspiración
+para el diseño de GPEC.</p>
+<div class="figure">
+<img alt="_images/mayavi28.png" src="_images/mayavi28.png" style="width: 100%;" />
+<p class="caption">Interfaz de la aplicación de visualización de diagramas VTK que sirvió
+como inspiración para la interfaz de GPEC.</p>
 </div>
-<div class="section" id="pruebas-de-usabilidad">
-<h3>6.5.5. Pruebas de usabilidad<a class="headerlink" href="#pruebas-de-usabilidad" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Algunas decisiciones concernientes a la usabilidad se muestran en el siguiente
+diagrama:</p>
+<div class="figure">
+<img alt="_images/usabilidad_labels8.png" src="_images/usabilidad_labels8.png" style="width: 100%;" />
+<p class="caption">Interfaz de la aplicación de visualización de diagramas VTK que sirvió
+como inspiración para la interfaz de GPEC.</p>
+</div>
+<ul class="simple">
+<li>El diseño acompaña al <em>workflow</em>: primero se define el sistema, opcionalmente
+se manipulan los cálculos y por último se grafica. Sólo el primero y el último
+paso son obligatorios.</li>
+<li>La ubicación de los botones principales está dispuesta en función del
+flujo de lectura de occidental (de izquierda a derecha y de arriba hacia abajo)
+de manera de resultar intuitiva la secuencia de acciones demandada al usuario</li>
+<li>Todos los botones tiene asociado un ícono descriptivo</li>
+<li>Los componentes que muestran información no modificable se mantienen en modo
+sólo lectura y visualmente se ven &#8220;grisados&#8221;.</li>
+<li>Un conjunto de parámetros (coeficientes, reglas de combinación) se ubican en
+un panel colapsable. Al expandirlo, el panel genera automática una barra de
+desplazamiento vertical.</li>
+<li>El uso del símbolo &#8220;+&#8221; en la ubicación dispuesta es una convención popularizada
+por los navegadores web para abrir una nueva pestaña de trabajo. Dado el contexto
+resulta evidente que genera un nuevo caso.</li>
+</ul>
 </div>
 </div>
 <div class="section" id="integraci-n-matplotlib-wxpython">
-<h2>6.6. Integración Matplotlib-WxPython<a class="headerlink" href="#integraci-n-matplotlib-wxpython" title="Enlazar permanentemente con este título">¶</a></h2>
-<table class="docutils footnote" frame="void" id="id16" rules="none">
+<span id="matplotlibwx"></span><h2>7.6. Integración Matplotlib-WxPython<a class="headerlink" href="#integraci-n-matplotlib-wxpython" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>La biblioteca de graficación Matplotlib incluye soporte para los
+toolkits para creación de interfaces gráficas <a class="footnote-reference" href="#id32" id="id16">[12]</a> más utilizados, que permite
+incrustar (y hacer interactuar) figuras dentro de aplicaciones gráficas.</p>
+<p>La integración entre Matplotlib y WxPython se logra a través de un
+&#8220;canvas&#8221; (<em>lienzo</em>) donde Matplotlib es capaz de dibujar y, se comporta, a la vez
+como un panel de wxPython.</p>
+<p>El objeto en cuestion es <tt class="xref py py-class docutils literal"><span class="pre">FigureCanvasWxAgg</span></tt> y tiene se muestra
+su ascendencia de clases en el siguiente diagrama:</p>
+<div class="figure">
+<img alt="_images/figcanvas6.png" src="_images/figcanvas6.png" style="width: 50%;" />
+<p class="caption">Diagrama de clases para <tt class="xref py py-class docutils literal"><span class="pre">FigureCanvasWxAgg</span></tt> donde se evidencia
+la herencia múltiple que permite el comportamiento dual del objeto.</p>
+</div>
+<p>La clase <tt class="xref py py-class docutils literal"><span class="pre">FigureCanvasAgg</span></tt> es en realidad la encargada de dibujar
+los gráficos a través de los algoritmos
+<a class="reference external" href="http://www.antigrain.com">Anti-Grain Geometry</a> que aplican técnicas
+como <em>Anti-Aliasing</em> <a class="footnote-reference" href="#id33" id="id17">[13]</a> o <em>Precisión de subpixel</em> para mejorar la definición
+de la líneas trazadas.</p>
+<div class="figure">
+<img alt="_images/wxmatplotlib7.png" src="_images/wxmatplotlib7.png" style="width: 65%;" />
+<p class="caption">Diagrama de secuencia para la graficación de un diagrama al nivel subyacente
+(via <tt class="docutils literal"><span class="pre">matplotlib</span></tt>)</p>
+</div>
+<div class="figure">
+<img alt="_images/class-plots7.png" src="_images/class-plots7.png" style="width: 65%;" />
+<p class="caption">Diagrama de clases de los distintos tipos de diagramas soportados</p>
+</div>
+</div>
+<div class="section" id="gesti-n-de-base-de-datos">
+<span id="bbdd"></span><h2>7.7. Gestión de base de datos<a class="headerlink" href="#gesti-n-de-base-de-datos" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>El almacenamiento y gestión de la información necesaria como entrada para GPEC se realiza
+a través de un sistema de gestión de base de datos relacional. Se
+utilizó el software <a class="reference external" href="http://sqlite.org">sqlite</a>  (versión 3) que respeta
+el estándar <abbr title="Structured Query Language">SQL</abbr>  mediante una librería
+monolítica, portable, eficiente y compacta que es integramente soportada por Python <a class="footnote-reference" href="#id34" id="id18">[14]</a>.</p>
+<p>La ventaja principal es que una base de datos de <em>sqlite</em> está autocontenida en un
+archivo binario que puede ser distribuído en conjunto con el software, sin
+requerir inicialización o un <em>servidor</em> de base de datos local o remoto. En
+este sentido es equivalente a una base de datos de Microsoft Access, aunque
+superadora en las prestaciones y apego a un lenguaje estándar para base de datos.</p>
+<div class="section" id="la-informaci-n-gestionada">
+<h3>7.7.1. La información gestionada<a class="headerlink" href="#la-informaci-n-gestionada" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>En particular, los datos almacenados son las constantes de compuestos
+químicos.</p>
+<p>Se incluye una vasta base de datos termodinámicos para más de 2000 compuestos,
+corroborados mediante <cite>DIPPR Project 801 &lt;http://dippr.byu.edu/&gt;</cite> <a class="footnote-reference" href="#id35" id="id19">[15]</a> que incluye información
+como la fórmula, el factor acéntrico, el volúmen, la temperatura y la presión crítica,
+etc.</p>
+<p>Esta información se comporta en modo <em>sólo lectura</em> <a class="footnote-reference" href="#id36" id="id20">[16]</a>
+a través de la interfaz de usuario, pero se brinda también una categoría editable
+para permitir <em>compuestos definidos por el usuario</em> que pueden ser agregados como
+una copia de un compuesto existente en <abbr>DIPPR</abbr> (que acepta, entonces, la modificación
+o ajuste de sus valores) o bien como un nuevo compuesto definido desde datos
+experimentales.</p>
+</div>
+<div class="section" id="modelo-entidad-relaci-n">
+<h3>7.7.2. Modelo Entidad-Relación<a class="headerlink" href="#modelo-entidad-relaci-n" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="figure">
+<img alt="_images/er-database.png" src="_images/er-database.png" style="width: 90%;" />
+<p class="caption">Representación de las entidades con sus atributos y la relación entre las mismas</p>
+</div>
+</div>
+<div class="section" id="definici-n-de-la-estructura-de-tablas">
+<h3>7.7.3. Definición de la estructura de tablas<a class="headerlink" href="#definici-n-de-la-estructura-de-tablas" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="highlight-sql"><div class="highlight"><pre><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="ss">&quot;compounds&quot;</span> <span class="p">(</span><span class="ss">&quot;id&quot;</span> <span class="nb">INTEGER</span><span class="p">,</span><span class="ss">&quot;id_category&quot;</span> <span class="n">INTERGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span>
+                                                  <span class="n">AUTOINCREMENT</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">,</span>
+                          <span class="ss">&quot;name&quot;</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+                          <span class="ss">&quot;formula&quot;</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+                          <span class="ss">&quot;formula_extended&quot;</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+                          <span class="ss">&quot;tc&quot;</span> <span class="nb">FLOAT</span><span class="p">,</span>
+                          <span class="ss">&quot;pc&quot;</span> <span class="nb">FLOAT</span><span class="p">,</span>
+                          <span class="ss">&quot;vc&quot;</span> <span class="nb">FLOAT</span><span class="p">,</span>
+                          <span class="ss">&quot;acentric_factor&quot;</span> <span class="nb">FLOAT</span><span class="p">,</span>
+                          <span class="ss">&quot;vc_rat&quot;</span> <span class="nb">FLOAT</span> <span class="k">DEFAULT</span> <span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="mi">168</span><span class="p">)</span>
+                         <span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="ss">&quot;categories&quot;</span> <span class="p">(</span><span class="ss">&quot;id_category&quot;</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span>
+                                         <span class="n">AUTOINCREMENT</span>  <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+                           <span class="ss">&quot;name&quot;</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+                           <span class="ss">&quot;editable&quot;</span> <span class="n">BOOL</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">DEFAULT</span> <span class="k">True</span>
+                          <span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="ss">&quot;categories&quot;</span> <span class="k">VALUES</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;DIPPR&#39;</span><span class="p">,</span><span class="s1">&#39;False&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="ss">&quot;categories&quot;</span> <span class="k">VALUES</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;User defined&#39;</span><span class="p">,</span><span class="s1">&#39;True&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="importaci-n-de-datos">
+<h3>7.7.4. Importación de datos<a class="headerlink" href="#importaci-n-de-datos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Los datos fueron obtenidos de la versión preexistente (<em>Visual GPEC</em>) cuya base
+de datos, como se ha comentado en la sección <a class="reference internal" href="requerimientos.html#problemas"><em>Problemas detectados</em></a>, está en formato
+MS Jet.</p>
+<p>La obtención de la información contenida para su conversión a Sqlite se realizó
+utilizando un proceso de 2 pasos.</p>
+<ol class="arabic simple">
+<li>Con la herramienta <tt class="docutils literal"><span class="pre">gmdb2</span></tt>, parte de la suite
+de utilidades libres para la manipulación de archivos Jet/Access
+<a class="reference external" href="http://mdbtools.sourceforge.net/">MDB tools</a>, <strong>se exportó</strong> la tabla de parámetros
+de compuestos a un formato <abbr title="Comma Separeted Values">CSV</abbr> donde cada registro
+constituye una línea de texto plano y los valores están separados por un caracter
+(en particular se utilizó el punto y coma <tt class="docutils literal"><span class="pre">;</span></tt>). El formato <tt class="docutils literal"><span class="pre">CSV</span></tt>, es
+un mecanismo canónico para la exportación e importación de datos, por su
+trivial facilidad de manipulación.</li>
+<li>Denida la estructura de la base de datos de destino (Sqlite), se utilizó
+la herramienta <a class="reference external" href="http://code.google.com/p/sqlite-manager/">sqlite-manager</a>
+para <strong>importar</strong> las columnas pertinentes del archivo CSV a la tabla de destino</li>
+</ol>
+<div class="figure">
+<img alt="_images/import-db2.png" src="_images/import-db2.png" style="width: 60%;" />
+<p class="caption">Procesos de conversión de la base de datos a <em>sqlite</em></p>
+</div>
+<table class="docutils footnote" frame="void" id="id21" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>En 2010 el autor de <em>Python PySub</em> reescribió completamente la <a class="reference internal" href="glosario.html#term-api"><em class="xref std std-term">API</em></a>,
-agrengando una orientación a objetos del paso de mensajes más poderosa,
-a la que llamó <em>version 3</em>.</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id17" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>En realidad, la llamada está intercedida por una función decoradora (<tt class="docutils literal"><span class="pre">memoize</span></tt>)
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>En realidad, la llamada está intercedida por una función decoradora (<tt class="docutils literal"><span class="pre">memoize</span></tt>)
 que realiza un <em>caché</em> de los resultados la primera vez que se invoca. Si en
 sucesivas llamadas los parámetros coinciden, se devuelven los datos
 almacenados en memoria, tarea mucho más rápida que recalcular.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id18" rules="none">
+<table class="docutils footnote" frame="void" id="id22" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[3]</a></td><td>El comando <tt class="docutils literal"><span class="pre">grep</span> <span class="pre">-r</span></tt> busca de manera recursiva una cadena (o una expresión
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>El comando <tt class="docutils literal"><span class="pre">grep</span> <span class="pre">-r</span></tt> busca de manera recursiva una cadena (o una expresión
 regular) sobre sobre los archivos de un directorio</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id19" rules="none">
+<table class="docutils footnote" frame="void" id="id23" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id5">[4]</a></td><td>El módulo <tt class="xref py py-mod docutils literal"><span class="pre">cStringIO</span></tt> provee un tipo de <em>buffers</em> de cadenas
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>El módulo <tt class="xref py py-mod docutils literal"><span class="pre">cStringIO</span></tt> provee un tipo de <em>buffers</em> de cadenas
 de caractéres con la misma interfaz que un archivo de texto normal.
 Las operaciones con la información en memoria son altamente eficientes.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id20" rules="none">
+<table class="docutils footnote" frame="void" id="id24" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id6">[5]</a></td><td>&#8220;Mientras que las velocidades de CPU y las capacidades de memporia se han
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>&#8220;Mientras que las velocidades de CPU y las capacidades de memporia se han
 incrementado enormemente, otros aspectos concernientes a la performance
 como las velocidades de acceso a disco se han quedado en el tiempo. Como
 consecuencia, estas latencias son cada vez más seguido un cuello de botella
 en la performance global del sistema&#8221;. <a class="reference external" href="http://en.wikipedia.org/wiki/Moore's_law#Importance_of_non-CPU_bottlenecks">http://en.wikipedia.org/wiki/Moore&#8217;s_law#Importance_of_non-CPU_bottlenecks</a></td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id21" rules="none">
+<table class="docutils footnote" frame="void" id="id25" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id7">[6]</a></td><td>También llamado <em class="dfn">memoization</em>.
+<tr><td class="label"><a class="fn-backref" href="#id5">[5]</a></td><td>También llamado <em class="dfn">memoization</em>.
 Ver <a class="reference external" href="http://en.wikipedia.org/wiki/Memoization">http://en.wikipedia.org/wiki/Memoization</a></td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id22" rules="none">
+<table class="docutils footnote" frame="void" id="id26" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id9">[7]</a></td><td>Cuando se necesita pasar parámetros específicos al decorador
+<tr><td class="label"><a class="fn-backref" href="#id7">[6]</a></td><td>Cuando se necesita pasar parámetros específicos al decorador
 (además de los que se pasan en la llamada a la función decorada)
 se necesita una forma sutilmente más compleja, donde la declaración
 del decorador tiene un subnivel más de <em>wrappering</em>, o sea, 3
 funciones anidadas.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id23" rules="none">
+<table class="docutils footnote" frame="void" id="id27" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id10">[8]</a></td><td>Una referencia completa de esta función se encuentra en
+<tr><td class="label"><a class="fn-backref" href="#id8">[7]</a></td><td>Una referencia completa de esta función se encuentra en
 <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.loadtxt.html">http://docs.scipy.org/doc/numpy/reference/generated/numpy.loadtxt.html</a></td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id24" rules="none">
+<table class="docutils footnote" frame="void" id="id28" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id12">[9]</a></td><td>Una aproximación de este tipo, relativa al tamaño de la ventana, utiliza
+<tr><td class="label"><a class="fn-backref" href="#id10">[8]</a></td><td>Una aproximación de este tipo, relativa al tamaño de la ventana, utiliza
 la versión anterior de GPEC.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id25" rules="none">
+<table class="docutils footnote" frame="void" id="id29" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id14">[10]</a></td><td>Para layout de estilo cuadrícula se utiliza una de las implementaciones de la clase abstracta <tt class="xref py py-class docutils literal"><span class="pre">wx.Sizer</span></tt>
+<tr><td class="label"><a class="fn-backref" href="#id12">[9]</a></td><td>Para layout de estilo cuadrícula se utiliza una de las implementaciones de la clase abstracta <tt class="xref py py-class docutils literal"><span class="pre">wx.Sizer</span></tt>
 es <tt class="xref py py-class docutils literal"><span class="pre">GridSizer</span></tt></td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id26" rules="none">
+<table class="docutils footnote" frame="void" id="id30" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id15">[11]</a></td><td>Esta técnica es ampliamente utilizada en frameworks Javascript
+<tr><td class="label"><a class="fn-backref" href="#id13">[10]</a></td><td>Esta técnica es ampliamente utilizada en frameworks Javascript
 como <cite>jQuery &lt;http://jquery.com&gt;</cite>, dada que su alta expresividad produce
 código más compacto, característica muy relevante en el ambiente web.
 Ver <a class="reference external" href="http://en.wikipedia.org/wiki/Method_chaining">http://en.wikipedia.org/wiki/Method_chaining</a></td></tr>
 </tbody>
 </table>
+<table class="docutils footnote" frame="void" id="id31" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id15">[11]</a></td><td>Una versión online gratuita de este libro se encuentra en
+<a class="reference external" href="http://www.joelonsoftware.com/uibook/fog0000000249.html">http://www.joelonsoftware.com/uibook/fog0000000249.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id32" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id16">[12]</a></td><td>El soporte incluye GTK, QT4, TKinter, PDF y wxPython</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id33" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id17">[13]</a></td><td>Es un proceso utilizado para suavizar los bordes desparejos de los gráficos.
+Ver <a class="reference external" href="http://es.wikipedia.org/wiki/Antialiasing">http://es.wikipedia.org/wiki/Antialiasing</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id34" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id18">[14]</a></td><td>Permite aumentar la resolución contemplando precisiones de &#8220;fracciones&#8221; de
+un pixel. Ver <a class="reference external" href="http://en.wikipedia.org/wiki/Sub-pixel_resolution">http://en.wikipedia.org/wiki/Sub-pixel_resolution</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id35" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id19">[15]</a></td><td>De hecho, a partir de la versión 2.6 de Python, el modulo <tt class="docutils literal"><span class="pre">sqlite3</span></tt> forma
+parte de la biblioteca estándar de Python.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id36" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id20">[16]</a></td><td><em>DIPPR 801</em> es un producto comercial cuya licencia ronda los u$s3400 anuales.
+GPEC incluye en su base datos equivalentes a una porción de la información
+que ese producto ofrece, sin depender de esta de manera alguna.
+No obstante, el autor considera este aspecto como suceptible a acarrear
+complicaciones legales y comerciales, que deberán revisarse y solucioanrse
+a futuro.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id37" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[17]</td><td>Sqlite no permite definir tablas o registros de datos como <em>sólo lectura</em>.
+Queda en potestad del desarrollador vedar la posilidad de modificación como parte
+del proceso de validación. Sin embargo, siempre es posible para un usuario abrir
+y modificar la información &#8220;manualmente&#8221; a través de un gestor que interprete
+el formato <em>sqlite</em>.</td></tr>
+</tbody>
+</table>
 <table class="docutils citation" frame="void" id="vdlaar2002" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[vdLaar2002]</a></td><td>van de Laar, F. (2002).  <em>Publish/Subscribe as architectural style
+<tr><td class="label">[vdLaar2002]</td><td>van de Laar, F. (2002).  <em>Publish/Subscribe as architectural style
 for component interaction (Mater&#8217;s thesis)</em>, Phillips Research
 Laboratories, Eindhoven</td></tr>
 </tbody>
 </table>
+<table class="docutils citation" frame="void" id="spolsky2001" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id14">[Spolsky2001]</a></td><td>Spolsky, Joel (2001). <em>User Interface Design for Programmers</em>, Apress</td></tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 
@@ -1044,58 +1163,57 @@ Laboratories, Eindhoven</td></tr>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Contenidos</a></h3>
   <ul>
-<li><a class="reference internal" href="#">6. Implementación</a><ul>
-<li><a class="reference internal" href="#el-patr-n-publish-subscribe">6.1. El patrón Publish/Subscribe</a><ul>
-<li><a class="reference internal" href="#ventajas">6.1.1. Ventajas</a></li>
-<li><a class="reference internal" href="#pubsub-en-python">6.1.2. Pubsub en Python</a></li>
-<li><a class="reference internal" href="#usos-en-gpec">6.1.3. Usos en GPEC</a><ul>
-<li><a class="reference internal" href="#panel-de-mensajes">6.1.3.1. Panel de mensajes</a></li>
-<li><a class="reference internal" href="#generaci-n-de-gr-ficos">6.1.3.2. Generación de gráficos</a><ul>
-<li><a class="reference internal" href="#exposici-n-de-archivos-de-datos">6.1.3.2.1. Exposición de archivos de datos</a></li>
-<li><a class="reference internal" href="#tabla-de-incidencias-de-mensajes">6.1.3.2.2. Tabla de incidencias de mensajes</a></li>
+<li><a class="reference internal" href="#">7. Implementación</a><ul>
+<li><a class="reference internal" href="#utilizaci-n-de-publish-suscribe-en-gpec">7.1. Utilización de Publish/Suscribe en GPEC</a><ul>
+<li><a class="reference internal" href="#panel-de-mensajes">7.1.1. Panel de mensajes</a></li>
+<li><a class="reference internal" href="#solicitud-de-gr-ficaci-n">7.1.2. Solicitud de gráficación</a></li>
+<li><a class="reference internal" href="#exposici-n-de-archivos-de-datos">7.1.3. Exposición de archivos de datos</a></li>
+<li><a class="reference internal" href="#tabla-de-incidencias-de-mensajes">7.1.4. Tabla de incidencias de mensajes</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#invocaci-n-de-ejecutables-del-backend">7.2. Invocación de ejecutables del backend</a><ul>
+<li><a class="reference internal" href="#la-dependencia-con-wine">7.2.1. La dependencia con Wine</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#memorizaci-n-de-resultados-costosos">7.3. Memorización de resultados costosos</a><ul>
+<li><a class="reference internal" href="#patr-n-decorator">7.3.1. Patrón <em>decorator</em></a></li>
+<li><a class="reference internal" href="#algoritmo-de-cach-de-datos">7.3.2. Algoritmo de caché de datos</a></li>
+<li><a class="reference internal" href="#c-digo-fuente">7.3.3. Código fuente</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#invocaci-n-de-ejecutables-del-backend">6.2. Invocación de ejecutables del backend</a><ul>
-<li><a class="reference internal" href="#la-dependencia-con-wine">6.2.1. La dependencia con Wine</a></li>
+<li><a class="reference internal" href="#algoritmo-de-an-lisis-sint-ctico">7.4. Algoritmo de análisis sintáctico</a><ul>
+<li><a class="reference internal" href="#descripci-n">7.4.1. Descripción</a></li>
+<li><a class="reference internal" href="#id9">7.4.2. Código fuente</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#memorizaci-n-de-resultados-costosos">6.3. Memorización de resultados costosos</a><ul>
-<li><a class="reference internal" href="#patr-n-decorator">6.3.1. Patrón <em>decorator</em></a></li>
-<li><a class="reference internal" href="#algoritmo-de-cach-de-datos">6.3.2. Algoritmo de caché de datos</a></li>
-<li><a class="reference internal" href="#c-digo-fuente">6.3.3. Código fuente</a></li>
+<li><a class="reference internal" href="#interfaz-gr-fica-de-usuario-gui">7.5. Interfaz Gráfica de Usuario (GUI)</a><ul>
+<li><a class="reference internal" href="#contenedores-y-sizers">7.5.1. Contenedores y <em>sizers</em></a><ul>
+<li><a class="reference internal" href="#uso-en-la-aplicaci-n">7.5.1.1. Uso en la aplicación</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#algoritmo-de-an-lisis-sint-ctico">6.4. Algoritmo de análisis sintáctico</a><ul>
-<li><a class="reference internal" href="#descripci-n">6.4.1. Descripción</a></li>
-<li><a class="reference internal" href="#id11">6.4.2. Código fuente</a></li>
+<li><a class="reference internal" href="#el-uso-de-la-advanced-user-interface">7.5.2. El uso de la <em>Advanced User Interface</em></a></li>
+<li><a class="reference internal" href="#la-gesti-n-avanzada-de-pesta-as">7.5.3. La gestión avanzada de pestañas</a></li>
+<li><a class="reference internal" href="#justificaci-n-del-dise-o-de-ui">7.5.4. Justificación del diseño de UI</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#interfaz-gr-fica-de-usuario-gui">6.5. Interfaz Gráfica de Usuario (GUI)</a><ul>
-<li><a class="reference internal" href="#contenedores-y-sizers">6.5.1. Contenedores y <em>sizers</em></a><ul>
-<li><a class="reference internal" href="#uso-en-la-aplicaci-n">6.5.1.1. Uso en la aplicación</a></li>
+<li><a class="reference internal" href="#integraci-n-matplotlib-wxpython">7.6. Integración Matplotlib-WxPython</a></li>
+<li><a class="reference internal" href="#gesti-n-de-base-de-datos">7.7. Gestión de base de datos</a><ul>
+<li><a class="reference internal" href="#la-informaci-n-gestionada">7.7.1. La información gestionada</a></li>
+<li><a class="reference internal" href="#modelo-entidad-relaci-n">7.7.2. Modelo Entidad-Relación</a></li>
+<li><a class="reference internal" href="#definici-n-de-la-estructura-de-tablas">7.7.3. Definición de la estructura de tablas</a></li>
+<li><a class="reference internal" href="#importaci-n-de-datos">7.7.4. Importación de datos</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#el-uso-de-la-advanced-user-interface">6.5.2. El uso de la <em>Advanced User Interface</em></a></li>
-<li><a class="reference internal" href="#la-gesti-n-avanzada-de-pesta-as">6.5.3. La gestión avanzada de pestañas</a></li>
-<li><a class="reference internal" href="#justificaci-n-de-dise-o">6.5.4. Justificación de diseño</a></li>
-<li><a class="reference internal" href="#pruebas-de-usabilidad">6.5.5. Pruebas de usabilidad</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#integraci-n-matplotlib-wxpython">6.6. Integración Matplotlib-WxPython</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Tema anterior</h4>
-  <p class="topless"><a href="diseno.html"
-                        title="Capítulo anterior">5. Diseño</a></p>
+  <p class="topless"><a href="arquitectura.html"
+                        title="Capítulo anterior">6. Arquitectura</a></p>
   <h4>Próximo tema</h4>
   <p class="topless"><a href="verificacion.html"
-                        title="Próximo capítulo">7. Verificación y Validación</a></p>
+                        title="Próximo capítulo">8. Verificación y Validación</a></p>
   <h3>Esta página</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/implementacion.txt"
@@ -1125,10 +1243,10 @@ Laboratories, Eindhoven</td></tr>
           <a href="genindex.html" title="Índice General"
              >índice</a></li>
         <li class="right" >
-          <a href="verificacion.html" title="7. Verificación y Validación"
+          <a href="verificacion.html" title="8. Verificación y Validación"
              >siguiente</a> |</li>
         <li class="right" >
-          <a href="diseno.html" title="5. Diseño"
+          <a href="arquitectura.html" title="6. Arquitectura"
              >anterior</a> |</li>
         <li><a href="index.html">&lt;project&gt;</a> &raquo;</li> 
       </ul>

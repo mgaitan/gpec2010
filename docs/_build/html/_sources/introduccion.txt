@@ -24,19 +24,24 @@ Diversas áreas de la ciencia y la ingeniería han
 sido revolucionadas por el software para cálculo, visualización 
 y simulación disponible. Por nombrar sólo dos ejemplos, 
 herramientas como *MATLAB®* o *Mathematica®* 
-forman parte del día a día en la labor de ingenieros e investigadores. 
-
-Someramente puede hacerse aquí una distinción entre software científico/técnico 
+forman parte del día a día en la labor de ingenieros e investigadores. En "nicho" 
+puede hacerse aquí una distinción entre software científico/técnico 
 de propósito general como los mencionados (independientemente de que 
 tengan mayor aceptación en un campo u otro) de los que son 
-de propósito específico (software aplicativo), como es es el caso del software 
-sobre el cual trata este proyecto final. 
+de propósito específico y realizan un conjunto de tareas puntuales (software aplicativo).
+
+Este trabajo se incluye en la segunda categoría ya que se trata de una aplicación 
+científica multiplataforma, con interfaz gráfica de escritorio, que basada en programas de 
+cálculo preexistentes permite realizar *diagramas de equilibro termodinámico* en 2 y 3 dimensiones 
+que son de suma utilidad para la enseñanza, la investigación y la aplicación
+industrial.
+
 
 Descripción
 ===========
 
 :abbr:`GPEC (Global Phase Equilibrium Calculations)` [#]_, es un software para la  
-obtención de :term:`curvas de equilibro` de :term:`fase global`  
+obtención de :term:`curvas de equilibro` termodinámico de :term:`fase global`  
 para :term:`sistemas binarios <sistema binario>`, que se calculan mediante 
 :term:`ecuaciones de estado <ecuación de estado>`. 
 Es útil para fines académicos, científicos y de desarrollo industrial. 
@@ -54,20 +59,20 @@ Actualmente es un proyecto dirigido por el Prof. Esteban Brignole de
 :abbr:`PLAPIQUI (Planta Piloto de Ingeniería Química)` [#]_
 en colaboración con el :abbr:`IDTQ (Investigación y Desarrollo en Tecnologías Química)` [#]_ 
 
-El software tiene una arquitectura de capas. El :term:`Back end` corresponde
-al conjunto de programas (codificados en lenguaje Fortran) que implementa los algoritmos
+El software tiene una arquitectura de capas con un mecanismo de comunicación. 
+El :term:`Back end` corresponde al conjunto de programas (codificados en lenguaje Fortran) que implementa los algoritmos
 de cálculo . El :term:`Front end`, denominado *Visual Gpec* es la interfaz 
 de usuario que genera datos de entrada con formato comprensible por los algoritmos
 y procesa las salidas generando distintos gráficos. Para detalle sobre esta arquitectura
-puede ver :ref:`frontend_backend`.
+puede ver :ref:`modelo`.
 
-.. note::
+.. important::
     
-        Estrictamente, *GPEC* es el software backend; el desarrollo original de Cismondi, 
-        un conjunto de programas de línea de comando. 
-        Con el advenimiento de la interfaz gráfica *Visual Gpec*, se comenzó a 
+        Estrictamente, *GPEC* es el conjunto de aplicaciones de cálculo 
+        desarrolladas por Cismondi
+        Con el advenimiento de la primera interfaz gráfica *Visual Gpec*, se comenzó a 
         llamar *GPEC* al conjunto de software, y es, salvo
-        aclaración explícita, a la asepción que tiene en este libro. 
+        aclaración explícita, la asepción que tiene en este libro. 
 
 .. seealso::
 
@@ -94,12 +99,12 @@ desde el año 2008. En particular:
 
 * La ausencia de documentación 
 
-* El diseño :term:`cerrado <software cerrado>`, no :term:`reutilizable <software reutilizable>` y 
-  poco :term:`extensible <software extensible>` de *Visual Gpec*
+* La complejidad que ha alcanzado el proyecto 
 
-    .. seealso:: 
+* El diseño :term:`cerrado <software cerrado>`, no reutilizable y 
+  poco extensible adoptado
 
-        :ref:`relevamiento`
+    .. seealso:: :ref:`problemas`
         
 
 Importancia 
@@ -109,20 +114,20 @@ Las potencialidades técnicas, científicas e incluso comerciales de este softwa
 son amplias, ya que su *nicho* tiene aplicación en la industria alimenticia, 
 petroquímica, etc. 
 
-    .. todo::
-        
-        ver aplicación / nicho
-
-
 También es útil como herramienta educativa, donde los estudiantes consolidan
-conceptos teóricos y manipulan curvas que, por razones obvias, son estáticas 
-en los libros. 
+conceptos teóricos y manipulan parámetros obteniendo una visualización interactiva
+de los resultados.
+
+    .. seealso::  Para un detalle sobre este aspecto vea :ref:`aplicacion`
+
 
 Alcance
 =======
 
-El alcance de este trabajo es el rediseño y la implementación de un nuevo 
-*Visual Gpec*. Para más detalles puede ver :ref:`justificacion_diseno`.
+El alcance de este trabajo es el rediseño y la implementación de una nueva aplicación
+de generación de gráficos para *GPEC*, cubriendo y superando las prestaciones ofrecidas 
+hasta el moemnto, contemplando los mecanismos de comunicación con el software de cálculo
+subyacente sin alterarlo de manera alguna.
 
 
 Objetivos
@@ -148,6 +153,9 @@ Objetivos específicos
 Los objetivos específicos del proyecto son:
 
 * Estudiar y documentar la versión preexistente del software. Vea :ref:`relevamiento`.
+
+* Estudiar y documentar el mecanismo de comunicación entre el *front-end* y el 
+  *back-end* . Vea :ref:`api`  
 
 * Dilucidar fallas de diseño desde el punto de vista del usuario
   e idear sus soluciones para incluirlas como nuevos requerimientos.

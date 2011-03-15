@@ -68,16 +68,20 @@ siendo de gran importancia.</p>
 sido revolucionadas por el software para cálculo, visualización
 y simulación disponible. Por nombrar sólo dos ejemplos,
 herramientas como <em>MATLAB®</em> o <em>Mathematica®</em>
-forman parte del día a día en la labor de ingenieros e investigadores.</p>
-<p>Someramente puede hacerse aquí una distinción entre software científico/técnico
+forman parte del día a día en la labor de ingenieros e investigadores. En &#8220;nicho&#8221;
+puede hacerse aquí una distinción entre software científico/técnico
 de propósito general como los mencionados (independientemente de que
 tengan mayor aceptación en un campo u otro) de los que son
-de propósito específico (software aplicativo), como es es el caso del software
-sobre el cual trata este proyecto final.</p>
+de propósito específico y realizan un conjunto de tareas puntuales (software aplicativo).</p>
+<p>Este trabajo se incluye en la segunda categoría ya que se trata de una aplicación
+científica multiplataforma, con interfaz gráfica de escritorio, que basada en programas de
+cálculo preexistentes permite realizar <em>diagramas de equilibro termodinámico</em> en 2 y 3 dimensiones
+que son de suma utilidad para la enseñanza, la investigación y la aplicación
+industrial.</p>
 <div class="section" id="descripci-n">
 <h2>1.1. Descripción<a class="headerlink" href="#descripci-n" title="Enlazar permanentemente con este título">¶</a></h2>
 <p><abbr title="Global Phase Equilibrium Calculations">GPEC</abbr> <a class="footnote-reference" href="#id7" id="id1">[1]</a>, es un software para la
-obtención de <a class="reference internal" href="glosario.html#term-curvas-de-equilibro"><em class="xref std std-term">curvas de equilibro</em></a> de <a class="reference internal" href="glosario.html#term-fase-global"><em class="xref std std-term">fase global</em></a>
+obtención de <a class="reference internal" href="glosario.html#term-curvas-de-equilibro"><em class="xref std std-term">curvas de equilibro</em></a> termodinámico de <a class="reference internal" href="glosario.html#term-fase-global"><em class="xref std std-term">fase global</em></a>
 para <a class="reference internal" href="glosario.html#term-sistema-binario"><em class="xref std std-term">sistemas binarios</em></a>, que se calculan mediante
 <a class="reference internal" href="glosario.html#term-ecuaci-n-de-estado"><em class="xref std std-term">ecuaciones de estado</em></a>.
 Es útil para fines académicos, científicos y de desarrollo industrial.</p>
@@ -91,19 +95,19 @@ DTU (Dinamarca), y el Prof. Marcelo Zabaloy de la Universidad Nacional del Sur,
 <p>Actualmente es un proyecto dirigido por el Prof. Esteban Brignole de
 <abbr title="Planta Piloto de Ingeniería Química">PLAPIQUI</abbr> <a class="footnote-reference" href="#id10" id="id4">[4]</a>
 en colaboración con el <abbr title="Investigación y Desarrollo en Tecnologías Química">IDTQ</abbr> <a class="footnote-reference" href="#id11" id="id5">[5]</a></p>
-<p>El software tiene una arquitectura de capas. El <a class="reference internal" href="glosario.html#term-back-end"><em class="xref std std-term">Back end</em></a> corresponde
-al conjunto de programas (codificados en lenguaje Fortran) que implementa los algoritmos
+<p>El software tiene una arquitectura de capas con un mecanismo de comunicación.
+El <a class="reference internal" href="glosario.html#term-back-end"><em class="xref std std-term">Back end</em></a> corresponde al conjunto de programas (codificados en lenguaje Fortran) que implementa los algoritmos
 de cálculo . El <a class="reference internal" href="glosario.html#term-front-end"><em class="xref std std-term">Front end</em></a>, denominado <em>Visual Gpec</em> es la interfaz
 de usuario que genera datos de entrada con formato comprensible por los algoritmos
 y procesa las salidas generando distintos gráficos. Para detalle sobre esta arquitectura
-puede ver <a class="reference internal" href="diseno.html#frontend-backend"><em>Interacción Frontend / Backend</em></a>.</p>
-<div class="admonition note">
-<p class="first admonition-title">Nota</p>
-<p class="last">Estrictamente, <em>GPEC</em> es el software backend; el desarrollo original de Cismondi,
-un conjunto de programas de línea de comando.
-Con el advenimiento de la interfaz gráfica <em>Visual Gpec</em>, se comenzó a
+puede ver <a class="reference internal" href="arquitectura.html#modelo"><em>Modelo conceptual</em></a>.</p>
+<div class="admonition important">
+<p class="first admonition-title">Importante</p>
+<p class="last">Estrictamente, <em>GPEC</em> es el conjunto de aplicaciones de cálculo
+desarrolladas por Cismondi
+Con el advenimiento de la primera interfaz gráfica <em>Visual Gpec</em>, se comenzó a
 llamar <em>GPEC</em> al conjunto de software, y es, salvo
-aclaración explícita, a la asepción que tiene en este libro.</p>
+aclaración explícita, la asepción que tiene en este libro.</p>
 </div>
 <div class="admonition-ver-tambi-n admonition seealso">
 <p class="first admonition-title">Ver también</p>
@@ -128,12 +132,14 @@ vinculados a los grupos que impulsan GPEC</p>
 </li>
 <li><p class="first">La ausencia de documentación</p>
 </li>
-<li><p class="first">El diseño <a class="reference internal" href="glosario.html#term-software-cerrado"><em class="xref std std-term">cerrado</em></a>, no <em class="xref std std-term">reutilizable</em> y
-poco <em class="xref std std-term">extensible</em> de <em>Visual Gpec</em></p>
+<li><p class="first">La complejidad que ha alcanzado el proyecto</p>
+</li>
+<li><p class="first">El diseño <a class="reference internal" href="glosario.html#term-software-cerrado"><em class="xref std std-term">cerrado</em></a>, no reutilizable y
+poco extensible adoptado</p>
 <blockquote>
 <div><div class="admonition-ver-tambi-n admonition seealso">
 <p class="first admonition-title">Ver también</p>
-<p class="last"><a class="reference internal" href="requerimientos.html#relevamiento"><em>Relevamiento de la versión preexistente</em></a></p>
+<p class="last"><a class="reference internal" href="requerimientos.html#problemas"><em>Problemas detectados</em></a></p>
 </div>
 </div></blockquote>
 </li>
@@ -144,20 +150,22 @@ poco <em class="xref std std-term">extensible</em> de <em>Visual Gpec</em></p>
 <p>Las potencialidades técnicas, científicas e incluso comerciales de este software
 son amplias, ya que su <em>nicho</em> tiene aplicación en la industria alimenticia,
 petroquímica, etc.</p>
+<p>También es útil como herramienta educativa, donde los estudiantes consolidan
+conceptos teóricos y manipulan parámetros obteniendo una visualización interactiva
+de los resultados.</p>
 <blockquote>
-<div><div class="admonition-todo admonition " id="index-0">
-<p class="first admonition-title">Todo</p>
-<p class="last">ver aplicación / nicho</p>
+<div><div class="admonition-ver-tambi-n admonition seealso">
+<p class="first admonition-title">Ver también</p>
+<p class="last">Para un detalle sobre este aspecto vea <a class="reference internal" href="marco_teorico.html#aplicacion"><em>Aplicación y utilidad</em></a></p>
 </div>
 </div></blockquote>
-<p>También es útil como herramienta educativa, donde los estudiantes consolidan
-conceptos teóricos y manipulan curvas que, por razones obvias, son estáticas
-en los libros.</p>
 </div>
 <div class="section" id="alcance">
 <h2>1.4. Alcance<a class="headerlink" href="#alcance" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>El alcance de este trabajo es el rediseño y la implementación de un nuevo
-<em>Visual Gpec</em>. Para más detalles puede ver <a class="reference internal" href="diseno.html#justificacion-diseno"><em>Justificación de diseño</em></a>.</p>
+<p>El alcance de este trabajo es el rediseño y la implementación de una nueva aplicación
+de generación de gráficos para <em>GPEC</em>, cubriendo y superando las prestaciones ofrecidas
+hasta el moemnto, contemplando los mecanismos de comunicación con el software de cálculo
+subyacente sin alterarlo de manera alguna.</p>
 </div>
 <div class="section" id="objetivos">
 <h2>1.5. Objetivos<a class="headerlink" href="#objetivos" title="Enlazar permanentemente con este título">¶</a></h2>
@@ -180,6 +188,9 @@ la <a class="reference internal" href="glosario.html#term-usabilidad"><em class=
 <p>Los objetivos específicos del proyecto son:</p>
 <ul>
 <li><p class="first">Estudiar y documentar la versión preexistente del software. Vea <a class="reference internal" href="requerimientos.html#relevamiento"><em>Relevamiento de la versión preexistente</em></a>.</p>
+</li>
+<li><p class="first">Estudiar y documentar el mecanismo de comunicación entre el <em>front-end</em> y el
+<em>back-end</em> . Vea <a class="reference internal" href="api.html#api"><em>Especificación de la interfaz de comunicación</em></a></p>
 </li>
 <li><p class="first">Dilucidar fallas de diseño desde el punto de vista del usuario
 e idear sus soluciones para incluirlas como nuevos requerimientos.</p>

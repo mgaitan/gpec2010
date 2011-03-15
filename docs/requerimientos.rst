@@ -108,6 +108,7 @@ por más de un colaborador. Las modificaciones y los archivos circulan por email
 entre uno y otro, pero sin lograr sistematización y control sobre *quién cambió qué*.
 y a *qué versión de GPEC corresponde un determinado código fuente*. 
 
+.. _problemas:
 
 Problemas detectados
 ---------------------
@@ -178,7 +179,7 @@ que facilite la ubicuidad.
 Base de datos
 ^^^^^^^^^^^^^
 
-La base de datos está implementada en fomate MS Access y su diseño de tablas 
+La base de datos está implementada en formato Microsoft Jet [#]_ y su diseño de tablas 
 es complejo innecesariamente, realizando diversas relaciones *One-to-One* con 
 una misma clave principal. Por ejemplo, los nombres y las propiedades de un 
 compuesto químico se encuentran en tablas separadas. 
@@ -191,10 +192,6 @@ compuesto químico se encuentran en tablas separadas.
 
 Sumado a esto, dada la ineficiencia del formato, el archivo de base de datos 
 estándar (sin datos extra del usuario)  ocupa *45.2Mb* de espacio en disco. 
-
-Casos de uso   
-============
-
 
 
 
@@ -295,12 +292,14 @@ Es decir que debe existir el concepto de **proyecto** como un conjunto de
 múltiples **casos**, gestionados desde una misma interfaz de usuario. 
 
 
-    .. note:: Dado que se presta a confunsión, vale reiterar que **caso** en 
-              pertenece al contexto químico y es la conjunción de un sistema binario, un 
-              modelo de cálculo (ecuación de estado) y sus respectivos 
-              parámetros, y **caso de uso** refiere al ámbito de la 
-              ingeniería de software y se trata de una técnica para 
-              sistematizar requerimientos y compartamientos esperados del sistema. 
+    .. note:: 
+      
+       Dado que se presta a confunsión, vale reiterar que **caso** en 
+       pertenece al contexto químico y es la conjunción de un sistema binario, un 
+       modelo de cálculo (ecuación de estado) y sus respectivos 
+       parámetros, y **caso de uso** refiere al ámbito de la 
+       ingeniería de software y se trata de una técnica para 
+       sistematizar requerimientos y compartamientos esperados del sistema. 
             
 
 Gráficos en 3D
@@ -345,9 +344,13 @@ Diagramas de caso de uso
 .. [#]  Este problema es conocido como *DLL Hell* (infierno de las DLL). Ver 
         http://es.wikipedia.org/wiki/DLL_Hell
 
+.. [#]  Microsoft Jet Database Engine es un motor de base de datos utilizado por 
+        el gestor Microsoft Access, entre otros productos. Ver 
+        http://en.wikipedia.org/wiki/Microsoft_Jet
+
 .. [#]  Para la parametrización de los datos de entrada para cada ecuación de 
         estado fue menenester documentar la :ref:`api`.
 
-.. [#]  La validación de los rangos dinámicos (dependen de las constantes críticas
+.. [#]  La validación de los rangos dinámicos (que dependen de las constantes críticas
         de los compuestos del sistema) la realizan los algoritmos de cálculo. El frontend
         se limita a reportar un error en la obtención de los datos de salida. 

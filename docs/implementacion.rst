@@ -2,6 +2,8 @@
 
 Implementación
 ***************
+
+.. _uso-pubsub:
         
 Utilización de Publish/Suscribe en GPEC
 ========================================
@@ -131,7 +133,9 @@ deseable que tengan un acceso al contenido desde la propia aplicación, para
 encontrar información numérica puntual cuya precisión se pierde en un gráfico. 
 
 .. figure:: images/inpout.png
-   :width: 80%
+   :width: 100%
+
+   Panel de navegación y visualización de archivos en entrada y salida 
 
 Esta tarea se hace a través de PubSub. El emisor envía un mensaje con tópico
 ``add_txt`` adjuntando como información una tupla con la ruta al archivo 
@@ -210,6 +214,7 @@ permiso de escritura en la carpeta destino). En caso de error por algún motivo
 
    Secuencia de la comunicación frontend-backend
 
+.. _wine:
 
 La dependencia con Wine
 ------------------------
@@ -469,7 +474,7 @@ Todo los *sizers* son instancias de una subclase de la clase abstracta :py:class
     .. seealso:: 
 
        Para una explicación exhaustiva sobre el tema, vea el capitulo 11 de 
-        *"wxPython in Action"*, [NR-RD2006]_ 
+       *"wxPython in Action"*, [NR-RD2006]_ 
 
 
 Por ejemplo, ``sizer`` permite dividir el espacio, cualquier este sea, en porciones
@@ -481,12 +486,11 @@ puede contener a otros de manera anidada, definiendo una cuadrícula con espacio
 
 
 .. figure:: images/wxglade-sizer.png
-   :width: 95%
+   :width: 80%
     
    Diseño con *sizers* de una ventana de la aplicación mediante la utilidad 
    `wxGlade <http://wxglade.sourceforge.net>`_
  
-
 El hecho de que un sizer no sea un contenedor indica que ``parent`` de cualquier elemento 
 aún debe serlo. Es decir, un elemento cualquier (por ejemplo, un botón) está en incrustado
 en un contenedor (por ejemplo, un panel) pero ubicado según indica un sizer que está 
@@ -711,21 +715,13 @@ Un software complejo con un acabado estudio de usabilidad es
 para el diseño de GPEC. 
 
 .. figure:: images/mayavi2.png
-   :width: 100%
+   :width: 90%
 
    Interfaz de la aplicación de visualización de diagramas VTK que sirvió 
    como inspiración para la interfaz de GPEC.  
 
 
-Algunas decisiciones concernientes a la usabilidad se muestran en el siguiente 
-diagrama:
-
-.. figure:: images/usabilidad_labels.png
-   :width: 100%
-
-   Interfaz de la aplicación de visualización de diagramas VTK que sirvió 
-   como inspiración para la interfaz de GPEC.  
-
+Algunas decisiciones concernientes a la usabilidad han sido:
 
 * El diseño acompaña al *workflow*: primero se define el sistema, opcionalmente 
   se manipulan los cálculos y por último se grafica. Sólo el primero y el último
@@ -747,6 +743,14 @@ diagrama:
 * El uso del símbolo "+" en la ubicación dispuesta es una convención popularizada 
   por los navegadores web para abrir una nueva pestaña de trabajo. Dado el contexto
   resulta evidente que genera un nuevo caso. 
+
+
+.. figure:: images/usabilidad_labels.png
+   :width: 100%
+
+   Interfaz de la aplicación de visualización de diagramas VTK que sirvió 
+   como inspiración para la interfaz de GPEC.  
+
 
 .. _matplotlibwx:
 
@@ -790,43 +794,53 @@ de la líneas trazadas.
    Diagrama de clases de los distintos tipos de diagramas soportados 
 
 
+.. _bbdd:
 
-
-
-Base de datos
-=============
+Gestión de base de datos
+========================
 
 El almacenamiento y gestión de la información necesaria como entrada para GPEC se realiza
 a través de un sistema de gestión de base de datos relacional. Se 
-utilizó el software `Sqlite <http://sqlite.org>`_  (versión 3) que respeta casi íntegramente 
+utilizó el software `sqlite <http://sqlite.org>`_  (versión 3) que respeta 
 el estándar :abbr:`SQL (Structured Query Language)`  mediante una librería 
 monolítica, portable, eficiente y compacta que es integramente soportada por Python [#]_. 
 
-Una base de datos de *Sqlite* está autocontenida en un 
+La ventaja principal es que una base de datos de *sqlite* está autocontenida en un 
 archivo binario que puede ser distribuído en conjunto con el software, sin 
-requerir inicialización o un *servidor* de base de datos local o remoto. 
+requerir inicialización o un *servidor* de base de datos local o remoto. En 
+este sentido es equivalente a una base de datos de Microsoft Access, aunque 
+superadora en las prestaciones y apego a un lenguaje estándar para base de datos. 
+
+La información gestionada
+--------------------------
 
 En particular, los datos almacenados son las constantes de compuestos 
-químicos. Se incluye una vasta base de compuestos denominada :abbr:`DIPPR` cuya 
-modificación está vedada a través de la interfaz de usuario (modo *sólo lectura* [#]_), 
-así como *compuestos definidos por el usuario* que pueden ser agregados como 
-una copia de un compuesto :abbr:`DIPPR` (que acepta, entonces, la modificación 
+químicos. 
+
+Se incluye una vasta base de datos termodinámicos para más de 2000 compuestos, 
+corroborados mediante `DIPPR Project 801 <http://dippr.byu.edu/>` [#]_ que incluye información 
+como la fórmula, el factor acéntrico, el volúmen, la temperatura y la presión crítica, 
+etc. 
+
+Esta información se comporta en modo *sólo lectura* [#]_ 
+a través de la interfaz de usuario, pero se brinda también una categoría editable 
+para permitir *compuestos definidos por el usuario* que pueden ser agregados como 
+una copia de un compuesto existente en :abbr:`DIPPR` (que acepta, entonces, la modificación 
 o ajuste de sus valores) o bien como un nuevo compuesto definido desde datos 
 experimentales. 
-
-.. todo:: 
-        Siglas de dippr ? 
 
 
 Modelo Entidad-Relación
 -----------------------
 
-.. todo:: 
+.. figure:: images/er-database.png
+   :width: 90% 
 
-    entidad-relacion
+   Representación de las entidades con sus atributos y la relación entre las mismas
 
-Definición de las tablas
--------------------------
+
+Definición de la estructura de tablas 
+--------------------------------------
 
 
 .. code-block:: sql
@@ -852,13 +866,36 @@ Definición de las tablas
     INSERT INTO "categories" VALUES(2,'User defined','True');
 
 
+Importación de datos 
+---------------------
+
+Los datos fueron obtenidos de la versión preexistente (*Visual GPEC*) cuya base 
+de datos, como se ha comentado en la sección :ref:`problemas`, está en formato
+MS Jet. 
+
+La obtención de la información contenida para su conversión a Sqlite se realizó
+utilizando un proceso de 2 pasos. 
+
+1.  Con la herramienta ``gmdb2``, parte de la suite
+    de utilidades libres para la manipulación de archivos Jet/Access 
+    `MDB tools <http://mdbtools.sourceforge.net/>`_, **se exportó** la tabla de parámetros
+    de compuestos a un formato :abbr:`CSV (Comma Separeted Values)` donde cada registro
+    constituye una línea de texto plano y los valores están separados por un caracter
+    (en particular se utilizó el punto y coma ``;``). El formato ``CSV``, es 
+    un mecanismo canónico para la exportación e importación de datos, por su 
+    trivial facilidad de manipulación.
+
+2.  Denida la estructura de la base de datos de destino (Sqlite), se utilizó 
+    la herramienta `sqlite-manager <http://code.google.com/p/sqlite-manager/>`_
+    para **importar** las columnas pertinentes del archivo CSV a la tabla de destino
     
+.. figure:: images/import-db.png
+   :width: 60%
+
+   Procesos de conversión de la base de datos a *sqlite*
 
 
 
-.. [#]  En 2010 el autor de *Python PySub* reescribió completamente la :term:`API`, 
-        agrengando una orientación a objetos del paso de mensajes más poderosa, 
-        a la que llamó *version 3*. 
 
 
 .. [#]  En realidad, la llamada está intercedida por una función decoradora (``memoize``)
@@ -916,6 +953,13 @@ Definición de las tablas
 
 .. [#]  De hecho, a partir de la versión 2.6 de Python, el modulo ``sqlite3`` forma 
         parte de la biblioteca estándar de Python. 
+
+.. [#]  *DIPPR 801* es un producto comercial cuya licencia ronda los u$s3400 anuales. 
+        GPEC incluye en su base datos equivalentes a una porción de la información
+        que ese producto ofrece, sin depender de esta de manera alguna. 
+        No obstante, el autor considera este aspecto como suceptible a acarrear 
+        complicaciones legales y comerciales, que deberán revisarse y solucioanrse 
+        a futuro.
 
 .. [#]  Sqlite no permite definir tablas o registros de datos como *sólo lectura*. 
         Queda en potestad del desarrollador vedar la posilidad de modificación como parte    

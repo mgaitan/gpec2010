@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4. Ingeniería de requerimientos &mdash; &lt;project&gt;</title>
+    <title>5. Ingeniería de requerimientos &mdash; &lt;project&gt;</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -24,8 +24,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="top" title="&lt;project&gt;" href="index.html" />
-    <link rel="next" title="5. Diseño" href="diseno.html" />
-    <link rel="prev" title="3. Contexto de trabajo" href="contexto_de_trabajo.html" /> 
+    <link rel="next" title="6. Arquitectura" href="arquitectura.html" />
+    <link rel="prev" title="4. Tecnologías y metodologías" href="tecnologias.html" /> 
   </head>
   <body>
     <div class="related">
@@ -35,10 +35,10 @@
           <a href="genindex.html" title="Índice General"
              accesskey="I">índice</a></li>
         <li class="right" >
-          <a href="diseno.html" title="5. Diseño"
+          <a href="arquitectura.html" title="6. Arquitectura"
              accesskey="N">siguiente</a> |</li>
         <li class="right" >
-          <a href="contexto_de_trabajo.html" title="3. Contexto de trabajo"
+          <a href="tecnologias.html" title="4. Tecnologías y metodologías"
              accesskey="P">anterior</a> |</li>
         <li><a href="index.html">&lt;project&gt;</a> &raquo;</li> 
       </ul>
@@ -50,12 +50,12 @@
           <div class="body">
             
   <div class="section" id="ingenier-a-de-requerimientos">
-<h1>4. Ingeniería de requerimientos<a class="headerlink" href="#ingenier-a-de-requerimientos" title="Enlazar permanentemente con este título">¶</a></h1>
+<h1>5. Ingeniería de requerimientos<a class="headerlink" href="#ingenier-a-de-requerimientos" title="Enlazar permanentemente con este título">¶</a></h1>
 <div class="section" id="metodolog-a-de-relevamiento">
-<h2>4.1. Metodología de relevamiento<a class="headerlink" href="#metodolog-a-de-relevamiento" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>5.1. Metodología de relevamiento<a class="headerlink" href="#metodolog-a-de-relevamiento" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Para el relevamiento de requerimientos se realizaron entrevistas informales
 con el comitente, una evaluación exhaustiva de la versión preexistente y,
-basado en el modelo de <a class="reference internal" href="marco_teorico.html#desarrollo"><em>Desarrollo evolutivo adaptado</em></a> (que se explica
+basado en el modelo de <a class="reference internal" href="tecnologias.html#desarrollo"><em>Desarrollo evolutivo adaptado</em></a> (que se explica
 en <a class="reference internal" href="marco_teorico.html#marco"><em>Marco Teórico</em></a>), sucesivas presentaciones de prototipos que se
 fueron adaptando según las observaciones de la parte interesada.</p>
 <p>Además se utilizó un <em>issue tracker</em> para permitir que los usuarios
@@ -66,9 +66,9 @@ Gpec</em> y con investigadores de <abbr>PLAPIQUI</abbr> involucrados, como
 desarrolladores o usuarios, en GPEC.</p>
 </div>
 <div class="section" id="relevamiento-de-la-versi-n-preexistente">
-<span id="relevamiento"></span><h2>4.2. Relevamiento de la versión preexistente<a class="headerlink" href="#relevamiento-de-la-versi-n-preexistente" title="Enlazar permanentemente con este título">¶</a></h2>
+<span id="relevamiento"></span><h2>5.2. Relevamiento de la versión preexistente<a class="headerlink" href="#relevamiento-de-la-versi-n-preexistente" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="aspectos-hist-ricos">
-<h3>4.2.1. Aspectos históricos<a class="headerlink" href="#aspectos-hist-ricos" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>5.2.1. Aspectos históricos<a class="headerlink" href="#aspectos-hist-ricos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>La versión previa de GPEC es una aplicación para entornos Microsoft Windows (Windows 2000, Windows XP
 o superior) desarrollada en una arquitectura de dos bloques funcionales:</p>
 <ol class="arabic simple">
@@ -89,13 +89,13 @@ ecuaciones de estado.</li>
 2004 y 2005.</p>
 </div>
 <div class="section" id="descripci-n-general">
-<h3>4.2.2. Descripción general<a class="headerlink" href="#descripci-n-general" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>5.2.2. Descripción general<a class="headerlink" href="#descripci-n-general" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>La interfaz visual de GPEC presenta al usuario una GUI para interactuar con los
 distintos parámetros del diagrama elegido, envía los parámetros a los algoritmos
 de cálculo y procesa las salidas de estos generando y mostrando los
 diferentes diagramas.</p>
 <div class="figure">
-<img alt="_images/visual_gpec16.png" src="_images/visual_gpec16.png" style="width: 80%;" />
+<img alt="_images/visual_gpec19.png" src="_images/visual_gpec19.png" style="width: 80%;" />
 <p class="caption">Interfaz principal de <em>Visual Gpec</em>. Definiendo un sistema Methane-Methanol
 con la EoS RK-PR.</p>
 </div>
@@ -110,7 +110,7 @@ de modo que los gráficos se generan mediante el trazado punto a punto sobre un 
 tipo canvas. El control de escala, segmentación y demás funcionalidades básicas
 debió programarse desde cero.</p>
 <div class="figure">
-<img alt="_images/visual_gpec26.png" src="_images/visual_gpec26.png" style="width: 80%;" />
+<img alt="_images/visual_gpec29.png" src="_images/visual_gpec29.png" style="width: 80%;" />
 <p class="caption">Visualizacion de un diagrama P-T para el sistema Methane-Methanol
 con modelo RK-PR.</p>
 </div>
@@ -119,7 +119,7 @@ desarrollo, con gráficos sólo 2D, poco configurables, que no se pueden
 vectorizar ni exportar.</p>
 </div>
 <div class="section" id="licenciamiento">
-<h3>4.2.3. Licenciamiento<a class="headerlink" href="#licenciamiento" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>5.2.3. Licenciamiento<a class="headerlink" href="#licenciamiento" title="Enlazar permanentemente con este título">¶</a></h3>
 <p><em>Visual GPEC</em> no tiene una licencia explicitada pero se trata de
 un <em>freeware*</em>, es decir, un tipo de software que se distribuye  sin costo y
 está disponible para su uso por tiempo ilimitado. La última versión
@@ -128,7 +128,7 @@ públicamente disponible era la 2.0.</p>
 fuente no está  disponible.</p>
 </div>
 <div class="section" id="aspectos-de-ingenier-a-de-software">
-<h3>4.2.4. Aspectos de ingeniería de software<a class="headerlink" href="#aspectos-de-ingenier-a-de-software" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>5.2.4. Aspectos de ingeniería de software<a class="headerlink" href="#aspectos-de-ingenier-a-de-software" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Durante su desarrollo anterior, GPEC no adoptó ninguna metodología de
 desarrollo particular, salvo la concerniente a la separación
 funcional de la aplicación como se explica más arriba.</p>
@@ -139,9 +139,9 @@ entre uno y otro, pero sin lograr sistematización y control sobre <em>quién ca
 y a <em>qué versión de GPEC corresponde un determinado código fuente</em>.</p>
 </div>
 <div class="section" id="problemas-detectados">
-<h3>4.2.5. Problemas detectados<a class="headerlink" href="#problemas-detectados" title="Enlazar permanentemente con este título">¶</a></h3>
+<span id="problemas"></span><h3>5.2.5. Problemas detectados<a class="headerlink" href="#problemas-detectados" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="section" id="lenguaje">
-<h4>4.2.5.1. Lenguaje<a class="headerlink" href="#lenguaje" title="Enlazar permanentemente con este título">¶</a></h4>
+<h4>5.2.5.1. Lenguaje<a class="headerlink" href="#lenguaje" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Como se ha mencinado, el programa se codificó en Visual Basic 6, que es un
 lenguaje lanzado en 1998 y ya no es soportado por Microsoft, la empresa
 creadora, proponiendo en su reemplazo .Net, su tecnología más moderna</p>
@@ -153,7 +153,7 @@ cualquier software no trivial a ser engorrosa y poco fiable.</p>
 multiplataforma nativa, ya que el lenguaje sólo funciona sobre Windows.</p>
 </div>
 <div class="section" id="calidad-de-los-gr-ficos">
-<h4>4.2.5.2. Calidad de los gráficos<a class="headerlink" href="#calidad-de-los-gr-ficos" title="Enlazar permanentemente con este título">¶</a></h4>
+<h4>5.2.5.2. Calidad de los gráficos<a class="headerlink" href="#calidad-de-los-gr-ficos" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Los gráficos generados, como se ha comentado, no se generan en ningun formato
 de archivo de imágenes (vectorial o mapa de bits), sino que simplemente
 se grafican por pantalla, con una proporción de 1 pixel por punto. La
@@ -169,11 +169,11 @@ numéricos y realizan la graficación con otro software específico como
 Origin o Microsoft Excel.</p>
 </div>
 <div class="section" id="dise-o-y-usabilidad">
-<h4>4.2.5.3. Diseño y Usabilidad<a class="headerlink" href="#dise-o-y-usabilidad" title="Enlazar permanentemente con este título">¶</a></h4>
+<h4>5.2.5.3. Diseño y Usabilidad<a class="headerlink" href="#dise-o-y-usabilidad" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Un aspecto poco cuidado de Visual Gpec es su usabilidad, ofreciendo una
 experiencia de usuario anti-intuitiva.</p>
 <div class="figure">
-<img alt="_images/visual_gpec36.png" src="_images/visual_gpec36.png" style="width: 80%;" />
+<img alt="_images/visual_gpec39.png" src="_images/visual_gpec39.png" style="width: 80%;" />
 <p class="caption">Ventanas abiertas para obtener un nuevo compuesto desde la base de datos,
 para que sea listado y utilizable en el sistema. Poco usable.</p>
 </div>
@@ -185,18 +185,18 @@ exponen en este selector. En caso de necesitar un compuesto que no esté allí
 listado, el proceso de obtención requiere interacturar con 3 formularios
 distintos.</p>
 <p>Por poner otro ejemplo, el botón principal para el inicio del cálculo
-(<img alt="play" src="_images/play4.png" /> ) se encuentra en una barra de herramientas con otras funciones no
+(<img alt="play" src="_images/play7.png" /> ) se encuentra en una barra de herramientas con otras funciones no
 obligatorias para la ejecución. Es decir, las herramientas carecen de un contexto
 que facilite la ubicuidad.</p>
 </div>
 <div class="section" id="base-de-datos">
-<h4>4.2.5.4. Base de datos<a class="headerlink" href="#base-de-datos" title="Enlazar permanentemente con este título">¶</a></h4>
-<p>La base de datos está implementada en fomate MS Access y su diseño de tablas
+<h4>5.2.5.4. Base de datos<a class="headerlink" href="#base-de-datos" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>La base de datos está implementada en formato Microsoft Jet <a class="footnote-reference" href="#id6" id="id2">[2]</a> y su diseño de tablas
 es complejo innecesariamente, realizando diversas relaciones <em>One-to-One</em> con
 una misma clave principal. Por ejemplo, los nombres y las propiedades de un
 compuesto químico se encuentran en tablas separadas.</p>
 <div class="figure">
-<img alt="_images/bbdd4.png" src="_images/bbdd4.png" style="width: 80%;" />
+<img alt="_images/bbdd7.png" src="_images/bbdd7.png" style="width: 80%;" />
 <p class="caption">Visualización de algunas estructuras y datos de la base de Visual
 GPEC mediante el utilitario <em>gmdb2</em>.</p>
 </div>
@@ -205,13 +205,10 @@ estándar (sin datos extra del usuario)  ocupa <em>45.2Mb</em> de espacio en dis
 </div>
 </div>
 </div>
-<div class="section" id="casos-de-uso">
-<h2>4.3. Casos de uso<a class="headerlink" href="#casos-de-uso" title="Enlazar permanentemente con este título">¶</a></h2>
-</div>
 <div class="section" id="especificaci-n-de-requerimientos">
-<span id="requerimientos"></span><h2>4.4. Especificación de requerimientos<a class="headerlink" href="#especificaci-n-de-requerimientos" title="Enlazar permanentemente con este título">¶</a></h2>
+<span id="requerimientos"></span><h2>5.3. Especificación de requerimientos<a class="headerlink" href="#especificaci-n-de-requerimientos" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="requerimientos-funcionales">
-<h3>4.4.1. Requerimientos funcionales<a class="headerlink" href="#requerimientos-funcionales" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>5.3.1. Requerimientos funcionales<a class="headerlink" href="#requerimientos-funcionales" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Todas las funcionalidades de la versión preexistente de GPEC deben igualarse y
 en lo posible mejorarse. Se detallan a continuación:</p>
 <ul>
@@ -221,7 +218,7 @@ en lo posible mejorarse. Se detallan a continuación:</p>
 con el software que el usuario puede manipular.</p>
 </li>
 <li><p class="first">Adecuación del formulario y archivo de entrada de parámetros para
-diferentes ecuaciones de estado (modelos) de base molecular <a class="footnote-reference" href="#id6" id="id2">[2]</a> :</p>
+diferentes ecuaciones de estado (modelos) de base molecular <a class="footnote-reference" href="#id7" id="id3">[3]</a> :</p>
 <blockquote>
 <div><ul class="simple">
 <li>Soave-Redlich-Kwong</li>
@@ -255,7 +252,7 @@ diferentes ecuaciones de estado (modelos) de base molecular <a class="footnote-r
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">Diagramas isotérmicos (Pxy): diagramas para temperatura <tt class="docutils literal"><span class="pre">T</span> <span class="pre">[K]</span></tt> constante <a class="footnote-reference" href="#id7" id="id3">[3]</a>:</p>
+<li><p class="first">Diagramas isotérmicos (Pxy): diagramas para temperatura <tt class="docutils literal"><span class="pre">T</span> <span class="pre">[K]</span></tt> constante <a class="footnote-reference" href="#id8" id="id4">[4]</a>:</p>
 <blockquote>
 <div><ul class="simple">
 <li>Presión - Composición (Pxy)</li>
@@ -296,7 +293,7 @@ automáticamente superpuestos para cada caso:</p>
 </ul>
 </div>
 <div class="section" id="requerimientos-no-funcionales">
-<h3>4.4.2. Requerimientos no funcionales<a class="headerlink" href="#requerimientos-no-funcionales" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>5.3.2. Requerimientos no funcionales<a class="headerlink" href="#requerimientos-no-funcionales" title="Enlazar permanentemente con este título">¶</a></h3>
 <ul class="simple">
 <li>GPEC requiere flexibilidad que permita la extensibilidad de funcionalidades. Para esto se apunta a una arquitectura
 lógica modularizada que permita incorporar o extender funcionalidades de manera
@@ -308,14 +305,14 @@ accesible.</li>
 </ul>
 </div>
 </div>
-<div class="section" id="id4">
-<h2>4.5. Casos de uso<a class="headerlink" href="#id4" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="casos-de-uso">
+<h2>5.4. Casos de uso<a class="headerlink" href="#casos-de-uso" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="casos-de-uso-destacados">
-<h3>4.5.1. Casos de uso destacados<a class="headerlink" href="#casos-de-uso-destacados" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>5.4.1. Casos de uso destacados<a class="headerlink" href="#casos-de-uso-destacados" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Se especifican en esta sección, de manera no formal, un conjunto de casos de
 uso de especial interés para el diseño del software.</p>
 <div class="section" id="un-proyecto-muchos-casos">
-<h4>4.5.1.1. Un proyecto, muchos casos<a class="headerlink" href="#un-proyecto-muchos-casos" title="Enlazar permanentemente con este título">¶</a></h4>
+<h4>5.4.1.1. Un proyecto, muchos casos<a class="headerlink" href="#un-proyecto-muchos-casos" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Una tarea frecuente del usuario (investigador) es la comparación entre
 distintos &#8220;casos&#8221; de estudio. Esto puede ser, un mismo sistema binario con
 aplicando diferentes coeficientes, las mismas condiciones con diferentes
@@ -335,7 +332,7 @@ sistematizar requerimientos y compartamientos esperados del sistema.</p>
 </div></blockquote>
 </div>
 <div class="section" id="gr-ficos-en-3d">
-<h4>4.5.1.2. Gráficos en 3D<a class="headerlink" href="#gr-ficos-en-3d" title="Enlazar permanentemente con este título">¶</a></h4>
+<h4>5.4.1.2. Gráficos en 3D<a class="headerlink" href="#gr-ficos-en-3d" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>La información resultante de los cálculos brinda conjuntos (vectores) de datos para
 múltiples variables (presión, temperatura, composición, densidad, etc)
 Tomando tres vectores de datos en vez de dos, pueden graficarse diagramas 3D,
@@ -343,7 +340,7 @@ Tomando tres vectores de datos en vez de dos, pueden graficarse diagramas 3D,
 alguna.</p>
 </div>
 <div class="section" id="superposici-n-autom-tica">
-<h4>4.5.1.3. Superposición automática<a class="headerlink" href="#superposici-n-autom-tica" title="Enlazar permanentemente con este título">¶</a></h4>
+<h4>5.4.1.3. Superposición automática<a class="headerlink" href="#superposici-n-autom-tica" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Dada la visualización 3D, es común que el investigador desee
 superponer diagramas de línea de contorno (isobaras, isopletas, etc.) sobre
 el diagrama de fase global del mismo caso para ver su disposición tridimensional.</p>
@@ -352,7 +349,7 @@ solicitado, debe generar un diagrama 2D independiente y trazar estas mismas
 curvas sobre un diagrama 3D común para todo el caso.</p>
 </div>
 <div class="section" id="superposici-n-manual">
-<h4>4.5.1.4. Superposición manual<a class="headerlink" href="#superposici-n-manual" title="Enlazar permanentemente con este título">¶</a></h4>
+<h4>5.4.1.4. Superposición manual<a class="headerlink" href="#superposici-n-manual" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>El usuario puede necesitar superponer visualmente diagramas 2D, ya sean estos
 del mismo caso (por ejemplo, un diagrama P-T global con una isopleta) o bien
 de distintos casos (por ejemplo, diagramas PT correspondientes a distintas
@@ -360,7 +357,7 @@ mezclas)</p>
 </div>
 </div>
 <div class="section" id="diagramas-de-caso-de-uso">
-<h3>4.5.2. Diagramas de caso de uso<a class="headerlink" href="#diagramas-de-caso-de-uso" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>5.4.2. Diagramas de caso de uso<a class="headerlink" href="#diagramas-de-caso-de-uso" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="admonition-todo admonition " id="index-0">
 <p class="first admonition-title">Todo</p>
 <p class="last">diagramas caso de uso</p>
@@ -375,14 +372,22 @@ mezclas)</p>
 <table class="docutils footnote" frame="void" id="id6" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Para la parametrización de los datos de entrada para cada ecuación de
-estado fue menenester documentar la <a class="reference internal" href="api.html#api"><em>Especificación de la interfaz de comunicación</em></a>.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Microsoft Jet Database Engine es un motor de base de datos utilizado por
+el gestor Microsoft Access, entre otros productos. Ver
+<a class="reference external" href="http://en.wikipedia.org/wiki/Microsoft_Jet">http://en.wikipedia.org/wiki/Microsoft_Jet</a></td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id7" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>La validación de los rangos dinámicos (dependen de las constantes críticas
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>Para la parametrización de los datos de entrada para cada ecuación de
+estado fue menenester documentar la <a class="reference internal" href="api.html#api"><em>Especificación de la interfaz de comunicación</em></a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>La validación de los rangos dinámicos (que dependen de las constantes críticas
 de los compuestos del sistema) la realizan los algoritmos de cálculo. El frontend
 se limita a reportar un error en la obtención de los datos de salida.</td></tr>
 </tbody>
@@ -399,37 +404,36 @@ se limita a reportar un error en la obtención de los datos de salida.</td></tr>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Contenidos</a></h3>
   <ul>
-<li><a class="reference internal" href="#">4. Ingeniería de requerimientos</a><ul>
-<li><a class="reference internal" href="#metodolog-a-de-relevamiento">4.1. Metodología de relevamiento</a></li>
-<li><a class="reference internal" href="#relevamiento-de-la-versi-n-preexistente">4.2. Relevamiento de la versión preexistente</a><ul>
-<li><a class="reference internal" href="#aspectos-hist-ricos">4.2.1. Aspectos históricos</a></li>
-<li><a class="reference internal" href="#descripci-n-general">4.2.2. Descripción general</a></li>
-<li><a class="reference internal" href="#licenciamiento">4.2.3. Licenciamiento</a></li>
-<li><a class="reference internal" href="#aspectos-de-ingenier-a-de-software">4.2.4. Aspectos de ingeniería de software</a></li>
-<li><a class="reference internal" href="#problemas-detectados">4.2.5. Problemas detectados</a><ul>
-<li><a class="reference internal" href="#lenguaje">4.2.5.1. Lenguaje</a></li>
-<li><a class="reference internal" href="#calidad-de-los-gr-ficos">4.2.5.2. Calidad de los gráficos</a></li>
-<li><a class="reference internal" href="#dise-o-y-usabilidad">4.2.5.3. Diseño y Usabilidad</a></li>
-<li><a class="reference internal" href="#base-de-datos">4.2.5.4. Base de datos</a></li>
+<li><a class="reference internal" href="#">5. Ingeniería de requerimientos</a><ul>
+<li><a class="reference internal" href="#metodolog-a-de-relevamiento">5.1. Metodología de relevamiento</a></li>
+<li><a class="reference internal" href="#relevamiento-de-la-versi-n-preexistente">5.2. Relevamiento de la versión preexistente</a><ul>
+<li><a class="reference internal" href="#aspectos-hist-ricos">5.2.1. Aspectos históricos</a></li>
+<li><a class="reference internal" href="#descripci-n-general">5.2.2. Descripción general</a></li>
+<li><a class="reference internal" href="#licenciamiento">5.2.3. Licenciamiento</a></li>
+<li><a class="reference internal" href="#aspectos-de-ingenier-a-de-software">5.2.4. Aspectos de ingeniería de software</a></li>
+<li><a class="reference internal" href="#problemas-detectados">5.2.5. Problemas detectados</a><ul>
+<li><a class="reference internal" href="#lenguaje">5.2.5.1. Lenguaje</a></li>
+<li><a class="reference internal" href="#calidad-de-los-gr-ficos">5.2.5.2. Calidad de los gráficos</a></li>
+<li><a class="reference internal" href="#dise-o-y-usabilidad">5.2.5.3. Diseño y Usabilidad</a></li>
+<li><a class="reference internal" href="#base-de-datos">5.2.5.4. Base de datos</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#casos-de-uso">4.3. Casos de uso</a></li>
-<li><a class="reference internal" href="#especificaci-n-de-requerimientos">4.4. Especificación de requerimientos</a><ul>
-<li><a class="reference internal" href="#requerimientos-funcionales">4.4.1. Requerimientos funcionales</a></li>
-<li><a class="reference internal" href="#requerimientos-no-funcionales">4.4.2. Requerimientos no funcionales</a></li>
+<li><a class="reference internal" href="#especificaci-n-de-requerimientos">5.3. Especificación de requerimientos</a><ul>
+<li><a class="reference internal" href="#requerimientos-funcionales">5.3.1. Requerimientos funcionales</a></li>
+<li><a class="reference internal" href="#requerimientos-no-funcionales">5.3.2. Requerimientos no funcionales</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id4">4.5. Casos de uso</a><ul>
-<li><a class="reference internal" href="#casos-de-uso-destacados">4.5.1. Casos de uso destacados</a><ul>
-<li><a class="reference internal" href="#un-proyecto-muchos-casos">4.5.1.1. Un proyecto, muchos casos</a></li>
-<li><a class="reference internal" href="#gr-ficos-en-3d">4.5.1.2. Gráficos en 3D</a></li>
-<li><a class="reference internal" href="#superposici-n-autom-tica">4.5.1.3. Superposición automática</a></li>
-<li><a class="reference internal" href="#superposici-n-manual">4.5.1.4. Superposición manual</a></li>
+<li><a class="reference internal" href="#casos-de-uso">5.4. Casos de uso</a><ul>
+<li><a class="reference internal" href="#casos-de-uso-destacados">5.4.1. Casos de uso destacados</a><ul>
+<li><a class="reference internal" href="#un-proyecto-muchos-casos">5.4.1.1. Un proyecto, muchos casos</a></li>
+<li><a class="reference internal" href="#gr-ficos-en-3d">5.4.1.2. Gráficos en 3D</a></li>
+<li><a class="reference internal" href="#superposici-n-autom-tica">5.4.1.3. Superposición automática</a></li>
+<li><a class="reference internal" href="#superposici-n-manual">5.4.1.4. Superposición manual</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#diagramas-de-caso-de-uso">4.5.2. Diagramas de caso de uso</a></li>
+<li><a class="reference internal" href="#diagramas-de-caso-de-uso">5.4.2. Diagramas de caso de uso</a></li>
 </ul>
 </li>
 </ul>
@@ -437,11 +441,11 @@ se limita a reportar un error en la obtención de los datos de salida.</td></tr>
 </ul>
 
   <h4>Tema anterior</h4>
-  <p class="topless"><a href="contexto_de_trabajo.html"
-                        title="Capítulo anterior">3. Contexto de trabajo</a></p>
+  <p class="topless"><a href="tecnologias.html"
+                        title="Capítulo anterior">4. Tecnologías y metodologías</a></p>
   <h4>Próximo tema</h4>
-  <p class="topless"><a href="diseno.html"
-                        title="Próximo capítulo">5. Diseño</a></p>
+  <p class="topless"><a href="arquitectura.html"
+                        title="Próximo capítulo">6. Arquitectura</a></p>
   <h3>Esta página</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/requerimientos.txt"
@@ -471,10 +475,10 @@ se limita a reportar un error en la obtención de los datos de salida.</td></tr>
           <a href="genindex.html" title="Índice General"
              >índice</a></li>
         <li class="right" >
-          <a href="diseno.html" title="5. Diseño"
+          <a href="arquitectura.html" title="6. Arquitectura"
              >siguiente</a> |</li>
         <li class="right" >
-          <a href="contexto_de_trabajo.html" title="3. Contexto de trabajo"
+          <a href="tecnologias.html" title="4. Tecnologías y metodologías"
              >anterior</a> |</li>
         <li><a href="index.html">&lt;project&gt;</a> &raquo;</li> 
       </ul>

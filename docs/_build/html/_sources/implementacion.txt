@@ -2,131 +2,22 @@
 
 Implementación
 ***************
+
+.. _uso-pubsub:
         
-El patrón Publish/Subscribe
-===========================
+Utilización de Publish/Suscribe en GPEC
+========================================
 
-Un patrón de diseño (también catalogado como patrón de mensajería) de recurrente 
-aplicación en GPEC ha sido *Publish/Subscribe*, frencuentemente abreviado *Pubsub*. 
-Se trata de una arquitectura de paso de mensajes desacoplada (y en algunas implementaciones distribuída)
-donde existen "remitentes" (o "publicadores") que envían mensajes ante el acaecimiento
-de un suceso específico (por ejemplo, un evento originado por el usuario como 
-el click sobre un botón) sin conocimiento alguno sobre "qué sucede despues" 
-con el mensaje. Análogamente existen "receptores" (o "suscriptores") que en cuya inicialización
-se define a qué tipo de mensajes se suscribirán (el tipo se define en función 
-del "asunto" o "topic") y qué acción (un método o función) 
-debe ejecutarse cuando un mensaje de tal tipo arribe. 
+En :ref:`pubsub` (ver :ref:`marco`) se describió el patrón PubSub y la implementación 
+utilizada para diferentes aspectos del funcionamiento de GPEC. Aquí se describen 
+más en detalles estos usos.
 
-.. figure:: images/pubsub_concept.png
-   :width: 60%
-
-   Diagrama conceptual de la arquitectura *Pub/Sub*
-
-
-Como se describe en [vdLaar2002]_ Pubsub facilita el desacople de componentes 
-(*callables*, módulos, paquetes) dentro de una aplicación. Los conceptos involucrados son:
-
-
-- Permitir que partes de un aplicación evien mensajes "al resto de la aplicación" 
-  sin tener que conocer:
-  
-  - *si* el mensaje será manejado y usufructuado: 
-  
-    - puede suceder que el mensaje se ignore completamente
-    - o que sea manejado en muchas partes diferentes de la aplicación
-    
-  - *cómo* será manejado el mensaje: 
-
-    - al publicador no le importa qué se hará con el mensaje y su contenido;
-    - tampoco hay control del orden en que un mensaje dado se enviará al resto
-      de la aplicación (comportamiento no determinístico).   
-
-- Permitiendo que partes de una aplicación reciban y manejen mensajes desde 
-  "el resto de la aplicación" sin tener que conocer *quién* envió el mensaje.    
-
-
-Un *receptor* (*listerner*) es "una parte de la aplicación que quiere 
-recibir mensajes". Un receptor se suscribe a uno o más tópicos. Un *emisor*
-(*sender*) es cualquier parte de la aplicación que envía (deposita en 
-el intermediario) un mensaje con un tópico dado, y opcionalmente, cualquier información
-adjunta. Este intermediario (a veces conocido como *broker*, o directamente 
-*pubsub*) entrega este mensaje a todos los receptores suscriptos. 
-
-Ventajas
---------
-
-- **Acoplamiento débil**: la topología de Pubsub, basada en la intermediación y el 
-  desconocimiento de identidades y comportamientos de los objetos que interactuan 
-  permite un desacople de los componentes de la aplicación. Esto significa
-  que las distintas "partes" de la aplicación son independientes entre sí, de modo 
-  que pueden facilmente desactivarse componentes no críticos sin afectar al conjunto 
-  de la aplicación. Esta estrategia es útil para realizar pruebas de seguridad. 
-
-
-- **Funcionalidad configurable** : Dado que un emisor no tiene necesidad de conocer
-  la existencia de un receptor, es fácil diseñar una arquitectura basada en "plugins"
-  que permite mantener un núcleo y agregar funcionalidades extra con posterioridad  
-  (incluso desarrolladas por terceros). Esto trae aparejada la posibilidad de 
-  adaptar, mediante extensiones que se activan o no, las características 
-  del software en función de las necesidades del usuario. 
-
-- **Escalabilidad**: En las implementaciones distribuidas de demanda moderada (donde los mensajes
-  se transmiten entre múltiples procesos o, incluso, equipos), PubSub provee
-  una arquitectura mucho más simple y autogestionada que la típica topología
-  *cliente/servidor* para tareas de procesamiento paralelo o  
-  Sin embargo, la eficiencia no suele ser proporcional en sistemas de alta
-  demanda computacional.  
-
-Pubsub en Python
------------------
-
-En GPEC se ha utilizado el paquete `Python Pubsub <http://pubsub.sourceforge.net/>`_
-de Oliver Schoenborn, en su versión 1 [#]_ . Esta implementación es muy sencilla
-y se basa en la existencia de un objeto único (Ver :term:`singleton`), ``pub``, 
-que controla el envío y las suscripción a los mensajes. Se describe en el siguiente 
-código::
-
-
-
-    from pubsub import pub      
-
-    # declaración de la  función "destino" 
-
-    def destino(arg1, arg2=None):
-        print 'Mensaje con argumentos arg1="%s"\n  arg2="%s"' % (arg1, arg2)
-
-    # declaración de suscripción
-
-    pub.subscribe(destino, 'asuntoParticular')
-
-    # función que envía un mensaje 
-
-    def hacer_algo_y_avisar():
-        print 'Se enviará un mensaje'
-        pub.sendMessage('asuntoParticular', arg1=123, arg2=dict(a='abc', b='def'))
-    
-    if __name__ == '__main__':
-
-        hacer_algo_y_avisar()
-
-
-Cuyo diagrama de secuencia es el siguiente:
-
-
-.. figure::images/uml_sec_pubsub.png
-   :width: 80%
-
-   Diagrama de secuencia para una interacción sencilla entre emisor y receptor
-   via *Pub/Sub*
-
-Usos en GPEC
-------------
 
 Panel de mensajes
-^^^^^^^^^^^^^^^^^
+-----------------
 
 Como se ha dicho, PubSub constituye el patrón principal y toda la *orientación
-a eventos* se basa en una comunicación vía esta biblioteca. 
+a eventos* de la biblioteca se basa en una comunicación vía esta biblioteca. 
 
 El ejemplo canónico es el **panel de log** (registro de mensajes de usuario), donde
 se registra una crónica de eventos de interés para el usuario, denotados en 
@@ -207,27 +98,33 @@ observa::
     app.MainLoop()
 
 
-Generación de gráficos
-^^^^^^^^^^^^^^^^^^^^^^^
+Solicitud de gráficación
+-------------------------
 
-Otro uso de ``PubSub`` es la generación de gráficos. Se resume en el siguiente 
-diagrama de secuencia:
+Otro uso de ``PubSub`` se produce durante la solicitud de 
+de generación gráficos. Se resume en el siguiente diagrama de secuencia:
 
 
 .. figure:: images/uml_sec_makeplot_vertical.png
-   :width: 65%
+   :width: 60%
    
    Secuencia para la generación de un diagrama desde el evento generado por 
    el usuario 
-
 
 Esto significa que el panel de definición de casos está independizado del 
 panel contenedor de los gráficos generados a traves de PubSub. 
 El mencanismo invocación del backend (desde donde se obtienen los datos a graficar) 
 se verá más adelante. 
 
+El objeto :py:class:`SuitePlotsPanel` es el panel de pestañas donde se muestran 
+los gráficos de todos los casos de un proyecto. Cada una de estas pestañas 
+contiene un objeto :py:class:`PlotPanel` que es el que soporta 
+la integración con Matplotlib y contiene el diagrama en sí. 
+Esta integración se verá en :ref:`matplotlibwx` .
+
+
 Exposición de archivos de datos
-+++++++++++++++++++++++++++++++
+-------------------------------
 
 Cada invocación a un ejecutable del backend dependen de una entrada 
 y produce una salida [#]_ en un archivo de texto. Para usuarios avanzados que conocen 
@@ -264,8 +161,10 @@ método :py:meth:`OnAddItem` .
 
 
 Tabla de incidencias de mensajes
-++++++++++++++++++++++++++++++++
+--------------------------------
 
+Se lista aquí una tabla con diferentes tipos de mensajes, su utilidad, emisor/es 
+y destinatario/s:
 
   ==============  ======================  ========================= =================== 
    Tópico           Descripción             Emisor/es                 Receptor/es    
@@ -289,6 +188,8 @@ Para un listado completo puede analizar el código fuente ejecutando
 de GPEC. [#]_ 
 
 
+.. _backend:
+
 Invocación de ejecutables del backend
 =====================================
 
@@ -311,6 +212,7 @@ permiso de escritura en la carpeta destino). En caso de error por algún motivo
 
    Secuencia de la comunicación frontend-backend
 
+.. _wine:
 
 La dependencia con Wine
 ------------------------
@@ -787,30 +689,212 @@ como *drag & drop de pestañas* entre distintos paneles, o la visualización
 simultánea de múltiples pestañas. 
 
 .. figure:: images/auinotebook.png
-   :width: 95%
+   :width: 100%
 
    El control ``AuiNotebook`` de los gráficos mostrando 2 diagramas en simultáneo
 
-
         
-Justificación de diseño
------------------------
+Justificación del diseño de UI
+-------------------------------
 
-Pruebas de usabilidad
----------------------
+Como se ha mencionado, la usabilidad e intuitividad de la interfaz de usuario
+ha sido un requerimiento de especial atención. Mucha bibliografía fue consultada
+al respecto, rescantando en particular muchos conceptos y consejos de Joel Spolsky 
+en [Spolsky2001]_ [#]_ . Entre muchos, se destacan:
 
+    - Brindar contextos intuitivos y secuencias de operación lógicas.
+    - Minimizar las opciones en simultáneo. Cada opción es una decisión que se le 
+      exige al usuario.  
+    - Los usuarios no leen manuales (de hecho tampoco leen mensajes en pantalla si son largos)
+    - Convenciones por sobre configuraciones: limitar los parámetros requeridos
+    - Valerse de las costumbres del usuario: no reinventar la rueda
+
+Un software complejo con un acabado estudio de usabilidad es 
+`Mayavi <http://code.enthought.com/projects/mayavi/>`_ , que ha servido de inspiración
+para el diseño de GPEC. 
+
+.. figure:: images/mayavi2.png
+   :width: 100%
+
+   Interfaz de la aplicación de visualización de diagramas VTK que sirvió 
+   como inspiración para la interfaz de GPEC.  
+
+
+Algunas decisiciones concernientes a la usabilidad se muestran en el siguiente 
+diagrama:
+
+.. figure:: images/usabilidad_labels.png
+   :width: 100%
+
+   Interfaz de la aplicación de visualización de diagramas VTK que sirvió 
+   como inspiración para la interfaz de GPEC.  
+
+
+* El diseño acompaña al *workflow*: primero se define el sistema, opcionalmente 
+  se manipulan los cálculos y por último se grafica. Sólo el primero y el último
+  paso son obligatorios. 
+
+* La ubicación de los botones principales está dispuesta en función del 
+  flujo de lectura de occidental (de izquierda a derecha y de arriba hacia abajo)
+  de manera de resultar intuitiva la secuencia de acciones demandada al usuario  
+
+* Todos los botones tiene asociado un ícono descriptivo
+
+* Los componentes que muestran información no modificable se mantienen en modo
+  sólo lectura y visualmente se ven "grisados". 
+
+* Un conjunto de parámetros (coeficientes, reglas de combinación) se ubican en 
+  un panel colapsable. Al expandirlo, el panel genera automática una barra de 
+  desplazamiento vertical. 
+
+* El uso del símbolo "+" en la ubicación dispuesta es una convención popularizada 
+  por los navegadores web para abrir una nueva pestaña de trabajo. Dado el contexto
+  resulta evidente que genera un nuevo caso. 
+
+.. _matplotlibwx:
 
 Integración Matplotlib-WxPython
 ===============================
 
+La biblioteca de graficación Matplotlib incluye soporte para los 
+toolkits para creación de interfaces gráficas [#]_ más utilizados, que permite
+incrustar (y hacer interactuar) figuras dentro de aplicaciones gráficas. 
+
+La integración entre Matplotlib y WxPython se logra a través de un 
+"canvas" (*lienzo*) donde Matplotlib es capaz de dibujar y, se comporta, a la vez
+como un panel de wxPython. 
+
+El objeto en cuestion es :py:class:`FigureCanvasWxAgg` y tiene se muestra
+su ascendencia de clases en el siguiente diagrama:
+
+.. figure:: images/figcanvas.png
+   :width: 50%
+
+   Diagrama de clases para :py:class:`FigureCanvasWxAgg` donde se evidencia 
+   la herencia múltiple que permite el comportamiento dual del objeto.
+
+La clase :py:class:`FigureCanvasAgg` es en realidad la encargada de dibujar 
+los gráficos a través de los algoritmos 
+`Anti-Grain Geometry <http://www.antigrain.com>`_ que aplican técnicas
+como *Anti-Aliasing* [#]_ o *Precisión de subpixel* para mejorar la definición
+de la líneas trazadas. 
+
+
+.. figure:: images/wxmatplotlib.png
+   :width: 65%
+
+   Diagrama de secuencia para la graficación de un diagrama al nivel subyacente
+   (via ``matplotlib``)
+
+
+.. figure:: images/class-plots.png
+   :width: 65%
+
+   Diagrama de clases de los distintos tipos de diagramas soportados 
+
+
+.. _bbdd:
+
+Gestión de base de datos
+========================
+
+El almacenamiento y gestión de la información necesaria como entrada para GPEC se realiza
+a través de un sistema de gestión de base de datos relacional. Se 
+utilizó el software `sqlite <http://sqlite.org>`_  (versión 3) que respeta 
+el estándar :abbr:`SQL (Structured Query Language)`  mediante una librería 
+monolítica, portable, eficiente y compacta que es integramente soportada por Python [#]_. 
+
+La ventaja principal es que una base de datos de *sqlite* está autocontenida en un 
+archivo binario que puede ser distribuído en conjunto con el software, sin 
+requerir inicialización o un *servidor* de base de datos local o remoto. En 
+este sentido es equivalente a una base de datos de Microsoft Access, aunque 
+superadora en las prestaciones y apego a un lenguaje estándar para base de datos. 
+
+La información gestionada
+--------------------------
+
+En particular, los datos almacenados son las constantes de compuestos 
+químicos. 
+
+Se incluye una vasta base de datos termodinámicos para más de 2000 compuestos, 
+corroborados mediante `DIPPR Project 801 <http://dippr.byu.edu/>` [#]_ que incluye información 
+como la fórmula, el factor acéntrico, el volúmen, la temperatura y la presión crítica, 
+etc. 
+
+Esta información se comporta en modo *sólo lectura* [#]_ 
+a través de la interfaz de usuario, pero se brinda también una categoría editable 
+para permitir *compuestos definidos por el usuario* que pueden ser agregados como 
+una copia de un compuesto existente en :abbr:`DIPPR` (que acepta, entonces, la modificación 
+o ajuste de sus valores) o bien como un nuevo compuesto definido desde datos 
+experimentales. 
+
+
+Modelo Entidad-Relación
+-----------------------
+
+.. figure:: images/er-database.png
+   :width: 90% 
+
+   Representación de las entidades con sus atributos y la relación entre las mismas
+
+
+Definición de la estructura de tablas 
+--------------------------------------
+
+
+.. code-block:: sql
+
+    CREATE TABLE "compounds" ("id" INTEGER,"id_category" INTERGER PRIMARY KEY 
+                                                      AUTOINCREMENT NOT NULL ,
+                              "name" VARCHAR,
+                              "formula" VARCHAR,
+                              "formula_extended" VARCHAR,
+                              "tc" FLOAT,
+                              "pc" FLOAT,
+                              "vc" FLOAT,
+                              "acentric_factor" FLOAT,
+                              "vc_rat" FLOAT DEFAULT (1.168) 
+                             );
+
+    CREATE TABLE "categories" ("id_category" INTEGER PRIMARY KEY  
+                                             AUTOINCREMENT  NOT NULL, 
+                               "name" VARCHAR, 
+                               "editable" BOOL NOT NULL DEFAULT True
+                              );
+    INSERT INTO "categories" VALUES(1,'DIPPR','False');
+    INSERT INTO "categories" VALUES(2,'User defined','True');
+
+
+Importación de datos 
+---------------------
+
+Los datos fueron obtenidos de la versión preexistente (*Visual GPEC*) cuya base 
+de datos, como se ha comentado en la sección :ref:`problemas`, está en formato
+MS Jet. 
+
+La obtención de la información contenida para su conversión a Sqlite se realizó
+utilizando un proceso de 2 pasos. 
+
+1.  Con la herramienta ``gmdb2``, parte de la suite
+    de utilidades libres para la manipulación de archivos Jet/Access 
+    `MDB tools <http://mdbtools.sourceforge.net/>`_, **se exportó** la tabla de parámetros
+    de compuestos a un formato :abbr:`CSV (Comma Separeted Values)` donde cada registro
+    constituye una línea de texto plano y los valores están separados por un caracter
+    (en particular se utilizó el punto y coma ``;``). El formato ``CSV``, es 
+    un mecanismo canónico para la exportación e importación de datos, por su 
+    trivial facilidad de manipulación.
+
+2.  Denida la estructura de la base de datos de destino (Sqlite), se utilizó 
+    la herramienta `sqlite-manager <http://code.google.com/p/sqlite-manager/>`_
+    para **importar** las columnas pertinentes del archivo CSV a la tabla de destino
+    
+.. figure:: images/import-db.png
+   :width: 60%
+
+   Procesos de conversión de la base de datos a *sqlite*
 
 
 
-
-
-.. [#]  En 2010 el autor de *Python PySub* reescribió completamente la :term:`API`, 
-        agrengando una orientación a objetos del paso de mensajes más poderosa, 
-        a la que llamó *version 3*. 
 
 
 .. [#]  En realidad, la llamada está intercedida por una función decoradora (``memoize``)
@@ -855,8 +939,41 @@ Integración Matplotlib-WxPython
         código más compacto, característica muy relevante en el ambiente web. 
         Ver http://en.wikipedia.org/wiki/Method_chaining
 
+.. [#]  Una versión online gratuita de este libro se encuentra en 
+        http://www.joelonsoftware.com/uibook/fog0000000249.html
+
+.. [#]  El soporte incluye GTK, QT4, TKinter, PDF y wxPython
+
+.. [#]  Es un proceso utilizado para suavizar los bordes desparejos de los gráficos. 
+        Ver http://es.wikipedia.org/wiki/Antialiasing
+
+.. [#]  Permite aumentar la resolución contemplando precisiones de "fracciones" de 
+        un pixel. Ver http://en.wikipedia.org/wiki/Sub-pixel_resolution.
+
+.. [#]  De hecho, a partir de la versión 2.6 de Python, el modulo ``sqlite3`` forma 
+        parte de la biblioteca estándar de Python. 
+
+.. [#]  *DIPPR 801* es un producto comercial cuya licencia ronda los u$s3400 anuales. 
+        GPEC incluye en su base datos equivalentes a una porción de la información
+        que ese producto ofrece, sin depender de esta de manera alguna. 
+        No obstante, el autor considera este aspecto como suceptible a acarrear 
+        complicaciones legales y comerciales, que deberán revisarse y solucioanrse 
+        a futuro.
+
+.. [#]  Sqlite no permite definir tablas o registros de datos como *sólo lectura*. 
+        Queda en potestad del desarrollador vedar la posilidad de modificación como parte    
+        del proceso de validación. Sin embargo, siempre es posible para un usuario abrir
+        y modificar la información "manualmente" a través de un gestor que interprete 
+        el formato *sqlite*. 
+        
+        
+
+
+
 .. [vdLaar2002]  van de Laar, F. (2002).  *Publish/Subscribe as architectural style 
                  for component interaction (Mater's thesis)*, Phillips Research
                  Laboratories, Eindhoven
 
 
+.. [Spolsky2001]  Spolsky, Joel (2001). *User Interface Design for Programmers*, Apress
+                  
