@@ -539,7 +539,7 @@ Código fuente
 Interfaz Gráfica de Usuario (GUI)
 =================================
 
-Contenedores y *sizer*
+Contenedores y *sizers*
 -----------------------
 
 En la introducción general a :ref:`wx` vista en :ref:`marco` se hizo referencia
@@ -567,10 +567,11 @@ sino que simplemente indican cómo se ubican originalmente y cómo se comportan 
 los elementos ante un evento que afecte  la apariencia de la aplicación. 
 Todo los *sizers* son instancias de una subclase de la clase abstracta :py:class:`wx.Sizer`
 
-.. seealso:: 
+    .. seealso:: 
 
-   Para una explicación exhaustiva sobre el tema, vea el capitulo 11 de *wxPython in Action*, 
-   ([NR-RD2006]_ )
+       Para una explicación exhaustiva sobre el tema, vea el capitulo 11 de 
+        *"wxPython in Action"*, [NR-RD2006]_ 
+
 
 Por ejemplo, ``sizer`` permite dividir el espacio, cualquier este sea, en porciones
 proporcionales de filas o columnas, y ubicar allí elementos (como botones o campos de 
@@ -581,7 +582,7 @@ puede contener a otros de manera anidada, definiendo una cuadrícula con espacio
 
 
 .. figure:: images/wxglade-sizer.png
-   :width: 80%
+   :width: 95%
     
    Diseño con *sizers* de una ventana de la aplicación mediante la utilidad 
    `wxGlade <http://wxglade.sourceforge.net>`_
@@ -701,14 +702,14 @@ a ser trivial. Básicamente consiste en dos objetos:
   un panel principal de `wx`. 
 
 .. figure:: images/gpec_aui_max.png
-   :width: 100%
+   :width: 95%
 
    La interfaz avanzada de GPEC visualizando 2 de los 4 paneles por defecto. 
-   Yendo a :menuselection:‘View --> Restore default view‘ se reestablece la 
-   estructura original.  
 
-Conociendo la utilidad de estos objetos, un extracto 
-relevante de :py:class:`MainFrame` es el siguiente::
+Vale comentar que luego de cualquier cambio, yendo a :menuselection:‘View --> Restore default view‘ se reestablece la 
+estructura original.  
+
+Un extracto relevante de :py:class:`MainFrame` es el siguiente::
 
     class MainFrame(wx.Frame):
 
@@ -770,7 +771,7 @@ varios paneles con información estén contenidos dentro de una sola ventana o p
 principal, usando pestañas para alternar entre ellos. Es típico su uso en 
 los navegadores web modernos, como Mozilla Firefox. GPEC hace uso extendido 
 de esta arquitectura, en el soporte de múltiples casos, múltiples gráficos, 
-e varios paneles de información.
+o varios paneles de información.
 
 En wxPython existen múltiples implementaciones de controladores de pestañas y se 
 ha hecho uso de :py:class:`AuiNotebook`, que forma parte de las 
@@ -780,7 +781,15 @@ desarrolladas por el programador italiano Andrea Gavana.
 Toda la librería *AGW* forma parte del paquete estándar de ``wx`` y reside en 
 ``wx.lib.agw.aui``. 
 
+La gran ventaja de :py:class:`AuiNotebook` es que funciona como complemento 
+de la intefaz avanzada de Python ``wx.aui`` permitiendo el control de eventos 
+como *drag & drop de pestañas* entre distintos paneles, o la visualización 
+simultánea de múltiples pestañas. 
 
+.. figure:: images/auinotebook.png
+   :width: 95%
+
+   El control ``AuiNotebook`` de los gráficos mostrando 2 diagramas en simultáneo
 
 
         

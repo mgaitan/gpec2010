@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.47pre4 r22446"
+   sodipodi:docname="Nuevo documento 1">
+  <defs
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="-29.800678 : 628.63423 : 1"
+       inkscape:vp_y="0 : 160.10923 : 0"
+       inkscape:vp_z="1286.2116 : 637.66702 : 1"
+       inkscape:persp3d-origin="747.17913 : 609.58487 : 1"
+       id="perspective10" />
+    <inkscape:perspective
+       id="perspective2846"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2871"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2907"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2938"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2960"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2960-7"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3207"
+       inkscape:persp3d-origin="66.25 : 64.166667 : 1"
+       inkscape:vp_z="132.5 : 96.25 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 96.25 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4038"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4067"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4117"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4177"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4322"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4400"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4456"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.1961229"
+     inkscape:cx="293.31375"
+     inkscape:cy="766.29379"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1280"
+     inkscape:window-height="774"
+     inkscape:window-x="0"
+     inkscape:window-y="1"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4357" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g4473"
+       inkscape:export-filename="/home/tin/facu/pi/docs/images/arquitectura_capas.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300">
+      <g
+         transform="matrix(1.1839646,0,0,1,-20.365681,-2.2249146)"
+         id="g2890">
+        <rect
+           style="fill:#00ff00;fill-opacity:0.36283186;fill-rule:evenodd;stroke:none"
+           id="rect2830"
+           width="282.68497"
+           height="157.26123"
+           x="122.85715"
+           y="80.815231" />
+        <text
+           xml:space="preserve"
+           style="font-size:27.55110931px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+           x="243.1319"
+           y="145.03094"
+           id="text2834"
+           transform="scale(0.8563735,1.1677148)"><tspan
+             sodipodi:role="line"
+             id="tspan2836"
+             x="243.1319"
+             y="145.03094">GPEC2010</tspan></text>
+      </g>
+      <g
+         transform="translate(7.6757048,-43.362145)"
+         id="g4219">
+        <g
+           id="g4215"
+           transform="matrix(1,0,0,0.77373715,-2.2162456,84.217429)">
+          <path
+             id="path3197"
+             d="m 131.13609,364.531 c 0,-11.71598 75,-11.71598 75,0 l 0,93.71933 c 0,11.71598 -75,11.71598 -75,0 l 0,-93.71933"
+             style="fill:#ff9955;fill-opacity:0.58823529;fill-rule:evenodd;stroke:#000000;stroke-width:2.32887769;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1" />
+          <path
+             id="path3199"
+             d="m 131.39574,367.33158 c 0,11.71597 75,11.71597 75,0 l 0,93.71934"
+             style="fill:none;stroke:#000000;stroke-width:2.32887769;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1" />
+        </g>
+        <text
+           xml:space="preserve"
+           style="font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+           x="145.6442"
+           y="405.14917"
+           id="text4018"><tspan
+             sodipodi:role="line"
+             id="tspan4020"
+             x="145.6442"
+             y="405.14917">sqlite3</tspan></text>
+      </g>
+      <g
+         id="g4279">
+        <rect
+           style="fill:#ff9955;fill-opacity:0.36470588;fill-rule:evenodd;stroke:none"
+           id="rect2832"
+           width="101.22141"
+           height="50"
+           x="124.94708"
+           y="251.55276" />
+        <text
+           xml:space="preserve"
+           style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+           x="138.27411"
+           y="279.89175"
+           id="text2895"><tspan
+             sodipodi:role="line"
+             id="tspan2897"
+             x="138.27411"
+             y="279.89175"
+             style="font-size:14px">pysqlite</tspan></text>
+      </g>
+      <g
+         transform="translate(-1.5258789e-5,0)"
+         id="g4284">
+        <rect
+           style="fill:#0000ff;fill-opacity:0.36283186;fill-rule:evenodd;stroke:none"
+           id="rect2832-0-9"
+           width="106.23621"
+           height="50"
+           x="352.23294"
+           y="251.55276" />
+        <text
+           xml:space="preserve"
+           style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+           x="371.99649"
+           y="279.66077"
+           id="text2895-2-1"><tspan
+             sodipodi:role="line"
+             id="tspan2897-5-7"
+             x="371.99649"
+             y="279.66077"
+             style="font-size:14px">wxpython</tspan></text>
+      </g>
+      <text
+         id="text2895-2"
+         y="279.66077"
+         x="249.40964"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+         xml:space="preserve"><tspan
+           style="font-size:14px"
+           y="279.66077"
+           x="249.40964"
+           id="tspan2897-5"
+           sodipodi:role="line">subprocess</tspan></text>
+      <rect
+         y="251.55276"
+         x="236.0826"
+         height="50"
+         width="106.23621"
+         id="rect2832-0"
+         style="fill:#ff8080;fill-opacity:0.36283186;fill-rule:evenodd;stroke:none" />
+      <g
+         transform="matrix(0.97896668,0,0,1,41.49095,-1.7700226)"
+         id="g4308">
+        <g
+           id="g4303"
+           transform="translate(19.228794,51.83414)">
+          <rect
+             y="294.4288"
+             x="236.38934"
+             height="37.869263"
+             width="49.304447"
+             id="rect2832-4"
+             style="fill:#cccccc;fill-opacity:0.36470588;fill-rule:evenodd;stroke:#1a1a1a;stroke-width:0.61350781;stroke-miterlimit:10;stroke-dasharray:0.61350778, 1.84052333;stroke-dashoffset:0.552157" />
+          <text
+             id="text2895-2-4"
+             y="317.94843"
+             x="244.65675"
+             style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+             xml:space="preserve"><tspan
+               style="font-size:14px"
+               y="317.94843"
+               x="244.65675"
+               id="tspan2897-5-9"
+               sodipodi:role="line">wine</tspan></text>
+        </g>
+      </g>
+      <g
+         transform="translate(-0.66557596,-50.486725)"
+         id="g4210">
+        <rect
+           style="fill:#0000ff;fill-opacity:0.58823529;fill-rule:evenodd;stroke:none"
+           id="rect2832-0-9-7"
+           width="106.23621"
+           height="82.85714"
+           x="353.78503"
+           y="368.22168" />
+        <text
+           xml:space="preserve"
+           style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+           x="369.69464"
+           y="412.98926"
+           id="text2895-2-1-7"><tspan
+             sodipodi:role="line"
+             id="tspan2897-5-7-4"
+             x="369.69464"
+             y="412.98926"
+             style="font-size:14px">wxWidgets</tspan></text>
+      </g>
+      <g
+         id="g4373">
+        <rect
+           style="fill:#008080;fill-opacity:0.36283186;fill-rule:evenodd;stroke:none"
+           id="rect2830-6"
+           width="334.689"
+           height="42.724503"
+           x="125.09283"
+           y="416.09653" />
+        <text
+           xml:space="preserve"
+           style="font-size:27.55110931px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+           x="208.84633"
+           y="383.71997"
+           id="text2834-7"
+           transform="scale(0.8563735,1.1677148)"><tspan
+             sodipodi:role="line"
+             id="tspan2836-2"
+             x="208.84633"
+             y="383.71997">Binarios Fortran</tspan></text>
+      </g>
+      <path
+         inkscape:connection-end="#g4279"
+         inkscape:connection-start="#g2890"
+         inkscape:connector-type="polyline"
+         id="path4361"
+         d="m 215.42259,235.85155 -15.37856,15.70121"
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connection-end="#rect2832-0"
+         inkscape:connection-start="#g2890"
+         inkscape:connector-type="polyline"
+         id="path4363"
+         d="m 290.30464,235.85155 -0.42586,15.70121"
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connection-end="#g4284"
+         inkscape:connection-start="#g2890"
+         inkscape:connector-type="polyline"
+         id="path4365"
+         d="m 366.83888,235.85155 14.85675,15.70121"
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connection-end="#g4308"
+         inkscape:connection-start="#rect2832-0"
+         inkscape:connector-type="polyline"
+         id="path4367"
+         d="m 296.87427,301.55276 13.18018,42.94016"
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connection-end="#rect2830-6"
+         inkscape:connection-start="#g4308"
+         inkscape:connector-type="polyline"
+         id="path4369"
+         d="m 309.87397,382.36218 -10.67605,33.73435"
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connection-end="#rect2830-6"
+         inkscape:connection-start="#rect2832-0"
+         inkscape:connector-type="polyline"
+         id="path4371"
+         d="m 289.70358,301.55276 c -17.05915,33.66899 -25.86839,76.43466 2.30404,114.54377"
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connection-end="#g4219"
+         inkscape:connection-start="#g4279"
+         inkscape:connector-type="polyline"
+         id="path4384"
+         d="m 175.15457,301.55276 -0.39301,24.36708"
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connection-end="#g4210"
+         inkscape:connection-start="#g4284"
+         inkscape:connector-type="polyline"
+         id="path4386"
+         d="m 405.61932,301.55276 0.17366,16.18219"
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <text
+         transform="matrix(0,-1,1,0,0,0)"
+         id="text4388"
+         y="90"
+         x="-182.36218"
+         style="font-size:16;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+         xml:space="preserve"><tspan
+           y="90"
+           x="-182.36218"
+           id="tspan4390"
+           sodipodi:role="line">Frontend</tspan></text>
+      <text
+         transform="matrix(0,-1,1,0,0,0)"
+         id="text4388-0"
+         y="90.223999"
+         x="-322.36218"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+         xml:space="preserve"><tspan
+           y="90.223999"
+           x="-322.36218"
+           id="tspan4390-1"
+           sodipodi:role="line">Middleware</tspan></text>
+      <rect
+         style="fill:#00ff00;fill-opacity:0.3137255;fill-rule:evenodd;stroke:none"
+         id="rect4435"
+         width="334.689"
+         height="30"
+         x="125.09283"
+         y="205.85155" />
+      <text
+         id="text4444"
+         y="226.64755"
+         x="254.47195"
+         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+         xml:space="preserve"><tspan
+           y="226.64755"
+           x="254.47195"
+           id="tspan4446"
+           sodipodi:role="line">Pub/Sub</tspan></text>
+      <text
+         transform="matrix(0,-1,1,0,0,0)"
+         id="text4388-5"
+         y="90"
+         x="-442.36218"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+         xml:space="preserve"><tspan
+           y="90"
+           x="-442.36218"
+           id="tspan4390-8"
+           sodipodi:role="line">Backend</tspan></text>
+    </g>
+  </g>
+</svg>
