@@ -274,11 +274,27 @@ Requerimientos no funcionales
 Casos de uso
 ============
 
+Diagrama de caso de uso general
+-------------------------------
+
+El diagrama de la Figura :ref:`casouso-num` describe las acciones generales
+del sistema.
+
+
+.. _casouso-num:
+
+.. figure:: images/caso_uso_general.png
+   :width: 80%
+
+   Diagrama de caso de uso general del sistema 
+
+
+
 Casos de uso destacados
 -----------------------
 
 Se especifican en esta sección, de manera no formal, un conjunto de casos de 
-uso de especial interés para el diseño del software. 
+uso específicos de especial interés para el diseño del software. 
 
 Un proyecto, muchos casos
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -332,11 +348,6 @@ mezclas)
 
 
 
-
-Diagramas de caso de uso
---------------------------
-
-.. todo:: diagramas caso de uso 
 
 
 

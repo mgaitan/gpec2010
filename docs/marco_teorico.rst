@@ -13,10 +13,13 @@ y evaluado por profesionales o interesados de/en las distintas áreas de incumbe
 
 Dado que no necesariamente se tiene un conocimiento
 sólido fuera de la especificidad de la profesión, en este capítulo se presentarán 
-conceptos generales (que no pretenten exhautividad pero sí precisión) de las dos áreas, 
-útiles para la comprensión de este trabajo. Para definiciónes de términos puntuales, 
+conceptos generales (que no pretenden exhaustividad pero sí precisión) relacionados
+con la termodinámica y el equilibrio de fases. Para definiciónes de términos puntuales, 
 consulte el :ref:`glosario <glosario>`.
 
+En el :ref:`capitulo siguiente <tecnologias>` se verá una introducción a las 
+tecnologías, intentando un desarrollo de los conceptos apto para la comprensión 
+de todos los lectores.
 
 Conceptos de equilibrio de fases y sus diagramas
 ================================================
@@ -30,7 +33,7 @@ Diagrama de fase de sistemas binarios
 Un **diagrama de fase** es un tipo de gráfico utilizado para mostrar 
 las condiciones en las que distintas fases termodinámicas de un sistema pueden ocurrir en 
 equilibrio. Se representa en función de variables que caracterizan el estado 
-intesivo del sistema físicoquímico (funciones de estado).  
+intensivo del sistema fisicoquímico (funciones de estado).  
 
 El estudio introductorio de la termodinámica se centra en sustancias puras o 
 mezclas a composición constante. En este caso, el sistema es descripto por 
@@ -54,7 +57,7 @@ fracción masa, o concentración molar.
 Para **sistemas binarios** (una mezcla de dos componentes) la *composición* 
 (o, complementariamente, la *densidad*) se vuelve 
 una variable del sistema, cuya representación gráfica son curvas en el 
-espacio *R³* (gráfico tridimensional). Para un determinado estado *T-P-x* (*x* es 
+espacio :math:`\mathbb{R}^{3}` (gráfico tridimensional). Para un determinado estado *T-P-x* (*x* es 
 composición, en general expresada como fracción del compuesto más volátil) el 
 sistema se encuentra en *zonas de equilibrio* vapor/líquido, líquido/líquido, vapor/sólido, 
 líquido/sólido u otros casos particulares. 
@@ -78,7 +81,7 @@ El **comportamiento termodinámico de los sistemas binarios** no es uniforme
 cualesquiera sean los compuestos de la mezcla. Existen seis **tipos de 
 comportamiento**, de los cuales los tipos I, II, III y IV (enumerados en orden 
 creciente de complejidad) son los más comunes (todas calculables a través de 
-GPEC). Esta complejidad creciente del comportomaniento se observa en la aparación 
+GPEC). Esta complejidad creciente del comportamiento se observa en la aparición 
 de fases líquido-líquido, líquido-líquido-vapor, líneas azeotrópicas, etc. 
 
 .. figure:: images/beha_types.png
@@ -171,10 +174,7 @@ y Jørgen Mollerup de la Universidad Técnica de Dinamarca, que
 ha convocado a centenares de profesionales de diversas firmas como British 
 Petroleum, Chevron, Phillips, Shell y muchas otras de renombre mundial. 
 
-Estado del arte
----------------
 
-.. todo:: estado del arte
 
 
 

@@ -8,10 +8,10 @@ Metodologías de desarrollo de Software
 Metodologías Ágiles
 --------------------
 
-El desarrollo de este trabajo ha sido guiado por un conjunto de preceptos 
+Este proyecto integrador ha sido guiado por un conjunto de preceptos 
 comunes a las *metodologías ágiles de desarrollo de software*. 
 Sin necesariamente ajustarse a ninguna en particular, se comparte
-la escala de valoración hecha en el Manifiesto [AG-MANIF]_ :
+la escala de valoración hecha en Agile Manifiesto [AG-MANIF]_ :
 
     * Individuos e interacciones sobre procesos y herramientas
     * Software funcionando sobre documentación extensiva
@@ -43,14 +43,15 @@ otras.
 Desarrollo evolutivo adaptado
 -----------------------------
 
-Según Sommerville en [IS2004]_, el desarrollo evolutivo se basa en la idea de 
+Según [Sommerville2004]_, el desarrollo evolutivo se basa en la idea de 
 una implementación inicial, exponiéndola a los comentarios del comitente o 
 los usuarios, y refinándola a través de diferentes versiones preliminares 
 (versiones *beta*) hasta obtener una versión que satisfaga el conjunto de 
 requerimientos planteado. 
 
-
  .. figure:: images/desarrollo_evolutivo.png
+
+    Esquema conceptual del desarrollo evolutivo
 
 Las actividades de especificación, desarrollo y validación se entrelazan en 
 vez de separarse, con una rápida y constantes retroalimentación entre estas. 
@@ -181,8 +182,8 @@ La implementación en Python es la siguiente::
     #Felix: Miau!
     #Firulai: Guau, guau!
 
-Puede ver el artículo [WIKIPEDIA1]_ para una comparación (en particular la extensión y legibilidad)
-de código equivalente en otros lenguajes de programación.
+Puede ver el artículo [WIKIPEDIA1]_ para una comparación (en particular la 
+extensión y legibilidad) de código equivalente en otros lenguajes de programación.
  
     .. note::
 
@@ -207,8 +208,8 @@ como protocolos de internet, funciones matemáticas, manejo de hilos y multiproc
 pruebas unitarias, manipulación de XML y abstracción de llamadas al sistemas operativo subyacente, entre 
 muchas otras.
 
-Además de la incorporada, puede interfacear con diversas bibliotecas, por ejemplo
-para desarrollar interfaces gráficas de usuario (:term:`GUI`) (ver 
+Además de la biblioteca incorporada, puede utilizar diversas bibliotecas externas, 
+por ejemplo para desarrollar interfaces gráficas de usuario (:term:`GUI`) (ver 
 :ref:`wx`), y a la vez es extensible en C o C++. 
 
 Esta facilidad de integración permite que frecuentemente sea utilizado 
@@ -221,7 +222,7 @@ sino en el mercado altamente competitivo de la industria del software. Como
 plantea Shannon Behrens en el prólogo de [ZIADE2008]_:
     
     Hubo un tiempo en el que las compañías me llamaban loco cuando insistía en usar Python. 
-    En estos días, simplemente no hay suficientes programadores Python para todos. 
+    En estos días, simplemente no hay suficientes programadores Python para todas. 
     Grandes empresas como Google, YouTube, VMware y DreamWorks están en una lucha 
     constante para contratar todo buen talento Python que puedan encontrar. [#]_
 
@@ -395,8 +396,8 @@ de escritorio GNOME en Linux, y como una aplicación OS/X en platafomas Mac:
           El mismo programa wxPython ejecutado en Windows, Linux y Mac
 
    
-La guia [NR-RD2006]_ escrita por dos de los desarrolladores de la biblioteca
-es un material de refencia obligado para el desarrollo con wxPython. 
+La guía [NR-RD2006]_ escrita por dos de los desarrolladores de la biblioteca
+es un material de referencia obligado para el desarrollo con wxPython. 
 Allí se exponen como características relevantes es la orientación 
 a objetos y la orientación a eventos.
 
@@ -652,14 +653,14 @@ o usuarios particulares pueden reportar un *incidente* (*issue*), con un mensaje
 descriptivo que permita reproducir el error reportado, o bien fundamentando la necesidad 
 de una mejora o nueva funcionalidad. El *issue* es asociado a 
 palabras clave que identifican su estado (abierto, aceptado, 
-rechazado, solucionado, etc), su gravedad o interes (bajo, normal, alto),  
+rechazado, solucionado, etc), su gravedad o interés (bajo, normal, alto),  
 etc. Por supuesto, cada una de estas palabras clave puede cambiar con el 
 tiempo, adjuntando mensajes que indican las tareas realizadas en cada 
 intervención, hasta que el *issue* sea cerrado, ya sea por que se logró una 
 solución o se decidió descartarlo por alguna razón. 
 
-La utidad de este tipo de sistemas permite la desentralización del reporte de 
-errores, permitendo a la comunidad de usuarios participar de la mejora del 
+La utilidad de este tipo de sistemas permite la descentralización del reporte de 
+errores, permitiendo a la comunidad de usuarios participar de la mejora del 
 software. También permite llevar registro de errores o funcionalidades 
 pendientes en cada momento del desarrollo, facilitando la planificación de 
 lanzamientos de nuevas versiones.
@@ -668,7 +669,7 @@ Documentación
 -------------
 
 Gran parte del desarrollo de un software así como el de un proyecto integrador o 
-tésis en general, cualquiera sea el tópico, es la documentación. Contar con 
+tesis en general, cualquiera sea el tópico, es la documentación. Contar con 
 procedimientos y herramientas adecuadas para la realización de este trabajo es 
 tan necesaria e importante como el lenguaje de programación adoptado para la 
 codificación del software. 
@@ -691,14 +692,14 @@ cuaderno de notas para llevar cuenta de las minutas, links de interés, etc.
 restructuredText
 ^^^^^^^^^^^^^^^^
 
-El documento principal (la "tésis") se ha escrito utilizando el lenguaje de 
+El documento principal (la "tesis") se ha escrito utilizando el lenguaje de 
 marcado `reStructuredText <http://docutils.sourceforge.net/docs/user/rst/>`_ 
 (:abbr:`rst o rest`). :abbr:`rst` permite aportar 
 semántica a un documento de texto plano, de manera equivalente a *LaTeX* 
 pero mucho más sencilla, conservando legibilidad en formato fuente. 
 
 A través de diversas herramientas se puede convertir *rst* a distintos 
-formatos, como html, pdf o código LaTeX compilable. 
+formatos, como html, pdf o código LaTeX. 
 
 Sphinx
 ^^^^^^
@@ -802,7 +803,7 @@ y PDF de alta calidad a través de Latex.
 .. [LL-RJ2003] Lindstrom, Lowell - Jeffries, Ron (2003) *Extreme Programming and 
                Agile Software Development Methodologies*, http://xprogramming.com
 
-.. [IS2004] Sommerville, Ian (2004) *Software Enginnering, 7th edition*, Pretince Hall
+.. [Sommerville2004] Sommerville, Ian (2004) *Software Enginnering, 7th edition*, Pretince Hall
             Traducción al español por el Departamento de Ciencias de la Computación e Inteligencia 
             Artificial de la Universidad de Alicante (2005). 
 

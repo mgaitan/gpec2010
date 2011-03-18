@@ -3,17 +3,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title>5. Ingeniería de requerimientos &mdash; &lt;project&gt;</title>
+    
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     'dev',
+        VERSION:     'draft',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -95,7 +98,7 @@ distintos parámetros del diagrama elegido, envía los parámetros a los algorit
 de cálculo y procesa las salidas de estos generando y mostrando los
 diferentes diagramas.</p>
 <div class="figure">
-<img alt="_images/visual_gpec19.png" src="_images/visual_gpec19.png" style="width: 80%;" />
+<img alt="_images/visual_gpec12.png" src="_images/visual_gpec12.png" style="width: 80%;" />
 <p class="caption">Interfaz principal de <em>Visual Gpec</em>. Definiendo un sistema Methane-Methanol
 con la EoS RK-PR.</p>
 </div>
@@ -110,7 +113,7 @@ de modo que los gráficos se generan mediante el trazado punto a punto sobre un 
 tipo canvas. El control de escala, segmentación y demás funcionalidades básicas
 debió programarse desde cero.</p>
 <div class="figure">
-<img alt="_images/visual_gpec29.png" src="_images/visual_gpec29.png" style="width: 80%;" />
+<img alt="_images/visual_gpec22.png" src="_images/visual_gpec22.png" style="width: 80%;" />
 <p class="caption">Visualizacion de un diagrama P-T para el sistema Methane-Methanol
 con modelo RK-PR.</p>
 </div>
@@ -173,7 +176,7 @@ Origin o Microsoft Excel.</p>
 <p>Un aspecto poco cuidado de Visual Gpec es su usabilidad, ofreciendo una
 experiencia de usuario anti-intuitiva.</p>
 <div class="figure">
-<img alt="_images/visual_gpec39.png" src="_images/visual_gpec39.png" style="width: 80%;" />
+<img alt="_images/visual_gpec32.png" src="_images/visual_gpec32.png" style="width: 80%;" />
 <p class="caption">Ventanas abiertas para obtener un nuevo compuesto desde la base de datos,
 para que sea listado y utilizable en el sistema. Poco usable.</p>
 </div>
@@ -185,7 +188,7 @@ exponen en este selector. En caso de necesitar un compuesto que no esté allí
 listado, el proceso de obtención requiere interacturar con 3 formularios
 distintos.</p>
 <p>Por poner otro ejemplo, el botón principal para el inicio del cálculo
-(<img alt="play" src="_images/play7.png" /> ) se encuentra en una barra de herramientas con otras funciones no
+(<img alt="play" src="_images/play2.png" /> ) se encuentra en una barra de herramientas con otras funciones no
 obligatorias para la ejecución. Es decir, las herramientas carecen de un contexto
 que facilite la ubicuidad.</p>
 </div>
@@ -196,7 +199,7 @@ es complejo innecesariamente, realizando diversas relaciones <em>One-to-One</em>
 una misma clave principal. Por ejemplo, los nombres y las propiedades de un
 compuesto químico se encuentran en tablas separadas.</p>
 <div class="figure">
-<img alt="_images/bbdd7.png" src="_images/bbdd7.png" style="width: 80%;" />
+<img alt="_images/bbdd2.png" src="_images/bbdd2.png" style="width: 80%;" />
 <p class="caption">Visualización de algunas estructuras y datos de la base de Visual
 GPEC mediante el utilitario <em>gmdb2</em>.</p>
 </div>
@@ -307,12 +310,21 @@ accesible.</li>
 </div>
 <div class="section" id="casos-de-uso">
 <h2>5.4. Casos de uso<a class="headerlink" href="#casos-de-uso" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="diagrama-de-caso-de-uso-general">
+<h3>5.4.1. Diagrama de caso de uso general<a class="headerlink" href="#diagrama-de-caso-de-uso-general" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El diagrama de la Figura <a class="reference internal" href="#casouso-num"><em>Diagrama de caso de uso general del sistema</em></a> describe las acciones generales
+del sistema.</p>
+<div class="figure" id="casouso-num">
+<img alt="_images/caso_uso_general1.png" src="_images/caso_uso_general1.png" style="width: 80%;" />
+<p class="caption">Diagrama de caso de uso general del sistema</p>
+</div>
+</div>
 <div class="section" id="casos-de-uso-destacados">
-<h3>5.4.1. Casos de uso destacados<a class="headerlink" href="#casos-de-uso-destacados" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>5.4.2. Casos de uso destacados<a class="headerlink" href="#casos-de-uso-destacados" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Se especifican en esta sección, de manera no formal, un conjunto de casos de
-uso de especial interés para el diseño del software.</p>
+uso específicos de especial interés para el diseño del software.</p>
 <div class="section" id="un-proyecto-muchos-casos">
-<h4>5.4.1.1. Un proyecto, muchos casos<a class="headerlink" href="#un-proyecto-muchos-casos" title="Enlazar permanentemente con este título">¶</a></h4>
+<h4>5.4.2.1. Un proyecto, muchos casos<a class="headerlink" href="#un-proyecto-muchos-casos" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Una tarea frecuente del usuario (investigador) es la comparación entre
 distintos &#8220;casos&#8221; de estudio. Esto puede ser, un mismo sistema binario con
 aplicando diferentes coeficientes, las mismas condiciones con diferentes
@@ -332,7 +344,7 @@ sistematizar requerimientos y compartamientos esperados del sistema.</p>
 </div></blockquote>
 </div>
 <div class="section" id="gr-ficos-en-3d">
-<h4>5.4.1.2. Gráficos en 3D<a class="headerlink" href="#gr-ficos-en-3d" title="Enlazar permanentemente con este título">¶</a></h4>
+<h4>5.4.2.2. Gráficos en 3D<a class="headerlink" href="#gr-ficos-en-3d" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>La información resultante de los cálculos brinda conjuntos (vectores) de datos para
 múltiples variables (presión, temperatura, composición, densidad, etc)
 Tomando tres vectores de datos en vez de dos, pueden graficarse diagramas 3D,
@@ -340,7 +352,7 @@ Tomando tres vectores de datos en vez de dos, pueden graficarse diagramas 3D,
 alguna.</p>
 </div>
 <div class="section" id="superposici-n-autom-tica">
-<h4>5.4.1.3. Superposición automática<a class="headerlink" href="#superposici-n-autom-tica" title="Enlazar permanentemente con este título">¶</a></h4>
+<h4>5.4.2.3. Superposición automática<a class="headerlink" href="#superposici-n-autom-tica" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Dada la visualización 3D, es común que el investigador desee
 superponer diagramas de línea de contorno (isobaras, isopletas, etc.) sobre
 el diagrama de fase global del mismo caso para ver su disposición tridimensional.</p>
@@ -349,19 +361,11 @@ solicitado, debe generar un diagrama 2D independiente y trazar estas mismas
 curvas sobre un diagrama 3D común para todo el caso.</p>
 </div>
 <div class="section" id="superposici-n-manual">
-<h4>5.4.1.4. Superposición manual<a class="headerlink" href="#superposici-n-manual" title="Enlazar permanentemente con este título">¶</a></h4>
+<h4>5.4.2.4. Superposición manual<a class="headerlink" href="#superposici-n-manual" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>El usuario puede necesitar superponer visualmente diagramas 2D, ya sean estos
 del mismo caso (por ejemplo, un diagrama P-T global con una isopleta) o bien
 de distintos casos (por ejemplo, diagramas PT correspondientes a distintas
 mezclas)</p>
-</div>
-</div>
-<div class="section" id="diagramas-de-caso-de-uso">
-<h3>5.4.2. Diagramas de caso de uso<a class="headerlink" href="#diagramas-de-caso-de-uso" title="Enlazar permanentemente con este título">¶</a></h3>
-<div class="admonition-todo admonition " id="index-0">
-<p class="first admonition-title">Todo</p>
-<p class="last">diagramas caso de uso</p>
-</div>
 <table class="docutils footnote" frame="void" id="id5" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
@@ -392,6 +396,7 @@ de los compuestos del sistema) la realizan los algoritmos de cálculo. El fronte
 se limita a reportar un error en la obtención de los datos de salida.</td></tr>
 </tbody>
 </table>
+</div>
 </div>
 </div>
 </div>
@@ -426,14 +431,14 @@ se limita a reportar un error en la obtención de los datos de salida.</td></tr>
 </ul>
 </li>
 <li><a class="reference internal" href="#casos-de-uso">5.4. Casos de uso</a><ul>
-<li><a class="reference internal" href="#casos-de-uso-destacados">5.4.1. Casos de uso destacados</a><ul>
-<li><a class="reference internal" href="#un-proyecto-muchos-casos">5.4.1.1. Un proyecto, muchos casos</a></li>
-<li><a class="reference internal" href="#gr-ficos-en-3d">5.4.1.2. Gráficos en 3D</a></li>
-<li><a class="reference internal" href="#superposici-n-autom-tica">5.4.1.3. Superposición automática</a></li>
-<li><a class="reference internal" href="#superposici-n-manual">5.4.1.4. Superposición manual</a></li>
+<li><a class="reference internal" href="#diagrama-de-caso-de-uso-general">5.4.1. Diagrama de caso de uso general</a></li>
+<li><a class="reference internal" href="#casos-de-uso-destacados">5.4.2. Casos de uso destacados</a><ul>
+<li><a class="reference internal" href="#un-proyecto-muchos-casos">5.4.2.1. Un proyecto, muchos casos</a></li>
+<li><a class="reference internal" href="#gr-ficos-en-3d">5.4.2.2. Gráficos en 3D</a></li>
+<li><a class="reference internal" href="#superposici-n-autom-tica">5.4.2.3. Superposición automática</a></li>
+<li><a class="reference internal" href="#superposici-n-manual">5.4.2.4. Superposición manual</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#diagramas-de-caso-de-uso">5.4.2. Diagramas de caso de uso</a></li>
 </ul>
 </li>
 </ul>
@@ -484,8 +489,8 @@ se limita a reportar un error en la obtención de los datos de salida.</td></tr>
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2010, Martín Gaitán.
-      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+        &copy; Copyright 2011, Martín Gaitán.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1pre/ce4bb37a1409+.
     </div>
   </body>
 </html>

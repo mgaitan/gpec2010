@@ -22,7 +22,7 @@ instalación por separado del lenguaje Python (intérprete) y las diversas
 bibliotecas necesarias para la ejecución del software. Esto, en primer lugar, 
 porque complica la utilización al usuario inexperto, y en segundo lugar 
 porque resulta ineficiente en términos de tamaño teniendo en cuenta que sólo parte 
-(algunos módulos)  de las bibliotecas intrísecas de Python y las bibliotecas 
+(algunos módulos)  de las bibliotecas intrínsecas de Python y las bibliotecas 
 de terceros son utilizadas en GPEC. 
 
 Por poner un ejemplo, la biblioteca de graficación *Matplotlib* incluye 
@@ -39,9 +39,9 @@ Para realizar el estudio de cuáles son los módulos (y sus respectivas
 dependencias) unívocamente necesarios  se utilizó el software `py2exe 
 <http://www.py2exe.org/>`_
 
-*py2exe* es una extensión a las Python Distribution Utilities 
-(“Distutils”) que convierte scripts de Python en aplicaciones ejecutables 
-en windows (.exe) sin requerir la instalación por separado del intérprete o 
+*py2exe* es una extensión a las *Python Distribution Utilities*
+(:py:mod:`distutils`) que convierte scripts de Python en aplicaciones ejecutables 
+en windows (``.exe``) sin requerir la instalación por separado del intérprete o 
 bibliotecas. 
 
 Partiendo de un ambiente de desarrollo Windows con todos los requerimientos 
@@ -174,32 +174,33 @@ filosofía Unix que se resume en su famoso leitmotif:
 
 
 Sin embargo, por falta de masa crítica y tiempo, al momento de la 
-presentación no se realizaron instaladores ni paquetes especificos para una 
+presentación no se realizaron instaladores ni paquetes específicos para una 
 distribución Linux, aunque la instalación mediante el código fuente es 
-trivial, dado que Python no reqiere compilacion. Los siguientes comandos son 
-suficientes para la obstención de la última versión de GPEC y sus 
-dependencias::
+trivial, dado que Python no requiere compilación. Los siguientes comandos son 
+suficientes para la obtención de la última versión de GPEC y sus 
+dependencias:
 
+
+.. code-block:: bash
 
     $ sudo apt-get install python-matplotlib python-matplotlib-data python-numpy 
       python-wxgtk2.8 wine subversion
     $ svn checkout https://gpec2010.googlecode.com/svn/trunk/src gpec
 
-Y para ejecutarlo, simplemente se invoca el script principal::
+Y para ejecutarlo, simplemente se invoca el script principal:
 
+.. code-block:: bash
 
     $ python gpec/aui.py
 
-
-
-  
+ 
 
 
 Distribución y soporte
 -----------------------
 
 Dada la gratuidad de GPEC, cada nueva versión se deja disponible 
-automáticmente en la sección de descargas del sitio de desarrollo, 
+automáticamente en la sección de descargas del sitio de desarrollo, 
 http://code.google.com/p/gpec2010/downloads/list
 y también en su sitio oficial http://gpec.efn.uncor.edu
 
@@ -207,9 +208,6 @@ También se ha creado un grupo de correo , que intenta nuclear a la
 comunidad de usuarios e interesados en GPEC. Allí se remiten novedades del 
 desarrollo, se contestan dudas y se recibe *feedback* de los usuarios. La 
 dirección del grupo es http://groups.google.com.ar/group/gpec-discuss 
-
-
-
 
 
 

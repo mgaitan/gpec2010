@@ -3,17 +3,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title>7. Implementación &mdash; &lt;project&gt;</title>
+    
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     'dev',
+        VERSION:     'draft',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="top" title="&lt;project&gt;" href="index.html" />
-    <link rel="next" title="8. Verificación y Validación" href="verificacion.html" />
+    <link rel="next" title="8. Verificación" href="verificacion.html" />
     <link rel="prev" title="6. Arquitectura" href="arquitectura.html" /> 
   </head>
   <body>
@@ -35,7 +38,7 @@
           <a href="genindex.html" title="Índice General"
              accesskey="I">índice</a></li>
         <li class="right" >
-          <a href="verificacion.html" title="8. Verificación y Validación"
+          <a href="verificacion.html" title="8. Verificación"
              accesskey="N">siguiente</a> |</li>
         <li class="right" >
           <a href="arquitectura.html" title="6. Arquitectura"
@@ -64,7 +67,7 @@ a eventos</em> de la biblioteca se basa en una comunicación vía esta bibliotec
 se registra una crónica de eventos de interés para el usuario, denotados en
 su categoría con un símbolo y la hora del suceso.</p>
 <div class="figure">
-<img alt="_images/log_msg36.png" src="_images/log_msg36.png" style="width: 80%;" />
+<img alt="_images/log_msg2.png" src="_images/log_msg2.png" style="width: 80%;" />
 <p class="caption">A través de PubSub, cualquier parte del programa envía avisos que el panel
 (un <em>receptor</em>) mostrará al usuario.</p>
 </div>
@@ -110,26 +113,26 @@ al icono que los representan:</p>
 <col width="49%" />
 </colgroup>
 <thead valign="bottom">
-<tr><th class="head">Asunto</th>
+<tr class="row-odd"><th class="head">Asunto</th>
 <th class="head">Símbolo</th>
 <th class="head">Descripción</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr><td><em>ok</em></td>
-<td><img alt="ok" src="_images/ok35.png" /></td>
+<tr class="row-even"><td><em>ok</em></td>
+<td><img alt="ok" src="_images/ok2.png" /></td>
 <td>Acción existosa</td>
 </tr>
-<tr><td><em>info</em></td>
-<td><img alt="info" src="_images/info35.png" /></td>
+<tr class="row-odd"><td><em>info</em></td>
+<td><img alt="info" src="_images/info2.png" /></td>
 <td>Información importante</td>
 </tr>
-<tr><td><em>warning</em></td>
-<td><img alt="warning" src="_images/warning35.png" /></td>
+<tr class="row-even"><td><em>warning</em></td>
+<td><img alt="warning" src="_images/warning2.png" /></td>
 <td>Advertencia</td>
 </tr>
-<tr><td><em>error</em></td>
-<td><img alt="error" src="_images/error35.png" /></td>
+<tr class="row-odd"><td><em>error</em></td>
+<td><img alt="error" src="_images/error2.png" /></td>
 <td>Error</td>
 </tr>
 </tbody>
@@ -152,9 +155,11 @@ observa:</p>
 <div class="section" id="solicitud-de-gr-ficaci-n">
 <h3>7.1.2. Solicitud de gráficación<a class="headerlink" href="#solicitud-de-gr-ficaci-n" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Otro uso de <tt class="docutils literal"><span class="pre">PubSub</span></tt> se produce durante la solicitud de
-de generación gráficos. Se resume en el siguiente diagrama de secuencia:</p>
-<div class="figure">
-<img alt="_images/uml_sec_makeplot_vertical17.png" src="_images/uml_sec_makeplot_vertical17.png" style="width: 60%;" />
+de generación gráficos. Se resume en el diagrama de secuencia de la figura
+<a class="reference internal" href="#makeplot-num"><em>Secuencia para la generación de un diagrama desde el evento generado por
+el usuario</em></a>.</p>
+<div class="figure" id="makeplot-num">
+<img alt="_images/uml_sec_makeplot_vertical2.png" src="_images/uml_sec_makeplot_vertical2.png" style="width: 60%;" />
 <p class="caption">Secuencia para la generación de un diagrama desde el evento generado por
 el usuario</p>
 </div>
@@ -174,9 +179,10 @@ Esta integración se verá en <a class="reference internal" href="#matplotlibwx"
 y produce una salida <a class="footnote-reference" href="#id21" id="id1">[1]</a> en un archivo de texto. Para usuarios avanzados que conocen
 la estructura y significado de estos archivos (descriptos en :ref:&#8217;api&#8217;), es
 deseable que tengan un acceso al contenido desde la propia aplicación, para
-encontrar información numérica puntual cuya precisión se pierde en un gráfico.</p>
+encontrar información numérica cuya precisión se pierde en un gráfico.</p>
 <div class="figure">
-<img alt="_images/inpout31.png" src="_images/inpout31.png" style="width: 80%;" />
+<img alt="_images/inpout2.png" src="_images/inpout2.png" style="width: 100%;" />
+<p class="caption">Panel de navegación y visualización de archivos en entrada y salida</p>
 </div>
 <p>Esta tarea se hace a través de PubSub. El emisor envía un mensaje con tópico
 <tt class="docutils literal"><span class="pre">add_txt</span></tt> adjuntando como información una tupla con la ruta al archivo
@@ -184,20 +190,28 @@ y el caso al que este cálculo pertenence.</p>
 <p>Por ejemplo, la función que escribe el archivo de entrada para el cálculo de
 parámetros es la siguiente:</p>
 <div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">write_conparin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">model_id</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Write the input file CONPARIN.DAT &quot;. data could be EOS variables or </span>
-<span class="sd">            model paramater&quot;&quot;&quot;</span> 
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Write the input file CONPARIN.DAT . </span>
 
+<span class="sd">        ``data`` could be compound constants (direction=0) or model paramater (direction=1)</span>
+<span class="sd">        </span>
+<span class="sd">        0 -&gt;  [tc, pc, vc, omega]</span>
+<span class="sd">    </span>
+<span class="sd">            Example: [u&#39;305.32&#39;, u&#39;48.72&#39;, u&#39;0.1455&#39;, u&#39;0.099493&#39;]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span> 
         <span class="n">filename</span> <span class="o">=</span> <span class="s">&#39;CONPARIN.DAT&#39;</span>
         <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_temp</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
         <span class="n">template</span> <span class="o">=</span> <span class="s">&quot;{0}  {1}</span><span class="se">\n</span><span class="s"> {2}&quot;</span>
 
-        <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="mf">0</span> <span class="ow">and</span> <span class="n">model_id</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="mf">2</span><span class="p">,</span><span class="mf">3</span><span class="p">):</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="o">-</span><span class="mf">2</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mf">1</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mf">2</span><span class="p">]]</span>
-        <span class="k">elif</span> <span class="n">direction</span> <span class="o">==</span> <span class="mf">0</span> <span class="ow">and</span> <span class="n">model_id</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">4</span><span class="p">,</span><span class="mf">6</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span> <span class="o">==</span> <span class="mf">0</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">model_id</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="mf">2</span><span class="p">,</span><span class="mf">3</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="o">-</span><span class="mf">2</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mf">1</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mf">2</span><span class="p">]]</span> <span class="c">#t,p,v,o -&gt; t,p,o,v</span>
+            
+        <span class="k">elif</span> <span class="nb">int</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span> <span class="o">==</span> <span class="mf">0</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">model_id</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">4</span><span class="p">,</span><span class="mf">6</span><span class="p">):</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="o">-</span><span class="mf">2</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mf">1</span><span class="p">]]</span>
 
 
-        <span class="n">output</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">format</span> <span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">model_id</span><span class="p">,</span> <span class="s">&quot;  &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">data</span> <span class="p">))</span> 
+        <span class="n">output</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">format</span> <span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">model_id</span><span class="p">,</span> <span class="s">&quot;  &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">)))</span> 
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span> <span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
             <span class="n">fh</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -253,43 +267,43 @@ y destinatario/s:</p>
 <col width="24%" />
 </colgroup>
 <thead valign="bottom">
-<tr><th class="head">Tópico</th>
+<tr class="row-odd"><th class="head">Tópico</th>
 <th class="head">Descripción</th>
 <th class="head">Emisor/es</th>
 <th class="head">Receptor/es</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr><td>log</td>
+<tr class="row-even"><td>log</td>
 <td>Mensaje al usuario</td>
 <td>varios</td>
 <td>LogMessagesPanel</td>
 </tr>
-<tr><td>add_txt</td>
+<tr class="row-odd"><td>add_txt</td>
 <td>Expone archivo de
 backend</td>
 <td>ApiManager.*</td>
 <td>IOPanel</td>
 </tr>
-<tr><td>clone case</td>
+<tr class="row-even"><td>clone case</td>
 <td>Crear un nuevo caso
 a partir del actual</td>
 <td>CasePanel.Clone</td>
 <td>TabbedCases</td>
 </tr>
-<tr><td>make.*</td>
+<tr class="row-odd"><td>make.*</td>
 <td>Invoca el cálculo y
 genera el gráfico</td>
 <td>CasePanel.OnMakePlots</td>
 <td>SuitePlotsPanel</td>
 </tr>
-<tr><td>refresh all</td>
+<tr class="row-even"><td>refresh all</td>
 <td>Refresca la interfaz
 de usuario</td>
 <td>varios</td>
 <td>MainFrame</td>
 </tr>
-<tr><td>active page</td>
+<tr class="row-odd"><td>active page</td>
 <td>Trae a primer
 plano una pestaña
 de los gráficos</td>
@@ -316,7 +330,7 @@ de entrada <tt class="file docutils literal"><span class="pre">GPECIN.DAT</span>
 permiso de escritura en la carpeta destino). En caso de error por algún motivo
 (conocido o no), se remite un mensaje de log y se cancela la ejecución.</p>
 <div class="figure" id="front-back">
-<img alt="_images/uml_front-back_vertical20.png" src="_images/uml_front-back_vertical20.png" style="width: 100%;" />
+<img alt="_images/uml_front-back_vertical2.png" src="_images/uml_front-back_vertical2.png" style="width: 100%;" />
 <p class="caption">Secuencia de la comunicación frontend-backend</p>
 </div>
 <div class="section" id="la-dependencia-con-wine">
@@ -387,38 +401,35 @@ simplificados realiza una transformación dinámica de una función o método,
 agregándole una funcionalidad que no tiene por sí misma, o más en general,
 alterando de alguna manera el resultado devuelto.</p>
 <div class="figure">
-<img alt="_images/Decorator_UML_class_diagram19.png" src="_images/Decorator_UML_class_diagram19.png" style="width: 60%;" />
+<img alt="_images/Decorator_UML_class_diagram2.png" src="_images/Decorator_UML_class_diagram2.png" style="width: 60%;" />
 <p class="caption">Diagrama de clases del patrón <em>Decorator</em></p>
 </div>
 <p>Expresándolo en términos matemáticos, se trata de una <em class="dfn">composición de funciones</em>:</p>
 <div class="math">
 <p><img src="_images/math/a6aa91817f451ebfb474c5a537d779e732b24bbb.png" alt="X \to \,\,Y\;\; \to \;\;\,Z
 
-x \mapsto f(x) \mapsto g(f(x))" /></p>
+x \mapsto f(x) \mapsto g(f(x))"/></p>
 </div><p>Desde la versión 2.4, Python tiene una nomenclatura facilitada para la
 escritura de decoradores. Una estructura genérica para la definición
 de una función decoradora, que se compone de un <a class="reference internal" href="glosario.html#term-wrapper"><em class="xref std std-term">wrapper</em></a>
 de dos funciones anidadas <a class="footnote-reference" href="#id24" id="id4">[4]</a>,  es la siguiente:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">mydecorator</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">_mydecorator</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="c"># hacer las tareas de &#39;decoración&#39;</span>
-<span class="gp">... </span>        <span class="c"># antes de llamar a la funcion decorada</span>
-<span class="gp">... </span>        <span class="n">res</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
-<span class="gp">... </span>        <span class="c"># hacer otras cosas antes de devolver el resultado</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="n">res</span>
-<span class="gp">... </span>    <span class="c"># se devuelve la subfunción</span>
-<span class="gp">... </span>    <span class="k">return</span> <span class="n">_mydecorator</span>
-<span class="gp">...</span>
-<span class="go">&gt;&gt;&gt;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">mydecorator</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_mydecorator</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="c"># hacer las tareas de &#39;decoración&#39;</span>
+        <span class="c"># antes de llamar a la funcion decorada</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+        <span class="c"># hacer otras cosas antes de devolver el resultado</span>
+        <span class="k">return</span> <span class="n">res</span>
+    <span class="c"># se devuelve la subfunción</span>
+    <span class="k">return</span> <span class="n">_mydecorator</span>
 </pre></div>
 </div>
 <p>Cuando se tiene una funcion cualquier que se quiere decorar, simplemente
 se utiliza la sintaxis <tt class="docutils literal"><span class="pre">&#64;mydecorator</span></tt> justo antes de la función en
 cuestion. Por ejemplo:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nd">@mydecorator</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">mifuncion</span><span class="p">():</span>
-<span class="gp">... </span>    <span class="k">pass</span>
-<span class="go">&gt;&gt;&gt;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="nd">@mydecorator</span>
+<span class="k">def</span> <span class="nf">mifuncion</span><span class="p">():</span>
+     <span class="k">pass</span>
 </pre></div>
 </div>
 <p>Al llamar a <tt class="xref py py-func docutils literal"><span class="pre">mifuncion()</span></tt> se obtiene en realidad
@@ -500,9 +511,10 @@ de información válida para un diagrama, determinando así la porción de texto
 (números flotantes en formato texto) que debe extraerse. Este texto se convierte
 a un objeto array de <tt class="xref py py-mod docutils literal"><span class="pre">numpy</span></tt>.</p>
 <p>Las marcas de inicio son cadena de tres letras mayúsculas (<tt class="docutils literal"><span class="pre">VAP</span></tt>,``CRI``,``LLV``, etc.)
-y un renglón vacío marca el final del bloque de información.</p>
-<div class="figure">
-<img alt="_images/parser26.png" src="_images/parser26.png" style="width: 80%;" />
+y un renglón vacío marca el final del bloque de información como se muestra
+en la figura <a class="reference internal" href="#parser-num"><em>Topología de la información extractada</em></a>.</p>
+<div class="figure" id="parser-num">
+<img alt="_images/parser2.png" src="_images/parser2.png" style="width: 80%;" />
 <p class="caption">Topología de la información extractada</p>
 </div>
 <p>Una estructura de datos basadas en asociaciones clave-valor (diccionarios),
@@ -616,10 +628,8 @@ Todo los <em>sizers</em> son instancias de una subclase de la clase abstracta <t
 <blockquote>
 <div><div class="admonition-ver-tambi-n admonition seealso">
 <p class="first admonition-title">Ver también</p>
-<dl class="last docutils">
-<dt>Para una explicación exhaustiva sobre el tema, vea el capitulo 11 de</dt>
-<dd><em>&#8220;wxPython in Action&#8221;</em>, <a class="reference internal" href="tecnologias.html#nr-rd2006">[NR-RD2006]</a></dd>
-</dl>
+<p class="last">Para una explicación exhaustiva sobre el tema, vea el capitulo 11 de
+<em>&#8220;wxPython in Action&#8221;</em>, <a class="reference internal" href="tecnologias.html#nr-rd2006">[NR-RD2006]</a></p>
 </div>
 </div></blockquote>
 <p>Por ejemplo, <tt class="docutils literal"><span class="pre">sizer</span></tt> permite dividir el espacio, cualquier este sea, en porciones
@@ -629,7 +639,7 @@ texto), definiendo atributos como su alineación horizontal o vertical, el tama�
 puede contener a otros de manera anidada, definiendo una cuadrícula con espacios para ubicar los
 <em>widgets</em> controladores <a class="footnote-reference" href="#id29" id="id12">[9]</a>.</p>
 <div class="figure">
-<img alt="_images/wxglade-sizer16.png" src="_images/wxglade-sizer16.png" style="width: 95%;" />
+<img alt="_images/wxglade-sizer2.png" src="_images/wxglade-sizer2.png" style="width: 80%;" />
 <p class="caption">Diseño con <em>sizers</em> de una ventana de la aplicación mediante la utilidad
 <a class="reference external" href="http://wxglade.sourceforge.net">wxGlade</a></p>
 </div>
@@ -639,11 +649,12 @@ en un contenedor (por ejemplo, un panel) pero ubicado según indica un sizer que
 haciado al mismo contenedor.</p>
 <div class="section" id="uso-en-la-aplicaci-n">
 <h4>7.5.1.1. Uso en la aplicación<a class="headerlink" href="#uso-en-la-aplicaci-n" title="Enlazar permanentemente con este título">¶</a></h4>
-<p>En GPEC, toda la distribución de componentes está dispuesta a través de <tt class="docutils literal"><span class="pre">sizers</span></tt>.
-Como ejemplo, se muestra la parte superior de un panel para la definición de un caso
-donde consta el uso anidado de <tt class="docutils literal"><span class="pre">sizers</span></tt> de distinto tipo.</p>
-<div class="figure">
-<img alt="_images/sizers_example14.png" src="_images/sizers_example14.png" style="width: 90%;" />
+<p>En GPEC, toda la distribución de componentes de la interfaz está dispuesta a través de <tt class="docutils literal"><span class="pre">sizers</span></tt>.
+Como ejemplo, en la figura <a class="reference internal" href="#sizers-num"><em>Distribución mediante sizers de componentes. El contenido del GridBagSizer
+es dinámico, cambiando su contenido en función de un evento de cambio de
+opción (evento wx.EVT_CHOICE) del menú de modelos.</em></a> se muestra la parte superior de un panel para la definición de un caso donde consta el uso anidado de <tt class="docutils literal"><span class="pre">sizers</span></tt> de distinta clase.</p>
+<div class="figure" id="sizers-num">
+<img alt="_images/sizers_example2.png" src="_images/sizers_example2.png" style="width: 90%;" />
 <p class="caption">Distribución mediante <em>sizers</em> de componentes. El contenido del <tt class="docutils literal"><span class="pre">GridBagSizer</span></tt>
 es dinámico, cambiando su contenido en función de un evento de cambio de
 opción (evento <tt class="docutils literal"><span class="pre">wx.EVT_CHOICE</span></tt>) del menú de modelos.</p>
@@ -737,11 +748,10 @@ que define una &#8220;subventana&#8221; a la que se le asocia el contenido a mos
 un panel principal de <cite>wx</cite>.</li>
 </ul>
 <div class="figure">
-<img alt="_images/gpec_aui_max16.png" src="_images/gpec_aui_max16.png" style="width: 95%;" />
+<img alt="_images/gpec_aui_max2.png" src="_images/gpec_aui_max2.png" style="width: 95%;" />
 <p class="caption">La interfaz avanzada de GPEC visualizando 2 de los 4 paneles por defecto.</p>
 </div>
-<p>Vale comentar que luego de cualquier cambio, yendo a :menuselection:‘View &#8211;&gt; Restore default view‘ se reestablece la
-estructura original.</p>
+<p>Vale comentar que luego de cualquier cambio, yendo a :menuselection:‘View &#8211;&gt; Restore default view‘ se reestablece la estructura original.</p>
 <p>Un extracto relevante de <tt class="xref py py-class docutils literal"><span class="pre">MainFrame</span></tt> es el siguiente:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MainFrame</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">Frame</span><span class="p">):</span>
 
@@ -789,25 +799,25 @@ de <tt class="xref py py-class docutils literal"><span class="pre">AuiPaneInfo</
 <col width="54%" />
 </colgroup>
 <thead valign="bottom">
-<tr><th class="head">Título</th>
+<tr class="row-odd"><th class="head">Título</th>
 <th class="head">Panel de contenido</th>
 <th class="head">Descripción del contenido</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr><td>Cases</td>
+<tr class="row-even"><td>Cases</td>
 <td>TabbedCases</td>
 <td>Definición de casos</td>
 </tr>
-<tr><td>Plots</td>
+<tr class="row-odd"><td>Plots</td>
 <td>SuitePlotsPanel</td>
 <td>Pestañas de gráficos</td>
 </tr>
-<tr><td>Manager</td>
+<tr class="row-even"><td>Manager</td>
 <td>PlotsTreePanel</td>
 <td>Árbol de manejo gráficos</td>
 </tr>
-<tr><td>Info</td>
+<tr class="row-odd"><td>Info</td>
 <td>InfoPanel</td>
 <td>Panel de informaciones diversas</td>
 </tr>
@@ -833,9 +843,9 @@ desarrolladas por el programador italiano Andrea Gavana.</p>
 <p>La gran ventaja de <tt class="xref py py-class docutils literal"><span class="pre">AuiNotebook</span></tt> es que funciona como complemento
 de la intefaz avanzada de Python <tt class="docutils literal"><span class="pre">wx.aui</span></tt> permitiendo el control de eventos
 como <em>drag &amp; drop de pestañas</em> entre distintos paneles, o la visualización
-simultánea de múltiples pestañas.</p>
-<div class="figure">
-<img alt="_images/auinotebook9.png" src="_images/auinotebook9.png" style="width: 100%;" />
+simultánea de múltiples pestañas, como muestra la figura <a class="reference internal" href="#auinotebook-num"><em>El control AuiNotebook de los gráficos mostrando 2 diagramas en simultáneo</em></a>.</p>
+<div class="figure" id="auinotebook-num">
+<img alt="_images/auinotebook2.png" src="_images/auinotebook2.png" style="width: 100%;" />
 <p class="caption">El control <tt class="docutils literal"><span class="pre">AuiNotebook</span></tt> de los gráficos mostrando 2 diagramas en simultáneo</p>
 </div>
 </div>
@@ -859,17 +869,11 @@ exige al usuario.</li>
 <a class="reference external" href="http://code.enthought.com/projects/mayavi/">Mayavi</a> , que ha servido de inspiración
 para el diseño de GPEC.</p>
 <div class="figure">
-<img alt="_images/mayavi28.png" src="_images/mayavi28.png" style="width: 100%;" />
+<img alt="_images/mayavi22.png" src="_images/mayavi22.png" style="width: 90%;" />
 <p class="caption">Interfaz de la aplicación de visualización de diagramas VTK que sirvió
 como inspiración para la interfaz de GPEC.</p>
 </div>
-<p>Algunas decisiciones concernientes a la usabilidad se muestran en el siguiente
-diagrama:</p>
-<div class="figure">
-<img alt="_images/usabilidad_labels8.png" src="_images/usabilidad_labels8.png" style="width: 100%;" />
-<p class="caption">Interfaz de la aplicación de visualización de diagramas VTK que sirvió
-como inspiración para la interfaz de GPEC.</p>
-</div>
+<p>Algunas decisiciones concernientes a la usabilidad han sido:</p>
 <ul class="simple">
 <li>El diseño acompaña al <em>workflow</em>: primero se define el sistema, opcionalmente
 se manipulan los cálculos y por último se grafica. Sólo el primero y el último
@@ -887,6 +891,11 @@ desplazamiento vertical.</li>
 por los navegadores web para abrir una nueva pestaña de trabajo. Dado el contexto
 resulta evidente que genera un nuevo caso.</li>
 </ul>
+<div class="figure">
+<img alt="_images/usabilidad_labels2.png" src="_images/usabilidad_labels2.png" style="width: 100%;" />
+<p class="caption">Interfaz de la aplicación de visualización de diagramas VTK que sirvió
+como inspiración para la interfaz de GPEC.</p>
+</div>
 </div>
 </div>
 <div class="section" id="integraci-n-matplotlib-wxpython">
@@ -898,24 +907,27 @@ incrustar (y hacer interactuar) figuras dentro de aplicaciones gráficas.</p>
 &#8220;canvas&#8221; (<em>lienzo</em>) donde Matplotlib es capaz de dibujar y, se comporta, a la vez
 como un panel de wxPython.</p>
 <p>El objeto en cuestion es <tt class="xref py py-class docutils literal"><span class="pre">FigureCanvasWxAgg</span></tt> y tiene se muestra
-su ascendencia de clases en el siguiente diagrama:</p>
-<div class="figure">
-<img alt="_images/figcanvas6.png" src="_images/figcanvas6.png" style="width: 50%;" />
+su ascendencia de clases en el diagrama de la figura <a class="reference internal" href="#figcanvas-num"><em>Diagrama de clases para FigureCanvasWxAgg donde se evidencia
+la herencia múltiple que permite el comportamiento dual del objeto.</em></a>.</p>
+<div class="figure" id="figcanvas-num">
+<img alt="_images/figcanvas2.png" src="_images/figcanvas2.png" style="width: 50%;" />
 <p class="caption">Diagrama de clases para <tt class="xref py py-class docutils literal"><span class="pre">FigureCanvasWxAgg</span></tt> donde se evidencia
 la herencia múltiple que permite el comportamiento dual del objeto.</p>
 </div>
 <p>La clase <tt class="xref py py-class docutils literal"><span class="pre">FigureCanvasAgg</span></tt> es en realidad la encargada de dibujar
-los gráficos a través de los algoritmos
-<a class="reference external" href="http://www.antigrain.com">Anti-Grain Geometry</a> que aplican técnicas
-como <em>Anti-Aliasing</em> <a class="footnote-reference" href="#id33" id="id17">[13]</a> o <em>Precisión de subpixel</em> para mejorar la definición
+los gráficos a través de los algoritmos <a class="reference external" href="http://www.antigrain.com">Anti-Grain Geometry</a> que aplican técnicas como <em>Anti-Aliasing</em> <a class="footnote-reference" href="#id33" id="id17">[13]</a> o <em>Precisión de subpixel</em> para mejorar la definición
 de la líneas trazadas.</p>
-<div class="figure">
-<img alt="_images/wxmatplotlib7.png" src="_images/wxmatplotlib7.png" style="width: 65%;" />
+<p>La figura <a class="reference internal" href="#wx-num"><em>Diagrama de secuencia para la graficación de un diagrama al nivel subyacente
+(via matplotlib)</em></a> muestra la secuencia de eventos para la graficación
+de un diagrama. El diagrama de la figura <a class="reference internal" href="#plotclass-num"><em>Diagrama de clases de los distintos tipos de diagramas soportados</em></a> muestra la estructura
+de clases implementada para dar soporte a los distintos tipos de gráfico.</p>
+<div class="figure" id="wx-num">
+<img alt="_images/wxmatplotlib2.png" src="_images/wxmatplotlib2.png" style="width: 65%;" />
 <p class="caption">Diagrama de secuencia para la graficación de un diagrama al nivel subyacente
 (via <tt class="docutils literal"><span class="pre">matplotlib</span></tt>)</p>
 </div>
-<div class="figure">
-<img alt="_images/class-plots7.png" src="_images/class-plots7.png" style="width: 65%;" />
+<div class="figure" id="plotclass-num">
+<img alt="_images/class-plots2.png" src="_images/class-plots2.png" style="width: 65%;" />
 <p class="caption">Diagrama de clases de los distintos tipos de diagramas soportados</p>
 </div>
 </div>
@@ -949,7 +961,7 @@ experimentales.</p>
 <div class="section" id="modelo-entidad-relaci-n">
 <h3>7.7.2. Modelo Entidad-Relación<a class="headerlink" href="#modelo-entidad-relaci-n" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="figure">
-<img alt="_images/er-database.png" src="_images/er-database.png" style="width: 90%;" />
+<img alt="_images/er-database2.png" src="_images/er-database2.png" style="width: 90%;" />
 <p class="caption">Representación de las entidades con sus atributos y la relación entre las mismas</p>
 </div>
 </div>
@@ -983,7 +995,7 @@ experimentales.</p>
 de datos, como se ha comentado en la sección <a class="reference internal" href="requerimientos.html#problemas"><em>Problemas detectados</em></a>, está en formato
 MS Jet.</p>
 <p>La obtención de la información contenida para su conversión a Sqlite se realizó
-utilizando un proceso de 2 pasos.</p>
+utilizando un proceso de 2 pasos</p>
 <ol class="arabic simple">
 <li>Con la herramienta <tt class="docutils literal"><span class="pre">gmdb2</span></tt>, parte de la suite
 de utilidades libres para la manipulación de archivos Jet/Access
@@ -1020,7 +1032,7 @@ regular) sobre sobre los archivos de un directorio</td></tr>
 <table class="docutils footnote" frame="void" id="id23" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>El módulo <tt class="xref py py-mod docutils literal"><span class="pre">cStringIO</span></tt> provee un tipo de <em>buffers</em> de cadenas
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>El módulo <tt class="xref py py-mod docutils literal"><span class="pre">cStringIO</span></tt> provee un tipo de <em>buffer</em> de cadenas
 de caractéres con la misma interfaz que un archivo de texto normal.
 Las operaciones con la información en memoria son altamente eficientes.</td></tr>
 </tbody>
@@ -1213,7 +1225,7 @@ Laboratories, Eindhoven</td></tr>
                         title="Capítulo anterior">6. Arquitectura</a></p>
   <h4>Próximo tema</h4>
   <p class="topless"><a href="verificacion.html"
-                        title="Próximo capítulo">8. Verificación y Validación</a></p>
+                        title="Próximo capítulo">8. Verificación</a></p>
   <h3>Esta página</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/implementacion.txt"
@@ -1243,7 +1255,7 @@ Laboratories, Eindhoven</td></tr>
           <a href="genindex.html" title="Índice General"
              >índice</a></li>
         <li class="right" >
-          <a href="verificacion.html" title="8. Verificación y Validación"
+          <a href="verificacion.html" title="8. Verificación"
              >siguiente</a> |</li>
         <li class="right" >
           <a href="arquitectura.html" title="6. Arquitectura"
@@ -1252,8 +1264,8 @@ Laboratories, Eindhoven</td></tr>
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2010, Martín Gaitán.
-      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+        &copy; Copyright 2011, Martín Gaitán.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1pre/ce4bb37a1409+.
     </div>
   </body>
 </html>

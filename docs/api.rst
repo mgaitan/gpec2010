@@ -1,7 +1,7 @@
 .. _api:
 
 Especificación de la interfaz de comunicación
-==============================================
+*********************************************
 
 Esta documentación especifica la interfaz de archivos de entrada y salida
 para el conjunto de programas de cálculo que componen *GPEC*. 
@@ -10,7 +10,7 @@ ya que se carecía de documentación fehaciente.
 
 
 Tabla de incidencia
---------------------
+====================
 
  ==========================================  ============  ================
  Entrada                                     Ejecutable    Salida
@@ -74,7 +74,7 @@ Formato General:
 
 
 Modo para calcular parámetros del modelo
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------------------
 
 Este modo se define con ``SENTIDO`` 0. Se definen las variables del compuesto. 
 
@@ -119,7 +119,7 @@ Si el usuario define ``VCeos``, se actualiza el ``VCrat`` y viceversa.
 
 
 Modo para calcular variables del compuesto
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------------------
 
 Cuando ``SENTIDO`` es 1 el formato depende del modelo
     
@@ -197,7 +197,7 @@ Cuando ``SENTIDO`` es 1 el formato depende del modelo
 
 
 CONPAROUT.DAT
--------------
+=============
 
 Es el archivo de salida para el cálculo de parámetros y constantes. 
 El formato es el mismo independientemente del sentido de cálculo, teniendo la 
@@ -212,43 +212,34 @@ Formato General:
 
 Detalle:
 
-     - Para `Soave-Redlich-Kwong`_ (id 1) y  ``Peng-Robinson`` (id 2):
-        
-           TC    PC    VC    OM
-           ac     b     m
+- Para `Soave-Redlich-Kwong`_ (id 1) y  ``Peng-Robinson`` (id 2)::
 
- 
-     - Para  ``RK-PR`` (id 3):
-        
-           TC    PC     VC    OM
-           ac     b   del1     k
+   TC    PC    VC    OM
+   ac     b     m
 
-     - Para  ``PC-SAFT`` (id 4):
 
-           TC    PC     VC    OM
-           eps/k   ro    m 
-        
+- Para  ``RK-PR`` (id 3)::
+
+   TC    PC     VC    OM
+   ac     b   del1     k
+
+- Para  ``PC-SAFT`` (id 4)::
+
+   TC    PC     VC    OM
+   eps/k   ro    m 
+
+- Para  ``SPHCT`` (id 6):
+
+    TC    PC     VC    OM
+    T*   V*   c
+  
         
 
 
 GPECIN.DAT
-----------
+==========
 
 Se trata del archivo de entrada de parámetros para el cálculo del diagrama global. 
-
-Ejemplo::
-
-    1
-    0 0
-    METHANE
-    190.56  45.99  0.0115  0.114837
-    2.33338  0.029849  0.498078
-    ETHANOL
-    514  61.37  0.6436  0.232124
-    12.722  0.060334  1.420538
-    0.1000
-    0.0000
-    2000
 
 Formato General::
 
@@ -264,6 +255,19 @@ Formato General::
     L12
     MAX_P
 
+Ejemplo::
+
+    1
+    0 0
+    METHANE
+    190.56  45.99  0.0115  0.114837
+    2.33338  0.029849  0.498078
+    ETHANOL
+    514  61.37  0.6436  0.232124
+    12.722  0.060334  1.420538
+    0.1000
+    0.0000
+    2000
 
 :MODELO: `ID de Modelos`_      
 :NCOMB: Regla de combinación
@@ -397,7 +401,7 @@ Formato General::
 
 
 GPECOUT.DAT
------------
+===========
 
 Es el archivo de salida de ``GPEC``. Tiene una cabecera, donde especifica
 a fines descriptivos los parámetros que se utilizaron para realizar el cálculo, 
@@ -406,7 +410,7 @@ una *curva* en el espacio n-dimensional. Tomando 2 de estas columnas de valores
 se obtienen las distintas curvas a graficar. 
 
 Cabecera
-^^^^^^^^
+--------
 
 Para el analisis sintáctico, se puede ignorar la cabecera del archivo. 
 Sin embargo, para los fines descriptivos se incluye un ejemplo::
@@ -435,7 +439,7 @@ Esta cabecera puede cambiar ligeramente en función del modelo con el que se
 calculó. 
 
 Datos tabulados
-^^^^^^^^^^^^^^^
+---------------
 
 La estructura general de una tabla de datos tabulados tiene la siguiente 
 estructura::
@@ -456,14 +460,14 @@ estructura::
     
  .. _`Tabla de tipos`:
 
- =====  ======================  =======================
- Tipo   Descripción             Columnas significativas
- =====  ======================  =======================
- VAP    Vapor                   4                   
- CRI    Curva crítica    ?      5
- CEP    Critical End Point      6
- LLV    --                      10
- =====  ======================  =======================
+ =====  ===============================  =======================
+ Tipo   Descripción                      Columnas significativas
+ =====  ===============================  =======================
+ VAP    Vapor                            4                   
+ CRI    Curva crítica                    5
+ CEP    Critical End Point               6
+ LLV    Liquido liquido vapor            10
+ =====  ===============================  =======================
 
  .. todo:: 
     ver descripción. Ver AZE line  ¿Estructura?. 
@@ -509,7 +513,8 @@ Por ejemplo::
 
 
 Pie
-^^^
+---
+
 Al igual que la cabecera, el final del archivo aporta información extra.
 Por ejemplo::
 
@@ -528,7 +533,7 @@ Por ejemplo::
 
 
 TFORPXY.dat
------------
+===========
 
 ``TFORPXY.dat`` es el tercer archivo de entrada que utiliza PxyGPEC para calcular
 diagramas Presión-Composición a una temperatura constante dada. 
@@ -545,7 +550,7 @@ previo al cálculo::
                encontrado en los bloques de datos tabulados LLV. 
 
 PXYOUT.DAT
-----------
+==========
 
 Es el archivo de salida para el diagrama Presión-Composición (diagrama isotermico). 
 Tiene una estructura de `datos tabulados`_ como sigue::
@@ -565,7 +570,7 @@ Tiene 7 columnas significativas.
    
 
 PFORTXY.DAT
------------
+===========
 
 Análogo a TFORPXY.dat_ para el diagrama de presión constante, este archivo 
 indica el valor de presión definida por el usuario. 
@@ -579,7 +584,7 @@ indica el valor de presión definida por el usuario.
                       cual es el rango ?
                 
 TXYOUT.DAT
----------- 
+==========
 
 Datos tabulados de salida para diagramas isobáricos. Tiene 
 la misma estructura que PXYOUT.DAT_ pero el parámetro constante es la temperatura
@@ -599,7 +604,7 @@ y la primer columna de datos tabulados es presión::
 Tiene 7 columnas significativas. 
 
 ZforIsop.dat
-------------
+============
 
 Es un archivo de entrada para ``IsoplethGPEC`` que realiza los cómputos 
 para obtener un set de datos para una proporción del *compuesto 1* constante, 
@@ -622,7 +627,7 @@ adimensional que representa la fracción de compuesto::
           cual es el rango ( 0 a 1 ? )
 
 ISOPOUT.DAT
------------
+===========
 
 Archivo de salida para isopletas (Presión-Temperatura en composición constante). 
 Tiene la siguiente estructura::
@@ -662,7 +667,7 @@ El bloque de datos tabulados ``ISO`` tiene 6 cifras significativas.
 
 
 FUGIN.DAT                      
----------
+=========
 
 Archivo de entrada para ``FUGi`` que se utiliza para realizar un diagrama
 *Fugacidad-Composición* para una temperatura y una presión dadas. 
@@ -681,7 +686,7 @@ Detalle:
 
 
 FUGOUT.DAT
-----------
+==========
 
 El archivo de salida de datos para *Fugacidad-Composición* producido por 
 ``FUGi``. Tiene una estructura similar a GPECOUT.DAT_ y en particular 
@@ -710,7 +715,7 @@ Las tres columnas de datos son significativas.
 
 
 IsoXTin.DAT
------------
+===========
 
 Archivo de entrada para ``IsoXT`` que se utiliza para realizar un diagrama
 *Presión-densidad* para temperatura y composición constante. 
@@ -730,7 +735,7 @@ Detalle:
 
 
 IsoXTout.DAT
-------------
+============
 
 Archivo de salida similar a FUGOUT.DAT_ con una cabecera_ con la siguiente
 estructura::
@@ -753,10 +758,6 @@ Detalle:
  
 Notar que el bloque de datos no tiene un identificador de tres letras
 previo a las columnas de datos. 
-
-
-
-
 
 
 

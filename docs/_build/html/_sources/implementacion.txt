@@ -102,8 +102,11 @@ Solicitud de gráficación
 -------------------------
 
 Otro uso de ``PubSub`` se produce durante la solicitud de 
-de generación gráficos. Se resume en el siguiente diagrama de secuencia:
+de generación gráficos. Se resume en el diagrama de secuencia de la figura 
+:ref:`makeplot-num`. 
 
+
+.. _makeplot-num:
 
 .. figure:: images/uml_sec_makeplot_vertical.png
    :width: 60%
@@ -130,10 +133,12 @@ Cada invocación a un ejecutable del backend dependen de una entrada
 y produce una salida [#]_ en un archivo de texto. Para usuarios avanzados que conocen 
 la estructura y significado de estos archivos (descriptos en :ref:'api'), es 
 deseable que tengan un acceso al contenido desde la propia aplicación, para 
-encontrar información numérica puntual cuya precisión se pierde en un gráfico. 
+encontrar información numérica cuya precisión se pierde en un gráfico. 
 
 .. figure:: images/inpout.png
-   :width: 80%
+   :width: 100%
+
+   Panel de navegación y visualización de archivos en entrada y salida 
 
 Esta tarea se hace a través de PubSub. El emisor envía un mensaje con tópico
 ``add_txt`` adjuntando como información una tupla con la ruta al archivo 
@@ -313,26 +318,26 @@ de una función decoradora, que se compone de un :term:`wrapper`
 de dos funciones anidadas [#]_,  es la siguiente::
  
 
-    >>> def mydecorator(function):
-    ...     def _mydecorator(*args, **kw):
-    ...         # hacer las tareas de 'decoración' 
-    ...         # antes de llamar a la funcion decorada 
-    ...         res = function(*args, **kw)
-    ...         # hacer otras cosas antes de devolver el resultado
-    ...         return res
-    ...     # se devuelve la subfunción
-    ...     return _mydecorator
-    ...
-    >>>
+     def mydecorator(function):
+         def _mydecorator(*args, **kw):
+             # hacer las tareas de 'decoración' 
+             # antes de llamar a la funcion decorada 
+             res = function(*args, **kw)
+             # hacer otras cosas antes de devolver el resultado
+             return res
+         # se devuelve la subfunción
+         return _mydecorator
+    
+    
 
 Cuando se tiene una funcion cualquier que se quiere decorar, simplemente
 se utiliza la sintaxis ``@mydecorator`` justo antes de la función en 
 cuestion. Por ejemplo::
 
-    >>> @mydecorator
-    >>> def mifuncion(): 
-    ...     pass
-    >>>
+    @mydecorator
+    def mifuncion(): 
+         pass
+    
     
 Al llamar a :py:func:`mifuncion` se obtiene en realidad 
 ``mydecorator(mifuncion())``. La ventaja sintáctica de Python es que permite 
@@ -408,7 +413,10 @@ de información válida para un diagrama, determinando así la porción de texto
 a un objeto array de :py:mod:`numpy`.
 
 Las marcas de inicio son cadena de tres letras mayúsculas (``VAP``,``CRI``,``LLV``, etc.)
-y un renglón vacío marca el final del bloque de información.
+y un renglón vacío marca el final del bloque de información como se muestra 
+en la figura :ref:`parser-num`.
+
+.. _parser-num:
 
 .. figure:: images/parser.png
    :width: 80%
@@ -472,7 +480,7 @@ Todo los *sizers* son instancias de una subclase de la clase abstracta :py:class
     .. seealso:: 
 
        Para una explicación exhaustiva sobre el tema, vea el capitulo 11 de 
-        *"wxPython in Action"*, [NR-RD2006]_ 
+       *"wxPython in Action"*, [NR-RD2006]_ 
 
 
 Por ejemplo, ``sizer`` permite dividir el espacio, cualquier este sea, en porciones
@@ -484,12 +492,11 @@ puede contener a otros de manera anidada, definiendo una cuadrícula con espacio
 
 
 .. figure:: images/wxglade-sizer.png
-   :width: 95%
+   :width: 80%
     
    Diseño con *sizers* de una ventana de la aplicación mediante la utilidad 
    `wxGlade <http://wxglade.sourceforge.net>`_
  
-
 El hecho de que un sizer no sea un contenedor indica que ``parent`` de cualquier elemento 
 aún debe serlo. Es decir, un elemento cualquier (por ejemplo, un botón) está en incrustado
 en un contenedor (por ejemplo, un panel) pero ubicado según indica un sizer que está 
@@ -498,9 +505,11 @@ haciado al mismo contenedor.
 Uso en la aplicación
 ^^^^^^^^^^^^^^^^^^^^
 
-En GPEC, toda la distribución de componentes está dispuesta a través de ``sizers``. 
-Como ejemplo, se muestra la parte superior de un panel para la definición de un caso
-donde consta el uso anidado de ``sizers`` de distinto tipo. 
+En GPEC, toda la distribución de componentes de la interfaz está dispuesta a través de ``sizers``. 
+Como ejemplo, en la figura :ref:`sizers-num` se muestra la parte superior de un panel para la definición de un caso donde consta el uso anidado de ``sizers`` de distinta clase. 
+
+
+.. _sizers-num:
 
 .. figure:: images/sizers_example.png
    :width: 90%
@@ -608,8 +617,7 @@ a ser trivial. Básicamente consiste en dos objetos:
 
    La interfaz avanzada de GPEC visualizando 2 de los 4 paneles por defecto. 
 
-Vale comentar que luego de cualquier cambio, yendo a :menuselection:‘View --> Restore default view‘ se reestablece la 
-estructura original.  
+Vale comentar que luego de cualquier cambio, yendo a :menuselection:‘View --> Restore default view‘ se reestablece la estructura original.  
 
 Un extracto relevante de :py:class:`MainFrame` es el siguiente::
 
@@ -686,7 +694,10 @@ Toda la librería *AGW* forma parte del paquete estándar de ``wx`` y reside en
 La gran ventaja de :py:class:`AuiNotebook` es que funciona como complemento 
 de la intefaz avanzada de Python ``wx.aui`` permitiendo el control de eventos 
 como *drag & drop de pestañas* entre distintos paneles, o la visualización 
-simultánea de múltiples pestañas. 
+simultánea de múltiples pestañas, como muestra la figura :ref:`auinotebook-num`.
+
+
+.. _auinotebook-num:
 
 .. figure:: images/auinotebook.png
    :width: 100%
@@ -714,21 +725,13 @@ Un software complejo con un acabado estudio de usabilidad es
 para el diseño de GPEC. 
 
 .. figure:: images/mayavi2.png
-   :width: 100%
+   :width: 90%
 
    Interfaz de la aplicación de visualización de diagramas VTK que sirvió 
    como inspiración para la interfaz de GPEC.  
 
 
-Algunas decisiciones concernientes a la usabilidad se muestran en el siguiente 
-diagrama:
-
-.. figure:: images/usabilidad_labels.png
-   :width: 100%
-
-   Interfaz de la aplicación de visualización de diagramas VTK que sirvió 
-   como inspiración para la interfaz de GPEC.  
-
+Algunas decisiciones concernientes a la usabilidad han sido:
 
 * El diseño acompaña al *workflow*: primero se define el sistema, opcionalmente 
   se manipulan los cálculos y por último se grafica. Sólo el primero y el último
@@ -751,6 +754,14 @@ diagrama:
   por los navegadores web para abrir una nueva pestaña de trabajo. Dado el contexto
   resulta evidente que genera un nuevo caso. 
 
+
+.. figure:: images/usabilidad_labels.png
+   :width: 100%
+
+   Interfaz de la aplicación de visualización de diagramas VTK que sirvió 
+   como inspiración para la interfaz de GPEC.  
+
+
 .. _matplotlibwx:
 
 Integración Matplotlib-WxPython
@@ -765,7 +776,9 @@ La integración entre Matplotlib y WxPython se logra a través de un
 como un panel de wxPython. 
 
 El objeto en cuestion es :py:class:`FigureCanvasWxAgg` y tiene se muestra
-su ascendencia de clases en el siguiente diagrama:
+su ascendencia de clases en el diagrama de la figura :ref:`figcanvas-num`. 
+
+.. _figcanvas-num:
 
 .. figure:: images/figcanvas.png
    :width: 50%
@@ -774,11 +787,14 @@ su ascendencia de clases en el siguiente diagrama:
    la herencia múltiple que permite el comportamiento dual del objeto.
 
 La clase :py:class:`FigureCanvasAgg` es en realidad la encargada de dibujar 
-los gráficos a través de los algoritmos 
-`Anti-Grain Geometry <http://www.antigrain.com>`_ que aplican técnicas
-como *Anti-Aliasing* [#]_ o *Precisión de subpixel* para mejorar la definición
+los gráficos a través de los algoritmos `Anti-Grain Geometry <http://www.antigrain.com>`_ que aplican técnicas como *Anti-Aliasing* [#]_ o *Precisión de subpixel* para mejorar la definición
 de la líneas trazadas. 
 
+La figura :ref:`wx-num` muestra la secuencia de eventos para la graficación 
+de un diagrama. El diagrama de la figura :ref:`plotclass-num` muestra la estructura
+de clases implementada para dar soporte a los distintos tipos de gráfico. 
+
+.. _wx-num:
 
 .. figure:: images/wxmatplotlib.png
    :width: 65%
@@ -786,6 +802,7 @@ de la líneas trazadas.
    Diagrama de secuencia para la graficación de un diagrama al nivel subyacente
    (via ``matplotlib``)
 
+.. _plotclass-num:
 
 .. figure:: images/class-plots.png
    :width: 65%
@@ -873,7 +890,7 @@ de datos, como se ha comentado en la sección :ref:`problemas`, está en formato
 MS Jet. 
 
 La obtención de la información contenida para su conversión a Sqlite se realizó
-utilizando un proceso de 2 pasos. 
+utilizando un proceso de 2 pasos
 
 1.  Con la herramienta ``gmdb2``, parte de la suite
     de utilidades libres para la manipulación de archivos Jet/Access 
@@ -905,7 +922,7 @@ utilizando un proceso de 2 pasos.
 .. [#]  El comando ``grep -r`` busca de manera recursiva una cadena (o una expresión
         regular) sobre sobre los archivos de un directorio
 
-.. [#]  El módulo :py:mod:`cStringIO` provee un tipo de *buffers* de cadenas
+.. [#]  El módulo :py:mod:`cStringIO` provee un tipo de *buffer* de cadenas
         de caractéres con la misma interfaz que un archivo de texto normal. 
         Las operaciones con la información en memoria son altamente eficientes.
 

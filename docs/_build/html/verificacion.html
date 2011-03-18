@@ -3,17 +3,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>8. Verificación y Validación &mdash; &lt;project&gt;</title>
+    <title>8. Verificación &mdash; &lt;project&gt;</title>
+    
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     'dev',
+        VERSION:     'draft',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -49,13 +52,248 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="verificaci-n-y-validaci-n">
-<h1>8. Verificación y Validación<a class="headerlink" href="#verificaci-n-y-validaci-n" title="Enlazar permanentemente con este título">¶</a></h1>
-<div class="section" id="pruebas-unitarias">
-<h2>8.1. Pruebas unitarias<a class="headerlink" href="#pruebas-unitarias" title="Enlazar permanentemente con este título">¶</a></h2>
+  <div class="section" id="verificaci-n">
+<span id="test"></span><h1>8. Verificación<a class="headerlink" href="#verificaci-n" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Este capítulo describe el trabajo realizado para la verificación del correcto
+funcionamiento de la aplicación.</p>
+<p>En particular se ha <em>&#8220;testeado&#8221;</em> la librería de comunicación, es decir
+la clase <tt class="xref py py-class docutils literal"><span class="pre">ApiManager</span></tt> del módulo <tt class="xref py py-mod docutils literal"><span class="pre">apimanager</span></tt></p>
+<div class="section" id="conceptos-de-pruebas-unitarias">
+<h2>8.1. Conceptos de pruebas unitarias<a class="headerlink" href="#conceptos-de-pruebas-unitarias" title="Enlazar permanentemente con este título">¶</a></h2>
+<p><em>Unit Testing</em> o pruebas unitarias son test en donde cada parte (módulo, clase, función)
+del programa es testeado por separado (de alló lo de <em>unitario</em>).
+Idealmente, se pone a prueba todas las funciones y todos los casos posibles para cada
+una de ellas.</p>
+<p>Según <a class="reference internal" href="#zulberti2010">[ZULBERTI2010]</a>, el unit testing tiene varias ventajas:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Permite probar que el programa funciona correctamente. En Python, los tests
+también permiten identificar variables que no existen o tipos esperados en
+las funciones (en otros lenguajes eso se hace en tiempo de compilación).</li>
+<li>Permite identificar en caso de que se haga una modificación que siga
+funcionando correctamente todas las parte del programa. Tanto las cosas
+modificadas como las cosas que dependen de las modificadas. Esto es muy
+importante cuando se trabaja en grupo (con algún sistema de control de versiones)
+ya que permite asegurar que el código que usa el resto del grupo y que uno
+modifico sigue funcionando.</li>
+<li>Permiten documentar el código. Esto no es en forma directa, pero como los
+tests indican como es que se tiene que comportar el programa, viendo los
+tests uno puede fijarse cuál es el resultado esperado para ciertas entradas
+del programa. Esto no excluye que se tenga que escribir la documentación del código.</li>
+</ul>
+</div></blockquote>
+<p>Es muy importante que un test cumpla las siguientes reglas:</p>
+<ul class="simple">
+<li>Tiene que poder correr sin interacción humana. Es decir, los tests no deben pedir que el usuario ingrese valores en ningún caso. Para esto, es en el test mismo cuando se pasan los valores a la función.</li>
+<li>Tienen que poder verificar el resultado de la ejecución sin interacción humana. De nuevo, para  saber si esta bien o no el resultado no tiene que pedirle al usuario que verifique el resultado. Para esto, se tiene que saber de antemano el resultado del test con los valores que se pasaron.</li>
+<li>Un test tiene que ser independiente del otro. Es decir, el resultado de un test no debería depender del resultado anterior.</li>
+</ul>
+<div class="section" id="unit-testing-en-python">
+<h3>8.1.1. Unit testing en Python<a class="headerlink" href="#unit-testing-en-python" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Python provee en su librería estándar un completo framework para realizar
+pruebas unitarias. Se trata de <tt class="xref py py-mod docutils literal"><span class="pre">unittest</span></tt> <a class="footnote-reference" href="#id4" id="id2">[1]</a> cuya arquitectura y
+<a class="reference internal" href="glosario.html#term-api"><em class="xref std std-term">api</em></a> está basada en el framework <a class="reference external" href="http://www.junit.org/">Junit</a> para
+el lenguaje Java.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">El <em>testing</em> en todas sus formas tiene amplio interés en la comunidad de
+usuarios de Python y además del framework estándar existen gran cantidad
+de herramientas para facilitar distintos aspectos de la.
+Ver <a class="reference external" href="http://pycheesecake.org/wiki/PythonTestingToolsTaxonomy">The Python Testing Tools Taxonomy</a></p>
 </div>
-<div class="section" id="errores-conocidos">
-<h2>8.2. Errores conocidos<a class="headerlink" href="#errores-conocidos" title="Enlazar permanentemente con este título">¶</a></h2>
+</div></blockquote>
+<p>En particular, se utilizó el framework <tt class="xref py py-mod docutils literal"><span class="pre">unittest2</span></tt> que forma parte estándar
+de la versión 2.7 de Python, y existe como <a class="reference internal" href="glosario.html#term-backport"><em class="xref std std-term">backport</em></a> para las
+versiones 2.4 a 2.6 <a class="footnote-reference" href="#id5" id="id3">[2]</a>.</p>
+<p><tt class="xref py py-mod docutils literal"><span class="pre">unittest</span></tt> provee muchas clases y funciones utilitarias para realizar
+pruebas automatizadas de la cuales se utilizó la estructura más tradicional
+basada en la clase <tt class="xref py py-class docutils literal"><span class="pre">TestCase</span></tt>.</p>
+<p>Todos los métodos de una subclase de <tt class="xref py py-class docutils literal"><span class="pre">TestCase</span></tt>
+cuyo prefijo es <tt class="docutils literal"><span class="pre">test_</span></tt> son ejecutados como una prueba, cuya estructura
+general es realizar una acción y comparar el resultado producido con el resultado
+esperado. Dependiendo de la condición analizada, que se realiza mediante alguno
+o varios de los métodos que comienzan con <tt class="docutils literal"><span class="pre">assert</span></tt> (<tt class="docutils literal"><span class="pre">assertEqual</span></tt>,
+<tt class="docutils literal"><span class="pre">assertNotEqual</span></tt>, <tt class="docutils literal"><span class="pre">assertGreatEqual</span></tt>, etc,) todos heredados
+de la clase <tt class="xref py py-class docutils literal"><span class="pre">TestCase</span></tt>, la prueba es exitosa o falla.</p>
+<p>Existen además dos métodos especiales <tt class="xref py py-meth docutils literal"><span class="pre">setUp()`()</span></tt> y <tt class="xref py py-meth docutils literal"><span class="pre">tearDown()</span></tt>
+que se ejecutan automáticamente (antes y despues, respectivamente) de ejecutar
+cada test.</p>
+</div>
+</div>
+<div class="section" id="pruebas-realizadas">
+<h2>8.2. Pruebas realizadas<a class="headerlink" href="#pruebas-realizadas" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Como se dijo, varias pruebas fueron realizadas sobre el controlador de la
+interfaz de comunicación. Por supuesto, en un sistema tan complejo como
+el desarrollado la cobertura de pruebas dista de ser total, pero se ha verificado
+el módulo más complejo y por ende propenso a introducir errores.</p>
+<p>Se listan a continuación la batería de test realizados.</p>
+<dl class="class">
+<dt id="test_apimanager.TestApiManager">
+<em class="property">class </em><tt class="descclassname">test_apimanager.</tt><tt class="descname">TestApiManager</tt><big>(</big><em>methodName='runTest'</em><big>)</big><a class="reference internal" href="_modules/test_apimanager.html#TestApiManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_apimanager.TestApiManager" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><dl class="method">
+<dt id="test_apimanager.TestApiManager.setUp">
+<tt class="descname">setUp</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_apimanager.html#TestApiManager.setUp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_apimanager.TestApiManager.setUp" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>inicializador de cada test</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="test_apimanager.TestApiManager.test_gpecout_1">
+<tt class="descname">test_gpecout_1</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_apimanager.html#TestApiManager.test_gpecout_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_apimanager.TestApiManager.test_gpecout_1" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Prueba que hay 2 curvas de vapor y al menos una crítica en los 
+arrays de datos de numpy</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="test_apimanager.TestApiManager.test_read_conpaout_1">
+<tt class="descname">test_read_conpaout_1</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_apimanager.html#TestApiManager.test_read_conpaout_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_apimanager.TestApiManager.test_read_conpaout_1" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Prueba que para todos los modelos, la primer fila de resultados 
+tiene 4 parámetros y la segunda 3 excepto para RK-PR que son 4</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="test_apimanager.TestApiManager.test_write_conparin_1">
+<tt class="descname">test_write_conparin_1</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_apimanager.html#TestApiManager.test_write_conparin_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_apimanager.TestApiManager.test_write_conparin_1" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Dirección 0 para modelos de cálculo 1 2 o 3. 
+Prueba que se invierte el orden de los últimos dos parámetros.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="test_apimanager.TestApiManager.test_write_conparin_2">
+<tt class="descname">test_write_conparin_2</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_apimanager.html#TestApiManager.test_write_conparin_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_apimanager.TestApiManager.test_write_conparin_2" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Prueba que la primer linea es [direction, model_id]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="test_apimanager.TestApiManager.test_write_conparin_3">
+<tt class="descname">test_write_conparin_3</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_apimanager.html#TestApiManager.test_write_conparin_3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_apimanager.TestApiManager.test_write_conparin_3" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Prueba que no se incluye el parámetro Vc</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="test_apimanager.TestApiManager.test_write_gpecin">
+<tt class="descname">test_write_gpecin</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_apimanager.html#TestApiManager.test_write_gpecin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_apimanager.TestApiManager.test_write_gpecin" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Prueba que se satisface la estructura de GPECIN.DAT</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="ejemplos-de-c-digo-de-las-pruebas">
+<h3>8.2.1. Ejemplos de código de las pruebas<a class="headerlink" href="#ejemplos-de-c-digo-de-las-pruebas" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El código de implementación de cada una de estas pruebas es muy descriptivo
+pero por una cuestión de extensión, se muestran sólo algunos de ellos.
+Para el estudio completo ver el módulo <tt class="xref py py-mod docutils literal"><span class="pre">test_apimanager.py</span></tt></p>
+<div class="section" id="ejemplo-1">
+<h4>8.2.1.1. Ejemplo 1<a class="headerlink" href="#ejemplo-1" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">test_write_conparin_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dirección 0 para modelos de cálculo 1 2 o 3. </span>
+<span class="sd">        Prueba que se invierte el orden de los últimos dos parámetros.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">direction</span> <span class="o">=</span> <span class="s">&#39;0&#39;</span>
+        <span class="n">model_id</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s">&#39;1&#39;</span><span class="p">,</span><span class="s">&#39;2&#39;</span><span class="p">,</span><span class="s">&#39;3&#39;</span><span class="p">])</span>        
+        <span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">o</span> <span class="o">=</span> <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mf">4</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">write_conparin</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">model_id</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file2list</span><span class="p">(</span><span class="s">&#39;CONPARIN.DAT&#39;</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="mf">1</span><span class="p">],</span> <span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">v</span><span class="p">])</span>
+
+    
+</pre></div>
+</div>
+</div>
+<div class="section" id="ejemplo-2">
+<h4>8.2.1.2. Ejemplo 2<a class="headerlink" href="#ejemplo-2" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">test_read_conpaout_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prueba que para todos los modelos, la primer fila de resultados </span>
+<span class="sd">        tiene 4 parámetros y la segunda 3 excepto para RK-PR que son 4</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">direction</span> <span class="o">=</span> <span class="s">&#39;0&#39;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;469.7&#39;</span><span class="p">,</span> <span class="s">&#39;33.7&#39;</span><span class="p">,</span> <span class="s">&#39;0.313&#39;</span><span class="p">,</span> <span class="s">&#39;0.251506&#39;</span><span class="p">]</span>  <span class="c"># n-pentane</span>
+        <span class="k">for</span> <span class="n">model_id</span> <span class="ow">in</span> <span class="n">settings</span><span class="o">.</span><span class="n">EOS</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">conparin2conparout</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">model_id</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="mf">0</span><span class="p">]),</span> <span class="mf">4</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">model_id</span> <span class="o">==</span> <span class="mf">3</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="mf">1</span><span class="p">]),</span> <span class="mf">4</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="mf">1</span><span class="p">]),</span> <span class="mf">3</span><span class="p">)</span>
+
+    
+</pre></div>
+</div>
+</div>
+<div class="section" id="ejemplo-3">
+<h4>8.2.1.3. Ejemplo 3<a class="headerlink" href="#ejemplo-3" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">test_gpecout_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prueba que hay 2 curvas de vapor y al menos una crítica en los </span>
+<span class="sd">        arrays de datos de numpy</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">model</span> <span class="o">=</span> <span class="mf">1</span>  <span class="c">#random.choice([1,2,4,6])</span>
+    
+        <span class="n">data1</span> <span class="o">=</span> <span class="p">[</span><span class="mf">190.56</span><span class="p">,</span>  <span class="mf">45.99</span><span class="p">,</span>  <span class="mf">0.0115</span><span class="p">,</span>  <span class="mf">0.114837</span><span class="p">]</span> <span class="c">#methane</span>
+        <span class="n">data2</span> <span class="o">=</span> <span class="p">[</span><span class="mf">514</span><span class="p">,</span>  <span class="mf">61.37</span><span class="p">,</span>  <span class="mf">0.6436</span><span class="p">,</span>  <span class="mf">0.232124</span><span class="p">]</span> <span class="c">#ethanol</span>
+
+        <span class="n">data1</span><span class="p">,</span> <span class="n">param1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">conparin2conparout</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">data1</span><span class="p">)</span>
+        <span class="n">data2</span><span class="p">,</span> <span class="n">param2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">conparin2conparout</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">data2</span><span class="p">)</span>
+
+        <span class="n">comp1</span> <span class="o">=</span> <span class="p">(</span><span class="s">u&#39;METHANE&#39;</span><span class="p">,</span> <span class="n">data1</span><span class="p">,</span> <span class="n">param1</span><span class="p">)</span>
+
+        <span class="n">comp2</span> <span class="o">=</span> <span class="p">(</span><span class="s">u&#39;ETHANOL&#39;</span><span class="p">,</span> <span class="n">data2</span><span class="p">,</span> <span class="n">param2</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">gpecin2gpecout</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">comp1</span><span class="p">,</span> <span class="n">comp2</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;VAP&#39;</span><span class="p">]),</span> <span class="mf">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertGreaterEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;CRI&#39;</span><span class="p">]),</span> <span class="mf">1</span><span class="p">)</span> 
+            
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="ejecuci-n-y-validaci-n">
+<h2>8.3. Ejecución y validación<a class="headerlink" href="#ejecuci-n-y-validaci-n" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Se muestra la ejecución automatizada de todas las pruebas y su resultado
+exitoso</p>
+<div class="highlight-bash"><div class="highlight"><pre>tin@azulita:~/facu/pi/src<span class="nv">$ </span>python test_apimanager.py
+test_gpecout_1 <span class="o">(</span>__main__.TestApiManager<span class="o">)</span> ... ok
+test_read_conpaout_1 <span class="o">(</span>__main__.TestApiManager<span class="o">)</span> ... ok
+test_write_conparin_1 <span class="o">(</span>__main__.TestApiManager<span class="o">)</span> ... ok
+test_write_conparin_2 <span class="o">(</span>__main__.TestApiManager<span class="o">)</span> ... ok
+test_write_conparin_3 <span class="o">(</span>__main__.TestApiManager<span class="o">)</span> ... ok
+test_write_gpecin <span class="o">(</span>__main__.TestApiManager<span class="o">)</span> ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.808s
+
+OK
+</pre></div>
+</div>
+<table class="docutils citation" frame="void" id="zulberti2010" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[ZULBERTI2010]</a></td><td>Zulberti, Tomás (2010), <em>Introducción a Unit Testing con Python</em>, Revista
+&#8220;PET: Python Entre Todos&#8221;* Nº 1 - Agosto 2010, Comunidad de Usuarios
+Python Argentina. Disponible en <a class="reference external" href="http://revista.python.org.ar/1/html/unittest.html">http://revista.python.org.ar/1/html/unittest.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>La documentación completa de la versión utilizada se encuentra en
+<a class="reference external" href="http://docs.python.org/library/unittest.html">http://docs.python.org/library/unittest.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>El paquete <em>backported</em> se encuentra en la dirección
+<a class="reference external" href="http://pypi.python.org/pypi/unittest2">http://pypi.python.org/pypi/unittest2</a>  y se puede instalar fácilmente
+mediante el utilitario <strong class="program">easy_install</strong>.</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 
@@ -67,9 +305,21 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Contenidos</a></h3>
   <ul>
-<li><a class="reference internal" href="#">8. Verificación y Validación</a><ul>
-<li><a class="reference internal" href="#pruebas-unitarias">8.1. Pruebas unitarias</a></li>
-<li><a class="reference internal" href="#errores-conocidos">8.2. Errores conocidos</a></li>
+<li><a class="reference internal" href="#">8. Verificación</a><ul>
+<li><a class="reference internal" href="#conceptos-de-pruebas-unitarias">8.1. Conceptos de pruebas unitarias</a><ul>
+<li><a class="reference internal" href="#unit-testing-en-python">8.1.1. Unit testing en Python</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pruebas-realizadas">8.2. Pruebas realizadas</a><ul>
+<li><a class="reference internal" href="#ejemplos-de-c-digo-de-las-pruebas">8.2.1. Ejemplos de código de las pruebas</a><ul>
+<li><a class="reference internal" href="#ejemplo-1">8.2.1.1. Ejemplo 1</a></li>
+<li><a class="reference internal" href="#ejemplo-2">8.2.1.2. Ejemplo 2</a></li>
+<li><a class="reference internal" href="#ejemplo-3">8.2.1.3. Ejemplo 3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ejecuci-n-y-validaci-n">8.3. Ejecución y validación</a></li>
 </ul>
 </li>
 </ul>
@@ -118,8 +368,8 @@
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2010, Martín Gaitán.
-      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+        &copy; Copyright 2011, Martín Gaitán.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1pre/ce4bb37a1409+.
     </div>
   </body>
 </html>

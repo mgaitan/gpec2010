@@ -11,7 +11,7 @@ abarataron y multiplicaron la potencia de las computadoras y, en el otro sentido
 ayudando a resolver complejos interrogantes que sin la capacidad computacional los 
 científicos no hubieran podido responder. 
 
-Es evidente que en la actualidad las computadoras ya no son exclusivad de 
+Es evidente que en la actualidad las computadoras ya no son exclusividad de 
 selectos laboratorios o universidades y su uso generalizado ha modificado 
 drásticamente la cultura y la calidad de vida de las personas, teniendo un rol
 *sine qua non* en el trabajo, la comunicación, el ocio, etc. 
@@ -32,7 +32,7 @@ de propósito específico y realizan un conjunto de tareas puntuales (software a
 
 Este trabajo se incluye en la segunda categoría ya que se trata de una aplicación 
 científica multiplataforma, con interfaz gráfica de escritorio, que basada en programas de 
-cálculo preexistentes permite realizar *diagramas de equilibro termodinámico* en 2 y 3 dimensiones 
+cálculo preexistentes permite realizar *diagramas de equilibro de fase* en 2 y 3 dimensiones 
 que son de suma utilidad para la enseñanza, la investigación y la aplicación
 industrial.
 
@@ -82,14 +82,13 @@ Motivación
 ==========
 
 GPEC es un software que goza de cierta popularidad en el ambiente científico- 
-académico. Se utiliza, por ejemplo, en el curso iintesivo de postgrado *High Pressure Technology in 
+académico. Se utiliza, por ejemplo, en el curso intesivo de postgrado *High Pressure Technology in 
 Process and Chemical Industry* en el marco del programa Socrates Erasmus de la Unión Europea [#]_. 
 Dicho curso se dicta iterativamente en distintas universidades europeas de Alemania, 
 Italia, España, Holanda, etc. 
 
 Hasta el momento no se conoce ningún otro software con capacidades equivalentes, 
-lo que implica una creciente comunidad de usuarios, pertenecientes no sólo a instituciones académicas 
-y de investigación, si no también a industrias.
+lo que implica una creciente comunidad de usuarios, pertenecientes no sólo a instituciones académicas y de investigación, si no también a industrias.
 
 Sin embargo, algunos factores han sido determinantes para el virtual congelamiento de su desarrollo
 desde el año 2008. En particular:
@@ -126,7 +125,7 @@ Alcance
 
 El alcance de este trabajo es el rediseño y la implementación de una nueva aplicación
 de generación de gráficos para *GPEC*, cubriendo y superando las prestaciones ofrecidas 
-hasta el moemnto, contemplando los mecanismos de comunicación con el software de cálculo
+hasta el momento, contemplando los mecanismos de comunicación con el software de cálculo
 subyacente sin alterarlo de manera alguna.
 
 
@@ -138,7 +137,7 @@ Objetivo general
 
 El objetivo principal que persigue este trabajo es:
 
-* Desarrollar un software *front-end* totalmente compatible con el back-end 
+* Desarrollar un software *front end* totalmente compatible con el *back end*
   existente que reemplace al actual (*Visual Gpec*), orientado a un desarrollo
   prolongado y extensible, basado en un lenguaje de programación moderno y bibliotecas
   en desarrollo activo. 
@@ -154,8 +153,8 @@ Los objetivos específicos del proyecto son:
 
 * Estudiar y documentar la versión preexistente del software. Vea :ref:`relevamiento`.
 
-* Estudiar y documentar el mecanismo de comunicación entre el *front-end* y el 
-  *back-end* . Vea :ref:`api`  
+* Estudiar y documentar el mecanismo de comunicación entre el *front end* y el 
+  *back end* . Vea :ref:`api`. 
 
 * Dilucidar fallas de diseño desde el punto de vista del usuario
   e idear sus soluciones para incluirlas como nuevos requerimientos.

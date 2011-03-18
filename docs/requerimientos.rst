@@ -135,8 +135,8 @@ de archivo de imágenes (vectorial o mapa de bits), sino que simplemente
 se grafican por pantalla, con una proporción de 1 pixel por punto. La 
 información faltante se completa con segmentos de recta. 
 
-Esto acarrea la imposibilidad de exportar la imágen si no es a través de una 
-"captura de pantalla", requiriendo al menos un minimo tratamiento de 
+Esto acarrea la imposibilidad de exportar la imagen si no es a través de una 
+"captura de pantalla", requiriendo al menos un mínimo tratamiento de 
 recortado y adaptación (por ejemplo del color de fondo, dependiente del "tema" 
 de apariencia de Windows configurado por el usuario) con un programa de manipulación de gráficos.
 
@@ -158,10 +158,10 @@ experiencia de usuario anti-intuitiva.
    :width: 80%
    
    Ventanas abiertas para obtener un nuevo compuesto desde la base de datos, 
-   para que sea listado y utilizable en el sistema. Poco usable. 
+   para que sea listado y utilizable en el sistema. 
 
 
-A primera vista, la pantalla principal ofrece muchisimas opciones que tienden 
+A primera vista, la pantalla principal ofrece muchísimas opciones que tienden 
 a abrumar al usuario inexperto. Muchos componentes de la interfaz, como la 
 lista de compuestos, no son necesarios permanentemente, y aun así, sin razón objetiva 
 justificable, no todos los compuestos presentes en la base de datos se 
@@ -274,11 +274,27 @@ Requerimientos no funcionales
 Casos de uso
 ============
 
+Diagrama de caso de uso general
+-------------------------------
+
+El diagrama de la Figura :ref:`casouso-num` describe las acciones generales
+del sistema.
+
+
+.. _casouso-num:
+
+.. figure:: images/caso_uso_general.png
+   :width: 80%
+
+   Diagrama de caso de uso general del sistema 
+
+
+
 Casos de uso destacados
 -----------------------
 
 Se especifican en esta sección, de manera no formal, un conjunto de casos de 
-uso de especial interés para el diseño del software. 
+uso específicos de especial interés para el diseño del software. 
 
 Un proyecto, muchos casos
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -294,7 +310,7 @@ múltiples **casos**, gestionados desde una misma interfaz de usuario.
 
     .. note:: 
       
-       Dado que se presta a confunsión, vale reiterar que **caso** en 
+       Dado que se presta a confusión, vale reiterar que **caso** en 
        pertenece al contexto químico y es la conjunción de un sistema binario, un 
        modelo de cálculo (ecuación de estado) y sus respectivos 
        parámetros, y **caso de uso** refiere al ámbito de la 
@@ -330,16 +346,26 @@ del mismo caso (por ejemplo, un diagrama P-T global con una isopleta) o bien
 de distintos casos (por ejemplo, diagramas PT correspondientes a distintas 
 mezclas)
 
+Validación de orden del sistema
+-------------------------------
+
+En la definición de un sistema binario el usuario puede elegir cualesquiera
+dos compuestos de la base de datos, sin importar el orden. 
+A los fines del cálculo, es necesario disponer el compuesto más liviano, 
+en términos termodinámicos, para que el resultado sea válido. La determinación 
+de esta condición debe validarse, y en caso necesario, invertir el orden de compuestos
+dado por el usuario. El sistema es válido si se cumple que la "función peso" [#]_
+del compuesto 1 es menor a la del compuesto 2, es decir: 
+
+    .. math::
+
+       \frac{T_{c_{1}}^{14}}{P_{c_{1}}} < \frac{T_{c_{2}}^{14}}{P_{c_{2}}} 
 
 
 
-Diagramas de caso de uso
---------------------------
 
-.. todo:: diagramas caso de uso 
-
-
-
+.. [#]  La validez de esta función tiene fue comprobada de manera empírica por 
+        Cismondi.
 
 .. [#]  Este problema es conocido como *DLL Hell* (infierno de las DLL). Ver 
         http://es.wikipedia.org/wiki/DLL_Hell

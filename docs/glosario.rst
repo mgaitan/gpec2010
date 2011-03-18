@@ -77,6 +77,9 @@ Computación
     middleware
         pass
 
+    backport
+        pass
+
     layout
         pass
 
@@ -119,14 +122,14 @@ Computación
         perjudicar a un competidor.
 
     Front end 
-        El front-end es la parte del software que interactúa con el o los usuarios 
-        y el back-end es la parte que procesa la entrada desde el front-end. 
+        El front end es la parte del software que interactúa con el o los usuarios 
+        y el back-end es la parte que procesa la entrada desde el front end. 
         La separación del sistema en "front ends" y "back ends" es un tipo de 
         abstracción que ayuda a mantener las diferentes partes del sistema separadas. 
-        La idea general es que el front-end  sea el responsable de recolectar 
+        La idea general es que el front end  sea el responsable de recolectar 
         los datos de entrada del usuario, que pueden ser de muchas y variadas formas, 
         y procesarlas de una manera conforme a la especificación que el back-end 
-        pueda usar. La conexión del front-end y el back-end es un tipo de interfaz
+        pueda usar. La conexión del front ends y el back-end es un tipo de interfaz
 
     Back end
         Ver :term:`Front end`

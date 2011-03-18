@@ -25,7 +25,7 @@ la información y la graficación.
 comunicación definida para la comunicación entre ambas partes, que está basada
 en archivos de texto plano con un formato particular. El relevamiento de esta interfaz 
 formó parte del desarrollo, y se describe exhaustivamente en :ref:`api`. 
-Una librería modularlemente independiente, basada en ese relevamiento se 
+Una librería modularmente independiente, basada en ese relevamiento se 
 programó para dar soporte a la comunicación. Se describe en :ref:`backend`. 
 
 El backend refiere al conjunto de programas desarrollados en Fortran que implementan
