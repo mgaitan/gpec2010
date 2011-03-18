@@ -364,9 +364,6 @@ del compuesto 1 es menor a la del compuesto 2, es decir:
 
 
 
-.. [#]  La validez de esta función tiene fue comprobada de manera empírica por 
-        Cismondi.
-
 .. [#]  Este problema es conocido como *DLL Hell* (infierno de las DLL). Ver 
         http://es.wikipedia.org/wiki/DLL_Hell
 
@@ -380,3 +377,6 @@ del compuesto 1 es menor a la del compuesto 2, es decir:
 .. [#]  La validación de los rangos dinámicos (que dependen de las constantes críticas
         de los compuestos del sistema) la realizan los algoritmos de cálculo. El frontend
         se limita a reportar un error en la obtención de los datos de salida. 
+
+.. [#]  La validez de esta función fue comprobada de manera empírica por 
+        Cismondi.

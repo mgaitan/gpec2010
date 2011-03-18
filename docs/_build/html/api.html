@@ -48,7 +48,7 @@
 <span id="api"></span><h1>Especificación de la interfaz de comunicación<a class="headerlink" href="#especificaci-n-de-la-interfaz-de-comunicaci-n" title="Enlazar permanentemente con este título">¶</a></h1>
 <p>Esta documentación especifica la interfaz de archivos de entrada y salida
 para el conjunto de programas de cálculo que componen <em>GPEC</em>.
-Se ha realizado a través de un proceso de <em>ingeniería inversa</em>,
+Se ha realizado a través de un proceso de <a class="reference internal" href="glosario.html#term-ingenier-a-inversa"><em class="xref std std-term">ingeniería inversa</em></a>,
 ya que se carecía de documentación fehaciente.</p>
 <div class="section" id="tabla-de-incidencia">
 <h2>Tabla de incidencia<a class="headerlink" href="#tabla-de-incidencia" title="Enlazar permanentemente con este título">¶</a></h2>
@@ -423,12 +423,6 @@ eps/k   ro    m</pre>
 </tbody>
 </table>
 </li>
-<li><p class="first">5   GC</p>
-<div class="admonition-todo admonition " id="index-0">
-<p class="first admonition-title">Todo</p>
-<p class="last">No aplica</p>
-</div>
-</li>
 <li><p class="first">6   SPHCT</p>
 <div class="highlight-python"><pre>1   6
 T*   V*   c</pre>
@@ -764,12 +758,6 @@ Ver CONPAROUT.DAT</p>
 </tbody>
 </table>
 </li>
-<li><p class="first">Para  el modelo 5 (GC):</p>
-<div class="admonition-todo admonition " id="index-1">
-<p class="first admonition-title">Todo</p>
-<p class="last">aplica ?</p>
-</div>
-</li>
 <li><p class="first">Para  el modelo 6 (SPHCT)</p>
 <div class="highlight-python"><pre>T*    V*    c    s    q</pre>
 </div>
@@ -808,24 +796,12 @@ Ver CONPAROUT.DAT</p>
 </table>
 </li>
 </ul>
-<div class="admonition-todo admonition " id="index-2">
-<p class="first admonition-title">Todo</p>
-<p class="last">falta descripción de parametros <tt class="docutils literal"><span class="pre">c</span></tt>, <tt class="docutils literal"><span class="pre">s</span></tt> y <tt class="docutils literal"><span class="pre">q</span></tt></p>
-</div>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">K12:</th><td class="field-body"><p class="first">Parámetro de interacción binario</p>
-<div class="admonition-todo admonition " id="index-3">
-<p class="first admonition-title">Todo</p>
-<p class="last">ver</p>
-</div>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">L12:</th><td class="field-body"><p class="first">Parámetro de interacción binario</p>
-<div class="admonition-todo admonition " id="index-4">
-<p class="first admonition-title">Todo</p>
-<p class="last">ver</p>
-</div>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">MAX_P:</th><td class="field-body"><p class="first last">Máxima presión para líquidos. Se especifica en <tt class="docutils literal"><span class="pre">bar</span></tt>.</p>
@@ -934,16 +910,12 @@ Entra paréntesis especifica la unidad de medida.</p>
 </tr>
 </tbody>
 </table>
-<div class="admonition-todo admonition " id="index-5">
-<p class="first admonition-title">Todo</p>
-<p class="last">ver descripción. Ver AZE line  ¿Estructura?.</p>
-</div>
 <p>Las columnas significativas son las que deben <em>leerse</em> ya que aportan datos
 necesarios para la graficación. Las columnas restantes representan detalles
 del cálculo interno (cantidad de iteraciones, precisión) pero serán ignoradas
 para los fines de graficación.</p>
 <p>El significado de las las columnas para cada tipo puede verse aqui:</p>
-<table border="1" class="docutils">
+<table border="1" class="last docutils">
 <colgroup>
 <col width="5%" />
 <col width="95%" />
@@ -978,10 +950,6 @@ para los fines de graficación.</p>
 </tr>
 </tbody>
 </table>
-<div class="admonition-todo last admonition " id="index-6">
-<p class="first admonition-title">Todo</p>
-<p class="last">ver detalle de significación de las columnas. Ver LLV ¿10 col significativas?</p>
-</div>
 </td>
 </tr>
 </tbody>
@@ -1057,13 +1025,8 @@ indica el valor de presión definida por el usuario.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">PRESION:</th><td class="field-body"><p class="first">Valor de presión en Bar definido por el usuario, dentro del rango
-de valores aceptados por el sistema.</p>
-<div class="admonition-todo last admonition " id="index-7">
-<p class="first admonition-title">Todo</p>
-<p class="last">cual es el rango ?</p>
-</div>
-</td>
+<tr class="field-odd field"><th class="field-name">PRESION:</th><td class="field-body">Valor de presión en Bar definido por el usuario, dentro del rango
+de valores aceptados por el sistema.</td>
 </tr>
 </tbody>
 </table>
@@ -1099,10 +1062,7 @@ que define el usuario.</p>
 adimensional que representa la fracción de compuesto:</p>
 <div class="highlight-python"><pre>   Z
 
-:Z: Fracción de compuesto 1 definida por el usuario.
-
-  .. todo::
-         cual es el rango ( 0 a 1 ? )</pre>
+:Z: Fracción de compuesto 1 definida por el usuario.</pre>
 </div>
 </div>
 <div class="section" id="isopout-dat">

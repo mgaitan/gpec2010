@@ -9,20 +9,63 @@ Química y termodinámica
 ..  glossary::
     :sorted:
 
-    curvas de equilibro
-        una curva de equilibro    
 
     ecuación de estado
         :abbr:`EOS (Equation of State)` es la relación entre variables de estado
         que describen el estado de la materia bajo ciertas condiciones físicas.
 
-    fase global
-        fase global
+    termodinámica
+        Rama de la fisicoquímica que estudia la conversión de energía entre 
+        calor y trabajo mecánico, y subsecuentemente las variables macroscopicas
+        como temperatura, presión y volumen. 
 
-    sistema binario
-        Un sistema binario 
+
+    propiedades intensivas
+        Son aquellas propiedades que no dependen de la cantidad de sustancia o del tamaño de un sistema, por lo que cuyo valor permanece inalterable al subdividir el sistema.
+        Muchas magnitudes extensivas, como el volumen, la cantidad de calor o el peso, pueden convertirse en intensivas dividiéndolas por la cantidad de sustancia, la masa o el volumen de la muestra; resultando en valores por unidad de sustancia.
+
+    sustancia
+        Toda porción de materia que comparte determinadas :term:`propiedades intensivas`.
+
+    sustancia pura
+        :term:`Sustancia <sustancia>` que no puede separarse en otras sustancias por ningún medio físico (como calentamiento o un campo magnético).
 
     
+    compuesto químico
+        Es una sustancia formada por la unión de dos o más elementos de la tabla 
+        periódica. Una característica esencial es que tiene una fórmula química
+
+    mezcla
+        Es un sistema material compuesto de dos o más sustancias no combinadas
+        químicamente. En una mezcla no ocurre una reacción química y cada uno de sus componentes mantiene su identidad y propiedades químicas, que pueden separarse 
+        mediante métodos físico como destilación, disolución, separación magnética, 
+        filtración, etc.
+
+    sistema binario
+        Un sistema binario es una :term:`mezcla` de dos sustancias
+
+    EoS
+        :term:`ecuación de estado`
+
+    diagrama de fase
+        Gráfico utilizado para mostrar las condiciones en las que distintas 
+        :term:`fases <fase>` de un sistema pueden ocurrir en equilibrio.
+        
+    fase 
+        En termodinámica y química, se denomina fase a cada una de las partes macroscópicas de una composición química y propiedades físicas homogéneas que forman un sistema
+        Suele usarse como sinónimo de `term:`estado de agregación` sin exactitud
+        ya que pueden existir fases distintas en el mismo estado de agregación
+        (por ejemplo, el diamante y el grafito son distintas fases de carbono, 
+        y ambas se encuentran en estado sólido).
+
+    estado de agregación
+        Es el estado en que se presenta en la naturaleza una sustancia; dicho estado puede ser sólido, líquido, gaseoso, plasmático, 
+
+    isopleta
+        Se denomina isopleta (también llamada isolínea o isograma) a la línea 
+        que une los puntos en los que una cierta magnitud es constante, en un 
+        mapa o diagrama. En los :term:`diagramas de fase <diagrama de fase>`
+        refiere a las curvas para proporción de composición constante.
 
 
 Computación
@@ -56,44 +99,65 @@ Computación
             *What is a Hacker?*, Brian Harvey, University of California, Berkeley,
             http://www.cs.berkeley.edu/~bh/hacker.html
 
-        
+    OOP
+      La programación orientada a objetos (:dfn:`del inglés, Object Oriented Programming`)
+      es un paradigma de programación que usa el modelado de objetos y sus interacciones para diseñar aplicaciones. Involucra técnicas como la :term:`herencia`, el 
+      :term:`polimorfismo`, la abstracción, etc. 
+
 
     GUI
-        pass
+        La interfaz gráfica de usuario o :abbr:`GUI (del inglés, Graphical User Interface)`
+        es un programa informático que actúa de interfaz de usuario, utilizando un conjunto de imágenes y objetos gráficos para representar la información y acciones disponibles en la interfaz
 
         .. seealso::  :term:`layout`
 
     API
-        pass
+        Una interfaz de programación de aplicaciones o :abbr:`API (del inglés, Application Programming Interface)` es el conjunto de funciones y procedimientos (o métodos, en la :term:`programación orientada a objetos <OOP>`) que representan una interfaz de comunicación entre componentes de software. Se trata del conjunto de llamadas a ciertas bibliotecas que ofrecen acceso a ciertos servicios y constituye un método para conseguir abstracción en la programación, generalmente (aunque no necesariamente) entre los niveles o capas inferiores y los superiores del software.
+        
+    ingeniería inversa 
+        Es el conjunto de tareas destinadas a obtener las especificaciones de un sistema de información partiendo del propio sistema. Es una actividad típica del mantenimiento de equipos lógicos, cuando no existen las especificaciones del diseño del equipo a mantener.
+
 
     decorator
-        pass
+        Es un patrón de diseño de software que permite agregar dinámicamente
+        (extender, "decorar") una funcionalidad  inexistente en la definición de un objeto. 
 
         .. seealso::  :term:`wrapper`
     
     singleton
-        pass
-    
+        Es un patrón de diseño que restringe y garantiza la creación de objetos pertenecientes 
+        a una clase o el valor de un tipo a un único objeto. Es una forma de reemplazo
+        de las *variables globales* de la programación procedural en la programación
+        orientada a objetos.
+
     middleware
-        pass
+        El middleware es un software de conectividad entre otros componentes de software.
+        Estrictamente refiere al ámbito del software distribuido, pero el concepto
+        suele extenderse a cualquier tipo de software.
 
     backport
-        pass
+        *Backporting* es la acción de aplicar cierta modificación de un software
+        a una versión anterior para la cual no estuvo originalmente creada. 
 
     layout
-        pass
+        Es la disposición dada a los elementos o componentes en un determinado 
+        espacio
 
     herencia
-        pass
+        En :term:`OOP` la herencia es el mecanismo mediante el cual una clase
+        se basa en las propiedades y comportamientos de otra ya definida, pudiendo
+        utilizarlas o redefinirlas. Es el mecanismo fundamental para implementar 
+        la reutilización y extensibilidad del software. Ver :term:`polimorfismo`.
     
     polimorfismo
-        pass
+        Se refiere a la posibilidad de definir clases diferentes que tienen métodos o atributos denominados de forma idéntica, pero que se comportan de manera distinta.
 
     arreglo
-        pass
+        Estructura de datos en la que a cada elemento se le asigna un índice único. Su representación matemática es una matriz
 
     wrapper
-        pass
+        Un *wrapper* es un patrón de diseño (también llamado *adapter*) que transforma
+        una interfaz en otra, de tal modo que una clase que no pudiera utilizar la primera, haga uso de ella a través de la segunda. Son muy comunes en la adaptación de bibliotecas desarrolladas en un lenguaje de programación distinto al que se la desea utilizar. 
 
     pseudocódigo
         Descripción de alto nivel de un algoritmo que emplea una mezcla de lenguaje natural
@@ -171,8 +235,3 @@ Computación
     software cerrado
         Forma poco precisa de denominar al :term:`software privativo`
 
-
-TODO's
-======
-
-.. todolist::

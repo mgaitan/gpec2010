@@ -5,7 +5,7 @@ Especificación de la interfaz de comunicación
 
 Esta documentación especifica la interfaz de archivos de entrada y salida
 para el conjunto de programas de cálculo que componen *GPEC*. 
-Se ha realizado a través de un proceso de *ingeniería inversa*, 
+Se ha realizado a través de un proceso de :term:`ingeniería inversa`, 
 ya que se carecía de documentación fehaciente. 
 
 

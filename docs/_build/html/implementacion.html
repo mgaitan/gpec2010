@@ -67,7 +67,7 @@ a eventos</em> de la biblioteca se basa en una comunicación vía esta bibliotec
 se registra una crónica de eventos de interés para el usuario, denotados en
 su categoría con un símbolo y la hora del suceso.</p>
 <div class="figure">
-<img alt="_images/log_msg4.png" src="_images/log_msg4.png" style="width: 80%;" />
+<img alt="_images/log_msg7.png" src="_images/log_msg7.png" style="width: 80%;" />
 <p class="caption">A través de PubSub, cualquier parte del programa envía avisos que el panel
 (un <em>receptor</em>) mostrará al usuario.</p>
 </div>
@@ -120,19 +120,19 @@ al icono que los representan:</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><em>ok</em></td>
-<td><img alt="ok" src="_images/ok4.png" /></td>
+<td><img alt="ok" src="_images/ok7.png" /></td>
 <td>Acción existosa</td>
 </tr>
 <tr class="row-odd"><td><em>info</em></td>
-<td><img alt="info" src="_images/info4.png" /></td>
+<td><img alt="info" src="_images/info7.png" /></td>
 <td>Información importante</td>
 </tr>
 <tr class="row-even"><td><em>warning</em></td>
-<td><img alt="warning" src="_images/warning4.png" /></td>
+<td><img alt="warning" src="_images/warning7.png" /></td>
 <td>Advertencia</td>
 </tr>
 <tr class="row-odd"><td><em>error</em></td>
-<td><img alt="error" src="_images/error4.png" /></td>
+<td><img alt="error" src="_images/error7.png" /></td>
 <td>Error</td>
 </tr>
 </tbody>
@@ -159,7 +159,7 @@ de generación gráficos. Se resume en el diagrama de secuencia de la figura
 <a class="reference internal" href="#makeplot-num"><em>Secuencia para la generación de un diagrama desde el evento generado por
 el usuario</em></a>.</p>
 <div class="figure" id="makeplot-num">
-<img alt="_images/uml_sec_makeplot_vertical4.png" src="_images/uml_sec_makeplot_vertical4.png" style="width: 60%;" />
+<img alt="_images/uml_sec_makeplot_vertical7.png" src="_images/uml_sec_makeplot_vertical7.png" style="width: 60%;" />
 <p class="caption">Secuencia para la generación de un diagrama desde el evento generado por
 el usuario</p>
 </div>
@@ -176,12 +176,12 @@ Esta integración se verá en <a class="reference internal" href="#matplotlibwx"
 <div class="section" id="exposici-n-de-archivos-de-datos">
 <h3>7.1.3. Exposición de archivos de datos<a class="headerlink" href="#exposici-n-de-archivos-de-datos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Cada invocación a un ejecutable del backend dependen de una entrada
-y produce una salida <a class="footnote-reference" href="#id21" id="id1">[1]</a> en un archivo de texto. Para usuarios avanzados que conocen
+y produce una salida <a class="footnote-reference" href="#id22" id="id1">[1]</a> en un archivo de texto. Para usuarios avanzados que conocen
 la estructura y significado de estos archivos (descriptos en :ref:&#8217;api&#8217;), es
 deseable que tengan un acceso al contenido desde la propia aplicación, para
 encontrar información numérica cuya precisión se pierde en un gráfico.</p>
 <div class="figure">
-<img alt="_images/inpout4.png" src="_images/inpout4.png" style="width: 100%;" />
+<img alt="_images/inpout7.png" src="_images/inpout7.png" style="width: 100%;" />
 <p class="caption">Panel de navegación y visualización de archivos en entrada y salida</p>
 </div>
 <p>Esta tarea se hace a través de PubSub. El emisor envía un mensaje con tópico
@@ -315,7 +315,7 @@ de los gráficos</td>
 </div></blockquote>
 <p>Para un listado completo puede analizar el código fuente ejecutando
 <tt class="docutils literal"><span class="pre">grep</span> <span class="pre">-r</span> <span class="pre">&quot;pub.sendMessage&quot;</span></tt> sobre el directorio de código fuente raiz
-de GPEC. <a class="footnote-reference" href="#id22" id="id2">[2]</a></p>
+de GPEC. <a class="footnote-reference" href="#id23" id="id2">[2]</a></p>
 </div>
 </div>
 <div class="section" id="invocaci-n-de-ejecutables-del-backend">
@@ -329,7 +329,7 @@ de entrada <tt class="file docutils literal"><span class="pre">GPECIN.DAT</span>
 permiso de escritura en la carpeta destino). En caso de error por algún motivo
 (conocido o no), se remite un mensaje de log y se cancela la ejecución.</p>
 <div class="figure" id="front-back-num">
-<img alt="_images/uml_front-back_vertical4.png" src="_images/uml_front-back_vertical4.png" style="width: 100%;" />
+<img alt="_images/uml_front-back_vertical7.png" src="_images/uml_front-back_vertical7.png" style="width: 100%;" />
 <p class="caption">Secuencia de la comunicación frontend-backend</p>
 </div>
 <div class="section" id="la-dependencia-con-wine">
@@ -373,7 +373,7 @@ se duplica la dependencia de software privativo.</p>
 <p>Como se observa la figura <a class="reference internal" href="#front-back-num"><em>Secuencia de la comunicación frontend-backend</em></a>, el proceso de comunicación y obtención de los
 datos desde el backend no es trivial. Más aún, considerando que, dada la arquitectura
 heredada interviene de manera insalvable la escritura y lectura a disco, el
-proceso también es costoso <a class="footnote-reference" href="#id23" id="id3">[3]</a> a nivel computacional.</p>
+proceso también es costoso <a class="footnote-reference" href="#id24" id="id3">[3]</a> a nivel computacional.</p>
 <p>Tomando de ventaja de la condición determinística de la operación (para los mismos
 parámetros de entrada, es decir el caso, se obtiene siempre el mismo resultado)
 se puede calcular una vez, guardar el resultado en memoria, y devolverlo sin
@@ -400,7 +400,7 @@ simplificados realiza una transformación dinámica de una función o método,
 agregándole una funcionalidad que no tiene por sí misma, o más en general,
 alterando de alguna manera el resultado devuelto.</p>
 <div class="figure">
-<img alt="_images/Decorator_UML_class_diagram4.png" src="_images/Decorator_UML_class_diagram4.png" style="width: 60%;" />
+<img alt="_images/Decorator_UML_class_diagram7.png" src="_images/Decorator_UML_class_diagram7.png" style="width: 60%;" />
 <p class="caption">Diagrama de clases del patrón <em>Decorator</em></p>
 </div>
 <p>Expresándolo en términos matemáticos, se trata de una <em class="dfn">composición de funciones</em>:</p>
@@ -411,7 +411,7 @@ x \mapsto f(x) \mapsto g(f(x))"/></p>
 </div><p>Desde la versión 2.4, Python tiene una nomenclatura facilitada para la
 escritura de decoradores. Una estructura genérica para la definición
 de una función decoradora, que se compone de un <a class="reference internal" href="glosario.html#term-wrapper"><em class="xref std std-term">wrapper</em></a>
-de dos funciones anidadas <a class="footnote-reference" href="#id24" id="id4">[4]</a>,  es la siguiente:</p>
+de dos funciones anidadas <a class="footnote-reference" href="#id25" id="id4">[4]</a>,  es la siguiente:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">mydecorator</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">_mydecorator</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
         <span class="c"># hacer las tareas de &#39;decoración&#39;</span>
@@ -423,7 +423,7 @@ de dos funciones anidadas <a class="footnote-reference" href="#id24" id="id4">[4
     <span class="k">return</span> <span class="n">_mydecorator</span>
 </pre></div>
 </div>
-<p>Cuando se tiene una función cualquier que se quiere decorar, simplemente
+<p>Cuando se tiene una función cualquiera que se quiere decorar, simplemente
 se utiliza la sintaxis <tt class="docutils literal"><span class="pre">&#64;mydecorator</span></tt> justo antes de la función en
 cuestion. Por ejemplo:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="nd">@mydecorator</span>
@@ -432,12 +432,13 @@ cuestion. Por ejemplo:</p>
 </pre></div>
 </div>
 <p>Al llamar a <tt class="xref py py-func docutils literal"><span class="pre">mifuncion()</span></tt> se obtiene en realidad
-<tt class="docutils literal"><span class="pre">mydecorator(mifuncion())</span></tt>. La ventaja sintáctica de Python es que permite</p>
+<tt class="docutils literal"><span class="pre">mydecorator(mifuncion())</span></tt>. La ventaja sintáctica de Python es que permite
+hacer esta llamada de manera implícita.</p>
 </div>
 <div class="section" id="algoritmo-de-cach-de-datos">
 <h3>7.3.2. Algoritmo de caché de datos<a class="headerlink" href="#algoritmo-de-cach-de-datos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>El algoritmo utilizado para la implementación del sistema de <em>caché</em> se llama
-<em class="dfn">memoize</em> <a class="footnote-reference" href="#id25" id="id5">[5]</a> y es descripto en detalle en <a class="reference internal" href="tecnologias.html#ziade2008">[ZIADE2008]</a> , cuya versión,
+<em class="dfn">memoize</em> <a class="footnote-reference" href="#id26" id="id5">[5]</a> y es descripto en detalle en <a class="reference internal" href="tecnologias.html#ziade2008">[ZIADE2008]</a> , cuya versión,
 parcialmente simplificada, se ha utilizado.</p>
 <p>En este caso, la funcionalidad que aporta el decorador a la
 función que se &#8220;decora&#8221; es la siguiente:</p>
@@ -513,7 +514,7 @@ a un objeto array de <tt class="xref py py-mod docutils literal"><span class="pr
 y un renglón vacío marca el final del bloque de información como se muestra
 en la figura <a class="reference internal" href="#parser-num"><em>Topología de la información extractada</em></a>.</p>
 <div class="figure" id="parser-num">
-<img alt="_images/parser4.png" src="_images/parser4.png" style="width: 80%;" />
+<img alt="_images/parser7.png" src="_images/parser7.png" style="width: 80%;" />
 <p class="caption">Topología de la información extractada</p>
 </div>
 <p>Una estructura de datos basadas en asociaciones clave-valor (diccionarios),
@@ -522,10 +523,10 @@ extraer para cada una. Iterando sobre todas las líneas del archivo se obtiene
 un nuevo diccionario cuya clave es una tupla de la forma <tt class="docutils literal"><span class="pre">(inicio,</span> <span class="pre">fin)</span></tt> y el
 tipo de curva como valor.</p>
 <p>Con esta información simplemente se &#8220;recorta&#8221; el archivo de texto completo del cual
-se realiza una copia residente en memoria <a class="footnote-reference" href="#id26" id="id7">[6]</a> para importarlo
+se realiza una copia residente en memoria <a class="footnote-reference" href="#id27" id="id7">[6]</a> para importarlo
 y convertirlo a arreglos de números flotantes de doble precisión
 mediante la función <tt class="xref py py-func docutils literal"><span class="pre">numpy.loadtxt()</span></tt> que acepta como parámetro
-opcional la cantidad de columnas significativas que deben interpretarse <a class="footnote-reference" href="#id27" id="id8">[7]</a>.</p>
+opcional la cantidad de columnas significativas que deben interpretarse <a class="footnote-reference" href="#id28" id="id8">[7]</a>.</p>
 </div>
 <div class="section" id="id9">
 <h3>7.4.2. Código fuente<a class="headerlink" href="#id9" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -610,7 +611,7 @@ objetos gráficos&#8221;</em>.</p>
 <a class="reference internal" href="glosario.html#term-gui"><em class="xref std std-term">GUI</em></a> es el manejo de la disposición física de los componentes en el espacio
 disponible (<a class="reference internal" href="glosario.html#term-layout"><em class="xref std std-term">layout</em></a>). En los comienzos, la solución fue el posicionamiento
 absoluto donde el programador explicitaba el tamaño y la posición exácta
-del <em>widget</em> en la pantalla <a class="footnote-reference" href="#id28" id="id10">[8]</a> . Esta estrategia acarrea una batería de problemas
+del <em>widget</em> en la pantalla <a class="footnote-reference" href="#id29" id="id10">[8]</a> . Esta estrategia acarrea una batería de problemas
 ya que sólo funciona correctamente si se tiene control total sobre el espacio
 disponible, es decir, controlando la resolución de pantalla del equipo del cliente,
 el tamaño de tipografía estándar que ha elegido, etc. pero se vuelve inmanejable
@@ -636,9 +637,9 @@ proporcionales de filas o columnas, y ubicar allí elementos (como botones o cam
 texto), definiendo atributos como su alineación horizontal o vertical, el tamaño
 (proporcional al espacio, fijo, con límite máximo, etc). Asímismo, un <tt class="docutils literal"><span class="pre">sizer</span></tt>
 puede contener a otros de manera anidada, definiendo una cuadrícula con espacios para ubicar los
-<em>widgets</em> controladores <a class="footnote-reference" href="#id29" id="id12">[9]</a>.</p>
+<em>widgets</em> controladores <a class="footnote-reference" href="#id30" id="id12">[9]</a>.</p>
 <div class="figure">
-<img alt="_images/wxglade-sizer4.png" src="_images/wxglade-sizer4.png" style="width: 80%;" />
+<img alt="_images/wxglade-sizer7.png" src="_images/wxglade-sizer7.png" style="width: 80%;" />
 <p class="caption">Diseño con <em>sizers</em> de una ventana de la aplicación mediante la utilidad
 <a class="reference external" href="http://wxglade.sourceforge.net">wxGlade</a></p>
 </div>
@@ -653,7 +654,7 @@ Como ejemplo, en la figura <a class="reference internal" href="#sizers-num"><em>
 es dinámico, cambiando su contenido en función de un evento de cambio de
 opción (evento wx.EVT_CHOICE) del menú de modelos.</em></a> se muestra la parte superior de un panel para la definición de un caso donde consta el uso anidado de <tt class="docutils literal"><span class="pre">sizers</span></tt> de distinta clase.</p>
 <div class="figure" id="sizers-num">
-<img alt="_images/sizers_example4.png" src="_images/sizers_example4.png" style="width: 90%;" />
+<img alt="_images/sizers_example7.png" src="_images/sizers_example7.png" style="width: 90%;" />
 <p class="caption">Distribución mediante <em>sizers</em> de componentes. El contenido del <tt class="docutils literal"><span class="pre">GridBagSizer</span></tt>
 es dinámico, cambiando su contenido en función de un evento de cambio de
 opción (evento <tt class="docutils literal"><span class="pre">wx.EVT_CHOICE</span></tt>) del menú de modelos.</p>
@@ -747,7 +748,7 @@ que define una &#8220;subventana&#8221; a la que se le asocia el contenido a mos
 un panel principal de <cite>wx</cite>.</li>
 </ul>
 <div class="figure">
-<img alt="_images/gpec_aui_max4.png" src="_images/gpec_aui_max4.png" style="width: 95%;" />
+<img alt="_images/gpec_aui_max7.png" src="_images/gpec_aui_max7.png" style="width: 95%;" />
 <p class="caption">La interfaz avanzada de GPEC visualizando 2 de los 4 paneles por defecto.</p>
 </div>
 <p>Vale comentar que luego de cualquier cambio, yendo a :menuselection:‘View &#8211;&gt; Restore default view‘ se reestablece la estructura original.</p>
@@ -785,7 +786,7 @@ y se lo agrega al manejador.</li>
 </ol>
 </div></blockquote>
 <p>Una observación en el paso 3 es que para definir los atributos del panel
-se utiliza una técnica denominada <em>encadenado de métodos</em> (<em>Method chaining</em>) <a class="footnote-reference" href="#id30" id="id13">[10]</a>
+se utiliza una técnica denominada <em>encadenado de métodos</em> (<em>Method chaining</em>) <a class="footnote-reference" href="#id31" id="id13">[10]</a>
 donde la ejecución de un método de un objeto devuelve el objeto en sí, posibilitando
 &#8220;encadenar&#8221; la ejecución de otro método.</p>
 <p>La interfaz por defecto de GPEC se compone de 4 instancias
@@ -844,7 +845,7 @@ de la intefaz avanzada de Python <tt class="docutils literal"><span class="pre">
 como <em>drag &amp; drop de pestañas</em> entre distintos paneles, o la visualización
 simultánea de múltiples pestañas, como muestra la figura <a class="reference internal" href="#auinotebook-num"><em>El control AuiNotebook de los gráficos mostrando 2 diagramas en simultáneo</em></a>.</p>
 <div class="figure" id="auinotebook-num">
-<img alt="_images/auinotebook4.png" src="_images/auinotebook4.png" style="width: 100%;" />
+<img alt="_images/auinotebook7.png" src="_images/auinotebook7.png" style="width: 100%;" />
 <p class="caption">El control <tt class="docutils literal"><span class="pre">AuiNotebook</span></tt> de los gráficos mostrando 2 diagramas en simultáneo</p>
 </div>
 </div>
@@ -853,7 +854,7 @@ simultánea de múltiples pestañas, como muestra la figura <a class="reference 
 <p>Como se ha mencionado, la usabilidad e intuitividad de la interfaz de usuario
 ha sido un requerimiento de especial atención. Mucha bibliografía fue consultada
 al respecto, rescantando en particular muchos conceptos y consejos de Joel Spolsky
-en <a class="reference internal" href="#spolsky2001">[Spolsky2001]</a> <a class="footnote-reference" href="#id31" id="id15">[11]</a> . Entre muchos, se destacan:</p>
+en <a class="reference internal" href="#spolsky2001">[Spolsky2001]</a> <a class="footnote-reference" href="#id32" id="id15">[11]</a> . Entre muchos, se destacan:</p>
 <blockquote>
 <div><ul class="simple">
 <li>Brindar contextos intuitivos y secuencias de operación lógicas.</li>
@@ -868,7 +869,7 @@ exige al usuario.</li>
 <a class="reference external" href="http://code.enthought.com/projects/mayavi/">Mayavi</a> , que ha servido de inspiración
 para el diseño de GPEC.</p>
 <div class="figure">
-<img alt="_images/mayavi24.png" src="_images/mayavi24.png" style="width: 90%;" />
+<img alt="_images/mayavi27.png" src="_images/mayavi27.png" style="width: 90%;" />
 <p class="caption">Interfaz de la aplicación de visualización de diagramas VTK que sirvió
 como inspiración para la interfaz de GPEC.</p>
 </div>
@@ -891,7 +892,7 @@ por los navegadores web para abrir una nueva pestaña de trabajo. Dado el contex
 resulta evidente que genera un nuevo caso.</li>
 </ul>
 <div class="figure">
-<img alt="_images/usabilidad_labels4.png" src="_images/usabilidad_labels4.png" style="width: 100%;" />
+<img alt="_images/usabilidad_labels7.png" src="_images/usabilidad_labels7.png" style="width: 100%;" />
 <p class="caption">Interfaz de la aplicación de visualización de diagramas VTK que sirvió
 como inspiración para la interfaz de GPEC.</p>
 </div>
@@ -900,7 +901,7 @@ como inspiración para la interfaz de GPEC.</p>
 <div class="section" id="integraci-n-matplotlib-wxpython">
 <span id="matplotlibwx"></span><h2>7.6. Integración Matplotlib-WxPython<a class="headerlink" href="#integraci-n-matplotlib-wxpython" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>La biblioteca de graficación Matplotlib incluye soporte para los
-toolkits para creación de interfaces gráficas <a class="footnote-reference" href="#id32" id="id16">[12]</a> más utilizados, que permite
+toolkits para creación de interfaces gráficas <a class="footnote-reference" href="#id33" id="id16">[12]</a> más utilizados, que permite
 incrustar (y hacer interactuar) figuras dentro de aplicaciones gráficas.</p>
 <p>La integración entre Matplotlib y WxPython se logra a través de un
 &#8220;canvas&#8221; (<em>lienzo</em>) donde Matplotlib es capaz de dibujar y, se comporta, a la vez
@@ -909,25 +910,148 @@ como un panel de wxPython.</p>
 su ascendencia de clases en el diagrama de la figura <a class="reference internal" href="#figcanvas-num"><em>Diagrama de clases para FigureCanvasWxAgg donde se evidencia
 la herencia múltiple que permite el comportamiento dual del objeto.</em></a>.</p>
 <div class="figure" id="figcanvas-num">
-<img alt="_images/figcanvas4.png" src="_images/figcanvas4.png" style="width: 50%;" />
+<img alt="_images/figcanvas7.png" src="_images/figcanvas7.png" style="width: 50%;" />
 <p class="caption">Diagrama de clases para <tt class="xref py py-class docutils literal"><span class="pre">FigureCanvasWxAgg</span></tt> donde se evidencia
 la herencia múltiple que permite el comportamiento dual del objeto.</p>
 </div>
 <p>La clase <tt class="xref py py-class docutils literal"><span class="pre">FigureCanvasAgg</span></tt> es en realidad la encargada de dibujar
-los gráficos a través de los algoritmos <a class="reference external" href="http://www.antigrain.com">Anti-Grain Geometry</a> que aplican técnicas como <em>Anti-Aliasing</em> <a class="footnote-reference" href="#id33" id="id17">[13]</a> o <em>Precisión de subpixel</em> para mejorar la definición
+los gráficos a través de los algoritmos <a class="reference external" href="http://www.antigrain.com">Anti-Grain Geometry</a> que aplican técnicas como <em>Anti-Aliasing</em> <a class="footnote-reference" href="#id34" id="id17">[13]</a> o <em>Precisión de subpixel</em> para mejorar la definición
 de la líneas trazadas.</p>
 <p>La figura <a class="reference internal" href="#wx-num"><em>Diagrama de secuencia para la graficación de un diagrama al nivel subyacente
 (via matplotlib)</em></a> muestra la secuencia de eventos para la graficación
 de un diagrama. El diagrama de la figura <a class="reference internal" href="#plotclass-num"><em>Diagrama de clases de los distintos tipos de diagramas soportados</em></a> muestra la estructura
 de clases implementada para dar soporte a los distintos tipos de gráfico.</p>
 <div class="figure" id="wx-num">
-<img alt="_images/wxmatplotlib4.png" src="_images/wxmatplotlib4.png" style="width: 65%;" />
+<img alt="_images/wxmatplotlib7.png" src="_images/wxmatplotlib7.png" style="width: 65%;" />
 <p class="caption">Diagrama de secuencia para la graficación de un diagrama al nivel subyacente
 (via <tt class="docutils literal"><span class="pre">matplotlib</span></tt>)</p>
 </div>
 <div class="figure" id="plotclass-num">
-<img alt="_images/class-plots4.png" src="_images/class-plots4.png" style="width: 65%;" />
+<img alt="_images/class-plots7.png" src="_images/class-plots7.png" style="width: 65%;" />
 <p class="caption">Diagrama de clases de los distintos tipos de diagramas soportados</p>
+</div>
+<div class="section" id="barra-de-herramientas-de-gr-ficos">
+<h3>7.6.1. Barra de herramientas de gráficos<a class="headerlink" href="#barra-de-herramientas-de-gr-ficos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Matplotlib provee una integración avanzada con Wx proveyendo un barra de herramientas
+asociada al <tt class="docutils literal"><span class="pre">canvas</span></tt> integrable en la interfaz de usuario.
+Esta barra de herramientas provee zoom, definición de margenes, desplazamiento,
+exportación y navegación histórica <a class="footnote-reference" href="#id35" id="id18">[14]</a></p>
+<div class="figure">
+<img alt="_images/wx_toolbar1.png" src="_images/wx_toolbar1.png" />
+<p class="caption">Barra de herramientas provista por Matplotlib integrable en wxPython</p>
+</div>
+<p>La exportación permite guardar el estado actual del diagrama, incluyendo
+tamaño, curvas visibles, etiquetas, grilla, etc. en distintos formatos escalables
+como <tt class="docutils literal"><span class="pre">PDF</span></tt>, <tt class="docutils literal"><span class="pre">SVG</span></tt>, <tt class="docutils literal"><span class="pre">EPS</span></tt>, o de mapa de bits como <tt class="docutils literal"><span class="pre">PNG</span></tt> entre muchos otros.</p>
+<p>La integración es muy sencilla y se logra mediante la clase <tt class="xref py py-class docutils literal"><span class="pre">NavigationToolbar2Wx</span></tt>
+que se encuentra en el módulo general de integración con wx
+<tt class="xref py py-mod docutils literal"><span class="pre">matplotlib.backends.backend_wxagg</span></tt> . El código se resume a la
+instanciación, indicando el objeto <tt class="docutils literal"><span class="pre">canvas</span></tt> al que se asocian las herramientas
+y a la ubicación en un <tt class="docutils literal"><span class="pre">sizer</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span> <span class="o">=</span> <span class="n">NavigationToolbar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">canvas</span><span class="p">)</span>   <span class="c">#the canvas from plot</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">vbox</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">BoxSizer</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">VERTICAL</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">vbox</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">canvas</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">LEFT</span> <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">TOP</span> <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">GROW</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">vbox</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span><span class="p">,</span> <span class="mf">0</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="integraci-n-de-men-s-contextuales">
+<h3>7.6.2. Integración de menús contextuales<a class="headerlink" href="#integraci-n-de-men-s-contextuales" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Otro aspecto de la integración, un poco más complejo, son los menús contextuales
+que permiten al usuario manipular la figura de diferentes manera, u ocultar
+y volver a mostrar las diferentes curvas.</p>
+<div class="figure">
+<img alt="_images/menu_contextual1.png" src="_images/menu_contextual1.png" />
+<p class="caption">Menú contextual sobre una figura que se activa ante un evento con el botón
+derecho.</p>
+</div>
+<p>La complejidad está dada por el paso de eventos entre wxPython y Matplotlib.
+El primero, en la clase <tt class="xref py py-class docutils literal"><span class="pre">PlotPanel</span></tt> define y construye el menú contextual
+pero asocia las acciones a métodos de <tt class="xref py py-class docutils literal"><span class="pre">BasePlot`</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">onMouseButtonClick</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span> <span class="o">==</span> <span class="mf">3</span><span class="p">:</span> 
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;menu&#39;</span><span class="p">):</span>               
+                <span class="bp">self</span><span class="o">.</span><span class="n">menu</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">Menu</span><span class="p">()</span>
+
+                <span class="k">for</span> <span class="n">curve</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">curves</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="n">curve</span><span class="p">[</span><span class="s">&#39;wx_id&#39;</span><span class="p">],</span> <span class="n">curve</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="n">wx</span><span class="o">.</span><span class="n">ITEM_CHECK</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_MENU</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">OnToggleCurve</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">curve</span><span class="p">[</span><span class="s">&#39;wx_id&#39;</span><span class="p">])</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">Check</span><span class="p">(</span><span class="n">curve</span><span class="p">[</span><span class="s">&#39;wx_id&#39;</span><span class="p">],</span> <span class="bp">True</span><span class="p">)</span>
+    
+                <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">AppendSeparator</span><span class="p">()</span>
+                
+                <span class="k">for</span> <span class="n">prop</span><span class="p">,</span> <span class="n">wx_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">properties_normal</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="n">wx_id</span><span class="p">,</span> <span class="n">prop</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_MENU</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">OnSetupProperty</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">wx_id</span><span class="p">)</span>
+
+                <span class="k">for</span> <span class="n">prop</span><span class="p">,</span> <span class="n">wx_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">properties_check</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="n">wx_id</span><span class="p">,</span> <span class="n">prop</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="n">wx</span><span class="o">.</span><span class="n">ITEM_CHECK</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_MENU</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">OnToggleProperty</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">wx_id</span><span class="p">)</span>
+
+            <span class="c"># Popup the menu.  If an item is selected then its handler</span>
+            <span class="c"># will be called before PopupMenu returns.</span>
+            <span class="n">wx</span><span class="o">.</span><span class="n">CallAfter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PopupMenu</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">)</span>
+
+    
+</pre></div>
+</div>
+<p>Los métodos <tt class="docutils literal"><span class="pre">OnToggleCurve</span></tt> y <tt class="docutils literal"><span class="pre">OnSetupProperty</span></tt> son los que realizan
+las tareas solicitadas, como cambiar a escala logarítmica, ocultar o mostrar una curva,
+etc.</p>
+<div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">OnToggleCurve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="n">wx_id</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">GetId</span><span class="p">()</span>
+        <span class="n">curve</span> <span class="o">=</span> <span class="p">[</span><span class="n">curve</span> <span class="k">for</span> <span class="n">curve</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">curves</span>  <span class="k">if</span> <span class="n">curve</span><span class="p">[</span><span class="s">&#39;wx_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">wx_id</span><span class="p">][</span><span class="mf">0</span><span class="p">]</span>     <span class="c">#TODO better way?        </span>
+
+        <span class="n">curve</span><span class="p">[</span><span class="s">&#39;visible&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">curve</span><span class="p">[</span><span class="s">&#39;visible&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">curve</span><span class="p">[</span><span class="s">&#39;lines2d&#39;</span><span class="p">]:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">line</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="n">curve</span><span class="p">[</span><span class="s">&#39;visible&#39;</span><span class="p">])</span> 
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">line_</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="n">line_</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="n">curve</span><span class="p">[</span><span class="s">&#39;visible&#39;</span><span class="p">])</span> 
+                
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">OnSetupProperty</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="n">wx_id</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">GetId</span><span class="p">()</span>
+        <span class="n">prop</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([[</span><span class="n">v</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">properties_normal</span><span class="o">.</span><span class="n">items</span><span class="p">()])[</span><span class="n">wx_id</span><span class="p">]</span> <span class="c">#inverted dict</span>
+
+        <span class="k">if</span> <span class="n">prop</span> <span class="o">==</span> <span class="s">&#39;Set perspective...&#39;</span><span class="p">:</span>
+            
+            <span class="n">dlg</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">TextEntryDialog</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="s">u&#39;Azimuthal angle&#39;</span><span class="p">,</span> <span class="s">u&#39;Set Perpective&#39;</span><span class="p">,</span> 
+                                            <span class="n">defaultValue</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">azim</span><span class="p">)</span> <span class="p">)</span>            
+            <span class="n">r</span> <span class="o">=</span> <span class="n">dlg</span><span class="o">.</span><span class="n">ShowModal</span><span class="p">()</span>
+            <span class="k">if</span>  <span class="n">r</span> <span class="o">==</span> <span class="n">wx</span><span class="o">.</span><span class="n">ID_CANCEL</span><span class="p">:</span>
+                <span class="k">return</span> 
+            <span class="k">elif</span> <span class="n">r</span>  <span class="o">==</span> <span class="n">wx</span><span class="o">.</span><span class="n">ID_OK</span><span class="p">:</span>
+                <span class="n">azim</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dlg</span><span class="o">.</span><span class="n">GetValue</span><span class="p">())</span>
+            
+            <span class="n">dlg</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">TextEntryDialog</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="s">u&#39;Elevation angle&#39;</span><span class="p">,</span> <span class="s">u&#39;Set Perpective&#39;</span><span class="p">,</span> 
+                                            <span class="n">defaultValue</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">elev</span><span class="p">)</span> <span class="p">)</span>            
+            <span class="n">r</span> <span class="o">=</span> <span class="n">dlg</span><span class="o">.</span><span class="n">ShowModal</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">r</span>  <span class="o">==</span> <span class="n">wx</span><span class="o">.</span><span class="n">ID_CANCEL</span><span class="p">:</span>
+                <span class="k">return</span> 
+            <span class="k">elif</span> <span class="n">r</span>  <span class="o">==</span> <span class="n">wx</span><span class="o">.</span><span class="n">ID_OK</span><span class="p">:</span>
+                <span class="n">elev</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dlg</span><span class="o">.</span><span class="n">GetValue</span><span class="p">())</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="n">elev</span><span class="p">,</span> <span class="n">azim</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">prop</span> <span class="o">==</span> <span class="s">&#39;Set plot title...&#39;</span><span class="p">:</span>
+            <span class="n">dlg</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">TextEntryDialog</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="s">u&#39;Plot title&#39;</span><span class="p">,</span> <span class="s">u&#39;Set plot title&#39;</span><span class="p">,</span> 
+                                            <span class="n">defaultValue</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">get_title</span><span class="p">()</span> <span class="p">)</span>            
+            <span class="n">r</span> <span class="o">=</span> <span class="n">dlg</span><span class="o">.</span><span class="n">ShowModal</span><span class="p">()</span>
+            <span class="k">if</span>  <span class="n">r</span> <span class="o">==</span> <span class="n">wx</span><span class="o">.</span><span class="n">ID_CANCEL</span><span class="p">:</span>
+                <span class="k">return</span> 
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">dlg</span><span class="o">.</span><span class="n">GetValue</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>    
+                
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="gesti-n-de-base-de-datos">
@@ -936,7 +1060,7 @@ de clases implementada para dar soporte a los distintos tipos de gráfico.</p>
 a través de un sistema de gestión de base de datos relacional. Se
 utilizó el software <a class="reference external" href="http://sqlite.org">sqlite</a>  (versión 3) que respeta
 el estándar <abbr title="Structured Query Language">SQL</abbr>  mediante una librería
-monolítica, portable, eficiente y compacta que es integramente soportada por Python <a class="footnote-reference" href="#id34" id="id18">[14]</a>.</p>
+monolítica, portable, eficiente y compacta que es integramente soportada por Python <a class="footnote-reference" href="#id36" id="id19">[15]</a>.</p>
 <p>La ventaja principal es que una base de datos de <em>sqlite</em> está autocontenida en un
 archivo binario que puede ser distribuido en conjunto con el software, sin
 requerir inicialización o un <em>servidor</em> de base de datos local o remoto. En
@@ -947,11 +1071,11 @@ superadora en las prestaciones y apego a un lenguaje estándar para base de dato
 <p>En particular, los datos almacenados son las constantes de compuestos
 químicos.</p>
 <p>Se incluye una vasta base de datos termodinámicos para más de 2000 compuestos,
-corroborados mediante <cite>DIPPR Project 801 &lt;http://dippr.byu.edu/&gt;</cite> <a class="footnote-reference" href="#id35" id="id19">[15]</a> que incluye información
+corroborados mediante <cite>DIPPR Project 801 &lt;http://dippr.byu.edu/&gt;</cite> <a class="footnote-reference" href="#id37" id="id20">[16]</a> que incluye información
 como la fórmula, el factor acéntrico, el volumen, la temperatura y la presión crítica,
 como la fórmula, el factor acéntrico, el volumen, la temperatura y la presión crítica,
 etc.</p>
-<p>Esta información se comporta en modo <em>sólo lectura</em> <a class="footnote-reference" href="#id36" id="id20">[16]</a>
+<p>Esta información se comporta en modo <em>sólo lectura</em> <a class="footnote-reference" href="#id38" id="id21">[17]</a>
 a través de la interfaz de usuario, pero se brinda también una categoría editable
 para permitir <em>compuestos definidos por el usuario</em> que pueden ser agregados como
 una copia de un compuesto existente en <abbr>DIPPR</abbr> (que acepta, entonces, la modificación
@@ -961,7 +1085,7 @@ experimentales.</p>
 <div class="section" id="modelo-entidad-relaci-n">
 <h3>7.7.2. Modelo Entidad-Relación<a class="headerlink" href="#modelo-entidad-relaci-n" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="figure">
-<img alt="_images/er-database4.png" src="_images/er-database4.png" style="width: 90%;" />
+<img alt="_images/er-database7.png" src="_images/er-database7.png" style="width: 90%;" />
 <p class="caption">Representación de las entidades con sus atributos y la relación entre las mismas</p>
 </div>
 </div>
@@ -1010,10 +1134,10 @@ la herramienta <a class="reference external" href="http://code.google.com/p/sqli
 para <strong>importar</strong> las columnas pertinentes del archivo CSV a la tabla de destino</li>
 </ol>
 <div class="figure">
-<img alt="_images/import-db4.png" src="_images/import-db4.png" style="width: 60%;" />
+<img alt="_images/import-db7.png" src="_images/import-db7.png" style="width: 60%;" />
 <p class="caption">Procesos de conversión de la base de datos a <em>sqlite</em></p>
 </div>
-<table class="docutils footnote" frame="void" id="id21" rules="none">
+<table class="docutils footnote" frame="void" id="id22" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>En realidad, la llamada está intercedida por una función decoradora (<tt class="docutils literal"><span class="pre">memoize</span></tt>)
@@ -1022,14 +1146,14 @@ sucesivas llamadas los parámetros coinciden, se devuelven los datos
 almacenados en memoria, tarea mucho más rápida que recalcular.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id22" rules="none">
+<table class="docutils footnote" frame="void" id="id23" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>El comando <tt class="docutils literal"><span class="pre">grep</span> <span class="pre">-r</span></tt> busca de manera recursiva una cadena (o una expresión
 regular) sobre sobre los archivos de un directorio</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id23" rules="none">
+<table class="docutils footnote" frame="void" id="id24" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>El módulo <tt class="xref py py-mod docutils literal"><span class="pre">cStringIO</span></tt> provee un tipo de <em>buffer</em> de cadenas
@@ -1037,7 +1161,7 @@ de caractéres con la misma interfaz que un archivo de texto normal.
 Las operaciones con la información en memoria son altamente eficientes.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id24" rules="none">
+<table class="docutils footnote" frame="void" id="id25" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>&#8220;Mientras que las velocidades de CPU y las capacidades de memporia se han
@@ -1047,14 +1171,14 @@ consecuencia, estas latencias son cada vez más seguido un cuello de botella
 en la performance global del sistema&#8221;. <a class="reference external" href="http://en.wikipedia.org/wiki/Moore's_law#Importance_of_non-CPU_bottlenecks">http://en.wikipedia.org/wiki/Moore&#8217;s_law#Importance_of_non-CPU_bottlenecks</a></td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id25" rules="none">
+<table class="docutils footnote" frame="void" id="id26" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id5">[5]</a></td><td>También llamado <em class="dfn">memoization</em>.
 Ver <a class="reference external" href="http://en.wikipedia.org/wiki/Memoization">http://en.wikipedia.org/wiki/Memoization</a></td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id26" rules="none">
+<table class="docutils footnote" frame="void" id="id27" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id7">[6]</a></td><td>Cuando se necesita pasar parámetros específicos al decorador
@@ -1064,28 +1188,28 @@ del decorador tiene un subnivel más de <em>wrappering</em>, o sea, 3
 funciones anidadas.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id27" rules="none">
+<table class="docutils footnote" frame="void" id="id28" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id8">[7]</a></td><td>Una referencia completa de esta función se encuentra en
 <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/">http://docs.scipy.org/doc/numpy/reference/</a></td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id28" rules="none">
+<table class="docutils footnote" frame="void" id="id29" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id10">[8]</a></td><td>Una aproximación de este tipo, relativa al tamaño de la ventana, utiliza
 la versión anterior de GPEC.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id29" rules="none">
+<table class="docutils footnote" frame="void" id="id30" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id12">[9]</a></td><td>Para layout de estilo cuadrícula se utiliza una de las implementaciones de la clase abstracta <tt class="xref py py-class docutils literal"><span class="pre">wx.Sizer</span></tt>
 es <tt class="xref py py-class docutils literal"><span class="pre">GridSizer</span></tt></td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id30" rules="none">
+<table class="docutils footnote" frame="void" id="id31" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id13">[10]</a></td><td>Esta técnica es ampliamente utilizada en frameworks Javascript
@@ -1094,44 +1218,52 @@ código más compacto, característica muy relevante en el ambiente web.
 Ver <a class="reference external" href="http://en.wikipedia.org/wiki/Method_chaining">http://en.wikipedia.org/wiki/Method_chaining</a></td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id31" rules="none">
+<table class="docutils footnote" frame="void" id="id32" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id15">[11]</a></td><td>Una versión online gratuita de este libro se encuentra en
 <a class="reference external" href="http://www.joelonsoftware.com/uibook/fog0000000249.html">http://www.joelonsoftware.com/uibook/fog0000000249.html</a></td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id32" rules="none">
+<table class="docutils footnote" frame="void" id="id33" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id16">[12]</a></td><td>El soporte incluye GTK, QT4, TKinter, PDF y wxPython</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id33" rules="none">
+<table class="docutils footnote" frame="void" id="id34" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id17">[13]</a></td><td>Es un proceso utilizado para suavizar los bordes desparejos de los gráficos.
 Ver <a class="reference external" href="http://es.wikipedia.org/wiki/Antialiasing">http://es.wikipedia.org/wiki/Antialiasing</a></td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id34" rules="none">
+<table class="docutils footnote" frame="void" id="id35" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id18">[14]</a></td><td>Permite aumentar la resolución contemplando precisiones de &#8220;fracciones&#8221; de
 un pixel. Ver <a class="reference external" href="http://en.wikipedia.org/wiki/Sub-pixel_resolution">http://en.wikipedia.org/wiki/Sub-pixel_resolution</a>.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id35" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id19">[15]</a></td><td>De hecho, a partir de la versión 2.6 de Python, el modulo <tt class="docutils literal"><span class="pre">sqlite3</span></tt> forma
-parte de la biblioteca estándar de Python.</td></tr>
-</tbody>
-</table>
 <table class="docutils footnote" frame="void" id="id36" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id20">[16]</a></td><td><em>DIPPR 801</em> es un producto comercial cuya licencia ronda los u$s3400 anuales.
+<tr><td class="label"><a class="fn-backref" href="#id19">[15]</a></td><td>Cada vez que se modifica la visualización de la figura (un acercamiento,
+un desplazamiento, etc) se marca un hito en la historia, al que se puede
+regresar mediante las flechas de navegación.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id37" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id20">[16]</a></td><td>De hecho, a partir de la versión 2.6 de Python, el modulo <tt class="docutils literal"><span class="pre">sqlite3</span></tt> forma
+parte de la biblioteca estándar de Python.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id38" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id21">[17]</a></td><td><em>DIPPR 801</em> es un producto comercial cuya licencia ronda los u$s3400 anuales.
 GPEC incluye en su base datos equivalentes a una porción de la información
 que ese producto ofrece, sin depender de esta de manera alguna.
 No obstante, el autor considera este aspecto como suceptible a acarrear
@@ -1139,10 +1271,10 @@ complicaciones legales y comerciales, que deberán revisarse y solucioanrse
 a futuro.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id37" rules="none">
+<table class="docutils footnote" frame="void" id="id39" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[17]</td><td>Sqlite no permite definir tablas o registros de datos como <em>sólo lectura</em>.
+<tr><td class="label">[18]</td><td>Sqlite no permite definir tablas o registros de datos como <em>sólo lectura</em>.
 Queda en potestad del desarrollador vedar la posilidad de modificación como parte
 del proceso de validación. Sin embargo, siempre es posible para un usuario abrir
 y modificar la información &#8220;manualmente&#8221; a través de un gestor que interprete
@@ -1208,7 +1340,11 @@ Laboratories, Eindhoven</td></tr>
 <li><a class="reference internal" href="#justificaci-n-del-dise-o-de-ui">7.5.4. Justificación del diseño de UI</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#integraci-n-matplotlib-wxpython">7.6. Integración Matplotlib-WxPython</a></li>
+<li><a class="reference internal" href="#integraci-n-matplotlib-wxpython">7.6. Integración Matplotlib-WxPython</a><ul>
+<li><a class="reference internal" href="#barra-de-herramientas-de-gr-ficos">7.6.1. Barra de herramientas de gráficos</a></li>
+<li><a class="reference internal" href="#integraci-n-de-men-s-contextuales">7.6.2. Integración de menús contextuales</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#gesti-n-de-base-de-datos">7.7. Gestión de base de datos</a><ul>
 <li><a class="reference internal" href="#la-informaci-n-gestionada">7.7.1. La información gestionada</a></li>
 <li><a class="reference internal" href="#modelo-entidad-relaci-n">7.7.2. Modelo Entidad-Relación</a></li>

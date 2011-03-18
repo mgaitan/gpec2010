@@ -56,7 +56,7 @@ Química y termodinámica
         Suele usarse como sinónimo de `term:`estado de agregación` sin exactitud
         ya que pueden existir fases distintas en el mismo estado de agregación
         (por ejemplo, el diamante y el grafito son distintas fases de carbono, 
-         y ambas se encuentran en estado sólido).
+        y ambas se encuentran en estado sólido).
 
     estado de agregación
         Es el estado en que se presenta en la naturaleza una sustancia; dicho estado puede ser sólido, líquido, gaseoso, plasmático, 
@@ -99,7 +99,11 @@ Computación
             *What is a Hacker?*, Brian Harvey, University of California, Berkeley,
             http://www.cs.berkeley.edu/~bh/hacker.html
 
-        
+    OOP
+      La programación orientada a objetos (:dfn:`del inglés, Object Oriented Programming`)
+      es un paradigma de programación que usa el modelado de objetos y sus interacciones para diseñar aplicaciones. Involucra técnicas como la :term:`herencia`, el 
+      :term:`polimorfismo`, la abstracción, etc. 
+
 
     GUI
         La interfaz gráfica de usuario o :abbr:`GUI (del inglés, Graphical User Interface)`
@@ -108,8 +112,10 @@ Computación
         .. seealso::  :term:`layout`
 
     API
-        Una interfaz de programación de aplicaciones o :abbr:`API (del inglés, Application Programming Interface)` es el conjunto de funciones y procedimientos (o métodos, en la programación orientada a objetos) que representan una interfaz de comunicación entre componentes de software. Se trata del conjunto de llamadas a ciertas bibliotecas que ofrecen acceso a ciertos servicios y constituye un método para conseguir abstracción en la programación, generalmente (aunque no necesariamente) entre los niveles o capas inferiores y los superiores del software.
+        Una interfaz de programación de aplicaciones o :abbr:`API (del inglés, Application Programming Interface)` es el conjunto de funciones y procedimientos (o métodos, en la :term:`programación orientada a objetos <OOP>`) que representan una interfaz de comunicación entre componentes de software. Se trata del conjunto de llamadas a ciertas bibliotecas que ofrecen acceso a ciertos servicios y constituye un método para conseguir abstracción en la programación, generalmente (aunque no necesariamente) entre los niveles o capas inferiores y los superiores del software.
         
+    ingeniería inversa 
+        Es el conjunto de tareas destinadas a obtener las especificaciones de un sistema de información partiendo del propio sistema. Es una actividad típica del mantenimiento de equipos lógicos, cuando no existen las especificaciones del diseño del equipo a mantener.
 
 
     decorator

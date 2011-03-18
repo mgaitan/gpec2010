@@ -61,7 +61,7 @@ language = 'es'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
-#today = ''
+today = 'Marzo de 2010'
 # Else, today_fmt is used as the format for a strftime call.
 #today_fmt = '%B %d, %Y'
 
@@ -194,14 +194,14 @@ latex_elements = {'papersize': 'a4paper',
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
-#latex_logo = None
+latex_logo = 'images/unc3-b.jpg'
 
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.
 latex_use_parts = False
 
 # If true, show page references after internal links.
-latex_show_pagerefs = False
+latex_show_pagerefs = False #True #False
 
 # If true, show URL addresses after external links.
 latex_show_urls = True #False

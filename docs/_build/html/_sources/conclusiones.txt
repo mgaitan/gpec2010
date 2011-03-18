@@ -10,8 +10,8 @@ El software obtenido constituye una mejora cualitativa y cuantitativa
 de funcionalidad y facilidad de uso respecto a la versión preexistente. 
 
 Se consiguió una aplicación multiplataforma a partir de una única rama de código
-que ha sido probada en sistemas Windows XP, Windows Vista, Windows 7 y 
-las distribuciones con kernel Linux  Ubuntu y Red Hat.
+que ha sido probada en sistemas Windows XP, Windows Vista, Windows 7 de 32 y 64bits 
+y las distribuciones con kernel Linux Ubuntu (32 y 64bits) y Red Hat.
 
 Los gráficos producidos tienen alta calidad, con herramientas de manipulación 
 accesibles desde la misma interfaz (barra de herramientas y menú contextual) 
@@ -73,14 +73,15 @@ usuarios están intrínsecamente relacionadas
 En este contexto de creciente aceptación, la elección de Python y sus complementos
 constituyó un acierto, no sólo por los resultados satisfactorios en relación 
 a los objetivos y tiempos propuestos, sino porque se suma a una corriente de modernización 
-tecnológica de los ámbitos científicos tecnológicos, en particular en lo relacionado 
+tecnológica de los ámbitos científico-tecnológicos, en particular en lo relacionado 
 con el desarrollo de software, aportando calidad, facilidad y potencia de prestaciones. 
 
 Por último, si bien todavía no ha podido cuantificarse, la decisión de 
 mantener el proyecto bajo una licencia libre permitirá no sólo mayor facilidad
 para que la comunidad de usuarios reporte (y, eventualmente, resuelva) fallos, 
 sino para potenciar sus posibilidades de disfusión, accediendo a circuitos a los 
-que el software privativo (y comercial) no accede sin costosas campañas publicitarias. 
+que el software privativo (de escala moderada) no accede sin costosas 
+campañas de marketing. 
 
 
 Tiempo de desarrollo 

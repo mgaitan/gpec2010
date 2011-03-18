@@ -809,6 +809,67 @@ de clases implementada para dar soporte a los distintos tipos de gráfico.
 
    Diagrama de clases de los distintos tipos de diagramas soportados 
 
+Barra de herramientas de gráficos
+---------------------------------
+
+Matplotlib provee una integración avanzada con Wx proveyendo un barra de herramientas
+asociada al ``canvas`` integrable en la interfaz de usuario. 
+Esta barra de herramientas provee zoom, definición de margenes, desplazamiento, 
+exportación y navegación histórica [#]_
+
+.. figure:: images/wx_toolbar.png
+   :width: 60% 
+
+   Barra de herramientas provista por Matplotlib integrable en wxPython
+
+La exportación permite guardar el estado actual del diagrama, incluyendo 
+tamaño, curvas visibles, etiquetas, grilla, etc. en distintos formatos escalables 
+como ``PDF``, ``SVG``, ``EPS``, o de mapa de bits como ``PNG`` entre muchos otros.  
+
+La integración es muy sencilla y se logra mediante la clase :py:class:`NavigationToolbar2Wx`
+que se encuentra en el módulo general de integración con wx 
+:py:mod:`matplotlib.backends.backend_wxagg` . El código se resume a la 
+instanciación, indicando el objeto ``canvas`` al que se asocian las herramientas
+y a la ubicación en un ``sizer``::
+
+    self.toolbar = NavigationToolbar(self.plot.canvas)   #the canvas from plot
+    self.vbox = wx.BoxSizer(wx.VERTICAL)
+    self.vbox.Add(self.plot.canvas, 1, wx.LEFT | wx.TOP | wx.GROW)
+    self.vbox.Add(self.toolbar, 0, wx.EXPAND) 
+
+
+Integración de menús contextuales
+---------------------------------
+
+Otro aspecto de la integración, un poco más complejo, son los menús contextuales
+que permiten al usuario manipular la figura de diferentes manera, u ocultar
+y volver a mostrar las diferentes curvas.
+
+.. figure:: images/menu_contextual.png
+   :width: 60%  
+
+   Menú contextual sobre una figura que se activa ante un evento con el botón 
+   derecho.  
+
+La complejidad está dada por el paso de eventos entre wxPython y Matplotlib. 
+El primero, en la clase :py:class:`PlotPanel` define y construye el menú contextual
+pero asocia las acciones a métodos de :py:class:`BasePlot``: 
+
+
+.. literalinclude:: ../src/panels.py
+   :pyobject: PlotPanel.onMouseButtonClick 
+
+Los métodos ``OnToggleCurve`` y ``OnSetupProperty`` son los que realizan 
+las tareas solicitadas, como cambiar a escala logarítmica, ocultar o mostrar una curva, 
+etc. 
+
+.. literalinclude:: ../src/plots.py
+   :pyobject: BasePlot.OnToggleCurve
+
+.. literalinclude:: ../src/plots.py
+   :pyobject: BasePlot.OnSetupProperty
+
+
 
 .. _bbdd:
 
@@ -967,6 +1028,11 @@ utilizando un proceso de 2 pasos
 
 .. [#]  Permite aumentar la resolución contemplando precisiones de "fracciones" de 
         un pixel. Ver http://en.wikipedia.org/wiki/Sub-pixel_resolution.
+
+.. [#]  Cada vez que se modifica la visualización de la figura (un acercamiento, 
+        un desplazamiento, etc) se marca un hito en la historia, al que se puede
+        regresar mediante las flechas de navegación.
+
 
 .. [#]  De hecho, a partir de la versión 2.6 de Python, el modulo ``sqlite3`` forma 
         parte de la biblioteca estándar de Python. 

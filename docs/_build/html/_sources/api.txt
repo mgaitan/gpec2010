@@ -5,7 +5,7 @@ Especificación de la interfaz de comunicación
 
 Esta documentación especifica la interfaz de archivos de entrada y salida
 para el conjunto de programas de cálculo que componen *GPEC*. 
-Se ha realizado a través de un proceso de *ingeniería inversa*, 
+Se ha realizado a través de un proceso de :term:`ingeniería inversa`, 
 ya que se carecía de documentación fehaciente. 
 
 
@@ -180,13 +180,6 @@ Cuando ``SENTIDO`` es 1 el formato depende del modelo
       ro          --                   Å
       m           --                   --
       ==========  ===================  ============
-
-
-    -  5   GC
-
-       .. todo::
-
-            No aplica
 
 
     -  6   SPHCT
@@ -364,10 +357,6 @@ Ejemplo::
           ==========  ===================  ============
 
 
-        - Para  el modelo 5 (GC):
-
-          .. todo:: aplica ?
-
 
         - Para  el modelo 6 (SPHCT) ::
 
@@ -383,19 +372,10 @@ Ejemplo::
           V*          Volumen              .
           ==========  ===================  ============
 
-        .. todo:: 
-            falta descripción de parametros ``c``, ``s`` y ``q``
-
 
 :K12: Parámetro de interacción binario
 
-    .. todo:: 
-        ver
-
 :L12: Parámetro de interacción binario
-
-    .. todo:: 
-        ver
 
 :MAX_P: Máxima presión para líquidos. Se especifica en ``bar``. 
 
@@ -468,11 +448,7 @@ estructura::
  CEP    Critical End Point               6
  LLV    Liquido liquido vapor            10
  =====  ===============================  =======================
-
- .. todo:: 
-    ver descripción. Ver AZE line  ¿Estructura?. 
-    
-
+   
 
 
  Las columnas significativas son las que deben *leerse* ya que aportan datos 
@@ -491,9 +467,6 @@ estructura::
  LLV    ``T(K)    P(bar)    XL1    XL2    Y(1)    Y(2)    X2L2    d1(mol/L)    d2(mol/L)    dV(mol/L)``
  =====  ===================================================================================
  
- .. todo:: 
-    ver detalle de significación de las columnas. Ver LLV ¿10 col significativas?
-
 
 Las tablas de datos tabulados pueden tener cualquier extensión y terminan
 únicamente por una línea en blanco. 
@@ -580,8 +553,6 @@ indica el valor de presión definida por el usuario.
  :PRESION: Valor de presión en Bar definido por el usuario, dentro del rango 
                de valores aceptados por el sistema.
 
-               .. todo:: 
-                      cual es el rango ?
                 
 TXYOUT.DAT
 ==========
@@ -621,10 +592,8 @@ adimensional que representa la fracción de compuesto::
 
     Z
 
- :Z: Fracción de compuesto 1 definida por el usuario. 
+ :Z: Fracción de compuesto 1 definida por el usuario.
 
-   .. todo:: 
-          cual es el rango ( 0 a 1 ? )
 
 ISOPOUT.DAT
 ===========

@@ -276,6 +276,8 @@ a futuro.
 .. [#]  Salvo quizás las más cercanas, como electrónica y computación, pero en una medida
         muy inferior a la que podría lograrse. 
 
+.. [#]  *Licencia pública general versión 3*, http://www.gnu.org/licenses/licenses.html#GPL
+
 .. [#]  Refiere a las cuatro libertades esenciales del software libre descriptas en [FSFa]_
 
 .. [#]  La definición de *hacker* que el común de la gente tiene es incorrecta. 
@@ -299,7 +301,6 @@ a futuro.
 .. [#]  *"Facebook has been developed from the ground up using open source software"*, 
         http://developers.facebook.com/opensource/    
 
-.. [#]  *Licencia pública general versión 3*, http://www.gnu.org/licenses/licenses.html#GPL
 
 .. [#]  Por supuesto, habiendo podido dedicar su tiempo a otras labores, 
         los docentes aceptaron dirigir este trabajo voluntariamente, 
