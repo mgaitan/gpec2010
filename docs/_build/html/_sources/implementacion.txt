@@ -198,9 +198,8 @@ de GPEC. [#]_
 Invocación de ejecutables del backend
 =====================================
 
-La comunicación frontend-backend se describe en el siguiente diagrama de secuencia 
-donde se resalta el ciclo de vida del objeto :py:class:`ApiManager` donde está 
-implementada la lógica de tratamimiento de la interfaz de comunicación. 
+La comunicación frontend-backend se describe en el diagrama de secuencia 
+de la figura :ref:`front-back-num`. Allí se resalta el ciclo de vida del objeto :py:class:`ApiManager` donde está  implementada la lógica de tratamiento de la interfaz de comunicación. 
 
 El caso particular representado es la obtención de datos el cálculo del diagrama
 de fase global (que se obtiene mediante el ejecutable :program:`GPEC.exe`) 
@@ -210,7 +209,7 @@ permiso de escritura en la carpeta destino). En caso de error por algún motivo
 (conocido o no), se remite un mensaje de log y se cancela la ejecución. 
 
 
-.. _front-back:
+.. _front-back-num:
 
 .. figure:: images/uml_front-back_vertical.png
    :width: 100%
@@ -264,7 +263,7 @@ se está corriendo la aplicación y en caso de no ser Windows, invoca a Wine::
 Memorización de resultados costosos
 ====================================
 
-Como se observa :ref:`front-back`, el proceso de comunicación y obtención de los 
+Como se observa la figura :ref:`front-back-num`, el proceso de comunicación y obtención de los 
 datos desde el backend no es trivial. Más aún, considerando que, dada la arquitectura
 heredada interviene de manera insalvable la escritura y lectura a disco, el 
 proceso también es costoso [#]_ a nivel computacional. 
@@ -330,7 +329,7 @@ de dos funciones anidadas [#]_,  es la siguiente::
     
     
 
-Cuando se tiene una funcion cualquier que se quiere decorar, simplemente
+Cuando se tiene una función cualquier que se quiere decorar, simplemente
 se utiliza la sintaxis ``@mydecorator`` justo antes de la función en 
 cuestion. Por ejemplo::
 
@@ -596,7 +595,7 @@ es una de subclase de la clase :py:class:`wx.Frame` pero el manejo de la distrib
 de sus componentes se basa en una librería especial denominado *Advanced User Interface*, 
 que reside en :py:class:`wx.aui`. 
 
-Esta librería está construída sobre la pila de componentes de wxPython y permite 
+Esta librería está construida sobre la pila de componentes de wxPython y permite 
 implementar "interfaces avanzadas" a través del control de "subventanas" 
 automatizado de eventos como  maximizar (ocupar toda la ventana principal), cerrar (no se muestra en la ventana 
 principal) o restaurar (vuelve a la posición original) entre otras.  
@@ -657,7 +656,7 @@ En el código se observa la siguiente secuencia
 Una observación en el paso 3 es que para definir los atributos del panel
 se utiliza una técnica denominada *encadenado de métodos* (*Method chaining*) [#]_
 donde la ejecución de un método de un objeto devuelve el objeto en sí, posibilitando
-"encadenar" la ejución de otro método. 
+"encadenar" la ejecución de otro método. 
 
 La interfaz por defecto de GPEC se compone de 4 instancias 
 de :py:class:`AuiPaneInfo` cuyo contenido se lista en la siguiente tabla: 
@@ -731,7 +730,7 @@ para el diseño de GPEC.
    como inspiración para la interfaz de GPEC.  
 
 
-Algunas decisiciones concernientes a la usabilidad han sido:
+Algunas decisiones concernientes a la usabilidad han sido:
 
 * El diseño acompaña al *workflow*: primero se define el sistema, opcionalmente 
   se manipulan los cálculos y por último se grafica. Sólo el primero y el último
@@ -822,7 +821,7 @@ el estándar :abbr:`SQL (Structured Query Language)`  mediante una librería
 monolítica, portable, eficiente y compacta que es integramente soportada por Python [#]_. 
 
 La ventaja principal es que una base de datos de *sqlite* está autocontenida en un 
-archivo binario que puede ser distribuído en conjunto con el software, sin 
+archivo binario que puede ser distribuido en conjunto con el software, sin 
 requerir inicialización o un *servidor* de base de datos local o remoto. En 
 este sentido es equivalente a una base de datos de Microsoft Access, aunque 
 superadora en las prestaciones y apego a un lenguaje estándar para base de datos. 
@@ -835,7 +834,8 @@ químicos.
 
 Se incluye una vasta base de datos termodinámicos para más de 2000 compuestos, 
 corroborados mediante `DIPPR Project 801 <http://dippr.byu.edu/>` [#]_ que incluye información 
-como la fórmula, el factor acéntrico, el volúmen, la temperatura y la presión crítica, 
+como la fórmula, el factor acéntrico, el volumen, la temperatura y la presión crítica, 
+como la fórmula, el factor acéntrico, el volumen, la temperatura y la presión crítica, 
 etc. 
 
 Esta información se comporta en modo *sólo lectura* [#]_ 
@@ -943,7 +943,7 @@ utilizando un proceso de 2 pasos
 
 
 .. [#]  Una referencia completa de esta función se encuentra en 
-        http://docs.scipy.org/doc/numpy/reference/generated/numpy.loadtxt.html
+        http://docs.scipy.org/doc/numpy/reference/
 
 .. [#]  Una aproximación de este tipo, relativa al tamaño de la ventana, utiliza
         la versión anterior de GPEC.

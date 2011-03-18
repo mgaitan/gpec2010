@@ -263,7 +263,7 @@ se está corriendo la aplicación y en caso de no ser Windows, invoca a Wine::
 Memorización de resultados costosos
 ====================================
 
-Como se observa :ref:`front-back`, el proceso de comunicación y obtención de los 
+Como se observa la figura :ref:`front-back-num`, el proceso de comunicación y obtención de los 
 datos desde el backend no es trivial. Más aún, considerando que, dada la arquitectura
 heredada interviene de manera insalvable la escritura y lectura a disco, el 
 proceso también es costoso [#]_ a nivel computacional. 
@@ -329,7 +329,7 @@ de dos funciones anidadas [#]_,  es la siguiente::
     
     
 
-Cuando se tiene una función cualquier que se quiere decorar, simplemente
+Cuando se tiene una función cualquiera que se quiere decorar, simplemente
 se utiliza la sintaxis ``@mydecorator`` justo antes de la función en 
 cuestion. Por ejemplo::
 
@@ -340,6 +340,7 @@ cuestion. Por ejemplo::
     
 Al llamar a :py:func:`mifuncion` se obtiene en realidad 
 ``mydecorator(mifuncion())``. La ventaja sintáctica de Python es que permite 
+hacer esta llamada de manera implícita.
 
 
 Algoritmo de caché de datos

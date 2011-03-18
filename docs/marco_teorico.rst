@@ -17,27 +17,21 @@ conceptos generales (que no pretenden exhaustividad pero sí precisión) relacio
 con la termodinámica y el equilibrio de fases. Para definiciónes de términos puntuales, 
 consulte el :ref:`glosario <glosario>`.
 
-En el :ref:`capitulo siguiente <tecnologias>` se verá una introducción a las 
+Como complemento, en :ref:`tecnologias` se verá una introducción a las 
 tecnologías, intentando un desarrollo de los conceptos apto para la comprensión 
 de todos los lectores.
 
-Conceptos de equilibrio de fases y sus diagramas
-================================================
-
-Algunas definiciones
---------------------
 
 Diagrama de fase de sistemas binarios
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=====================================
 
-Un **diagrama de fase** es un tipo de gráfico utilizado para mostrar 
+Un :term:`diagrama de fase` es un tipo de gráfico utilizado para mostrar 
 las condiciones en las que distintas fases termodinámicas de un sistema pueden ocurrir en 
-equilibrio. Se representa en función de variables que caracterizan el estado 
-intensivo del sistema fisicoquímico (funciones de estado).  
+equilibrio. Se representa en función de variables que caracterizan el :term:`estado 
+intensivo <propiedades intensivas>` del sistema fisicoquímico (:term:`EoS`).  
 
-El estudio introductorio de la termodinámica se centra en sustancias puras o 
-mezclas a composición constante. En este caso, el sistema es descripto por 
-dos variables.  Un diagrama de fase típico para estos 
+El estudio introductorio de la :term:`termodinámica` se centra en 
+:term:`sustancias puras <sustancia pura>` o mezclas a composición constante. En este caso, el sistema es descripto por dos variables.  Un diagrama de fase típico para estos 
 sistemas, es el *Presión vs. temperatura* :
 
     .. figure:: images/Phase-diag_es.png
@@ -54,10 +48,10 @@ dos sustancias del sistema. La composición habitualmente se mide en fracción m
 fracción masa, o concentración molar. 
 
 
-Para **sistemas binarios** (una mezcla de dos componentes) la *composición* 
-(o, complementariamente, la *densidad*) se vuelve 
+Para :term:`sistemas binarios <sistema binario>` (una mezcla de dos componentes) 
+la *composición*  (o, complementariamente, la *densidad*) se vuelve 
 una variable del sistema, cuya representación gráfica son curvas en el 
-espacio :math:`\mathbb{R}^{3}` (gráfico tridimensional). Para un determinado estado *T-P-x* (*x* es 
+espacio :math:`R^3` (gráfico tridimensional). Para un determinado estado *T-P-x* (*x* es 
 composición, en general expresada como fracción del compuesto más volátil) el 
 sistema se encuentra en *zonas de equilibrio* vapor/líquido, líquido/líquido, vapor/sólido, 
 líquido/sólido u otros casos particulares. 
@@ -78,9 +72,9 @@ correspondientes genera los gráficos cartesianos bidimensionales PT, Px, Tx
    otras informaciones. 
 
 El **comportamiento termodinámico de los sistemas binarios** no es uniforme 
-cualesquiera sean los compuestos de la mezcla. Existen seis **tipos de 
+cualquiera sean los compuestos de la mezcla. Existen seis **tipos de 
 comportamiento**, de los cuales los tipos I, II, III y IV (enumerados en orden 
-creciente de complejidad) son los más comunes (todas calculables a través de 
+creciente de complejidad) son los más comunes (todos calculables a través de 
 GPEC). Esta complejidad creciente del comportamiento se observa en la aparición 
 de fases líquido-líquido, líquido-líquido-vapor, líneas azeotrópicas, etc. 
 
@@ -91,7 +85,7 @@ de fases líquido-líquido, líquido-líquido-vapor, líneas azeotrópicas, etc.
 
 
 Equilibrio termodinámico
-^^^^^^^^^^^^^^^^^^^^^^^^^
+========================
 
 Según [SM-VN-AG2000]_ :
 
@@ -116,7 +110,7 @@ presiones, y son representados por medio de distintos tipos de diagramas de
 fases. 
 
 Ecuaciones de Estado 
-^^^^^^^^^^^^^^^^^^^^
+====================
 El modelado cuantitativo de los equilibrios de fases se realiza principalmente 
 utilizando **ecuaciones de estado** (:abbr:`EoS (Equation of State)`). Estas son relaciones 
 matemáticas (modelos matemáticos) entre dos o más funciones de 
@@ -157,7 +151,7 @@ estado (ver :ref:'Requerimientos funcionales').
 .. _aplicacion:
 
 Aplicación y utilidad
-----------------------
+======================
 
 Los equilibrios entre fases tienen un rol muy importante en la tecnología química, 
 alcanzando una gran diversidad de aplicaciones, principalmente en procesos de

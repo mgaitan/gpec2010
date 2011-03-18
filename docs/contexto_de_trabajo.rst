@@ -106,7 +106,7 @@ a otros tipos de creaciones intelectuales.
 .. _justificacion:
 
 Justificación
-*************
+-------------
 
 Entre los muchos motivos que hacen al SL un modelo 
 técnicamente viable, económicamente sostenible y socialmente justo [JMiH2005]_, 
@@ -115,7 +115,7 @@ para este trabajo haya sido liberado.
 
 
 Creación desde la Universidad Pública
-======================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 La formación del autor de este trabajo, así como la de su director y codirector, 
 no obstante el esfuerzo personal, son fruto de la Universidad Pública Argentina, 
@@ -135,7 +135,7 @@ enumera dentro de sus fines:
     (...) [y] la difusión del saber superior entre todas las capas de la población.
 
 Desarrollo basado en software libre
-====================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. epigraph::
 
@@ -175,7 +175,7 @@ Retribuir el resultado de los beneficios usufructuados para que otros puedan ser
 resulta un evidente acto de justicia. 
 
 Necesidad de transparencia en el software científico
-====================================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Dan Gezelter, mentor de la iniciativa `Open Science <http://www.openscience.org>`_
 resume en [DG2009]_ los objetivos del proyecto:
@@ -203,7 +203,7 @@ es una buena práctica permitir la verificabilidad de que los resultados no se
 adulteran. 
 
 Calidad del software
-====================
+^^^^^^^^^^^^^^^^^^^^^
 
 La libertad de un software no garantiza su calidad *per se*, ni mucho menos 
 la ausencia de errores,  pero aumenta enormemente las posibilidades de alcanzar 
@@ -222,7 +222,7 @@ que muchos proyectos de software libre logran, donde el *feedback* entre usuario
 y desarrolladores es constante y horizontal. 
 
 Mejor estrategia comercial
-==========================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Un mito, muchas veces difundido por interés [#]_ o por ignorancia, 
 es que no se puede lucrar con Software Libre, lo cual es falso. Por el contrario, 

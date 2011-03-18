@@ -67,7 +67,7 @@ a eventos</em> de la biblioteca se basa en una comunicación vía esta bibliotec
 se registra una crónica de eventos de interés para el usuario, denotados en
 su categoría con un símbolo y la hora del suceso.</p>
 <div class="figure">
-<img alt="_images/log_msg2.png" src="_images/log_msg2.png" style="width: 80%;" />
+<img alt="_images/log_msg4.png" src="_images/log_msg4.png" style="width: 80%;" />
 <p class="caption">A través de PubSub, cualquier parte del programa envía avisos que el panel
 (un <em>receptor</em>) mostrará al usuario.</p>
 </div>
@@ -120,19 +120,19 @@ al icono que los representan:</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><em>ok</em></td>
-<td><img alt="ok" src="_images/ok2.png" /></td>
+<td><img alt="ok" src="_images/ok4.png" /></td>
 <td>Acción existosa</td>
 </tr>
 <tr class="row-odd"><td><em>info</em></td>
-<td><img alt="info" src="_images/info2.png" /></td>
+<td><img alt="info" src="_images/info4.png" /></td>
 <td>Información importante</td>
 </tr>
 <tr class="row-even"><td><em>warning</em></td>
-<td><img alt="warning" src="_images/warning2.png" /></td>
+<td><img alt="warning" src="_images/warning4.png" /></td>
 <td>Advertencia</td>
 </tr>
 <tr class="row-odd"><td><em>error</em></td>
-<td><img alt="error" src="_images/error2.png" /></td>
+<td><img alt="error" src="_images/error4.png" /></td>
 <td>Error</td>
 </tr>
 </tbody>
@@ -159,7 +159,7 @@ de generación gráficos. Se resume en el diagrama de secuencia de la figura
 <a class="reference internal" href="#makeplot-num"><em>Secuencia para la generación de un diagrama desde el evento generado por
 el usuario</em></a>.</p>
 <div class="figure" id="makeplot-num">
-<img alt="_images/uml_sec_makeplot_vertical2.png" src="_images/uml_sec_makeplot_vertical2.png" style="width: 60%;" />
+<img alt="_images/uml_sec_makeplot_vertical4.png" src="_images/uml_sec_makeplot_vertical4.png" style="width: 60%;" />
 <p class="caption">Secuencia para la generación de un diagrama desde el evento generado por
 el usuario</p>
 </div>
@@ -181,7 +181,7 @@ la estructura y significado de estos archivos (descriptos en :ref:&#8217;api&#82
 deseable que tengan un acceso al contenido desde la propia aplicación, para
 encontrar información numérica cuya precisión se pierde en un gráfico.</p>
 <div class="figure">
-<img alt="_images/inpout2.png" src="_images/inpout2.png" style="width: 100%;" />
+<img alt="_images/inpout4.png" src="_images/inpout4.png" style="width: 100%;" />
 <p class="caption">Panel de navegación y visualización de archivos en entrada y salida</p>
 </div>
 <p>Esta tarea se hace a través de PubSub. El emisor envía un mensaje con tópico
@@ -320,17 +320,16 @@ de GPEC. <a class="footnote-reference" href="#id22" id="id2">[2]</a></p>
 </div>
 <div class="section" id="invocaci-n-de-ejecutables-del-backend">
 <span id="backend"></span><h2>7.2. Invocación de ejecutables del backend<a class="headerlink" href="#invocaci-n-de-ejecutables-del-backend" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>La comunicación frontend-backend se describe en el siguiente diagrama de secuencia
-donde se resalta el ciclo de vida del objeto <tt class="xref py py-class docutils literal"><span class="pre">ApiManager</span></tt> donde está
-implementada la lógica de tratamimiento de la interfaz de comunicación.</p>
+<p>La comunicación frontend-backend se describe en el diagrama de secuencia
+de la figura <a class="reference internal" href="#front-back-num"><em>Secuencia de la comunicación frontend-backend</em></a>. Allí se resalta el ciclo de vida del objeto <tt class="xref py py-class docutils literal"><span class="pre">ApiManager</span></tt> donde está  implementada la lógica de tratamiento de la interfaz de comunicación.</p>
 <p>El caso particular representado es la obtención de datos el cálculo del diagrama
 de fase global (que se obtiene mediante el ejecutable <strong class="program">GPEC.exe</strong>)
 satisfaciendo las precondiciones de ejecución (por ejemplo, que exista el archivo
 de entrada <tt class="file docutils literal"><span class="pre">GPECIN.DAT</span></tt>, que exista permiso de ejecución, que exista
 permiso de escritura en la carpeta destino). En caso de error por algún motivo
 (conocido o no), se remite un mensaje de log y se cancela la ejecución.</p>
-<div class="figure" id="front-back">
-<img alt="_images/uml_front-back_vertical2.png" src="_images/uml_front-back_vertical2.png" style="width: 100%;" />
+<div class="figure" id="front-back-num">
+<img alt="_images/uml_front-back_vertical4.png" src="_images/uml_front-back_vertical4.png" style="width: 100%;" />
 <p class="caption">Secuencia de la comunicación frontend-backend</p>
 </div>
 <div class="section" id="la-dependencia-con-wine">
@@ -371,7 +370,7 @@ se duplica la dependencia de software privativo.</p>
 </div>
 <div class="section" id="memorizaci-n-de-resultados-costosos">
 <h2>7.3. Memorización de resultados costosos<a class="headerlink" href="#memorizaci-n-de-resultados-costosos" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Como se observa <a class="reference internal" href="#front-back"><em>Secuencia de la comunicación frontend-backend</em></a>, el proceso de comunicación y obtención de los
+<p>Como se observa la figura <a class="reference internal" href="#front-back-num"><em>Secuencia de la comunicación frontend-backend</em></a>, el proceso de comunicación y obtención de los
 datos desde el backend no es trivial. Más aún, considerando que, dada la arquitectura
 heredada interviene de manera insalvable la escritura y lectura a disco, el
 proceso también es costoso <a class="footnote-reference" href="#id23" id="id3">[3]</a> a nivel computacional.</p>
@@ -401,7 +400,7 @@ simplificados realiza una transformación dinámica de una función o método,
 agregándole una funcionalidad que no tiene por sí misma, o más en general,
 alterando de alguna manera el resultado devuelto.</p>
 <div class="figure">
-<img alt="_images/Decorator_UML_class_diagram2.png" src="_images/Decorator_UML_class_diagram2.png" style="width: 60%;" />
+<img alt="_images/Decorator_UML_class_diagram4.png" src="_images/Decorator_UML_class_diagram4.png" style="width: 60%;" />
 <p class="caption">Diagrama de clases del patrón <em>Decorator</em></p>
 </div>
 <p>Expresándolo en términos matemáticos, se trata de una <em class="dfn">composición de funciones</em>:</p>
@@ -424,7 +423,7 @@ de dos funciones anidadas <a class="footnote-reference" href="#id24" id="id4">[4
     <span class="k">return</span> <span class="n">_mydecorator</span>
 </pre></div>
 </div>
-<p>Cuando se tiene una funcion cualquier que se quiere decorar, simplemente
+<p>Cuando se tiene una función cualquier que se quiere decorar, simplemente
 se utiliza la sintaxis <tt class="docutils literal"><span class="pre">&#64;mydecorator</span></tt> justo antes de la función en
 cuestion. Por ejemplo:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="nd">@mydecorator</span>
@@ -514,7 +513,7 @@ a un objeto array de <tt class="xref py py-mod docutils literal"><span class="pr
 y un renglón vacío marca el final del bloque de información como se muestra
 en la figura <a class="reference internal" href="#parser-num"><em>Topología de la información extractada</em></a>.</p>
 <div class="figure" id="parser-num">
-<img alt="_images/parser2.png" src="_images/parser2.png" style="width: 80%;" />
+<img alt="_images/parser4.png" src="_images/parser4.png" style="width: 80%;" />
 <p class="caption">Topología de la información extractada</p>
 </div>
 <p>Una estructura de datos basadas en asociaciones clave-valor (diccionarios),
@@ -639,7 +638,7 @@ texto), definiendo atributos como su alineación horizontal o vertical, el tama�
 puede contener a otros de manera anidada, definiendo una cuadrícula con espacios para ubicar los
 <em>widgets</em> controladores <a class="footnote-reference" href="#id29" id="id12">[9]</a>.</p>
 <div class="figure">
-<img alt="_images/wxglade-sizer2.png" src="_images/wxglade-sizer2.png" style="width: 80%;" />
+<img alt="_images/wxglade-sizer4.png" src="_images/wxglade-sizer4.png" style="width: 80%;" />
 <p class="caption">Diseño con <em>sizers</em> de una ventana de la aplicación mediante la utilidad
 <a class="reference external" href="http://wxglade.sourceforge.net">wxGlade</a></p>
 </div>
@@ -654,7 +653,7 @@ Como ejemplo, en la figura <a class="reference internal" href="#sizers-num"><em>
 es dinámico, cambiando su contenido en función de un evento de cambio de
 opción (evento wx.EVT_CHOICE) del menú de modelos.</em></a> se muestra la parte superior de un panel para la definición de un caso donde consta el uso anidado de <tt class="docutils literal"><span class="pre">sizers</span></tt> de distinta clase.</p>
 <div class="figure" id="sizers-num">
-<img alt="_images/sizers_example2.png" src="_images/sizers_example2.png" style="width: 90%;" />
+<img alt="_images/sizers_example4.png" src="_images/sizers_example4.png" style="width: 90%;" />
 <p class="caption">Distribución mediante <em>sizers</em> de componentes. El contenido del <tt class="docutils literal"><span class="pre">GridBagSizer</span></tt>
 es dinámico, cambiando su contenido en función de un evento de cambio de
 opción (evento <tt class="docutils literal"><span class="pre">wx.EVT_CHOICE</span></tt>) del menú de modelos.</p>
@@ -733,7 +732,7 @@ se basa en un <tt class="xref py py-class docutils literal"><span class="pre">wx
 es una de subclase de la clase <tt class="xref py py-class docutils literal"><span class="pre">wx.Frame</span></tt> pero el manejo de la distribución
 de sus componentes se basa en una librería especial denominado <em>Advanced User Interface</em>,
 que reside en <tt class="xref py py-class docutils literal"><span class="pre">wx.aui</span></tt>.</p>
-<p>Esta librería está construída sobre la pila de componentes de wxPython y permite
+<p>Esta librería está construida sobre la pila de componentes de wxPython y permite
 implementar &#8220;interfaces avanzadas&#8221; a través del control de &#8220;subventanas&#8221;
 automatizado de eventos como  maximizar (ocupar toda la ventana principal), cerrar (no se muestra en la ventana
 principal) o restaurar (vuelve a la posición original) entre otras.</p>
@@ -748,7 +747,7 @@ que define una &#8220;subventana&#8221; a la que se le asocia el contenido a mos
 un panel principal de <cite>wx</cite>.</li>
 </ul>
 <div class="figure">
-<img alt="_images/gpec_aui_max2.png" src="_images/gpec_aui_max2.png" style="width: 95%;" />
+<img alt="_images/gpec_aui_max4.png" src="_images/gpec_aui_max4.png" style="width: 95%;" />
 <p class="caption">La interfaz avanzada de GPEC visualizando 2 de los 4 paneles por defecto.</p>
 </div>
 <p>Vale comentar que luego de cualquier cambio, yendo a :menuselection:‘View &#8211;&gt; Restore default view‘ se reestablece la estructura original.</p>
@@ -788,7 +787,7 @@ y se lo agrega al manejador.</li>
 <p>Una observación en el paso 3 es que para definir los atributos del panel
 se utiliza una técnica denominada <em>encadenado de métodos</em> (<em>Method chaining</em>) <a class="footnote-reference" href="#id30" id="id13">[10]</a>
 donde la ejecución de un método de un objeto devuelve el objeto en sí, posibilitando
-&#8220;encadenar&#8221; la ejución de otro método.</p>
+&#8220;encadenar&#8221; la ejecución de otro método.</p>
 <p>La interfaz por defecto de GPEC se compone de 4 instancias
 de <tt class="xref py py-class docutils literal"><span class="pre">AuiPaneInfo</span></tt> cuyo contenido se lista en la siguiente tabla:</p>
 <blockquote>
@@ -845,7 +844,7 @@ de la intefaz avanzada de Python <tt class="docutils literal"><span class="pre">
 como <em>drag &amp; drop de pestañas</em> entre distintos paneles, o la visualización
 simultánea de múltiples pestañas, como muestra la figura <a class="reference internal" href="#auinotebook-num"><em>El control AuiNotebook de los gráficos mostrando 2 diagramas en simultáneo</em></a>.</p>
 <div class="figure" id="auinotebook-num">
-<img alt="_images/auinotebook2.png" src="_images/auinotebook2.png" style="width: 100%;" />
+<img alt="_images/auinotebook4.png" src="_images/auinotebook4.png" style="width: 100%;" />
 <p class="caption">El control <tt class="docutils literal"><span class="pre">AuiNotebook</span></tt> de los gráficos mostrando 2 diagramas en simultáneo</p>
 </div>
 </div>
@@ -869,11 +868,11 @@ exige al usuario.</li>
 <a class="reference external" href="http://code.enthought.com/projects/mayavi/">Mayavi</a> , que ha servido de inspiración
 para el diseño de GPEC.</p>
 <div class="figure">
-<img alt="_images/mayavi22.png" src="_images/mayavi22.png" style="width: 90%;" />
+<img alt="_images/mayavi24.png" src="_images/mayavi24.png" style="width: 90%;" />
 <p class="caption">Interfaz de la aplicación de visualización de diagramas VTK que sirvió
 como inspiración para la interfaz de GPEC.</p>
 </div>
-<p>Algunas decisiciones concernientes a la usabilidad han sido:</p>
+<p>Algunas decisiones concernientes a la usabilidad han sido:</p>
 <ul class="simple">
 <li>El diseño acompaña al <em>workflow</em>: primero se define el sistema, opcionalmente
 se manipulan los cálculos y por último se grafica. Sólo el primero y el último
@@ -892,7 +891,7 @@ por los navegadores web para abrir una nueva pestaña de trabajo. Dado el contex
 resulta evidente que genera un nuevo caso.</li>
 </ul>
 <div class="figure">
-<img alt="_images/usabilidad_labels2.png" src="_images/usabilidad_labels2.png" style="width: 100%;" />
+<img alt="_images/usabilidad_labels4.png" src="_images/usabilidad_labels4.png" style="width: 100%;" />
 <p class="caption">Interfaz de la aplicación de visualización de diagramas VTK que sirvió
 como inspiración para la interfaz de GPEC.</p>
 </div>
@@ -910,7 +909,7 @@ como un panel de wxPython.</p>
 su ascendencia de clases en el diagrama de la figura <a class="reference internal" href="#figcanvas-num"><em>Diagrama de clases para FigureCanvasWxAgg donde se evidencia
 la herencia múltiple que permite el comportamiento dual del objeto.</em></a>.</p>
 <div class="figure" id="figcanvas-num">
-<img alt="_images/figcanvas2.png" src="_images/figcanvas2.png" style="width: 50%;" />
+<img alt="_images/figcanvas4.png" src="_images/figcanvas4.png" style="width: 50%;" />
 <p class="caption">Diagrama de clases para <tt class="xref py py-class docutils literal"><span class="pre">FigureCanvasWxAgg</span></tt> donde se evidencia
 la herencia múltiple que permite el comportamiento dual del objeto.</p>
 </div>
@@ -922,12 +921,12 @@ de la líneas trazadas.</p>
 de un diagrama. El diagrama de la figura <a class="reference internal" href="#plotclass-num"><em>Diagrama de clases de los distintos tipos de diagramas soportados</em></a> muestra la estructura
 de clases implementada para dar soporte a los distintos tipos de gráfico.</p>
 <div class="figure" id="wx-num">
-<img alt="_images/wxmatplotlib2.png" src="_images/wxmatplotlib2.png" style="width: 65%;" />
+<img alt="_images/wxmatplotlib4.png" src="_images/wxmatplotlib4.png" style="width: 65%;" />
 <p class="caption">Diagrama de secuencia para la graficación de un diagrama al nivel subyacente
 (via <tt class="docutils literal"><span class="pre">matplotlib</span></tt>)</p>
 </div>
 <div class="figure" id="plotclass-num">
-<img alt="_images/class-plots2.png" src="_images/class-plots2.png" style="width: 65%;" />
+<img alt="_images/class-plots4.png" src="_images/class-plots4.png" style="width: 65%;" />
 <p class="caption">Diagrama de clases de los distintos tipos de diagramas soportados</p>
 </div>
 </div>
@@ -939,7 +938,7 @@ utilizó el software <a class="reference external" href="http://sqlite.org">sqli
 el estándar <abbr title="Structured Query Language">SQL</abbr>  mediante una librería
 monolítica, portable, eficiente y compacta que es integramente soportada por Python <a class="footnote-reference" href="#id34" id="id18">[14]</a>.</p>
 <p>La ventaja principal es que una base de datos de <em>sqlite</em> está autocontenida en un
-archivo binario que puede ser distribuído en conjunto con el software, sin
+archivo binario que puede ser distribuido en conjunto con el software, sin
 requerir inicialización o un <em>servidor</em> de base de datos local o remoto. En
 este sentido es equivalente a una base de datos de Microsoft Access, aunque
 superadora en las prestaciones y apego a un lenguaje estándar para base de datos.</p>
@@ -949,7 +948,8 @@ superadora en las prestaciones y apego a un lenguaje estándar para base de dato
 químicos.</p>
 <p>Se incluye una vasta base de datos termodinámicos para más de 2000 compuestos,
 corroborados mediante <cite>DIPPR Project 801 &lt;http://dippr.byu.edu/&gt;</cite> <a class="footnote-reference" href="#id35" id="id19">[15]</a> que incluye información
-como la fórmula, el factor acéntrico, el volúmen, la temperatura y la presión crítica,
+como la fórmula, el factor acéntrico, el volumen, la temperatura y la presión crítica,
+como la fórmula, el factor acéntrico, el volumen, la temperatura y la presión crítica,
 etc.</p>
 <p>Esta información se comporta en modo <em>sólo lectura</em> <a class="footnote-reference" href="#id36" id="id20">[16]</a>
 a través de la interfaz de usuario, pero se brinda también una categoría editable
@@ -961,7 +961,7 @@ experimentales.</p>
 <div class="section" id="modelo-entidad-relaci-n">
 <h3>7.7.2. Modelo Entidad-Relación<a class="headerlink" href="#modelo-entidad-relaci-n" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="figure">
-<img alt="_images/er-database2.png" src="_images/er-database2.png" style="width: 90%;" />
+<img alt="_images/er-database4.png" src="_images/er-database4.png" style="width: 90%;" />
 <p class="caption">Representación de las entidades con sus atributos y la relación entre las mismas</p>
 </div>
 </div>
@@ -1010,7 +1010,7 @@ la herramienta <a class="reference external" href="http://code.google.com/p/sqli
 para <strong>importar</strong> las columnas pertinentes del archivo CSV a la tabla de destino</li>
 </ol>
 <div class="figure">
-<img alt="_images/import-db2.png" src="_images/import-db2.png" style="width: 60%;" />
+<img alt="_images/import-db4.png" src="_images/import-db4.png" style="width: 60%;" />
 <p class="caption">Procesos de conversión de la base de datos a <em>sqlite</em></p>
 </div>
 <table class="docutils footnote" frame="void" id="id21" rules="none">
@@ -1068,7 +1068,7 @@ funciones anidadas.</td></tr>
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id8">[7]</a></td><td>Una referencia completa de esta función se encuentra en
-<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.loadtxt.html">http://docs.scipy.org/doc/numpy/reference/generated/numpy.loadtxt.html</a></td></tr>
+<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/">http://docs.scipy.org/doc/numpy/reference/</a></td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id28" rules="none">

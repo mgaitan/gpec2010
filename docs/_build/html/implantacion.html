@@ -69,7 +69,7 @@ instalación por separado del lenguaje Python (intérprete) y las diversas
 bibliotecas necesarias para la ejecución del software. Esto, en primer lugar,
 porque complica la utilización al usuario inexperto, y en segundo lugar
 porque resulta ineficiente en términos de tamaño teniendo en cuenta que sólo parte
-(algunos módulos)  de las bibliotecas intrísecas de Python y las bibliotecas
+(algunos módulos)  de las bibliotecas intrínsecas de Python y las bibliotecas
 de terceros son utilizadas en GPEC.</p>
 <p>Por poner un ejemplo, la biblioteca de graficación <em>Matplotlib</em> incluye
 soporte para la integración con otras bibliotecas para interfaces gráficas
@@ -79,9 +79,9 @@ especificado, en <em>WxWidget</em>.</p>
 <h3>9.1.1. Py2exe: separar sólo lo necesario<a class="headerlink" href="#py2exe-separar-s-lo-lo-necesario" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Para realizar el estudio de cuáles son los módulos (y sus respectivas
 dependencias) unívocamente necesarios  se utilizó el software <a class="reference external" href="http://www.py2exe.org/">py2exe</a></p>
-<p><em>py2exe</em> es una extensión a las Python Distribution Utilities
-(“Distutils”) que convierte scripts de Python en aplicaciones ejecutables
-en windows (.exe) sin requerir la instalación por separado del intérprete o
+<p><em>py2exe</em> es una extensión a las <em>Python Distribution Utilities</em>
+(<tt class="xref py py-mod docutils literal"><span class="pre">distutils</span></tt>) que convierte scripts de Python en aplicaciones ejecutables
+en windows (<tt class="docutils literal"><span class="pre">.exe</span></tt>) sin requerir la instalación por separado del intérprete o
 bibliotecas.</p>
 <p>Partiendo de un ambiente de desarrollo Windows con todos los requerimientos
 satisfechos, <em>py2exe</em> realiza un <strong>árbol de dependencias</strong> y genera una
@@ -92,7 +92,7 @@ ejecución. Además, puede realizar la conversión del código python a
 agregar una cierta compresión, de manera de optimizar el tamaño del paquete
 resultante.</p>
 <div class="figure">
-<img alt="_images/py2exe_2.png" src="_images/py2exe_2.png" style="width: 671px;" />
+<img alt="_images/py2exe_21.png" src="_images/py2exe_21.png" style="width: 671px;" />
 <p class="caption">Salida final de la ejecución de <em>py2exe</em> enumerando las librerías dinámicas
 complementarias que son necesarias para la ejecución del programa. Todas
 estas son comunes en cualquier instalación por defecto de Windows.</p>
@@ -145,7 +145,7 @@ fuente de la aplicación en formato <em>bytecode</em> con todas las
 bibliotecas necesarias así como el intérprete de Python empaquetado como
 biblioteca dinámica.</p>
 <div class="figure">
-<img alt="_images/py2exe_3.png" src="_images/py2exe_3.png" style="width: 719px;" />
+<img alt="_images/py2exe_31.png" src="_images/py2exe_31.png" style="width: 719px;" />
 <p class="caption">Resultado de la ejecución de <em>py2exe</em></p>
 </div>
 <p>Ejecutando <tt class="docutils literal"><span class="pre">aui.exe</span></tt> se ejecutaría la aplicación distribuible.</p>
@@ -163,7 +163,7 @@ entradas de acceso rápido en el &#8220;Menú de Inicio&#8221;, por ejemplo.</p>
 utilizó la aplicación <a class="reference external" href="http://nsis.sourceforge.net/">NSIS (Nullsoft Scriptable Install System)</a>, que es una software open source para la
 creación de instaladores Windows.</p>
 <div class="figure">
-<img alt="_images/py2exe_3.png" src="_images/py2exe_3.png" style="width: 615px;" />
+<img alt="_images/py2exe_31.png" src="_images/py2exe_31.png" style="width: 615px;" />
 <p class="caption">Creando un instalador Windows a partir de un <em>zip</em> con el contenido
 resultante de <em>py2exe</em></p>
 </div>
@@ -197,23 +197,25 @@ filosofía Unix que se resume en su famoso leitmotif:</p>
 <blockquote>
 <div>&#8220;Write programs that do one thing... and do it well&#8221; <a class="footnote-reference" href="#id2" id="id1">[1]</a></div></blockquote>
 <p>Sin embargo, por falta de masa crítica y tiempo, al momento de la
-presentación no se realizaron instaladores ni paquetes especificos para una
+presentación no se realizaron instaladores ni paquetes específicos para una
 distribución Linux, aunque la instalación mediante el código fuente es
-trivial, dado que Python no reqiere compilacion. Los siguientes comandos son
-suficientes para la obstención de la última versión de GPEC y sus
+trivial, dado que Python no requiere compilación. Los siguientes comandos son
+suficientes para la obtención de la última versión de GPEC y sus
 dependencias:</p>
-<div class="highlight-python"><pre>$ sudo apt-get install python-matplotlib python-matplotlib-data python-numpy
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python-matplotlib python-matplotlib-data python-numpy
   python-wxgtk2.8 wine subversion
-$ svn checkout https://gpec2010.googlecode.com/svn/trunk/src gpec</pre>
+<span class="nv">$ </span>svn checkout https://gpec2010.googlecode.com/svn/trunk/src gpec
+</pre></div>
 </div>
 <p>Y para ejecutarlo, simplemente se invoca el script principal:</p>
-<div class="highlight-python"><pre>$ python gpec/aui.py</pre>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python gpec/aui.py
+</pre></div>
 </div>
 </div>
 <div class="section" id="distribuci-n-y-soporte">
 <h2>9.3. Distribución y soporte<a class="headerlink" href="#distribuci-n-y-soporte" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Dada la gratuidad de GPEC, cada nueva versión se deja disponible
-automáticmente en la sección de descargas del sitio de desarrollo,
+automáticamente en la sección de descargas del sitio de desarrollo,
 <a class="reference external" href="http://code.google.com/p/gpec2010/downloads/list">http://code.google.com/p/gpec2010/downloads/list</a>
 y también en su sitio oficial <a class="reference external" href="http://gpec.efn.uncor.edu">http://gpec.efn.uncor.edu</a></p>
 <p>También se ha creado un grupo de correo , que intenta nuclear a la

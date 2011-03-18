@@ -124,7 +124,7 @@ Ejecución y validación
 ========================
 
 Se muestra la ejecución automatizada de todas las pruebas y su resultado 
-exitoso
+exitoso:
 
 .. code-block:: bash
 

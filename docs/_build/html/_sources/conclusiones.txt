@@ -50,7 +50,7 @@ académicos como de la industria. Prueba de esto es el éxito de la conferencia
 su 10º edición [#]_ en Austin, Estados Unidos, mientras que en agosto se hará la 4º edición de
 la versión europa, *"EuroScipy"*, en París, Francia. 
 La edición de 2010 convocó a más de 200 profesionales (ingenieros, matemáticos, 
-físicos, químicos, biólogos), 47 empresas involucradas y los auspicios destacadados 
+físicos, químicos, biólogos), 47 empresas involucradas y los auspicios destacados 
 de Dell, Microsoft y el gobierno de India. 
 
 En este último pais, vanguardia mundial en la industria del desarrollo de software y en la calidad
@@ -62,13 +62,13 @@ computacionales, mejorando así la calidad de la enseñanza y el aprendizaje" [#
 Uno de las tres pilares programáticos es el uso de Python para la computación científica. 
 
 Además, Python ha obtenido el premio a "mejor lenguaje de programación" 
-durante 3 ediones consecutivas (2008-2010) en el programa 
+durante 3 ediciones consecutivas (2008-2010) en el programa 
 *Readers' Choice Awards* de la revista especializada *Linux Journal* [#]_
 
 Por otra parte, el conjunto de herramientas complementarias (Matplotlib y Numpy) constituyen
-a esta altura casi un estándar de facto para el software científico con Python, 
+a esta altura casi un estándar *de facto* para el software científico con Python, 
 con probado éxito de integración y cuyas comunidades de desarrolladores y 
-usarios están intrínsecamente relacionadas 
+usuarios están intrínsecamente relacionadas 
 
 En este contexto de creciente aceptación, la elección de Python y sus complementos
 constituyó un acierto, no sólo por los resultados satisfactorios en relación 
@@ -87,27 +87,27 @@ Tiempo de desarrollo
 =====================
 
 Puede decirse que el tiempo insumido para su concreción fue mayor que el deseado 
-[#]_, diversas métricas dan cuenta que se está dentro de los tiempos 
-esperables para un proyecto de esta envegadura. 
+[#]_, pero diversas métricas  dan cuenta que ha sido un desarrollo
+rápido comparado con lo pronosticado (ver :ref:`costo`). En este sentido, se concluye que la metodología ha dado resultado.
 
 Más aún, analizando el historial de revisiones del repositorio,  
 puede notarse que durante algunas semanas se realizaron muchos avances 
-(infiriendose esto, con cierto margen de error, desde la cantidad de 
-*commits* realizados) mientras que en otras estuvo detenido. Puede concluirse de 
-esto que el ritmo de desarrollo pudo haber sido más alto y, consecuentemente, 
+(infiriéndose esto, con cierto margen de error, desde la cantidad de 
+*commits* realizados) mientras que en otras estuvo detenido. Puede concluirse 
+d esto que el ritmo de desarrollo pudo haber sido más alto y, consecuentemente, 
 haber alcanzado los objetivos propuestos con anterioridad, si hubieran existido 
-las condiciones (económicas, académicas, laborales, etc.) para una dedicación fulltime. 
+condiciones (económicas, académicas, laborales, etc.) para una dedicación fulltime
+al proyecto.
 
  
-.. todo:: grafico historial de revisiones (tortoise)
-
+.. _costo:
 
 Costo de desarrollo
 ===================
 
 Según la herramienta de análisis de código `Ohloh <https://www.ohloh.net>`_  
-que utliza el algoritmo COCOMO [#]_,  el código de GPEC se compone de 
-aproximadamente 6700 líneas de código Python, lo que insume un esfuerzo estimado 
+que utiliza el algoritmo COCOMO [#]_,  el código de GPEC se compone de 
+aproximádamente 6700 líneas de código Python, lo que insume un esfuerzo estimado 
 de 1 programador/año. Según un salario internacional estándar para un proyecto de software con 
 esta complejidad y lenguaje, el costo del software (sin su documentación) se 
 estima en **u$s 81,053**
@@ -121,7 +121,9 @@ se eleva a 3 desarrolladores/año y **u$s 151.358** de costo total [#]_.
 Mediante la herramienta `SLOCCount <http://www.dwheeler.com/sloccount/>`_ 
 de David Wheeler el conteo de líneas es de 5634, un esfuerzo de 14.74 meses y un 
 costo total estimado de **$ 162,167**, debido a un factor de *overhead* (relacionado
-con la complejidad) de 2.4 :: 
+con la complejidad) del 240%, lo que da pauta de la complejidad global del software.
+
+.. code-block:: bash
  
 
     tin@azulita:~/facu/pi/src$ sloccount --personcost 55000 ./
@@ -148,7 +150,7 @@ Impacto
 
 Si bien la publicación y difusión de las versiones públicas de este software
 se han mantenido como versiones "beta" manteniendo en paralelo el acceso a descarga 
-de la versión anterior como version "estable", esta nueva versión de GPEC ya ha 
+de la versión anterior como versión "estable", esta nueva versión de GPEC ya ha 
 tenido experiencias de uso. 
 
 Durante el mes de noviembre de 2010, la cátedra *Termodinámica*, correspondiente al 
@@ -167,7 +169,7 @@ con la firma del desarrollador y los directores Cismondi y Wolfmann,
 en las conferencias PyCon Argentina 2010 [#]_ y RITeQ 2010 [#]_
 
 .. figure:: images/poster.jpg
-   :width: 80%
+   :width: 60%
     
    Poster expuesto en el congreso PyCon Argentina 2010. Fotografía de Elías
    Andrawos. 
@@ -203,15 +205,6 @@ proyecto.
 Líneas de trabajo abiertas
 ==========================
 
-Mejora y "refactorización" a patrones de diseño
------------------------------------------------
-
-Como se ha visto, GPEC se vale de diversos patrones de diseño de software y 
-especialmente del patrón *Publisher/Subscriber*. No obstante, para garantizar
-aspectos como mantenibilidad, escalabilidad y seguridad del software sería deseable
-realizar un proceso de refactorización a patrones ([JK1999]), en particular en lo 
-concerniente a una arquitectura de separación más acabado entre lógica e interfaz.
-
 
 GPEC como aplicación Web
 -------------------------
@@ -222,12 +215,12 @@ se ha constituido como una tendencia para el desarrollo de software en general,
 excediendo los dominios de las *redes sociales*, los juegos y las aplicaciones
 orientadas a la comunicación corporativa que dieron su origen. 
 
-Esta tendencia se acentúa día a día con nuevos dispositivos que acceden a la red 
+Esta tendencia se acentúa dia a dia con nuevos dispositivos que acceden a la red 
 (como *smartphones*, *tablets* o *netbooks*) que sin importar cuanto poder de cálculo
 tengan por sí mismos, pueden acceder información y solicitar procesamientos 
 a servidores online. 
 
-Aplicaciones en la "nube" como `Google Docs <http://docs.google.com>`_ virtualmente
+Aplicaciones "en la nube" como `Google Docs <http://docs.google.com>`_ virtualmente
 reemplazan paquetes de software de escritorio para ofimática, con la ventaja de independizar al 
 usuario del soporte físico de la información, las actualizaciones del software, 
 y el características subyacentes de su equipo cliente. Se suman además las posibilidades "multiusuario" 
@@ -239,7 +232,7 @@ intentan constituirse en un reemplazo total del sistema
 operativo, integrando ofimática, almacenamiento de datos, comunicación, edición 
 gráfica, ocio, etc. en un "escritorio virtual" accesible via web. 
 
-Llevado al campo del software científico, donde el aspecto colaborativo es escencial
+Llevado al campo del software científico, donde el aspecto colaborativo es esencial
 por génesis, el paradigma tiene especial asidero y de esto da cuenta, por ejemplo, 
 la conferencia *Science Online London* realizada en 2010 [#]_ cuya pregunta
 disparadora es *"¿Cómo la web está cambiando la ciencia?"*
@@ -255,14 +248,33 @@ y pueda generar diagramas directamente "online".
 Esta posibilidad implica una potencial estrategia de comercialización, en el marco
 de lo que se conoce como :abbr:`SaaS (Software as a Service)` [#]_
 
+
 Importación y graficación de datos experimentales
 --------------------------------------------------
 
-.. todo:: Importación y graficación de datos experimentales
+Una de las utilidades de GPEC como entorno de "modelado" de comportamientos 
+de sistemas termodinámicos es la comparación de sus resultados con datos 
+experimentales. Para esto se hace necesario (y es factible) la importación de datos para 
+ser graficados como "curvas experimentales". 
+
+Versión nativa para Linux
+-------------------------
+
+La :ref:`dependencia con Wine <wine>` es una solución de compromiso que repercute 
+significativamente en la performance. Pruebas sencillas dan cuanta que los tiempos
+de ejecución a través de este emulador son de al menos un 300% más lento que 
+sobre Windows en el mismo equipo. 
+Si bien se trata del orden de segundos, para llevar la arquitectura a un sistema
+centralizado basado en web, donde se debe dar respuesta potencial a muchos usuarios
+simultáneos, es necesario eliminar este requerimiento.
+
+Durante Marzo de 2010, el ingeniero químico Francisco Sánchez 
+ha iniciado experimentación, con resultados satisfactorios pero inacabados, para 
+lograr ejecutables nativos para plataforma Linux.
 
 
 Nuevas funcionalidades
-----------------------
+-------------------------
 
 Durante el transcurso del proyecto surgieron muchas ideas de mejoras posibles. 
 Se listan a continuación algunas de ellas: 
@@ -285,6 +297,25 @@ Se listan a continuación algunas de ellas:
 * Mejora en la interoperabilidad y exportación de datos. 
 
 * Soporte de impresión
+
+Ampliación del conjunto de pruebas unitarias
+---------------------------------------------
+
+Si bien se han probado puntos críticos susceptibles a vulnerabilidad, es necesario
+lograr una cobertura de prueba total del sistema, no sólo en el gestor 
+de la API sino en la interfaz de usuario. Esto es, generar test que lancen 
+eventos programáticamente simulando las acciones del usuario, y validar los 
+resultados. 
+
+Mejora y "refactorización" a patrones de diseño
+-----------------------------------------------
+
+Como se ha visto, GPEC se vale de diversos patrones de diseño de software y 
+especialmente del patrón *Publisher/Subscriber*. No obstante, para garantizar
+aspectos como mantenibilidad, escalabilidad y seguridad del software sería deseable
+realizar un proceso de refactorización a patrones ([JK1999]_), en particular en lo 
+concerniente a una arquitectura de separación más acabado entre lógica e interfaz.
+
 
 
 

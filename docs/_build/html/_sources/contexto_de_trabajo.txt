@@ -37,22 +37,40 @@ expone el magíster Antonio Rey Roque en [ARR2003]_:
     nivel adecuado de comunicación, la integración de paradigmas, la
     ruptura de concepciones reduccionistas, el desarrollo de una cultura de aprendizaje colectivo.
     Presupone implicación profesional, multiplicación (no suma) de ideas conceptuales,
-    metodológicas, procedimentales; economización de esfuerzos, de carga profesional y evaluativa.
+    metodológicas, procedimentales; economía de esfuerzos, de carga profesional y evaluativa.
     Implica una proceso docente educativo ágil, económico y enriquecedor para los docentes;
     procesos de aprendizaje más significativos para los alumnos; relación profesional más rica y
     afectiva entre docentes. El escenario correspondiente a un trabajo interdisciplinario no implica,
     como algunos pueden pensar, un mayor trabajo, sino, mayor riqueza, variedad y aceptación de
     actividades; mayor equidad en la distribución de tareas y recibe los beneficios afectivos y
-    profesionales del trabajo en equipo. El resultado del aprendizaje en tal escenario es un saber más
-    coherente, se logra mayor capacidad para enfrentar problemas.
+    profesionales del trabajo en equipo. El resultado del aprendizaje en tal escenario 
+    es un saber más coherente, se logra mayor capacidad para enfrentar problemas.
 
 Desde ambos puntos de vista, estas han sido las ideas que, desde el principio,
-guiaron este proyecto. Como se verá en :ref:`experiencia`, el resultado fue altamente 
-satisfactorio. 
+guiaron este proyecto. Como se verá en :ref:`experiencia`, el resultado 
+ha sido altamente satisfactorio.
 
 
 Software libre
 ===============
+
+El desarrollo de este trabajo ha sido liberado como Software Libre, bajo los teŕminos de la bajo la licencia libre :abbr:`GPL (General Public License)` [#]_. Por su parte, 
+este documento se ofrece bajo los términos de la licencia `Creative Commons Atribución-NoComercial-CompartirIgual 2.5 <http://creativecommons.org/licenses/by-nc-sa/2.5/ar/>`.
+
+Se dará a continuación una somera introducción conceptual sobre Sobre Libre, 
+y en :ref:`justificacion` se exponen los argumentos de la decisión
+mencionada, que se invita a leer y analizar. 
+
+ .. important::
+        
+        La liberación se limita al software desarrollado por el autor de este trabajo,
+        siendo este dependiente del *backend GPEC* que no es libre. 
+        Si bien la utilidad de un sofware libre que depende de otro no libre es parcial,
+        (ver [RMS2004]_), queda fuera de la potestad del autor la determinación
+        de una liberación total, aunque enfáticamente la promueva.
+
+Introducción
+------------
 
 
 El :term:`Software Libre` (SL) es aquel que respeta la libertad  de los usuarios sobre su 
@@ -84,26 +102,20 @@ de conocimiento en sus diversas formas. Iniciativas como `Creative Commons <http
 `Wikipedia <http://wikipedia.org/>`_ nacieron como extensión conceptual aplicada
 a otros tipos de creaciones intelectuales. 
 
-Entre las muchos motivos que hacen al SL un modelo 
-técnicamente viable, económicamente sostenible y socialmente justo [JMiH2005]_, 
-sintéticamente se mencionarán los que justifican que el software desarrollado 
-para este trabajo sea liberado bajo la licencia libre :abbr:`GPL (General Public License)` [#]_
 
- .. important::
-        
-        La liberación se limita al software desarrollado por el autor de este trabajo,
-        siendo este dependiente del *backend GPEC* que no es libre. 
-        Si bien la utilidad de un sofware libre que depende de otro no libre es parcial,
-        (ver [RMS2004]_), queda fuera de la potestad del autor la determinación
-        de una liberación total, aunque enfáticamente la promueva.
-
-
+.. _justificacion:
 
 Justificación
---------------
+*************
+
+Entre los muchos motivos que hacen al SL un modelo 
+técnicamente viable, económicamente sostenible y socialmente justo [JMiH2005]_, 
+sintéticamente se mencionarán los que justifican que el software desarrollado 
+para este trabajo haya sido liberado.
+
 
 Creación desde la Universidad Pública
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+======================================
 
 La formación del autor de este trabajo, así como la de su director y codirector, 
 no obstante el esfuerzo personal, son fruto de la Universidad Pública Argentina, 
@@ -123,7 +135,7 @@ enumera dentro de sus fines:
     (...) [y] la difusión del saber superior entre todas las capas de la población.
 
 Desarrollo basado en software libre
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+====================================
 
 .. epigraph::
 
@@ -163,7 +175,7 @@ Retribuir el resultado de los beneficios usufructuados para que otros puedan ser
 resulta un evidente acto de justicia. 
 
 Necesidad de transparencia en el software científico
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+====================================================
 
 Dan Gezelter, mentor de la iniciativa `Open Science <http://www.openscience.org>`_
 resume en [DG2009]_ los objetivos del proyecto:
@@ -191,7 +203,7 @@ es una buena práctica permitir la verificabilidad de que los resultados no se
 adulteran. 
 
 Calidad del software
-^^^^^^^^^^^^^^^^^^^^
+====================
 
 La libertad de un software no garantiza su calidad *per se*, ni mucho menos 
 la ausencia de errores,  pero aumenta enormemente las posibilidades de alcanzar 
@@ -210,7 +222,7 @@ que muchos proyectos de software libre logran, donde el *feedback* entre usuario
 y desarrolladores es constante y horizontal. 
 
 Mejor estrategia comercial
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+==========================
 
 Un mito, muchas veces difundido por interés [#]_ o por ignorancia, 
 es que no se puede lucrar con Software Libre, lo cual es falso. Por el contrario, 
@@ -303,7 +315,6 @@ a futuro.
 .. [#]  Traducción del inglés propia del autor del trabajo.
 
 .. [#]  Vea :term:`FUD` en el glosario
-
 
 
 .. [UNC1]  Universidad Nacional de Córdoba, *Estatuto de la UNC -  Misión de la Universidad*: 
