@@ -818,6 +818,7 @@ Esta barra de herramientas provee zoom, definición de margenes, desplazamiento,
 exportación y navegación histórica [#]_
 
 .. figure:: images/wx_toolbar.png
+   :width: 60% 
 
    Barra de herramientas provista por Matplotlib integrable en wxPython
 
@@ -845,6 +846,7 @@ que permiten al usuario manipular la figura de diferentes manera, u ocultar
 y volver a mostrar las diferentes curvas.
 
 .. figure:: images/menu_contextual.png
+   :width: 60%  
 
    Menú contextual sobre una figura que se activa ante un evento con el botón 
    derecho.  

@@ -41,7 +41,7 @@ Descripción
 ===========
 
 :abbr:`GPEC (Global Phase Equilibrium Calculations)` [#]_, es un software para la  
-obtención de :term:`curvas de equilibro` termodinámico de :term:`fase global`  
+obtención de curvas de equilibro termodinámico de fase global  
 para :term:`sistemas binarios <sistema binario>`, que se calculan mediante 
 :term:`ecuaciones de estado <ecuación de estado>`. 
 Es útil para fines académicos, científicos y de desarrollo industrial. 

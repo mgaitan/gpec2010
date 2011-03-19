@@ -1,0 +1,258 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>test_apimanager &mdash; &lt;project&gt;</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'draft',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="&lt;project&gt;" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li><a href="../index.html">&lt;project&gt;</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for test_apimanager</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c">#</span>
+
+<span class="kn">import</span> <span class="nn">unittest2</span> <span class="kn">as</span> <span class="nn">unittest</span>
+<span class="kn">from</span> <span class="nn">apimanager</span> <span class="kn">import</span> <span class="n">ApiManager</span><span class="p">,</span> <span class="n">get_numbers</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">settings</span>
+
+<span class="c">#from settings import _models</span>
+
+
+
+<div class="viewcode-block" id="TestApiManager"><a class="viewcode-back" href="../verificacion.html#test_apimanager.TestApiManager">[docs]</a><span class="k">class</span> <span class="nc">TestApiManager</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    
+    
+<div class="viewcode-block" id="TestApiManager.setUp"><a class="viewcode-back" href="../verificacion.html#test_apimanager.TestApiManager.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;inicializador de cada test&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="n">ApiManager</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="mf">10000</span><span class="p">))</span>
+        </div>
+    <span class="k">def</span> <span class="nf">file2list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">file</span><span class="p">):</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">path_temp</span><span class="p">,</span> <span class="nb">file</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">get_numbers</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fh</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
+
+    
+<div class="viewcode-block" id="TestApiManager.test_write_conparin_1"><a class="viewcode-back" href="../verificacion.html#test_apimanager.TestApiManager.test_write_conparin_1">[docs]</a>    <span class="k">def</span> <span class="nf">test_write_conparin_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dirección 0 para modelos de cálculo 1 2 o 3. </span>
+<span class="sd">        Prueba que se invierte el orden de los últimos dos parámetros.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">direction</span> <span class="o">=</span> <span class="s">&#39;0&#39;</span>
+        <span class="n">model_id</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s">&#39;1&#39;</span><span class="p">,</span><span class="s">&#39;2&#39;</span><span class="p">,</span><span class="s">&#39;3&#39;</span><span class="p">])</span>        
+        <span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">o</span> <span class="o">=</span> <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mf">4</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">write_conparin</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">model_id</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file2list</span><span class="p">(</span><span class="s">&#39;CONPARIN.DAT&#39;</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="mf">1</span><span class="p">],</span> <span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">v</span><span class="p">])</span>
+
+    </div>
+<div class="viewcode-block" id="TestApiManager.test_write_conparin_2"><a class="viewcode-back" href="../verificacion.html#test_apimanager.TestApiManager.test_write_conparin_2">[docs]</a>    <span class="k">def</span> <span class="nf">test_write_conparin_2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dirección 0 para modelos de cálculo 1 2 o 3. </span>
+<span class="sd">        Prueba que la primer linea es [direction, model_id]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">direction</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s">&#39;0&#39;</span><span class="p">,</span><span class="s">&#39;1&#39;</span><span class="p">])</span>
+        <span class="n">model_id</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s">&#39;1&#39;</span><span class="p">,</span><span class="s">&#39;2&#39;</span><span class="p">,</span><span class="s">&#39;3&#39;</span><span class="p">])</span>        
+        <span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">o</span> <span class="o">=</span> <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mf">4</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">write_conparin</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">model_id</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file2list</span><span class="p">(</span><span class="s">&#39;CONPARIN.DAT&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="mf">0</span><span class="p">],</span> <span class="p">[</span><span class="n">direction</span><span class="p">,</span> <span class="n">model_id</span><span class="p">])</span>
+
+    </div>
+<div class="viewcode-block" id="TestApiManager.test_write_conparin_3"><a class="viewcode-back" href="../verificacion.html#test_apimanager.TestApiManager.test_write_conparin_3">[docs]</a>    <span class="k">def</span> <span class="nf">test_write_conparin_3</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dirección 0 para modelos de cálculo 4 o 6. </span>
+<span class="sd">        Prueba que no se incluye el parámetro Vc</span>
+<span class="sd">        &quot;&quot;&quot;</span>    
+        <span class="n">direction</span> <span class="o">=</span> <span class="s">&#39;0&#39;</span>
+        <span class="n">model_id</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s">&#39;4&#39;</span><span class="p">,</span><span class="s">&#39;6&#39;</span><span class="p">])</span>        
+        <span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">o</span> <span class="o">=</span> <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mf">4</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">write_conparin</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">model_id</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file2list</span><span class="p">(</span><span class="s">&#39;CONPARIN.DAT&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="mf">1</span><span class="p">],</span> <span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span><span class="p">])</span>
+
+    </div>
+<div class="viewcode-block" id="TestApiManager.test_read_conpaout_1"><a class="viewcode-back" href="../verificacion.html#test_apimanager.TestApiManager.test_read_conpaout_1">[docs]</a>    <span class="k">def</span> <span class="nf">test_read_conpaout_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prueba que para todos los modelos, la primer fila de resultados </span>
+<span class="sd">        tiene 4 parámetros y la segunda 3 excepto para RK-PR que son 4</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">direction</span> <span class="o">=</span> <span class="s">&#39;0&#39;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;469.7&#39;</span><span class="p">,</span> <span class="s">&#39;33.7&#39;</span><span class="p">,</span> <span class="s">&#39;0.313&#39;</span><span class="p">,</span> <span class="s">&#39;0.251506&#39;</span><span class="p">]</span>  <span class="c"># n-pentane</span>
+        <span class="k">for</span> <span class="n">model_id</span> <span class="ow">in</span> <span class="n">settings</span><span class="o">.</span><span class="n">EOS</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">conparin2conparout</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">model_id</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="mf">0</span><span class="p">]),</span> <span class="mf">4</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">model_id</span> <span class="o">==</span> <span class="mf">3</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="mf">1</span><span class="p">]),</span> <span class="mf">4</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="mf">1</span><span class="p">]),</span> <span class="mf">3</span><span class="p">)</span>
+
+    </div>
+<div class="viewcode-block" id="TestApiManager.test_write_gpecin"><a class="viewcode-back" href="../verificacion.html#test_apimanager.TestApiManager.test_write_gpecin">[docs]</a>    <span class="k">def</span> <span class="nf">test_write_gpecin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prueba que se satisface la estructura de GPECIN.DAT</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    
+        <span class="n">model</span> <span class="o">=</span> <span class="mf">1</span>
+        <span class="n">comp1</span> <span class="o">=</span> <span class="p">(</span><span class="s">u&#39;METHANE&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mf">190.56</span><span class="p">,</span>  <span class="mf">45.99</span><span class="p">,</span>  <span class="mf">0.0115</span><span class="p">,</span>  <span class="mf">0.114837</span><span class="p">],</span> 
+                            <span class="p">[</span><span class="mf">2.33338</span><span class="p">,</span>  <span class="mf">0.029849</span><span class="p">,</span>  <span class="mf">0.498078</span><span class="p">,])</span>
+
+        <span class="n">comp2</span> <span class="o">=</span> <span class="p">(</span><span class="s">u&#39;ETHANOL&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mf">514</span><span class="p">,</span>  <span class="mf">61.37</span><span class="p">,</span>  <span class="mf">0.6436</span><span class="p">,</span>  <span class="mf">0.232124</span><span class="p">],</span> 
+                                <span class="p">[</span><span class="mf">12.722</span><span class="p">,</span>  <span class="mf">0.060334</span><span class="p">,</span>  <span class="mf">1.420538</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">write_gpecin</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">comp1</span><span class="p">,</span> <span class="n">comp2</span><span class="p">)</span>
+                
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s">        1</span>
+<span class="s">        0 0</span>
+<span class="s">        METHANE</span>
+<span class="s">        190.56  45.99  0.0115  0.114837</span>
+<span class="s">        2.33338  0.029849  0.498078</span>
+<span class="s">        ETHANOL</span>
+<span class="s">        514  61.37  0.6436  0.232124</span>
+<span class="s">        12.722  0.060334  1.420538</span>
+<span class="s">        0.0</span>
+<span class="s">        0.0</span>
+<span class="s">        2000</span>
+<span class="s">        &quot;&quot;&quot;</span><span class="p">)</span>
+    
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">path_temp</span><span class="p">,</span> <span class="s">&#39;GPECIN.DAT&#39;</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+
+            </div>
+    <span class="k">def</span> <span class="nf">test_gpecout_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prueba que los bloques de datos tienen las columnas significativas</span>
+<span class="sd">        que corresponden</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">model</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mf">1</span><span class="p">,</span><span class="mf">2</span><span class="p">,</span><span class="mf">3</span><span class="p">,</span><span class="mf">4</span><span class="p">,</span><span class="mf">6</span><span class="p">])</span>
+    
+        <span class="n">vcrat</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="n">model</span> <span class="o">!=</span> <span class="mf">3</span> <span class="k">else</span> <span class="p">[</span><span class="mf">1.168</span><span class="p">]</span>   <span class="c">#extra param for RKPR</span>
+        <span class="n">comp1</span> <span class="o">=</span> <span class="p">(</span><span class="s">u&#39;METHANE&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mf">190.56</span><span class="p">,</span>  <span class="mf">45.99</span><span class="p">,</span>  <span class="mf">0.0115</span><span class="p">,</span>  <span class="mf">0.114837</span><span class="p">]</span> <span class="o">+</span> <span class="n">vcrat</span><span class="p">,</span> 
+                            <span class="p">[</span><span class="mf">2.33338</span><span class="p">,</span>  <span class="mf">0.029849</span><span class="p">,</span>  <span class="mf">0.498078</span><span class="p">,])</span>
+
+        <span class="n">comp2</span> <span class="o">=</span> <span class="p">(</span><span class="s">u&#39;ETHANOL&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mf">514</span><span class="p">,</span>  <span class="mf">61.37</span><span class="p">,</span>  <span class="mf">0.6436</span><span class="p">,</span>  <span class="mf">0.232124</span><span class="p">]</span> <span class="o">+</span> <span class="n">vcrat</span><span class="p">,</span> 
+                                <span class="p">[</span><span class="mf">12.722</span><span class="p">,</span>  <span class="mf">0.060334</span><span class="p">,</span>  <span class="mf">1.420538</span><span class="p">])</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">gpecin2gpecout</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">comp1</span><span class="p">,</span> <span class="n">comp2</span><span class="p">)</span>
+        <span class="n">cols</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;VAP&#39;</span><span class="p">:</span><span class="mf">4</span><span class="p">,</span> <span class="s">&#39;CRI&#39;</span><span class="p">:</span><span class="mf">5</span><span class="p">,</span> <span class="s">&#39;CEP&#39;</span><span class="p">:</span><span class="mf">6</span><span class="p">,</span> <span class="s">&#39;LLV&#39;</span><span class="p">:</span><span class="mf">10</span><span class="p">,</span> <span class="s">&#39;AZE&#39;</span><span class="p">:</span><span class="mf">6</span> <span class="p">}</span>
+    
+        <span class="k">for</span> <span class="nb">type</span><span class="p">,</span> <span class="n">curves</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">arrays</span> <span class="ow">in</span> <span class="n">curves</span><span class="p">:</span>                
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">cols</span><span class="p">[</span><span class="nb">type</span><span class="p">],</span> <span class="n">arrays</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mf">1</span><span class="p">])</span>
+
+<div class="viewcode-block" id="TestApiManager.test_gpecout_1"><a class="viewcode-back" href="../verificacion.html#test_apimanager.TestApiManager.test_gpecout_1">[docs]</a>    <span class="k">def</span> <span class="nf">test_gpecout_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prueba que hay 2 curvas de vapor y al menos una crítica</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">model</span> <span class="o">=</span> <span class="mf">1</span>  <span class="c">#random.choice([1,2,4,6])</span>
+    
+        <span class="n">data1</span> <span class="o">=</span> <span class="p">[</span><span class="mf">190.56</span><span class="p">,</span>  <span class="mf">45.99</span><span class="p">,</span>  <span class="mf">0.0115</span><span class="p">,</span>  <span class="mf">0.114837</span><span class="p">]</span> <span class="c">#methane</span>
+        <span class="n">data2</span> <span class="o">=</span> <span class="p">[</span><span class="mf">514</span><span class="p">,</span>  <span class="mf">61.37</span><span class="p">,</span>  <span class="mf">0.6436</span><span class="p">,</span>  <span class="mf">0.232124</span><span class="p">]</span> <span class="c">#ethanol</span>
+
+        <span class="n">data1</span><span class="p">,</span> <span class="n">param1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">conparin2conparout</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">data1</span><span class="p">)</span>
+        <span class="n">data2</span><span class="p">,</span> <span class="n">param2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">conparin2conparout</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">data2</span><span class="p">)</span>
+
+        <span class="n">comp1</span> <span class="o">=</span> <span class="p">(</span><span class="s">u&#39;METHANE&#39;</span><span class="p">,</span> <span class="n">data1</span><span class="p">,</span> <span class="n">param1</span><span class="p">)</span>
+
+        <span class="n">comp2</span> <span class="o">=</span> <span class="p">(</span><span class="s">u&#39;ETHANOL&#39;</span><span class="p">,</span> <span class="n">data2</span><span class="p">,</span> <span class="n">param2</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">gpecin2gpecout</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">comp1</span><span class="p">,</span> <span class="n">comp2</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;VAP&#39;</span><span class="p">]),</span> <span class="mf">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertGreaterEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;CRI&#39;</span><span class="p">]),</span> <span class="mf">1</span><span class="p">)</span> 
+            
+
+</div></div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">suite</span> <span class="o">=</span> <span class="n">unittest</span><span class="o">.</span><span class="n">TestLoader</span><span class="p">()</span><span class="o">.</span><span class="n">loadTestsFromTestCase</span><span class="p">(</span><span class="n">TestApiManager</span><span class="p">)</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">TextTestRunner</span><span class="p">(</span><span class="n">verbosity</span><span class="o">=</span><span class="mf">2</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">suite</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introduzca los términos de búsqueda o un módulo, clase o nombre de función.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Índice General"
+             >índice</a></li>
+        <li><a href="../index.html">&lt;project&gt;</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Martín Gaitán.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1pre/ce4bb37a1409+.
+    </div>
+  </body>
+</html>

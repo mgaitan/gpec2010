@@ -307,11 +307,12 @@ a futuro.
         actitud por la que vale reiterar el agradecimiento del autor.
         
 
+.. [#]  Según `la entrada en Wikipedia <http://en.wikipedia.org/wiki/Standing_on_the_shoulders_of_giants#Attribution_and_meaning>`_
+        la cita corresponde a Bernard of Chartres.
+
 .. [#]  Particularmente, sus licencias no exigen que el software producido o derivado 
         deba ser liberado, como sí ocurre con *GPEC* al adoptar una licencia GPL.
 
-.. [#]  Según `la entrada en Wikipedia <http://en.wikipedia.org/wiki/Standing_on_the_shoulders_of_giants#Attribution_and_meaning>`_
-        la cita corresponde a Bernard of Chartres.
         
 .. [#]  Traducción del inglés propia del autor del trabajo.
 

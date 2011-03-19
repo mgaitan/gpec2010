@@ -41,14 +41,13 @@ Descripción
 ===========
 
 :abbr:`GPEC (Global Phase Equilibrium Calculations)` [#]_, es un software para la  
-obtención de :term:`curvas de equilibro` termodinámico de :term:`fase global`  
+obtención de curvas de equilibro termodinámico de fase global  
 para :term:`sistemas binarios <sistema binario>`, que se calculan mediante 
 :term:`ecuaciones de estado <ecuación de estado>`. 
 Es útil para fines académicos, científicos y de desarrollo industrial. 
 
 *GPEC* fue desarrollado originalmente por el Dr. Martín Cismondi Duarte, codirector de este trabajo, 
-en el marco de su tesis doctoral [#]_ en Ingeniería Química por la Universidad Técnica de Dinamarca [#]_, 
-en 2005 y luego ampliado junto a Diego Nuñez.
+en el marco de su tesis doctoral [#]_ en Ingeniería Química por la Universidad Técnica de Dinamarca [#]_, en 2005 y luego ampliado junto a Diego Nuñez.
 
 Está basado en métodos numéricos y algoritmos desarrollados principalmente por Cismondi 
 en colaboración con el Prof. Michael Michelsen, del Department of Chemical Engineering, 
@@ -57,16 +56,17 @@ DTU (Dinamarca), y el Prof. Marcelo Zabaloy de la Universidad Nacional del Sur,
 
 Actualmente es un proyecto dirigido por el Prof. Esteban Brignole de 
 :abbr:`PLAPIQUI (Planta Piloto de Ingeniería Química)` [#]_
-en colaboración con el :abbr:`IDTQ (Investigación y Desarrollo en Tecnologías Química)` [#]_ 
+en colaboración con el :abbr:`IDTQ (Investigación y Desarrollo en Tecnologías Químicas)` [#]_ 
 
 El software tiene una arquitectura de capas con un mecanismo de comunicación. 
 El :term:`Back end` corresponde al conjunto de programas (codificados en lenguaje Fortran) que implementa los algoritmos
 de cálculo . El :term:`Front end`, denominado *Visual Gpec* es la interfaz 
 de usuario que genera datos de entrada con formato comprensible por los algoritmos
 y procesa las salidas generando distintos gráficos. Para detalle sobre esta arquitectura
-puede ver :ref:`modelo`.
+puede ver :ref:`modelo`. Para mayores detalle sobre la versión preexistente de GPEC vea :ref:`relevamiento`.
 
-.. important::
+
+     .. important::
     
         Estrictamente, *GPEC* es el conjunto de aplicaciones de cálculo 
         desarrolladas por Cismondi
@@ -74,9 +74,9 @@ puede ver :ref:`modelo`.
         llamar *GPEC* al conjunto de software, y es, salvo
         aclaración explícita, la asepción que tiene en este libro. 
 
-.. seealso::
 
-        Para mayor detalle sobre la versión preexistente de GPEC ver :ref:`relevamiento`
+
+
 
 Motivación
 ==========
