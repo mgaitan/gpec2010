@@ -161,7 +161,7 @@ para su prácticas de laboratorio, con gran aceptación y buenos resultados por 
 de los alumnos. 
 
 Con vista a la experiencia del corriente año, la cátedra de la asignatura tiene como plan 
-preparar un artículo sobre la mejora pedagógica de la ensañanza de termodinámica
+preparar un artículo sobre la mejora pedagógica de la enseñanza de termodinámica
 asistida con el uso de esta nueva versión de GPEC. 
 
 Asimismo, este trabajo permitió la publicación de un *poster* titulado 
