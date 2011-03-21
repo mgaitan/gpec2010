@@ -5,7 +5,7 @@ Conclusiones
 Logros
 ======
 
-El desarrollo de este proyecto ha satisfecho los requerimientos planteados. 
+El desarrollo de este proyecto ha satisfecho los objetivos y requerimientos planteados. 
 El software obtenido constituye una mejora cualitativa y cuantitativa 
 de funcionalidad y facilidad de uso respecto a la versión preexistente. 
 
