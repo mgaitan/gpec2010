@@ -80,6 +80,11 @@ Computación
         y que se comportan como si fuesen una única computadora.
         Es la arquitectura de **supercomputadores** más utilizada en la actualidad.
 
+    UML
+        Lenguaje Unificado de Modelado (del inglés, Unified Modeling Language)
+        es el lenguaje de modelado de sistemas de software más conocido que permite su
+        especificación, visualización, construcción y documentación 
+
 
     ambiente de desarrollo
         Es el conjunto de lenguajes de programación, bibliotecas, utilitarios y

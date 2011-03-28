@@ -69,7 +69,6 @@ Formato General:
  3   RK-PR
  4   PC-SAFT
  6   SPHCT
- -   GC
  ==  ====================
 
 
@@ -90,8 +89,8 @@ Este modo se define con ``SENTIDO`` 0. Se definen las variables del compuesto.
      TC    PC    OM
 
 
-.. attention::
-   El ejecutable a invocar para el cálculo en los modelos 4 o 6 es ``PCSAFT``
+    .. attention::
+       El ejecutable a invocar para el cálculo en los modelos 4 o 6 es ``PCSAFT``
 
 
 Detalle:

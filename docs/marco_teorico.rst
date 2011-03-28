@@ -3,7 +3,7 @@
 Marco Teórico
 **************
 
-Debido a la naturaleza multidisciplinaria de este trabajo, posiblemente sea leído
+Debido a la naturaleza multidisciplinaria de este trabajo posiblemente sea leído
 y evaluado por profesionales o interesados de/en las distintas áreas de incumbecia
 (química y computación). 
 
@@ -22,13 +22,13 @@ tecnologías, intentando un desarrollo de los conceptos apto para la comprensió
 de todos los lectores.
 
 
-Diagrama de fase de sistemas binarios
-=====================================
+Diagrama de fases de sistemas binarios
+======================================
 
 Un :term:`diagrama de fase` es un tipo de gráfico utilizado para mostrar 
 las condiciones en las que distintas fases termodinámicas de un sistema pueden ocurrir en 
 equilibrio. Se representa en función de variables que caracterizan el :term:`estado 
-intensivo <propiedades intensivas>` del sistema fisicoquímico (:term:`EoS`).  
+intensivo <propiedades intensivas>` del sistema fisicoquímico.  
 
 El estudio introductorio de la :term:`termodinámica` se centra en 
 :term:`sustancias puras <sustancia pura>` o mezclas a composición constante. En este caso, el sistema es descripto por dos variables.  Un diagrama de fase típico para estos 
@@ -52,21 +52,21 @@ Para :term:`sistemas binarios <sistema binario>` (una mezcla de dos componentes)
 la *composición*  (o, complementariamente, la *densidad*) se vuelve 
 una variable del sistema, cuya representación gráfica son curvas en el 
 espacio :math:`R^3` (gráfico tridimensional). Para un determinado estado *T-P-x* (*x* es 
-composición, en general expresada como fracción del compuesto más volátil) el 
+composición, en general expresada como fracción molar del compuesto más volátil) el 
 sistema se encuentra en *zonas de equilibrio* vapor/líquido, líquido/líquido, vapor/sólido, 
 líquido/sólido u otros casos particulares. 
 
    .. figure:: images/ejTipo1.png
-      :width: 80%
+      :width: 70%
 
       Un diagrama P-T-x para un sistema binario de Tipo I. 
 
-La proyección ortogonal de estas curvas tridimensionales sobre los planos 
+La :index:`proyección ortogonal` de estas curvas tridimensionales sobre los planos 
 correspondientes genera los gráficos cartesianos bidimensionales PT, Px, Tx 
 (y sus análogos para densidad) que son típicos de la   bibliografía del tema. 
 
 .. figure:: images/ejemploTx.png
-   :width: 80%
+   :width: 70%
 
    Un diagrama T-x para un sistema binario, mostrando la línea crítica y 
    otras informaciones. 
@@ -76,7 +76,7 @@ cualquiera sean los compuestos de la mezcla. Existen seis **tipos de
 comportamiento**, de los cuales los tipos I, II, III y IV (enumerados en orden 
 creciente de complejidad) son los más comunes (todos calculables a través de 
 GPEC). Esta complejidad creciente del comportamiento se observa en la aparición 
-de fases líquido-líquido, líquido-líquido-vapor, líneas azeotrópicas, etc. 
+de equilibrios líquido-líquido, líquido-líquido-vapor, líneas azeotrópicas, etc. 
 
 .. figure:: images/beha_types.png
    :width: 80%
@@ -100,15 +100,6 @@ tendencia a que suceda un cambio en sí mismo. La temperatura, la presión y
 las composiciones de fase logran los valores finales que en adelante 
 permanecen fijos, por lo que el sistema logra el equilibrio [#]_ . 
 
-Los equilibrios entre fases tienen un rol muy importante en la tecnología 
-química, alcanzando una gran diversidad de aplicaciones, principalmente 
-en procesos de separación de la industria química, petroquímica y el sector 
-de hidrocarburos, pero también en novedosos procesos basados en fluidos 
-supercríticos que han alcanzado un gran desarrollo en las últimas décadas. 
-Estos equilibrios pueden presentar cierta complejidad, especialmente a altas 
-presiones, y son representados por medio de distintos tipos de diagramas de 
-fases. 
-
 Ecuaciones de Estado 
 ====================
 El modelado cuantitativo de los equilibrios de fases se realiza principalmente 
@@ -128,8 +119,7 @@ despreciables, limita su utilidad para modelar gases reales.
 :math:`p` es la presión absoluta, :math:`V` el volumen, :math:`T` la temperatura, 
 :math:`n` la cantidad de materia y :math:`R` la constante del gas ideal.
 
-La  :eq:`Ecuación de Van der Waals` (1873) [#]_ es una ecuación que generaliza la ecuación de los gases 
-ideales, teniendo en consideración tanto el volumen finito de las 
+La  :eq:`Ecuación de Van der Waals` (1873) [#]_ es una ecuación que generaliza la ecuación de los gases ideales, teniendo en consideración tanto el volumen finito de las 
 moléculas de gas como otros efectos que afectan al término de presiones
 
 .. math:: 
@@ -159,7 +149,9 @@ separación de la industria química, petroquímica y el sector
 de hidrocarburos, pero también en novedosos procesos basados en fluídos 
 supercríticos, de gran desarrollo y creciente interés en las últimas 
 décadas, como la generación de co-cristales, la producción de biodiesel, 
-secado supercrítico, cromatografía supercrítica, etc. [#]_
+secado supercrítico, cromatografía supercrítica, etc. [#]_. Especialmente a altas presiones
+estos equilibrios ser complejos de calcular e interpretar, por lo que la representación
+a traves de diagramas de fases es esencial.
 
 Como ejemplificación del interés de la industria y la academia sobre esta 
 área de investigación, vale mencionar la experiencia del curso *Advanced 
@@ -185,7 +177,7 @@ Petroleum, Chevron, Phillips, Shell y muchas otras de renombre mundial.
 .. [#]  Para un listado más abarcativo, ver `Supercritical fluid: 
         Applications <http://en.wikipedia.org/wiki/Supercritical_fluid#Applications>`_
         
-.. [#]  Este curso se realizó durante 2010 por primera 
+.. [#]  Este curso se realizó durante 2009 por primera 
         vez en Latinoamérica, organizado desde IDTQ, con participantes de Brasil, Canadá, Chile, 
         Alemania y varias otras procedencias. Ver http://www.course.efn.uncor.edu/
 

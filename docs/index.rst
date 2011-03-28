@@ -5,9 +5,7 @@ Contenidos:
 
 
 ..  toctree::
-    :maxdepth: 3
     :numbered:
-
 
     introduccion
     marco_teorico

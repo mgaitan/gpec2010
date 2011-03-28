@@ -4,6 +4,7 @@
 Introducción
 *************
 
+
 En sus orígenes y durante muchas décadas, la computación estuvo vinculada
 estricta e intrínsecamente al mundo de la ciencia. Este vínculo fue 
 retroalimentándose a lo largo de la historia, permitiendo tecnologías que 

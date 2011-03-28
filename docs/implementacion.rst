@@ -10,7 +10,7 @@ Utilización de Publish/Suscribe en GPEC
 
 En :ref:`pubsub` (ver :ref:`marco`) se describió el patrón PubSub y la implementación 
 utilizada para diferentes aspectos del funcionamiento de GPEC. Aquí se describen 
-más en detalles estos usos.
+en detalle sus usos en la aplicación.
 
 
 Panel de mensajes
@@ -102,7 +102,7 @@ Solicitud de gráficación
 -------------------------
 
 Otro uso de ``PubSub`` se produce durante la solicitud de 
-de generación gráficos. Se resume en el diagrama de secuencia de la figura 
+generación de gráficos. Se resume en el diagrama de secuencia de la figura 
 :ref:`makeplot-num`. 
 
 

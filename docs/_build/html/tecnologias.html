@@ -96,7 +96,7 @@ los usuarios, y refinándola a través de diferentes versiones preliminares
 requerimientos planteado.</p>
 <blockquote>
 <div><div class="figure">
-<img alt="_images/desarrollo_evolutivo1.png" src="_images/desarrollo_evolutivo1.png" />
+<img alt="_images/desarrollo_evolutivo3.png" src="_images/desarrollo_evolutivo3.png" />
 <p class="caption">Esquema conceptual del desarrollo evolutivo</p>
 </div>
 </div></blockquote>
@@ -350,7 +350,7 @@ de publicación. Se pueden generar gráficos cartesianos, polares, de barras,
 histogramas, de superficie, etc.</p>
 <blockquote>
 <div><div class="figure">
-<img alt="_images/matplotlib_examples1.png" src="_images/matplotlib_examples1.png" />
+<img alt="_images/matplotlib_examples3.png" src="_images/matplotlib_examples3.png" />
 <p class="caption">Ejemplos de gráficos logrados con Matplotlib</p>
 </div>
 </div></blockquote>
@@ -388,7 +388,7 @@ código es un ejemplo extraído de <a class="reference internal" href="#st2009">
 <p>El resultado se observa en el siguiente gráfico:</p>
 <blockquote>
 <div><div class="figure">
-<img alt="Figura" src="_images/mpl_fig11.png" style="width: 75%;" />
+<img alt="Figura" src="_images/mpl_fig13.png" style="width: 75%;" />
 <p class="caption">Gráfico generado interactivamente</p>
 </div>
 </div></blockquote>
@@ -410,7 +410,7 @@ si se corre en Windows®, como una <em>aplicación GNOME</em> si se corre sobre 
 de escritorio GNOME en Linux, y como una aplicación OS/X en platafomas Mac:</p>
 <blockquote>
 <div><div class="figure">
-<img alt="_images/wxpython_example1.png" src="_images/wxpython_example1.png" />
+<img alt="_images/wxpython_example3.png" src="_images/wxpython_example3.png" />
 <p class="caption">El mismo programa wxPython ejecutado en Windows, Linux y Mac</p>
 </div>
 </div></blockquote>
@@ -464,7 +464,7 @@ En este caso se asocia el evento <tt class="docutils literal"><span class="pre">
 de texto será actualizada con las coordenadas donde este se encuentra.</p>
 <blockquote>
 <div><div class="figure">
-<img alt="_images/wxpython_ventana1.png" src="_images/wxpython_ventana1.png" />
+<img alt="_images/wxpython_ventana3.png" src="_images/wxpython_ventana3.png" />
 <p class="caption">Captura del ejemplo de marras</p>
 </div>
 </div></blockquote>
@@ -491,7 +491,7 @@ se define a qué tipo de mensajes se suscribirán (el tipo se define en función
 del &#8220;asunto&#8221; o &#8220;topic&#8221;) y qué acción (un método o función)
 debe ejecutarse cuando un mensaje de tal tipo arribe.</p>
 <div class="figure">
-<img alt="_images/pubsub_concept1.png" src="_images/pubsub_concept1.png" style="width: 60%;" />
+<img alt="_images/pubsub_concept3.png" src="_images/pubsub_concept3.png" style="width: 60%;" />
 <p class="caption">Diagrama conceptual de la arquitectura <em>Pub/Sub</em></p>
 </div>
 <p>Como se describe en <a class="reference internal" href="implementacion.html#vdlaar2002">[vdLaar2002]</a> Pubsub facilita el desacople de componentes
@@ -556,7 +556,7 @@ código:</p>
 <span class="c"># declaración de la  función &quot;destino&quot;</span>
 
 <span class="k">def</span> <span class="nf">destino</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="k">print</span> <span class="s">&#39;Mensaje con argumentos arg1=&quot;</span><span class="si">%s</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">  arg2=&quot;</span><span class="si">%s</span><span class="s">&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;Mensaje con arg1=&quot;</span><span class="si">%s</span><span class="s">&quot; y arg2=&quot;</span><span class="si">%s</span><span class="s">&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
 
 <span class="c"># declaración de suscripción</span>
 
@@ -566,7 +566,8 @@ código:</p>
 
 <span class="k">def</span> <span class="nf">hacer_algo_y_avisar</span><span class="p">():</span>
     <span class="k">print</span> <span class="s">&#39;Se enviará un mensaje&#39;</span>
-    <span class="n">pub</span><span class="o">.</span><span class="n">sendMessage</span><span class="p">(</span><span class="s">&#39;asuntoParticular&#39;</span><span class="p">,</span> <span class="n">arg1</span><span class="o">=</span><span class="mf">123</span><span class="p">,</span> <span class="n">arg2</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s">&#39;abc&#39;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s">&#39;def&#39;</span><span class="p">))</span>
+    <span class="n">pub</span><span class="o">.</span><span class="n">sendMessage</span><span class="p">(</span><span class="s">&#39;asuntoParticular&#39;</span><span class="p">,</span>  <span class="n">arg1</span><span class="o">=</span><span class="mf">123</span><span class="p">,</span>
+                    <span class="n">arg2</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s">&#39;abc&#39;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s">&#39;def&#39;</span><span class="p">))</span>
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
 
@@ -617,7 +618,7 @@ un repositorio y otras herramientas de gestión de proyecto de manera
 gratuita, para desarrollos de software libre / open source.</p>
 <p>El proyecto se encuentra en la dirección <a class="reference external" href="http://code.google.com/p/gpec2010">http://code.google.com/p/gpec2010</a> .</p>
 <div class="figure">
-<img alt="_images/google_code1.png" src="_images/google_code1.png" style="width: 90%;" />
+<img alt="_images/google_code3.png" src="_images/google_code3.png" style="width: 90%;" />
 <p class="caption">Portada del proyecto en Google Code.</p>
 </div>
 </div>
@@ -746,7 +747,7 @@ son las más notables alternativas.</td></tr>
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id25">[9]</a></td><td>En 2010 el autor de <em>Python PySub</em> reescribió completamente la <a class="reference internal" href="glosario.html#term-api"><em class="xref std std-term">API</em></a>,
-agrengando una orientación a objetos del paso de mensajes más poderosa,
+agregando una orientación a objetos del paso de mensajes más poderosa,
 a la que denominó <em>version 3</em>.</td></tr>
 </tbody>
 </table>

@@ -4,6 +4,7 @@
 Introducción
 *************
 
+
 En sus orígenes y durante muchas décadas, la computación estuvo vinculada
 estricta e intrínsecamente al mundo de la ciencia. Este vínculo fue 
 retroalimentándose a lo largo de la historia, permitiendo tecnologías que 
@@ -24,8 +25,8 @@ Diversas áreas de la ciencia y la ingeniería han
 sido revolucionadas por el software para cálculo, visualización 
 y simulación disponible. Por nombrar sólo dos ejemplos, 
 herramientas como *MATLAB®* o *Mathematica®* 
-forman parte del día a día en la labor de ingenieros e investigadores. En "nicho" 
-puede hacerse aquí una distinción entre software científico/técnico 
+forman parte del día a día en la labor de ingenieros e investigadores. En este 
+ámbito de aplicación puede hacerse una distinción entre software científico/técnico 
 de propósito general como los mencionados (independientemente de que 
 tengan mayor aceptación en un campo u otro) de los que son 
 de propósito específico y realizan un conjunto de tareas puntuales (software aplicativo).
@@ -46,8 +47,8 @@ para :term:`sistemas binarios <sistema binario>`, que se calculan mediante
 :term:`ecuaciones de estado <ecuación de estado>`. 
 Es útil para fines académicos, científicos y de desarrollo industrial. 
 
-*GPEC* fue desarrollado originalmente por el Dr. Martín Cismondi Duarte, codirector de este trabajo, 
-en el marco de su tesis doctoral [#]_ en Ingeniería Química por la Universidad Técnica de Dinamarca [#]_, en 2005 y luego ampliado junto a Diego Nuñez.
+*GPEC* fue desarrollado originalmente en el año 2005 por el Dr. Martín Cismondi Duarte, codirector de este trabajo, en el marco de su tesis doctoral [#]_ en Ingeniería Química por la Universidad 
+Nacional del Sur, parte de la cual fue cursada en la Universidad Técnica de Dinamarca [#]_. Luego fue ampliado junto a Diego Nuñez.
 
 Está basado en métodos numéricos y algoritmos desarrollados principalmente por Cismondi 
 en colaboración con el Prof. Michael Michelsen, del Department of Chemical Engineering, 
@@ -182,9 +183,8 @@ Los objetivos específicos del proyecto son:
 
 .. [#] Web: http://gpec.efn.uncor.edu
 
-.. [#] *Global phase equilibrium calculations: Critical lines, critical end points 
-       and liquid-liquid-vapour equilibrium in binary mixtures*, M Cismondi, ML Michelsen 
-       - The Journal of Supercritical Fluids, 2007 - Elsevier
+.. [#] Un resumen de la tesis es el artículo *Global phase equilibrium calculations: Critical lines,
+       critical end points and liquid-liquid-vapour equilibrium in binary mixtures*, M Cismondi, ML Michelsen - The Journal of Supercritical Fluids, 2007
 
 .. [#] DTU - Danmarks Tekniske Universitet. Web http://www.dtu.dk/
 

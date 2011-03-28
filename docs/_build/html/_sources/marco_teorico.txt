@@ -3,7 +3,7 @@
 Marco Teórico
 **************
 
-Debido a la naturaleza multidisciplinaria de este trabajo, posiblemente sea leído
+Debido a la naturaleza multidisciplinaria de este trabajo posiblemente sea leído
 y evaluado por profesionales o interesados de/en las distintas áreas de incumbecia
 (química y computación). 
 
@@ -61,7 +61,7 @@ líquido/sólido u otros casos particulares.
 
       Un diagrama P-T-x para un sistema binario de Tipo I. 
 
-La proyección ortogonal de estas curvas tridimensionales sobre los planos 
+La :index:`proyección ortogonal` de estas curvas tridimensionales sobre los planos 
 correspondientes genera los gráficos cartesianos bidimensionales PT, Px, Tx 
 (y sus análogos para densidad) que son típicos de la   bibliografía del tema. 
 
@@ -128,8 +128,7 @@ despreciables, limita su utilidad para modelar gases reales.
 :math:`p` es la presión absoluta, :math:`V` el volumen, :math:`T` la temperatura, 
 :math:`n` la cantidad de materia y :math:`R` la constante del gas ideal.
 
-La  :eq:`Ecuación de Van der Waals` (1873) [#]_ es una ecuación que generaliza la ecuación de los gases 
-ideales, teniendo en consideración tanto el volumen finito de las 
+La  :eq:`Ecuación de Van der Waals` (1873) [#]_ es una ecuación que generaliza la ecuación de los gases ideales, teniendo en consideración tanto el volumen finito de las 
 moléculas de gas como otros efectos que afectan al término de presiones
 
 .. math:: 

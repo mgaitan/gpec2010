@@ -15,13 +15,13 @@ el flujo de procesamiento de la información.
 .. figure:: images/workflow.png
    :width: 70%
 
-   Diagrama conceptual del flujo de información entre las distintas capas 
+   :index:`Diagrama conceptual` del flujo de información entre las distintas capas 
 
 El frontend, objeto de este trabajo, se compone de la interfaz de usuario, 
 la gestión de base de datos, los algoritmos de procesamiento de 
 la información y la graficación.
 
-:abbr:`API (Application Programming Interface` refiere a la interfaz de 
+:abbr:`API (Application Programming Interface)` refiere a la interfaz de 
 comunicación definida para la comunicación entre ambas partes, que está basada
 en archivos de texto plano con un formato particular. El relevamiento de esta interfaz 
 formó parte del desarrollo, y se describe exhaustivamente en :ref:`api`. 
@@ -30,7 +30,7 @@ programó para dar soporte a la comunicación. Se describe en :ref:`backend`.
 
 El backend refiere al conjunto de programas desarrollados en Fortran que implementan
 los algoritmos de cálculo. Estos programas leen uno o varios archivos de entrada
-y producen un archivo de salida con la los vectores de números 
+y producen un archivo de salida con los vectores de números 
 reales resultantes de los cálculos (la información a graficar) junto a otras 
 informaciones relativas al contexto de cálculo
 
@@ -42,9 +42,9 @@ se realizan los gráficos correspondientes.
 Componentes y capas de software 
 ================================
 
-El siguiente diagrama, diseñado con la intención de favorecer la compresión
-por sobre el apego al estándar UML, describe las capas y componentes de software
-involucrados en la aplicación. 
+El siguiente diagrama, diseñado con la intención de favorecer la comprensión
+por sobre el apego a la especificación :term:`UML`, describe las capas y 
+:index:`componentes` de software involucrados en la aplicación. 
 
 .. figure:: images/arquitectura.png
    :width: 60%
@@ -52,7 +52,7 @@ involucrados en la aplicación.
    Arquitectura Frontend - Middleware - Backend      
 
 Este diagrama complementa al anterior brindando más detalles sobre la 
-la vinculación de los componentes y las capas de software. Por simplicidad, 
+vinculación de los componentes y las capas de software. Por simplicidad, 
 se ha obviado la descripción de los componentes Matplotlib y Numpy, asumiéndolos 
 tácitamente como parte de la aplicación. 
 

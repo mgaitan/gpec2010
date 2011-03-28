@@ -109,7 +109,7 @@ html_theme = 'default'
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-html_title = "<project>"
+html_title = project
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None
@@ -169,11 +169,7 @@ htmlhelp_basename = 'Gpec2doc'
 
 # -- Options for LaTeX output --------------------------------------------------
 
-# The paper size ('letter' or 'a4').
-latex_paper_size = 'a4'
 
-# The font size ('10pt', '11pt' or '12pt').
-latex_font_size = '12pt'
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
@@ -182,13 +178,10 @@ latex_documents = [
    u'Martín Gaitán', 'manual'),
 ]
 
-pre_tableofcontent = '' #r'''\includegraphics{cc.png}'''
 
-latex_elements = {'papersize': 'a4paper', 
-                  'tableofcontents': pre_tableofcontent + r'''
-                                          \tableofcontents ''',
 
-    }
+
+
 
 
 
@@ -207,8 +200,79 @@ latex_show_pagerefs = False #True #False
 latex_show_urls = True #False
 
 # Additional stuff for the LaTeX preamble.
-#latex_preamble = """\usepackage{graphicx}
-#                  \setkeys{Gin}{width=0.25\textwidth}"""
+
+_TITLE = ur"""
+\begin{titlepage}%
+    \let\footnotesize\small
+    \let\footnoterule\relax
+    \rule{\textwidth}{1pt}%
+    \begin{flushright}%
+      \sphinxlogo%
+      \vspace{15 mm}
+      {\rm\Huge Software para la graficación\\ de diagramas termodinámicos\\ }
+      {\em\large Proyecto Integrador de Ingeniería en Computación}
+      \vfill
+      {\LARGE
+        \begin{tabular}[t]{c}
+          Martín Gaitán
+        \end{tabular}
+        \par}
+      \vfill\vfill
+      {\large
+        Marzo de 2011
+       \vfill
+       \strong{Director}\\
+          Mg. Gustavo Wolfmann\\
+          \strong{Codirector}\\
+          Dr. Martín Cismondi Duarte
+      }%
+    \end{flushright}%\par
+  \end{titlepage}%
+  \vspace{\fill}
+  \includegraphics{cc.png}  
+  \cleardoublepage%
+  \phantomsection\label{pre:dedication}
+  \vspace*{\fill}
+  \begin{flushright}
+    \emph{A Nati y a mi familia,\\por todo el amor}
+  \end{flushright}
+  \vspace{\fill}
+"""
+
+_PREAMBLE = ur"""
+
+  \fancypagestyle{normal}{
+    \fancyhf{}
+    % Footer
+
+    \fancyfoot[LE,RO]{{\textbf{\textsf{\thepage}}}}
+    \fancyfoot[LO]{{\sffamily\bfseries\nouppercase{\textbf{\rightmark}}}}
+    \fancyfoot[RE]{{\sffamily\bfseries\nouppercase{\textbf{\leftmark}}}}
+
+    \fancyhead[LE,RO]{{\sffamily\bfseries\nouppercase{\textit{Software para la graficación de diagramas termodinámicos}}}}
+
+    \renewcommand{\headrulewidth}{0.4pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+  }
+  % Update the plain style so we get the page number & footer line,
+  % but not a chapter or section title.  This is to keep the first
+  % page of a chapter and the blank page between chapters `clean.'
+  \fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[RO,RE]{{\textbf{\textsf{\thepage}}}}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+  }
+"""
+
+
+latex_elements = {
+    'preamble': _PREAMBLE,
+    'maketitle': _TITLE,
+    #'tableofcontents': _TABLE,
+    'papersize': 'a4paper',
+    'pointsize': '12pt',
+} 
 
 # Documents to append as an appendix to all manuals.
 latex_appendices = ['ejemplos', 'api', 'glosario']

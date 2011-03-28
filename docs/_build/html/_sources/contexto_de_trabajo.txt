@@ -7,6 +7,13 @@ Contexto de trabajo
 Trabajo interdisciplinario
 ===========================
 
+.. epigraph::
+
+   La ciencia de la computación no trata sobre las computadoras más de 
+   lo que la astronomía trata sobre los telescopios
+
+   -- Edsger Dijkstra
+
 Como se describe en la :ref:`introducción <intro>`, la computación ha revolucionado
 todas las áreas de la cultura y la investigación moderna, incluyendo, por supuesto,
 a la ingeniería en todas sus formas. 
@@ -232,7 +239,7 @@ su maximización.
 Jordi Mas enumera en [JMiH2005]_ los principales modelos negocio
 que se han puesto en práctica en el SL con éxito durante los últimos años.
 En particular, es importante destacar el modelo de desarrollo software como 
-servicio. Sobre este modelo mas comenta:
+servicio. Sobre este modelo Mas comenta:
 
     (...) [son] empresas que se dedican a la consultoría, desarrollo a medida de
     soluciones, formación y soporte técnico (...)

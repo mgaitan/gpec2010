@@ -54,7 +54,7 @@ requerimientos planteado.
     Esquema conceptual del desarrollo evolutivo
 
 Las actividades de especificación, desarrollo y validación se entrelazan en 
-vez de separarse, con una rápida y constantes retroalimentación entre estas. 
+vez de separarse, con una rápida y constante retroalimentación entre estas. 
 
 Existen dos grandes tipos de desarrollos evolutivos: 
 
@@ -314,9 +314,13 @@ código C). La vectorización tiene muchas ventajas:
     * La vectorización redunda en un código más "pythónico" [#]_
 
 El *broadcasting* o *difusión* es el término que describe el comportamiento 
-elemento "elemento por elemento" de las operaciones. En general, en NumPy todas 
+elemento por elemento de las operaciones. En general, en NumPy todas 
 las operaciones adoptan por defecto un comportamiento de este tipo (no sólo las operaciones 
 aritméticas sino las lógicas, las funcionales y las de nivel de bits). 
+
+Por defecto Numpy define el tipo de dato del array de elementos como el mínimo
+capaz de contener la información brindada. Se incluyen tipos flotantes de hasta
+128 bits de precisión (16 bytes) [#]_.
 
 Matplotlib               
 ----------
@@ -345,7 +349,8 @@ se destaca por las siguientes características:
       a muchos formatos gráficos, incluyendo :abbr:`PS (PostScript)` y 
       :abbr:`SVG (Scalable Vector Graphic)`
     * Es empotrable dentro de las bibliotecas para :term:`GUI` más utilizadas
-      permitiendo realizar aplicaciones de escritorio sin la funcionalidades. 
+      permitiendo realizar aplicaciones de escritorio manteniendose en un alto 
+      nivel de abstracción.
     * Incorpora muchos paquetes que extienden las posibilidades: el 
       muy logrado paquete para graficación 3D, graficación sobre mapas geográficos, 
       utilidades para la interacción con Microsoft Excel®, etc. 
@@ -398,7 +403,7 @@ de escritorio GNOME en Linux, y como una aplicación OS/X en platafomas Mac:
    
 La guía [NR-RD2006]_ escrita por dos de los desarrolladores de la biblioteca
 es un material de referencia obligado para el desarrollo con wxPython. 
-Allí se exponen como características relevantes es la orientación 
+Allí se exponen como características relevantes la orientación 
 a objetos y la orientación a eventos.
 
     .. attention::
@@ -457,7 +462,7 @@ User Interface)` que permite el desarrollo de interfaces de usuario orientadas
 a la :term:`usabilidad` y de alta calidad, abstrayendo y encapsulando 
 el control de aspectos comunes. En particular, este módulo 
 permite la gestión de *subframes*, de manera que los subcomponentes o subventanas
-pueden configurarse con mediante operaciones comunes como *abrir*, *cerrar* u *ocultar*, 
+pueden configurarse mediante operaciones comunes como *abrir*, *cerrar* u *ocultar*, 
 y ser guardadas como *perspectivas* que el usuario puede recuperar 
 en posteriores sesiones de trabajo. 
 
@@ -488,7 +493,7 @@ Como se describe en [vdLaar2002]_ Pubsub facilita el desacople de componentes
 (*callables*, módulos, paquetes) dentro de una aplicación. Los conceptos involucrados son:
 
 
-- Permitir que partes de un aplicación evien mensajes "al resto de la aplicación" 
+- Permitir que partes de una aplicación envíe mensajes "al resto de la aplicación" 
   sin tener que conocer:
   
   - *si* el mensaje será manejado y usufructuado: 
@@ -554,7 +559,7 @@ código::
     # declaración de la  función "destino" 
 
     def destino(arg1, arg2=None):
-        print 'Mensaje con argumentos arg1="%s"\n  arg2="%s"' % (arg1, arg2)
+        print 'Mensaje con arg1="%s" y arg2="%s"' % (arg1, arg2)
 
     # declaración de suscripción
 
@@ -564,17 +569,19 @@ código::
 
     def hacer_algo_y_avisar():
         print 'Se enviará un mensaje'
-        pub.sendMessage('asuntoParticular', arg1=123, arg2=dict(a='abc', b='def'))
+        pub.sendMessage('asuntoParticular',  arg1=123, 
+                        arg2=dict(a='abc', b='def'))
     
     if __name__ == '__main__':
 
         hacer_algo_y_avisar()
 
 
-Cuyo diagrama de secuencia es el siguiente:
+Cuyo diagrama de secuencia se muestra en :ref:`uml_sec-num`.
 
+.. _uml_sec-num:
 
-.. figure::images/uml_sec_pubsub.png
+.. figure:: images/uml_sec_pubsub.png
    :width: 80%
 
    Diagrama de secuencia para una interacción sencilla entre emisor y receptor
@@ -716,7 +723,7 @@ y PDF de alta calidad a través de Latex.
 
 
 
-.. [#]  Un programa {"Hola Mundo!"} es el que imprime el texto «Hola Mundo!» en un 
+.. [#]  Un programa *"Hola Mundo!"* es el que imprime el texto «Hola Mundo!» en un 
         dispositivo de visualización (generalmente una pantalla de monitor). 
         Se suele usar como introducción al estudio de un lenguaje de programación, 
         siendo un primer ejercicio típico.
@@ -741,11 +748,15 @@ y PDF de alta calidad a través de Latex.
         por Python se dice que es "pythonico". Contrariamente, el código opaco u ofuscado es 
         bautizado como "no pythonico". Ver [PEP8]_ y [PEP20]_.
 
+.. [#]  Los tipos `float64` y `complex128` existen en todas las plataformas. En algunas, la precisión
+        es extendida a 96 y 128 bits por número (el doble para complejos) si la arquitectura 
+        lo permite.
+
 .. [#]  `Chaco <http://code.enthought.com/chaco/>`_ y `GNUplot-Py <http://gnuplot-py.sourceforge.net/>`_ 
         son las más notables alternativas. 
 
 .. [#]  En 2010 el autor de *Python PySub* reescribió completamente la :term:`API`, 
-        agrengando una orientación a objetos del paso de mensajes más poderosa, 
+        agregando una orientación a objetos del paso de mensajes más poderosa, 
         a la que denominó *version 3*. 
 
 

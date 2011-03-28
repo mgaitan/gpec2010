@@ -37,7 +37,7 @@ Esta arquitectura respondió a dos cuestiones principales:
 
 * La preexistencia de los programas de cálculo (ejecutables sin interfaz de usuario) que desarrolló 
   el Dr. Martín Cismondi como tésis doctoral y mantiene hasta la actualidad, con la colaboración del 
-  Dr. Marcelo Sabaloy y la supervisión del Dr. Esteban Brignole, 
+  Dr. Marcelo Zabaloy y la supervisión del Dr. Esteban Brignole, 
 
 * La necesidad pragmática de separar el desarrollo del *"Gpec visual"*, trabajo realizado 
   por Diego Nuñez, del mantenimiento e implementación de nuevos algoritmos y 
@@ -68,7 +68,7 @@ las dos partes. Como se verá en breve, esta interfaz de comunicación se ha res
 (ver :ref:`api`). Asimismo, los datos de salida que producen los algoritmos, son 
 leídos por Visual Gpec desde archivos de texto para su posterior 
 graficación, que se realiza mediante rutinas desarrolladas *ad hoc* para esta 
-implementación. Es decir, no se utiliza en ninguna biblioteca para estos fines. 
+implementación. Es decir, no se utiliza en ninguna biblioteca para estos fines, 
 de modo que los gráficos se generan mediante el trazado punto a punto sobre un *widget* 
 tipo canvas. El control de escala, segmentación y demás funcionalidades básicas 
 debió programarse desde cero. 
@@ -208,7 +208,7 @@ en lo posible mejorarse. Se detallan a continuación:
 
 
 * Generación del sistema binario: selección de dos sustancias. 
-* Gestión de de base de datos de constantes de compuestos químicos. Se incluirá una base de datos 
+* Gestión de base de datos de constantes de compuestos químicos. Se incluirá una base de datos 
   con el software que el usuario puede manipular.
 * Adecuación del formulario y archivo de entrada de parámetros para 
   diferentes ecuaciones de estado (modelos) de base molecular [#]_ : 
@@ -221,7 +221,7 @@ en lo posible mejorarse. Se detallan a continuación:
 
 * Generación de suite de gráficos 2-D: 
 
-    * Diagrama de equilibrio de fase global :
+    * Diagrama global de equilibrio de fases:
 
       * Presión - Temperatura (P-T)
       * Temperatura - Composición (T-x)
@@ -310,12 +310,12 @@ múltiples **casos**, gestionados desde una misma interfaz de usuario.
 
     .. note:: 
       
-       Dado que se presta a confusión, vale reiterar que **caso** en 
-       pertenece al contexto químico y es la conjunción de un sistema binario, un 
+       Dado que se presta a confusión, vale reiterar que **caso** en el contexto 
+       es la conjunción de un sistema binario, un 
        modelo de cálculo (ecuación de estado) y sus respectivos 
        parámetros, y **caso de uso** refiere al ámbito de la 
        ingeniería de software y se trata de una técnica para 
-       sistematizar requerimientos y compartamientos esperados del sistema. 
+       dilucidad requerimientos y comportamientos esperados del sistema. 
             
 
 Gráficos en 3D

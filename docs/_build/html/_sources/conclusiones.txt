@@ -5,7 +5,7 @@ Conclusiones
 Logros
 ======
 
-El desarrollo de este proyecto ha satisfecho los requerimientos planteados. 
+El desarrollo de este proyecto ha satisfecho los objetivos y requerimientos planteados. 
 El software obtenido constituye una mejora cualitativa y cuantitativa 
 de funcionalidad y facilidad de uso respecto a la versión preexistente. 
 
@@ -43,13 +43,13 @@ de los *sets* de datos mediante otras herramientas de software.
 Observaciones respecto a la tecnología empleada
 ================================================
 
-La utilización de Python como lenguaje para la computación científica ha sido 
+La utilización de Python como lenguaje para computación científica ha sido 
 una práctica en constante crecimiento alrededor del mundo, tanto en ambientes 
 académicos como de la industria. Prueba de esto es el éxito de la conferencia  
 *"SciPy: Python for Scientific Computing Conference"* que durante 2011 tendrá 
 su 10º edición [#]_ en Austin, Estados Unidos, mientras que en agosto se hará la 4º edición de
 la versión europa, *"EuroScipy"*, en París, Francia. 
-La edición de 2010 convocó a más de 200 profesionales (ingenieros, matemáticos, 
+La edición de 2010 convocó a más de 500 profesionales (ingenieros, matemáticos, 
 físicos, químicos, biólogos), 47 empresas involucradas y los auspicios destacados 
 de Dell, Microsoft y el gobierno de India. 
 
@@ -87,12 +87,14 @@ campañas de marketing.
 Tiempo de desarrollo 
 =====================
 
-Puede decirse que el tiempo insumido para su concreción fue mayor que el deseado 
-[#]_, pero diversas métricas  dan cuenta que ha sido un desarrollo
-rápido comparado con lo pronosticado (ver :ref:`costo`). En este sentido, se concluye que la metodología ha dado resultado.
+El tiempo insumido para la concreción fue mayor que el deseado 
+[#]_, pero diversas métricas  dan cuenta que ha sido un desarrollo al menos un 40% 
+más rápido que lo estimado restrospectivamente [#]_. 
+En este sentido, se concluye que la metodología y las tecnologías empleadas
+han dado resultados positivos. 
 
-Más aún, analizando el historial de revisiones del repositorio,  
-puede notarse que durante algunas semanas se realizaron muchos avances 
+Más aún, analizando el historial de revisiones del repositorio, iniciado 
+el 4 de julio de 2010 [#]_, puede notarse que durante algunas semanas se realizaron muchos avances 
 (infiriéndose esto, con cierto margen de error, desde la cantidad de 
 *commits* realizados) mientras que en otras estuvo detenido. Puede concluirse 
 d esto que el ritmo de desarrollo pudo haber sido más alto y, consecuentemente, 
@@ -111,7 +113,8 @@ que utiliza el algoritmo COCOMO [#]_,  el código de GPEC se compone de
 aproximádamente 6700 líneas de código Python, lo que insume un esfuerzo estimado 
 de 1 programador/año. Según un salario internacional estándar para un proyecto de software con 
 esta complejidad y lenguaje, el costo del software (sin su documentación) se 
-estima en **u$s 81,053**
+estima en **u$s 81,053**  considerando una remuneración internacional estándar de un programador
+*semi-senior* [#]_. 
     
 Contemplando la escritura de la documentación (este reporte), el esfuerzo estimado 
 se eleva a 3 desarrolladores/año y **u$s 151.358** de costo total [#]_. 
@@ -120,9 +123,9 @@ se eleva a 3 desarrolladores/año y **u$s 151.358** de costo total [#]_.
    :width:  30%
 
 Mediante la herramienta `SLOCCount <http://www.dwheeler.com/sloccount/>`_ 
-de David Wheeler el conteo de líneas es de 5634, un esfuerzo de 14.74 meses y un 
+de David Wheeler se estima un esfuerzo de 14.74 meses y un 
 costo total estimado de **$ 162,167**, debido a un factor de *overhead* (relacionado
-con la complejidad) del 240%, lo que da pauta de la complejidad global del software.
+con la complejidad de abstracción) del 240%, lo que da pauta de la complejidad global del software.
 
 .. code-block:: bash
  
@@ -161,7 +164,7 @@ para su prácticas de laboratorio, con gran aceptación y buenos resultados por 
 de los alumnos. 
 
 Con vista a la experiencia del corriente año, la cátedra de la asignatura tiene como plan 
-preparar un artículo sobre la mejora pedagógica de la ensañanza de termodinámica
+preparar un artículo sobre la mejora pedagógica de la enseñanza de termodinámica
 asistida con el uso de esta nueva versión de GPEC. 
 
 Asimismo, este trabajo permitió la publicación de un *poster* titulado 
@@ -258,24 +261,28 @@ de sistemas termodinámicos es la comparación de sus resultados con datos
 experimentales. Para esto se hace necesario (y es factible) la importación de datos para 
 ser graficados como "curvas experimentales". 
 
-Versión nativa para Linux
--------------------------
+Versión nativa del *backend* para Linux
+----------------------------------------
 
-La :ref:`dependencia con Wine <wine>` es una solución de compromiso que repercute 
-significativamente en la performance. Pruebas sencillas dan cuanta que los tiempos
+La :ref:`dependencia con Wine <wine>` de los programas Fortran que implementan el cálculo
+es una solución de compromiso que repercute 
+significativamente en la performance. Pruebas sencillas revelan que los tiempos
 de ejecución a través de este emulador son de al menos un 300% más lento que 
 sobre Windows en el mismo equipo. 
 Si bien se trata del orden de segundos, para llevar la arquitectura a un sistema
 centralizado basado en web, donde se debe dar respuesta potencial a muchos usuarios
-simultáneos, es necesario eliminar este requerimiento.
+simultáneos, es necesario eliminar este requerimiento y optimizar la comunicación
+entre las capas. 
 
-Durante Marzo de 2010, el ingeniero químico Francisco Sánchez 
-ha iniciado experimentación, con resultados satisfactorios pero inacabados, para 
-lograr ejecutables nativos para plataforma Linux.
+    .. note::
+
+       Durante Marzo de 2010, el ingeniero químico Francisco Sánchez 
+       ha realizado adaptaciones del código fuente Fortran
+       para lograr ejecutables nativos para plataforma Linux.
 
 
 Nuevas funcionalidades
--------------------------
+-----------------------
 
 Durante el transcurso del proyecto surgieron muchas ideas de mejoras posibles. 
 Se listan a continuación algunas de ellas: 
@@ -326,13 +333,23 @@ concerniente a una arquitectura de separación más acabado entre lógica e inte
 
 .. [#]  Sitio web: http://www.linuxjournal.com/content/readers-choice-awards-2010
 
+.. [#]  Se considera el proyecto iniciado en el mes de Julio de 2010, aunque 
+        la idea se trabajó informalmente desde tiempo antes. Esto suma 9 meses
+        hasta Marzo de 2011. El algoritmo COCOMO predice, en la estimación más 
+        favorable, un tiempo de desarrollo de 15 meses. 
+
+.. [#]  Revisión 1 http://code.google.com/p/gpec2010/source/detail?r=1
+
 .. [#]  Con cierta perspicacia puede observarse que el autor bautizó el nombre clave del proyecto 
         como ``GPEC 2010`` (tal es el nombre utilizado en *Google Code*) 
-        donde se refleja que la expectativa era concluir el trabajo durante 
+        donde se refleja que la expectativa, no poco audaz, era concluir el trabajo durante 
         dicho año. 
 
-.. [#]  Cocomo es un algoritmo de estimación de costos de software que utiliza una regresión
+.. [#]  *COCOMO* es un algoritmo de estimación de costos de software que utiliza una regresión
         de la evolución del proyecto. Ver http://en.wikipedia.org/wiki/COCOMO . 
+
+.. [#]  *"The average computer programmer salary is around USD 55,000 per year"*. Fuente
+        http://www.buzzle.com/articles/computer-programmer-salary.html    
 
 .. [#]  Una corrección no desestimable a este cálculo es que se calcula el costo de la 
         documentación fuente en *restructuredText* y la generada en HTML de manera automática 

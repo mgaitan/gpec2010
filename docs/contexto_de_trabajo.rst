@@ -7,6 +7,13 @@ Contexto de trabajo
 Trabajo interdisciplinario
 ===========================
 
+.. epigraph::
+
+   La ciencia de la computación no trata sobre las computadoras más de 
+   lo que la astronomía trata sobre los telescopios
+
+   -- Edsger Dijkstra
+
 Como se describe en la :ref:`introducción <intro>`, la computación ha revolucionado
 todas las áreas de la cultura y la investigación moderna, incluyendo, por supuesto,
 a la ingeniería en todas sus formas. 
@@ -38,7 +45,7 @@ expone el magíster Antonio Rey Roque en [ARR2003]_:
     ruptura de concepciones reduccionistas, el desarrollo de una cultura de aprendizaje colectivo.
     Presupone implicación profesional, multiplicación (no suma) de ideas conceptuales,
     metodológicas, procedimentales; economía de esfuerzos, de carga profesional y evaluativa.
-    Implica una proceso docente educativo ágil, económico y enriquecedor para los docentes;
+    Implica un proceso docente educativo ágil, económico y enriquecedor para los docentes;
     procesos de aprendizaje más significativos para los alumnos; relación profesional más rica y
     afectiva entre docentes. El escenario correspondiente a un trabajo interdisciplinario no implica,
     como algunos pueden pensar, un mayor trabajo, sino, mayor riqueza, variedad y aceptación de
@@ -94,7 +101,7 @@ de los dos sitios más visitados y exitosos a nivel mundial: Google [#]_ [#]_ y 
        :figwidth: 50 %
 
        Familia de S.O. de los 500 supercomputadores 
-       más rápidos del múndo. http://www.top500.org
+       más rápidos del mundo. http://www.top500.org
 
 De cierta manera, el SL ha excedido su condición de forma de licenciamiento de software 
 erigiéndose en un marco de referencia moral, político y legal para la creación 
@@ -141,7 +148,7 @@ Desarrollo basado en software libre
 
     Los buenos programadores saben qué escribir. Los mejores, que reescribir (y reutilizar)
 
-    -- Eric Raymon, [ER1997]_
+    -- Eric Raymond, [ER1997]_
 
 En ninguna disciplina creativa se es absolutamente original. Basarse 
 en las creaciones o ideas previas, que han sido probadas con éxito, 
@@ -232,7 +239,7 @@ su maximización.
 Jordi Mas enumera en [JMiH2005]_ los principales modelos negocio
 que se han puesto en práctica en el SL con éxito durante los últimos años.
 En particular, es importante destacar el modelo de desarrollo software como 
-servicio. Sobre este modelo mas comenta:
+servicio. Sobre este modelo Mas comenta:
 
     (...) [son] empresas que se dedican a la consultoría, desarrollo a medida de
     soluciones, formación y soporte técnico (...)
@@ -264,7 +271,7 @@ con cientos de miles de visitas diarias.
 
 Más y mejores usuarios repercute, como se ha visto, en más calidad y prestigio, 
 que se realimentan en un bucle virtuoso ampliando posibilidades de lucro, 
-fin que está fuera de los alcances de este trabajo por no por ello descartado 
+fin que está fuera de los alcances de este trabajo pero no por ello descartado 
 a futuro. 
 
     .. seealso::
@@ -280,14 +287,14 @@ a futuro.
 
 .. [#]  Refiere a las cuatro libertades esenciales del software libre descriptas en [FSFa]_
 
-.. [#]  La definición de *hacker* que el común de la gente tiene es incorrecta. 
+.. [#]  La noción de *hacker* que el común de la gente tiene es incorrecta. 
         Vea el :ref:`glosario <glosario>` para una definición correcta.
 
 .. [#]  En 2010, el 73% de los servidores web funciona con software libre. 
         http://news.netcraft.com/archives/2010/02/22/february_2010_web_server_survey.html
 
-.. [#]  Hasta junio de 2010, el 91% de los 500 supercomputadores más poderosos del mundo
-        funcionaban con Linux o derivados. http://www.top500.org/charts/list/35/osfam
+.. [#]  Hasta marzo de 2011, el 91.8% de los 500 supercomputadores más poderosos del mundo
+        funcionaban con Linux o derivados. http://www.top500.org/charts/list/36/osfam
 
 .. [#]  Sergey Brin en una entrevista de 2000 cuenta que dentro de Google 
         *"Linux se utiliza en todas partes... en los más de 6.000 servidores así 
