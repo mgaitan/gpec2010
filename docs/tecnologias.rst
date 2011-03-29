@@ -1,95 +1,7 @@
-Tecnologías y metodologías
-**************************
-
-
-Metodologías de desarrollo de Software
-========================================
-
-Metodologías Ágiles
---------------------
-
-Este proyecto integrador ha sido guiado por un conjunto de preceptos 
-comunes a las *metodologías ágiles de desarrollo de software*. 
-Sin necesariamente ajustarse a ninguna en particular, se comparte
-la escala de valoración hecha en Agile Manifiesto [AG-MANIF]_ :
-
-    Estamos descubriendo formas mejores de desarrollar
-    software tanto por nuestra propia experiencia como
-    ayudando a terceros. A través de este trabajo hemos
-    aprendido a valorar:
-
-    * Individuos e interacciones sobre procesos y herramientas
-    * Software funcionando sobre documentación extensiva
-    * Colaboración con el cliente sobre negociación contractual
-    * Respuesta ante el cambio sobre seguimiento [estricto] de un plan
-
-    (Esto es, aunque valoramos los elementos de la derecha,
-    valoramos más los de la izquierda).
-
-Las *implementaciones* del marco conceptual propuesto por el Manifiesto de 
-desarrollo ágil (como *eXtremme Programming* o *Scrum*) están estructuralmente 
-concebidas para el trabajo de un equipo de desarrollo abocado al mismo proyecto. 
-Como el desarrollo  del software estuvo a cargo de una sola persona 
-(con la colaboración y revisión de los directores) no se ajustó 
-a un método estrictamente definido para un equipo como los mencionados. 
-
-Sin embargo, muchas ideas propuestas por estos métodos han sido aplicadas, 
-concibiendo un desarrollo evolutivo con énfasis en la adaptabilidad 
-de los requerimientos. 
-
-Algunas de las técnicas y procesos ágiles involucrados en este desarrollo 
-han sido la utilización de un lenguaje de muy alto nivel (ver :ref:`tecnologias` ), 
-la implementación de pruebas automatizadas, la utilización de bibliotecas 
-probas para la implementación de aspectos específicos de la solución, entre 
-otras.   
-
-.. _desarrollo:
-
-Desarrollo evolutivo adaptado
------------------------------
-
-Según [Sommerville2004]_, el desarrollo evolutivo se basa en la idea de 
-una implementación inicial, exponiéndola a los comentarios del comitente o 
-los usuarios, y refinándola a través de diferentes versiones preliminares 
-(versiones *beta*) hasta obtener una versión que satisfaga el conjunto de 
-requerimientos planteado. 
-
- .. figure:: images/desarrollo_evolutivo.png
-
-    Esquema conceptual del desarrollo evolutivo
-
-Las actividades de especificación, desarrollo y validación se entrelazan en 
-vez de separarse, con una rápida y constante retroalimentación entre estas. 
-
-Existen dos grandes tipos de desarrollos evolutivos: 
-
-1.  *Desarrollo exploratorio* donde el objetivo del proceso es trabajar con el 
-    cliente para explorar y precisar los requerimientos y obtener un sistema 
-    final. Se comienza con las partes del sistema que más cabalmente se 
-    comprenden y se evoluciona agregando nuevos atributos precisados por el 
-    comitente, la comunidad de usuarios o el propio equipo de desarrollo. 
-
-2.  *Prototipos desechables* donde el objetivo del proceso es comprender 
-    mejor los requerimientos. Una vez evacuadas todas las incertidumbres, los 
-    prototipos se desechan y se diseña e implementa el sistema final desde el 
-    principio.
-
-En este trabajo se aplicó un proceso evolutivo de tipo exploratorio, con activa
-interacción con el comitente, basándose en estrategias de desarrollo ágil mencionadas previamente. 
-
-    .. important::
-
-    La adopción de principios rectores del desarrollo ágil y el desarrollo evolutivo
-    implica que no se ha un proceso de ingeniería en software formal, más 
-    frecuentemente enseñada en la facultad. Esto es, el proceso de diseño e 
-    implementación han sido mancomunados en vez de separados estrictamente, 
-    y por ello esta documentación los reporta en forma conjunta. 
-
-
 .. _tecnologias:
 
-Tecnologías principales
-========================
+Tecnologías adoptadas
+*********************
 
 Se expondrá a continuación una introducción a las características y conceptos
 claves de las tecnologías de software que se han utilizado en este proyecto 
@@ -102,8 +14,11 @@ y la justificación de su adopción.
        para explicar cuestiones particulares.  
      
 
-Lenguaje de programación Python 
--------------------------------
+Lenguaje de programación
+========================
+
+Características de Python
+-------------------------
 
 `Python <http://python.org>`_ es un avanzado lenguaje de programación de alto nivel, 
 :term:`interpretado`, :term:`multiparadigma` y :term:`multiplataforma`. 
@@ -243,7 +158,7 @@ plantea Shannon Behrens en el prólogo de [ZIADE2008]_:
 
 
 Python en el software científico
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------
 Como se afirma en [JH-FP]_ en la sección *Who is using Python?*, el uso de 
 Python en la computación científica  es tan amplio como el campo mismo. 
 Los autores destacan muchos usos en distintas universidades y centros de investigación 
@@ -273,7 +188,7 @@ del mundo:
         http://python.org/about/success/
            
 NumPy
-------
+======
 
 Los tipos de datos incorporados con Python nativamente para contener otros tipos 
 de datos u objetos (en particular listas y tuplas), son muy eficientes pero
@@ -338,7 +253,7 @@ capaz de contener la información brindada. Se incluyen tipos flotantes de hasta
 128 bits de precisión (16 bytes) [#]_.
 
 Matplotlib               
-----------
+==========
 
 `Matplotlib <http://matplotlib.sourceforge.net/>`_ es una biblioteca para Python, 
 liberada como software libre, que permite la generación de diferentes tipos de gráficos en 2D y 3D con calidad 
@@ -393,7 +308,7 @@ El resultado se observa en el siguiente gráfico:
 .. _wx:
 
 WxPython
---------
+=======-
 
 `wxWidgets <http://www.wxwindows.org/>`_ es una biblioteca en C++ que permite 
 desarrollar interfaces gráficas para aplicaciones multiplataforma que corren
@@ -534,7 +449,7 @@ adjunta. Este intermediario (a veces conocido como *broker*, o directamente
 *pubsub*) entrega este mensaje a todos los receptores suscriptos. 
 
 Ventajas
---------
+=======-
 
 - **Acoplamiento débil**: la topología de Pubsub, basada en la intermediación y el 
   desconocimiento de identidades y comportamientos de los objetos que interactuan 
@@ -559,7 +474,7 @@ Ventajas
   demanda computacional.  
 
 Pubsub en Python
------------------
+================-
 
 En GPEC se ha utilizado el paquete `Python Pubsub <http://pubsub.sourceforge.net/>`_
 de Oliver Schoenborn, en su versión 1 [#]_ . Esta implementación es muy sencilla
@@ -622,7 +537,7 @@ Del vasto conjunto de herramientas, se detallan aquí las utilizadas para el des
 de este trabajo.
 
 Control de versiones
---------------------
+===================-
 
 Un  :abbr:`VCS (Sistema de Control de Versiones)` es un software capaz de llevar registro de 
 la evolución incremental de cualquier conjunto de archivos, permitiendo 
@@ -662,7 +577,7 @@ El proyecto se encuentra en la dirección http://code.google.com/p/gpec2010 .
 
 
 Seguimiento de errores y propuestas
-------------------------------------
+====================================
 
 El mismo servicio que provee el repositorio *svn* gratuito, incluye un 
 sistema de gestión de errores (*bug tracker* o, más generalmente, *issue 
@@ -688,7 +603,7 @@ pendientes en cada momento del desarrollo, facilitando la planificación de
 lanzamientos de nuevas versiones.
 
 Documentación
--------------
+=============
 
 Gran parte del desarrollo de un software así como el de un proyecto integrador o 
 tesis en general, cualquiera sea el tópico, es la documentación. Contar con 
@@ -701,7 +616,7 @@ desarrollo, con distintos niveles de detalle. Se utilizaron las siguientes
 herramientas.
 
 Wiki
-^^^^
+----
 
 Una *wiki* es un sistema para la creación de documentos hipertextuales de 
 manera sencilla. Con el permiso adecuado, un documento (en general una 
@@ -712,7 +627,7 @@ El servicio *Google Code* incopora una *Wiki* que se ha utilizado como
 cuaderno de notas para llevar cuenta de las minutas, links de interés, etc.  
 
 restructuredText
-^^^^^^^^^^^^^^^^
+----------------
 
 El documento principal (la "tesis") se ha escrito utilizando el lenguaje de 
 marcado `reStructuredText <http://docutils.sourceforge.net/docs/user/rst/>`_ 
@@ -724,7 +639,7 @@ A través de diversas herramientas se puede convertir *rst* a distintos
 formatos, como html, pdf o código LaTeX. 
 
 Sphinx
-^^^^^^
+------
 
 `Sphinx <http://sphinx.pocoo.org>`_ es una herramienta para la documentación de 
 software. Si bien permite la *autodocumentación* (realizando introspección 
@@ -824,14 +739,11 @@ y PDF de alta calidad a través de Latex.
 .. [ST2009]  Tosi, Sandro (2009) *Matplotlib for Python Developers, Build remarkable publication 
              quality plots the easy way*, Pack Publishing
 
-.. [AG-MANIF]  Varios autores (2001), *Manifesto for Agile Software Development*, http://agilemanifesto.org/
 
 .. [LL-RJ2003] Lindstrom, Lowell - Jeffries, Ron (2003) *Extreme Programming and 
                Agile Software Development Methodologies*, http://xprogramming.com
 
-.. [Sommerville2004] Sommerville, Ian (2004) *Software Enginnering, 7th edition*, Pretince Hall
-            Traducción al español por el Departamento de Ciencias de la Computación e Inteligencia 
-            Artificial de la Universidad de Alicante (2005). 
+
 
 .. [GR-STE2005] Greene, Jeniffer - Steelman, Andrew (2005) *Applied Software Project Management*,
                 O'Reilly Associates
