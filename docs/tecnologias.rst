@@ -3,9 +3,9 @@
 Tecnologías adoptadas
 *********************
 
-Se expondrá a continuación una introducción a las características y conceptos
-claves de las tecnologías de software que se han utilizado en este proyecto 
-y la justificación de su adopción.
+Se expondrá a continuación las justificación de adopción de las herramientas y tecnologías
+utilizadas acompañada de una introducción a las características y conceptos
+claves de cada una.
 
 
     .. seealso:: 
@@ -13,9 +13,39 @@ y la justificación de su adopción.
        En el capítulo :ref:`implementacion` se ahonda en algunos aspectos 
        para explicar cuestiones particulares.  
      
-
 Lenguaje de programación
 ========================
+
+Adopción de Python
+------------------
+
+La elección del lenguaje de desarrollo fue clave y previa a muchos otras decisiones
+a lo largo de la vida del proyecto. 
+
+Dadas las características y requerimientos de la aplicación a desarrollar
+se requería un lenguaje que satisfaga las siguientes condiciones: 
+
+- Lenguaje de muy alto nivel que permita rápido prototipado
+- Multiplataforma
+- Orientación a objetos completa y flexible
+- Posibilidad de crear interfaz de usuario compleja 
+- Licencia libre no restrictiva
+- Integración con bibliotecas de graficación 2D y 3D
+- Documentación accesible y clara 
+
+En el análisis realizado, Java y Python (entre otros) satifacen esas condiciones
+pero se optó por el segundo dadas las siguientes razones: 
+
+- Se contaba con un dominio más profundo y mayor experiencia, dado trabajos académicos
+  y laborales previos realizados con este lenguaje  
+- Es un lenguaje sintácticamente más sencillo
+- Las opciones de graficación 2D y 3D se consideraron más logradas. Para una 
+  resultado equivalente debían usarse sendas bibliotecas en Java, con APIs 
+  distintas. 
+- Las interfaces de escritorio en plataformas Linux de Java no son nativas
+- La posibilidad a futuro de mejorar la integración con el backend (Fortran) es limitada
+  en Java, y en cambio Python cuenta con herramientas como `F2Py <http://www.scipy.org/F2py>`_
+
 
 Características de Python
 -------------------------
@@ -252,6 +282,14 @@ Por defecto Numpy define el tipo de dato del array de elementos como el mínimo
 capaz de contener la información brindada. Se incluyen tipos flotantes de hasta
 128 bits de precisión (16 bytes) [#]_.
 
+Alternativa analizada
+----------------------
+
+Estrictamente, existe un módulo que da soporte a arreglos (ver `Array <http://docs.python.org/library/array.html>`_)  en la biblioteca estándar de Python. 
+Sin embargo, las funcionalidades provistas no son comparables a las de Numpy 
+y fue por ello descartado. 
+
+
 Matplotlib               
 ==========
 
@@ -269,8 +307,8 @@ a objetos. Está principalmente escrito en Python, aunque se basa fuertemente
 en NumPy y otras extensiones para proveer buena performance incluso con 
 arreglos grandes. 
 
-Sin bien existen otras bibliotecas libres con prestaciones similares [#]_, Matplotlib 
-se destaca por las siguientes características: 
+Si bien fueron estudiadas otras bibliotecas libres con prestaciones similares como 
+Chaco o GNUplot [#]_, se optó por Matplotlib dadas las siguientes características: 
 
     * Cuenta con una extensa y clara documentación (ver [MPLDOC]_)
     * Es orientado a objetos: se puede heredar, extender y sobrecargar cada tipo de objeto 
@@ -285,8 +323,7 @@ se destaca por las siguientes características:
       muy logrado paquete para graficación 3D, graficación sobre mapas geográficos, 
       utilidades para la interacción con Microsoft Excel®, etc. 
 
-Matplotlib incluye una :term:`API` que tiene su origen en la emulación de los comandos gráficos de Matlab®, 
-denominada *PyPlot*, especialmente orientada a su uso interactivo. El siguiente 
+Matplotlib incluye una :term:`API` que tiene su origen en la emulación de los comandos gráficos de Matlab®, denominada *PyPlot*, especialmente orientada a su uso interactivo. El siguiente 
 código es un ejemplo extraído de [ST2009]_ ::
 
     >>> import matplotlib.pyplot as plt
@@ -295,9 +332,11 @@ código es un ejemplo extraído de [ST2009]_ ::
     >>> plt.plot(x, x**2)
     >>> plt.show()
 
-El resultado se observa en el siguiente gráfico:
+El resultado se observa en la figura :ref:`mplfig1-num`. 
 
     
+    .. _mplfig1-num:
+
     .. figure:: images/mpl_fig1.png
        :alt: Figura
        :width: 75% 
@@ -379,13 +418,15 @@ que indica como responde el programa ante el acaecimiento del evento.
 En este caso se asocia el evento ``wx.EVT_MOTION`` en el objeto ``panel`` 
 (que ocurre cuando se mueve el puntero sobre el objeto) al método ``OnMove``. 
 
-Como resultado, cada vez que se mueve el puntero sobre el panel, la caja
-de texto será actualizada con las coordenadas donde este se encuentra.
+Como ejemplifica la figura :ref:`wxventana-num`, cada vez que se mueve el 
+puntero sobre el panel, la caja de texto será actualizada con las coordenadas 
+donde este se encuentra. 
+
+    .. _wxventana-num:
 
     .. figure:: images/wxpython_ventana.png
 
         Captura del ejemplo de marras
-
 
 Como característica avanzada, wxPython incluye el módulo :abbr:`AUI (Advanced 
 User Interface)` que permite el desarrollo de interfaces de usuario orientadas
@@ -395,6 +436,20 @@ permite la gestión de *subframes*, de manera que los subcomponentes o subventan
 pueden configurarse mediante operaciones comunes como *abrir*, *cerrar* u *ocultar*, 
 y ser guardadas como *perspectivas* que el usuario puede recuperar 
 en posteriores sesiones de trabajo. 
+
+Alternativas analizadas
+-----------------------
+
+Python soporta un gran número *toolkits* para desarrollo de interfaces de usuario. 
+Las estudiadas como alternativa fueron: 
+
+- GTK a través de PyGTK
+- QT a través de PyQT o PySide
+- Tcl/Tk a través del paquete estándar Tkinter
+
+Si bien Tkinter contaba con la ventaja de no requerir software adicional a Python
+para su utilización, se optó por `wxPython` dada la experiencia previa y la apariencia nativa en 
+cada sistema operativo. 
 
 
 .. _pubsub:
@@ -449,7 +504,7 @@ adjunta. Este intermediario (a veces conocido como *broker*, o directamente
 *pubsub*) entrega este mensaje a todos los receptores suscriptos. 
 
 Ventajas
-=======-
+--------
 
 - **Acoplamiento débil**: la topología de Pubsub, basada en la intermediación y el 
   desconocimiento de identidades y comportamientos de los objetos que interactuan 
@@ -474,7 +529,7 @@ Ventajas
   demanda computacional.  
 
 Pubsub en Python
-================-
+----------------
 
 En GPEC se ha utilizado el paquete `Python Pubsub <http://pubsub.sourceforge.net/>`_
 de Oliver Schoenborn, en su versión 1 [#]_ . Esta implementación es muy sencilla
@@ -615,6 +670,47 @@ A lo largo de todo el proyecto se fue documentando distintos aspectos del
 desarrollo, con distintos niveles de detalle. Se utilizaron las siguientes 
 herramientas.
 
+restructuredText
+----------------
+
+Este documento se ha escrito utilizando el lenguaje de 
+marcado `reStructuredText <http://docutils.sourceforge.net/docs/user/rst/>`_ 
+(:abbr:`rst o rest`). :abbr:`rst` permite aportar 
+semántica a un documento de texto plano, de manera equivalente a *LaTeX* 
+pero mucho más sencilla, conservando legibilidad en formato fuente. 
+
+A través de diversas herramientas se puede convertir *rst* a distintos 
+formatos, como html, pdf o código LaTeX. 
+
+Como ejemplo de la sintáxis de :abbr:`rst` se muestra el inicio
+de esta misma sección: 
+
+.. code-block:: rst
+
+   restructuredText
+   ----------------
+
+   Este documento se ha escrito utilizando el lenguaje de 
+   marcado `reStructuredText <http://docutils.sourceforge.net/docs/user/rst/>`_ 
+   (:abbr:`rst o rest`).  
+
+
+El uso de restructuredText permitió obtener un documento de apariencia profesional, 
+con abundantes referencias cruzadas y gestión bibliográfica y terminológica, 
+con el plus de obtener una versión web desde el mismo contenido. 
+
+Alternativas analizadas
+^^^^^^^^^^^^^^^^^^^^^^^
+
+La alternativas analizadas fueron OpenOffice Writer que utiliza un esquema
+:abbr:`WYSIWYG (del inglés: lo que ves es lo que obtienes)` al estilo Microsoft
+Word pero utilizando el formato estándar OpenDocument, y el lenguaje de 
+marcado para textos científicos LaTeX. 
+
+El primero fue descartado por la dificultad de mantener homogeneidad de estilo 
+y el pobre soporte a referencias cruzadas, y el segundo fue descartado 
+por la complejidad de su sintáxis. 
+
 Wiki
 ----
 
@@ -625,18 +721,6 @@ contenido, incluir imágenes u otro tipo de información, o generar enlaces a ot
 
 El servicio *Google Code* incopora una *Wiki* que se ha utilizado como 
 cuaderno de notas para llevar cuenta de las minutas, links de interés, etc.  
-
-restructuredText
-----------------
-
-El documento principal (la "tesis") se ha escrito utilizando el lenguaje de 
-marcado `reStructuredText <http://docutils.sourceforge.net/docs/user/rst/>`_ 
-(:abbr:`rst o rest`). :abbr:`rst` permite aportar 
-semántica a un documento de texto plano, de manera equivalente a *LaTeX* 
-pero mucho más sencilla, conservando legibilidad en formato fuente. 
-
-A través de diversas herramientas se puede convertir *rst* a distintos 
-formatos, como html, pdf o código LaTeX. 
 
 Sphinx
 ------
