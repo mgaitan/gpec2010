@@ -228,8 +228,8 @@ _TITLE = ur"""
       }%
     \end{flushright}%\par
   \end{titlepage}%
-  \vspace{\fill}
-  \includegraphics{cc.png}  
+  %\vspace{\fill}
+  %\includegraphics{cc.png}  
   \cleardoublepage%
   \phantomsection\label{pre:dedication}
   \vspace*{\fill}
