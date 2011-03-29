@@ -13,8 +13,8 @@ y evaluado por profesionales o interesados de/en las distintas áreas de incumbe
 
 Dado que no necesariamente se tiene un conocimiento
 sólido fuera de la especificidad de la profesión, en este capítulo se presentarán 
-conceptos generales (que no pretenden exhaustividad pero sí precisión) relacionados
-con la termodinámica y el equilibrio de fases. Para definiciónes de términos puntuales, 
+**conceptos generales de termodinámica y equilibrio de fases** 
+(que no pretenden exhaustividad pero sí precisión) . Para definiciónes de términos puntuales, 
 consulte el :ref:`glosario <glosario>`.
 
 Como complemento, en :ref:`tecnologias` se verá una introducción a las 
@@ -32,7 +32,9 @@ intensivo <propiedades intensivas>` del sistema fisicoquímico.
 
 El estudio introductorio de la :term:`termodinámica` se centra en 
 :term:`sustancias puras <sustancia pura>` o mezclas a composición constante. En este caso, el sistema es descripto por dos variables.  Un diagrama de fase típico para estos 
-sistemas, es el *Presión vs. temperatura* :
+sistemas, es el *Presión vs. temperatura* que muestra la Figura :ref:`ptbasic-num`.
+
+    .. _ptbasic-num:
 
     .. figure:: images/Phase-diag_es.png
        :width: 80%
@@ -51,10 +53,10 @@ fracción masa, o concentración molar.
 Para :term:`sistemas binarios <sistema binario>` (una mezcla de dos componentes) 
 la *composición*  (o, complementariamente, la *densidad*) se vuelve 
 una variable del sistema, cuya representación gráfica son curvas en el 
-espacio :math:`R^3` (gráfico tridimensional). Para un determinado estado *T-P-x* (*x* es 
-composición, en general expresada como fracción molar del compuesto más volátil) el 
-sistema se encuentra en *zonas de equilibrio* vapor/líquido, líquido/líquido, vapor/sólido, 
-líquido/sólido u otros casos particulares. 
+espacio :math:`R^3` (gráfico tridimensional) como muestra la figura :ref:`tipoI-num`. 
+Para un determinado estado *T-P-x* (*x* es composición, en general expresada como fracción molar del compuesto más volátil) el sistema se encuentra en *zonas de equilibrio* vapor/líquido, líquido/líquido, vapor/sólido, líquido/sólido u otros casos particulares. 
+
+   .. _tipoI-num:
 
    .. figure:: images/ejTipo1.png
       :width: 70%
@@ -63,7 +65,11 @@ líquido/sólido u otros casos particulares.
 
 La :index:`proyección ortogonal` de estas curvas tridimensionales sobre los planos 
 correspondientes genera los gráficos cartesianos bidimensionales PT, Px, Tx 
-(y sus análogos para densidad) que son típicos de la   bibliografía del tema. 
+(y sus análogos para densidad) que son típicos de la bibliografía del tema. Un ejemplo
+de proyección *Temperatura vs. Composición* se muestra en la figura :ref:`tx1-num`. 
+
+
+.. _tx1-num:
 
 .. figure:: images/ejemploTx.png
    :width: 70%
@@ -109,21 +115,21 @@ estado asociadas a la materia como la temperatura, la presión, el volumen o
 la energía interna. 
 
 Como ejemplo conocido en cualquier curso introductorio de química, 
-la :eq:`Ley del gas ideal` es una ecuación de estado, que al  
+la Ley del gas ideal :eq:`gasideal` es una ecuación de estado, que al  
 considerar el volumen molecular nulo y a las fuerzas de atracción-repulsión 
 despreciables, limita su utilidad para modelar gases reales. 
 
  .. math:: pV=nRT
-    :label: Ley del gas ideal
+    :label: gasideal
 
 :math:`p` es la presión absoluta, :math:`V` el volumen, :math:`T` la temperatura, 
 :math:`n` la cantidad de materia y :math:`R` la constante del gas ideal.
 
-La  :eq:`Ecuación de Van der Waals` (1873) [#]_ es una ecuación que generaliza la ecuación de los gases ideales, teniendo en consideración tanto el volumen finito de las 
+La  Ecuación de Van der Waals :eq:`vdw` (1873) [#]_ generaliza la ecuación :eq:`gasideal`, teniendo en consideración tanto el volumen finito de las 
 moléculas de gas como otros efectos que afectan al término de presiones
 
 .. math:: 
-   :label: EoS de Van der Waals
+   :label: vdw
 
     \left(P + \frac{a}{\upsilon^2}\right)\left(\upsilon-b\right) = RT
 
@@ -155,14 +161,14 @@ a traves de diagramas de fases es esencial.
 
 Como ejemplificación del interés de la industria y la academia sobre esta 
 área de investigación, vale mencionar la experiencia del curso *Advanced 
-Course on Thermodynamic Models* [#]_ , dictada por los profesores Michael Michelsen 
+Course on Thermodynamic Models*  , dictada por los profesores Michael Michelsen 
 y Jørgen Mollerup de la Universidad Técnica de Dinamarca, que 
 ha convocado a centenares de profesionales de diversas firmas como British 
 Petroleum, Chevron, Phillips, Shell y muchas otras de renombre mundial. 
 
-
-
-
+Este curso se realizó durante 2009 por primera vez en Latinoamérica, teniendo 
+sede en la Universidad Nacional de Córdoba, organizado desde IDTQ, 
+con participantes de Brasil, Canadá, Chile, Alemania y varias otras procedencias [#]_. 
 
 .. [#]  A pesar de eso, en el nivel microscópico las condiciones no son estáticas. 
         Las moléculas contenidas en una fase en un determinado instante son 
@@ -177,9 +183,7 @@ Petroleum, Chevron, Phillips, Shell y muchas otras de renombre mundial.
 .. [#]  Para un listado más abarcativo, ver `Supercritical fluid: 
         Applications <http://en.wikipedia.org/wiki/Supercritical_fluid#Applications>`_
         
-.. [#]  Este curso se realizó durante 2009 por primera 
-        vez en Latinoamérica, organizado desde IDTQ, con participantes de Brasil, Canadá, Chile, 
-        Alemania y varias otras procedencias. Ver http://www.course.efn.uncor.edu/
+.. [#]  Ver http://www.course.efn.uncor.edu/
 
 
 .. [SM-VN-AG2000] Smith, JM - Van Ness, HC - Abbott, MM  (2000), *Introducción a la termodinámica 

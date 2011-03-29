@@ -111,8 +111,8 @@ Importancia
 ===========
 
 Las potencialidades técnicas, científicas e incluso comerciales de este software
-son amplias, ya que su *nicho* tiene aplicación en la industria alimenticia, 
-petroquímica, etc. 
+son amplias, ya que tiene aplicación en la industria alimenticia, 
+petroquímica, hidrocarburifera, etc. 
 
 También es útil como herramienta educativa, donde los estudiantes consolidan
 conceptos teóricos y manipulan parámetros obteniendo una visualización interactiva
