@@ -10,8 +10,8 @@ Contenidos:
     introduccion
     marco_teorico
     contexto_de_trabajo
-    tecnologias
     requerimientos
+    tecnologias
     arquitectura
     implementacion
     verificacion
