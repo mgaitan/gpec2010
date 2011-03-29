@@ -13,6 +13,11 @@ comunes a las *metodologías ágiles de desarrollo de software*.
 Sin necesariamente ajustarse a ninguna en particular, se comparte
 la escala de valoración hecha en Agile Manifiesto [AG-MANIF]_ :
 
+    Estamos descubriendo formas mejores de desarrollar
+    software tanto por nuestra propia experiencia como
+    ayudando a terceros. A través de este trabajo hemos
+    aprendido a valorar:
+
     * Individuos e interacciones sobre procesos y herramientas
     * Software funcionando sobre documentación extensiva
     * Colaboración con el cliente sobre negociación contractual
@@ -36,7 +41,7 @@ Algunas de las técnicas y procesos ágiles involucrados en este desarrollo
 han sido la utilización de un lenguaje de muy alto nivel (ver :ref:`tecnologias` ), 
 la implementación de pruebas automatizadas, la utilización de bibliotecas 
 probas para la implementación de aspectos específicos de la solución, entre 
-otras. 
+otras.   
 
 .. _desarrollo:
 
@@ -69,8 +74,17 @@ Existen dos grandes tipos de desarrollos evolutivos:
     prototipos se desechan y se diseña e implementa el sistema final desde el 
     principio.
 
-En este trabajo se aplicó principlamente un proceso evolutivo de tipo exploratorio, 
-basándose en estrategias de desarrollo ágil mencionadas previamente. 
+En este trabajo se aplicó un proceso evolutivo de tipo exploratorio, con activa
+interacción con el comitente, basándose en estrategias de desarrollo ágil mencionadas previamente. 
+
+    .. important::
+
+    La adopción de principios rectores del desarrollo ágil y el desarrollo evolutivo
+    implica que no se ha un proceso de ingeniería en software formal, más 
+    frecuentemente enseñada en la facultad. Esto es, el proceso de diseño e 
+    implementación han sido mancomunados en vez de separados estrictamente, 
+    y por ello esta documentación los reporta en forma conjunta. 
+
 
 .. _tecnologias:
 
@@ -78,7 +92,8 @@ Tecnologías principales
 ========================
 
 Se expondrá a continuación una introducción a las características y conceptos
-claves de las tecnologías de software que se han utilizado en este proyecto. 
+claves de las tecnologías de software que se han utilizado en este proyecto 
+y la justificación de su adopción.
 
 
     .. seealso:: 
