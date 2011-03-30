@@ -24,8 +24,8 @@ la escala de valoración hecha en Agile Manifiesto [AG-MANIF]_ que declara:
     * Colaboración con el cliente sobre negociación contractual
     * Respuesta ante el cambio sobre seguimiento (estricto) de un plan
 
-    (Esto es, aunque valoramos los elementos de la derecha,
-    valoramos más los de la izquierda).
+    Esto es, aunque valoramos los elementos de la derecha,
+    valoramos más los de la izquierda.
 
 Las *implementaciones* del marco conceptual propuesto por el Manifiesto de 
 desarrollo ágil (como *eXtremme Programming* o *Scrum*) están estructuralmente 

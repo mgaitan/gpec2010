@@ -3,6 +3,14 @@
 Implementación
 ***************
 
+Este capítulo recorre distintos aspectos de la implementación de GPEC. 
+Como se ha descripto en :ref:`metodologia`, el proceso de implementación
+y el de diseño han tenido a una evolución conjunta e integrada a lo largo 
+de la vida del proyecto. 
+Si bien una visión de diseño se resume en el capítulo :ref:`arquitectura`, 
+algunas decisiones y detalles se justifican en este capítulo. 
+
+
 .. _uso-pubsub:
         
 Utilización de Publish/Suscribe en GPEC
@@ -353,8 +361,9 @@ parcialmente simplificada, se ha utilizado.
 En este caso, la funcionalidad que aporta el decorador a la 
 función que se "decora" es la siguiente:
 
-1. Se obtienen todos los parámetros de la función y con ellos se genera 
-   un *hash*, es decir, una clave de cadena de caracteres unívoca para ese conjunto de datos. 
+1. Se obtienen todos los parámetros de la función, se serializan en una cadena de texto, 
+   y con esa cadena se genera un *hash*, es decir, una clave de caracteres unívoca 
+   para ese conjunto de datos. Esta codificacación es un proceso determinístico.
 
 2. Se evalua si ese *hash* existe como clave en el diccionario que almacena resultados
    "memorizados". 
@@ -389,7 +398,7 @@ se realiza mediante archivos de texto. Los archivos de salida, en particular,
 contienen (en arreglos de columnas) los vectores de datos para cada variable
 de una curva. 
 
-La tarea de delimitar la información de un texto se denomina en la lingüistica
+Según [Vera1994], la tarea de delimitar la información de un texto se denomina en la lingüistica
 *Análisis sintáctico* y es también un área de la informática de utilidad en la 
 implementación de diversos software (como ejemplo notorio, los compiladores). 
 
@@ -398,11 +407,11 @@ Este trabajo implementa un analizador sintáctico (denominado
 bidimensionales) de los archivos de salida, obteniendo así la información necesaria
 para graficar cada curva.
 
-.. note:: 
+    .. note:: 
 
-   Para una comprensión cabal del algoritmo, es necesario estár familiarizado
-   con la definición de la interfaz. Una descripción exhaustiva se expone 
-   en :ref:`api`. 
+    Para una comprensión cabal del algoritmo, es necesario estár familiarizado
+    con la definición de la interfaz. Una descripción exhaustiva se expone 
+    en :ref:`api`. 
 
 Descripción
 ------------
@@ -445,9 +454,19 @@ Código fuente
 
 
 
-
 Interfaz Gráfica de Usuario (GUI)
 =================================
+
+La interfaz gráfica fue objeto de estudio. La pantalla principal está dividida
+en cuatro paneles (subventanas) que permiten la entrada de datos (Cases), 
+la visualización de gráficos (Plots), informaciones útiles como mensajes 
+de usuario y los archivos de entrada/salida sin procesar (Info) y el 
+navegador de vistas en forma de árbol (Manager). 
+
+Esta división se definió para dar soporte al requerimiento de múltiples 
+casos y gráficos permitiendo navegar fácilmente entre los distintos resultados, 
+de manera de facilitar la comparación sin complejizar la interfaz. 
+
 
 Contenedores y *sizers*
 -----------------------
@@ -500,7 +519,7 @@ puede contener a otros de manera anidada, definiendo una cuadrícula con espacio
 El hecho de que un sizer no sea un contenedor indica que ``parent`` de cualquier elemento 
 aún debe serlo. Es decir, un elemento cualquier (por ejemplo, un botón) está en incrustado
 en un contenedor (por ejemplo, un panel) pero ubicado según indica un sizer que está 
-haciado al mismo contenedor. 
+asociado al mismo contenedor. 
 
 Uso en la aplicación
 ^^^^^^^^^^^^^^^^^^^^
@@ -705,62 +724,6 @@ simultánea de múltiples pestañas, como muestra la figura :ref:`auinotebook-nu
    El control ``AuiNotebook`` de los gráficos mostrando 2 diagramas en simultáneo
 
         
-Justificación del diseño de UI
--------------------------------
-
-Como se ha mencionado, la usabilidad e intuitividad de la interfaz de usuario
-ha sido un requerimiento de especial atención. Mucha bibliografía fue consultada
-al respecto, rescantando en particular muchos conceptos y consejos de Joel Spolsky 
-en [Spolsky2001]_ [#]_ . Entre muchos, se destacan:
-
-    - Brindar contextos intuitivos y secuencias de operación lógicas.
-    - Minimizar las opciones en simultáneo. Cada opción es una decisión que se le 
-      exige al usuario.  
-    - Los usuarios no leen manuales (de hecho tampoco leen mensajes en pantalla si son largos)
-    - Convenciones por sobre configuraciones: limitar los parámetros requeridos
-    - Valerse de las costumbres del usuario: no reinventar la rueda
-
-Un software complejo con un acabado estudio de usabilidad es 
-`Mayavi <http://code.enthought.com/projects/mayavi/>`_ , que ha servido de inspiración
-para el diseño de GPEC. 
-
-.. figure:: images/mayavi2.png
-   :width: 90%
-
-   Interfaz de la aplicación de visualización de diagramas VTK que sirvió 
-   como inspiración para la interfaz de GPEC.  
-
-
-Algunas decisiones concernientes a la usabilidad han sido:
-
-* El diseño acompaña al *workflow*: primero se define el sistema, opcionalmente 
-  se manipulan los cálculos y por último se grafica. Sólo el primero y el último
-  paso son obligatorios. 
-
-* La ubicación de los botones principales está dispuesta en función del 
-  flujo de lectura de occidental (de izquierda a derecha y de arriba hacia abajo)
-  de manera de resultar intuitiva la secuencia de acciones demandada al usuario  
-
-* Todos los botones tiene asociado un ícono descriptivo
-
-* Los componentes que muestran información no modificable se mantienen en modo
-  sólo lectura y visualmente se ven "grisados". 
-
-* Un conjunto de parámetros (coeficientes, reglas de combinación) se ubican en 
-  un panel colapsable. Al expandirlo, el panel genera automática una barra de 
-  desplazamiento vertical. 
-
-* El uso del símbolo "+" en la ubicación dispuesta es una convención popularizada 
-  por los navegadores web para abrir una nueva pestaña de trabajo. Dado el contexto
-  resulta evidente que genera un nuevo caso. 
-
-
-.. figure:: images/usabilidad_labels.png
-   :width: 100%
-
-   Interfaz de la aplicación de visualización de diagramas VTK que sirvió 
-   como inspiración para la interfaz de GPEC.  
-
 
 .. _matplotlibwx:
 
@@ -775,7 +738,7 @@ La integración entre Matplotlib y WxPython se logra a través de un
 "canvas" (*lienzo*) donde Matplotlib es capaz de dibujar y, se comporta, a la vez
 como un panel de wxPython. 
 
-El objeto en cuestion es :py:class:`FigureCanvasWxAgg` y tiene se muestra
+El objeto en cuestion es :py:class:`FigureCanvasWxAgg`. Se muestra
 su ascendencia de clases en el diagrama de la figura :ref:`figcanvas-num`. 
 
 .. _figcanvas-num:
@@ -790,24 +753,22 @@ La clase :py:class:`FigureCanvasAgg` es en realidad la encargada de dibujar
 los gráficos a través de los algoritmos `Anti-Grain Geometry <http://www.antigrain.com>`_ que aplican técnicas como *Anti-Aliasing* [#]_ o *Precisión de subpixel* para mejorar la definición
 de la líneas trazadas. 
 
+Por su parte, la otra clase padre :py:class:`FigureCanvasWx` es la que realiza 
+la integración concreta con wxPython, heredando de un contenedor tipo `wx.Panel`. 
+
 La figura :ref:`wx-num` muestra la secuencia de eventos para la graficación 
-de un diagrama. El diagrama de la figura :ref:`plotclass-num` muestra la estructura
-de clases implementada para dar soporte a los distintos tipos de gráfico. 
+de un diagrama. Puede ver la sección :ref:`tipos-graf`   para estructura de clases implementada para dar soporte a los distintos 
+tipos de gráficos. 
 
 .. _wx-num:
 
 .. figure:: images/wxmatplotlib.png
-   :width: 65%
+   :width: 58%
 
    Diagrama de secuencia para la graficación de un diagrama al nivel subyacente
    (via ``matplotlib``)
 
-.. _plotclass-num:
 
-.. figure:: images/class-plots.png
-   :width: 65%
-
-   Diagrama de clases de los distintos tipos de diagramas soportados 
 
 Barra de herramientas de gráficos
 ---------------------------------
@@ -873,10 +834,12 @@ etc.
 
 .. _bbdd:
 
-Gestión de base de datos
-========================
+Implementación de base de datos
+===============================
 
-El almacenamiento y gestión de la información necesaria como entrada para GPEC se realiza
+El almacenamiento y gestión de la información necesaria de la base de datos definida 
+en :ref:`bbdd_design`
+ como entrada para GPEC se realiza
 a través de un sistema de gestión de base de datos relacional. Se 
 utilizó el software `sqlite <http://sqlite.org>`_  (versión 3) que respeta 
 el estándar :abbr:`SQL (Structured Query Language)`  mediante una librería 
@@ -887,34 +850,6 @@ archivo binario que puede ser distribuido en conjunto con el software, sin
 requerir inicialización o un *servidor* de base de datos local o remoto. En 
 este sentido es equivalente a una base de datos de Microsoft Access, aunque 
 superadora en las prestaciones y apego a un lenguaje estándar para base de datos. 
-
-La información gestionada
---------------------------
-
-En particular, los datos almacenados son las constantes de compuestos 
-químicos. 
-
-Se incluye una vasta base de datos termodinámicos para más de 2000 compuestos, 
-corroborados mediante `DIPPR Project 801 <http://dippr.byu.edu/>` [#]_ que incluye información 
-como la fórmula, el factor acéntrico, el volumen, la temperatura y la presión crítica, 
-como la fórmula, el factor acéntrico, el volumen, la temperatura y la presión crítica, 
-etc. 
-
-Esta información se comporta en modo *sólo lectura* [#]_ 
-a través de la interfaz de usuario, pero se brinda también una categoría editable 
-para permitir *compuestos definidos por el usuario* que pueden ser agregados como 
-una copia de un compuesto existente en :abbr:`DIPPR` (que acepta, entonces, la modificación 
-o ajuste de sus valores) o bien como un nuevo compuesto definido desde datos 
-experimentales. 
-
-
-Modelo Entidad-Relación
------------------------
-
-.. figure:: images/er-database.png
-   :width: 90% 
-
-   Representación de las entidades con sus atributos y la relación entre las mismas
 
 
 Definición de la estructura de tablas 
@@ -1018,9 +953,6 @@ utilizando un proceso de 2 pasos
         código más compacto, característica muy relevante en el ambiente web. 
         Ver http://en.wikipedia.org/wiki/Method_chaining
 
-.. [#]  Una versión online gratuita de este libro se encuentra en 
-        http://www.joelonsoftware.com/uibook/fog0000000249.html
-
 .. [#]  El soporte incluye GTK, QT4, TKinter, PDF y wxPython
 
 .. [#]  Es un proceso utilizado para suavizar los bordes desparejos de los gráficos. 
@@ -1037,12 +969,7 @@ utilizando un proceso de 2 pasos
 .. [#]  De hecho, a partir de la versión 2.6 de Python, el modulo ``sqlite3`` forma 
         parte de la biblioteca estándar de Python. 
 
-.. [#]  *DIPPR 801* es un producto comercial cuya licencia ronda los u$s3400 anuales. 
-        GPEC incluye en su base datos equivalentes a una porción de la información
-        que ese producto ofrece, sin depender de esta de manera alguna. 
-        No obstante, el autor considera este aspecto como suceptible a acarrear 
-        complicaciones legales y comerciales, que deberán revisarse y solucioanrse 
-        a futuro.
+
 
 .. [#]  Sqlite no permite definir tablas o registros de datos como *sólo lectura*. 
         Queda en potestad del desarrollador vedar la posilidad de modificación como parte    
@@ -1056,8 +983,10 @@ utilizando un proceso de 2 pasos
 
 .. [vdLaar2002]  van de Laar, F. (2002).  *Publish/Subscribe as architectural style 
                  for component interaction (Mater's thesis)*, Phillips Research
-                 Laboratories, Eindhoven
+                 Laboratories
 
 
 .. [Spolsky2001]  Spolsky, Joel (2001). *User Interface Design for Programmers*, Apress
                   
+.. [Vera1994]  Vera Luján, A. (1994), *Fundamentos del análisis sintáctico*, 
+               Universidad de Murcia
