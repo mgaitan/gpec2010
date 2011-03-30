@@ -157,8 +157,7 @@ se han mantenido como versiones "beta" manteniendo en paralelo el acceso a desca
 de la versión anterior como versión "estable", esta nueva versión de GPEC ya ha 
 tenido experiencias de uso. 
 
-Durante el mes de noviembre de 2010, la cátedra *Termodinámica*, correspondiente al 
-4º cuatrimestre de la carrera Ingeniería Química de la Facultad de Ciencias Exáctas, 
+Como se mencionó previamente, durante el mes de noviembre de 2010, la cátedra *Termodinámica*, correspondiente al 4º cuatrimestre de la carrera Ingeniería Química de la Facultad de Ciencias Exáctas, 
 Físicas y Naturales (Universidad Nacional de Córdoba), utilizó la nueva versión
 para su prácticas de laboratorio, con gran aceptación y buenos resultados por parte
 de los alumnos. 
