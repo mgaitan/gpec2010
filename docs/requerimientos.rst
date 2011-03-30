@@ -18,7 +18,6 @@ El proceso de relevamiento incluyó entrevistas con el desarrollador de *Visual
 Gpec* y con investigadores de :abbr:`PLAPIQUI` involucrados, como 
 desarrolladores o usuarios, en GPEC. 
 
-
 .. _relevamiento:
 
 Relevamiento de la versión preexistente
@@ -63,12 +62,11 @@ diferentes diagramas.
 
 
 La comunicación con los algoritmos implementados en Fortran se realiza mediante
-archivos de texto plano en un formato cuya estructura *ad hoc* es comprendida por 
+archivos de texto plano en un formato cuya estructura *ad hoc* es bien conocida por 
 las dos partes. Como se verá en breve, esta interfaz de comunicación se ha respetado
 (ver :ref:`api`). Asimismo, los datos de salida que producen los algoritmos, son 
 leídos por Visual Gpec desde archivos de texto para su posterior 
-graficación, que se realiza mediante rutinas desarrolladas *ad hoc* para esta 
-implementación. Es decir, no se utiliza en ninguna biblioteca para estos fines, 
+graficación, que se realiza, segun manifestó el comitente, mediante rutinas desarrolladas *ad hoc* para esta implementación. Es decir, no se utiliza en ninguna biblioteca para estos fines, 
 de modo que los gráficos se generan mediante el trazado punto a punto sobre un *widget* 
 tipo canvas. El control de escala, segmentación y demás funcionalidades básicas 
 debió programarse desde cero. 
@@ -98,13 +96,12 @@ fuente no está  disponible.
 Aspectos de ingeniería de software
 -----------------------------------
 
-Durante su desarrollo anterior, GPEC no adoptó ninguna metodología de 
-desarrollo particular, salvo la concerniente a la separación  
-funcional de la aplicación como se explica más arriba. 
+Según surge de las entrevistas realizadas, durante su desarrollo anterior, GPEC no adoptó ninguna metodología particular, salvo la concerniente a la separación  
+funcional de la aplicación como se explicó anteriormente. 
 
 Un problema manifestado por el equipo de desarrollo es el del versionamiento,
 ya que era incontrolable la coherencia entre los cambios realizados 
-por más de un colaborador. Las modificaciones y los archivos circulan por email
+por más de un colaborador. Las modificaciones y los archivos circulaban por email
 entre uno y otro, pero sin lograr sistematización y control sobre *quién cambió qué*.
 y a *qué versión de GPEC corresponde un determinado código fuente*. 
 
@@ -271,33 +268,14 @@ Requerimientos no funcionales
 * Usabilidad y claridad de las interfaces: debe poder usarse intuitivamente
 
 
-Casos de uso
-============
+Requerimientos específicos
+==========================
 
-Diagrama de caso de uso general
--------------------------------
-
-El diagrama de la Figura :ref:`casouso-num` describe las acciones generales
-del sistema.
-
-
-.. _casouso-num:
-
-.. figure:: images/caso_uso_general.png
-   :width: 80%
-
-   Diagrama de caso de uso general del sistema 
-
-
-
-Casos de uso destacados
------------------------
-
-Se especifican en esta sección, de manera no formal, un conjunto de casos de 
-uso específicos de especial interés para el diseño del software. 
+Se especifican en esta sección, de manera no formal, un conjunto de requerimientos 
+de especial interés para el diseño del software. 
 
 Un proyecto, muchos casos
-^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------
 
 Una tarea frecuente del usuario (investigador) es la comparación entre 
 distintos "casos" de estudio. Esto puede ser, un mismo sistema binario con 
@@ -319,16 +297,16 @@ múltiples **casos**, gestionados desde una misma interfaz de usuario.
             
 
 Gráficos en 3D
-^^^^^^^^^^^^^^   
+---------------
 
 La información resultante de los cálculos brinda conjuntos (vectores) de datos para 
 múltiples variables (presión, temperatura, composición, densidad, etc) 
 Tomando tres vectores de datos en vez de dos, pueden graficarse diagramas 3D, 
 (por ejemplo *P-T-composición*) sin necesidad de alterar el backend de manera 
-alguna.
+alguna. Esta funcionalidad debe soportarse en la nueva implementación.
 
 Superposición automática
-^^^^^^^^^^^^^^^^^^^^^^^^  
+------------------------
 
 Dada la visualización 3D, es común que el investigador desee 
 superponer diagramas de línea de contorno (isobaras, isopletas, etc.) sobre 
@@ -339,7 +317,7 @@ solicitado, debe generar un diagrama 2D independiente y trazar estas mismas
 curvas sobre un diagrama 3D común para todo el caso. 
 
 Superposición manual
-^^^^^^^^^^^^^^^^^^^^
+--------------------
 
 El usuario puede necesitar superponer visualmente diagramas 2D, ya sean estos 
 del mismo caso (por ejemplo, un diagrama P-T global con una isopleta) o bien 
@@ -360,6 +338,53 @@ del compuesto 1 es menor a la del compuesto 2, es decir:
     .. math::
 
        \frac{T_{c_{1}}^{14}}{P_{c_{1}}} < \frac{T_{c_{2}}^{14}}{P_{c_{2}}} 
+
+
+
+Casos de uso
+============
+
+Se describen a continuación los casos de uso más relevantes del sistema. Amparado
+en el paradigma de desarrollo ágil, no se realiza una enumeración minuciosa 
+de las condiciones de contexto, pretendiendo que la descripción y su diagrama
+sea autoexplicativo. 
+
+
+Definir caso de estudio
+-----------------------
+
+El usuario define un caso (Figura :ref:`defcaso-num`) mediante la conjunción de la definición de un sistema 
+químico binario (dos compuestos), la definición de un modelo de cálculo (de 
+las 5 disponibles) y el cálculo o definición de los parámetros. 
+
+.. _defcaso-num:
+
+.. figure:: images/uc-DefinirCaso.png
+   :width: 80%
+
+   Caso de uso: definición de un caso de estudio en GPEC
+
+Graficar diagramas
+------------------
+
+Una vez definido el sistema el usuario solicita la graficación 
+de los diagramas (Figura :ref:`grafdiag-num`) para lo cual el sistema los calcula. 
+Independientemente de la suite de diagramas solicitados por el usuario 
+el cálculo de los diagramas globales es precedente. 
+
+.. _grafdiag-num:
+
+.. figure:: images/uc-GraficarDiagramas.png
+   :width: 80%
+
+   Caso de uso: graficación de diagramas
+
+.. todo:: 
+    
+    resto de los casos de uso
+
+    uc-CalcularGlobal.png  uc-CalcularParametros.png  uc-DefinirSistema.png  
+
 
 
 
