@@ -34,7 +34,7 @@ y producen un archivo de salida con los vectores de números
 reales resultantes de los cálculos (la información a graficar) junto a otras 
 informaciones relativas al contexto de cálculo
 
-Los algoritmos de procesamiento analizan y extraen sólo la información útil, 
+Los algoritmos de procesamiento del frontend analizan y extraen sólo la información útil, 
 haciendo una conversión de texto a un tipo de dato numérico y con esa información
 se realizan los gráficos correspondientes. 
 
