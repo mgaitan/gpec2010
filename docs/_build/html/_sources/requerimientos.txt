@@ -418,7 +418,7 @@ manualmente por el usuario. Se representa en el diagrama de la figura :ref:`uc4-
 
 .. _uc4-num:
 
-.. figure:: uc-CalcularParametros.png
+.. figure:: images/uc-CalcularParametros.png
    :width: 80%
 
    Caso de uso: Cálculo de parámetros

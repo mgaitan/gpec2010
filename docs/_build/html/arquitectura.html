@@ -53,7 +53,7 @@
           <div class="body">
             
   <div class="section" id="arquitectura">
-<h1>7. Arquitectura<a class="headerlink" href="#arquitectura" title="Enlazar permanentemente con este título">¶</a></h1>
+<span id="id1"></span><h1>7. Arquitectura<a class="headerlink" href="#arquitectura" title="Enlazar permanentemente con este título">¶</a></h1>
 <p>En este capitulo se describe, de manera conceptual, el diseño arquitectónico
 de la aplicación. La metodología ágil e iterativa adoptada no implica
 que no haya existido una instancia de reflexión en el diseño en la aplicación,
@@ -81,7 +81,7 @@ al momento de realizar un diagrama.</div></blockquote>
 <p>La siguiente infografía describe conceptualmente, de manera simplificada,
 el flujo de procesamiento de la información.</p>
 <div class="figure">
-<img alt="_images/workflow5.png" src="_images/workflow5.png" style="width: 70%;" />
+<img alt="_images/workflow7.png" src="_images/workflow7.png" style="width: 70%;" />
 <p class="caption"><span class="target" id="index-0"></span>Diagrama conceptual del flujo de información entre las distintas capas</p>
 </div>
 <p>El frontend, objeto de este trabajo, se compone de la interfaz de usuario,
@@ -108,7 +108,7 @@ se realizan los gráficos correspondientes.</p>
 por sobre el apego a la especificación <a class="reference internal" href="glosario.html#term-uml"><em class="xref std std-term">UML</em></a>, describe las capas y
 <span class="target" id="index-1"></span>componentes de software involucrados en la aplicación.</p>
 <div class="figure">
-<img alt="_images/arquitectura5.png" src="_images/arquitectura5.png" style="width: 60%;" />
+<img alt="_images/arquitectura7.png" src="_images/arquitectura7.png" style="width: 60%;" />
 <p class="caption">Arquitectura Frontend - Middleware - Backend</p>
 </div>
 <p>Este diagrama brinda más detalles sobre la
@@ -133,7 +133,7 @@ se describe en <a class="reference internal" href="implementacion.html#uso-pubsu
 <p>El diagrama de despliegue de la figura <em class="xref std std-ref">despliegue-num</em>, es una representación
 más formal (basada en la especificación UML) de los anteriores diagramas.</p>
 <div class="figure" id="despliegue-num">
-<img alt="_images/arquitectura5.png" src="_images/arquitectura5.png" style="width: 60%;" />
+<img alt="_images/arquitectura7.png" src="_images/arquitectura7.png" style="width: 60%;" />
 </div>
 </div>
 <div class="section" id="capa-de-base-de-datos">
@@ -142,10 +142,10 @@ más formal (basada en la especificación UML) de los anteriores diagramas.</p>
 En particular, los datos almacenados son las constantes de compuestos
 químicos.</p>
 <p>Se incluye una vasta base de datos termodinámicos para más de 2000 compuestos,
-corroborados mediante <cite>DIPPR Project 801 &lt;http://dippr.byu.edu/&gt;</cite> <a class="footnote-reference" href="#id7" id="id3">[1]</a> que incluye información
+corroborados mediante <cite>DIPPR Project 801 &lt;http://dippr.byu.edu/&gt;</cite> <a class="footnote-reference" href="#id8" id="id4">[1]</a> que incluye información
 como la fórmula, el factor acéntrico, el volumen, la temperatura y la presión crítica,
 etc.</p>
-<p>Esta información se comporta en modo <em>sólo lectura</em> <a class="footnote-reference" href="#id8" id="id4">[2]</a>
+<p>Esta información se comporta en modo <em>sólo lectura</em> <a class="footnote-reference" href="#id9" id="id5">[2]</a>
 a través de la interfaz de usuario, pero se brinda también una categoría editable
 para permitir <em>compuestos definidos por el usuario</em> que pueden ser agregados como
 una copia de un compuesto existente en <abbr>DIPPR</abbr> (que acepta, entonces, la modificación
@@ -157,7 +157,7 @@ experimentales.</p>
 la información gestionada por la base de datos. Se muestra en la figura <a class="reference internal" href="#bd-num"><em>Representación de las entidades con sus atributos y la
 relación entre las mismas</em></a>.</p>
 <div class="figure" id="bd-num">
-<img alt="_images/er-database9.png" src="_images/er-database9.png" style="width: 90%;" />
+<img alt="_images/er-database11.png" src="_images/er-database11.png" style="width: 90%;" />
 <p class="caption">Representación de las entidades con sus atributos y la
 relación entre las mismas</p>
 </div>
@@ -171,7 +171,7 @@ relación entre las mismas</p>
 <h2>7.5. Diagrama de paquetes<a class="headerlink" href="#diagrama-de-paquetes" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>El diagrama de paquetes de la figura <a class="reference internal" href="#diag-pack-num"><em>Diagrama de paquetes</em></a>,  que forma parte de la suite definida por UML 2.0, muestra los paquetes y módulos (unidades de código fuente) y su árbol interdependencia.</p>
 <div class="figure" id="diag-pack-num">
-<img alt="_images/packages_Gpec2010.png" src="_images/packages_Gpec2010.png" style="width: 90%;" />
+<img alt="_images/packages_Gpec20102.png" src="_images/packages_Gpec20102.png" style="width: 90%;" />
 <p class="caption">Diagrama de paquetes</p>
 </div>
 <p>Este diagrama se realizó mediante un análisis de ingeniería inversa utilizando
@@ -190,7 +190,7 @@ sobre la estructura arquitectónica de la aplicación.</p>
 <p>El diagrama de la figura <a class="reference internal" href="#class2-num"><em>Jerarquía de clases de la GUI</em></a> muestra la relación y jerarquía de las
 clases que componen la interfaz de usuario.</p>
 <div class="figure" id="class2-num">
-<img alt="_images/classes1.png" src="_images/classes1.png" style="width: 90%;" />
+<img alt="_images/classes12.png" src="_images/classes12.png" style="width: 90%;" />
 <p class="caption">Jerarquía de clases de la GUI</p>
 </div>
 <p>La clase <cite>ShellPanel</cite> corresponde a una consola interactiva que se incluyó
@@ -202,7 +202,7 @@ actuales por no formar parte de los requerimientos especificados.</p>
 <p>El diagrama de clases de la figura <a class="reference internal" href="#class1-num"><em>CasePanel y su composición</em></a> hace hincapié en la
 clase <cite>CasePanel</cite> y sus relaciones de composición</p>
 <div class="figure" id="class1-num">
-<img alt="_images/classes1.png" src="_images/classes1.png" style="width: 80%;" />
+<img alt="_images/classes12.png" src="_images/classes12.png" style="width: 80%;" />
 <p class="caption"><cite>CasePanel</cite> y su composición</p>
 </div>
 </div>
@@ -211,7 +211,7 @@ clase <cite>CasePanel</cite> y sus relaciones de composición</p>
 <p>El diagrama de la figura <a class="reference internal" href="#class3-num"><em>Diagrama de clases relacionadas con la graficación</em></a> describe las clases
 relacionadas con la graficación. Muchas de estas forman parte de MatploLib.</p>
 <div class="figure" id="class3-num">
-<img alt="_images/classes3.png" src="_images/classes3.png" style="width: 90%;" />
+<img alt="_images/classes32.png" src="_images/classes32.png" style="width: 90%;" />
 <p class="caption">Diagrama de clases relacionadas con la graficación</p>
 </div>
 </div>
@@ -222,7 +222,7 @@ muestra en la figura <a class="reference internal" href="#plotclass-num"><em>Dia
 el método que selecciona el subconjunto de datos
 que cada gráfico necesita. Los métodos comunes son heredados de la superclase.</p>
 <div class="figure" id="plotclass-num">
-<img alt="_images/class-plots9.png" src="_images/class-plots9.png" style="width: 65%;" />
+<img alt="_images/class-plots11.png" src="_images/class-plots11.png" style="width: 65%;" />
 <p class="caption">Diagrama de clases de los distintos tipos de diagramas soportados</p>
 </div>
 </div>
@@ -232,7 +232,7 @@ que cada gráfico necesita. Los métodos comunes son heredados de la superclase.
 <p>Como se ha mencionado, la usabilidad e intuitividad de la interfaz de usuario
 ha sido un requerimiento de especial atención. Mucha bibliografía fue consultada
 al respecto, rescantando en particular muchos conceptos y consejos de Joel Spolsky
-en <a class="reference internal" href="implementacion.html#spolsky2001">[Spolsky2001]</a> <a href="#id9"><span class="problematic" id="id10"><span id="id6"></span>[#]_</span></a> . Entre muchos, se destacan:</p>
+en <a class="reference internal" href="implementacion.html#spolsky2001">[Spolsky2001]</a> <a class="footnote-reference" href="#id10" id="id7">[3]</a> . Entre muchos, se destacan:</p>
 <blockquote>
 <div><ul class="simple">
 <li>Brindar contextos intuitivos y secuencias de operación lógicas.</li>
@@ -247,7 +247,7 @@ exige al usuario.</li>
 <a class="reference external" href="http://code.enthought.com/projects/mayavi/">Mayavi</a> , que ha servido de inspiración
 para el diseño de GPEC.</p>
 <div class="figure">
-<img alt="_images/mayavi29.png" src="_images/mayavi29.png" style="width: 90%;" />
+<img alt="_images/mayavi211.png" src="_images/mayavi211.png" style="width: 90%;" />
 <p class="caption">Interfaz de la aplicación de visualización de diagramas VTK que sirvió
 como inspiración para la interfaz de GPEC.</p>
 </div>
@@ -270,14 +270,14 @@ por los navegadores web para abrir una nueva pestaña de trabajo. Dado el contex
 resulta evidente que genera un nuevo caso.</li>
 </ul>
 <div class="figure">
-<img alt="_images/usabilidad_labels9.png" src="_images/usabilidad_labels9.png" style="width: 100%;" />
+<img alt="_images/usabilidad_labels11.png" src="_images/usabilidad_labels11.png" style="width: 100%;" />
 <p class="caption">Interfaz de la aplicación de visualización de diagramas VTK que sirvió
 como inspiración para la interfaz de GPEC.</p>
 </div>
-<table class="docutils footnote" frame="void" id="id7" rules="none">
+<table class="docutils footnote" frame="void" id="id8" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[1]</a></td><td><em>DIPPR 801</em> es un producto comercial cuya licencia ronda los u$s3400 anuales.
+<tr><td class="label"><a class="fn-backref" href="#id4">[1]</a></td><td><em>DIPPR 801</em> es un producto comercial cuya licencia ronda los u$s3400 anuales.
 GPEC incluye en su base datos equivalentes a una porción de la información
 que ese producto ofrece, sin depender de esta de manera alguna.
 No obstante, el autor considera este aspecto como suceptible a acarrear
@@ -285,17 +285,27 @@ complicaciones legales y comerciales, que deberán revisarse y solucioanrse
 a futuro.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id8" rules="none">
+<table class="docutils footnote" frame="void" id="id9" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[2]</a></td><td>Una versión online gratuita de este libro se encuentra en
+<tr><td class="label"><a class="fn-backref" href="#id5">[2]</a></td><td>Sqlite no permite definir tablas o registros de datos como <em>sólo lectura</em>.
+Queda en potestad del desarrollador vedar la posilidad de modificación como parte
+del proceso de validación. Sin embargo, siempre es posible para un usuario abrir
+y modificar la información &#8220;manualmente&#8221; a través de un gestor que interprete
+el formato <em>sqlite</em>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id10" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[3]</a></td><td>Una versión online gratuita de este libro se encuentra en
 <a class="reference external" href="http://www.joelonsoftware.com/uibook/fog0000000249.html">http://www.joelonsoftware.com/uibook/fog0000000249.html</a></td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="quatrani2010" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[Quatrani2010]</a></td><td>Quatrani, Terry (2010) <em>The Truth About Agile
+<tr><td class="label"><a class="fn-backref" href="#id2">[Quatrani2010]</a></td><td>Quatrani, Terry (2010) <em>The Truth About Agile
 Modeling</em>. Cita extraída de
 <a class="reference external" href="http://agilescout.com/agile-modeling-and-uml/">http://agilescout.com/agile-modeling-and-uml/</a></td></tr>
 </tbody>
@@ -303,7 +313,7 @@ Modeling</em>. Cita extraída de
 <table class="docutils citation" frame="void" id="martin2006" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[Martin2006]</a></td><td>Martin, Robert (2006) <em>Agile Principles, Patterns, and Practices in C#</em>,
+<tr><td class="label"><a class="fn-backref" href="#id3">[Martin2006]</a></td><td>Martin, Robert (2006) <em>Agile Principles, Patterns, and Practices in C#</em>,
 Prentice Hall. Cita extraída de <a class="reference external" href="http://stackoverflow.com/questions/61487/do-you-use-uml-in-agile-development-practices">http://stackoverflow.com/questions/61487/do-you-use-uml-in-agile-development-practices</a></td></tr>
 </tbody>
 </table>

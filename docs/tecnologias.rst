@@ -347,7 +347,7 @@ El resultado se observa en la figura :ref:`mplfig1-num`.
 .. _wx:
 
 WxPython
-=======-
+========
 
 `wxWidgets <http://www.wxwindows.org/>`_ es una biblioteca en C++ que permite 
 desarrollar interfaces gráficas para aplicaciones multiplataforma que corren
@@ -592,7 +592,7 @@ Del vasto conjunto de herramientas, se detallan aquí las utilizadas para el des
 de este trabajo.
 
 Control de versiones
-===================-
+====================
 
 Un  :abbr:`VCS (Sistema de Control de Versiones)` es un software capaz de llevar registro de 
 la evolución incremental de cualquier conjunto de archivos, permitiendo 

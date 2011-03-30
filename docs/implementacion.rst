@@ -409,9 +409,9 @@ para graficar cada curva.
 
     .. note:: 
 
-    Para una comprensión cabal del algoritmo, es necesario estár familiarizado
-    con la definición de la interfaz. Una descripción exhaustiva se expone 
-    en :ref:`api`. 
+       Para una comprensión cabal del algoritmo, es necesario estár familiarizado
+       con la definición de la interfaz. Una descripción exhaustiva se expone 
+       en :ref:`api`. 
 
 Descripción
 ------------
@@ -471,7 +471,7 @@ de manera de facilitar la comparación sin complejizar la interfaz.
 Contenedores y *sizers*
 -----------------------
 
-En la introducción general a :ref:`wx` vista en :ref:`marco` se hizo referencia
+En la introducción general a :ref:`wx` vista en :ref:`tecnologias` se hizo referencia
 a la clase :py:class:`wx.Panel` describiéndola como *"un contenedor de otros 
 objetos gráficos"*. 
 
@@ -838,8 +838,7 @@ Implementación de base de datos
 ===============================
 
 El almacenamiento y gestión de la información necesaria de la base de datos definida 
-en :ref:`bbdd_design`
- como entrada para GPEC se realiza
+en :ref:`bbdd_design` como entrada para GPEC se realiza
 a través de un sistema de gestión de base de datos relacional. Se 
 utilizó el software `sqlite <http://sqlite.org>`_  (versión 3) que respeta 
 el estándar :abbr:`SQL (Structured Query Language)`  mediante una librería 
