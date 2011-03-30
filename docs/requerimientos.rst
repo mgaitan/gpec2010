@@ -411,12 +411,12 @@ Cálculo de parámetros
 ---------------------
 
 Definidas las constantes de los compuestos (obtenidas de la definición del sistema)
-se calculan los parámetros del modelo elegido a través del backend, o bien, 
+se calculan los parámetros del modelo elegido a través del backend o bien 
 se ajustan las constantes de los compuestos en función de los parámetros definidos
-manualmente por el usuario. 
+manualmente por el usuario. Se representa en el diagrama de la figura :ref:`uc4-num`.
 
 
-.. _uc3-num:
+.. _uc4-num:
 
 .. figure:: uc-CalcularParametros.png
    :width: 80%
