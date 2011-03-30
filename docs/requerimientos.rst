@@ -379,11 +379,50 @@ el cálculo de los diagramas globales es precedente.
 
    Caso de uso: graficación de diagramas
 
-.. todo:: 
-    
-    resto de los casos de uso
+Definir sistema
+---------------
 
-    uc-CalcularGlobal.png  uc-CalcularParametros.png  uc-DefinirSistema.png  
+En este caso de uso se produce la interacción del usuario con la base de datos. 
+Como se observa en el diagrama de la figura :ref:`uc2-num`, el usuario puede elegir compuestos previamente definidos para la conformación del sistema binario o bien crear nuevos compuestos. 
+
+.. _uc2-num:
+
+.. figure:: images/uc-DefinirSistema.png
+   :width: 80%
+
+   Caso de uso: definición del sistema binario
+
+
+Cálculo Global
+---------------
+    
+El backend se modela como un actor lógico (subsistema)
+que interactua con el software desarrollado realizando el cálculo de los 
+distinto diagramas. Se observa en la figura :ref:`uc3-num`. 
+
+.. _uc3-num:
+
+.. figure:: images/uc-CalcularGlobal.png
+   :width: 80%
+
+   Caso de uso: graficación de diagramas
+
+Cálculo de parámetros 
+---------------------
+
+Definidas las constantes de los compuestos (obtenidas de la definición del sistema)
+se calculan los parámetros del modelo elegido a través del backend, o bien, 
+se ajustan las constantes de los compuestos en función de los parámetros definidos
+manualmente por el usuario. 
+
+
+.. _uc3-num:
+
+.. figure:: uc-CalcularParametros.png
+   :width: 80%
+
+   Caso de uso: Cálculo de parámetros
+
 
 
 
