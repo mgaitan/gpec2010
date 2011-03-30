@@ -310,9 +310,9 @@ Ampliación del conjunto de pruebas unitarias
 
 Si bien se han probado puntos críticos susceptibles a vulnerabilidad, es necesario
 lograr una cobertura de prueba total del sistema, no sólo en el gestor 
-de la API sino en la interfaz de usuario. Esto es, generar test que lancen 
+de la API sino en la interfaz de usuario. Esto es, generar prubas que lancen 
 eventos programáticamente simulando las acciones del usuario, y validar los 
-resultados. 
+resultados. El libro [NR-RD2006]_ trata y ejemplifica estas tareas. 
 
 Mejora y "refactorización" a patrones de diseño
 -----------------------------------------------

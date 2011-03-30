@@ -145,10 +145,8 @@ exitoso:
 Pruebas de usabilidad
 =====================
 
-La usabilidad es un aspecto de dificil mensura. 
-
 Para analizar la mejora  respecto a la versión precedente se realizaron pruebas con 
-usuarios inexpertos con el objetivo de cuantificar el éxito en la tarea de realizar un diagrama. 
+usuarios inexpertos con el objetivo de observar el éxito en la tarea encomendada. 
 
 Las condiciones experimentales de estas pruebas fueron:
 
@@ -159,7 +157,9 @@ Las condiciones experimentales de estas pruebas fueron:
 
 Si bien la muestra poblacional no fue representativa para una conclusión 
 definitiva, los cuatro usuarios lograron el objetivo en menos de 2 minutos, 
-aún sin comprender el significado de los diagramas obtenidos.
+aún sin comprender el significado de los diagramas obtenidos. Las tareas
+de manipulación de los diagramas como rotar (en 3D), hacer zoom, desplazar, etc. 
+fueron bien interpretadas mediate los íconos de la barra de herramientas. 
 
 Como experiencia adicional, puede contarse con las clases prácticas realizadas 
 en el marco de los laboratorio de *Termodinámica* (Ingeniería Química, UNC), 
