@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>8. Verificación &mdash; &lt;project&gt;</title>
+    <title>9. Verificación &mdash; Software para graficación de diagramas termodinámicos</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,9 +26,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
-    <link rel="top" title="&lt;project&gt;" href="index.html" />
-    <link rel="next" title="9. Implantación" href="implantacion.html" />
-    <link rel="prev" title="7. Implementación" href="implementacion.html" /> 
+    <link rel="top" title="Software para graficación de diagramas termodinámicos" href="index.html" />
+    <link rel="next" title="10. Implantación" href="implantacion.html" />
+    <link rel="prev" title="8. Implementación" href="implementacion.html" /> 
   </head>
   <body>
     <div class="related">
@@ -38,12 +38,12 @@
           <a href="genindex.html" title="Índice General"
              accesskey="I">índice</a></li>
         <li class="right" >
-          <a href="implantacion.html" title="9. Implantación"
+          <a href="implantacion.html" title="10. Implantación"
              accesskey="N">siguiente</a> |</li>
         <li class="right" >
-          <a href="implementacion.html" title="7. Implementación"
+          <a href="implementacion.html" title="8. Implementación"
              accesskey="P">anterior</a> |</li>
-        <li><a href="index.html">&lt;project&gt;</a> &raquo;</li> 
+        <li><a href="index.html">Software para graficación de diagramas termodinámicos</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -53,13 +53,13 @@
           <div class="body">
             
   <div class="section" id="verificaci-n">
-<span id="test"></span><h1>8. Verificación<a class="headerlink" href="#verificaci-n" title="Enlazar permanentemente con este título">¶</a></h1>
+<span id="test"></span><h1>9. Verificación<a class="headerlink" href="#verificaci-n" title="Enlazar permanentemente con este título">¶</a></h1>
 <p>Este capítulo describe el trabajo realizado para la verificación del correcto
 funcionamiento de la aplicación.</p>
 <p>En particular se ha <em>&#8220;testeado&#8221;</em> la librería de comunicación, es decir
 la clase <tt class="xref py py-class docutils literal"><span class="pre">ApiManager</span></tt> del módulo <tt class="xref py py-mod docutils literal"><span class="pre">apimanager</span></tt></p>
 <div class="section" id="conceptos-de-pruebas-unitarias">
-<h2>8.1. Conceptos de pruebas unitarias<a class="headerlink" href="#conceptos-de-pruebas-unitarias" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>9.1. Conceptos de pruebas unitarias<a class="headerlink" href="#conceptos-de-pruebas-unitarias" title="Enlazar permanentemente con este título">¶</a></h2>
 <p><em>Unit Testing</em> o pruebas unitarias son test en donde cada parte (módulo, clase, función)
 del programa es testeado por separado (de alló lo de <em>unitario</em>).
 Idealmente, se pone a prueba todas las funciones y todos los casos posibles para cada
@@ -89,7 +89,7 @@ del programa. Esto no excluye que se tenga que escribir la documentación del c�
 <li>Un test tiene que ser independiente del otro. Es decir, el resultado de un test no debería depender del resultado anterior.</li>
 </ul>
 <div class="section" id="unit-testing-en-python">
-<h3>8.1.1. Unit testing en Python<a class="headerlink" href="#unit-testing-en-python" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>9.1.1. Unit testing en Python<a class="headerlink" href="#unit-testing-en-python" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Python provee en su librería estándar un completo framework para realizar
 pruebas unitarias. Se trata de <tt class="xref py py-mod docutils literal"><span class="pre">unittest</span></tt> <a class="footnote-reference" href="#id4" id="id2">[1]</a> cuya arquitectura y
 <a class="reference internal" href="glosario.html#term-api"><em class="xref std std-term">api</em></a> está basada en el framework <a class="reference external" href="http://www.junit.org/">Junit</a> para
@@ -122,7 +122,7 @@ cada test.</p>
 </div>
 </div>
 <div class="section" id="pruebas-realizadas">
-<h2>8.2. Pruebas realizadas<a class="headerlink" href="#pruebas-realizadas" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>9.2. Pruebas realizadas<a class="headerlink" href="#pruebas-realizadas" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Como se dijo, varias pruebas fueron realizadas sobre el controlador de la
 interfaz de comunicación. Por supuesto, en un sistema tan complejo como
 el desarrollado la cobertura de pruebas dista de ser total, pero se ha verificado
@@ -179,12 +179,12 @@ Prueba que se invierte el orden de los últimos dos parámetros.</p>
 </dd></dl>
 
 <div class="section" id="ejemplos-de-c-digo-de-las-pruebas">
-<h3>8.2.1. Ejemplos de código de las pruebas<a class="headerlink" href="#ejemplos-de-c-digo-de-las-pruebas" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>9.2.1. Ejemplos de código de las pruebas<a class="headerlink" href="#ejemplos-de-c-digo-de-las-pruebas" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>El código de implementación de cada una de estas pruebas es muy descriptivo
 pero por una cuestión de extensión, se muestran sólo algunos de ellos.
 Para el estudio completo ver el módulo <tt class="xref py py-mod docutils literal"><span class="pre">test_apimanager.py</span></tt></p>
 <div class="section" id="ejemplo-1">
-<h4>8.2.1.1. Ejemplo 1<a class="headerlink" href="#ejemplo-1" title="Enlazar permanentemente con este título">¶</a></h4>
+<h4>9.2.1.1. Ejemplo 1<a class="headerlink" href="#ejemplo-1" title="Enlazar permanentemente con este título">¶</a></h4>
 <div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">test_write_conparin_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dirección 0 para modelos de cálculo 1 2 o 3. </span>
@@ -203,7 +203,7 @@ Para el estudio completo ver el módulo <tt class="xref py py-mod docutils liter
 </div>
 </div>
 <div class="section" id="ejemplo-2">
-<h4>8.2.1.2. Ejemplo 2<a class="headerlink" href="#ejemplo-2" title="Enlazar permanentemente con este título">¶</a></h4>
+<h4>9.2.1.2. Ejemplo 2<a class="headerlink" href="#ejemplo-2" title="Enlazar permanentemente con este título">¶</a></h4>
 <div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">test_read_conpaout_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prueba que para todos los modelos, la primer fila de resultados </span>
@@ -224,7 +224,7 @@ Para el estudio completo ver el módulo <tt class="xref py py-mod docutils liter
 </div>
 </div>
 <div class="section" id="ejemplo-3">
-<h4>8.2.1.3. Ejemplo 3<a class="headerlink" href="#ejemplo-3" title="Enlazar permanentemente con este título">¶</a></h4>
+<h4>9.2.1.3. Ejemplo 3<a class="headerlink" href="#ejemplo-3" title="Enlazar permanentemente con este título">¶</a></h4>
 <div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">test_gpecout_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prueba que hay 2 curvas de vapor y al menos una crítica en los </span>
@@ -252,9 +252,8 @@ Para el estudio completo ver el módulo <tt class="xref py py-mod docutils liter
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="ejecuci-n-y-validaci-n">
-<h2>8.3. Ejecución y validación<a class="headerlink" href="#ejecuci-n-y-validaci-n" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>9.2.2. Ejecución y validación<a class="headerlink" href="#ejecuci-n-y-validaci-n" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Se muestra la ejecución automatizada de todas las pruebas y su resultado
 exitoso:</p>
 <div class="highlight-bash"><div class="highlight"><pre>tin@azulita:~/facu/pi/src<span class="nv">$ </span>python test_apimanager.py
@@ -271,6 +270,108 @@ Ran 6 tests in 0.808s
 OK
 </pre></div>
 </div>
+</div>
+</div>
+<div class="section" id="pruebas-de-usabilidad">
+<h2>9.3. Pruebas de usabilidad<a class="headerlink" href="#pruebas-de-usabilidad" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Para analizar la mejora  respecto a la versión precedente se realizaron pruebas con
+usuarios inexpertos con el objetivo de observar el éxito en la tarea encomendada.</p>
+<p>Las condiciones experimentales de estas pruebas fueron:</p>
+<ul class="simple">
+<li>Cuatro usuarios trabajando individualmente</li>
+<li>Se solicita la obtención de una suite de gráficos</li>
+<li>No se da ninguna otra intrucción y ayuda oral o escrita sobre cómo lograr el
+resultado</li>
+</ul>
+<p>Si bien la muestra poblacional no fue representativa para una conclusión
+definitiva, los cuatro usuarios lograron el objetivo en menos de 2 minutos,
+aún sin comprender el significado de los diagramas obtenidos. Las tareas
+de manipulación de los diagramas como rotar (en 3D), hacer zoom, desplazar, etc.
+fueron bien interpretadas mediate los íconos de la barra de herramientas.</p>
+<p>Como experiencia adicional, puede contarse con las clases prácticas realizadas
+en el marco de los laboratorio de <em>Termodinámica</em> (Ingeniería Química, UNC),
+dictador por el Dr. Cismondi, donde la gran mayoría de los alumnos lograron
+realizar los diagramas antes de que se dieran las instrucciones de procedimiento.</p>
+<div class="section" id="an-lisis-cuantitativo">
+<h3>9.3.1. Análisis cuantitativo<a class="headerlink" href="#an-lisis-cuantitativo" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Se describen algunos aspectos cuantitativos que dan muestra de la reducción
+de componentes de control y acciones necesarias para realizar una tarea, comparando
+la versión actual con la anterior.</p>
+<ul>
+<li><p class="first">Panel de definición de un caso</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="47%" />
+<col width="53%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><p class="first last">Visual GPEC</p>
+</th>
+<th class="head"><p class="first last">GPEC 2010</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first last">38 componentes simultáneos</p>
+</td>
+<td><p class="first last">19 componentes</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p class="first last">3 grupos de opciones</p>
+</td>
+<td><p class="first last">2 menues de opciones</p>
+</td>
+</tr>
+<tr class="row-even"><td><p class="first last">Opciones secundarias visibles</p>
+</td>
+<td><p class="first last">Opciones secundarias desplegables</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p class="first last">100 % espacio pantalla</p>
+</td>
+<td><p class="first last">25% espacio de pantalla</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+<li><p class="first">Definición un sistema de componentes arbitrarios</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="51%" />
+<col width="49%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><p class="first last">Visual GPEC</p>
+</th>
+<th class="head"><p class="first last">GPEC 2010</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first last">3 ventanas modales</p>
+</td>
+<td><p class="first last">1 ventana modales</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p class="first last">7 clicks</p>
+</td>
+<td><p class="first last">4 clicks</p>
+</td>
+</tr>
+<tr class="row-even"><td><p class="first last">15 cajas de texto</p>
+</td>
+<td><p class="first last">5 cajas de texto</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+</ul>
 <table class="docutils citation" frame="void" id="zulberti2010" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
@@ -296,6 +397,7 @@ mediante el utilitario <strong class="program">easy_install</strong>.</td></tr>
 </table>
 </div>
 </div>
+</div>
 
 
           </div>
@@ -305,31 +407,35 @@ mediante el utilitario <strong class="program">easy_install</strong>.</td></tr>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Contenidos</a></h3>
   <ul>
-<li><a class="reference internal" href="#">8. Verificación</a><ul>
-<li><a class="reference internal" href="#conceptos-de-pruebas-unitarias">8.1. Conceptos de pruebas unitarias</a><ul>
-<li><a class="reference internal" href="#unit-testing-en-python">8.1.1. Unit testing en Python</a></li>
+<li><a class="reference internal" href="#">9. Verificación</a><ul>
+<li><a class="reference internal" href="#conceptos-de-pruebas-unitarias">9.1. Conceptos de pruebas unitarias</a><ul>
+<li><a class="reference internal" href="#unit-testing-en-python">9.1.1. Unit testing en Python</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#pruebas-realizadas">8.2. Pruebas realizadas</a><ul>
-<li><a class="reference internal" href="#ejemplos-de-c-digo-de-las-pruebas">8.2.1. Ejemplos de código de las pruebas</a><ul>
-<li><a class="reference internal" href="#ejemplo-1">8.2.1.1. Ejemplo 1</a></li>
-<li><a class="reference internal" href="#ejemplo-2">8.2.1.2. Ejemplo 2</a></li>
-<li><a class="reference internal" href="#ejemplo-3">8.2.1.3. Ejemplo 3</a></li>
+<li><a class="reference internal" href="#pruebas-realizadas">9.2. Pruebas realizadas</a><ul>
+<li><a class="reference internal" href="#ejemplos-de-c-digo-de-las-pruebas">9.2.1. Ejemplos de código de las pruebas</a><ul>
+<li><a class="reference internal" href="#ejemplo-1">9.2.1.1. Ejemplo 1</a></li>
+<li><a class="reference internal" href="#ejemplo-2">9.2.1.2. Ejemplo 2</a></li>
+<li><a class="reference internal" href="#ejemplo-3">9.2.1.3. Ejemplo 3</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#ejecuci-n-y-validaci-n">9.2.2. Ejecución y validación</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#ejecuci-n-y-validaci-n">8.3. Ejecución y validación</a></li>
+<li><a class="reference internal" href="#pruebas-de-usabilidad">9.3. Pruebas de usabilidad</a><ul>
+<li><a class="reference internal" href="#an-lisis-cuantitativo">9.3.1. Análisis cuantitativo</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 
   <h4>Tema anterior</h4>
   <p class="topless"><a href="implementacion.html"
-                        title="Capítulo anterior">7. Implementación</a></p>
+                        title="Capítulo anterior">8. Implementación</a></p>
   <h4>Próximo tema</h4>
   <p class="topless"><a href="implantacion.html"
-                        title="Próximo capítulo">9. Implantación</a></p>
+                        title="Próximo capítulo">10. Implantación</a></p>
   <h3>Esta página</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/verificacion.txt"
@@ -359,17 +465,17 @@ mediante el utilitario <strong class="program">easy_install</strong>.</td></tr>
           <a href="genindex.html" title="Índice General"
              >índice</a></li>
         <li class="right" >
-          <a href="implantacion.html" title="9. Implantación"
+          <a href="implantacion.html" title="10. Implantación"
              >siguiente</a> |</li>
         <li class="right" >
-          <a href="implementacion.html" title="7. Implementación"
+          <a href="implementacion.html" title="8. Implementación"
              >anterior</a> |</li>
-        <li><a href="index.html">&lt;project&gt;</a> &raquo;</li> 
+        <li><a href="index.html">Software para graficación de diagramas termodinámicos</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2011, Martín Gaitán.
-      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1pre/ce4bb37a1409+.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1pre/40063bb1b44a.
     </div>
   </body>
 </html>

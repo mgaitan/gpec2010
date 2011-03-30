@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6. Arquitectura &mdash; &lt;project&gt;</title>
+    <title>7. Arquitectura &mdash; Software para graficación de diagramas termodinámicos</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,9 +26,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
-    <link rel="top" title="&lt;project&gt;" href="index.html" />
-    <link rel="next" title="7. Implementación" href="implementacion.html" />
-    <link rel="prev" title="5. Ingeniería de requerimientos" href="requerimientos.html" /> 
+    <link rel="top" title="Software para graficación de diagramas termodinámicos" href="index.html" />
+    <link rel="next" title="8. Implementación" href="implementacion.html" />
+    <link rel="prev" title="6. Tecnologías adoptadas" href="tecnologias.html" /> 
   </head>
   <body>
     <div class="related">
@@ -38,12 +38,12 @@
           <a href="genindex.html" title="Índice General"
              accesskey="I">índice</a></li>
         <li class="right" >
-          <a href="implementacion.html" title="7. Implementación"
+          <a href="implementacion.html" title="8. Implementación"
              accesskey="N">siguiente</a> |</li>
         <li class="right" >
-          <a href="requerimientos.html" title="5. Ingeniería de requerimientos"
+          <a href="tecnologias.html" title="6. Tecnologías adoptadas"
              accesskey="P">anterior</a> |</li>
-        <li><a href="index.html">&lt;project&gt;</a> &raquo;</li> 
+        <li><a href="index.html">Software para graficación de diagramas termodinámicos</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -53,21 +53,41 @@
           <div class="body">
             
   <div class="section" id="arquitectura">
-<h1>6. Arquitectura<a class="headerlink" href="#arquitectura" title="Enlazar permanentemente con este título">¶</a></h1>
+<h1>7. Arquitectura<a class="headerlink" href="#arquitectura" title="Enlazar permanentemente con este título">¶</a></h1>
 <p>En este capitulo se describe, de manera conceptual, el diseño arquitectónico
-de la aplicación.</p>
+de la aplicación. La metodología ágil e iterativa adoptada no implica
+que no haya existido una instancia de reflexión en el diseño en la aplicación,
+sólo que esta no es estado basada íntegramente en una descripción formal y exhaustiva
+como UML.</p>
+<p>Según afirma Terry Quatrani, evangelizadora de las metodologías ágiles en IBM,
+en <a class="reference internal" href="#quatrani2010">[Quatrani2010]</a> :</p>
+<blockquote>
+<div>Aunque sigas un proceso ágil, estarás realizando cierto grado de modelado
+– sólo que no lo realizarás tanto como si utilizaras un proceso tradicional.
+La falta de formalidad en el modelado ágil no significa que no estás modelando,
+sino que te pones el foco en los beneficios de este sin las desventajas
+y confusiones de documentos extraños y burocráticos.</div></blockquote>
+<p>Por su parte, Robert Martin afirma en <a class="reference internal" href="#martin2006">[Martin2006]</a> que el modelado
+en el desarrollo ágil es útil como instrumento de comunicación,
+pero no aporta información ahondar en detalles:</p>
+<blockquote>
+<div>No gastes mucho tiempo en esta tarea... no necesitas tanto detalle.
+Los modelos y los planos son necesarios en la arquitectura y la construcción
+civil porque es caro construir una casa para demostrar que su diseño funciona
+o no. El software no es así – puedes validar tu diseño con sólo codificarlo
+al momento de realizar un diagrama.</div></blockquote>
 <div class="section" id="modelo-conceptual">
-<span id="modelo"></span><h2>6.1. Modelo conceptual<a class="headerlink" href="#modelo-conceptual" title="Enlazar permanentemente con este título">¶</a></h2>
+<span id="modelo"></span><h2>7.1. Modelo conceptual<a class="headerlink" href="#modelo-conceptual" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>La siguiente infografía describe conceptualmente, de manera simplificada,
 el flujo de procesamiento de la información.</p>
 <div class="figure">
-<img alt="_images/workflow4.png" src="_images/workflow4.png" style="width: 70%;" />
+<img alt="_images/workflow5.png" src="_images/workflow5.png" style="width: 70%;" />
 <p class="caption"><span class="target" id="index-0"></span>Diagrama conceptual del flujo de información entre las distintas capas</p>
 </div>
 <p>El frontend, objeto de este trabajo, se compone de la interfaz de usuario,
 la gestión de base de datos, los algoritmos de procesamiento de
 la información y la graficación.</p>
-<p><abbr>API (Application Programming Interface</abbr> refiere a la interfaz de
+<p><abbr title="Application Programming Interface">API</abbr> refiere a la interfaz de
 comunicación definida para la comunicación entre ambas partes, que está basada
 en archivos de texto plano con un formato particular. El relevamiento de esta interfaz
 formó parte del desarrollo, y se describe exhaustivamente en <a class="reference internal" href="api.html#api"><em>Especificación de la interfaz de comunicación</em></a>.
@@ -75,24 +95,24 @@ Una librería modularmente independiente, basada en ese relevamiento se
 programó para dar soporte a la comunicación. Se describe en <a class="reference internal" href="implementacion.html#backend"><em>Invocación de ejecutables del backend</em></a>.</p>
 <p>El backend refiere al conjunto de programas desarrollados en Fortran que implementan
 los algoritmos de cálculo. Estos programas leen uno o varios archivos de entrada
-y producen un archivo de salida con la los vectores de números
+y producen un archivo de salida con los vectores de números
 reales resultantes de los cálculos (la información a graficar) junto a otras
 informaciones relativas al contexto de cálculo</p>
-<p>Los algoritmos de procesamiento analizan y extraen sólo la información útil,
+<p>Los algoritmos de procesamiento del frontend analizan y extraen sólo la información útil,
 haciendo una conversión de texto a un tipo de dato numérico y con esa información
 se realizan los gráficos correspondientes.</p>
 </div>
 <div class="section" id="componentes-y-capas-de-software">
-<h2>6.2. Componentes y capas de software<a class="headerlink" href="#componentes-y-capas-de-software" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>7.2. Componentes y capas de software<a class="headerlink" href="#componentes-y-capas-de-software" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>El siguiente diagrama, diseñado con la intención de favorecer la comprensión
 por sobre el apego a la especificación <a class="reference internal" href="glosario.html#term-uml"><em class="xref std std-term">UML</em></a>, describe las capas y
 <span class="target" id="index-1"></span>componentes de software involucrados en la aplicación.</p>
 <div class="figure">
-<img alt="_images/arquitectura4.png" src="_images/arquitectura4.png" style="width: 60%;" />
+<img alt="_images/arquitectura5.png" src="_images/arquitectura5.png" style="width: 60%;" />
 <p class="caption">Arquitectura Frontend - Middleware - Backend</p>
 </div>
-<p>Este diagrama complementa al anterior brindando más detalles sobre la
-la vinculación de los componentes y las capas de software. Por simplicidad,
+<p>Este diagrama brinda más detalles sobre la
+vinculación de los componentes y las capas de software. Por simplicidad,
 se ha obviado la descripción de los componentes Matplotlib y Numpy, asumiéndolos
 tácitamente como parte de la aplicación.</p>
 <p>Los componentes de <a class="reference internal" href="glosario.html#term-middleware"><em class="xref std std-term">middleware</em></a> de conexión a la base de datos
@@ -108,6 +128,186 @@ a Windows. Esto se describe ampliamente en <a class="reference internal" href="i
 Pub/Sub. La explicación de la importancia estructural de este componente
 se describe en <a class="reference internal" href="implementacion.html#uso-pubsub"><em>Utilización de Publish/Suscribe en GPEC</em></a>.</p>
 </div>
+<div class="section" id="diagrama-de-despliegue">
+<h2>7.3. Diagrama de despliegue<a class="headerlink" href="#diagrama-de-despliegue" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>El diagrama de despliegue de la figura <em class="xref std std-ref">despliegue-num</em>, es una representación
+más formal (basada en la especificación UML) de los anteriores diagramas.</p>
+<div class="figure" id="despliegue-num">
+<img alt="_images/arquitectura5.png" src="_images/arquitectura5.png" style="width: 60%;" />
+</div>
+</div>
+<div class="section" id="capa-de-base-de-datos">
+<span id="bbdd-design"></span><h2>7.4. Capa de base de datos<a class="headerlink" href="#capa-de-base-de-datos" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>La aplicación no requiere una infraestructura de base de datos compleja.
+En particular, los datos almacenados son las constantes de compuestos
+químicos.</p>
+<p>Se incluye una vasta base de datos termodinámicos para más de 2000 compuestos,
+corroborados mediante <cite>DIPPR Project 801 &lt;http://dippr.byu.edu/&gt;</cite> <a class="footnote-reference" href="#id7" id="id3">[1]</a> que incluye información
+como la fórmula, el factor acéntrico, el volumen, la temperatura y la presión crítica,
+etc.</p>
+<p>Esta información se comporta en modo <em>sólo lectura</em> <a class="footnote-reference" href="#id8" id="id4">[2]</a>
+a través de la interfaz de usuario, pero se brinda también una categoría editable
+para permitir <em>compuestos definidos por el usuario</em> que pueden ser agregados como
+una copia de un compuesto existente en <abbr>DIPPR</abbr> (que acepta, entonces, la modificación
+o ajuste de sus valores) o bien como un nuevo compuesto definido desde datos
+experimentales.</p>
+<div class="section" id="modelo-entidad-relaci-n">
+<h3>7.4.1. Modelo Entidad-Relación<a class="headerlink" href="#modelo-entidad-relaci-n" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El modelo Entidad-Relación es un diagrama que describe la interrelación de
+la información gestionada por la base de datos. Se muestra en la figura <a class="reference internal" href="#bd-num"><em>Representación de las entidades con sus atributos y la
+relación entre las mismas</em></a>.</p>
+<div class="figure" id="bd-num">
+<img alt="_images/er-database9.png" src="_images/er-database9.png" style="width: 90%;" />
+<p class="caption">Representación de las entidades con sus atributos y la
+relación entre las mismas</p>
+</div>
+<div class="admonition-ver-tambi-n admonition seealso">
+<p class="first admonition-title">Ver también</p>
+<p class="last">Vea <a class="reference internal" href="implementacion.html#bbdd"><em>Implementación de base de datos</em></a> para la implementación.</p>
+</div>
+</div>
+</div>
+<div class="section" id="diagrama-de-paquetes">
+<h2>7.5. Diagrama de paquetes<a class="headerlink" href="#diagrama-de-paquetes" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>El diagrama de paquetes de la figura <a class="reference internal" href="#diag-pack-num"><em>Diagrama de paquetes</em></a>,  que forma parte de la suite definida por UML 2.0, muestra los paquetes y módulos (unidades de código fuente) y su árbol interdependencia.</p>
+<div class="figure" id="diag-pack-num">
+<img alt="_images/packages_Gpec2010.png" src="_images/packages_Gpec2010.png" style="width: 90%;" />
+<p class="caption">Diagrama de paquetes</p>
+</div>
+<p>Este diagrama se realizó mediante un análisis de ingeniería inversa utilizando
+la herramienta <a class="reference external" href="http://www.logilab.org/blogentry/6883">pyreverse</a></p>
+</div>
+<div class="section" id="diagramas-de-clases">
+<h2>7.6. Diagramas de clases<a class="headerlink" href="#diagramas-de-clases" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Se incluyen en las siguientes figuras diagramas de clase de la
+aplicación.</p>
+<p>Se insiste en que en el proceso de desarrollo no existió una especificación
+de esta magnitud de detalle previa a la implementación, pero se ofrecen
+al lector, generadas mediante el análisis del código, como orientación
+sobre la estructura arquitectónica de la aplicación.</p>
+<div class="section" id="relaci-n-y-dependencia-de-los-paneles">
+<h3>7.6.1. Relación y dependencia de los paneles<a class="headerlink" href="#relaci-n-y-dependencia-de-los-paneles" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El diagrama de la figura <a class="reference internal" href="#class2-num"><em>Jerarquía de clases de la GUI</em></a> muestra la relación y jerarquía de las
+clases que componen la interfaz de usuario.</p>
+<div class="figure" id="class2-num">
+<img alt="_images/classes1.png" src="_images/classes1.png" style="width: 90%;" />
+<p class="caption">Jerarquía de clases de la GUI</p>
+</div>
+<p>La clase <cite>ShellPanel</cite> corresponde a una consola interactiva que se incluyó
+en uno de los prototipos presentados, pero luego ha sido descartada en versiones
+actuales por no formar parte de los requerimientos especificados.</p>
+</div>
+<div class="section" id="relaciones-del-panel-de-caso">
+<h3>7.6.2. Relaciones del Panel de caso<a class="headerlink" href="#relaciones-del-panel-de-caso" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El diagrama de clases de la figura <a class="reference internal" href="#class1-num"><em>CasePanel y su composición</em></a> hace hincapié en la
+clase <cite>CasePanel</cite> y sus relaciones de composición</p>
+<div class="figure" id="class1-num">
+<img alt="_images/classes1.png" src="_images/classes1.png" style="width: 80%;" />
+<p class="caption"><cite>CasePanel</cite> y su composición</p>
+</div>
+</div>
+<div class="section" id="clases-vinculadas-a-la-graficaci-n">
+<h3>7.6.3. Clases vinculadas a la graficación<a class="headerlink" href="#clases-vinculadas-a-la-graficaci-n" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El diagrama de la figura <a class="reference internal" href="#class3-num"><em>Diagrama de clases relacionadas con la graficación</em></a> describe las clases
+relacionadas con la graficación. Muchas de estas forman parte de MatploLib.</p>
+<div class="figure" id="class3-num">
+<img alt="_images/classes3.png" src="_images/classes3.png" style="width: 90%;" />
+<p class="caption">Diagrama de clases relacionadas con la graficación</p>
+</div>
+</div>
+<div class="section" id="tipos-de-gr-ficos">
+<span id="tipos-graf"></span><h3>7.6.4. Tipos de gráficos<a class="headerlink" href="#tipos-de-gr-ficos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Los tipos de gráficos 2D y 3D tiene un diseño jerarquico de clases como se
+muestra en la figura <a class="reference internal" href="#plotclass-num"><em>Diagrama de clases de los distintos tipos de diagramas soportados</em></a>, donde las subclases reimplementan
+el método que selecciona el subconjunto de datos
+que cada gráfico necesita. Los métodos comunes son heredados de la superclase.</p>
+<div class="figure" id="plotclass-num">
+<img alt="_images/class-plots9.png" src="_images/class-plots9.png" style="width: 65%;" />
+<p class="caption">Diagrama de clases de los distintos tipos de diagramas soportados</p>
+</div>
+</div>
+</div>
+<div class="section" id="preceptos-adoptados-en-el-dise-o-de-ui">
+<span id="preceptos-ui"></span><h2>7.7. Preceptos adoptados en el diseño de UI<a class="headerlink" href="#preceptos-adoptados-en-el-dise-o-de-ui" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Como se ha mencionado, la usabilidad e intuitividad de la interfaz de usuario
+ha sido un requerimiento de especial atención. Mucha bibliografía fue consultada
+al respecto, rescantando en particular muchos conceptos y consejos de Joel Spolsky
+en <a class="reference internal" href="implementacion.html#spolsky2001">[Spolsky2001]</a> <a href="#id9"><span class="problematic" id="id10"><span id="id6"></span>[#]_</span></a> . Entre muchos, se destacan:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Brindar contextos intuitivos y secuencias de operación lógicas.</li>
+<li>Minimizar las opciones en simultáneo. Cada opción es una decisión que se le
+exige al usuario.</li>
+<li>Los usuarios no leen manuales (de hecho tampoco leen mensajes en pantalla si son largos)</li>
+<li>Convenciones por sobre configuraciones: limitar los parámetros requeridos</li>
+<li>Valerse de las costumbres del usuario: no reinventar la rueda</li>
+</ul>
+</div></blockquote>
+<p>Un software complejo con un acabado estudio de usabilidad es
+<a class="reference external" href="http://code.enthought.com/projects/mayavi/">Mayavi</a> , que ha servido de inspiración
+para el diseño de GPEC.</p>
+<div class="figure">
+<img alt="_images/mayavi29.png" src="_images/mayavi29.png" style="width: 90%;" />
+<p class="caption">Interfaz de la aplicación de visualización de diagramas VTK que sirvió
+como inspiración para la interfaz de GPEC.</p>
+</div>
+<p>Algunas decisiones concernientes a la usabilidad han sido:</p>
+<ul class="simple">
+<li>El diseño acompaña al <em>workflow</em>: primero se define el sistema, opcionalmente
+se manipulan los cálculos y por último se grafica. Sólo el primero y el último
+paso son obligatorios.</li>
+<li>La ubicación de los botones principales está dispuesta en función del
+flujo de lectura de occidental (de izquierda a derecha y de arriba hacia abajo)
+de manera de resultar intuitiva la secuencia de acciones demandada al usuario</li>
+<li>Todos los botones tiene asociado un ícono descriptivo</li>
+<li>Los componentes que muestran información no modificable se mantienen en modo
+sólo lectura y visualmente se ven &#8220;grisados&#8221;.</li>
+<li>Un conjunto de parámetros (coeficientes, reglas de combinación) se ubican en
+un panel colapsable. Al expandirlo, el panel genera automática una barra de
+desplazamiento vertical.</li>
+<li>El uso del símbolo &#8220;+&#8221; en la ubicación dispuesta es una convención popularizada
+por los navegadores web para abrir una nueva pestaña de trabajo. Dado el contexto
+resulta evidente que genera un nuevo caso.</li>
+</ul>
+<div class="figure">
+<img alt="_images/usabilidad_labels9.png" src="_images/usabilidad_labels9.png" style="width: 100%;" />
+<p class="caption">Interfaz de la aplicación de visualización de diagramas VTK que sirvió
+como inspiración para la interfaz de GPEC.</p>
+</div>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[1]</a></td><td><em>DIPPR 801</em> es un producto comercial cuya licencia ronda los u$s3400 anuales.
+GPEC incluye en su base datos equivalentes a una porción de la información
+que ese producto ofrece, sin depender de esta de manera alguna.
+No obstante, el autor considera este aspecto como suceptible a acarrear
+complicaciones legales y comerciales, que deberán revisarse y solucioanrse
+a futuro.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[2]</a></td><td>Una versión online gratuita de este libro se encuentra en
+<a class="reference external" href="http://www.joelonsoftware.com/uibook/fog0000000249.html">http://www.joelonsoftware.com/uibook/fog0000000249.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="quatrani2010" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[Quatrani2010]</a></td><td>Quatrani, Terry (2010) <em>The Truth About Agile
+Modeling</em>. Cita extraída de
+<a class="reference external" href="http://agilescout.com/agile-modeling-and-uml/">http://agilescout.com/agile-modeling-and-uml/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="martin2006" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[Martin2006]</a></td><td>Martin, Robert (2006) <em>Agile Principles, Patterns, and Practices in C#</em>,
+Prentice Hall. Cita extraída de <a class="reference external" href="http://stackoverflow.com/questions/61487/do-you-use-uml-in-agile-development-practices">http://stackoverflow.com/questions/61487/do-you-use-uml-in-agile-development-practices</a></td></tr>
+</tbody>
+</table>
+</div>
 </div>
 
 
@@ -118,19 +318,33 @@ se describe en <a class="reference internal" href="implementacion.html#uso-pubsu
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Contenidos</a></h3>
   <ul>
-<li><a class="reference internal" href="#">6. Arquitectura</a><ul>
-<li><a class="reference internal" href="#modelo-conceptual">6.1. Modelo conceptual</a></li>
-<li><a class="reference internal" href="#componentes-y-capas-de-software">6.2. Componentes y capas de software</a></li>
+<li><a class="reference internal" href="#">7. Arquitectura</a><ul>
+<li><a class="reference internal" href="#modelo-conceptual">7.1. Modelo conceptual</a></li>
+<li><a class="reference internal" href="#componentes-y-capas-de-software">7.2. Componentes y capas de software</a></li>
+<li><a class="reference internal" href="#diagrama-de-despliegue">7.3. Diagrama de despliegue</a></li>
+<li><a class="reference internal" href="#capa-de-base-de-datos">7.4. Capa de base de datos</a><ul>
+<li><a class="reference internal" href="#modelo-entidad-relaci-n">7.4.1. Modelo Entidad-Relación</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#diagrama-de-paquetes">7.5. Diagrama de paquetes</a></li>
+<li><a class="reference internal" href="#diagramas-de-clases">7.6. Diagramas de clases</a><ul>
+<li><a class="reference internal" href="#relaci-n-y-dependencia-de-los-paneles">7.6.1. Relación y dependencia de los paneles</a></li>
+<li><a class="reference internal" href="#relaciones-del-panel-de-caso">7.6.2. Relaciones del Panel de caso</a></li>
+<li><a class="reference internal" href="#clases-vinculadas-a-la-graficaci-n">7.6.3. Clases vinculadas a la graficación</a></li>
+<li><a class="reference internal" href="#tipos-de-gr-ficos">7.6.4. Tipos de gráficos</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#preceptos-adoptados-en-el-dise-o-de-ui">7.7. Preceptos adoptados en el diseño de UI</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Tema anterior</h4>
-  <p class="topless"><a href="requerimientos.html"
-                        title="Capítulo anterior">5. Ingeniería de requerimientos</a></p>
+  <p class="topless"><a href="tecnologias.html"
+                        title="Capítulo anterior">6. Tecnologías adoptadas</a></p>
   <h4>Próximo tema</h4>
   <p class="topless"><a href="implementacion.html"
-                        title="Próximo capítulo">7. Implementación</a></p>
+                        title="Próximo capítulo">8. Implementación</a></p>
   <h3>Esta página</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/arquitectura.txt"
@@ -160,17 +374,17 @@ se describe en <a class="reference internal" href="implementacion.html#uso-pubsu
           <a href="genindex.html" title="Índice General"
              >índice</a></li>
         <li class="right" >
-          <a href="implementacion.html" title="7. Implementación"
+          <a href="implementacion.html" title="8. Implementación"
              >siguiente</a> |</li>
         <li class="right" >
-          <a href="requerimientos.html" title="5. Ingeniería de requerimientos"
+          <a href="tecnologias.html" title="6. Tecnologías adoptadas"
              >anterior</a> |</li>
-        <li><a href="index.html">&lt;project&gt;</a> &raquo;</li> 
+        <li><a href="index.html">Software para graficación de diagramas termodinámicos</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2011, Martín Gaitán.
-      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1pre/ce4bb37a1409+.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1pre/40063bb1b44a.
     </div>
   </body>
 </html>

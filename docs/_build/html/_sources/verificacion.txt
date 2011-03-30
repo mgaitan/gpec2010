@@ -121,7 +121,7 @@ Ejemplo 3
 
 
 Ejecución y validación
-========================
+----------------------
 
 Se muestra la ejecución automatizada de todas las pruebas y su resultado 
 exitoso:
@@ -142,7 +142,57 @@ exitoso:
     OK
 
 
+Pruebas de usabilidad
+=====================
 
+Para analizar la mejora  respecto a la versión precedente se realizaron pruebas con 
+usuarios inexpertos con el objetivo de observar el éxito en la tarea encomendada. 
+
+Las condiciones experimentales de estas pruebas fueron:
+
+- Cuatro usuarios trabajando individualmente
+- Se solicita la obtención de una suite de gráficos
+- No se da ninguna otra intrucción y ayuda oral o escrita sobre cómo lograr el 
+  resultado   
+
+Si bien la muestra poblacional no fue representativa para una conclusión 
+definitiva, los cuatro usuarios lograron el objetivo en menos de 2 minutos, 
+aún sin comprender el significado de los diagramas obtenidos. Las tareas
+de manipulación de los diagramas como rotar (en 3D), hacer zoom, desplazar, etc. 
+fueron bien interpretadas mediate los íconos de la barra de herramientas. 
+
+Como experiencia adicional, puede contarse con las clases prácticas realizadas 
+en el marco de los laboratorio de *Termodinámica* (Ingeniería Química, UNC), 
+dictador por el Dr. Cismondi, donde la gran mayoría de los alumnos lograron 
+realizar los diagramas antes de que se dieran las instrucciones de procedimiento.
+
+Análisis cuantitativo 
+----------------------
+
+Se describen algunos aspectos cuantitativos que dan muestra de la reducción 
+de componentes de control y acciones necesarias para realizar una tarea, comparando 
+la versión actual con la anterior.
+
+- Panel de definición de un caso
+
+    ==============================  ==================================
+    Visual GPEC                     GPEC 2010
+    ==============================  ==================================
+    38 componentes simultáneos      19 componentes 
+    3 grupos de opciones            2 menues de opciones
+    Opciones secundarias visibles   Opciones secundarias desplegables
+    100 % espacio pantalla          25% espacio de pantalla
+    ==============================  ==================================
+
+- Definición un sistema de componentes arbitrarios
+
+    ===================  ==================
+    Visual GPEC          GPEC 2010
+    ===================  ==================
+    3 ventanas modales   1 ventana modales  
+    7 clicks             4 clicks       
+    15 cajas de texto    5 cajas de texto
+    ===================  ==================
 
 
 

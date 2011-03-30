@@ -10,18 +10,16 @@ Química y termodinámica
     :sorted:
 
 
-    ecuación de estado
-        :abbr:`EOS (Equation of State)` es la relación entre variables de estado
-        que describen el estado de la materia bajo ciertas condiciones físicas.
-
     termodinámica
         Rama de la fisicoquímica que estudia la conversión de energía entre 
         calor y trabajo mecánico, y subsecuentemente las variables macroscopicas
-        como temperatura, presión y volumen. 
+        como temperatura, presión y volumen. El equilibrio de fases es 
+        la parte de la termodinámica más estudiada en la Ingeniería Química por 
+        su importancia en procesos de separación.
 
 
     propiedades intensivas
-        Son aquellas propiedades que no dependen de la cantidad de sustancia o del tamaño de un sistema, por lo que cuyo valor permanece inalterable al subdividir el sistema.
+        Son aquellas propiedades que no dependen de la cantidad de sustancia o del tamaño de un sistema, por lo que su valor permanece inalterable al subdividir el sistema.
         Muchas magnitudes extensivas, como el volumen, la cantidad de calor o el peso, pueden convertirse en intensivas dividiéndolas por la cantidad de sustancia, la masa o el volumen de la muestra; resultando en valores por unidad de sustancia.
 
     sustancia
@@ -30,19 +28,23 @@ Química y termodinámica
     sustancia pura
         :term:`Sustancia <sustancia>` que no puede separarse en otras sustancias por ningún medio físico (como calentamiento o un campo magnético).
 
-    
-    compuesto químico
-        Es una sustancia formada por la unión de dos o más elementos de la tabla 
-        periódica. Una característica esencial es que tiene una fórmula química
 
     mezcla
         Es un sistema material compuesto de dos o más sustancias no combinadas
         químicamente. En una mezcla no ocurre una reacción química y cada uno de sus componentes mantiene su identidad y propiedades químicas, que pueden separarse 
-        mediante métodos físico como destilación, disolución, separación magnética, 
+        mediante métodos físicos como destilación, disolución, separación magnética, 
         filtración, etc.
 
+    sistema
+        Ver :term:`mezcla`
+
     sistema binario
-        Un sistema binario es una :term:`mezcla` de dos sustancias
+        Un sistema binario es una :term:`mezcla` de dos sustancias.
+
+    ecuación de estado
+        :abbr:`EOS (Equation of State)` es la relación entre variables de estado
+        que describen el estado de la materia bajo ciertas condiciones físicas y 
+        a partir de la cual pueden derivarse distintas propiedades termodinámicas.
 
     EoS
         :term:`ecuación de estado`
@@ -52,14 +54,14 @@ Química y termodinámica
         :term:`fases <fase>` de un sistema pueden ocurrir en equilibrio.
         
     fase 
-        En termodinámica y química, se denomina fase a cada una de las partes macroscópicas de una composición química y propiedades físicas homogéneas que forman un sistema
-        Suele usarse como sinónimo de `term:`estado de agregación` sin exactitud
+        En termodinámica y química, se denomina fase a cada una de las partes macroscópicas de una sistema química con propiedades físicas homogéneas.
+        Suele usarse como sinónimo de :term:`estado de agregación` sin exactitud
         ya que pueden existir fases distintas en el mismo estado de agregación
         (por ejemplo, el diamante y el grafito son distintas fases de carbono, 
         y ambas se encuentran en estado sólido).
 
     estado de agregación
-        Es el estado en que se presenta en la naturaleza una sustancia; dicho estado puede ser sólido, líquido, gaseoso, plasmático, 
+        Es el estado en que se presenta en la naturaleza una sustancia; dicho estado puede ser sólido, líquido, gaseoso, plasmático, supercrítico. 
 
     isopleta
         Se denomina isopleta (también llamada isolínea o isograma) a la línea 

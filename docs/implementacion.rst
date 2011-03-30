@@ -971,12 +971,6 @@ utilizando un proceso de 2 pasos
 
 
 
-.. [#]  Sqlite no permite definir tablas o registros de datos como *sólo lectura*. 
-        Queda en potestad del desarrollador vedar la posilidad de modificación como parte    
-        del proceso de validación. Sin embargo, siempre es posible para un usuario abrir
-        y modificar la información "manualmente" a través de un gestor que interprete 
-        el formato *sqlite*. 
-        
         
 
 
