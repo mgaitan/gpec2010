@@ -50,8 +50,8 @@
             
   <div class="section" id="conclusiones">
 <h1>11. Conclusiones<a class="headerlink" href="#conclusiones" title="Enlazar permanentemente con este título">¶</a></h1>
-<div class="section" id="logros">
-<h2>11.1. Logros<a class="headerlink" href="#logros" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="resultados">
+<h2>11.1. Resultados<a class="headerlink" href="#resultados" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>El desarrollo de este proyecto ha satisfecho los objetivos y requerimientos planteados.
 El software obtenido constituye una mejora cualitativa y cuantitativa
 de funcionalidad y facilidad de uso respecto a la versión preexistente.</p>
@@ -118,8 +118,19 @@ sino para potenciar sus posibilidades de disfusión, accediendo a circuitos a lo
 que el software privativo (de escala moderada) no accede sin costosas
 campañas de marketing.</p>
 </div>
+<div class="section" id="problemas-detectados">
+<h2>11.3. Problemas detectados<a class="headerlink" href="#problemas-detectados" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Una de las dificultades detectadas constituyó falta de un proceso de <em>refactoring</em>
+temprano que permitiera llevar la aplicación a un patrón general de la aplicación, por ejemplo
+del tipo Modelo-Vista-Controlador. No obstante, la aplicación está separada lógica y modulamente
+según las distintas incumbencias, lo que vuelve factible esta tarea.</p>
+<p>Otra dificultad se avisora de cara al futuro del proyecto relacianada
+con la utilización de Pub/Sub. El total desacople (una parte no conoce de la otra)
+requiere un criterio sistemático de parte del equipo de desarrollo
+y una documentación clara sobre quién, cómo y sobre qué mensajes se actúa.</p>
+</div>
 <div class="section" id="tiempo-de-desarrollo">
-<h2>11.3. Tiempo de desarrollo<a class="headerlink" href="#tiempo-de-desarrollo" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>11.4. Tiempo de desarrollo<a class="headerlink" href="#tiempo-de-desarrollo" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>El tiempo insumido para la concreción fue mayor que el deseado
 <a class="footnote-reference" href="#id21" id="id4">[4]</a>, pero diversas métricas  dan cuenta que ha sido un desarrollo al menos un 40%
 más rápido que lo estimado restrospectivamente <a class="footnote-reference" href="#id22" id="id5">[5]</a>.
@@ -135,7 +146,7 @@ condiciones (económicas, académicas, laborales, etc.) para una dedicación ful
 al proyecto.</p>
 </div>
 <div class="section" id="costo-de-desarrollo">
-<span id="costo"></span><h2>11.4. Costo de desarrollo<a class="headerlink" href="#costo-de-desarrollo" title="Enlazar permanentemente con este título">¶</a></h2>
+<span id="costo"></span><h2>11.5. Costo de desarrollo<a class="headerlink" href="#costo-de-desarrollo" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Según la herramienta de análisis de código <a class="reference external" href="https://www.ohloh.net">Ohloh</a>
 que utiliza el algoritmo COCOMO <a class="footnote-reference" href="#id24" id="id7">[7]</a>,  el código de GPEC se compone de
 aproximádamente 6700 líneas de código Python, lo que insume un esfuerzo estimado
@@ -146,7 +157,7 @@ estima en <strong>u$s 81,053</strong>  considerando una remuneración internacio
 <p>Contemplando la escritura de la documentación (este reporte), el esfuerzo estimado
 se eleva a 3 desarrolladores/año y <strong>u$s 151.358</strong> de costo total <a class="footnote-reference" href="#id26" id="id9">[9]</a>.</p>
 <div class="figure">
-<img alt="_images/cocomo5.png" src="_images/cocomo5.png" style="width: 30%;" />
+<img alt="_images/cocomo6.png" src="_images/cocomo6.png" style="width: 30%;" />
 </div>
 <p>Mediante la herramienta <a class="reference external" href="http://www.dwheeler.com/sloccount/">SLOCCount</a>
 de David Wheeler se estima un esfuerzo de 14.74 meses y un
@@ -173,7 +184,7 @@ SLOCCount, Copyright <span class="o">(</span>C<span class="o">)</span> 2001-2004
 </div>
 </div>
 <div class="section" id="impacto">
-<h2>11.5. Impacto<a class="headerlink" href="#impacto" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>11.6. Impacto<a class="headerlink" href="#impacto" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Si bien la publicación y difusión de las versiones públicas de este software
 se han mantenido como versiones &#8220;beta&#8221; manteniendo en paralelo el acceso a descarga
 de la versión anterior como versión &#8220;estable&#8221;, esta nueva versión de GPEC ya ha
@@ -190,13 +201,13 @@ asistida con el uso de esta nueva versión de GPEC.</p>
 con la firma del desarrollador y los directores Cismondi y Wolfmann,
 en las conferencias PyCon Argentina 2010 <a class="footnote-reference" href="#id27" id="id10">[10]</a> y RITeQ 2010 <a class="footnote-reference" href="#id28" id="id11">[11]</a></p>
 <div class="figure">
-<img alt="_images/poster5.jpg" src="_images/poster5.jpg" style="width: 60%;" />
+<img alt="_images/poster6.jpg" src="_images/poster6.jpg" style="width: 60%;" />
 <p class="caption">Poster expuesto en el congreso PyCon Argentina 2010. Fotografía de Elías
 Andrawos.</p>
 </div>
 </div>
 <div class="section" id="experiencia-de-trabajo">
-<span id="experiencia"></span><h2>11.6. Experiencia de trabajo<a class="headerlink" href="#experiencia-de-trabajo" title="Enlazar permanentemente con este título">¶</a></h2>
+<span id="experiencia"></span><h2>11.7. Experiencia de trabajo<a class="headerlink" href="#experiencia-de-trabajo" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>El trabajo interdisciplinario que ha involucrado profesionales del área de la ingeniería en
 computación y de la ingeniería química ha sido exitoso y abre las puertas a nuevas
 y más profundas colaboraciones.</p>
@@ -215,9 +226,9 @@ de IDTQ, basado en la experiencia adquirida con las tecnologías involucradas en
 proyecto.</p>
 </div>
 <div class="section" id="l-neas-de-trabajo-abiertas">
-<span id="lineas-abiertas"></span><h2>11.7. Líneas de trabajo abiertas<a class="headerlink" href="#l-neas-de-trabajo-abiertas" title="Enlazar permanentemente con este título">¶</a></h2>
+<span id="lineas-abiertas"></span><h2>11.8. Líneas de trabajo abiertas<a class="headerlink" href="#l-neas-de-trabajo-abiertas" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="gpec-como-aplicaci-n-web">
-<h3>11.7.1. GPEC como aplicación Web<a class="headerlink" href="#gpec-como-aplicaci-n-web" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>11.8.1. GPEC como aplicación Web<a class="headerlink" href="#gpec-como-aplicaci-n-web" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Con la popularización y el incremento de velocidad de los accesos a Internet,
 en los últimos años la &#8220;computación en la nube&#8221; (Cloud Computing) <a class="footnote-reference" href="#id30" id="id13">[13]</a>
 se ha constituido como una tendencia para el desarrollo de software en general,
@@ -252,14 +263,14 @@ y pueda generar diagramas directamente &#8220;online&#8221;.</p>
 de lo que se conoce como <abbr title="Software as a Service">SaaS</abbr> <a class="footnote-reference" href="#id32" id="id15">[15]</a></p>
 </div>
 <div class="section" id="importaci-n-y-graficaci-n-de-datos-experimentales">
-<h3>11.7.2. Importación y graficación de datos experimentales<a class="headerlink" href="#importaci-n-y-graficaci-n-de-datos-experimentales" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>11.8.2. Importación y graficación de datos experimentales<a class="headerlink" href="#importaci-n-y-graficaci-n-de-datos-experimentales" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Una de las utilidades de GPEC como entorno de &#8220;modelado&#8221; de comportamientos
 de sistemas termodinámicos es la comparación de sus resultados con datos
 experimentales. Para esto se hace necesario (y es factible) la importación de datos para
 ser graficados como &#8220;curvas experimentales&#8221;.</p>
 </div>
 <div class="section" id="versi-n-nativa-del-backend-para-linux">
-<h3>11.7.3. Versión nativa del <em>backend</em> para Linux<a class="headerlink" href="#versi-n-nativa-del-backend-para-linux" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>11.8.3. Versión nativa del <em>backend</em> para Linux<a class="headerlink" href="#versi-n-nativa-del-backend-para-linux" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>La <a class="reference internal" href="implementacion.html#wine"><em>dependencia con Wine</em></a> de los programas Fortran que implementan el cálculo
 es una solución de compromiso que repercute
 significativamente en la performance. Pruebas sencillas revelan que los tiempos
@@ -279,7 +290,7 @@ para lograr ejecutables nativos para plataforma Linux.</p>
 </div></blockquote>
 </div>
 <div class="section" id="nuevas-funcionalidades">
-<h3>11.7.4. Nuevas funcionalidades<a class="headerlink" href="#nuevas-funcionalidades" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>11.8.4. Nuevas funcionalidades<a class="headerlink" href="#nuevas-funcionalidades" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Durante el transcurso del proyecto surgieron muchas ideas de mejoras posibles.
 Se listan a continuación algunas de ellas:</p>
 <ul class="simple">
@@ -299,7 +310,7 @@ se vuelve indistinguible.</li>
 </ul>
 </div>
 <div class="section" id="ampliaci-n-del-conjunto-de-pruebas-unitarias">
-<h3>11.7.5. Ampliación del conjunto de pruebas unitarias<a class="headerlink" href="#ampliaci-n-del-conjunto-de-pruebas-unitarias" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>11.8.5. Ampliación del conjunto de pruebas unitarias<a class="headerlink" href="#ampliaci-n-del-conjunto-de-pruebas-unitarias" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Si bien se han probado puntos críticos susceptibles a vulnerabilidad, es necesario
 lograr una cobertura de prueba total del sistema, no sólo en el gestor
 de la API sino en la interfaz de usuario. Esto es, generar prubas que lancen
@@ -307,7 +318,7 @@ eventos programáticamente simulando las acciones del usuario, y validar los
 resultados. El libro <a class="reference internal" href="tecnologias.html#nr-rd2006">[NR-RD2006]</a> trata y ejemplifica estas tareas.</p>
 </div>
 <div class="section" id="mejora-y-refactorizaci-n-a-patrones-de-dise-o">
-<h3>11.7.6. Mejora y &#8220;refactorización&#8221; a patrones de diseño<a class="headerlink" href="#mejora-y-refactorizaci-n-a-patrones-de-dise-o" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>11.8.6. Mejora y &#8220;refactorización&#8221; a patrones de diseño<a class="headerlink" href="#mejora-y-refactorizaci-n-a-patrones-de-dise-o" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Como se ha visto, GPEC se vale de diversos patrones de diseño de software y
 especialmente del patrón <em>Publisher/Subscriber</em>. No obstante, para garantizar
 aspectos como mantenibilidad, escalabilidad y seguridad del software sería deseable
@@ -434,19 +445,20 @@ ha expedido sobre la aprobación o no del proyecto. Sitio web: <a class="referen
   <h3><a href="index.html">Contenidos</a></h3>
   <ul>
 <li><a class="reference internal" href="#">11. Conclusiones</a><ul>
-<li><a class="reference internal" href="#logros">11.1. Logros</a></li>
+<li><a class="reference internal" href="#resultados">11.1. Resultados</a></li>
 <li><a class="reference internal" href="#observaciones-respecto-a-la-tecnolog-a-empleada">11.2. Observaciones respecto a la tecnología empleada</a></li>
-<li><a class="reference internal" href="#tiempo-de-desarrollo">11.3. Tiempo de desarrollo</a></li>
-<li><a class="reference internal" href="#costo-de-desarrollo">11.4. Costo de desarrollo</a></li>
-<li><a class="reference internal" href="#impacto">11.5. Impacto</a></li>
-<li><a class="reference internal" href="#experiencia-de-trabajo">11.6. Experiencia de trabajo</a></li>
-<li><a class="reference internal" href="#l-neas-de-trabajo-abiertas">11.7. Líneas de trabajo abiertas</a><ul>
-<li><a class="reference internal" href="#gpec-como-aplicaci-n-web">11.7.1. GPEC como aplicación Web</a></li>
-<li><a class="reference internal" href="#importaci-n-y-graficaci-n-de-datos-experimentales">11.7.2. Importación y graficación de datos experimentales</a></li>
-<li><a class="reference internal" href="#versi-n-nativa-del-backend-para-linux">11.7.3. Versión nativa del <em>backend</em> para Linux</a></li>
-<li><a class="reference internal" href="#nuevas-funcionalidades">11.7.4. Nuevas funcionalidades</a></li>
-<li><a class="reference internal" href="#ampliaci-n-del-conjunto-de-pruebas-unitarias">11.7.5. Ampliación del conjunto de pruebas unitarias</a></li>
-<li><a class="reference internal" href="#mejora-y-refactorizaci-n-a-patrones-de-dise-o">11.7.6. Mejora y &#8220;refactorización&#8221; a patrones de diseño</a></li>
+<li><a class="reference internal" href="#problemas-detectados">11.3. Problemas detectados</a></li>
+<li><a class="reference internal" href="#tiempo-de-desarrollo">11.4. Tiempo de desarrollo</a></li>
+<li><a class="reference internal" href="#costo-de-desarrollo">11.5. Costo de desarrollo</a></li>
+<li><a class="reference internal" href="#impacto">11.6. Impacto</a></li>
+<li><a class="reference internal" href="#experiencia-de-trabajo">11.7. Experiencia de trabajo</a></li>
+<li><a class="reference internal" href="#l-neas-de-trabajo-abiertas">11.8. Líneas de trabajo abiertas</a><ul>
+<li><a class="reference internal" href="#gpec-como-aplicaci-n-web">11.8.1. GPEC como aplicación Web</a></li>
+<li><a class="reference internal" href="#importaci-n-y-graficaci-n-de-datos-experimentales">11.8.2. Importación y graficación de datos experimentales</a></li>
+<li><a class="reference internal" href="#versi-n-nativa-del-backend-para-linux">11.8.3. Versión nativa del <em>backend</em> para Linux</a></li>
+<li><a class="reference internal" href="#nuevas-funcionalidades">11.8.4. Nuevas funcionalidades</a></li>
+<li><a class="reference internal" href="#ampliaci-n-del-conjunto-de-pruebas-unitarias">11.8.5. Ampliación del conjunto de pruebas unitarias</a></li>
+<li><a class="reference internal" href="#mejora-y-refactorizaci-n-a-patrones-de-dise-o">11.8.6. Mejora y &#8220;refactorización&#8221; a patrones de diseño</a></li>
 </ul>
 </li>
 </ul>

@@ -2,8 +2,8 @@ Conclusiones
 ************
 
 
-Logros
-======
+Resultados 
+==========
 
 El desarrollo de este proyecto ha satisfecho los objetivos y requerimientos planteados. 
 El software obtenido constituye una mejora cualitativa y cuantitativa 
@@ -82,6 +82,21 @@ para que la comunidad de usuarios reporte (y, eventualmente, resuelva) fallos,
 sino para potenciar sus posibilidades de disfusión, accediendo a circuitos a los 
 que el software privativo (de escala moderada) no accede sin costosas 
 campañas de marketing. 
+
+Problemas detectados
+====================
+
+Una de las dificultades detectadas constituyó falta de un proceso de *refactoring* 
+temprano que permitiera llevar la aplicación a un patrón general de la aplicación, por ejemplo
+del tipo Modelo-Vista-Controlador. No obstante, la aplicación está separada lógica y modulamente
+según las distintas incumbencias, lo que vuelve factible esta tarea. 
+
+Otra dificultad se avisora de cara al futuro del proyecto relacianada
+con la utilización de Pub/Sub. El total desacople (una parte no conoce de la otra)
+requiere un criterio sistemático de parte del equipo de desarrollo
+y una documentación clara sobre quién, cómo y sobre qué mensajes se actúa.
+
+
 
 
 Tiempo de desarrollo 

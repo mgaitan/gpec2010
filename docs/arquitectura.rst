@@ -291,11 +291,6 @@ Algunas decisiones concernientes a la usabilidad han sido:
   resulta evidente que genera un nuevo caso. 
 
 
-.. figure:: images/usabilidad_labels.png
-   :width: 100%
-
-   Interfaz de la aplicación de visualización de diagramas VTK que sirvió 
-   como inspiración para la interfaz de GPEC.  
 
 
 

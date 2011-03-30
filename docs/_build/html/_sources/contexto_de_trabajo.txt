@@ -98,7 +98,7 @@ de los :term:`clusters <cluster>` más poderosos [#]_ y núcleo propulsor
 de los dos sitios más visitados y exitosos a nivel mundial: Google [#]_ [#]_ y Facebook [#]_ .
 
     .. figure:: images/top500so.png
-       :figwidth: 50 %
+       :width: 60 %
 
        Familia de S.O. de los 500 supercomputadores 
        más rápidos del mundo. http://www.top500.org

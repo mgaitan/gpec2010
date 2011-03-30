@@ -220,7 +220,7 @@ permiso de escritura en la carpeta destino). En caso de error por algún motivo
 .. _front-back-num:
 
 .. figure:: images/uml_front-back_vertical.png
-   :width: 100%
+   :width: 90%
 
    Secuencia de la comunicación frontend-backend
 
@@ -604,6 +604,18 @@ La porción de código relevante se describe a continuación::
 
             gbs = self.gbs = ui.widgets.GridBagSizerEnh(6, 5)    
 
+
+La aplicación de `sizer` repercute en la homogeneidad y determinismo de la ubicación
+de los componentes, lo que permite aplicar las características de usabilidad mostradas
+en la figura :ref:`usab-num`, cuya base conceptual se menciona en 
+en :ref:`preceptos-ui`. 
+
+.. _usab-num:
+ 
+.. figure:: images/usabilidad_labels.png
+   :width: 90%
+
+   Características de usabilidad implementadas en el panel 
 
 
 

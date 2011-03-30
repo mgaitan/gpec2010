@@ -268,7 +268,7 @@ Requerimientos no funcionales
 * Usabilidad y claridad de las interfaces: debe poder usarse intuitivamente
 
 
-Requerimientos específicos
+Requerimientos especiales
 ==========================
 
 Se especifican en esta sección, de manera no formal, un conjunto de requerimientos 

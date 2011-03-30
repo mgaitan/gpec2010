@@ -3,7 +3,9 @@
 Metodología
 ***********
 
-Este capitulo detalla la metodología y 
+Este capitulo detalla el marco conceptual y la metodología de desarrollo adoptada.
+Esta decisión ha sido rectora de subsecuentes decisiones de diseño y, de cierta manera,  
+de la tecnología adoptada para la implementación.
 
 
 Metodologías Ágiles
@@ -78,12 +80,12 @@ Existen dos grandes tipos de desarrollos evolutivos:
 En este trabajo se aplicó un proceso evolutivo de tipo exploratorio, con activa
 interacción con el comitente, basándose en estrategias de desarrollo ágil mencionadas previamente. 
 
-    .. atenttion::
+    .. attention::
 
-    La adopción de principios del desarrollo ágil y el desarrollo evolutivo
-    implica que no se ha utilizado un proceso de ingeniería en software formal, más 
-    frecuentemente impartido en la facultad. Esto es, el proceso de diseño e 
-    implementación han sido mancomunados en vez de separados estrictamente.
+       La adopción de principios del desarrollo ágil y el desarrollo evolutivo
+       implica que no se ha utilizado un proceso de ingeniería en software formal, más 
+       frecuentemente impartido en la facultad. Esto es, el proceso de diseño e 
+       implementación han sido mancomunados en vez de separados estrictamente.
 
 
 .. [AG-MANIF]  Varios autores (2001), *Manifesto for Agile Software Development*, http://agilemanifesto.org/
