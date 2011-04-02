@@ -64,7 +64,7 @@ Software libre
 El desarrollo de este trabajo ha sido liberado como Software Libre, bajo los teŕminos de la bajo la licencia libre :abbr:`GPL (General Public License)` [#]_. Por su parte, 
 este documento se ofrece bajo los términos de la licencia `Creative Commons Atribución-NoComercial-CompartirIgual 2.5 <http://creativecommons.org/licenses/by-nc-sa/2.5/ar/>`.
 
-Se dará a continuación una somera introducción conceptual sobre Sobre Libre, 
+Se dará a continuación una somera introducción conceptual al Software Libre, 
 y en :ref:`justificacion` se exponen los argumentos de la decisión
 mencionada, que se invita a leer y analizar. 
 
