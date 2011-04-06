@@ -64,7 +64,7 @@ la clase <tt class="xref py py-class docutils literal"><span class="pre">ApiMana
 del programa es testeado por separado (de alló lo de <em>unitario</em>).
 Idealmente, se pone a prueba todas las funciones y todos los casos posibles para cada
 una de ellas.</p>
-<p>Según <a class="reference internal" href="#zulberti2010">[ZULBERTI2010]</a>, el unit testing tiene varias ventajas:</p>
+<p>Según <a class="reference internal" href="#zulberti2010">[Zulberti2010]</a>, el unit testing tiene varias ventajas:</p>
 <blockquote>
 <div><ul class="simple">
 <li>Permite probar que el programa funciona correctamente. En Python, los tests
@@ -91,7 +91,7 @@ del programa. Esto no excluye que se tenga que escribir la documentación del c�
 <div class="section" id="unit-testing-en-python">
 <h3>9.1.1. Unit testing en Python<a class="headerlink" href="#unit-testing-en-python" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Python provee en su librería estándar un completo framework para realizar
-pruebas unitarias. Se trata de <tt class="xref py py-mod docutils literal"><span class="pre">unittest</span></tt> <a class="footnote-reference" href="#id4" id="id2">[1]</a> cuya arquitectura y
+pruebas unitarias. Se trata de <tt class="xref py py-mod docutils literal"><span class="pre">unittest</span></tt> <a class="footnote-reference" href="#id6" id="id2">[1]</a> cuya arquitectura y
 <a class="reference internal" href="glosario.html#term-api"><em class="xref std std-term">api</em></a> está basada en el framework <a class="reference external" href="http://www.junit.org/">Junit</a> para
 el lenguaje Java.</p>
 <blockquote>
@@ -105,7 +105,7 @@ Ver <a class="reference external" href="http://pycheesecake.org/wiki/PythonTesti
 </div></blockquote>
 <p>En particular, se utilizó el framework <tt class="xref py py-mod docutils literal"><span class="pre">unittest2</span></tt> que forma parte estándar
 de la versión 2.7 de Python, y existe como <a class="reference internal" href="glosario.html#term-backport"><em class="xref std std-term">backport</em></a> para las
-versiones 2.4 a 2.6 <a class="footnote-reference" href="#id5" id="id3">[2]</a>.</p>
+versiones 2.4 a 2.6 <a class="footnote-reference" href="#id7" id="id3">[2]</a>.</p>
 <p><tt class="xref py py-mod docutils literal"><span class="pre">unittest</span></tt> provee muchas clases y funciones utilitarias para realizar
 pruebas automatizadas de la cuales se utilizó la estructura más tradicional
 basada en la clase <tt class="xref py py-class docutils literal"><span class="pre">TestCase</span></tt>.</p>
@@ -273,25 +273,29 @@ OK
 </div>
 </div>
 <div class="section" id="pruebas-de-usabilidad">
-<h2>9.3. Pruebas de usabilidad<a class="headerlink" href="#pruebas-de-usabilidad" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Para analizar la mejora  respecto a la versión precedente se realizaron pruebas con
-usuarios inexpertos con el objetivo de observar el éxito en la tarea encomendada.</p>
+<span id="test-usabilidad"></span><h2>9.3. Pruebas de usabilidad<a class="headerlink" href="#pruebas-de-usabilidad" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Para analizar la mejora  respecto a la versión preexistente se realizaron pruebas
+con usuarios con el objetivo de observar el éxito en la tarea encomendada.
+La pruba se basó en métodos propuestos por el reconocido consultor Jakob Nielsen, en
+en <a class="reference internal" href="#nielsen2000">[Nielsen2000]</a> y <a class="reference internal" href="#nielsen2009">[Nielsen2009]</a>.</p>
 <p>Las condiciones experimentales de estas pruebas fueron:</p>
 <ul class="simple">
-<li>Cuatro usuarios trabajando individualmente</li>
+<li>Cinco usuarios trabajando individualmente</li>
 <li>Se solicita la obtención de una suite de gráficos</li>
-<li>No se da ninguna otra intrucción y ayuda oral o escrita sobre cómo lograr el
+<li>No se da ninguna otra intrucción ni ayuda oral o escrita sobre cómo lograr el
 resultado</li>
 </ul>
 <p>Si bien la muestra poblacional no fue representativa para una conclusión
-definitiva, los cuatro usuarios lograron el objetivo en menos de 2 minutos,
-aún sin comprender el significado de los diagramas obtenidos. Las tareas
-de manipulación de los diagramas como rotar (en 3D), hacer zoom, desplazar, etc.
-fueron bien interpretadas mediate los íconos de la barra de herramientas.</p>
-<p>Como experiencia adicional, puede contarse con las clases prácticas realizadas
-en el marco de los laboratorio de <em>Termodinámica</em> (Ingeniería Química, UNC),
-dictador por el Dr. Cismondi, donde la gran mayoría de los alumnos lograron
-realizar los diagramas antes de que se dieran las instrucciones de procedimiento.</p>
+definitiva, los cinco usuarios lograron el objetivo en menos de 2 minutos,
+aun aquellos que no comprendieron, por ser ajenos a la disciplina,
+el significado de los diagramas obtenidos. Las tareas
+de manipulación de los diagramas como rotar (sobre diagramas 3D), hacer zoom,
+desplazar, etc. fueron bien interpretadas mediate los íconos de la barra de herramientas.</p>
+<p>Como experiencia adicional se menciona que en las clases prácticas realizadas
+en el marco de los laboratorios de la cátedra <em>Termodinámica</em> (Ingeniería Química, UNC),
+dictador por el Dr. Cismondi, la gran mayoría de los usuarios (superior al 75% de
+un curso de 25 alumnos) lograron realizar los diagramas antes de que
+se impartieran las instrucciones para obtenerlos.</p>
 <div class="section" id="an-lisis-cuantitativo">
 <h3>9.3.1. Análisis cuantitativo<a class="headerlink" href="#an-lisis-cuantitativo" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Se describen algunos aspectos cuantitativos que dan muestra de la reducción
@@ -375,19 +379,33 @@ la versión actual con la anterior.</p>
 <table class="docutils citation" frame="void" id="zulberti2010" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[ZULBERTI2010]</a></td><td>Zulberti, Tomás (2010), <em>Introducción a Unit Testing con Python</em>, Revista
+<tr><td class="label"><a class="fn-backref" href="#id1">[Zulberti2010]</a></td><td>Zulberti, Tomás (2010), <em>Introducción a Unit Testing con Python</em>, Revista
 &#8220;PET: Python Entre Todos&#8221;* Nº 1 - Agosto 2010, Comunidad de Usuarios
 Python Argentina. Disponible en <a class="reference external" href="http://revista.python.org.ar/1/html/unittest.html">http://revista.python.org.ar/1/html/unittest.html</a></td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id4" rules="none">
+<table class="docutils citation" frame="void" id="nielsen2000" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[Nielsen2000]</a></td><td>Nielsen, Jakob (2000) <em>Why You Only Need to Test with 5 Users</em>,
+<a class="reference external" href="http://www.useit.com/alertbox/20000319.html">http://www.useit.com/alertbox/20000319.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="nielsen2009" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[Nielsen2009]</a></td><td>Nielsen, Jacob (2009) <em>230 Tips and Tricks for Better Usability Testing</em>,
+Nielsen Norman Group</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>La documentación completa de la versión utilizada se encuentra en
 <a class="reference external" href="http://docs.python.org/library/unittest.html">http://docs.python.org/library/unittest.html</a></td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id5" rules="none">
+<table class="docutils footnote" frame="void" id="id7" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>El paquete <em>backported</em> se encuentra en la dirección

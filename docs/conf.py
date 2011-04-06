@@ -61,7 +61,7 @@ language = 'es'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
-today = 'Marzo de 2010'
+today = 'Abril de 2010'
 # Else, today_fmt is used as the format for a strftime call.
 #today_fmt = '%B %d, %Y'
 
@@ -219,7 +219,7 @@ _TITLE = ur"""
         \par}
       \vfill\vfill
       {\large
-        Marzo de 2011
+        Abril de 2011
        \vfill
        \strong{Director}\\
           Mg. Gustavo Wolfmann\\

@@ -9,7 +9,7 @@ de la tecnología adoptada para la implementación.
 
 
 Metodologías Ágiles
---------------------
+===================
 
 Este proyecto integrador ha sido guiado por un conjunto de preceptos 
 comunes a las *metodologías ágiles de desarrollo de software*. 
@@ -49,7 +49,7 @@ otras.
 .. _desarrollo:
 
 Desarrollo evolutivo adaptado
------------------------------
+=============================
 
 Según [Sommerville2004]_, el desarrollo evolutivo se basa en la idea de 
 una implementación inicial, exponiéndola a los comentarios del comitente o 
@@ -77,15 +77,55 @@ Existen dos grandes tipos de desarrollos evolutivos:
     prototipos se desechan y se diseña e implementa el sistema final desde el 
     principio.
 
-En este trabajo se aplicó un proceso evolutivo de tipo exploratorio, con activa
-interacción con el comitente, basándose en estrategias de desarrollo ágil mencionadas previamente. 
+.. _anti-uml:
 
-    .. attention::
+Modelado conceptual vs. UML
+===========================
 
-       La adopción de principios del desarrollo ágil y el desarrollo evolutivo
-       implica que no se ha utilizado un proceso de ingeniería en software formal, más 
-       frecuentemente impartido en la facultad. Esto es, el proceso de diseño e 
-       implementación han sido mancomunados en vez de separados estrictamente.
+Basado en los postulados de [AG-MANIF]_ durante el desarrollo se ha hecho hincapié
+en un modelado y documentación orientados a favorecer la comunicación
+por sobre el apego estricto y exhaustivo al lenguaje :term:`UML` y sus técnicas asociadas,
+intentando que el resultado sea útil para el comitente, evaluadores y futuros desarrolladores 
+del proyecto.
+
+
+Justificación
+-------------
+
+Según afirma Terry Quatrani, evangelizadora de las metodologías ágiles en IBM, 
+en [Quatrani2010]_ :
+
+    Aunque sigas un proceso ágil, estarás realizando cierto grado de modelado
+    – sólo que no lo realizarás tanto como si utilizaras un proceso tradicional. 
+    La falta de formalidad en el modelado ágil no significa que no estás modelando, 
+    sino que te pones el foco en los beneficios de este sin las desventajas 
+    y confusiones de documentos extraños y burocráticos. 
+
+Por su parte, Robert Martin sostiene en [Martin2006]_ que el modelado basado en UML
+en el desarrollo ágil es útil como instrumento de comunicación, 
+pero su detalle no aporta valor significativo:
+
+    No gastes mucho tiempo en esta tarea, no necesitas tanto detalle. 
+    Los modelos y los planos son necesarios en la arquitectura y la construcción
+    civil porque es caro construir una casa para demostrar que su diseño funciona. 
+    El software no es así – puedes validar tu idea con sólo codificarla, en igual
+    tiempo que el que insume hacer un modelo UML que nada prueba por sí
+    mismo.
+    
+Aun más escéptico, Alans Stevens, reconocido ingeniero en software [#]_
+y conferencista, opina en [Stevens2006]_ : 
+
+    No uso UML y noto que ninguno de mis colegas lo usa. Tengo sensaciones 
+    mezcladas acerca de su necesidad. Parece perfectamente razonable que debamos
+    acordar como industria un conjunto de símbolos comunes para representar 
+    la programación orientada a objetos, pero UML tiene la típica apariencia 
+    de "diseñado por un comité". 
+    
+    (...) El aspecto más crítico en un diseño inicial, en mi experiencia, 
+    es la interfaz entre la :abbr:`UI (interfaz de usuario)` y el modelo de 
+    objetos. Lamentablemente UML no aborda este problema y en cambio parece
+    obsesionado por las minucias en una parodia de distracción académica. 
+    
 
 
 .. [AG-MANIF]  Varios autores (2001), *Manifesto for Agile Software Development*, http://agilemanifesto.org/
@@ -93,3 +133,18 @@ interacción con el comitente, basándose en estrategias de desarrollo ágil men
 .. [Sommerville2004] Sommerville, Ian (2004) *Software Enginnering, 7th edition*, Pretince Hall
             Traducción al español por el Departamento de Ciencias de la Computación e Inteligencia 
             Artificial de la Universidad de Alicante (2005). 
+
+
+.. [Quatrani2010]  Quatrani, Terry (2010) *The Truth About Agile   
+                   Modeling*. Cita extraída de 
+                   http://agilescout.com/agile-modeling-and-uml/
+
+
+.. [Martin2006]  Martin, Robert (2006) *Agile Principles, Patterns, and Practices in C#*, 
+                 Prentice Hall. Cita extraída de http://stackoverflow.com/questions/61487/do-you-use-uml-in-agile-development-practices
+                 
+.. [Stevens2006]  Steven, Alan (2006) *UML Sucks (Really!)*, 
+                 http://halanstevens.com/uml-sucks-really/
+
+.. [#] Premio :abbr:`Most Valuable Professional (MVP)` de Microsoft por sus aportes
+       a la comunidad de usuarios del lenguaje C#. http://bit.ly/as_mvp 

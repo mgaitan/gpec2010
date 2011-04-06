@@ -5,28 +5,18 @@ Arquitectura
 
 En este capitulo se describe, de manera conceptual, el diseño arquitectónico
 de la aplicación. La metodología ágil e iterativa adoptada no implica 
-que no haya existido una instancia de reflexión en el diseño en la aplicación, 
+que no haya existido una profunda instancia de reflexión en el diseño en la aplicación, 
 sólo que esta no es estado basada íntegramente en una descripción formal y exhaustiva 
 como UML. 
 
-Según afirma Terry Quatrani, evangelizadora de las metodologías ágiles en IBM, 
-en [Quatrani2010]_ :
+    .. attention::
 
-    Aunque sigas un proceso ágil, estarás realizando cierto grado de modelado
-    – sólo que no lo realizarás tanto como si utilizaras un proceso tradicional. 
-    La falta de formalidad en el modelado ágil no significa que no estás modelando, 
-    sino que te pones el foco en los beneficios de este sin las desventajas 
-    y confusiones de documentos extraños y burocráticos. 
-
-Por su parte, Robert Martin afirma en [Martin2006]_ que el modelado 
-en el desarrollo ágil es útil como instrumento de comunicación, 
-pero no aporta información ahondar en detalles: 
-
-    No gastes mucho tiempo en esta tarea... no necesitas tanto detalle. 
-    Los modelos y los planos son necesarios en la arquitectura y la construcción
-    civil porque es caro construir una casa para demostrar que su diseño funciona 
-    o no. El software no es así – puedes validar tu diseño con sólo codificarlo 
-    al momento de realizar un diagrama. 
+       La adopción de principios del desarrollo ágil y el desarrollo evolutivo
+       implica que no se ha utilizado un proceso de ingeniería de software 
+       más frecuentemente enseñado en el ámbito académico. Esto es, el proceso de diseño e 
+       implementación han sido mancomunados iterativamente en vez de separados estrictamente.
+       De esta manera, muchos de los conceptos arquitectónicos están intrínsecamente 
+       aquí expuestados están relacionados intrísecamente con su implementación. 
 
 
 
@@ -68,9 +58,11 @@ se realizan los gráficos correspondientes.
 Componentes y capas de software 
 ================================
 
-El siguiente diagrama, diseñado con la intención de favorecer la comprensión
-por sobre el apego a la especificación :term:`UML`, describe las capas y 
+El diagrama de la figura :ref:`arq-num` describe las capas y 
 :index:`componentes` de software involucrados en la aplicación. 
+
+
+.. _arq-num:
 
 .. figure:: images/arquitectura.png
    :width: 60%
@@ -96,17 +88,6 @@ a Windows. Esto se describe ampliamente en :ref:`wine`.
 Un componente que se representa intrínsecamente vinculado al frontend es 
 Pub/Sub. La explicación de la importancia estructural de este componente
 se describe en :ref:`uso-pubsub`.
-
-Diagrama de despliegue
-======================
-
-El diagrama de despliegue de la figura :ref:`despliegue-num`, es una representación  
-más formal (basada en la especificación UML) de los anteriores diagramas.
-
-.. _despliegue-num:
-
-.. figure:: images/arquitectura.png
-   :width: 60%
 
 
 .. _bbdd_design:
@@ -257,14 +238,17 @@ en [Spolsky2001]_ [#]_ . Entre muchos, se destacan:
     - Valerse de las costumbres del usuario: no reinventar la rueda
 
 Un software complejo con un acabado estudio de usabilidad es 
-`Mayavi <http://code.enthought.com/projects/mayavi/>`_ , que ha servido de inspiración
-para el diseño de GPEC. 
+`Mayavi <http://code.enthought.com/projects/mayavi/>`_ , (Figura :ref:`mayavi-num`) 
+que ha servido de inspiración para el diseño de GPEC. 
 
-.. figure:: images/mayavi2.png
-   :width: 90%
 
-   Interfaz de la aplicación de visualización de diagramas VTK que sirvió 
-   como inspiración para la interfaz de GPEC.  
+    .. _mayavi-num:
+
+    .. figure:: images/mayavi2.png
+       :width: 90%
+
+       Interfaz de la aplicación de visualización de diagramas VTK que sirvió 
+       como inspiración para la interfaz de GPEC.  
 
 
 Algunas decisiones concernientes a la usabilidad han sido:
@@ -290,7 +274,8 @@ Algunas decisiones concernientes a la usabilidad han sido:
   por los navegadores web para abrir una nueva pestaña de trabajo. Dado el contexto
   resulta evidente que genera un nuevo caso. 
 
-
+Los resultados del estudio e implementación en materia de usabilidad se 
+analizan en :ref:`test-usabilidad`. 
 
 
 
@@ -313,12 +298,3 @@ Algunas decisiones concernientes a la usabilidad han sido:
         http://www.joelonsoftware.com/uibook/fog0000000249.html
 
 
-
-.. [Quatrani2010]  Quatrani, Terry (2010) *The Truth About Agile   
-                   Modeling*. Cita extraída de 
-                   http://agilescout.com/agile-modeling-and-uml/
-
-
-.. [Martin2006]  Martin, Robert (2006) *Agile Principles, Patterns, and Practices in C#*, 
-                 Prentice Hall. Cita extraída de http://stackoverflow.com/questions/61487/do-you-use-uml-in-agile-development-practices
-                 

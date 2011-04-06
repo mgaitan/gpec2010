@@ -18,7 +18,7 @@ del programa es testeado por separado (de alló lo de *unitario*).
 Idealmente, se pone a prueba todas las funciones y todos los casos posibles para cada 
 una de ellas.
 
-Según [ZULBERTI2010]_, el unit testing tiene varias ventajas:
+Según [Zulberti2010]_, el unit testing tiene varias ventajas:
 
     * Permite probar que el programa funciona correctamente. En Python, los tests 
       también permiten identificar variables que no existen o tipos esperados en 
@@ -142,29 +142,35 @@ exitoso:
     OK
 
 
+.. _test-usabilidad:
+
 Pruebas de usabilidad
 =====================
 
-Para analizar la mejora  respecto a la versión precedente se realizaron pruebas con 
-usuarios inexpertos con el objetivo de observar el éxito en la tarea encomendada. 
+Para analizar la mejora  respecto a la versión preexistente se realizaron pruebas 
+con usuarios con el objetivo de observar el éxito en la tarea encomendada.  
+La pruba se basó en métodos propuestos por el reconocido consultor Jakob Nielsen, en 
+en [Nielsen2000]_ y [Nielsen2009]_.
 
 Las condiciones experimentales de estas pruebas fueron:
 
-- Cuatro usuarios trabajando individualmente
+- Cinco usuarios trabajando individualmente
 - Se solicita la obtención de una suite de gráficos
-- No se da ninguna otra intrucción y ayuda oral o escrita sobre cómo lograr el 
+- No se da ninguna otra intrucción ni ayuda oral o escrita sobre cómo lograr el 
   resultado   
 
 Si bien la muestra poblacional no fue representativa para una conclusión 
-definitiva, los cuatro usuarios lograron el objetivo en menos de 2 minutos, 
-aún sin comprender el significado de los diagramas obtenidos. Las tareas
-de manipulación de los diagramas como rotar (en 3D), hacer zoom, desplazar, etc. 
-fueron bien interpretadas mediate los íconos de la barra de herramientas. 
+definitiva, los cinco usuarios lograron el objetivo en menos de 2 minutos, 
+aun aquellos que no comprendieron, por ser ajenos a la disciplina, 
+el significado de los diagramas obtenidos. Las tareas
+de manipulación de los diagramas como rotar (sobre diagramas 3D), hacer zoom, 
+desplazar, etc. fueron bien interpretadas mediate los íconos de la barra de herramientas. 
 
-Como experiencia adicional, puede contarse con las clases prácticas realizadas 
-en el marco de los laboratorio de *Termodinámica* (Ingeniería Química, UNC), 
-dictador por el Dr. Cismondi, donde la gran mayoría de los alumnos lograron 
-realizar los diagramas antes de que se dieran las instrucciones de procedimiento.
+Como experiencia adicional se menciona que en las clases prácticas realizadas 
+en el marco de los laboratorios de la cátedra *Termodinámica* (Ingeniería Química, UNC), 
+dictador por el Dr. Cismondi, la gran mayoría de los usuarios (superior al 75% de 
+un curso de 25 alumnos) lograron realizar los diagramas antes de que 
+se impartieran las instrucciones para obtenerlos.
 
 Análisis cuantitativo 
 ----------------------
@@ -196,10 +202,15 @@ la versión actual con la anterior.
 
 
 
-.. [ZULBERTI2010]  Zulberti, Tomás (2010), *Introducción a Unit Testing con Python*, Revista
+.. [Zulberti2010]  Zulberti, Tomás (2010), *Introducción a Unit Testing con Python*, Revista
                    "PET: Python Entre Todos"* Nº 1 - Agosto 2010, Comunidad de Usuarios
                    Python Argentina. Disponible en http://revista.python.org.ar/1/html/unittest.html
 
+.. [Nielsen2000]   Nielsen, Jakob (2000) *Why You Only Need to Test with 5 Users*, 
+                   http://www.useit.com/alertbox/20000319.html 
+
+.. [Nielsen2009]   Nielsen, Jacob (2009) *230 Tips and Tricks for Better Usability Testing*, 
+                   Nielsen Norman Group 
 
 
 .. [#]  La documentación completa de la versión utilizada se encuentra en 

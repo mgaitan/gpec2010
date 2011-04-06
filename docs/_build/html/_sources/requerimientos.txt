@@ -188,7 +188,8 @@ compuesto químico se encuentran en tablas separadas.
    GPEC mediante el utilitario *gmdb2*. 
 
 Sumado a esto, dada la ineficiencia del formato, el archivo de base de datos 
-estándar (sin datos extra del usuario)  ocupa *45.2Mb* de espacio en disco. 
+estándar (sin datos extras agregados por el usuario) ocupa *45.2Mb* 
+de espacio en disco. 
 
 
 
@@ -259,9 +260,9 @@ en lo posible mejorarse. Se detallan a continuación:
 Requerimientos no funcionales
 -----------------------------
 
-* GPEC requiere flexibilidad que permita la extensibilidad de funcionalidades. Para esto se apunta a una arquitectura 
-  lógica modularizada que permita incorporar o extender funcionalidades de manera 
-  accesible. 
+* GPEC requiere flexibilidad que permita la extensibilidad de funcionalidades. 
+  Para esto se apunta a una arquitectura lógica modularizada que permita 
+  incorporar o extender funcionalidades de manera accesible. 
 * Manipulación de gráficos accesible: zoom, rotación, desplazamiento, ocultación de curvas, etc.
 * Calidad y formatos de gráficos válidos para publicaciones científicas
 * Configurabilidad de aspecto de los gráficos
@@ -342,12 +343,12 @@ del compuesto 1 es menor a la del compuesto 2, es decir:
 
 
 Casos de uso
-============
+=============
 
-Se describen a continuación los casos de uso más relevantes del sistema. Amparado
-en el paradigma de desarrollo ágil, no se realiza una enumeración minuciosa 
-de las condiciones de contexto, pretendiendo que la descripción y su diagrama
-sea autoexplicativo. 
+Se describen a continuación los casos de uso más relevantes del sistema. 
+Basado en lo expuesto en la sección :ref:`anti-uml` no se realiza una enumeración minuciosa 
+de las condiciones de contexto, flujos alternativos, etc. y en cambio 
+se describen en un formato asociado a *historias de usuario* [#]_
 
 
 Definir caso de estudio
@@ -444,3 +445,6 @@ manualmente por el usuario. Se representa en el diagrama de la figura :ref:`uc4-
 
 .. [#]  La validez de esta función fue comprobada de manera empírica por 
         Cismondi.
+
+.. [#]  Ver http://es.wikipedia.org/wiki/Historias_de_usuario
+

@@ -125,8 +125,7 @@ despreciables, limita su utilidad para modelar gases reales.
 :math:`p` es la presión absoluta, :math:`V` el volumen, :math:`T` la temperatura, 
 :math:`n` la cantidad de materia y :math:`R` la constante del gas ideal.
 
-La  Ecuación de Van der Waals :eq:`vdw` (1873) [#]_ generaliza la ecuación :eq:`gasideal`, teniendo en consideración tanto el volumen finito de las 
-moléculas de gas como otros efectos que afectan al término de presiones
+La  Ecuación de Van der Waals :eq:`vdw` (1873) [#]_ generaliza la ecuación :eq:`gasideal`, teniendo en consideración tanto el volumen finito de las moléculas de gas como la atracción intermolecular que afectan al término de presiones
 
 .. math:: 
    :label: vdw
