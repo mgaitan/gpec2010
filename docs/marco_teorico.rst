@@ -184,7 +184,3 @@ con participantes de Brasil, Canadá, Chile, Alemania y varias otras procedencia
         
 .. [#]  Ver http://www.course.efn.uncor.edu/
 
-
-.. [SM-VN-AG2000] Smith, JM - Van Ness, HC - Abbott, MM  (2000), *Introducción a la termodinámica 
-                  en ingeniería química - 6ta Edición*, McGraw-Hill
-

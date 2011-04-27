@@ -10,7 +10,6 @@ de la vida del proyecto.
 Si bien una visión de diseño se resume en el capítulo :ref:`arquitectura`, 
 algunas decisiones y detalles se justifican en este capítulo. 
 
-
 .. _uso-pubsub:
         
 Utilización de Publish/Suscribe en GPEC
@@ -983,15 +982,3 @@ utilizando un proceso de 2 pasos
 
 
         
-
-
-
-.. [vdLaar2002]  van de Laar, F. (2002).  *Publish/Subscribe as architectural style 
-                 for component interaction (Mater's thesis)*, Phillips Research
-                 Laboratories
-
-
-.. [Spolsky2001]  Spolsky, Joel (2001). *User Interface Design for Programmers*, Apress
-                  
-.. [Vera1994]  Vera Luján, A. (1994), *Fundamentos del análisis sintáctico*, 
-               Universidad de Murcia

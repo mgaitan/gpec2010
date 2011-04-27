@@ -383,5 +383,4 @@ concerniente a una arquitectura de separación más acabado entre lógica e inte
 
 .. [#]  Ver http://en.wikipedia.org/wiki/Software_as_a_service
 
-.. [JK1999] Kerievsky, Joshua (1999) *Refactoring to Patterns*, Addison-Wesley
 

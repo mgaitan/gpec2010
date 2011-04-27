@@ -52,8 +52,8 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="verificaci-n">
-<span id="test"></span><h1>9. Verificación<a class="headerlink" href="#verificaci-n" title="Enlazar permanentemente con este título">¶</a></h1>
+  <div class="section" id="verificacion">
+<span id="test"></span><h1>9. Verificación<a class="headerlink" href="#verificacion" title="Enlazar permanentemente con este título">¶</a></h1>
 <p>Este capítulo describe el trabajo realizado para la verificación del correcto
 funcionamiento de la aplicación.</p>
 <p>En particular se ha <em>&#8220;testeado&#8221;</em> la librería de comunicación, es decir
@@ -64,7 +64,7 @@ la clase <tt class="xref py py-class docutils literal"><span class="pre">ApiMana
 del programa es testeado por separado (de alló lo de <em>unitario</em>).
 Idealmente, se pone a prueba todas las funciones y todos los casos posibles para cada
 una de ellas.</p>
-<p>Según <a class="reference internal" href="#zulberti2010">[Zulberti2010]</a>, el unit testing tiene varias ventajas:</p>
+<p>Según <a class="reference internal" href="bibliografia.html#zulberti2010">[Zulberti2010]</a>, el unit testing tiene varias ventajas:</p>
 <blockquote>
 <div><ul class="simple">
 <li>Permite probar que el programa funciona correctamente. En Python, los tests
@@ -84,9 +84,15 @@ del programa. Esto no excluye que se tenga que escribir la documentación del c�
 </div></blockquote>
 <p>Es muy importante que un test cumpla las siguientes reglas:</p>
 <ul class="simple">
-<li>Tiene que poder correr sin interacción humana. Es decir, los tests no deben pedir que el usuario ingrese valores en ningún caso. Para esto, es en el test mismo cuando se pasan los valores a la función.</li>
-<li>Tienen que poder verificar el resultado de la ejecución sin interacción humana. De nuevo, para  saber si esta bien o no el resultado no tiene que pedirle al usuario que verifique el resultado. Para esto, se tiene que saber de antemano el resultado del test con los valores que se pasaron.</li>
-<li>Un test tiene que ser independiente del otro. Es decir, el resultado de un test no debería depender del resultado anterior.</li>
+<li>Tiene que poder correr sin interacción humana. Es decir, los tests no deben
+pedir que el usuario ingrese valores en ningún caso. Para esto, es
+en el test mismo cuando se pasan los valores a la función.</li>
+<li>Tienen que poder verificar el resultado de la ejecución sin interacción
+humana. De nuevo, para  saber si esta bien o no el resultado no tiene
+que pedirle al usuario que verifique el resultado. Para esto, se tiene
+que saber de antemano el resultado del test con los valores que se pasaron.</li>
+<li>Un test tiene que ser independiente del otro. Es decir, el resultado de
+un test no debería depender del resultado anterior.</li>
 </ul>
 <div class="section" id="unit-testing-en-python">
 <h3>9.1.1. Unit testing en Python<a class="headerlink" href="#unit-testing-en-python" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -178,8 +184,8 @@ Prueba que se invierte el orden de los últimos dos parámetros.</p>
 
 </dd></dl>
 
-<div class="section" id="ejemplos-de-c-digo-de-las-pruebas">
-<h3>9.2.1. Ejemplos de código de las pruebas<a class="headerlink" href="#ejemplos-de-c-digo-de-las-pruebas" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="ejemplos-de-codigo-de-las-pruebas">
+<h3>9.2.1. Ejemplos de código de las pruebas<a class="headerlink" href="#ejemplos-de-codigo-de-las-pruebas" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>El código de implementación de cada una de estas pruebas es muy descriptivo
 pero por una cuestión de extensión, se muestran sólo algunos de ellos.
 Para el estudio completo ver el módulo <tt class="xref py py-mod docutils literal"><span class="pre">test_apimanager.py</span></tt></p>
@@ -252,8 +258,8 @@ Para el estudio completo ver el módulo <tt class="xref py py-mod docutils liter
 </div>
 </div>
 </div>
-<div class="section" id="ejecuci-n-y-validaci-n">
-<h3>9.2.2. Ejecución y validación<a class="headerlink" href="#ejecuci-n-y-validaci-n" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="ejecucion-y-validacion">
+<h3>9.2.2. Ejecución y validación<a class="headerlink" href="#ejecucion-y-validacion" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Se muestra la ejecución automatizada de todas las pruebas y su resultado
 exitoso:</p>
 <div class="highlight-bash"><div class="highlight"><pre>tin@azulita:~/facu/pi/src<span class="nv">$ </span>python test_apimanager.py
@@ -277,7 +283,7 @@ OK
 <p>Para analizar la mejora  respecto a la versión preexistente se realizaron pruebas
 con usuarios con el objetivo de observar el éxito en la tarea encomendada.
 La pruba se basó en métodos propuestos por el reconocido consultor Jakob Nielsen, en
-en <a class="reference internal" href="#nielsen2000">[Nielsen2000]</a> y <a class="reference internal" href="#nielsen2009">[Nielsen2009]</a>.</p>
+en <a class="reference internal" href="bibliografia.html#nielsen2000">[Nielsen2000]</a> y <a class="reference internal" href="bibliografia.html#nielsen2009">[Nielsen2009]</a>.</p>
 <p>Las condiciones experimentales de estas pruebas fueron:</p>
 <ul class="simple">
 <li>Cinco usuarios trabajando individualmente</li>
@@ -296,8 +302,8 @@ en el marco de los laboratorios de la cátedra <em>Termodinámica</em> (Ingenier
 dictador por el Dr. Cismondi, la gran mayoría de los usuarios (superior al 75% de
 un curso de 25 alumnos) lograron realizar los diagramas antes de que
 se impartieran las instrucciones para obtenerlos.</p>
-<div class="section" id="an-lisis-cuantitativo">
-<h3>9.3.1. Análisis cuantitativo<a class="headerlink" href="#an-lisis-cuantitativo" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="analisis-cuantitativo">
+<h3>9.3.1. Análisis cuantitativo<a class="headerlink" href="#analisis-cuantitativo" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Se describen algunos aspectos cuantitativos que dan muestra de la reducción
 de componentes de control y acciones necesarias para realizar una tarea, comparando
 la versión actual con la anterior.</p>
@@ -376,28 +382,6 @@ la versión actual con la anterior.</p>
 </div></blockquote>
 </li>
 </ul>
-<table class="docutils citation" frame="void" id="zulberti2010" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[Zulberti2010]</a></td><td>Zulberti, Tomás (2010), <em>Introducción a Unit Testing con Python</em>, Revista
-&#8220;PET: Python Entre Todos&#8221;* Nº 1 - Agosto 2010, Comunidad de Usuarios
-Python Argentina. Disponible en <a class="reference external" href="http://revista.python.org.ar/1/html/unittest.html">http://revista.python.org.ar/1/html/unittest.html</a></td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="nielsen2000" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[Nielsen2000]</a></td><td>Nielsen, Jakob (2000) <em>Why You Only Need to Test with 5 Users</em>,
-<a class="reference external" href="http://www.useit.com/alertbox/20000319.html">http://www.useit.com/alertbox/20000319.html</a></td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="nielsen2009" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id5">[Nielsen2009]</a></td><td>Nielsen, Jacob (2009) <em>230 Tips and Tricks for Better Usability Testing</em>,
-Nielsen Norman Group</td></tr>
-</tbody>
-</table>
 <table class="docutils footnote" frame="void" id="id6" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
@@ -431,17 +415,17 @@ mediante el utilitario <strong class="program">easy_install</strong>.</td></tr>
 </ul>
 </li>
 <li><a class="reference internal" href="#pruebas-realizadas">9.2. Pruebas realizadas</a><ul>
-<li><a class="reference internal" href="#ejemplos-de-c-digo-de-las-pruebas">9.2.1. Ejemplos de código de las pruebas</a><ul>
+<li><a class="reference internal" href="#ejemplos-de-codigo-de-las-pruebas">9.2.1. Ejemplos de código de las pruebas</a><ul>
 <li><a class="reference internal" href="#ejemplo-1">9.2.1.1. Ejemplo 1</a></li>
 <li><a class="reference internal" href="#ejemplo-2">9.2.1.2. Ejemplo 2</a></li>
 <li><a class="reference internal" href="#ejemplo-3">9.2.1.3. Ejemplo 3</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#ejecuci-n-y-validaci-n">9.2.2. Ejecución y validación</a></li>
+<li><a class="reference internal" href="#ejecucion-y-validacion">9.2.2. Ejecución y validación</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#pruebas-de-usabilidad">9.3. Pruebas de usabilidad</a><ul>
-<li><a class="reference internal" href="#an-lisis-cuantitativo">9.3.1. Análisis cuantitativo</a></li>
+<li><a class="reference internal" href="#analisis-cuantitativo">9.3.1. Análisis cuantitativo</a></li>
 </ul>
 </li>
 </ul>

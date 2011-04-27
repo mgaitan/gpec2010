@@ -91,7 +91,6 @@
     </div>
 <div class="viewcode-block" id="TestApiManager.test_write_conparin_2"><a class="viewcode-back" href="../verificacion.html#test_apimanager.TestApiManager.test_write_conparin_2">[docs]</a>    <span class="k">def</span> <span class="nf">test_write_conparin_2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Dirección 0 para modelos de cálculo 1 2 o 3. </span>
 <span class="sd">        Prueba que la primer linea es [direction, model_id]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">direction</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s">&#39;0&#39;</span><span class="p">,</span><span class="s">&#39;1&#39;</span><span class="p">])</span>
@@ -105,7 +104,6 @@
     </div>
 <div class="viewcode-block" id="TestApiManager.test_write_conparin_3"><a class="viewcode-back" href="../verificacion.html#test_apimanager.TestApiManager.test_write_conparin_3">[docs]</a>    <span class="k">def</span> <span class="nf">test_write_conparin_3</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Dirección 0 para modelos de cálculo 4 o 6. </span>
 <span class="sd">        Prueba que no se incluye el parámetro Vc</span>
 <span class="sd">        &quot;&quot;&quot;</span>    
         <span class="n">direction</span> <span class="o">=</span> <span class="s">&#39;0&#39;</span>
@@ -191,7 +189,8 @@
 
 <div class="viewcode-block" id="TestApiManager.test_gpecout_1"><a class="viewcode-back" href="../verificacion.html#test_apimanager.TestApiManager.test_gpecout_1">[docs]</a>    <span class="k">def</span> <span class="nf">test_gpecout_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Prueba que hay 2 curvas de vapor y al menos una crítica</span>
+<span class="sd">        Prueba que hay 2 curvas de vapor y al menos una crítica en los </span>
+<span class="sd">        arrays de datos de numpy</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">model</span> <span class="o">=</span> <span class="mf">1</span>  <span class="c">#random.choice([1,2,4,6])</span>

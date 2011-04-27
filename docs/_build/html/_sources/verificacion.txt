@@ -38,11 +38,17 @@ Según [Zulberti2010]_, el unit testing tiene varias ventajas:
 
 Es muy importante que un test cumpla las siguientes reglas:
 
-*  Tiene que poder correr sin interacción humana. Es decir, los tests no deben pedir que el usuario ingrese valores en ningún caso. Para esto, es en el test mismo cuando se pasan los valores a la función.
+*  Tiene que poder correr sin interacción humana. Es decir, los tests no deben 
+   pedir que el usuario ingrese valores en ningún caso. Para esto, es 
+   en el test mismo cuando se pasan los valores a la función.
     
-* Tienen que poder verificar el resultado de la ejecución sin interacción humana. De nuevo, para  saber si esta bien o no el resultado no tiene que pedirle al usuario que verifique el resultado. Para esto, se tiene que saber de antemano el resultado del test con los valores que se pasaron.
+* Tienen que poder verificar el resultado de la ejecución sin interacción 
+  humana. De nuevo, para  saber si esta bien o no el resultado no tiene 
+  que pedirle al usuario que verifique el resultado. Para esto, se tiene 
+  que saber de antemano el resultado del test con los valores que se pasaron.
     
-* Un test tiene que ser independiente del otro. Es decir, el resultado de un test no debería depender del resultado anterior.
+* Un test tiene que ser independiente del otro. Es decir, el resultado de 
+  un test no debería depender del resultado anterior.
 
 
 Unit testing en Python 
@@ -201,16 +207,6 @@ la versión actual con la anterior.
     ===================  ==================
 
 
-
-.. [Zulberti2010]  Zulberti, Tomás (2010), *Introducción a Unit Testing con Python*, Revista
-                   "PET: Python Entre Todos"* Nº 1 - Agosto 2010, Comunidad de Usuarios
-                   Python Argentina. Disponible en http://revista.python.org.ar/1/html/unittest.html
-
-.. [Nielsen2000]   Nielsen, Jakob (2000) *Why You Only Need to Test with 5 Users*, 
-                   http://www.useit.com/alertbox/20000319.html 
-
-.. [Nielsen2009]   Nielsen, Jacob (2009) *230 Tips and Tricks for Better Usability Testing*, 
-                   Nielsen Norman Group 
 
 
 .. [#]  La documentación completa de la versión utilizada se encuentra en 

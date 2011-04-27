@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Especificación de la interfaz de comunicación &mdash; Software para graficación de diagramas termodinámicos</title>
+    <title>2. Especificación de la interfaz de comunicación &mdash; Software para graficación de diagramas termodinámicos</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,7 +26,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
-    <link rel="top" title="Software para graficación de diagramas termodinámicos" href="index.html" /> 
+    <link rel="top" title="Software para graficación de diagramas termodinámicos" href="index.html" />
+    <link rel="next" title="3. Glosario" href="glosario.html" />
+    <link rel="prev" title="1. Ejemplos de diagramas" href="ejemplos.html" /> 
   </head>
   <body>
     <div class="related">
@@ -35,6 +37,12 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="Índice General"
              accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="glosario.html" title="3. Glosario"
+             accesskey="N">siguiente</a> |</li>
+        <li class="right" >
+          <a href="ejemplos.html" title="1. Ejemplos de diagramas"
+             accesskey="P">anterior</a> |</li>
         <li><a href="index.html">Software para graficación de diagramas termodinámicos</a> &raquo;</li> 
       </ul>
     </div>  
@@ -44,14 +52,14 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="especificaci-n-de-la-interfaz-de-comunicaci-n">
-<span id="api"></span><h1>Especificación de la interfaz de comunicación<a class="headerlink" href="#especificaci-n-de-la-interfaz-de-comunicaci-n" title="Enlazar permanentemente con este título">¶</a></h1>
+  <div class="section" id="especificacion-de-la-interfaz-de-comunicacion">
+<span id="api"></span><h1>2. Especificación de la interfaz de comunicación<a class="headerlink" href="#especificacion-de-la-interfaz-de-comunicacion" title="Enlazar permanentemente con este título">¶</a></h1>
 <p>Esta documentación especifica la interfaz de archivos de entrada y salida
 para el conjunto de programas de cálculo que componen <em>GPEC</em>.
-Se ha realizado a través de un proceso de <a class="reference internal" href="glosario.html#term-ingenier-a-inversa"><em class="xref std std-term">ingeniería inversa</em></a>,
+Se ha realizado a través de un proceso de <a class="reference internal" href="glosario.html#term-ingenieria-inversa"><em class="xref std std-term">ingeniería inversa</em></a>,
 ya que se carecía de documentación fehaciente.</p>
 <div class="section" id="tabla-de-incidencia">
-<h2>Tabla de incidencia<a class="headerlink" href="#tabla-de-incidencia" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>2.1. Tabla de incidencia<a class="headerlink" href="#tabla-de-incidencia" title="Enlazar permanentemente con este título">¶</a></h2>
 <blockquote>
 <div><table border="1" class="docutils">
 <colgroup>
@@ -110,7 +118,7 @@ ya que se carecía de documentación fehaciente.</p>
 </table>
 </div></blockquote>
 <div class="section" id="conparin-dat">
-<h3>CONPARIN.DAT<a class="headerlink" href="#conparin-dat" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>2.1.1. CONPARIN.DAT<a class="headerlink" href="#conparin-dat" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Es el archivo de entrada para el cálculo de parámetros específicos para los
 modelos en función de las constantes de cada compuesto, o bien, en sentido contrario,
 ajustar las constantes en función de parámetros del modelo definido por el usuario.
@@ -203,8 +211,8 @@ de los parámetros del modelo</p>
 </tbody>
 </table>
 </div>
-<div class="section" id="modo-para-calcular-par-metros-del-modelo">
-<h3>Modo para calcular parámetros del modelo<a class="headerlink" href="#modo-para-calcular-par-metros-del-modelo" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="modo-para-calcular-parametros-del-modelo">
+<h3>2.1.2. Modo para calcular parámetros del modelo<a class="headerlink" href="#modo-para-calcular-parametros-del-modelo" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Este modo se define con <tt class="docutils literal"><span class="pre">SENTIDO</span></tt> 0. Se definen las variables del compuesto.</p>
 <blockquote>
 <div><p>Modelos 1, 2, 3:</p>
@@ -266,7 +274,7 @@ RK-PR el valor sí es editable y está asociado a un factor denominado
 Si el usuario define <tt class="docutils literal"><span class="pre">VCeos</span></tt>, se actualiza el <tt class="docutils literal"><span class="pre">VCrat</span></tt> y viceversa.</p>
 </div>
 <div class="section" id="modo-para-calcular-variables-del-compuesto">
-<h3>Modo para calcular variables del compuesto<a class="headerlink" href="#modo-para-calcular-variables-del-compuesto" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>2.1.3. Modo para calcular variables del compuesto<a class="headerlink" href="#modo-para-calcular-variables-del-compuesto" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Cuando <tt class="docutils literal"><span class="pre">SENTIDO</span></tt> es 1 el formato depende del modelo</p>
 <blockquote>
 <div><ul>
@@ -426,7 +434,7 @@ T*   V*   c</pre>
 </div>
 </div>
 <div class="section" id="conparout-dat">
-<h2>CONPAROUT.DAT<a class="headerlink" href="#conparout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>2.2. CONPAROUT.DAT<a class="headerlink" href="#conparout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Es el archivo de salida para el cálculo de parámetros y constantes.
 El formato es el mismo independientemente del sentido de cálculo, teniendo la
 primer línea las variables de estado del compuesto, y en la segunda, los
@@ -461,7 +469,7 @@ T*   V*   c</p>
 </ul>
 </div>
 <div class="section" id="gpecin-dat">
-<h2>GPECIN.DAT<a class="headerlink" href="#gpecin-dat" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>2.3. GPECIN.DAT<a class="headerlink" href="#gpecin-dat" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Se trata del archivo de entrada de parámetros para el cálculo del diagrama global.</p>
 <p>Formato General:</p>
 <div class="highlight-python"><pre>MODELO
@@ -804,14 +812,14 @@ Ver CONPAROUT.DAT</p>
 </table>
 </div>
 <div class="section" id="gpecout-dat">
-<h2>GPECOUT.DAT<a class="headerlink" href="#gpecout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>2.4. GPECOUT.DAT<a class="headerlink" href="#gpecout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Es el archivo de salida de <tt class="docutils literal"><span class="pre">GPEC</span></tt>. Tiene una cabecera, donde especifica
 a fines descriptivos los parámetros que se utilizaron para realizar el cálculo,
 y diversas tablas de valores tabulados, cada una de las cuales representan
 una <em>curva</em> en el espacio n-dimensional. Tomando 2 de estas columnas de valores
 se obtienen las distintas curvas a graficar.</p>
 <div class="section" id="cabecera">
-<h3>Cabecera<a class="headerlink" href="#cabecera" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>2.4.1. Cabecera<a class="headerlink" href="#cabecera" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Para el analisis sintáctico, se puede ignorar la cabecera del archivo.
 Sin embargo, para los fines descriptivos se incluye un ejemplo:</p>
 <div class="highlight-python"><pre>METHANE
@@ -838,7 +846,7 @@ ETHANOL    0.00000
 calculó.</p>
 </div>
 <div class="section" id="datos-tabulados">
-<h3>Datos tabulados<a class="headerlink" href="#datos-tabulados" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>2.4.2. Datos tabulados<a class="headerlink" href="#datos-tabulados" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>La estructura general de una tabla de datos tabulados tiene la siguiente
 estructura:</p>
 <div class="highlight-python"><pre>  Var1(Un)    Var2(Un)    Var3(Un)    [...]
@@ -960,7 +968,7 @@ Por ejemplo:</p>
 </div>
 </div>
 <div class="section" id="pie">
-<h3>Pie<a class="headerlink" href="#pie" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3>2.4.3. Pie<a class="headerlink" href="#pie" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Al igual que la cabecera, el final del archivo aporta información extra.
 Por ejemplo:</p>
 <div class="highlight-python"><pre>Type of phase behaviour predicted by the model for this system
@@ -978,7 +986,7 @@ Heterogeneous Azeotropic End Points found:            0</pre>
 </div>
 </div>
 <div class="section" id="tforpxy-dat">
-<h2>TFORPXY.dat<a class="headerlink" href="#tforpxy-dat" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>2.5. TFORPXY.dat<a class="headerlink" href="#tforpxy-dat" title="Enlazar permanentemente con este título">¶</a></h2>
 <p><tt class="docutils literal"><span class="pre">TFORPXY.dat</span></tt> es el tercer archivo de entrada que utiliza PxyGPEC para calcular
 diagramas Presión-Composición a una temperatura constante dada.</p>
 <p>Este archivo simplemente define el valor de temperatura que el usuario puede ingresar,
@@ -993,7 +1001,7 @@ previo al cálculo:</p>
 </div>
 </div>
 <div class="section" id="pxyout-dat">
-<h2>PXYOUT.DAT<a class="headerlink" href="#pxyout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>2.6. PXYOUT.DAT<a class="headerlink" href="#pxyout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Es el archivo de salida para el diagrama Presión-Composición (diagrama isotermico).
 Tiene una estructura de <a class="reference internal" href="#datos-tabulados">datos tabulados</a> como sigue:</p>
 <div class="highlight-python"><pre>T = TEMPERATURA K
@@ -1008,7 +1016,7 @@ p.n       x1.n      y1.n     y2.n           x2.n    dX.n      dY.n      [...]</p
 <p>Tiene 7 columnas significativas.</p>
 </div>
 <div class="section" id="pfortxy-dat">
-<h2>PFORTXY.DAT<a class="headerlink" href="#pfortxy-dat" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>2.7. PFORTXY.DAT<a class="headerlink" href="#pfortxy-dat" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Análogo a <a class="reference internal" href="#tforpxy-dat">TFORPXY.dat</a> para el diagrama de presión constante, este archivo
 indica el valor de presión definida por el usuario.</p>
 <blockquote>
@@ -1026,7 +1034,7 @@ de valores aceptados por el sistema.</td>
 </div></blockquote>
 </div>
 <div class="section" id="txyout-dat">
-<h2>TXYOUT.DAT<a class="headerlink" href="#txyout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>2.8. TXYOUT.DAT<a class="headerlink" href="#txyout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Datos tabulados de salida para diagramas isobáricos. Tiene
 la misma estructura que <a class="reference internal" href="#pxyout-dat">PXYOUT.DAT</a> pero el parámetro constante es la temperatura
 y la primer columna de datos tabulados es presión:</p>
@@ -1042,7 +1050,7 @@ t.n       x1.n      y1.n     y2.n           x2.n    dX.n      dY.n      [...]</p
 <p>Tiene 7 columnas significativas.</p>
 </div>
 <div class="section" id="zforisop-dat">
-<h2>ZforIsop.dat<a class="headerlink" href="#zforisop-dat" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>2.9. ZforIsop.dat<a class="headerlink" href="#zforisop-dat" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Es un archivo de entrada para <tt class="docutils literal"><span class="pre">IsoplethGPEC</span></tt> que realiza los cómputos
 para obtener un set de datos para una proporción del <em>compuesto 1</em> constante,
 que define el usuario.</p>
@@ -1059,7 +1067,7 @@ adimensional que representa la fracción de compuesto:</p>
 </div>
 </div>
 <div class="section" id="isopout-dat">
-<h2>ISOPOUT.DAT<a class="headerlink" href="#isopout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>2.10. ISOPOUT.DAT<a class="headerlink" href="#isopout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Archivo de salida para isopletas (Presión-Temperatura en composición constante).
 Tiene la siguiente estructura:</p>
 <div class="highlight-python"><pre>NCRI=           N_L_CRITICAS
@@ -1102,7 +1110,7 @@ la cantidad de bloque <tt class="docutils literal"><span class="pre">CRI</span><
 <p>El bloque de datos tabulados <tt class="docutils literal"><span class="pre">ISO</span></tt> tiene 6 cifras significativas.</p>
 </div>
 <div class="section" id="fugin-dat">
-<h2>FUGIN.DAT<a class="headerlink" href="#fugin-dat" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>2.11. FUGIN.DAT<a class="headerlink" href="#fugin-dat" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Archivo de entrada para <tt class="docutils literal"><span class="pre">FUGi</span></tt> que se utiliza para realizar un diagrama
 <em>Fugacidad-Composición</em> para una temperatura y una presión dadas.
 La estructura del archivo es la siguiente:</p>
@@ -1130,7 +1138,7 @@ X1_min  X1_max</pre>
 </div></blockquote>
 </div>
 <div class="section" id="fugout-dat">
-<h2>FUGOUT.DAT<a class="headerlink" href="#fugout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>2.12. FUGOUT.DAT<a class="headerlink" href="#fugout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>El archivo de salida de datos para <em>Fugacidad-Composición</em> producido por
 <tt class="docutils literal"><span class="pre">FUGi</span></tt>. Tiene una estructura similar a <a class="reference internal" href="#gpecout-dat">GPECOUT.DAT</a> y en particular
 una <a class="reference internal" href="#cabecera">cabecera</a> y un bloque de <a class="reference internal" href="#datos-tabulados">datos tabulados</a> que tiene la siguiente
@@ -1160,7 +1168,7 @@ FUG
 <p>Las tres columnas de datos son significativas.</p>
 </div>
 <div class="section" id="isoxtin-dat">
-<h2>IsoXTin.DAT<a class="headerlink" href="#isoxtin-dat" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>2.13. IsoXTin.DAT<a class="headerlink" href="#isoxtin-dat" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Archivo de entrada para <tt class="docutils literal"><span class="pre">IsoXT</span></tt> que se utiliza para realizar un diagrama
 <em>Presión-densidad</em> para temperatura y composición constante.
 La estructura del archivo es la siguiente:</p>
@@ -1189,7 +1197,7 @@ por el usuario.</td>
 </div></blockquote>
 </div>
 <div class="section" id="isoxtout-dat">
-<h2>IsoXTout.DAT<a class="headerlink" href="#isoxtout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>2.14. IsoXTout.DAT<a class="headerlink" href="#isoxtout-dat" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Archivo de salida similar a <a class="reference internal" href="#fugout-dat">FUGOUT.DAT</a> con una <a class="reference internal" href="#cabecera">cabecera</a> con la siguiente
 estructura:</p>
 <div class="highlight-python"><pre>T (K)       x1          x2
@@ -1228,35 +1236,41 @@ previo a las columnas de datos.</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Contenidos</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Especificación de la interfaz de comunicación</a><ul>
-<li><a class="reference internal" href="#tabla-de-incidencia">Tabla de incidencia</a><ul>
-<li><a class="reference internal" href="#conparin-dat">CONPARIN.DAT</a></li>
-<li><a class="reference internal" href="#modo-para-calcular-par-metros-del-modelo">Modo para calcular parámetros del modelo</a></li>
-<li><a class="reference internal" href="#modo-para-calcular-variables-del-compuesto">Modo para calcular variables del compuesto</a></li>
+<li><a class="reference internal" href="#">2. Especificación de la interfaz de comunicación</a><ul>
+<li><a class="reference internal" href="#tabla-de-incidencia">2.1. Tabla de incidencia</a><ul>
+<li><a class="reference internal" href="#conparin-dat">2.1.1. CONPARIN.DAT</a></li>
+<li><a class="reference internal" href="#modo-para-calcular-parametros-del-modelo">2.1.2. Modo para calcular parámetros del modelo</a></li>
+<li><a class="reference internal" href="#modo-para-calcular-variables-del-compuesto">2.1.3. Modo para calcular variables del compuesto</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#conparout-dat">CONPAROUT.DAT</a></li>
-<li><a class="reference internal" href="#gpecin-dat">GPECIN.DAT</a></li>
-<li><a class="reference internal" href="#gpecout-dat">GPECOUT.DAT</a><ul>
-<li><a class="reference internal" href="#cabecera">Cabecera</a></li>
-<li><a class="reference internal" href="#datos-tabulados">Datos tabulados</a></li>
-<li><a class="reference internal" href="#pie">Pie</a></li>
+<li><a class="reference internal" href="#conparout-dat">2.2. CONPAROUT.DAT</a></li>
+<li><a class="reference internal" href="#gpecin-dat">2.3. GPECIN.DAT</a></li>
+<li><a class="reference internal" href="#gpecout-dat">2.4. GPECOUT.DAT</a><ul>
+<li><a class="reference internal" href="#cabecera">2.4.1. Cabecera</a></li>
+<li><a class="reference internal" href="#datos-tabulados">2.4.2. Datos tabulados</a></li>
+<li><a class="reference internal" href="#pie">2.4.3. Pie</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#tforpxy-dat">TFORPXY.dat</a></li>
-<li><a class="reference internal" href="#pxyout-dat">PXYOUT.DAT</a></li>
-<li><a class="reference internal" href="#pfortxy-dat">PFORTXY.DAT</a></li>
-<li><a class="reference internal" href="#txyout-dat">TXYOUT.DAT</a></li>
-<li><a class="reference internal" href="#zforisop-dat">ZforIsop.dat</a></li>
-<li><a class="reference internal" href="#isopout-dat">ISOPOUT.DAT</a></li>
-<li><a class="reference internal" href="#fugin-dat">FUGIN.DAT</a></li>
-<li><a class="reference internal" href="#fugout-dat">FUGOUT.DAT</a></li>
-<li><a class="reference internal" href="#isoxtin-dat">IsoXTin.DAT</a></li>
-<li><a class="reference internal" href="#isoxtout-dat">IsoXTout.DAT</a></li>
+<li><a class="reference internal" href="#tforpxy-dat">2.5. TFORPXY.dat</a></li>
+<li><a class="reference internal" href="#pxyout-dat">2.6. PXYOUT.DAT</a></li>
+<li><a class="reference internal" href="#pfortxy-dat">2.7. PFORTXY.DAT</a></li>
+<li><a class="reference internal" href="#txyout-dat">2.8. TXYOUT.DAT</a></li>
+<li><a class="reference internal" href="#zforisop-dat">2.9. ZforIsop.dat</a></li>
+<li><a class="reference internal" href="#isopout-dat">2.10. ISOPOUT.DAT</a></li>
+<li><a class="reference internal" href="#fugin-dat">2.11. FUGIN.DAT</a></li>
+<li><a class="reference internal" href="#fugout-dat">2.12. FUGOUT.DAT</a></li>
+<li><a class="reference internal" href="#isoxtin-dat">2.13. IsoXTin.DAT</a></li>
+<li><a class="reference internal" href="#isoxtout-dat">2.14. IsoXTout.DAT</a></li>
 </ul>
 </li>
 </ul>
 
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="ejemplos.html"
+                        title="Capítulo anterior">1. Ejemplos de diagramas</a></p>
+  <h4>Próximo tema</h4>
+  <p class="topless"><a href="glosario.html"
+                        title="Próximo capítulo">3. Glosario</a></p>
   <h3>Esta página</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/api.txt"
@@ -1285,6 +1299,12 @@ previo a las columnas de datos.</p>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="Índice General"
              >índice</a></li>
+        <li class="right" >
+          <a href="glosario.html" title="3. Glosario"
+             >siguiente</a> |</li>
+        <li class="right" >
+          <a href="ejemplos.html" title="1. Ejemplos de diagramas"
+             >anterior</a> |</li>
         <li><a href="index.html">Software para graficación de diagramas termodinámicos</a> &raquo;</li> 
       </ul>
     </div>

@@ -84,7 +84,7 @@ Modelado conceptual vs. UML
 
 Basado en los postulados de [AG-MANIF]_ durante el desarrollo se ha hecho hincapié
 en un modelado y documentación orientados a favorecer la comunicación
-por sobre el apego estricto y exhaustivo al lenguaje :term:`UML` y sus técnicas asociadas,
+por sobre el apego estricto y exhaustivo al lenguaje :term:`UML` y la documentación formal,
 intentando que el resultado sea útil para el comitente, evaluadores y futuros desarrolladores 
 del proyecto.
 
@@ -127,24 +127,6 @@ y conferencista, opina en [Stevens2006]_ :
     obsesionado por las minucias en una parodia de distracción académica. 
     
 
-
-.. [AG-MANIF]  Varios autores (2001), *Manifesto for Agile Software Development*, http://agilemanifesto.org/
-
-.. [Sommerville2004] Sommerville, Ian (2004) *Software Enginnering, 7th edition*, Pretince Hall
-            Traducción al español por el Departamento de Ciencias de la Computación e Inteligencia 
-            Artificial de la Universidad de Alicante (2005). 
-
-
-.. [Quatrani2010]  Quatrani, Terry (2010) *The Truth About Agile   
-                   Modeling*. Cita extraída de 
-                   http://agilescout.com/agile-modeling-and-uml/
-
-
-.. [Martin2006]  Martin, Robert (2006) *Agile Principles, Patterns, and Practices in C#*, 
-                 Prentice Hall. Cita extraída de http://stackoverflow.com/questions/61487/do-you-use-uml-in-agile-development-practices
-                 
-.. [Stevens2006]  Steven, Alan (2006) *UML Sucks (Really!)*, 
-                 http://halanstevens.com/uml-sucks-really/
 
 .. [#] Premio :abbr:`Most Valuable Professional (MVP)` de Microsoft por sus aportes
        a la comunidad de usuarios del lenguaje C#. http://bit.ly/as_mvp 

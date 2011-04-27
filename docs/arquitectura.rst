@@ -11,11 +11,11 @@ como UML.
 
     .. attention::
 
-       La adopción de principios del desarrollo ágil y el desarrollo evolutivo
-       implica que no se ha utilizado un proceso de ingeniería de software 
-       más frecuentemente enseñado en el ámbito académico. Esto es, el proceso de diseño e 
-       implementación han sido mancomunados iterativamente en vez de separados estrictamente.
-       De esta manera, muchos de los conceptos arquitectónicos están intrínsecamente 
+       La adopción de una metodología ágil implica que no se ha utilizado 
+       un proceso de ingeniería de software más frecuentemente enseñado en el 
+       ámbito académico. Esto es, el proceso de diseño e implementación han 
+       sido mancomunados iterativamente en vez de separados estrictamente.
+       De esta manera, muchos de los conceptos arquitectónicos  
        aquí expuestados están relacionados intrísecamente con su implementación. 
 
 

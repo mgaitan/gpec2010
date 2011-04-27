@@ -1,10 +1,17 @@
 .. _index:
 
-Contenidos:
-===========
+.. raw:: html
+
+   <div style="float:right"><em>A Nati y a familia<br /> por el amor </em></div>
+            
+
+
+Indice general
+==============
 
 
 ..  toctree::
+    :maxdepth: 2
     :numbered:
 
     introduccion
@@ -18,4 +25,17 @@ Contenidos:
     verificacion
     implantacion
     conclusiones
-    
+    bibliografia
+
+.. only:: html
+
+   Apéndices
+   ---------
+
+   ..  toctree::
+    :maxdepth: 1
+
+    ejemplos
+    api
+    trazabilidad
+    glosario

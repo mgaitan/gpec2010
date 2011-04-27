@@ -326,31 +326,3 @@ a futuro.
 .. [#]  Vea :term:`FUD` en el glosario
 
 
-.. [UNC1]  Universidad Nacional de Córdoba, *Estatuto de la UNC -  Misión de la Universidad*: 
-           http://www.unc.edu.ar/institucional/organizacion/estatutos/mision
-
-
-.. [FSFa]  Free Software Foundation, *La definición de Software libre*,  
-           http://www.gnu.org/philosophy/free-sw.es.html
-
-
-.. [ARR2003]  Rey Roque, Antonio (2003), *Experiencias en el trabajo 
-              Interdisciplinario desde una Disciplina Básica*,
-              Departamento de Matemáticas, Facultad de Informática, Universidad de
-              Cienfuegos “Carlos Rafael Rodríguez”, Cuba
-
-.. [JMiH2005]  Mas i Hernàndez, Jordi  (2005), *Software Libre. Técnicamente viable, 
-               económicamente sostenible y socialmente justo*, infonomia.com (Ed.), Barcelona
-
-
-.. [ER1997]  Raymond, Eric S (1997),  *The Cathedral and the Bazaar*, Open Source Software Foundation,
-             Traducción al español del Proyecto Lucas, http://es.tldp.org/Otros/catedral-bazar/cathedral-es-paper-00.html
-
-.. [RMS2004]  Stallman, Richard M (2004), *Libre pero encadenado. La trampa del Java.*, 
-              :abbr:`FSF (Free Software Foundation)`, http://www.gnu.org/philosophy/java-trap.es.html
-
-.. [DG2009]  Gezelter, Dan (2009), *What, exactly, is Open Science?*, 
-           http://www.openscience.org/blog/?p=269
-
-.. [CLD03]  Challet, D - Le Du, Y (2003), *Microscopic model of software bug dynamics: closed source versus open source*, 
-            International Journal of Reliability, Quality and Safety Engineering

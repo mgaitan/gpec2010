@@ -70,7 +70,7 @@ today = 'Abril de 2010'
 
 # List of directories, relative to source directory, that shouldn't be searched
 # for source files.
-exclude_trees = ['_build', 'sandbox', 'poster']
+exclude_trees = ['_build', 'sandbox', 'poster', 'presentacion']
 
 # The reST default role (used for this markup: `text`) to use for all documents.
 #default_role = None
@@ -275,7 +275,7 @@ latex_elements = {
 } 
 
 # Documents to append as an appendix to all manuals.
-latex_appendices = ['ejemplos', 'api', 'glosario']
+latex_appendices = ['ejemplos', 'api', 'trazabilidad', 'glosario']
 
 # If false, no module index is generated.
 latex_domain_indices = False

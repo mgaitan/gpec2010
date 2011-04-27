@@ -204,12 +204,12 @@ Requerimientos funcionales
 Todas las funcionalidades de la versión preexistente de GPEC deben igualarse y 
 en lo posible mejorarse. Se detallan a continuación:
 
-
-* Generación del sistema binario: selección de dos sustancias. 
-* Gestión de base de datos de constantes de compuestos químicos. Se incluirá una base de datos 
-  con el software que el usuario puede manipular.
-* Adecuación del formulario y archivo de entrada de parámetros para 
-  diferentes ecuaciones de estado (modelos) de base molecular [#]_ : 
+1. Comunicación input/output con el backend respetando la :ref:`api`
+2. Generación del sistema binario: selección de dos sustancias.
+3. Gestión de base de datos de constantes de compuestos químicos. Se incluirá una base de datos 
+   con el software que el usuario puede manipular.
+4. Adecuación del formulario y archivo de entrada de parámetros para 
+   diferentes ecuaciones de estado (modelos) de base molecular [#]_  : 
 
      * Soave-Redlich-Kwong 
      * Peng-Robinson
@@ -217,9 +217,9 @@ en lo posible mejorarse. Se detallan a continuación:
      * Simplified Perturbed Hard Chain Theory
      * Perturbed Chain Statistical Associating Fluid Theory (PC-SAFT)
 
-* Generación de suite de gráficos 2-D: 
+5. Generación de suite de gráficos 2-D: 
 
-    * Diagrama global de equilibrio de fases:
+    5.1. Diagrama global de equilibrio de fases:
 
       * Presión - Temperatura (P-T)
       * Temperatura - Composición (T-x)
@@ -227,7 +227,7 @@ en lo posible mejorarse. Se detallan a continuación:
       * Presión - Composición (P-x)
       * Presión - Densidad (P-ρ)
 
-    * Isopletas: diagramas para composición ``Z`` constante (rango definible [0, 1] ):
+    5.2. Isopletas: diagramas para composición ``Z`` constante (rango definible [0, 1] ):
         
         * Presión - Temperatura (P-T)
         * Temperatura - Composición (T-x)
@@ -235,27 +235,27 @@ en lo posible mejorarse. Se detallan a continuación:
         * Presión - Composición (P-x)
         * Presión - Densidad (P-ρ)
 
-    * Diagramas isotérmicos (Pxy): diagramas para temperatura ``T [K]`` constante [#]_:
+    5.3. Diagramas isotérmicos (Pxy): diagramas para temperatura ``T [K]`` constante [#]_:
 
         * Presión - Composición (Pxy)
         * Presión - Densidad (P-ρ)
 
-    * Diagramas isobáricos (Txy): diagramas para presión ``P [bar]`` constante :
+    5.4. Diagramas isobáricos (Txy): diagramas para presión ``P [bar]`` constante :
 
         * Temperatura - Composición (Txy)
         * Temperatura - Densidad  (T-ρ)
 
-* Generación de suite de gráficos 3-D: diagramas globales y de parámetros constantes 
-  automáticamente superpuestos para cada caso:
+6. Generación de suite de gráficos 3-D: diagramas globales y de parámetros constantes 
+   automáticamente superpuestos para cada caso:
     
-        * Presión - Temperatura - Composición
-        * Presión - Temperatura - Densidad
+   6.1. Presión - Temperatura - Composición
+   6.2. Presión - Temperatura - Densidad
                 
-* Superposición de diagramas compatibles
-* Gestión de proyectos (manipulación múltiples casos de sistemas/modelo/gráfico) 
-* Gestión de persistencia de datos (abrir, guardar, etc.)
-* Ejecución multiplataforma: GPEC debe ser capaz de utilizarse en entornos Windows® y Linux
-* Exportación de gráficos 
+7. Superposición de diagramas compatibles
+8. Gestión de proyectos (manipulación múltiples casos de sistemas/modelo/gráfico) 
+9. Gestión de persistencia de datos (abrir, guardar, etc.)
+10. Ejecución multiplataforma: GPEC debe ser capaz de utilizarse en entornos Windows® y Linux
+11. Exportación de gráficos 
 
 Requerimientos no funcionales
 -----------------------------
@@ -272,8 +272,8 @@ Requerimientos no funcionales
 Requerimientos especiales
 ==========================
 
-Se especifican en esta sección, de manera no formal, un conjunto de requerimientos 
-de especial interés para el diseño del software. 
+Se especifican en esta sección, en formato de historias de usuario, 
+un conjunto de requerimientos de especial interés para el diseño del software. 
 
 Un proyecto, muchos casos
 -------------------------
