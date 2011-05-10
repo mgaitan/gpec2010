@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="generator" content="rst2slides 0.2.2" /><title>Proyecto Integrador de Ingeniería en Computación</title>
+<link rel="stylesheet" href="ui/styles.css" />
+<link rel="stylesheet" href="ui/pygments_style.css" />
+<link rel="stylesheet" href="ui/user.css" />
+</head>
+<body>
+
+    <header>
+    <nav>
+        <ul>
+            <li><button id="prev-btn" title="Previous slide">Previous Slide</button></li>
+            <li><span id="slide-number"></span>/<span id="slide-total"></span></li>
+            <li><button id="next-btn" title="Next Slide">Next Slide</button></li>
+        </ul>
+    </nav>
+    </header>
+
+<div id='deck'>
+
+
+<section>
+<hgroup>
+    <h1>
+Proyecto Integrador de Ingeniería en Computación    </h1>
+</hgroup>
+<img alt="img/unc3-b.jpg" class="align-right" src="img/unc3-b.jpg" style="width: 40%;" />
+<div class="line-block">
+<div class="line"><em>GPEC 2010</em></div>
+<div class="line"><br /></div>
+<div class="line">Martín Gaitán</div>
+<div class="line"><br /></div>
+<div class="line">FCEFyN - UNC</div>
+<div class="line">12 de mayo de 2011</div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<ul>
+<li><p class="first">Director:</p>
+<blockquote>
+<ul class="simple">
+<li>Mg. Gustavo Wolfmann</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">Codirector:</p>
+<blockquote>
+<ul class="simple">
+<li>Dr. Martín Cismondi Duarte</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</section>
+<section>
+<hgroup>
+    <h1>
+Introducción    </h1>
+</hgroup>
+<ul class="incremental">
+<li><p class="first">Software GPEC (2005): tésis doctoral del Dr. Cismondi</p>
+<blockquote>
+<p>Un software para la obtención de curvas
+de equilibro termodinámico de fase global para sistemas binarios,
+que se calculan mediante ecuaciones de estado.</p>
+</blockquote>
+</li>
+<li><p class="first">Situación:</p>
+<blockquote>
+<ul class="simple">
+<li><em>Backend</em> (métodos númericos) (Fortran)</li>
+<li><em>Frontend</em> (UI + graficación) (Visual Basic)</li>
+<li>Comunicación mediante archivos</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+  </section>
+
+<section>
+<hgroup>
+    <h1>
+Motivación    </h1>
+</hgroup>
+<ul class="incremental">
+<li><p class="first">Actualmente</p>
+<blockquote>
+<ul class="simple">
+<li>Software muy utilizado en el ambiente científico-académico</li>
+<li>No se conoce otro software con prestaciones equivalentes</li>
+<li>Gran utilidad en la industria</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">Pero...</p>
+<blockquote>
+<ul class="simple">
+<li>Interfaz compleja</li>
+<li>No se basa en bibliotecas</li>
+<li>Lenguaje obsoleto</li>
+<li>Sólo funciona en Windows</li>
+<li>Sólo gráficos 2D.</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+  </section>
+
+<section>
+<hgroup>
+    <h1>
+Objetivos    </h1>
+</hgroup>
+<blockquote>
+<ul>
+<li><p class="first"><strong>Alcance</strong></p>
+<blockquote>
+<p>Rediseño e implementación de una nueva aplicación de
+generación de gráficos para GPEC reutilizando el backend preexistente</p>
+</blockquote>
+</li>
+<li><p class="first">Se buscó</p>
+<blockquote>
+<ul>
+<li><dl class="first docutils">
+<dt>Reimplementar el frontend sin afectar el backend. (&quot;caja negra&quot;)</dt>
+<dd><ul class="first last simple">
+<li>Implica respetar la interfaz de comunicación</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Equiparar y mejorar las funcionalidades</p>
+</li>
+<li><p class="first">Multiplataforma</p>
+</li>
+<li><p class="first">Mejorar la usabilidad</p>
+</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+  </section>
+
+<section>
+<hgroup>
+    <h1>
+Breve marco Teórico    </h1>
+</hgroup>
+<img alt="../images/Phase-diag_es.png" class="align-right" src="../images/Phase-diag_es.png" style="width: 50%;" />
+<ul>
+<li><p class="first">Diagrama de fase</p>
+<blockquote>
+<p>Gráfico utilizado para mostrar las condiciones en las que
+distintas fases termodinámicas pueden ocurrir en equilibrio.</p>
+</blockquote>
+</li>
+</ul>
+<img alt="../images/ejTipo1.png" class="align-right" src="../images/ejTipo1.png" style="width: 50%;" />
+<ul>
+<li><p class="first">En <strong>Sistemas binarios</strong>  (2 componentes)</p>
+<blockquote>
+<ul class="simple">
+<li>La <strong>composición</strong> (y la <strong>densidad</strong>) se vuelven una variable =&gt; espacio</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+  </section>
+
+<section>
+<hgroup>
+    <h1>
+Breve marco Teórico (cont.)    </h1>
+</hgroup>
+<ul>
+<li><p class="first">La proyección ortogonal de estas curvas tridimensionales genera gráficos 2D</p>
+<blockquote>
+<img alt="../images/ejemploTx.png" class="align-right" src="../images/ejemploTx.png" style="width: 50%;" />
+</blockquote>
+</li>
+<li><p class="first">Modelo matemático: Ecuaciones de estado que relaciones funciones de estado</p>
+<blockquote>
+<ul class="simple">
+<li>Todo parte de las famosa <em>Ecuacíón de Van der Wals</em></li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">También se realizan &quot;cortes&quot; fijando una variable (isobaras, isotermas, isopletas)</p>
+</li>
+<li><p class="first">Distintos comportamientos segun los compuestos (todos calculables por GPEC</p>
+</li>
+</ul>
+<!-- Contexto de trabajo
+********************
+
+- Trabajo interdisciplinario
+
+    .. epigraph::
+
+        La computación no trata sobre las computadoras más de
+        lo que la astronomía trata sobre los telescopios
+
+        - - Edsger Dijkstra
+
+- Basado en software libre
+
+- Software Libre -->
+  </section>
+
+<section>
+<hgroup>
+    <h1>
+Relevamiento de la versión preexistente    </h1>
+</hgroup>
+<div class="figure align-center">
+<img alt="../images/visual_gpec1.png" src="../images/visual_gpec1.png" style="width: 60%;" />
+</div>
+<ul>
+<li><p class="first">Interfaz confusa: Demasiadas opciones simultáneas</p>
+</li>
+<li><dl class="first docutils">
+<dt>Gráficos:</dt>
+<dd><ul class="first last simple">
+<li>rutinas adhoc</li>
+<li>rasterización de pixels.</li>
+<li>no se pueden exportar</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Diseño de base de datos (<em>Ms Jet</em>) innecesariamente complejo</p>
+</li>
+</ul>
+  </section>
+
+<section>
+<hgroup>
+    <h1>
+Metodología    </h1>
+</hgroup>
+<ul>
+<li><p class="first">Marco conceptual: Agile Manifiesto</p>
+<blockquote>
+<ul class="simple">
+<li>Individuos e interacciones sobre procesos y herramientas</li>
+<li>Software funcionando sobre documentación extensiva</li>
+<li>Colaboración con el comitente sobre negociación contractual</li>
+<li>Respuesta ante el cambio sobre seguimiento (estricto) de un plan</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">Desarrollo evolutivo</p>
+<blockquote>
+<img alt="../images/desarrollo_evolutivo.png" class="align-center" src="../images/desarrollo_evolutivo.png" style="width: 70%;" />
+</blockquote>
+</li>
+</ul>
+  </section>
+
+<section>
+<hgroup>
+    <h1>
+Tecnologías empleadas    </h1>
+</hgroup>
+<ul class="incremental">
+<li><p class="first">Lenguaje: Python</p>
+<blockquote class="epigraph">
+<p>El canónico <em>&quot;Python es un gran primer lenguaje&quot;</em> suscitó
+<em>&quot;¡Python es un gran último lenguaje!&quot;</em></p>
+<p class="attribution">&mdash;Noah Spurrier</p>
+</blockquote>
+<ul class="simple">
+<li>Simple, potente y elegante</li>
+<li>Multiplataforma</li>
+<li>Contaba con experiencia</li>
+</ul>
+</li>
+<li><p class="first">Graficación: Matplotlib</p>
+<blockquote>
+<ul class="simple">
+<li>Graficos de alta calidad 2D y 3D</li>
+<li>Integración con toolkits gráficos</li>
+<li>Exportación a multiples formatos (mapa de bits y vectoriales)</li>
+<li>Desarrollo muy activo</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">GUI: WxPython</p>
+<ul class="simple">
+<li>Uso nativo de las APIs gráficas en cada entorno</li>
+<li><em>Advanced User Interface</em></li>
+</ul>
+</li>
+</ul>
+  </section>
+
+<section>
+<hgroup>
+    <h1>
+Arquitectura    </h1>
+</hgroup>
+<ul class="simple">
+<li>Modelo conceptual</li>
+</ul>
+<img alt="../images/workflow.png" class="align-center" src="../images/workflow.png" style="width: 70%;" />
+  </section>
+
+<section>
+<hgroup>
+    <h1>
+Componentes    </h1>
+</hgroup>
+<div class="figure align-center">
+<img alt="../images/arquitectura.png" src="../images/arquitectura.png" style="width: 60%;" />
+</div>
+  </section>
+
+<section>
+<hgroup>
+    <h1>
+Patrón de comunicación    </h1>
+</hgroup>
+<div class="figure align-center">
+<img alt="../images/pubsub_concept.png" src="../images/pubsub_concept.png" style="width: 60%;" />
+<p class="caption">Patrón Publisher/Subscriber</p>
+</div>
+<ul class="simple">
+<li>Aplicación modular desacoplada</li>
+<li>Permite la extensibilidad</li>
+<li>Implementación simple</li>
+</ul>
+<div class="highlight"><pre><span class="c">#suscribe</span>
+<span class="n">pub</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OnAppendLog</span><span class="p">,</span> <span class="s">&#39;log&#39;</span><span class="p">)</span>
+<span class="c">#envia</span>
+<span class="n">pub</span><span class="o">.</span><span class="n">sendMessage</span><span class="p">(</span><span class="s">&#39;log&#39;</span><span class="p">,</span> <span class="n">mensaje</span><span class="p">)</span>
+</pre></div>
+  </section>
+
+<section>
+<hgroup>
+    <h1>
+API    </h1>
+</hgroup>
+<img alt="../images/parser.png" class="align-right" src="../images/parser.png" style="width: 50%;" />
+<ul class="incremental simple">
+<li>Escasa documentación del formato de los archivos<ul>
+<li>Arduo trabajo ingeniería inversa</li>
+</ul>
+</li>
+<li>Implementada como una clase independiente<ul>
+<li>Permite reutilizar el backend en otro contexto (¿web?)</li>
+</ul>
+</li>
+<li>Usa wine sobre plataformas no Windows :(<ul>
+<li>Pero es mejorable: compilar nativamente,  <em>f2py</em>, etc.</li>
+</ul>
+</li>
+</ul>
+  </section>
+
+<section>
+<hgroup>
+    <h1>
+Implementacion    </h1>
+</hgroup>
+<ul class="simple">
+<li>VIDEO</li>
+</ul>
+  </section>
+
+<section>
+<hgroup>
+    <h1>
+Verificacion    </h1>
+</hgroup>
+<ul>
+<li><p class="first">Pruebas unitarias (test automáticos)</p>
+<blockquote>
+<ul class="simple">
+<li>Principalmente sobre la API</li>
+</ul>
+<div class="highlight"><pre><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<span class="n">test_write_conparin_3</span> <span class="p">(</span><span class="n">__main__</span><span class="o">.</span><span class="n">TestApiManager</span><span class="p">)</span> <span class="o">...</span> <span class="n">ok</span>
+<span class="n">test_write_gpecin</span> <span class="p">(</span><span class="n">__main__</span><span class="o">.</span><span class="n">TestApiManager</span><span class="p">)</span> <span class="o">...</span> <span class="n">ok</span>
+
+<span class="o">----------------------------------------------------------------------</span>
+<span class="n">Ran</span> <span class="mf">26</span> <span class="n">tests</span> <span class="ow">in</span> <span class="mf">2.808</span><span class="n">s</span>
+
+<span class="n">OK</span>
+</pre></div>
+</blockquote>
+</li>
+<li><p class="first">Usabilidad</p>
+<blockquote>
+<ul class="simple">
+<li>Pruebas con usuarios</li>
+<li>Análisis cuantitativo</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+  </section>
+
+<section>
+<hgroup>
+    <h1>
+Implantacion    </h1>
+</hgroup>
+<ul>
+<li><p class="first">En windows</p>
+<blockquote>
+<ul class="simple">
+<li>py2exe: genera un directorio <em>stand-alone</em></li>
+<li>NSIS: genera un instalador</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">En linux:</p>
+<blockquote>
+<ul class="simple">
+<li>setuptools</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+  </section>
+
+<section>
+<hgroup>
+    <h1>
+Conclusiones    </h1>
+</hgroup>
+<ul>
+<li><p class="first">Objetivos satisfechos:</p>
+</li>
+<li><p class="first">Gráficos 3D: característica sobresaliente</p>
+</li>
+<li><p class="first">Se mejoró de usabilidad</p>
+</li>
+<li><p class="first">Impacto:</p>
+<blockquote>
+<ul class="simple">
+<li>Se utiliza para práctica en Termodinámica (UNC)</li>
+<li>Poster en RITEQ</li>
+<li>Grandes posibilidades comerciales</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+  </section>
+
+<section>
+<hgroup>
+    <h1>
+Muchas gracias    </h1>
+</hgroup>
+<blockquote>
+<ul class="simple">
+<li>A mi familia y a Nati.</li>
+<li>a todos los que de una u otra manera me ayudaron a llegar hasta aquí</li>
+</ul>
+<p>Y especialmente</p>
+<blockquote>
+<ul class="simple">
+<li>Al pueblo argentino, por la universidad pública que le pertenece.</li>
+</ul>
+</blockquote>
+</blockquote>
+  </section>
+</div>
+
+
+        <script src="ui/jquery-1.4.2.min.js"></script>
+        <script src="ui/htmlSlides.js"></script>
+        </body>
+</html>

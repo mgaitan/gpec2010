@@ -1,35 +1,41 @@
-********************************************
-Global Phase Equilibrium Calculations v.2010
-********************************************
+************************************************************
+Proyecto Integrador de Ingeniería en Computación
+************************************************************
 
-.. image::  ../unc3-b.jpg
+.. image::  img/unc3-b.jpg
    :align: right
+   :width: 40 % 
 
-| Proyecto Integrador de Ingeniería en Computación
-| 
-| Facultad de Ciencias Exáctas Físicas y Naturales
+| *GPEC 2010*
 |
 | Martín Gaitán 
+| 
+| FCEFyN - UNC
+| 12 de mayo de 2011
+|
+|
 
-Director: 
 
-    Mg. Gustavo Wolfmann
+- Director: 
 
-Codirector: 
+   * Mg. Gustavo Wolfmann
 
-    Dr. Martín Cismondi Duarte
+- Codirector: 
+
+   * Dr. Martín Cismondi Duarte
  
 
 Introducción
 ************
 
+.. class:: incremental
 
    - Software GPEC (2005): tésis doctoral del Dr. Cismondi
         
 
-        *Un software para la obtención de curvas
-        de **equilibro termodinámico de fase global para sistemas binarios**, 
-        que se calculan mediante ecuaciones de estado.*
+        Un software para la obtención de curvas
+        de equilibro termodinámico de fase global para sistemas binarios, 
+        que se calculan mediante ecuaciones de estado.
    
 
    - Situación: 
@@ -43,19 +49,23 @@ Introducción
 Motivación
 **********
 
-- Software muy utilizado en el ambiente científico-académico
+.. class:: incremental
 
-- No se conoce otro software con prestaciones equivalentes
+    - Actualmente
 
-- Gran utilidad en la industria
+        - Software muy utilizado en el ambiente científico-académico
 
-- Pero... 
+        - No se conoce otro software con prestaciones equivalentes
 
-    - Interfaz compleja
-    - No se basa en bibliotecas
-    - Lenguaje obsoleto
-    - Sólo funciona en Windows
-    - Sólo gráficos 2D. 
+        - Gran utilidad en la industria
+
+    - Pero... 
+
+        - Interfaz compleja
+        - No se basa en bibliotecas
+        - Lenguaje obsoleto
+        - Sólo funciona en Windows
+        - Sólo gráficos 2D. 
 
 Objetivos
 *********
@@ -78,25 +88,24 @@ Objetivos
 Breve marco Teórico 
 ********************
 
+
+.. image:: ../images/Phase-diag_es.png
+   :align: right 
+   :width: 50%
+
 - Diagrama de fase
 
     Gráfico utilizado para mostrar las condiciones en las que
     distintas fases termodinámicas pueden ocurrir en equilibrio.
 
-    .. figure:: ../images/Phase-diag_es.png
-       :align: right 
-       :width: 50%
-
-       Ejemplo: Diagrama PT para sustancias pura o composición constante (Agua)
-
-- En **Sistemas binarios**  (2 componentes)
-
-    .. figure:: ../images/ejTipo1.png
-       :align: right 
-       :width: 50%
+   
+.. image:: ../images/ejTipo1.png
+      :align: right 
+      :width: 50%
     
-       Diagrama PTx
-
+    
+- En **Sistemas binarios**  (2 componentes)
+   
     - La **composición** (y la **densidad**) se vuelven una variable => espacio 
 
 Breve marco Teórico (cont.)
@@ -104,14 +113,13 @@ Breve marco Teórico (cont.)
 
 - La proyección ortogonal de estas curvas tridimensionales genera gráficos 2D 
 
-    .. figure:: images/ejemploTx.png
+    .. image:: ../images/ejemploTx.png
        :width: 50%
        :align: right 
 
-       Un diagrama T-x para un sistema binario, mostrando la línea crítica y 
-       otras informaciones. 
-
 - Modelo matemático: Ecuaciones de estado que relaciones funciones de estado 
+
+    - Todo parte de las famosa *Ecuacíón de Van der Wals*
 
 - También se realizan "cortes" fijando una variable (isobaras, isotermas, isopletas)
 
@@ -141,7 +149,7 @@ Relevamiento de la versión preexistente
 ****************************************
 
 .. figure:: ../images/visual_gpec1.png
-   :width: 80%
+   :width: 60%
    :align: center 
 
 - Interfaz confusa: Demasiadas opciones simultáneas
@@ -172,83 +180,92 @@ Metodología
 
 Tecnologías empleadas
 *********************
+.. class:: incremental 
 
-- Lenguaje: Python
-    
+   - Lenguaje: Python
+        
 
-    .. epigraph::
+     .. epigraph::
         
         El canónico *"Python es un gran primer lenguaje"* suscitó 
         *"¡Python es un gran último lenguaje!"*
-
+ 
         -- Noah Spurrier
 
-    - Simple, potente y elegante 
-    - Multiplataforma
-    - Contaba con experiencia 
-    
-- Graficación: Matplotlib
+     - Simple, potente y elegante 
+     - Multiplataforma
+     - Contaba con experiencia 
+        
+   - Graficación: Matplotlib
 
-    - Graficos de alta calidad 2D y 3D
-    - Integración con toolkits gráficos
-    - Exportación a multiples formatos (mapa de bits y vectoriales)
-    - Desarrollo muy activo 
+       - Graficos de alta calidad 2D y 3D
+       - Integración con toolkits gráficos
+       - Exportación a multiples formatos (mapa de bits y vectoriales)
+       - Desarrollo muy activo 
 
-- GUI: WxPython
-    
-    - Uso nativo de las APIs gráficas en cada entorno
-    - *Advanced User Interface*
+   - GUI: WxPython
+
+     - Uso nativo de las APIs gráficas en cada entorno 
+     - *Advanced User Interface*
 
 Arquitectura
 **************
 
 - Modelo conceptual
 
-    .. figure:: images/workflow.png
-       :width: 70%
+.. image:: ../images/workflow.png
+   :width: 70%
+   :align: center 
 
 Componentes
 ***********
 
 .. figure:: ../images/arquitectura.png
    :align: center 
-   :width: 70%
+   :width: 60%
 
 
 Patrón de comunicación
 **********************
+   
+.. figure:: ../images/pubsub_concept.png
+   :width: 60%
+   :align: center 
 
-- Publisher/Subscriber
+   Patrón Publisher/Subscriber
 
-    
-    .. image:: ../images/pubsub_concept.png
-       :width: 60%
-       :align: center 
+- Aplicación modular desacoplada
+- Permite la extensibilidad  
+- Implementación simple
 
-   - Aplicación modular desacoplada
-   - Implementación simple
-   - Permite la extensibilidad  
-    
+.. code-block:: python 
+
+    #suscribe
+    pub.subscribe(self.OnAppendLog, 'log')  
+    #envia
+    pub.sendMessage('log', mensaje)
+
 
 API
 ****
 
-.. figure:: ../images/parser.png
-   :width: 30%
+.. image:: ../images/parser.png
+   :width: 50%
+   :align: right 
 
-   Topología de la información extractada
+.. class:: incremental
 
-- Ausencia de documentación 
+    - Escasa documentación del formato de los archivos
 
-    - Arduo trabajo ingeniería inversa
+      - Arduo trabajo ingeniería inversa
 
-- Implementada como una clase independiente 
-    
-    - Permite reutilizar el backend en otro contexto (¿web?)
+    - Implementada como una clase independiente 
+        
+      - Permite reutilizar el backend en otro contexto (¿web?)
 
-- Usa wine sobre plataformas no windows :(
+    - Usa wine sobre plataformas no Windows :(
 
-    - Pero es mejorable: compilar nativamente,  f2py, etc. 
+      - Pero es mejorable: compilar nativamente,  *f2py*, etc. 
 
 
 Implementacion
@@ -262,17 +279,18 @@ Verificacion
 
 - Pruebas unitarias (test automáticos)
 
-    - Principalmente sobre la API::
+    - Principalmente sobre la API
 
-    [...]
-    test_write_conparin_2 (__main__.TestApiManager) ... ok
-    test_write_conparin_3 (__main__.TestApiManager) ... ok
-    test_write_gpecin (__main__.TestApiManager) ... ok
+    .. code-block:: python
 
-    ----------------------------------------------------------------------
-    Ran 26 tests in 2.808s
+        [...]
+        test_write_conparin_3 (__main__.TestApiManager) ... ok
+        test_write_gpecin (__main__.TestApiManager) ... ok
 
-    OK
+        ----------------------------------------------------------------------
+        Ran 26 tests in 2.808s
+
+        OK
 
 
 - Usabilidad
