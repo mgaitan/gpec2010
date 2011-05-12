@@ -61,8 +61,8 @@ Introducción    </h1>
 <ul class="incremental">
 <li><p class="first">Software GPEC (2005), tesis doctoral del Dr. Cismondi</p>
 <blockquote>
-<p>Un software para la obtención de curvas
-de equilibro termodinámico de fase global para sistemas binarios,
+<p>Software para la obtención de curvas
+de equilibro termodinámico de fase global para sistemas binarios
 que se calculan mediante ecuaciones de estado.</p>
 </blockquote>
 </li>
@@ -100,7 +100,7 @@ Motivación    </h1>
 <li>No se basa en bibliotecas</li>
 <li>Lenguaje de desarrollo obsoleto</li>
 <li>Sólo funciona en Windows</li>
-<li>Sólo gráficos 2D.</li>
+<li>Sólo gráficos 2D</li>
 </ul>
 </blockquote>
 </li>
@@ -120,13 +120,12 @@ hasta el momento, reutilizando el backend preexistente.</p>
 </li>
 <li><p class="first">En particular</p>
 <ul>
-<li><dl class="first docutils">
-<dt>Reimplementar el frontend sin afectar el backend</dt>
-<dd><ul class="first last simple">
+<li><p class="first">Reimplementar el frontend sin afectar el backend</p>
+<blockquote>
+<ul class="simple">
 <li>Implica respetar la interfaz de comunicación</li>
 </ul>
-</dd>
-</dl>
+</blockquote>
 </li>
 <li><p class="first">Gráficos: 2D y 3D, calidad, exportación, comparación, superposición</p>
 </li>
@@ -187,25 +186,7 @@ Breve marco Teórico (continuación)    </h1>
 </ul>
 </blockquote>
 </li>
-<li><p class="first">Distintos comportamientos segón los compuestos (todos calculables por GPEC)</p>
-</li>
-</ul>
-  </section>
-
-<section>
-<hgroup>
-    <h1>
-Contexto de trabajo    </h1>
-</hgroup>
-<ul>
-<li><p class="first">Trabajo interdisciplinario</p>
-<blockquote>
-<blockquote class="epigraph">
-<p>La computación no trata sobre las computadoras más de
-lo que la astronomía trata sobre los telescopios</p>
-<p class="attribution">&mdash;Edsger Dijkstra</p>
-</blockquote>
-</blockquote>
+<li><p class="first">Distintos comportamientos según el sistema (todos calculables por GPEC)</p>
 </li>
 </ul>
   </section>
@@ -242,7 +223,7 @@ Relevamiento de la versión preexistente    </h1>
 Metodología    </h1>
 </hgroup>
 <ul>
-<li><p class="first">Marco conceptual: Agile Manifiesto</p>
+<li><p class="first">Marco conceptual: <a class="reference external" href="http://agilemanifesto.org">Manifiesto Ágil</a></p>
 <blockquote>
 <ul class="simple">
 <li>Individuos e interacciones sobre procesos y herramientas</li>
@@ -261,7 +242,7 @@ Metodología    </h1>
 <ul class="simple">
 <li>Funcionalidades no previstas</li>
 <li>Falta de conocimiento en la materia</li>
-<li>Mayor rapidez</li>
+<li>Mayor rapidez de desarrollo</li>
 </ul>
 </li>
 </ul>
@@ -275,14 +256,6 @@ Tecnologías empleadas    </h1>
 <ul class="incremental">
 <li><p class="first">Lenguaje: Python</p>
 <blockquote class="epigraph">
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field"><th class="field-name">class:</th><td class="field-body">right</td>
-</tr>
-</tbody>
-</table>
 <p>El canónico <em>&quot;Python es un gran primer lenguaje&quot;</em> suscitó
 <em>&quot;¡Python es un gran último lenguaje!&quot;</em></p>
 <p class="attribution">&mdash;Noah Spurrier</p>
@@ -324,7 +297,7 @@ Tecnologías empleadas (continuación)    </h1>
 <ul class="simple">
 <li>Software Libre de calidad probada como decisión técnica</li>
 <li>Licencias <em>amigables</em> con la comercialización</li>
-<li>Trabajo resultante liberado como software libre</li>
+<li>Trabajo resultante liberado como Software Libre</li>
 </ul>
   </section>
 
@@ -375,7 +348,7 @@ API    </h1>
 <li>Permite reutilizar el backend en otro contexto (Ejemplo: web)</li>
 </ul>
 </li>
-<li>Usa <tt class="docutils literal">Wine</tt> sobre plataformas no Windows<ul>
+<li>Usa Wine sobre plataformas no Windows<ul>
 <li>Pero es mejorable: generar binarios nativos, <em>f2py</em>, etc.</li>
 </ul>
 </li>
@@ -454,7 +427,7 @@ Verificación    </h1>
 <span class="n">test_write_gpecin</span> <span class="p">(</span><span class="n">__main__</span><span class="o">.</span><span class="n">TestApiManager</span><span class="p">)</span> <span class="o">...</span> <span class="n">ok</span>
 
 <span class="o">----------------------------------------------------------------------</span>
-<span class="n">Ran</span> <span class="mi">26</span> <span class="n">tests</span> <span class="ow">in</span> <span class="mf">2.808</span><span class="n">s</span>
+<span class="n">Ran</span> <span class="mf">26</span> <span class="n">tests</span> <span class="ow">in</span> <span class="mf">2.808</span><span class="n">s</span>
 
 <span class="n">OK</span>
 </pre></div>

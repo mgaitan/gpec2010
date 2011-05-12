@@ -32,8 +32,8 @@ Introducción
    - Software GPEC (2005), tesis doctoral del Dr. Cismondi
         
 
-        Un software para la obtención de curvas
-        de equilibro termodinámico de fase global para sistemas binarios, 
+        Software para la obtención de curvas
+        de equilibro termodinámico de fase global para sistemas binarios 
         que se calculan mediante ecuaciones de estado.
    
 
@@ -79,7 +79,9 @@ Objetivos
   - En particular
 
     - Reimplementar el frontend sin afectar el backend
+
         - Implica respetar la interfaz de comunicación 
+
     - Gráficos: 2D y 3D, calidad, exportación, comparación, superposición
     - Multiplataforma
     - Simplificar la interfaz 
@@ -122,20 +124,7 @@ Breve marco Teórico (continuación)
 
     - Todo parte de la famosa *Ecuacíón de Van der Waals*
 
-- Distintos comportamientos segón los compuestos (todos calculables por GPEC)
-
-
-Contexto de trabajo
-********************
-
-- Trabajo interdisciplinario 
-
-    .. epigraph::
-
-        La computación no trata sobre las computadoras más de 
-        lo que la astronomía trata sobre los telescopios
-
-        -- Edsger Dijkstra
+- Distintos comportamientos según el sistema (todos calculables por GPEC)
 
 
 Relevamiento de la versión preexistente
@@ -158,7 +147,7 @@ Relevamiento de la versión preexistente
 Metodología
 **************
                             
-- Marco conceptual: Agile Manifiesto
+- Marco conceptual: `Manifiesto Ágil`_
 
      - Individuos e interacciones sobre procesos y herramientas
      - Software funcionando sobre documentación extensiva
@@ -175,8 +164,10 @@ Metodología
 
   - Funcionalidades no previstas
   - Falta de conocimiento en la materia
-  - Mayor rapidez
+  - Mayor rapidez de desarrollo
   
+
+.. _`Manifiesto Ágil`: http://agilemanifesto.org 
 
 Tecnologías empleadas
 *********************
@@ -185,7 +176,6 @@ Tecnologías empleadas
    - Lenguaje: Python
      
      .. epigraph::
-        :class: right
         
         El canónico *"Python es un gran primer lenguaje"* suscitó 
         *"¡Python es un gran último lenguaje!"*
@@ -221,7 +211,7 @@ Tecnologías empleadas (continuación)
 
 - Licencias *amigables* con la comercialización
 
-- Trabajo resultante liberado como software libre
+- Trabajo resultante liberado como Software Libre
 
 Arquitectura
 *************
@@ -272,7 +262,7 @@ API
         
       - Permite reutilizar el backend en otro contexto (Ejemplo: web)
 
-    - Usa ``Wine`` sobre plataformas no Windows
+    - Usa Wine sobre plataformas no Windows
 
       - Pero es mejorable: generar binarios nativos, *f2py*, etc. 
 
