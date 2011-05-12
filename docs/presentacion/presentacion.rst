@@ -184,14 +184,14 @@ Tecnologías empleadas
 
      - Simple, potente y elegante 
      - Multiplataforma
-     - Ampliamente utilizado en contextos análogos
+     - Exitósamente utilizado en contextos similares
         
    - Graficación: Matplotlib
 
-       - Graficos de alta calidad 2D y 3D
-       - Integración con toolkits gráficos
-       - Exportación a multiples formatos (mapa de bits y vectoriales)
-       - Desarrollo muy activo 
+     - Graficos de alta calidad 2D y 3D
+     - Integración con toolkits gráficos
+     - Exportación a multiples formatos (mapa de bits y vectoriales)
+     - Desarrollo muy activo 
 
    - GUI: WxPython
 
@@ -236,12 +236,12 @@ Patrón de comunicación interna
 - Permite la extensibilidad  
 - Implementación simple
 
-.. code-block:: python 
+  .. code-block:: python 
 
-    # suscripción
-    pub.subscribe(self.OnAppendLog, 'log')  
-    # envio de un mensaje
-    pub.sendMessage('log', mensaje)
+     # suscripción
+     pub.subscribe(self.OnAppendLog, 'log')  
+     # envío de un mensaje
+     pub.sendMessage('log', mensaje)
 
 
 API
@@ -284,27 +284,38 @@ Gráficos
 
 Base de datos
 *************
+.. class:: incremental
 
-- Diseño muy simplificado
-- Migración de datos a sqlite: 
+    - Mínimos requerimientos: Sqlite
+    - Se migraron los datos de la base antigua 
+    - Diseño muy simplificado
 
-    - soporte 
+    .. figure:: img/er-database.png
+       :align: center
+       :width: 65%
 
-.. image:: img/er-database.png
-   :align: center
-   :width: 65%
-
+       Diagrama Entidad - Relación
+ 
 Interfaz de usuario
 *******************
 
-- Se le prestó mucha atención
-- Basada en *AUI* de wxPython
-- Criterio: *"convención sobre configuración"*
-- Maximización de espacio de trabajo
+.. epigraph::
+
+   Una interfaz está bien diseñada cuando el programa se comporta exáctamente
+   como el usuario piensa que lo hará 
+
+   -- Joel Spolsky
+
 
 .. image:: img/gui1.png
-   :align: center
-   :width: 50% 
+   :align: right
+   :width: 65%
+
+- Se le prestó mucha atención
+- Basada en *AUI* de wxPython
+- Criterio: convención sobre configuración
+- Objetivo: interfaz simple e intuitiva
+ 
 
 
 Verificación
@@ -355,12 +366,13 @@ Huevo de pascua
 
 - De Wikipedia_ :
 
-    (...) los huevos de pascua son mensajes, gráficos, 
+    (...) [En computación] los huevos de pascua son mensajes, gráficos, 
     efectos de sonido o cambios inusuales en el comportamiento 
     de los programas, que se producen después de introducir 
     ciertos comandos no documentados clics con el ratón, 
     o combinaciones de teclas.
 
+    
 
 .. _Wikipedia : http://es.wikipedia.org/wiki/Huevo_de_pascua_%28virtual%29
 
@@ -371,7 +383,7 @@ Conclusiones
 
     - Objetivos satisfechos: cliente conforme
     - Prestaciones de los gráficos: característica sobresaliente
-    - Se mejoró la usabilidad
+    - Se mejoró considerablemente la usabilidad
 
     - Impacto: 
 

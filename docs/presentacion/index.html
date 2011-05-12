@@ -265,18 +265,16 @@ Tecnologías empleadas    </h1>
 <ul class="simple">
 <li>Simple, potente y elegante</li>
 <li>Multiplataforma</li>
-<li>Ampliamente utilizado en contextos análogos</li>
+<li>Exitósamente utilizado en contextos similares</li>
 </ul>
 </li>
 <li><p class="first">Graficación: Matplotlib</p>
-<blockquote>
 <ul class="simple">
 <li>Graficos de alta calidad 2D y 3D</li>
 <li>Integración con toolkits gráficos</li>
 <li>Exportación a multiples formatos (mapa de bits y vectoriales)</li>
 <li>Desarrollo muy activo</li>
 </ul>
-</blockquote>
 </li>
 <li><p class="first">GUI: WxPython</p>
 <ul class="simple">
@@ -323,16 +321,19 @@ Patrón de comunicación interna    </h1>
 <img alt="img/pubsub_concept.png" src="img/pubsub_concept.png" style="width: 50%;" />
 <p class="caption">Patrón Publisher/Subscriber</p>
 </div>
-<ul class="simple">
-<li>Aplicación modular desacoplada</li>
-<li>Permite la extensibilidad</li>
-<li>Implementación simple</li>
-</ul>
+<ul>
+<li><p class="first">Aplicación modular desacoplada</p>
+</li>
+<li><p class="first">Permite la extensibilidad</p>
+</li>
+<li><p class="first">Implementación simple</p>
 <div class="highlight"><pre><span class="c"># suscripción</span>
 <span class="n">pub</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OnAppendLog</span><span class="p">,</span> <span class="s">&#39;log&#39;</span><span class="p">)</span>
-<span class="c"># envio de un mensaje</span>
+<span class="c"># envío de un mensaje</span>
 <span class="n">pub</span><span class="o">.</span><span class="n">sendMessage</span><span class="p">(</span><span class="s">&#39;log&#39;</span><span class="p">,</span> <span class="n">mensaje</span><span class="p">)</span>
 </pre></div>
+</li>
+</ul>
   </section>
 
 <section>
@@ -386,18 +387,15 @@ Gráficos    </h1>
     <h1>
 Base de datos    </h1>
 </hgroup>
-<ul>
-<li><p class="first">Diseño muy simplificado</p>
-</li>
-<li><p class="first">Migración de datos a sqlite:</p>
-<blockquote>
-<ul class="simple">
-<li>soporte</li>
+<ul class="incremental simple">
+<li>Mínimos requerimientos: Sqlite</li>
+<li>Se migraron los datos de la base antigua</li>
+<li>Diseño muy simplificado</li>
 </ul>
-</blockquote>
-</li>
-</ul>
-<img alt="img/er-database.png" class="align-center" src="img/er-database.png" style="width: 65%;" />
+<div class="incremental figure align-center">
+<img alt="img/er-database.png" src="img/er-database.png" style="width: 65%;" />
+<p class="caption">Diagrama Entidad - Relación</p>
+</div>
   </section>
 
 <section>
@@ -405,13 +403,18 @@ Base de datos    </h1>
     <h1>
 Interfaz de usuario    </h1>
 </hgroup>
+<blockquote class="epigraph">
+<p>Una interfaz está bien diseñada cuando el programa se comporta exáctamente
+como el usuario piensa que lo hará</p>
+<p class="attribution">&mdash;Joel Spolsky</p>
+</blockquote>
+<img alt="img/gui1.png" class="align-right" src="img/gui1.png" style="width: 65%;" />
 <ul class="simple">
 <li>Se le prestó mucha atención</li>
 <li>Basada en <em>AUI</em> de wxPython</li>
-<li>Criterio: <em>&quot;convención sobre configuración&quot;</em></li>
-<li>Maximización de espacio de trabajo</li>
+<li>Criterio: convención sobre configuración</li>
+<li>Objetivo: interfaz simple e intuitiva</li>
 </ul>
-<img alt="img/gui1.png" class="align-center" src="img/gui1.png" style="width: 50%;" />
   </section>
 
 <section>
@@ -430,7 +433,7 @@ Verificación    </h1>
 <span class="n">test_write_gpecin</span> <span class="p">(</span><span class="n">__main__</span><span class="o">.</span><span class="n">TestApiManager</span><span class="p">)</span> <span class="o">...</span> <span class="n">ok</span>
 
 <span class="o">----------------------------------------------------------------------</span>
-<span class="n">Ran</span> <span class="mi">26</span> <span class="n">tests</span> <span class="ow">in</span> <span class="mf">2.808</span><span class="n">s</span>
+<span class="n">Ran</span> <span class="mf">26</span> <span class="n">tests</span> <span class="ow">in</span> <span class="mf">2.808</span><span class="n">s</span>
 
 <span class="n">OK</span>
 </pre></div>
@@ -489,7 +492,7 @@ Huevo de pascua    </h1>
 <ul>
 <li><p class="first">De <a class="reference external" href="http://es.wikipedia.org/wiki/Huevo_de_pascua_%28virtual%29">Wikipedia</a> :</p>
 <blockquote>
-<p>(...) los huevos de pascua son mensajes, gráficos,
+<p>(...) [En computación] los huevos de pascua son mensajes, gráficos,
 efectos de sonido o cambios inusuales en el comportamiento
 de los programas, que se producen después de introducir
 ciertos comandos no documentados clics con el ratón,
@@ -509,7 +512,7 @@ Conclusiones    </h1>
 </li>
 <li><p class="first">Prestaciones de los gráficos: característica sobresaliente</p>
 </li>
-<li><p class="first">Se mejoró la usabilidad</p>
+<li><p class="first">Se mejoró considerablemente la usabilidad</p>
 </li>
 <li><p class="first">Impacto:</p>
 <blockquote>
