@@ -27,14 +27,13 @@
 Proyecto Integrador de Ingeniería en Computación    </h1>
 </hgroup>
 <img alt="img/unc3-b.jpg" class="align-right" src="img/unc3-b.jpg" style="width: 40%;" />
+<p><strong>Software para graficación de diagramas termodinámicos</strong></p>
 <div class="line-block">
-<div class="line"><em>GPEC 2010</em></div>
 <div class="line"><br /></div>
 <div class="line">Martín Gaitán</div>
 <div class="line"><br /></div>
 <div class="line">FCEFyN - UNC</div>
 <div class="line">12 de mayo de 2011</div>
-<div class="line"><br /></div>
 <div class="line"><br /></div>
 </div>
 <ul>
@@ -60,7 +59,7 @@ Proyecto Integrador de Ingeniería en Computación    </h1>
 Introducción    </h1>
 </hgroup>
 <ul class="incremental">
-<li><p class="first">Software GPEC (2005): tésis doctoral del Dr. Cismondi</p>
+<li><p class="first">Software GPEC (2005), tesis doctoral del Dr. Cismondi</p>
 <blockquote>
 <p>Un software para la obtención de curvas
 de equilibro termodinámico de fase global para sistemas binarios,
@@ -72,7 +71,7 @@ que se calculan mediante ecuaciones de estado.</p>
 <ul class="simple">
 <li><em>Backend</em> (métodos númericos) (Fortran)</li>
 <li><em>Frontend</em> (UI + graficación) (Visual Basic)</li>
-<li>Comunicación mediante archivos</li>
+<li>Comunicación mediante archivos de texto</li>
 </ul>
 </blockquote>
 </li>
@@ -90,7 +89,7 @@ Motivación    </h1>
 <ul class="simple">
 <li>Software muy utilizado en el ambiente científico-académico</li>
 <li>No se conoce otro software con prestaciones equivalentes</li>
-<li>Gran utilidad en la industria</li>
+<li>Gran utilidad en la industria: hidrocarburos, alimentación, fluídos supercríticos</li>
 </ul>
 </blockquote>
 </li>
@@ -99,7 +98,7 @@ Motivación    </h1>
 <ul class="simple">
 <li>Interfaz compleja</li>
 <li>No se basa en bibliotecas</li>
-<li>Lenguaje obsoleto</li>
+<li>Lenguaje de desarrollo obsoleto</li>
 <li>Sólo funciona en Windows</li>
 <li>Sólo gráficos 2D.</li>
 </ul>
@@ -115,26 +114,29 @@ Objetivos    </h1>
 </hgroup>
 <blockquote>
 <ul>
-<li><p class="first"><strong>Alcance</strong></p>
+<li><p class="first">En general</p>
 <blockquote>
 <p>Rediseño e implementación de una nueva aplicación de
-generación de gráficos para GPEC reutilizando el backend preexistente</p>
+generación de gráficos, satisfaciendo y superando las prestaciones ofrecidas
+hasta el momento, reutilizando el backend preexistente.</p>
 </blockquote>
 </li>
-<li><p class="first">Se buscó</p>
+<li><p class="first">En particular</p>
 <blockquote>
 <ul>
 <li><dl class="first docutils">
-<dt>Reimplementar el frontend sin afectar el backend. (&quot;caja negra&quot;)</dt>
+<dt>Reimplementar el frontend sin afectar el backend</dt>
 <dd><ul class="first last simple">
 <li>Implica respetar la interfaz de comunicación</li>
 </ul>
 </dd>
 </dl>
 </li>
-<li><p class="first">Equiparar y mejorar las funcionalidades</p>
+<li><p class="first">Gráficos: 2D y 3D, calidad, exportación, comparación, superposición</p>
 </li>
 <li><p class="first">Multiplataforma</p>
+</li>
+<li><p class="first">Simplificar la interfaz</p>
 </li>
 <li><p class="first">Mejorar la usabilidad</p>
 </li>
@@ -164,7 +166,7 @@ distintas fases termodinámicas pueden ocurrir en equilibrio.</p>
 <li><p class="first">En <strong>Sistemas binarios</strong>  (2 componentes)</p>
 <blockquote>
 <ul class="simple">
-<li>La <strong>composición</strong> (y la <strong>densidad</strong>) se vuelven una variable =&gt; espacio</li>
+<li>La <strong>composición</strong> (y la <strong>densidad</strong>) se vuelven una variable =&gt; R³</li>
 </ul>
 </blockquote>
 </li>
@@ -174,7 +176,7 @@ distintas fases termodinámicas pueden ocurrir en equilibrio.</p>
 <section>
 <hgroup>
     <h1>
-Breve marco Teórico (cont.)    </h1>
+Breve marco Teórico (continuación)    </h1>
 </hgroup>
 <ul>
 <li><p class="first">La proyección ortogonal de estas curvas tridimensionales genera gráficos 2D</p>
@@ -182,33 +184,36 @@ Breve marco Teórico (cont.)    </h1>
 <img alt="../images/ejemploTx.png" class="align-right" src="../images/ejemploTx.png" style="width: 50%;" />
 </blockquote>
 </li>
+<li><p class="first">También se realizan &quot;cortes&quot; fijando una variable (isobaras, isotermas, isopletas)</p>
+</li>
 <li><p class="first">Modelo matemático: Ecuaciones de estado que relaciones funciones de estado</p>
 <blockquote>
 <ul class="simple">
-<li>Todo parte de las famosa <em>Ecuacíón de Van der Wals</em></li>
+<li>Todo parte de la famosa <em>Ecuacíón de Van der Waals</em></li>
 </ul>
 </blockquote>
 </li>
-<li><p class="first">También se realizan &quot;cortes&quot; fijando una variable (isobaras, isotermas, isopletas)</p>
-</li>
-<li><p class="first">Distintos comportamientos segun los compuestos (todos calculables por GPEC</p>
+<li><p class="first">Distintos comportamientos segón los compuestos (todos calculables por GPEC)</p>
 </li>
 </ul>
-<!-- Contexto de trabajo
-********************
+  </section>
 
-- Trabajo interdisciplinario
-
-    .. epigraph::
-
-        La computación no trata sobre las computadoras más de
-        lo que la astronomía trata sobre los telescopios
-
-        - - Edsger Dijkstra
-
-- Basado en software libre
-
-- Software Libre -->
+<section>
+<hgroup>
+    <h1>
+Contexto de trabajo    </h1>
+</hgroup>
+<ul>
+<li><p class="first">Trabajo interdisciplinario</p>
+<blockquote>
+<blockquote class="epigraph">
+<p>La computación no trata sobre las computadoras más de
+lo que la astronomía trata sobre los telescopios</p>
+<p class="attribution">&mdash;Edsger Dijkstra</p>
+</blockquote>
+</blockquote>
+</li>
+</ul>
   </section>
 
 <section>
@@ -258,6 +263,13 @@ Metodología    </h1>
 <img alt="../images/desarrollo_evolutivo.png" class="align-center" src="../images/desarrollo_evolutivo.png" style="width: 70%;" />
 </blockquote>
 </li>
+<li><p class="first">Razones:</p>
+<ul class="simple">
+<li>Funcionalidades no previstas</li>
+<li>Falta de conocimiento en la materia</li>
+<li>Mayor rapidez</li>
+</ul>
+</li>
 </ul>
   </section>
 
@@ -269,6 +281,14 @@ Tecnologías empleadas    </h1>
 <ul class="incremental">
 <li><p class="first">Lenguaje: Python</p>
 <blockquote class="epigraph">
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">class:</th><td class="field-body">right</td>
+</tr>
+</tbody>
+</table>
 <p>El canónico <em>&quot;Python es un gran primer lenguaje&quot;</em> suscitó
 <em>&quot;¡Python es un gran último lenguaje!&quot;</em></p>
 <p class="attribution">&mdash;Noah Spurrier</p>
@@ -276,7 +296,7 @@ Tecnologías empleadas    </h1>
 <ul class="simple">
 <li>Simple, potente y elegante</li>
 <li>Multiplataforma</li>
-<li>Contaba con experiencia</li>
+<li>Ampliamente utilizado en contextos análogos</li>
 </ul>
 </li>
 <li><p class="first">Graficación: Matplotlib</p>
@@ -301,6 +321,22 @@ Tecnologías empleadas    </h1>
 <section>
 <hgroup>
     <h1>
+Tecnologías empleadas (continuación)    </h1>
+</hgroup>
+<blockquote class="epigraph">
+<p>Si he visto más lejos es por haberme parado sobre hombros de gigantes</p>
+<p>Isaac Newton</p>
+</blockquote>
+<ul class="simple">
+<li>Software Libre de calidad probada como decisión técnica</li>
+<li>Licencias <em>amigables</em> con la comercialización</li>
+<li>Trabajo resultante liberado como software libre</li>
+</ul>
+  </section>
+
+<section>
+<hgroup>
+    <h1>
 Arquitectura    </h1>
 </hgroup>
 <ul class="simple">
@@ -312,20 +348,10 @@ Arquitectura    </h1>
 <section>
 <hgroup>
     <h1>
-Componentes    </h1>
+Patrón de comunicación interna    </h1>
 </hgroup>
 <div class="figure align-center">
-<img alt="../images/arquitectura.png" src="../images/arquitectura.png" style="width: 60%;" />
-</div>
-  </section>
-
-<section>
-<hgroup>
-    <h1>
-Patrón de comunicación    </h1>
-</hgroup>
-<div class="figure align-center">
-<img alt="../images/pubsub_concept.png" src="../images/pubsub_concept.png" style="width: 60%;" />
+<img alt="../images/pubsub_concept.png" src="../images/pubsub_concept.png" style="width: 50%;" />
 <p class="caption">Patrón Publisher/Subscriber</p>
 </div>
 <ul class="simple">
@@ -333,9 +359,9 @@ Patrón de comunicación    </h1>
 <li>Permite la extensibilidad</li>
 <li>Implementación simple</li>
 </ul>
-<div class="highlight"><pre><span class="c">#suscribe</span>
+<div class="highlight"><pre><span class="c"># suscripción</span>
 <span class="n">pub</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OnAppendLog</span><span class="p">,</span> <span class="s">&#39;log&#39;</span><span class="p">)</span>
-<span class="c">#envia</span>
+<span class="c"># envio de un mensaje</span>
 <span class="n">pub</span><span class="o">.</span><span class="n">sendMessage</span><span class="p">(</span><span class="s">&#39;log&#39;</span><span class="p">,</span> <span class="n">mensaje</span><span class="p">)</span>
 </pre></div>
   </section>
@@ -351,12 +377,12 @@ API    </h1>
 <li>Arduo trabajo ingeniería inversa</li>
 </ul>
 </li>
-<li>Implementada como una clase independiente<ul>
-<li>Permite reutilizar el backend en otro contexto (¿web?)</li>
+<li>Implementada como una clase (y módulo) independiente<ul>
+<li>Permite reutilizar el backend en otro contexto (Ejemplo: web)</li>
 </ul>
 </li>
-<li>Usa wine sobre plataformas no Windows :(<ul>
-<li>Pero es mejorable: compilar nativamente,  <em>f2py</em>, etc.</li>
+<li>Usa <tt class="docutils literal">Wine</tt> sobre plataformas no Windows<ul>
+<li>Pero es mejorable: generar binarios nativos, <em>f2py</em>, etc.</li>
 </ul>
 </li>
 </ul>
@@ -365,17 +391,63 @@ API    </h1>
 <section>
 <hgroup>
     <h1>
-Implementacion    </h1>
+Gráficos    </h1>
+</hgroup>
+<ul>
+<li><p class="first">Módulo independiente</p>
+</li>
+<li><p class="first">Muchas funcionalidades provistas por Matplotlib</p>
+<blockquote>
+<ul class="simple">
+<li>integración con GUI</li>
+<li>exportación</li>
+<li>toolbox</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">POO: Herencia y sobrecarga</p>
+</li>
+</ul>
+<img alt="img/class-plots_small.png" class="align-center" src="img/class-plots_small.png" />
+  </section>
+
+<section>
+<hgroup>
+    <h1>
+Base de datos    </h1>
+</hgroup>
+<ul>
+<li><p class="first">Diseño muy simplificado</p>
+</li>
+<li><p class="first">Migración de datos a sqlite:</p>
+<blockquote>
+<ul class="simple">
+<li>soporte</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<img alt="../image/er-database.png" class="align-center" src="../image/er-database.png" style="width: 65%;" />
+  </section>
+
+<section>
+<hgroup>
+    <h1>
+Interfaz de usuario    </h1>
 </hgroup>
 <ul class="simple">
-<li>VIDEO</li>
+<li>Se le prestó mucha atención</li>
+<li>Basada en <em>AUI</em> de wxPython</li>
+<li>Criterio: <em>&quot;convención sobre configuración&quot;</em></li>
+<li>Maximización de espacio de trabajo</li>
 </ul>
+<img alt="../images/gui1.png" class="align-center" src="../images/gui1.png" style="width: 50%;" />
   </section>
 
 <section>
 <hgroup>
     <h1>
-Verificacion    </h1>
+Verificación    </h1>
 </hgroup>
 <ul>
 <li><p class="first">Pruebas unitarias (test automáticos)</p>
@@ -388,7 +460,7 @@ Verificacion    </h1>
 <span class="n">test_write_gpecin</span> <span class="p">(</span><span class="n">__main__</span><span class="o">.</span><span class="n">TestApiManager</span><span class="p">)</span> <span class="o">...</span> <span class="n">ok</span>
 
 <span class="o">----------------------------------------------------------------------</span>
-<span class="n">Ran</span> <span class="mf">26</span> <span class="n">tests</span> <span class="ow">in</span> <span class="mf">2.808</span><span class="n">s</span>
+<span class="n">Ran</span> <span class="mi">26</span> <span class="n">tests</span> <span class="ow">in</span> <span class="mf">2.808</span><span class="n">s</span>
 
 <span class="n">OK</span>
 </pre></div>
@@ -408,10 +480,10 @@ Verificacion    </h1>
 <section>
 <hgroup>
     <h1>
-Implantacion    </h1>
+Distribución    </h1>
 </hgroup>
 <ul>
-<li><p class="first">En windows</p>
+<li><p class="first">En Windows</p>
 <blockquote>
 <ul class="simple">
 <li>py2exe: genera un directorio <em>stand-alone</em></li>
@@ -419,7 +491,7 @@ Implantacion    </h1>
 </ul>
 </blockquote>
 </li>
-<li><p class="first">En linux:</p>
+<li><p class="first">En Linux</p>
 <blockquote>
 <ul class="simple">
 <li>setuptools</li>
@@ -432,21 +504,49 @@ Implantacion    </h1>
 <section>
 <hgroup>
     <h1>
-Conclusiones    </h1>
+Demostración    </h1>
+</hgroup>
+<ul class="simple">
+<li>¿Murphy está en la sala?</li>
+</ul>
+  </section>
+
+<section>
+<hgroup>
+    <h1>
+Huevo de pascua    </h1>
 </hgroup>
 <ul>
-<li><p class="first">Objetivos satisfechos:</p>
+<li><p class="first">De <a class="reference external" href="http://es.wikipedia.org/wiki/Huevo_de_pascua_%28virtual%29">Wikipedia</a> :</p>
+<blockquote>
+<p>(...) los huevos de pascua son mensajes, gráficos,
+efectos de sonido o cambios inusuales en el comportamiento
+de los programas, que se producen después de introducir
+ciertos comandos no documentados clics con el ratón,
+o combinaciones de teclas.</p>
+</blockquote>
 </li>
-<li><p class="first">Gráficos 3D: característica sobresaliente</p>
+</ul>
+  </section>
+
+<section>
+<hgroup>
+    <h1>
+Conclusiones    </h1>
+</hgroup>
+<ul class="incremental">
+<li><p class="first">Objetivos satisfechos: cliente conforme</p>
 </li>
-<li><p class="first">Se mejoró de usabilidad</p>
+<li><p class="first">Prestaciones de los gráficos: característica sobresaliente</p>
+</li>
+<li><p class="first">Se mejoró la usabilidad</p>
 </li>
 <li><p class="first">Impacto:</p>
 <blockquote>
 <ul class="simple">
 <li>Se utiliza para práctica en Termodinámica (UNC)</li>
-<li>Poster en RITEQ</li>
-<li>Grandes posibilidades comerciales</li>
+<li>Presentación en RITeQ 2010</li>
+<li>Se espera continuar el desarrollo</li>
 </ul>
 </blockquote>
 </li>
@@ -458,18 +558,17 @@ Conclusiones    </h1>
     <h1>
 Muchas gracias    </h1>
 </hgroup>
-<blockquote>
 <ul class="simple">
-<li>A mi familia y a Nati.</li>
-<li>a todos los que de una u otra manera me ayudaron a llegar hasta aquí</li>
+<li>A mi familia y a mi novia</li>
+<li>A mis directores</li>
+<li>A los demás profesores, compañeros y compañeras</li>
+<li>A las comunidades de Software Libre</li>
 </ul>
-<p>Y especialmente</p>
-<blockquote>
+<p>Y especialmente...</p>
 <ul class="simple">
-<li>Al pueblo argentino, por la universidad pública que le pertenece.</li>
+<li>Al todo el Pueblo Argentino, por la Universidad Pública que sostiene
+y debemos honrar</li>
 </ul>
-</blockquote>
-</blockquote>
   </section>
 </div>
 

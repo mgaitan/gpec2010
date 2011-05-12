@@ -6,15 +6,14 @@ Proyecto Integrador de Ingeniería en Computación
    :align: right
    :width: 40 % 
 
-| *GPEC 2010*
+**Software para graficación de diagramas termodinámicos**
+
 |
 | Martín Gaitán 
 | 
 | FCEFyN - UNC
 | 12 de mayo de 2011
 |
-|
-
 
 - Director: 
 
@@ -30,7 +29,7 @@ Introducción
 
 .. class:: incremental
 
-   - Software GPEC (2005): tésis doctoral del Dr. Cismondi
+   - Software GPEC (2005), tesis doctoral del Dr. Cismondi
         
 
         Un software para la obtención de curvas
@@ -42,7 +41,7 @@ Introducción
 
         - *Backend* (métodos númericos) (Fortran) 
         - *Frontend* (UI + graficación) (Visual Basic)
-        - Comunicación mediante archivos
+        - Comunicación mediante archivos de texto
 
 
 
@@ -57,33 +56,33 @@ Motivación
 
         - No se conoce otro software con prestaciones equivalentes
 
-        - Gran utilidad en la industria
+        - Gran utilidad en la industria: hidrocarburos, alimentación, fluídos supercríticos
 
     - Pero... 
 
         - Interfaz compleja
         - No se basa en bibliotecas
-        - Lenguaje obsoleto
+        - Lenguaje de desarrollo obsoleto
         - Sólo funciona en Windows
         - Sólo gráficos 2D. 
 
 Objetivos
 *********
 
-   - **Alcance**
+   - En general
 
-        Rediseño e implementación de una nueva aplicación de 
-        generación de gráficos para GPEC reutilizando el backend preexistente
+        Rediseño e implementación de una nueva aplicación de
+        generación de gráficos, satisfaciendo y superando las prestaciones ofrecidas 
+        hasta el momento, reutilizando el backend preexistente.
+        
+   - En particular
 
-   - Se buscó
-
-        - Reimplementar el frontend sin afectar el backend. ("caja negra")
+        - Reimplementar el frontend sin afectar el backend
             - Implica respetar la interfaz de comunicación 
-
-        - Equiparar y mejorar las funcionalidades 
+        - Gráficos: 2D y 3D, calidad, exportación, comparación, superposición
         - Multiplataforma
+        - Simplificar la interfaz 
         - Mejorar la usabilidad
-
 
 Breve marco Teórico 
 ********************
@@ -97,7 +96,6 @@ Breve marco Teórico
 
     Gráfico utilizado para mostrar las condiciones en las que
     distintas fases termodinámicas pueden ocurrir en equilibrio.
-
    
 .. image:: ../images/ejTipo1.png
       :align: right 
@@ -106,10 +104,10 @@ Breve marco Teórico
     
 - En **Sistemas binarios**  (2 componentes)
    
-    - La **composición** (y la **densidad**) se vuelven una variable => espacio 
+    - La **composición** (y la **densidad**) se vuelven una variable => R³
 
-Breve marco Teórico (cont.)
-****************************
+Breve marco Teórico (continuación)
+**********************************
 
 - La proyección ortogonal de estas curvas tridimensionales genera gráficos 2D 
 
@@ -117,33 +115,27 @@ Breve marco Teórico (cont.)
        :width: 50%
        :align: right 
 
-- Modelo matemático: Ecuaciones de estado que relaciones funciones de estado 
-
-    - Todo parte de las famosa *Ecuacíón de Van der Wals*
-
 - También se realizan "cortes" fijando una variable (isobaras, isotermas, isopletas)
 
-- Distintos comportamientos segun los compuestos (todos calculables por GPEC
+- Modelo matemático: Ecuaciones de estado que relaciones funciones de estado 
+
+    - Todo parte de la famosa *Ecuacíón de Van der Waals*
+
+- Distintos comportamientos segón los compuestos (todos calculables por GPEC)
 
 
+Contexto de trabajo
+********************
 
+- Trabajo interdisciplinario 
 
-.. 
-    Contexto de trabajo
-    ********************
+    .. epigraph::
 
-    - Trabajo interdisciplinario 
+        La computación no trata sobre las computadoras más de 
+        lo que la astronomía trata sobre los telescopios
 
-        .. epigraph::
+        -- Edsger Dijkstra
 
-            La computación no trata sobre las computadoras más de 
-            lo que la astronomía trata sobre los telescopios
-
-            -- Edsger Dijkstra
-
-    - Basado en software libre
-
-    - Software Libre
 
 Relevamiento de la versión preexistente
 ****************************************
@@ -178,14 +170,21 @@ Metodología
        :align: center 
        :width: 70% 
 
+- Razones: 
+
+  - Funcionalidades no previstas
+  - Falta de conocimiento en la materia
+  - Mayor rapidez
+  
+
 Tecnologías empleadas
 *********************
 .. class:: incremental 
 
    - Lenguaje: Python
-        
-
+     
      .. epigraph::
+        :class: right
         
         El canónico *"Python es un gran primer lenguaje"* suscitó 
         *"¡Python es un gran último lenguaje!"*
@@ -194,7 +193,7 @@ Tecnologías empleadas
 
      - Simple, potente y elegante 
      - Multiplataforma
-     - Contaba con experiencia 
+     - Ampliamente utilizado en contextos análogos
         
    - Graficación: Matplotlib
 
@@ -208,8 +207,23 @@ Tecnologías empleadas
      - Uso nativo de las APIs gráficas en cada entorno 
      - *Advanced User Interface*
 
+Tecnologías empleadas (continuación)
+************************************
+
+.. epigraph::
+
+    Si he visto más lejos es por haberme parado sobre hombros de gigantes
+    
+    Isaac Newton
+
+- Software Libre de calidad probada como decisión técnica
+
+- Licencias *amigables* con la comercialización
+
+- Trabajo resultante liberado como software libre
+
 Arquitectura
-**************
+*************
 
 - Modelo conceptual
 
@@ -217,22 +231,16 @@ Arquitectura
    :width: 70%
    :align: center 
 
-Componentes
-***********
 
-.. figure:: ../images/arquitectura.png
-   :align: center 
-   :width: 60%
-
-
-Patrón de comunicación
-**********************
+Patrón de comunicación interna
+*******************************
    
 .. figure:: ../images/pubsub_concept.png
-   :width: 60%
+   :width: 50%
    :align: center 
 
    Patrón Publisher/Subscriber
+
 
 - Aplicación modular desacoplada
 - Permite la extensibilidad  
@@ -240,9 +248,9 @@ Patrón de comunicación
 
 .. code-block:: python 
 
-    #suscribe
+    # suscripción
     pub.subscribe(self.OnAppendLog, 'log')  
-    #envia
+    # envio de un mensaje
     pub.sendMessage('log', mensaje)
 
 
@@ -259,22 +267,55 @@ API
 
       - Arduo trabajo ingeniería inversa
 
-    - Implementada como una clase independiente 
+    - Implementada como una clase (y módulo) independiente 
         
-      - Permite reutilizar el backend en otro contexto (¿web?)
+      - Permite reutilizar el backend en otro contexto (Ejemplo: web)
 
-    - Usa wine sobre plataformas no Windows :(
+    - Usa ``Wine`` sobre plataformas no Windows
 
-      - Pero es mejorable: compilar nativamente,  *f2py*, etc. 
+      - Pero es mejorable: generar binarios nativos, *f2py*, etc. 
+
+Gráficos
+********
+
+- Módulo independiente
+- Muchas funcionalidades provistas por Matplotlib
+    
+    - integración con GUI
+    - exportación
+    - toolbox
+
+- POO: Herencia y sobrecarga
+
+.. image:: img/class-plots_small.png
+   :align: center
+
+Base de datos
+*************
+
+- Diseño muy simplificado
+- Migración de datos a sqlite: 
+
+    - soporte 
+
+.. image:: ../image/er-database.png
+   :align: center
+   :width: 65%
+
+Interfaz de usuario
+*******************
+
+- Se le prestó mucha atención
+- Basada en *AUI* de wxPython
+- Criterio: *"convención sobre configuración"*
+- Maximización de espacio de trabajo
+
+.. image:: ../images/gui1.png
+   :align: center
+   :width: 50% 
 
 
-Implementacion
-**************
-
-- VIDEO
-
-
-Verificacion
+Verificación
 *************
 
 - Pruebas unitarias (test automáticos)
@@ -292,49 +333,72 @@ Verificacion
 
         OK
 
-
 - Usabilidad
     
     - Pruebas con usuarios
     - Análisis cuantitativo 
     
 
-Implantacion
+Distribución
 *************
 
-- En windows
+- En Windows
 
     - py2exe: genera un directorio *stand-alone* 
     - NSIS: genera un instalador
 
-- En linux:
+- En Linux
 
     - setuptools
 
 
+Demostración
+************
+
+- ¿Murphy está en la sala?
+
+
+Huevo de pascua 
+****************
+
+- De Wikipedia_ :
+
+    (...) los huevos de pascua son mensajes, gráficos, 
+    efectos de sonido o cambios inusuales en el comportamiento 
+    de los programas, que se producen después de introducir 
+    ciertos comandos no documentados clics con el ratón, 
+    o combinaciones de teclas.
+
+
+.. _Wikipedia : http://es.wikipedia.org/wiki/Huevo_de_pascua_%28virtual%29
 
 Conclusiones
 ************
 
-- Objetivos satisfechos: 
-- Gráficos 3D: característica sobresaliente
-- Se mejoró de usabilidad
+.. class:: incremental
 
-- Impacto: 
+    - Objetivos satisfechos: cliente conforme
+    - Prestaciones de los gráficos: característica sobresaliente
+    - Se mejoró la usabilidad
 
-    - Se utiliza para práctica en Termodinámica (UNC)
-    - Poster en RITEQ
-    - Grandes posibilidades comerciales 
+    - Impacto: 
+
+        - Se utiliza para práctica en Termodinámica (UNC)
+        - Presentación en RITeQ 2010 
+        - Se espera continuar el desarrollo
+
 
 Muchas gracias
 **************
 
- 
- - A mi familia y a Nati. 
- - a todos los que de una u otra manera me ayudaron a llegar hasta aquí
 
- Y especialmente 
+- A mi familia y a mi novia
+- A mis directores
+- A los demás profesores, compañeros y compañeras
+- A las comunidades de Software Libre
 
-    - Al pueblo argentino, por la universidad pública que le pertenece. 
+Y especialmente... 
+
+- Al todo el Pueblo Argentino, por la Universidad Pública que sostiene
+  y debemos honrar
     
-
