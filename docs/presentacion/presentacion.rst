@@ -64,25 +64,26 @@ Motivación
         - No se basa en bibliotecas
         - Lenguaje de desarrollo obsoleto
         - Sólo funciona en Windows
-        - Sólo gráficos 2D. 
+        - Sólo gráficos 2D
 
 Objetivos
 *********
+.. class:: incremental
 
-   - En general
+  - En general
 
-        Rediseño e implementación de una nueva aplicación de
-        generación de gráficos, satisfaciendo y superando las prestaciones ofrecidas 
-        hasta el momento, reutilizando el backend preexistente.
+    Rediseño e implementación de una nueva aplicación de
+    generación de gráficos, satisfaciendo y superando las prestaciones ofrecidas 
+    hasta el momento, reutilizando el backend preexistente.
         
-   - En particular
+  - En particular
 
-        - Reimplementar el frontend sin afectar el backend
-            - Implica respetar la interfaz de comunicación 
-        - Gráficos: 2D y 3D, calidad, exportación, comparación, superposición
-        - Multiplataforma
-        - Simplificar la interfaz 
-        - Mejorar la usabilidad
+    - Reimplementar el frontend sin afectar el backend
+        - Implica respetar la interfaz de comunicación 
+    - Gráficos: 2D y 3D, calidad, exportación, comparación, superposición
+    - Multiplataforma
+    - Simplificar la interfaz 
+    - Mejorar la usabilidad
 
 Breve marco Teórico 
 ********************
