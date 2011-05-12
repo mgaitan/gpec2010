@@ -147,7 +147,7 @@ hasta el momento, reutilizando el backend preexistente.</p>
     <h1>
 Breve marco Teórico    </h1>
 </hgroup>
-<img alt="../images/Phase-diag_es.png" class="align-right" src="../images/Phase-diag_es.png" style="width: 50%;" />
+<img alt="img/Phase-diag_es.png" class="align-right" src="img/Phase-diag_es.png" style="width: 50%;" />
 <ul>
 <li><p class="first">Diagrama de fase</p>
 <blockquote>
@@ -156,7 +156,7 @@ distintas fases termodinámicas pueden ocurrir en equilibrio.</p>
 </blockquote>
 </li>
 </ul>
-<img alt="../images/ejTipo1.png" class="align-right" src="../images/ejTipo1.png" style="width: 50%;" />
+<img alt="img/ejTipo1.png" class="align-right" src="img/ejTipo1.png" style="width: 50%;" />
 <ul>
 <li><p class="first">En <strong>Sistemas binarios</strong>  (2 componentes)</p>
 <blockquote>
@@ -176,7 +176,7 @@ Breve marco Teórico (continuación)    </h1>
 <ul>
 <li><p class="first">La proyección ortogonal de estas curvas tridimensionales genera gráficos 2D</p>
 <blockquote>
-<img alt="../images/ejemploTx.png" class="align-right" src="../images/ejemploTx.png" style="width: 50%;" />
+<img alt="img/ejemploTx.png" class="align-right" src="img/ejemploTx.png" style="width: 50%;" />
 </blockquote>
 </li>
 <li><p class="first">También se realizan &quot;cortes&quot; fijando una variable (isobaras, isotermas, isopletas)</p>
@@ -199,7 +199,7 @@ Breve marco Teórico (continuación)    </h1>
 Relevamiento de la versión preexistente    </h1>
 </hgroup>
 <div class="figure align-center">
-<img alt="../images/visual_gpec1.png" src="../images/visual_gpec1.png" style="width: 60%;" />
+<img alt="img/visual_gpec1.png" src="img/visual_gpec1.png" style="width: 60%;" />
 </div>
 <ul>
 <li><p class="first">Interfaz confusa: Demasiadas opciones simultáneas</p>
@@ -237,7 +237,7 @@ Metodología    </h1>
 </li>
 <li><p class="first">Desarrollo evolutivo</p>
 <blockquote>
-<img alt="../images/desarrollo_evolutivo.png" class="align-center" src="../images/desarrollo_evolutivo.png" style="width: 70%;" />
+<img alt="img/desarrollo_evolutivo.png" class="align-center" src="img/desarrollo_evolutivo.png" style="width: 70%;" />
 </blockquote>
 </li>
 <li><p class="first">Razones:</p>
@@ -311,7 +311,7 @@ Arquitectura    </h1>
 <ul class="simple">
 <li>Modelo conceptual</li>
 </ul>
-<img alt="../images/workflow.png" class="align-center" src="../images/workflow.png" style="width: 70%;" />
+<img alt="img/workflow.png" class="align-center" src="img/workflow.png" style="width: 70%;" />
   </section>
 
 <section>
@@ -320,7 +320,7 @@ Arquitectura    </h1>
 Patrón de comunicación interna    </h1>
 </hgroup>
 <div class="figure align-center">
-<img alt="../images/pubsub_concept.png" src="../images/pubsub_concept.png" style="width: 50%;" />
+<img alt="img/pubsub_concept.png" src="img/pubsub_concept.png" style="width: 50%;" />
 <p class="caption">Patrón Publisher/Subscriber</p>
 </div>
 <ul class="simple">
@@ -340,14 +340,15 @@ Patrón de comunicación interna    </h1>
     <h1>
 API    </h1>
 </hgroup>
-<img alt="../images/parser.png" class="align-right" src="../images/parser.png" style="width: 50%;" />
+<img alt="img/parser.png" class="align-right" src="img/parser.png" style="width: 50%;" />
 <ul class="incremental simple">
+<li>Implementa un algoritmo de análisis sintáctico</li>
 <li>Escasa documentación del formato de los archivos<ul>
 <li>Arduo trabajo ingeniería inversa</li>
 </ul>
 </li>
-<li>Implementada como una clase (y módulo) independiente<ul>
-<li>Permite reutilizar el backend en otro contexto (Ejemplo: web)</li>
+<li>Módulo independiente<ul>
+<li>Permite acceder al backend en otro contexto (Ejemplo: web)</li>
 </ul>
 </li>
 <li>Usa Wine sobre plataformas no Windows<ul>
@@ -396,7 +397,7 @@ Base de datos    </h1>
 </blockquote>
 </li>
 </ul>
-<img alt="../image/er-database.png" class="align-center" src="../image/er-database.png" style="width: 65%;" />
+<img alt="img/er-database.png" class="align-center" src="img/er-database.png" style="width: 65%;" />
   </section>
 
 <section>
@@ -410,7 +411,7 @@ Interfaz de usuario    </h1>
 <li>Criterio: <em>&quot;convención sobre configuración&quot;</em></li>
 <li>Maximización de espacio de trabajo</li>
 </ul>
-<img alt="../images/gui1.png" class="align-center" src="../images/gui1.png" style="width: 50%;" />
+<img alt="img/gui1.png" class="align-center" src="img/gui1.png" style="width: 50%;" />
   </section>
 
 <section>
@@ -429,7 +430,7 @@ Verificación    </h1>
 <span class="n">test_write_gpecin</span> <span class="p">(</span><span class="n">__main__</span><span class="o">.</span><span class="n">TestApiManager</span><span class="p">)</span> <span class="o">...</span> <span class="n">ok</span>
 
 <span class="o">----------------------------------------------------------------------</span>
-<span class="n">Ran</span> <span class="mf">26</span> <span class="n">tests</span> <span class="ow">in</span> <span class="mf">2.808</span><span class="n">s</span>
+<span class="n">Ran</span> <span class="mi">26</span> <span class="n">tests</span> <span class="ow">in</span> <span class="mf">2.808</span><span class="n">s</span>
 
 <span class="n">OK</span>
 </pre></div>

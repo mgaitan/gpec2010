@@ -91,7 +91,7 @@ Objetivos
 Breve marco Teórico 
 ********************
 
-.. image:: ../images/Phase-diag_es.png
+.. image:: img/Phase-diag_es.png
    :align: right 
    :width: 50%
 
@@ -100,7 +100,7 @@ Breve marco Teórico
     Gráfico utilizado para mostrar las condiciones en las que
     distintas fases termodinámicas pueden ocurrir en equilibrio.
    
-.. image:: ../images/ejTipo1.png
+.. image:: img/ejTipo1.png
       :align: right 
       :width: 50%
     
@@ -114,7 +114,7 @@ Breve marco Teórico (continuación)
 
 - La proyección ortogonal de estas curvas tridimensionales genera gráficos 2D 
 
-    .. image:: ../images/ejemploTx.png
+    .. image:: img/ejemploTx.png
        :width: 50%
        :align: right 
 
@@ -130,7 +130,7 @@ Breve marco Teórico (continuación)
 Relevamiento de la versión preexistente
 ****************************************
 
-.. figure:: ../images/visual_gpec1.png
+.. figure:: img/visual_gpec1.png
    :width: 60%
    :align: center 
 
@@ -156,7 +156,7 @@ Metodología
     
 - Desarrollo evolutivo
 
-    .. image:: ../images/desarrollo_evolutivo.png
+    .. image:: img/desarrollo_evolutivo.png
        :align: center 
        :width: 70% 
 
@@ -218,7 +218,7 @@ Arquitectura
 
 - Modelo conceptual
 
-.. image:: ../images/workflow.png
+.. image:: img/workflow.png
    :width: 70%
    :align: center 
 
@@ -226,7 +226,7 @@ Arquitectura
 Patrón de comunicación interna
 *******************************
    
-.. figure:: ../images/pubsub_concept.png
+.. figure:: img/pubsub_concept.png
    :width: 50%
    :align: center 
 
@@ -247,19 +247,21 @@ Patrón de comunicación interna
 API
 ****
 
-.. image:: ../images/parser.png
+.. image:: img/parser.png
    :width: 50%
    :align: right 
 
 .. class:: incremental
 
+    - Implementa un algoritmo de análisis sintáctico
+
     - Escasa documentación del formato de los archivos
 
       - Arduo trabajo ingeniería inversa
 
-    - Implementada como una clase (y módulo) independiente 
+    - Módulo independiente 
         
-      - Permite reutilizar el backend en otro contexto (Ejemplo: web)
+      - Permite acceder al backend en otro contexto (Ejemplo: web)
 
     - Usa Wine sobre plataformas no Windows
 
@@ -288,7 +290,7 @@ Base de datos
 
     - soporte 
 
-.. image:: ../image/er-database.png
+.. image:: img/er-database.png
    :align: center
    :width: 65%
 
@@ -300,7 +302,7 @@ Interfaz de usuario
 - Criterio: *"convención sobre configuración"*
 - Maximización de espacio de trabajo
 
-.. image:: ../images/gui1.png
+.. image:: img/gui1.png
    :align: center
    :width: 50% 
 
