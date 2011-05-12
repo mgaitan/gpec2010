@@ -78,18 +78,18 @@ Objetivos
         
   - En particular
 
-    - Reimplementar el frontend sin afectar el backend
+    - Reimplementar el *frontend* sin afectar el backend
 
         - Implica respetar la interfaz de comunicación 
 
     - Gráficos: 2D y 3D, calidad, exportación, comparación, superposición
     - Multiplataforma
+    - Modular
     - Simplificar la interfaz 
     - Mejorar la usabilidad
 
 Breve marco Teórico 
 ********************
-
 
 .. image:: ../images/Phase-diag_es.png
    :align: right 
@@ -138,7 +138,7 @@ Relevamiento de la versión preexistente
 
 - Gráficos: 
     - rutinas adhoc
-    - rasterización de pixels. 
+    - mapa de bits 
     - no se pueden exportar
 
 - Diseño de base de datos (*Ms Jet*) innecesariamente complejo 
@@ -231,7 +231,6 @@ Patrón de comunicación interna
    :align: center 
 
    Patrón Publisher/Subscriber
-
 
 - Aplicación modular desacoplada
 - Permite la extensibilidad  
@@ -381,7 +380,6 @@ Conclusiones
 
 Muchas gracias
 **************
-
 
 - A mi familia y a mi novia
 - A mis directores
