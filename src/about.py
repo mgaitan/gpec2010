@@ -18,14 +18,14 @@ class AboutBox():
 
         info = wx.AboutDialogInfo()
         info.Name = "GPEC 2010"
-        info.Version = "Beta 1"
+        info.Version = "0.1 Beta 2.1"
         info.Copyright = u"(C) 2010 Martín Cismondi & Martín Gaitán "
         info.Description = wordwrap(about_text, 350, wx.ClientDC(parent))
         info.WebSite = ("http://gpec.efn.uncor.edu", "GPEC home page")
-        info.Developers = [ "Martín Gaitán (Python frontend) ",
-                            "Martín Cismondi Duarte (Fortran backend)",]
+        info.Developers = [ u"Martín Gaitán (Python frontend) ",
+                            u"Martín Cismondi Duarte (Fortran backend)",]
 
-        info.License = wordwrap(license_text, 500, wx.ClientDC(parent))
+        info.License = wordwrap(license_text, 600, wx.ClientDC(parent))
 
         # Then we call wx.AboutBox giving it that info object
         wx.AboutBox(info)
