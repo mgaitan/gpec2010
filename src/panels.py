@@ -245,11 +245,11 @@ class SuitePlotsPanel(wx.Panel):
         case_id, case_name, system = list(message.data[0:2]) + [message.data[-1]]
 
         #3D
-        #no matter wich type of diagrams, if it's the first plot this instances 3D plot panels
+        #no matter wich type of diagrams, it's the first plot this instances 3D plot panels
 
         if not self.plot3d_instances.has_key(case_id) and PLOT_IN_3D:
             self.plot3d_instances[case_id] = []
-            for type in ['PTrho', 'PTx']:
+            for type in ['PTx', 'PTrho']:
                 panel_name = 'case_%i_%s' % (case_id, type)
                 pp3d = PlotPanel(self,  -1, type, name=panel_name, system=system)
                 self.plot3d_instances[case_id] += [pp3d]
