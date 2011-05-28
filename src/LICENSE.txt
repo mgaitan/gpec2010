@@ -1,3 +1,7 @@
+GPEC2010 is a frontend layer based upon the software GPEC by Martin Cismondi. 
+GPEC2010 (but not GPEC as itself, which is a freeware) is under the terms of 
+the next license:
+
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
