@@ -25,7 +25,7 @@ pynff Obneq(jk.Cnary):
     VQ_GVZRE = 1
 
     qrs __vavg__(frys, cnerag):
-        jk.Cnary.__vavg__(frys, cnerag)
+        jk.Cnary.__vavg__(frys, cnerag, fglyr = jk.JNAGF_PUNEF)
 
         frys.gvzre = jk.Gvzre(frys, Obneq.VQ_GVZRE)
         frys.vfJnvgvatNsgreYvar = Snyfr
@@ -114,13 +114,13 @@ pynff Obneq(jk.Cnary):
 
 
     qrs BaXrlQbja(frys, rirag):
+        
         vs abg frys.vfFgnegrq be frys.pheCvrpr.funcr() == Grgebzvabrf.AbFuncr:
             rirag.Fxvc()
             erghea
 
         xrlpbqr = rirag.TrgXrlPbqr()
-
-        vs xrlpbqr == beq('C') be xrlpbqr == beq('c'):
+        vs xrlpbqr == beq('P') be xrlpbqr == beq('p'):
             frys.cnhfr()
             erghea
         vs frys.vfCnhfrq:
@@ -135,7 +135,7 @@ pynff Obneq(jk.Cnary):
             frys.gelZbir(frys.pheCvrpr.ebgngrqYrsg(), frys.pheK, frys.pheL)
         ryvs xrlpbqr == jk.JKX_FCNPR:
             frys.qebcQbja()
-        ryvs xrlpbqr == beq('Q') be xrlpbqr == beq('q'):
+        ryvs xrlpbqr == beq('D') be xrlpbqr == beq('d'):
             frys.barYvarQbja()
         ryfr:
             rirag.Fxvc()
@@ -222,7 +222,7 @@ pynff Obneq(jk.Cnary):
             frys.pheCvrpr.frgFuncr(Grgebzvabrf.AbFuncr)
             frys.gvzre.Fgbc()
             frys.vfFgnegrq = Snyfr
-            fgnghfone.FrgFgnghfGrkg('Tnzr bire'.rapbqr('rot13'))
+            fgnghfone.FrgFgnghfGrkg('Gung jnf sha. Onpx gb jbex abj :Q'.rapbqr('rot13'))
 
     qrs gelZbir(frys, arjCvrpr, arjK, arjL):
         sbe v va enatr(4):
@@ -381,5 +381,5 @@ pynff Funcr(bowrpg):
 
 
 ncc = jk.Ncc()
-Grgevf(Abar, -1, 'Grgevf!'.rapbqr('rot13'))
+Grgevf(Abar, -1, 'TCRPgevf!'.rapbqr('rot13'))
 ncc.ZnvaYbbc()
