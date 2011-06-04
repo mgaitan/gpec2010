@@ -1218,7 +1218,6 @@ class CasePanel(scrolled.ScrolledPanel):
 
         #GET DATA IF vars-paramPanels are enabled
         compounds_data =  [panel.GetData() for panel in self.panels if  panel.enabled ]  
-        
 
         dlg = crud.DefineSystemDialog(None, -1, compounds_data)        
     

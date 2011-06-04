@@ -28,6 +28,8 @@ class DefineSystemDialog(wx.Dialog):
         wx.Dialog.__init__(self, parent, id)
         self.SetBackgroundColour(wx.NullColour) #hack for win32
 
+        self.compounds_data = compounds_data
+
         #database handler
         conn = sqlite3.connect('gpec.sqlite')
         self.c1 = conn.cursor()
@@ -85,7 +87,7 @@ class DefineSystemDialog(wx.Dialog):
         self.button_remove4system = wx.BitmapButton(self, -1, wx.Bitmap(os.path.join(PATH_ICONS,"go-previous.png")))
 
 
-        self.compounds_data = compounds_data
+
         self.list_system = wx.ListCtrl(self, -1, validator= SystemValidator(self.compounds_data), style=wx.LC_REPORT|wx.SUNKEN_BORDER)
         
 
@@ -291,7 +293,6 @@ class DefineSystemDialog(wx.Dialog):
 
     def OnEdit(self, evt):
         id_cat = self.notebook_1.GetSelection() + 1
-
         key = self.list_base[id_cat].GetFirstSelected()
         id = self.list_base[id_cat].GetItemData(key)
         data = self.table_compounds[id_cat][id]
@@ -304,11 +305,7 @@ class DefineSystemDialog(wx.Dialog):
     
         if val == wx.OK:
             print dlg.controls
-
-
         dlg.Destroy()
-
-
 
     def OnDuplicate(self, evt):
         pass
@@ -338,9 +335,6 @@ class DefineSystemDialog(wx.Dialog):
         else:
             wx.Bell()
 
-    
-
-
     def OnRemoveFromSystem(self, evt):
         key = self.list_system.GetFirstSelected()
         if key != -1:
@@ -368,7 +362,7 @@ class DefineSystemDialog(wx.Dialog):
             self.Destroy()
 
 
-    
+### VALIDATORS #####
 
         
 class SystemValidator(wx.PyValidator):
@@ -428,23 +422,6 @@ class SystemValidator(wx.PyValidator):
         return True    
 
 
-class CompoundFormValidator(wx.PyValidator):
-    def __init__(self, data):
-        wx.PyValidator.__init__(self)
-        self.data = data
-
-    def Clone(self):
-        return CompoundFormValidator(self.data)
-    
-    def Validate(self, parent):
-        print "always valid"
-        return True
-        
- 
-    
-    def TransferFromWindow(self):
-        return True   
-
 
 class NotEmptyValidator(wx.PyValidator):
      def __init__(self):
@@ -481,13 +458,12 @@ class NotEmptyValidator(wx.PyValidator):
 
 
 class CompoundFormDialog(sc.SizedDialog):
+    """Dialog to add or edit a compound"""
+    
     def __init__(self, parent, id, title="New Compound", data=None ):
 
         sc.SizedDialog.__init__(self, None, -1, title )
-                        #style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
-        
-        
-
+                        
         pane = self.GetContentsPane()
         pane.SetSizerType("form")
         
@@ -536,28 +512,38 @@ class CompoundFormDialog(sc.SizedDialog):
 
         #self.Bind(wx.EVT_BUTTON, self.OnOk)
     
-        if self.data is not None:
-            id_cat, id = self.data[0:2]
-
+        
+        #populate with data if available
+        if self.data:
+            self.id_compound = id_cat, id = self.data[0:2]
             for control, value in zip(self.controls, self.data[2:]):
                 control.SetValue(str(value))
     
-    def OnOk(self, event):
-        if event.GetId == wx.ID_OK:
-            print "eureka"
-            print event.GetId(), wx.OK
-        else:
-            print "otra cosa"
+    def ValidateAll(self):
+        """returns true if all fields are valid"""
+        return all([c.Validate() for c in self.controls])
     
-        event.Skip()
-
+    def OnOk(self, event):
+        if event.GetId() == wx.ID_OK and self.ValidateAll():
+            print 'valid data'
+            if self.data and self.data[0] == 2:
+                ##update user data
+                new_data = self.data[0:2] + [c.GetValue() for c in self.controls]
+            else:
+                #insert new compound (copied from read-only table or defined from scratch)
+                new_data = [2, -1] + [c.GetValue() for c in self.controls]
+            print new_data
+            
+        else:
+            event.Skip()
+        
 
 if __name__ == "__main__":
+    #test purposes
     app = wx.PySimpleApp(0)
     wx.InitAllImageHandlers()
-
-    
-    dlg = DefineSystemDialog(None, -1)
+    dlg = DefineSystemDialog(None, -1, [])
+    dlg.CenterOnScreen()
     dlg.ShowModal()
     dlg.Destroy()
     app.MainLoop()
