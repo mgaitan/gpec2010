@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,7 +13,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     'draft',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -161,7 +159,7 @@ estima en <strong>u$s 81,053</strong>  considerando una remuneración internacio
 <p>Contemplando la escritura de la documentación (este reporte), el esfuerzo estimado
 se eleva a 3 desarrolladores/año y <strong>u$s 151.358</strong> de costo total <a class="footnote-reference" href="#id26" id="id9">[9]</a>.</p>
 <div class="figure">
-<img alt="_images/cocomo1.png" src="_images/cocomo1.png" style="width: 30%;" />
+<a class="reference internal image-reference" href="_images/cocomo.png"><img alt="_images/cocomo.png" src="_images/cocomo.png" style="width: 30%;" /></a>
 </div>
 <p>Mediante la herramienta <a class="reference external" href="http://www.dwheeler.com/sloccount/">SLOCCount</a>
 de David Wheeler se estima un esfuerzo de 14.74 meses y un
@@ -205,7 +203,7 @@ asistida con el uso de esta nueva versión de GPEC.</p>
 con la firma del desarrollador y los directores Cismondi y Wolfmann,
 en las conferencias PyCon Argentina 2010 <a class="footnote-reference" href="#id27" id="id10">[10]</a> y RITeQ 2010 <a class="footnote-reference" href="#id28" id="id11">[11]</a></p>
 <div class="figure">
-<img alt="_images/poster1.jpg" src="_images/poster1.jpg" style="width: 60%;" />
+<a class="reference internal image-reference" href="_images/poster.jpg"><img alt="_images/poster.jpg" src="_images/poster.jpg" style="width: 60%;" /></a>
 <p class="caption">Poster expuesto en el congreso PyCon Argentina 2010. Fotografía de Elías
 Andrawos.</p>
 </div>
@@ -319,14 +317,14 @@ se vuelve indistinguible.</li>
 lograr una cobertura de prueba total del sistema, no sólo en el gestor
 de la API sino en la interfaz de usuario. Esto es, generar prubas que lancen
 eventos programáticamente simulando las acciones del usuario, y validar los
-resultados. El libro <a class="reference internal" href="bibliografia.html#nr-rd2006">[NR-RD2006]</a> trata y ejemplifica estas tareas.</p>
+resultados. El libro <a class="reference internal" href="bibliografia.html#nr-rd2006" id="id16">[NR-RD2006]</a> trata y ejemplifica estas tareas.</p>
 </div>
 <div class="section" id="mejora-y-refactorizacion-a-patrones-de-diseno">
 <h3>11.8.6. Mejora y &#8220;refactorización&#8221; a patrones de diseño<a class="headerlink" href="#mejora-y-refactorizacion-a-patrones-de-diseno" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Como se ha visto, GPEC se vale de diversos patrones de diseño de software y
 especialmente del patrón <em>Publisher/Subscriber</em>. No obstante, para garantizar
 aspectos como mantenibilidad, escalabilidad y seguridad del software sería deseable
-realizar un proceso de refactorización a patrones (<a class="reference internal" href="bibliografia.html#jk1999">[JK1999]</a>), en particular en lo
+realizar un proceso de refactorización a patrones (<a class="reference internal" href="bibliografia.html#jk1999" id="id17">[JK1999]</a>), en particular en lo
 concerniente a una arquitectura de separación más acabado entre lógica e interfaz.</p>
 <table class="docutils footnote" frame="void" id="id18" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
@@ -440,7 +438,7 @@ ha expedido sobre la aprobación o no del proyecto. Sitio web: <a class="referen
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Contenidos</a></h3>
+  <h3><a href="index.html">Tabla de Contenidos</a></h3>
   <ul>
 <li><a class="reference internal" href="#">11. Conclusiones</a><ul>
 <li><a class="reference internal" href="#resultados">11.1. Resultados</a></li>
@@ -465,25 +463,25 @@ ha expedido sobre la aprobación o no del proyecto. Sitio web: <a class="referen
 
   <h4>Tema anterior</h4>
   <p class="topless"><a href="implantacion.html"
-                        title="Capítulo anterior">10. Implantación</a></p>
+                        title="capítulo anterior">10. Implantación</a></p>
   <h4>Próximo tema</h4>
   <p class="topless"><a href="bibliografia.html"
-                        title="Próximo capítulo">12. Bibliografía</a></p>
+                        title="próximo capítulo">12. Bibliografía</a></p>
   <h3>Esta página</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/conclusiones.txt"
-           rel="nofollow">Enseñar el código</a></li>
+           rel="nofollow">Mostrar el código</a></li>
   </ul>
 <div id="searchbox" style="display: none">
   <h3>Búsqueda rápida</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Ir a" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
     <p class="searchtip" style="font-size: 90%">
-    Introduzca los términos de búsqueda o un módulo, clase o nombre de función.
+    Introduzca los términos de búsqueda o un nombre de módulo, clase o función.
     </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
@@ -508,7 +506,7 @@ ha expedido sobre la aprobación o no del proyecto. Sitio web: <a class="referen
     </div>
     <div class="footer">
         &copy; Copyright 2011, Martín Gaitán.
-      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1pre/40063bb1b44a.
+      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

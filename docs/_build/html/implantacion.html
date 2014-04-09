@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,7 +13,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     'draft',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -92,7 +90,7 @@ ejecución. Además, puede realizar la conversión del código python a
 agregar una cierta compresión, de manera de optimizar el tamaño del paquete
 resultante.</p>
 <div class="figure">
-<img alt="_images/py2exe_21.png" src="_images/py2exe_21.png" style="width: 671px;" />
+<a class="reference internal image-reference" href="_images/py2exe_2.png"><img alt="_images/py2exe_2.png" src="_images/py2exe_2.png" style="width: 671px;" /></a>
 <p class="caption">Salida final de la ejecución de <em>py2exe</em> enumerando las librerías dinámicas
 complementarias que son necesarias para la ejecución del programa. Todas
 estas son comunes en cualquier instalación por defecto de Windows.</p>
@@ -122,13 +120,13 @@ etc.</p>
 
 <span class="n">setup</span><span class="p">(</span>
     <span class="n">data_files</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span>
-    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;py2exe&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s">&quot;compressed&quot;</span><span class="p">:</span> <span class="mf">2</span><span class="p">,</span>
-                          <span class="s">&quot;optimize&quot;</span><span class="p">:</span> <span class="mf">0</span><span class="p">,</span> <span class="c">#2,</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;py2exe&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s">&quot;compressed&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                          <span class="s">&quot;optimize&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c">#2,</span>
                           <span class="s">&quot;includes&quot;</span><span class="p">:</span> <span class="n">includes</span><span class="p">,</span>
                           <span class="s">&quot;excludes&quot;</span><span class="p">:</span> <span class="n">excludes</span><span class="p">,</span>
                           <span class="s">&quot;packages&quot;</span><span class="p">:</span> <span class="n">packages</span><span class="p">,</span>
                           <span class="s">&quot;dll_excludes&quot;</span><span class="p">:</span> <span class="n">dll_excludes</span><span class="p">,</span>
-                          <span class="s">&quot;bundle_files&quot;</span><span class="p">:</span> <span class="mf">3</span><span class="p">,</span>
+                          <span class="s">&quot;bundle_files&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
                           <span class="s">&quot;dist_dir&quot;</span><span class="p">:</span> <span class="s">&quot;dist&quot;</span><span class="p">,</span>
                           <span class="s">&quot;xref&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
                           <span class="s">&quot;skip_archive&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
@@ -145,7 +143,7 @@ fuente de la aplicación en formato <em>bytecode</em> con todas las
 bibliotecas necesarias así como el intérprete de Python empaquetado como
 biblioteca dinámica.</p>
 <div class="figure">
-<img alt="_images/py2exe_31.png" src="_images/py2exe_31.png" style="width: 719px;" />
+<a class="reference internal image-reference" href="_images/py2exe_3.png"><img alt="_images/py2exe_3.png" src="_images/py2exe_3.png" style="width: 719px;" /></a>
 <p class="caption">Resultado de la ejecución de <em>py2exe</em></p>
 </div>
 <p>Ejecutando <tt class="docutils literal"><span class="pre">aui.exe</span></tt> se ejecutaría la aplicación distribuible.</p>
@@ -163,7 +161,7 @@ entradas de acceso rápido en el &#8220;Menú de Inicio&#8221;, por ejemplo.</p>
 utilizó la aplicación <a class="reference external" href="http://nsis.sourceforge.net/">NSIS (Nullsoft Scriptable Install System)</a>, que es una software open source para la
 creación de instaladores Windows.</p>
 <div class="figure">
-<img alt="_images/py2exe_31.png" src="_images/py2exe_31.png" style="width: 615px;" />
+<a class="reference internal image-reference" href="_images/py2exe_3.png"><img alt="_images/py2exe_3.png" src="_images/py2exe_3.png" style="width: 615px;" /></a>
 <p class="caption">Creando un instalador Windows a partir de un <em>zip</em> con el contenido
 resultante de <em>py2exe</em></p>
 </div>
@@ -238,7 +236,7 @@ Ver <a class="reference external" href="http://en.wikipedia.org/wiki/Unix_philos
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Contenidos</a></h3>
+  <h3><a href="index.html">Tabla de Contenidos</a></h3>
   <ul>
 <li><a class="reference internal" href="#">10. Implantación</a><ul>
 <li><a class="reference internal" href="#empaquetado-para-sistemas-windows">10.1. Empaquetado para sistemas Windows</a><ul>
@@ -255,25 +253,25 @@ Ver <a class="reference external" href="http://en.wikipedia.org/wiki/Unix_philos
 
   <h4>Tema anterior</h4>
   <p class="topless"><a href="verificacion.html"
-                        title="Capítulo anterior">9. Verificación</a></p>
+                        title="capítulo anterior">9. Verificación</a></p>
   <h4>Próximo tema</h4>
   <p class="topless"><a href="conclusiones.html"
-                        title="Próximo capítulo">11. Conclusiones</a></p>
+                        title="próximo capítulo">11. Conclusiones</a></p>
   <h3>Esta página</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/implantacion.txt"
-           rel="nofollow">Enseñar el código</a></li>
+           rel="nofollow">Mostrar el código</a></li>
   </ul>
 <div id="searchbox" style="display: none">
   <h3>Búsqueda rápida</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Ir a" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
     <p class="searchtip" style="font-size: 90%">
-    Introduzca los términos de búsqueda o un módulo, clase o nombre de función.
+    Introduzca los términos de búsqueda o un nombre de módulo, clase o función.
     </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
@@ -298,7 +296,7 @@ Ver <a class="reference external" href="http://en.wikipedia.org/wiki/Unix_philos
     </div>
     <div class="footer">
         &copy; Copyright 2011, Martín Gaitán.
-      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1pre/40063bb1b44a.
+      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>5. Metodología &mdash; Software para graficación de diagramas termodinámicos</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'draft',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="Software para graficación de diagramas termodinámicos" href="index.html" />
+    <link rel="next" title="6. Tecnologías adoptadas" href="tecnologias.html" />
+    <link rel="prev" title="4. Ingeniería de requerimientos" href="requerimientos.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="tecnologias.html" title="6. Tecnologías adoptadas"
+             accesskey="N">siguiente</a> |</li>
+        <li class="right" >
+          <a href="requerimientos.html" title="4. Ingeniería de requerimientos"
+             accesskey="P">anterior</a> |</li>
+        <li><a href="index.html">Software para graficación de diagramas termodinámicos</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="metodologia">
+<span id="id1"></span><h1>5. Metodología<a class="headerlink" href="#metodologia" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Este capitulo detalla el marco conceptual y la metodología de desarrollo adoptada.
+Esta decisión ha sido rectora de subsecuentes decisiones de diseño y, de cierta manera,
+de la tecnología adoptada para la implementación.</p>
+<div class="section" id="metodologias-agiles">
+<h2>5.1. Metodologías Ágiles<a class="headerlink" href="#metodologias-agiles" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Este proyecto integrador ha sido guiado por un conjunto de preceptos
+comunes a las <em>metodologías ágiles de desarrollo de software</em>.
+Sin necesariamente ajustarse a ninguna en particular, se comparte
+la escala de valoración hecha en Agile Manifiesto <a class="reference internal" href="bibliografia.html#ag-manif" id="id2">[AG-MANIF]</a> que declara:</p>
+<blockquote>
+<div><p>Estamos descubriendo formas mejores de desarrollar
+software tanto por nuestra propia experiencia como
+ayudando a terceros. A través de este trabajo hemos
+aprendido a valorar:</p>
+<ul class="simple">
+<li>Individuos e interacciones sobre procesos y herramientas</li>
+<li>Software funcionando sobre documentación extensiva</li>
+<li>Colaboración con el cliente sobre negociación contractual</li>
+<li>Respuesta ante el cambio sobre seguimiento (estricto) de un plan</li>
+</ul>
+<p>Esto es, aunque valoramos los elementos de la derecha,
+valoramos más los de la izquierda.</p>
+</div></blockquote>
+<p>Las <em>implementaciones</em> del marco conceptual propuesto por el Manifiesto de
+desarrollo ágil (como <em>eXtremme Programming</em> o <em>Scrum</em>) están estructuralmente
+concebidas para el trabajo de un equipo de desarrollo abocado al mismo proyecto.
+Como el desarrollo  del software estuvo a cargo de una sola persona
+(con la colaboración y revisión de los directores) no se ajustó
+a un método estrictamente definido para un equipo como los mencionados.</p>
+<p>Sin embargo, muchas ideas propuestas por estos métodos han sido aplicadas,
+concibiendo un desarrollo evolutivo con énfasis en la adaptabilidad
+de los requerimientos.</p>
+<p>Algunas de las técnicas y procesos ágiles involucrados en este desarrollo
+han sido la utilización de un lenguaje de muy alto nivel (ver <a class="reference internal" href="tecnologias.html#tecnologias"><em>Tecnologías adoptadas</em></a> ),
+la implementación de pruebas automatizadas, la utilización de bibliotecas
+probas para la implementación de aspectos específicos de la solución, entre
+otras.</p>
+</div>
+<div class="section" id="desarrollo-evolutivo-adaptado">
+<span id="desarrollo"></span><h2>5.2. Desarrollo evolutivo adaptado<a class="headerlink" href="#desarrollo-evolutivo-adaptado" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Según <a class="reference internal" href="bibliografia.html#sommerville2004" id="id3">[Sommerville2004]</a>, el desarrollo evolutivo se basa en la idea de
+una implementación inicial, exponiéndola a los comentarios del comitente o
+los usuarios, y refinándola a través de diferentes versiones preliminares
+(versiones <em>beta</em>) hasta obtener una versión que satisfaga el conjunto de
+requerimientos planteado.</p>
+<blockquote>
+<div><div class="figure">
+<img alt="_images/desarrollo_evolutivo.png" src="_images/desarrollo_evolutivo.png" />
+<p class="caption">Esquema conceptual del desarrollo evolutivo</p>
+</div>
+</div></blockquote>
+<p>Las actividades de especificación, desarrollo y validación se entrelazan en
+vez de separarse, con una rápida y constante retroalimentación entre estas.</p>
+<p>Existen dos grandes tipos de desarrollos evolutivos:</p>
+<ol class="arabic simple">
+<li><em>Desarrollo exploratorio</em> donde el objetivo del proceso es trabajar con el
+cliente para explorar y precisar los requerimientos y obtener un sistema
+final. Se comienza con las partes del sistema que más cabalmente se
+comprenden y se evoluciona agregando nuevos atributos precisados por el
+comitente, la comunidad de usuarios o el propio equipo de desarrollo.</li>
+<li><em>Prototipos desechables</em> donde el objetivo del proceso es comprender
+mejor los requerimientos. Una vez evacuadas todas las incertidumbres, los
+prototipos se desechan y se diseña e implementa el sistema final desde el
+principio.</li>
+</ol>
+</div>
+<div class="section" id="modelado-conceptual-vs-uml">
+<span id="anti-uml"></span><h2>5.3. Modelado conceptual vs. UML<a class="headerlink" href="#modelado-conceptual-vs-uml" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Basado en los postulados de <a class="reference internal" href="bibliografia.html#ag-manif" id="id4">[AG-MANIF]</a> durante el desarrollo se ha hecho hincapié
+en un modelado y documentación orientados a favorecer la comunicación
+por sobre el apego estricto y exhaustivo al lenguaje <a class="reference internal" href="glosario.html#term-uml"><em class="xref std std-term">UML</em></a> y la documentación formal,
+intentando que el resultado sea útil para el comitente, evaluadores y futuros desarrolladores
+del proyecto.</p>
+<div class="section" id="justificacion">
+<h3>5.3.1. Justificación<a class="headerlink" href="#justificacion" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Según afirma Terry Quatrani, evangelizadora de las metodologías ágiles en IBM,
+en <a class="reference internal" href="bibliografia.html#quatrani2010" id="id5">[Quatrani2010]</a> :</p>
+<blockquote>
+<div>Aunque sigas un proceso ágil, estarás realizando cierto grado de modelado
+– sólo que no lo realizarás tanto como si utilizaras un proceso tradicional.
+La falta de formalidad en el modelado ágil no significa que no estás modelando,
+sino que te pones el foco en los beneficios de este sin las desventajas
+y confusiones de documentos extraños y burocráticos.</div></blockquote>
+<p>Por su parte, Robert Martin sostiene en <a class="reference internal" href="bibliografia.html#martin2006" id="id6">[Martin2006]</a> que el modelado basado en UML
+en el desarrollo ágil es útil como instrumento de comunicación,
+pero su detalle no aporta valor significativo:</p>
+<blockquote>
+<div>No gastes mucho tiempo en esta tarea, no necesitas tanto detalle.
+Los modelos y los planos son necesarios en la arquitectura y la construcción
+civil porque es caro construir una casa para demostrar que su diseño funciona.
+El software no es así – puedes validar tu idea con sólo codificarla, en igual
+tiempo que el que insume hacer un modelo UML que nada prueba por sí
+mismo.</div></blockquote>
+<p>Aun más escéptico, Alans Stevens, reconocido ingeniero en software <a class="footnote-reference" href="#id9" id="id7">[1]</a>
+y conferencista, opina en <a class="reference internal" href="bibliografia.html#stevens2006" id="id8">[Stevens2006]</a> :</p>
+<blockquote>
+<div><p>No uso UML y noto que ninguno de mis colegas lo usa. Tengo sensaciones
+mezcladas acerca de su necesidad. Parece perfectamente razonable que debamos
+acordar como industria un conjunto de símbolos comunes para representar
+la programación orientada a objetos, pero UML tiene la típica apariencia
+de &#8220;diseñado por un comité&#8221;.</p>
+<p>(...) El aspecto más crítico en un diseño inicial, en mi experiencia,
+es la interfaz entre la <abbr title="interfaz de usuario">UI</abbr> y el modelo de
+objetos. Lamentablemente UML no aborda este problema y en cambio parece
+obsesionado por las minucias en una parodia de distracción académica.</p>
+</div></blockquote>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[1]</a></td><td>Premio <abbr title="MVP">Most Valuable Professional</abbr> de Microsoft por sus aportes
+a la comunidad de usuarios del lenguaje C#. <a class="reference external" href="http://bit.ly/as_mvp">http://bit.ly/as_mvp</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Tabla de Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">5. Metodología</a><ul>
+<li><a class="reference internal" href="#metodologias-agiles">5.1. Metodologías Ágiles</a></li>
+<li><a class="reference internal" href="#desarrollo-evolutivo-adaptado">5.2. Desarrollo evolutivo adaptado</a></li>
+<li><a class="reference internal" href="#modelado-conceptual-vs-uml">5.3. Modelado conceptual vs. UML</a><ul>
+<li><a class="reference internal" href="#justificacion">5.3.1. Justificación</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="requerimientos.html"
+                        title="capítulo anterior">4. Ingeniería de requerimientos</a></p>
+  <h4>Próximo tema</h4>
+  <p class="topless"><a href="tecnologias.html"
+                        title="próximo capítulo">6. Tecnologías adoptadas</a></p>
+  <h3>Esta página</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/metodologia.txt"
+           rel="nofollow">Mostrar el código</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introduzca los términos de búsqueda o un nombre de módulo, clase o función.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="tecnologias.html" title="6. Tecnologías adoptadas"
+             >siguiente</a> |</li>
+        <li class="right" >
+          <a href="requerimientos.html" title="4. Ingeniería de requerimientos"
+             >anterior</a> |</li>
+        <li><a href="index.html">Software para graficación de diagramas termodinámicos</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Martín Gaitán.
+      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+    </div>
+  </body>
+</html>

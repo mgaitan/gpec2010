@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,7 +13,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     'draft',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -73,7 +71,7 @@ a eventos</em> de la biblioteca se basa en una comunicación vía esta bibliotec
 se registra una crónica de eventos de interés para el usuario, denotados en
 su categoría con un símbolo y la hora del suceso.</p>
 <div class="figure">
-<img alt="_images/log_msg3.png" src="_images/log_msg3.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/log_msg.png"><img alt="_images/log_msg.png" src="_images/log_msg.png" style="width: 80%;" /></a>
 <p class="caption">A través de PubSub, cualquier parte del programa envía avisos que el panel
 (un <em>receptor</em>) mostrará al usuario.</p>
 </div>
@@ -83,11 +81,11 @@ tópico <tt class="docutils literal"><span class="pre">'log'</span></tt>, y asig
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
         <span class="n">wx</span><span class="o">.</span><span class="n">Panel</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">list</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">ListCtrl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mf">1</span><span class="p">,</span>  <span class="n">style</span><span class="o">=</span>  <span class="n">wx</span><span class="o">.</span><span class="n">LC_REPORT</span><span class="o">|</span><span class="n">wx</span><span class="o">.</span><span class="n">SUNKEN_BORDER</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">list</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">ListCtrl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>  <span class="n">style</span><span class="o">=</span>  <span class="n">wx</span><span class="o">.</span><span class="n">LC_REPORT</span><span class="o">|</span><span class="n">wx</span><span class="o">.</span><span class="n">SUNKEN_BORDER</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setupList</span><span class="p">()</span>
 
         <span class="n">sizer</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">BoxSizer</span><span class="p">()</span>
-        <span class="n">sizer</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span><span class="p">)</span>
+        <span class="n">sizer</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SetSizerAndFit</span><span class="p">(</span><span class="n">sizer</span><span class="p">)</span>
 
         <span class="n">pub</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OnAppendLog</span><span class="p">,</span> <span class="s">&#39;log&#39;</span><span class="p">)</span>
@@ -97,14 +95,14 @@ tópico <tt class="docutils literal"><span class="pre">'log'</span></tt>, y asig
 adjuntando como parámetro un <em>objeto mensaje</em> (<tt class="docutils literal"><span class="pre">msg</span></tt>) en cuyo atributo <tt class="docutils literal"><span class="pre">data</span></tt>
 se almacena la información enviada por el remitente:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">OnAppendLog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-    <span class="n">ico</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">icon_map</span><span class="p">[</span><span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mf">0</span><span class="p">]]</span>
+    <span class="n">ico</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">icon_map</span><span class="p">[</span><span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
 
-    <span class="n">message</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">InsertImageStringItem</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">maxint</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">ico</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">SetStringItem</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%H:%M:%S&#39;</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">SetStringItem</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%H:%M:%S&#39;</span><span class="p">))</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">EnsureVisible</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="c">#keep scroll at bottom</span>
 
-    <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;error&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;error&#39;</span><span class="p">:</span>
         <span class="n">wx</span><span class="o">.</span><span class="n">Bell</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -126,19 +124,19 @@ al icono que los representan:</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><em>ok</em></td>
-<td><img alt="ok" src="_images/ok3.png" /></td>
+<td><img alt="ok" src="_images/ok.png" /></td>
 <td>Acción existosa</td>
 </tr>
 <tr class="row-odd"><td><em>info</em></td>
-<td><img alt="info" src="_images/info3.png" /></td>
+<td><img alt="info" src="_images/info.png" /></td>
 <td>Información importante</td>
 </tr>
 <tr class="row-even"><td><em>warning</em></td>
-<td><img alt="warning" src="_images/warning3.png" /></td>
+<td><img alt="warning" src="_images/warning.png" /></td>
 <td>Advertencia</td>
 </tr>
 <tr class="row-odd"><td><em>error</em></td>
-<td><img alt="error" src="_images/error3.png" /></td>
+<td><img alt="error" src="_images/error.png" /></td>
 <td>Error</td>
 </tr>
 </tbody>
@@ -165,7 +163,7 @@ generación de gráficos. Se resume en el diagrama de secuencia de la figura
 <a class="reference internal" href="#makeplot-num"><em>Secuencia para la generación de un diagrama desde el evento generado por
 el usuario</em></a>.</p>
 <div class="figure" id="makeplot-num">
-<img alt="_images/uml_sec_makeplot_vertical3.png" src="_images/uml_sec_makeplot_vertical3.png" style="width: 60%;" />
+<a class="reference internal image-reference" href="_images/uml_sec_makeplot_vertical.png"><img alt="_images/uml_sec_makeplot_vertical.png" src="_images/uml_sec_makeplot_vertical.png" style="width: 60%;" /></a>
 <p class="caption">Secuencia para la generación de un diagrama desde el evento generado por
 el usuario</p>
 </div>
@@ -187,7 +185,7 @@ la estructura y significado de estos archivos (descriptos en :ref:&#8217;api&#82
 deseable que tengan un acceso al contenido desde la propia aplicación, para
 encontrar información numérica cuya precisión se pierde en un gráfico.</p>
 <div class="figure">
-<img alt="_images/inpout3.png" src="_images/inpout3.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="_images/inpout.png"><img alt="_images/inpout.png" src="_images/inpout.png" style="width: 100%;" /></a>
 <p class="caption">Panel de navegación y visualización de archivos en entrada y salida</p>
 </div>
 <p>Esta tarea se hace a través de PubSub. El emisor envía un mensaje con tópico
@@ -195,70 +193,11 @@ encontrar información numérica cuya precisión se pierde en un gráfico.</p>
 y el caso al que este cálculo pertenence.</p>
 <p>Por ejemplo, la función que escribe el archivo de entrada para el cálculo de
 parámetros es la siguiente:</p>
-<div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">write_conparin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">model_id</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Write the input file CONPARIN.DAT . </span>
-
-<span class="sd">        ``data`` could be compound constants (direction=0) or model paramater (direction=1)</span>
-<span class="sd">        </span>
-<span class="sd">        0 -&gt;  [tc, pc, vc, omega]</span>
-<span class="sd">    </span>
-<span class="sd">            Example: [u&#39;305.32&#39;, u&#39;48.72&#39;, u&#39;0.1455&#39;, u&#39;0.099493&#39;]</span>
-
-<span class="sd">        &quot;&quot;&quot;</span> 
-        <span class="n">filename</span> <span class="o">=</span> <span class="s">&#39;CONPARIN.DAT&#39;</span>
-        <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_temp</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-        <span class="n">template</span> <span class="o">=</span> <span class="s">&quot;{0}  {1}</span><span class="se">\n</span><span class="s"> {2}&quot;</span>
-
-        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span> <span class="o">==</span> <span class="mf">0</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">model_id</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="mf">2</span><span class="p">,</span><span class="mf">3</span><span class="p">):</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="o">-</span><span class="mf">2</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mf">1</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mf">2</span><span class="p">]]</span> <span class="c">#t,p,v,o -&gt; t,p,o,v</span>
-            
-        <span class="k">elif</span> <span class="nb">int</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span> <span class="o">==</span> <span class="mf">0</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">model_id</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">4</span><span class="p">,</span><span class="mf">6</span><span class="p">):</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="o">-</span><span class="mf">2</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mf">1</span><span class="p">]]</span>
-
-
-        <span class="n">output</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">format</span> <span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">model_id</span><span class="p">,</span> <span class="s">&quot;  &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">)))</span> 
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span> <span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
-            <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-            <span class="n">fh</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">written</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">filename</span><span class="p">))</span>      <span class="c">#conparin written</span>
-
-        <span class="n">pub</span><span class="o">.</span><span class="n">sendMessage</span><span class="p">(</span><span class="s">&#39;add_txt&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">case_id</span><span class="p">))</span>
-</pre></div>
-</div>
 <p>El atributo <tt class="xref py py-attr docutils literal"><span class="pre">path_temp</span></tt> está definido en el constructor de la clase
 <tt class="xref py py-class docutils literal"><span class="pre">API</span></tt> y se trata de una ruta a un subdirectorio en la carpeta temporal,
 abstraída del sistema operativo subyacente mediante el módulo <tt class="xref py py-mod docutils literal"><span class="pre">tempfile</span></tt></p>
 <p>El receptor de este mensaje es <tt class="xref py py-class docutils literal"><span class="pre">IOPanel</span></tt> que maneja el mensaje con el
 método <tt class="xref py py-meth docutils literal"><span class="pre">OnAddItem()</span></tt> .</p>
-<div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">OnAddItem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-
-        <span class="n">filepath</span><span class="p">,</span> <span class="n">case_id</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">data</span>
-
-        <span class="n">head</span><span class="p">,</span><span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">case_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cases</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="c">#if case is unknown, create it</span>
-            <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">AppendItem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s">&quot;Case </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">case_id</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">cases</span><span class="p">[</span><span class="n">case_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cases</span><span class="p">[</span><span class="n">case_id</span><span class="p">]</span>
-
-
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span> <span class="n">filepath</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
-            <span class="n">content</span> <span class="o">=</span> <span class="n">fh</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-
-            <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">AppendItem</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">SetPyData</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
-                    
-
-        <span class="c">#self.tree.Expand(node)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">SelectItem</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>  <span class="c">#TODO refresh text_ctrl?</span>
-        
-</pre></div>
-</div>
 </div>
 <div class="section" id="tabla-de-incidencias-de-mensajes">
 <h3>8.1.4. Tabla de incidencias de mensajes<a class="headerlink" href="#tabla-de-incidencias-de-mensajes" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -335,7 +274,7 @@ de entrada <tt class="file docutils literal"><span class="pre">GPECIN.DAT</span>
 permiso de escritura en la carpeta destino). En caso de error por algún motivo
 (conocido o no), se remite un mensaje de log y se cancela la ejecución.</p>
 <div class="figure" id="front-back-num">
-<img alt="_images/uml_front-back_vertical3.png" src="_images/uml_front-back_vertical3.png" style="width: 90%;" />
+<a class="reference internal image-reference" href="_images/uml_front-back_vertical.png"><img alt="_images/uml_front-back_vertical.png" src="_images/uml_front-back_vertical.png" style="width: 90%;" /></a>
 <p class="caption">Secuencia de la comunicación frontend-backend</p>
 </div>
 <div class="section" id="la-dependencia-con-wine">
@@ -363,7 +302,7 @@ se está corriendo la aplicación y en caso de no ser Windows, invoca a Wine:</p
     <span class="c">#On any non-Windows system, we run binaries through wine</span>
     <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;wine&#39;</span><span class="p">)</span>
 
-<span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PATH_BIN</span><span class="p">,</span> <span class="n">bin</span> <span class="o">+</span> <span class="s">&#39;.exe&#39;</span><span class="p">))</span>
+<span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PATH_BIN</span><span class="p">,</span> <span class="nb">bin</span> <span class="o">+</span> <span class="s">&#39;.exe&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -406,12 +345,12 @@ simplificados realiza una transformación dinámica de una función o método,
 agregándole una funcionalidad que no tiene por sí misma, o más en general,
 alterando de alguna manera el resultado devuelto.</p>
 <div class="figure">
-<img alt="_images/Decorator_UML_class_diagram3.png" src="_images/Decorator_UML_class_diagram3.png" style="width: 60%;" />
+<a class="reference internal image-reference" href="_images/Decorator_UML_class_diagram.png"><img alt="_images/Decorator_UML_class_diagram.png" src="_images/Decorator_UML_class_diagram.png" style="width: 60%;" /></a>
 <p class="caption">Diagrama de clases del patrón <em>Decorator</em></p>
 </div>
 <p>Expresándolo en términos matemáticos, se trata de una <em class="dfn">composición de funciones</em>:</p>
 <div class="math">
-<p><img src="_images/math/a6aa91817f451ebfb474c5a537d779e732b24bbb.png" alt="X \to \,\,Y\;\; \to \;\;\,Z
+<p><img src="_images/math/e82ec7d42e920aa0d39348dadf47ef88485b46b9.png" alt="X \to \,\,Y\;\; \to \;\;\,Z
 
 x \mapsto f(x) \mapsto g(f(x))"/></p>
 </div><p>Desde la versión 2.4, Python tiene una nomenclatura facilitada para la
@@ -444,7 +383,7 @@ hacer esta llamada de manera implícita.</p>
 <div class="section" id="algoritmo-de-cache-de-datos">
 <h3>8.3.2. Algoritmo de caché de datos<a class="headerlink" href="#algoritmo-de-cache-de-datos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>El algoritmo utilizado para la implementación del sistema de <em>caché</em> se llama
-<em class="dfn">memoize</em> <a class="footnote-reference" href="#id23" id="id6">[5]</a> y es descripto en detalle en <a class="reference internal" href="bibliografia.html#ziade2008">[ZIADE2008]</a> , cuya versión,
+<em class="dfn">memoize</em> <a class="footnote-reference" href="#id23" id="id6">[5]</a> y es descripto en detalle en <a class="reference internal" href="bibliografia.html#ziade2008" id="id7">[ZIADE2008]</a> , cuya versión,
 parcialmente simplificada, se ha utilizado.</p>
 <p>En este caso, la funcionalidad que aporta el decorador a la
 función que se &#8220;decora&#8221; es la siguiente:</p>
@@ -468,28 +407,6 @@ se devuelve el resultado.</li>
 </div>
 <div class="section" id="codigo-fuente">
 <h3>8.3.3. Código fuente<a class="headerlink" href="#codigo-fuente" title="Enlazar permanentemente con este título">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">compute_key</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kw</span><span class="p">):</span>
-    <span class="n">key</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">((</span><span class="n">function</span><span class="o">.</span><span class="n">func_name</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kw</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha1</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">memoize</span><span class="p">():</span>
-    <span class="k">def</span> <span class="nf">_memoize</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
-        <span class="k">def</span> <span class="nf">__memoize</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
-            <span class="n">key</span> <span class="o">=</span> <span class="n">compute_key</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kw</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cache</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>     <span class="c">#we have&#39;nt it already?</span>
-                <span class="n">result</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>   
-                <span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>         <span class="c">#store a new one </span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">print</span> <span class="s">&#39;found in cache&#39;</span>          <span class="c">#TODO may be it&#39;s a better idea get a file and parse it again instead </span>
-                                                <span class="c">#cache the whole arrays. </span>
-
-            <span class="k">return</span> <span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>   
-        <span class="k">return</span> <span class="n">__memoize</span>
-    <span class="k">return</span> <span class="n">_memoize</span>
-</pre></div>
-</div>
 </div>
 </div>
 <div class="section" id="algoritmo-de-analisis-sintactico">
@@ -523,7 +440,7 @@ a un objeto array de <tt class="xref py py-mod docutils literal"><span class="pr
 y un renglón vacío marca el final del bloque de información como se muestra
 en la figura <a class="reference internal" href="#parser-num"><em>Topología de la información extractada</em></a>.</p>
 <div class="figure" id="parser-num">
-<img alt="_images/parser3.png" src="_images/parser3.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/parser.png"><img alt="_images/parser.png" src="_images/parser.png" style="width: 80%;" /></a>
 <p class="caption">Topología de la información extractada</p>
 </div>
 <p>Una estructura de datos basadas en asociaciones clave-valor (diccionarios),
@@ -539,74 +456,6 @@ opcional la cantidad de columnas significativas que deben interpretarse <a class
 </div>
 <div class="section" id="id10">
 <h3>8.4.2. Código fuente<a class="headerlink" href="#id10" title="Enlazar permanentemente con este título">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">output2array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">curve_types</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Parses gpecout.dat, PXYOUT.DAT TXYOUT.DAT or ISOPOUT.DAT</span>
-<span class="sd">        Detects numeric blocks and create arrays with them&quot;&quot;&quot;</span>
-
-        <span class="n">tokens</span> <span class="o">=</span> <span class="p">{}</span>         <span class="c">#{(begin,end):&#39;type&#39;, ...}</span>
-        <span class="n">begin</span> <span class="o">=</span> <span class="mf">0</span>
-        <span class="n">end</span> <span class="o">=</span> <span class="mf">0</span>
-        
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
-
-            <span class="n">number_of_lines</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fh</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span>
-            <span class="n">fh</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mf">0</span><span class="p">)</span>
-            
-            <span class="c">#give skip from header and skip from footer</span>
-            <span class="k">for</span> <span class="n">line_number</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fh</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">begin</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">:</span>
-                    <span class="c">#looking for a curve TOKEN : &#39;VAP&#39;, &#39;CRI&#39; etc...</span>
-                    <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">in</span> <span class="n">curve_types</span><span class="p">:</span>
-                        <span class="n">begin</span> <span class="o">=</span> <span class="n">line_number</span> <span class="o">+</span> <span class="mf">1</span>
-                        <span class="n">curve_type</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-                
-                <span class="k">elif</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">or</span> <span class="n">line_number</span><span class="o">==</span><span class="n">number_of_lines</span><span class="o">-</span><span class="mf">1</span><span class="p">:</span>
-                    <span class="c">#looking for a blank line which determines the end of </span>
-                    <span class="c">#arrays block.</span>
-                            
-                    <span class="n">end</span> <span class="o">=</span> <span class="n">line_number</span>
-                    <span class="n">tokens</span><span class="p">[(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">)]</span> <span class="o">=</span> <span class="n">curve_type</span>
-
-            <span class="n">arrays_out</span> <span class="o">=</span> <span class="p">{}</span>     <span class="c">#Format: {type: [array1,array2, ...], ...}</span>
-            
-            <span class="k">for</span> <span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">),</span> <span class="n">curve_type</span> <span class="ow">in</span> <span class="n">sorted</span><span class="p">(</span><span class="n">tokens</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
-                
-                <span class="n">fh</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mf">0</span><span class="p">)</span>
-                <span class="n">temp_w</span> <span class="o">=</span> <span class="n">cStringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>       <span class="c">#a memory file to write </span>
-                
-                <span class="c">#write lines just of the block between (begin,end)</span>
-                <span class="k">for</span> <span class="n">l</span><span class="p">,</span><span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fh</span><span class="p">):</span>
-
-                    <span class="k">if</span> <span class="n">begin</span> <span class="o">&lt;=</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">end</span> <span class="ow">and</span> \
-                        <span class="nb">len</span><span class="p">(</span><span class="n">get_numbers</span><span class="p">(</span><span class="n">line</span><span class="p">))</span><span class="o">&gt;</span><span class="mf">0</span><span class="p">:</span>      
-                    
-                        <span class="c">#a way to check the special case of col </span>
-                        <span class="c">#headers after mark</span>
-                        <span class="n">temp_w</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;*&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span> <span class="p">)</span>    
-            
-                <span class="c">#a copy to read</span>
-                <span class="n">temp_r</span> <span class="o">=</span> <span class="n">cStringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">temp_w</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>      
-                
-                <span class="c">#retrieve significative columns from a dictionary. </span>
-                <span class="c">#(begin,end)=&gt;type=&gt;num_cols </span>
-
-                <span class="n">signif_cols</span><span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">curve_types</span><span class="p">[</span><span class="n">tokens</span><span class="p">[(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">)]])</span>
-                <span class="n">curve_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">temp_r</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="n">signif_cols</span><span class="p">)</span>
-
-                <span class="n">temp_w</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                <span class="n">temp_r</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-                <span class="c">#if it&#39;s a new type on the dict, create it.</span>
-                <span class="k">if</span> <span class="n">curve_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">arrays_out</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                    <span class="c">#TODO should it be a ndarray ?</span>
-                    <span class="n">arrays_out</span><span class="p">[</span><span class="n">curve_type</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>  
-                
-                <span class="n">arrays_out</span><span class="p">[</span><span class="n">curve_type</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">curve_array</span><span class="p">)</span>
-
-            <span class="n">fh</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">arrays_out</span>
-</pre></div>
-</div>
 </div>
 </div>
 <div class="section" id="interfaz-grafica-de-usuario-gui">
@@ -643,10 +492,10 @@ sino que simplemente indican cómo se ubican originalmente y cómo se comportan 
 los elementos ante un evento que afecte  la apariencia de la aplicación.
 Todo los <em>sizers</em> son instancias de una subclase de la clase abstracta <tt class="xref py py-class docutils literal"><span class="pre">wx.Sizer</span></tt></p>
 <blockquote>
-<div><div class="admonition-ver-tambien admonition seealso">
+<div><div class="admonition seealso">
 <p class="first admonition-title">Ver también</p>
 <p class="last">Para una explicación exhaustiva sobre el tema, vea el capitulo 11 de
-<em>&#8220;wxPython in Action&#8221;</em>, <a class="reference internal" href="bibliografia.html#nr-rd2006">[NR-RD2006]</a></p>
+<em>&#8220;wxPython in Action&#8221;</em>, <a class="reference internal" href="bibliografia.html#nr-rd2006" id="id12">[NR-RD2006]</a></p>
 </div>
 </div></blockquote>
 <p>Por ejemplo, <tt class="docutils literal"><span class="pre">sizer</span></tt> permite dividir el espacio, cualquier este sea, en porciones
@@ -656,7 +505,7 @@ texto), definiendo atributos como su alineación horizontal o vertical, el tama�
 puede contener a otros de manera anidada, definiendo una cuadrícula con espacios para ubicar los
 <em>widgets</em> controladores <a class="footnote-reference" href="#id27" id="id13">[9]</a>.</p>
 <div class="figure">
-<img alt="_images/wxglade-sizer3.png" src="_images/wxglade-sizer3.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/wxglade-sizer.png"><img alt="_images/wxglade-sizer.png" src="_images/wxglade-sizer.png" style="width: 80%;" /></a>
 <p class="caption">Diseño con <em>sizers</em> de una ventana de la aplicación mediante la utilidad
 <a class="reference external" href="http://wxglade.sourceforge.net">wxGlade</a></p>
 </div>
@@ -671,7 +520,7 @@ Como ejemplo, en la figura <a class="reference internal" href="#sizers-num"><em>
 es dinámico, cambiando su contenido en función de un evento de cambio de
 opción (evento wx.EVT_CHOICE) del menú de modelos.</em></a> se muestra la parte superior de un panel para la definición de un caso donde consta el uso anidado de <tt class="docutils literal"><span class="pre">sizers</span></tt> de distinta clase.</p>
 <div class="figure" id="sizers-num">
-<img alt="_images/sizers_example3.png" src="_images/sizers_example3.png" style="width: 90%;" />
+<a class="reference internal image-reference" href="_images/sizers_example.png"><img alt="_images/sizers_example.png" src="_images/sizers_example.png" style="width: 90%;" /></a>
 <p class="caption">Distribución mediante <em>sizers</em> de componentes. El contenido del <tt class="docutils literal"><span class="pre">GridBagSizer</span></tt>
 es dinámico, cambiando su contenido en función de un evento de cambio de
 opción (evento <tt class="docutils literal"><span class="pre">wx.EVT_CHOICE</span></tt>) del menú de modelos.</p>
@@ -693,34 +542,34 @@ se basa en un <tt class="xref py py-class docutils literal"><span class="pre">wx
 
 
         <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">BoxSizer</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">VERTICAL</span><span class="p">)</span>   <span class="c"># &lt;- sizer principal</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model_choice</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">Choice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mf">1</span><span class="p">,</span>
-            <span class="n">choices</span> <span class="o">=</span> <span class="n">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_options</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_choice</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">Choice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">choices</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_options</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
 
 
         <span class="n">first_row_sizer</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">BoxSizer</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">)</span> <span class="c"># &lt;- sizer secundario</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_button</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">buttons</span><span class="o">.</span><span class="n">GenBitmapTextButton</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mf">1</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_button</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">buttons</span><span class="o">.</span><span class="n">GenBitmapTextButton</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
                 <span class="n">wx</span><span class="o">.</span><span class="n">Bitmap</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PATH_ICONS</span><span class="p">,</span><span class="s">&quot;compose.png&quot;</span><span class="p">)),</span>
                 <span class="s">&quot;Define system&quot;</span><span class="p">)</span>
 
-        <span class="n">first_row_sizer</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">load_button</span><span class="p">,</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="n">flag</span><span class="o">=</span><span class="n">wx</span><span class="o">.</span><span class="n">ALL</span> <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">ALIGN_LEFT</span> <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span> <span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="mf">5</span><span class="p">)</span>
+        <span class="n">first_row_sizer</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">load_button</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="n">flag</span><span class="o">=</span><span class="n">wx</span><span class="o">.</span><span class="n">ALL</span> <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">ALIGN_LEFT</span> <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span> <span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-        <span class="n">first_row_sizer</span><span class="o">.</span><span class="n">Add</span><span class="p">((</span><span class="mf">10</span><span class="p">,</span> <span class="mf">20</span><span class="p">),</span> <span class="mf">0</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span><span class="p">)</span>
+        <span class="n">first_row_sizer</span><span class="o">.</span><span class="n">Add</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span><span class="p">)</span>
 
-        <span class="n">first_row_sizer</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">StaticText</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mf">1</span><span class="p">,</span> <span class="s">&quot;Model:&quot;</span><span class="p">))</span>
+        <span class="n">first_row_sizer</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">StaticText</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s">&quot;Model:&quot;</span><span class="p">))</span>
         <span class="n">first_row_sizer</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_choice</span><span class="p">)</span>                 <span class="c"># &lt;- menu</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span> <span class="n">first_row_sizer</span><span class="p">,</span> <span class="mf">0</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">TOP</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span> <span class="n">first_row_sizer</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">TOP</span>
                                           <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">LEFT</span>
                                           <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">FIXED_MINSIZE</span>
-                                          <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">ALIGN_LEFT</span><span class="p">,</span> <span class="n">border</span> <span class="o">=</span> <span class="mf">5</span><span class="p">)</span>
+                                          <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">ALIGN_LEFT</span><span class="p">,</span> <span class="n">border</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
 
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">panels</span> <span class="o">=</span> <span class="p">(</span><span class="n">VarsAndParamPanel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">-</span><span class="mf">1</span><span class="p">),</span>
-                        <span class="n">VarsAndParamPanel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">-</span><span class="mf">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">panels</span> <span class="o">=</span> <span class="p">(</span><span class="n">VarsAndParamPanel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+                        <span class="n">VarsAndParamPanel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">panels</span><span class="p">[</span><span class="mf">0</span><span class="p">],</span> <span class="mf">0</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span> <span class="p">)</span>     <span class="c"># &lt;-- subpanel 1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">panels</span><span class="p">[</span><span class="mf">1</span><span class="p">],</span> <span class="mf">0</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">panels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span> <span class="p">)</span>     <span class="c"># &lt;-- subpanel 1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">panels</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span> <span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">VarsAndParamPanel</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">Panel</span><span class="p">):</span>
@@ -731,7 +580,7 @@ se basa en un <tt class="xref py py-class docutils literal"><span class="pre">wx
 <span class="sd">        defining the other one.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">model_id</span><span class="o">=</span><span class="mf">1</span><span class="p">,</span> <span class="n">setup_data</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">model_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">setup_data</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;setup_data: (id, name, tc, pc, vc, om)&quot;&quot;&quot;</span>
 
         <span class="n">wx</span><span class="o">.</span><span class="n">Panel</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">TAB_TRAVERSAL</span>
@@ -739,7 +588,7 @@ se basa en un <tt class="xref py py-class docutils literal"><span class="pre">wx
                      <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">FULL_REPAINT_ON_RESIZE</span>
                      <span class="p">)</span>
 
-        <span class="n">gbs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gbs</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">GridBagSizerEnh</span><span class="p">(</span><span class="mf">6</span><span class="p">,</span> <span class="mf">5</span><span class="p">)</span>
+        <span class="n">gbs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gbs</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">GridBagSizerEnh</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>La aplicación de <cite>sizer</cite> repercute en la homogeneidad y determinismo de la ubicación
@@ -747,7 +596,7 @@ de los componentes, lo que permite aplicar las características de usabilidad mo
 en la figura <a class="reference internal" href="#usab-num"><em>Características de usabilidad implementadas en el panel</em></a>, cuya base conceptual se menciona en
 en <a class="reference internal" href="arquitectura.html#preceptos-ui"><em>Preceptos adoptados en el diseño de UI</em></a>.</p>
 <div class="figure" id="usab-num">
-<img alt="_images/usabilidad_labels3.png" src="_images/usabilidad_labels3.png" style="width: 90%;" />
+<a class="reference internal image-reference" href="_images/usabilidad_labels.png"><img alt="_images/usabilidad_labels.png" src="_images/usabilidad_labels.png" style="width: 90%;" /></a>
 <p class="caption">Características de usabilidad implementadas en el panel</p>
 </div>
 </div>
@@ -773,25 +622,25 @@ que define una &#8220;subventana&#8221; a la que se le asocia el contenido a mos
 un panel principal de <cite>wx</cite>.</li>
 </ul>
 <div class="figure">
-<img alt="_images/gpec_aui_max3.png" src="_images/gpec_aui_max3.png" style="width: 95%;" />
+<a class="reference internal image-reference" href="_images/gpec_aui_max.png"><img alt="_images/gpec_aui_max.png" src="_images/gpec_aui_max.png" style="width: 95%;" /></a>
 <p class="caption">La interfaz avanzada de GPEC visualizando 2 de los 4 paneles por defecto.</p>
 </div>
 <p>Vale comentar que luego de cualquier cambio, yendo a :menuselection:‘View &#8211;&gt; Restore default view‘ se reestablece la estructura original.</p>
 <p>Un extracto relevante de <tt class="xref py py-class docutils literal"><span class="pre">MainFrame</span></tt> es el siguiente:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MainFrame</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">Frame</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="nb">id</span><span class="o">=-</span><span class="mf">1</span><span class="p">,</span>
-                 <span class="n">pos</span><span class="o">=</span><span class="n">wx</span><span class="o">.</span><span class="n">DefaultPosition</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&#39;GPEC&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mf">800</span><span class="p">,</span><span class="mf">600</span><span class="p">),</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="nb">id</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+                 <span class="n">pos</span><span class="o">=</span><span class="n">wx</span><span class="o">.</span><span class="n">DefaultPosition</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&#39;GPEC&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">600</span><span class="p">),</span>
                  <span class="n">style</span><span class="o">=</span><span class="n">wx</span><span class="o">.</span><span class="n">DEFAULT_FRAME_STYLE</span> <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">MAXIMIZE</span> <span class="p">):</span>
         <span class="n">wx</span><span class="o">.</span><span class="n">Frame</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_mgr</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">aui</span><span class="o">.</span><span class="n">AuiManager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>      <span class="c">#&lt;- manejador</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">cases_panel</span> <span class="o">=</span> <span class="n">TabbedCases</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mf">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cases_panel</span> <span class="o">=</span> <span class="n">TabbedCases</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">cases_auipane</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">aui</span><span class="o">.</span><span class="n">AuiPaneInfo</span><span class="p">()</span><span class="o">.</span><span class="n">Name</span><span class="p">(</span><span class="s">&quot;cases&quot;</span><span class="p">)</span><span class="o">.</span>\
             <span class="n">Caption</span><span class="p">(</span><span class="s">u&quot;Cases&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">Left</span><span class="p">()</span><span class="o">.</span><span class="n">MinSize</span><span class="p">(</span><span class="n">the_size</span><span class="p">)</span><span class="o">.</span><span class="n">MaxSize</span><span class="p">(</span><span class="n">the_size</span><span class="p">)</span><span class="o">.</span>\
-            <span class="n">Layer</span><span class="p">(</span><span class="mf">1</span><span class="p">)</span><span class="o">.</span><span class="n">Position</span><span class="p">(</span><span class="mf">2</span><span class="p">)</span><span class="o">.</span><span class="n">CloseButton</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">MinimizeButton</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">Layer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">Position</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">CloseButton</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">MinimizeButton</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_mgr</span><span class="o">.</span><span class="n">AddPane</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cases_panel</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cases_auipane</span> <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_mgr</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
@@ -870,7 +719,7 @@ de la intefaz avanzada de Python <tt class="docutils literal"><span class="pre">
 como <em>drag &amp; drop de pestañas</em> entre distintos paneles, o la visualización
 simultánea de múltiples pestañas, como muestra la figura <a class="reference internal" href="#auinotebook-num"><em>El control AuiNotebook de los gráficos mostrando 2 diagramas en simultáneo</em></a>.</p>
 <div class="figure" id="auinotebook-num">
-<img alt="_images/auinotebook3.png" src="_images/auinotebook3.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="_images/auinotebook.png"><img alt="_images/auinotebook.png" src="_images/auinotebook.png" style="width: 100%;" /></a>
 <p class="caption">El control <tt class="docutils literal"><span class="pre">AuiNotebook</span></tt> de los gráficos mostrando 2 diagramas en simultáneo</p>
 </div>
 </div>
@@ -887,7 +736,7 @@ como un panel de wxPython.</p>
 su ascendencia de clases en el diagrama de la figura <a class="reference internal" href="#figcanvas-num"><em>Diagrama de clases para FigureCanvasWxAgg donde se evidencia
 la herencia múltiple que permite el comportamiento dual del objeto.</em></a>.</p>
 <div class="figure" id="figcanvas-num">
-<img alt="_images/figcanvas3.png" src="_images/figcanvas3.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="_images/figcanvas.png"><img alt="_images/figcanvas.png" src="_images/figcanvas.png" style="width: 50%;" /></a>
 <p class="caption">Diagrama de clases para <tt class="xref py py-class docutils literal"><span class="pre">FigureCanvasWxAgg</span></tt> donde se evidencia
 la herencia múltiple que permite el comportamiento dual del objeto.</p>
 </div>
@@ -901,7 +750,7 @@ la integración concreta con wxPython, heredando de un contenedor tipo <cite>wx.
 de un diagrama. Puede ver la sección <a class="reference internal" href="arquitectura.html#tipos-graf"><em>Tipos de gráficos</em></a>   para estructura de clases implementada para dar soporte a los distintos
 tipos de gráficos.</p>
 <div class="figure" id="wx-num">
-<img alt="_images/wxmatplotlib3.png" src="_images/wxmatplotlib3.png" style="width: 58%;" />
+<a class="reference internal image-reference" href="_images/wxmatplotlib.png"><img alt="_images/wxmatplotlib.png" src="_images/wxmatplotlib.png" style="width: 58%;" /></a>
 <p class="caption">Diagrama de secuencia para la graficación de un diagrama al nivel subyacente
 (via <tt class="docutils literal"><span class="pre">matplotlib</span></tt>)</p>
 </div>
@@ -912,7 +761,7 @@ asociada al <tt class="docutils literal"><span class="pre">canvas</span></tt> in
 Esta barra de herramientas provee zoom, definición de margenes, desplazamiento,
 exportación y navegación histórica <a class="footnote-reference" href="#id31" id="id17">[13]</a></p>
 <div class="figure">
-<img alt="_images/wx_toolbar3.png" src="_images/wx_toolbar3.png" style="width: 60%;" />
+<a class="reference internal image-reference" href="_images/wx_toolbar.png"><img alt="_images/wx_toolbar.png" src="_images/wx_toolbar.png" style="width: 60%;" /></a>
 <p class="caption">Barra de herramientas provista por Matplotlib integrable en wxPython</p>
 </div>
 <p>La exportación permite guardar el estado actual del diagrama, incluyendo
@@ -925,8 +774,8 @@ instanciación, indicando el objeto <tt class="docutils literal"><span class="pr
 y a la ubicación en un <tt class="docutils literal"><span class="pre">sizer</span></tt>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span> <span class="o">=</span> <span class="n">NavigationToolbar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">canvas</span><span class="p">)</span>   <span class="c">#the canvas from plot</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">vbox</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">BoxSizer</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">VERTICAL</span><span class="p">)</span>
-<span class="bp">self</span><span class="o">.</span><span class="n">vbox</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">canvas</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">LEFT</span> <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">TOP</span> <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">GROW</span><span class="p">)</span>
-<span class="bp">self</span><span class="o">.</span><span class="n">vbox</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span><span class="p">,</span> <span class="mf">0</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">vbox</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">canvas</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">LEFT</span> <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">TOP</span> <span class="o">|</span> <span class="n">wx</span><span class="o">.</span><span class="n">GROW</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">vbox</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">wx</span><span class="o">.</span><span class="n">EXPAND</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -936,97 +785,16 @@ y a la ubicación en un <tt class="docutils literal"><span class="pre">sizer</sp
 que permiten al usuario manipular la figura de diferentes manera, u ocultar
 y volver a mostrar las diferentes curvas.</p>
 <div class="figure">
-<img alt="_images/menu_contextual3.png" src="_images/menu_contextual3.png" style="width: 60%;" />
+<a class="reference internal image-reference" href="_images/menu_contextual.png"><img alt="_images/menu_contextual.png" src="_images/menu_contextual.png" style="width: 60%;" /></a>
 <p class="caption">Menú contextual sobre una figura que se activa ante un evento con el botón
 derecho.</p>
 </div>
 <p>La complejidad está dada por el paso de eventos entre wxPython y Matplotlib.
 El primero, en la clase <tt class="xref py py-class docutils literal"><span class="pre">PlotPanel</span></tt> define y construye el menú contextual
 pero asocia las acciones a métodos de <tt class="xref py py-class docutils literal"><span class="pre">BasePlot`</span></tt>:</p>
-<div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">onMouseButtonClick</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span> <span class="o">==</span> <span class="mf">3</span><span class="p">:</span> 
-
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;menu&#39;</span><span class="p">):</span>               
-                <span class="bp">self</span><span class="o">.</span><span class="n">menu</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">Menu</span><span class="p">()</span>
-
-                <span class="k">for</span> <span class="n">curve</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">curves</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="n">curve</span><span class="p">[</span><span class="s">&#39;wx_id&#39;</span><span class="p">],</span> <span class="n">curve</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="n">wx</span><span class="o">.</span><span class="n">ITEM_CHECK</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_MENU</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">OnToggleCurve</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">curve</span><span class="p">[</span><span class="s">&#39;wx_id&#39;</span><span class="p">])</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">Check</span><span class="p">(</span><span class="n">curve</span><span class="p">[</span><span class="s">&#39;wx_id&#39;</span><span class="p">],</span> <span class="bp">True</span><span class="p">)</span>
-    
-                <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">AppendSeparator</span><span class="p">()</span>
-                
-                <span class="k">for</span> <span class="n">prop</span><span class="p">,</span> <span class="n">wx_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">properties_normal</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="n">wx_id</span><span class="p">,</span> <span class="n">prop</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_MENU</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">OnSetupProperty</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">wx_id</span><span class="p">)</span>
-
-                <span class="k">for</span> <span class="n">prop</span><span class="p">,</span> <span class="n">wx_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">properties_check</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="n">wx_id</span><span class="p">,</span> <span class="n">prop</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="n">wx</span><span class="o">.</span><span class="n">ITEM_CHECK</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">wx</span><span class="o">.</span><span class="n">EVT_MENU</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">OnToggleProperty</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">wx_id</span><span class="p">)</span>
-
-            <span class="c"># Popup the menu.  If an item is selected then its handler</span>
-            <span class="c"># will be called before PopupMenu returns.</span>
-            <span class="n">wx</span><span class="o">.</span><span class="n">CallAfter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PopupMenu</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">)</span>
-
-    
-</pre></div>
-</div>
 <p>Los métodos <tt class="docutils literal"><span class="pre">OnToggleCurve</span></tt> y <tt class="docutils literal"><span class="pre">OnSetupProperty</span></tt> son los que realizan
 las tareas solicitadas, como cambiar a escala logarítmica, ocultar o mostrar una curva,
 etc.</p>
-<div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">OnToggleCurve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-        <span class="n">wx_id</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">GetId</span><span class="p">()</span>
-        <span class="n">curve</span> <span class="o">=</span> <span class="p">[</span><span class="n">curve</span> <span class="k">for</span> <span class="n">curve</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">curves</span>  <span class="k">if</span> <span class="n">curve</span><span class="p">[</span><span class="s">&#39;wx_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">wx_id</span><span class="p">][</span><span class="mf">0</span><span class="p">]</span>     <span class="c">#TODO better way?        </span>
-
-        <span class="n">curve</span><span class="p">[</span><span class="s">&#39;visible&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">curve</span><span class="p">[</span><span class="s">&#39;visible&#39;</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">curve</span><span class="p">[</span><span class="s">&#39;lines2d&#39;</span><span class="p">]:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">line</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="n">curve</span><span class="p">[</span><span class="s">&#39;visible&#39;</span><span class="p">])</span> 
-            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">line_</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
-                    <span class="n">line_</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="n">curve</span><span class="p">[</span><span class="s">&#39;visible&#39;</span><span class="p">])</span> 
-                
-        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">OnSetupProperty</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-        <span class="n">wx_id</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">GetId</span><span class="p">()</span>
-        <span class="n">prop</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([[</span><span class="n">v</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">properties_normal</span><span class="o">.</span><span class="n">items</span><span class="p">()])[</span><span class="n">wx_id</span><span class="p">]</span> <span class="c">#inverted dict</span>
-
-        <span class="k">if</span> <span class="n">prop</span> <span class="o">==</span> <span class="s">&#39;Set perspective...&#39;</span><span class="p">:</span>
-            
-            <span class="n">dlg</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">TextEntryDialog</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="s">u&#39;Azimuthal angle&#39;</span><span class="p">,</span> <span class="s">u&#39;Set Perpective&#39;</span><span class="p">,</span> 
-                                            <span class="n">defaultValue</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">azim</span><span class="p">)</span> <span class="p">)</span>            
-            <span class="n">r</span> <span class="o">=</span> <span class="n">dlg</span><span class="o">.</span><span class="n">ShowModal</span><span class="p">()</span>
-            <span class="k">if</span>  <span class="n">r</span> <span class="o">==</span> <span class="n">wx</span><span class="o">.</span><span class="n">ID_CANCEL</span><span class="p">:</span>
-                <span class="k">return</span> 
-            <span class="k">elif</span> <span class="n">r</span>  <span class="o">==</span> <span class="n">wx</span><span class="o">.</span><span class="n">ID_OK</span><span class="p">:</span>
-                <span class="n">azim</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dlg</span><span class="o">.</span><span class="n">GetValue</span><span class="p">())</span>
-            
-            <span class="n">dlg</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">TextEntryDialog</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="s">u&#39;Elevation angle&#39;</span><span class="p">,</span> <span class="s">u&#39;Set Perpective&#39;</span><span class="p">,</span> 
-                                            <span class="n">defaultValue</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">elev</span><span class="p">)</span> <span class="p">)</span>            
-            <span class="n">r</span> <span class="o">=</span> <span class="n">dlg</span><span class="o">.</span><span class="n">ShowModal</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">r</span>  <span class="o">==</span> <span class="n">wx</span><span class="o">.</span><span class="n">ID_CANCEL</span><span class="p">:</span>
-                <span class="k">return</span> 
-            <span class="k">elif</span> <span class="n">r</span>  <span class="o">==</span> <span class="n">wx</span><span class="o">.</span><span class="n">ID_OK</span><span class="p">:</span>
-                <span class="n">elev</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dlg</span><span class="o">.</span><span class="n">GetValue</span><span class="p">())</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="n">elev</span><span class="p">,</span> <span class="n">azim</span><span class="p">)</span>
-
-        <span class="k">elif</span> <span class="n">prop</span> <span class="o">==</span> <span class="s">&#39;Set plot title...&#39;</span><span class="p">:</span>
-            <span class="n">dlg</span> <span class="o">=</span> <span class="n">wx</span><span class="o">.</span><span class="n">TextEntryDialog</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="s">u&#39;Plot title&#39;</span><span class="p">,</span> <span class="s">u&#39;Set plot title&#39;</span><span class="p">,</span> 
-                                            <span class="n">defaultValue</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">get_title</span><span class="p">()</span> <span class="p">)</span>            
-            <span class="n">r</span> <span class="o">=</span> <span class="n">dlg</span><span class="o">.</span><span class="n">ShowModal</span><span class="p">()</span>
-            <span class="k">if</span>  <span class="n">r</span> <span class="o">==</span> <span class="n">wx</span><span class="o">.</span><span class="n">ID_CANCEL</span><span class="p">:</span>
-                <span class="k">return</span> 
-            
-            <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">dlg</span><span class="o">.</span><span class="n">GetValue</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>    
-                
-</pre></div>
-</div>
 </div>
 </div>
 <div class="section" id="implementacion-de-base-de-datos">
@@ -1087,7 +855,7 @@ la herramienta <a class="reference external" href="http://code.google.com/p/sqli
 para <strong>importar</strong> las columnas pertinentes del archivo CSV a la tabla de destino</li>
 </ol>
 <div class="figure">
-<img alt="_images/import-db3.png" src="_images/import-db3.png" style="width: 60%;" />
+<a class="reference internal image-reference" href="_images/import-db.png"><img alt="_images/import-db.png" src="_images/import-db.png" style="width: 60%;" /></a>
 <p class="caption">Procesos de conversión de la base de datos a <em>sqlite</em></p>
 </div>
 <table class="docutils footnote" frame="void" id="id19" rules="none">
@@ -1216,7 +984,7 @@ parte de la biblioteca estándar de Python.</td></tr>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Contenidos</a></h3>
+  <h3><a href="index.html">Tabla de Contenidos</a></h3>
   <ul>
 <li><a class="reference internal" href="#">8. Implementación</a><ul>
 <li><a class="reference internal" href="#utilizacion-de-publish-suscribe-en-gpec">8.1. Utilización de Publish/Suscribe en GPEC</a><ul>
@@ -1266,25 +1034,25 @@ parte de la biblioteca estándar de Python.</td></tr>
 
   <h4>Tema anterior</h4>
   <p class="topless"><a href="arquitectura.html"
-                        title="Capítulo anterior">7. Arquitectura</a></p>
+                        title="capítulo anterior">7. Arquitectura</a></p>
   <h4>Próximo tema</h4>
   <p class="topless"><a href="verificacion.html"
-                        title="Próximo capítulo">9. Verificación</a></p>
+                        title="próximo capítulo">9. Verificación</a></p>
   <h3>Esta página</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/implementacion.txt"
-           rel="nofollow">Enseñar el código</a></li>
+           rel="nofollow">Mostrar el código</a></li>
   </ul>
 <div id="searchbox" style="display: none">
   <h3>Búsqueda rápida</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Ir a" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
     <p class="searchtip" style="font-size: 90%">
-    Introduzca los términos de búsqueda o un módulo, clase o nombre de función.
+    Introduzca los términos de búsqueda o un nombre de módulo, clase o función.
     </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
@@ -1309,7 +1077,7 @@ parte de la biblioteca estándar de Python.</td></tr>
     </div>
     <div class="footer">
         &copy; Copyright 2011, Martín Gaitán.
-      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1pre/40063bb1b44a.
+      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

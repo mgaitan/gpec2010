@@ -23,7 +23,7 @@ sys.path.append(os.path.abspath('../src'))
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc', 'rst2pdf.pdfbuilder', 'sphinx.ext.todo', 'sphinx.ext.pngmath', 
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.todo', 'sphinx.ext.pngmath',
                 'sphinx.ext.ifconfig', 'sphinx.ext.viewcode']
 
 # Add any paths that contain templates here, relative to this directory.
@@ -229,7 +229,7 @@ _TITLE = ur"""
     \end{flushright}%\par
   \end{titlepage}%
   %\vspace{\fill}
-  %\includegraphics{cc.png}  
+  %\includegraphics{cc.png}
   \cleardoublepage%
   \phantomsection\label{pre:dedication}
   \vspace*{\fill}
@@ -272,7 +272,7 @@ latex_elements = {
     #'tableofcontents': _TABLE,
     'papersize': 'a4paper',
     'pointsize': '12pt',
-} 
+}
 
 # Documents to append as an appendix to all manuals.
 latex_appendices = ['ejemplos', 'api', 'trazabilidad', 'glosario']

@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Documentación de trazabilidad &mdash; Software para graficación de diagramas termodinámicos</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'draft',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="Software para graficación de diagramas termodinámicos" href="index.html" />
+    <link rel="next" title="Glosario" href="glosario.html" />
+    <link rel="prev" title="Especificación de la interfaz de comunicación" href="api.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="glosario.html" title="Glosario"
+             accesskey="N">siguiente</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="Especificación de la interfaz de comunicación"
+             accesskey="P">anterior</a> |</li>
+        <li><a href="index.html">Software para graficación de diagramas termodinámicos</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="documentacion-de-trazabilidad">
+<h1>Documentación de trazabilidad<a class="headerlink" href="#documentacion-de-trazabilidad" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Este apéndice es la referencia de implementación de los requerimientos y
+las definiciones formales.</p>
+<div class="section" id="implementacion-de-los-requerimientos">
+<h2>Implementación de los requerimientos<a class="headerlink" href="#implementacion-de-los-requerimientos" title="Enlazar permanentemente con este título">¶</a></h2>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Requerimiento</th>
+<th class="head">Entidad de implementación (módulo / clase / método)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td><tt class="xref py py-class docutils literal"><span class="pre">apimanager.ApiManager</span></tt>. Ver <a class="reference internal" href="api.html#api"><em>Especificación de la interfaz de comunicación</em></a></td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td><tt class="xref py py-class docutils literal"><span class="pre">crud.DefineSystemDialog</span></tt> y
+<tt class="xref py py-class docutils literal"><span class="pre">crud.SystemValidator</span></tt></td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td><tt class="xref py py-class docutils literal"><span class="pre">crud.DefineSystemDialog</span></tt></td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td><tt class="xref py py-class docutils literal"><span class="pre">panels.VarsAndParamPanel</span></tt> y
+<tt class="xref py py-class docutils literal"><span class="pre">panels.CasePanel</span></tt></td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td><tt class="xref py py-class docutils literal"><span class="pre">plots.BasePlot</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">plots.Plot2D</span></tt></td>
+</tr>
+<tr class="row-odd"><td>5.1</td>
+<td><tt class="xref py py-class docutils literal"><span class="pre">plots.PT</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">plots.Tx</span></tt>,
+<tt class="xref py py-class docutils literal"><span class="pre">plots.Trho</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">plots.Px</span></tt>,
+<tt class="xref py py-class docutils literal"><span class="pre">plots.Prho</span></tt></td>
+</tr>
+<tr class="row-even"><td>5.2</td>
+<td><tt class="xref py py-class docutils literal"><span class="pre">plots.IsoPT</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">plots.IsoTx</span></tt>,
+<tt class="xref py py-class docutils literal"><span class="pre">plots.IsoTrho</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">plots.IsoPx</span></tt>,
+<tt class="xref py py-class docutils literal"><span class="pre">plots.IsoPrho</span></tt></td>
+</tr>
+<tr class="row-odd"><td>5.3</td>
+<td><tt class="xref py py-class docutils literal"><span class="pre">plots.Pxy</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">plots.PxyPrho</span></tt></td>
+</tr>
+<tr class="row-even"><td>5.4</td>
+<td><tt class="xref py py-class docutils literal"><span class="pre">plots.Txy</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">plots.TxyTrho</span></tt></td>
+</tr>
+<tr class="row-odd"><td>6</td>
+<td><tt class="xref py py-class docutils literal"><span class="pre">plots.BasePlot</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">plots.Plot3D</span></tt></td>
+</tr>
+<tr class="row-even"><td>6.1</td>
+<td><tt class="xref py py-class docutils literal"><span class="pre">plots.PTx</span></tt></td>
+</tr>
+<tr class="row-odd"><td>6.2</td>
+<td><tt class="xref py py-class docutils literal"><span class="pre">plots.PTrho</span></tt></td>
+</tr>
+<tr class="row-even"><td>7</td>
+<td><tt class="xref py py-class docutils literal"><span class="pre">plots.CustomPlot</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">plots.PlotsTreePanel</span></tt>,
+<tt class="xref py py-meth docutils literal"><span class="pre">planels.SuitePlotPanel.MakeCustomPlot()</span></tt></td>
+</tr>
+<tr class="row-odd"><td>8</td>
+<td><tt class="xref py py-class docutils literal"><span class="pre">plots.SuitePlotsPanel</span></tt></td>
+</tr>
+<tr class="row-even"><td>9</td>
+<td><tt class="xref py py-meth docutils literal"><span class="pre">aui.MainFrame.FileSaveAs()</span></tt>,
+<tt class="xref py py-meth docutils literal"><span class="pre">aui.MainFrame.FileSave()</span></tt>,
+<tt class="xref py py-meth docutils literal"><span class="pre">aui.MainFrame.Open()</span></tt></td>
+</tr>
+<tr class="row-odd"><td>10</td>
+<td>Ver <a class="reference internal" href="implantacion.html#implantacion"><em>Implantación</em></a></td>
+</tr>
+<tr class="row-even"><td>11</td>
+<td><dl class="first last docutils">
+<dt>Función implementada en Matplolib, accesible mediante</dt>
+<dd><cite>NavigationToolbar2Wx</cite> mediante <tt class="xref py py-class docutils literal"><span class="pre">panels.PlotPanel</span></tt></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="definiciones">
+<h2>Definiciones<a class="headerlink" href="#definiciones" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Tabla de Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Documentación de trazabilidad</a><ul>
+<li><a class="reference internal" href="#implementacion-de-los-requerimientos">Implementación de los requerimientos</a></li>
+<li><a class="reference internal" href="#definiciones">Definiciones</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="api.html"
+                        title="capítulo anterior">Especificación de la interfaz de comunicación</a></p>
+  <h4>Próximo tema</h4>
+  <p class="topless"><a href="glosario.html"
+                        title="próximo capítulo">Glosario</a></p>
+  <h3>Esta página</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/trazabilidad.txt"
+           rel="nofollow">Mostrar el código</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introduzca los términos de búsqueda o un nombre de módulo, clase o función.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="glosario.html" title="Glosario"
+             >siguiente</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="Especificación de la interfaz de comunicación"
+             >anterior</a> |</li>
+        <li><a href="index.html">Software para graficación de diagramas termodinámicos</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Martín Gaitán.
+      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+    </div>
+  </body>
+</html>
